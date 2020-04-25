@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Index_Rate_Name__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Index Rate Name</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5 OR 6 OR 7 OR 8 OR 9 OR 10)</booleanFilter>
+        <filterItems>
+            <field>Index__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Index</value>
+        </filterItems>
+        <filterItems>
+            <field>Index__c.Index_Rate__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <filterItems>
+            <field>Index__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <filterItems>
+            <field>Index__c.All_Locations__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <filterItems>
+            <field>Index__c.CES_Location_1__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.CES_Office__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>Index__c.CES_Location_2__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.CES_Office__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>Index__c.CES_Location_3__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.CES_Office__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>Index__c.CES_Location_4__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.CES_Office__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>Index__c.CES_Location_5__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.CES_Office__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>Index__c.Utility_1__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Utility_Lookup__c</valueField>
+        </filterItems>
+        <infoMessage>Filter is required for desired results.  DO NOT REMOVE</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Index__c</referenceTo>
+    <relationshipLabel>CES Contracts</relationshipLabel>
+    <relationshipName>CES_Contracts</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

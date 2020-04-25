@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Account__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>CES Customer Account</description>
+    <externalId>false</externalId>
+    <inlineHelpText>CES Customer Account</inlineHelpText>
+    <label>Customer Account</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>CES Customer should be a business account.</errorMessage>
+        <filterItems>
+            <field>$Source.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>CES Consultant Referral Fee</value>
+        </filterItems>
+        <filterItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business Account</value>
+        </filterItems>
+        <infoMessage>Please select a Business Account.</infoMessage>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Billing Documents (Customer Account)</relationshipLabel>
+    <relationshipName>Billing_Documents1</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

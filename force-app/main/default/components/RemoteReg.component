@@ -1,0 +1,67 @@
+<apex:component controller="ControllerForMobileMain" allowDML="true">
+    <apex:attribute name="ShowPhone" type="boolean" description="Show Phone on Registration form" required="false" default="true"/>
+    <apex:attribute name="ShowPromo" type="boolean" description="Show Promo Code on Registration form" required="false" default="true"/>
+    <apex:attribute name="PrePopPromo" type="string" description="Prepopulated promo code" required="false" default=""/>
+    <apex:attribute name="ShowHeader" type="boolean" description="Show the 'title' of the component" required="false" default="true"/>
+
+    <apex:outputPanel layout="none" rendered="{!ShowHeader}">
+        <h4>Create a Profile</h4>
+    </apex:outputPanel>
+    <form action="javascript:void(0);" id="regform">
+        <div class="control-group">
+            <label class="control-label visible-desktop" for="first_name">First Name</label>
+            <div class="controls">
+                <input  class="input-block-level" name="First Name" id="first_name" placeholder="First Name" value="" type="text" required="required" autofocus="autofocus"/>
+            </div>
+            
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-desktop" for="last_name">Last Name</label>
+            <div class="controls">
+                <input class="input-block-level" name="Last Name" id="last_name" placeholder="Last Name" value="" type="text" required="required"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-desktop" for="email">Email</label>
+            <div class="controls">
+                <input class="input-block-level" name="email" id="email" placeholder="email@somewhere.com" value="" type="email" required="required"/>
+            </div>
+        </div>
+        <apex:outputpanel styleclass="control-group" layout="block" rendered="{!ShowPhone}">
+            <label class="control-label" for="phone">Phone</label>
+            <div class="controls">
+                <input name="email" id="phone" placeholder="713 555-5555" value="" type="tel"/>
+            </div>
+        </apex:outputpanel>
+        <div class="control-group">
+            <label class="control-label" for="password">
+                Password<br/>
+                <small>At least 8 characters, at least one number, and at least one letter or symbol</small></label>
+            <div class="controls">
+                <input class="input-block-level" name="password" id="password" placeholder="abcdefg1" value="" type="password" required="required" minlength="8" 
+                pattern="^(?!.*password)(?=.*[0-9])(?=.*[a-z]).{8,}$" title="At least 8 characters, at least one number, and at least one letter or symbol, and don't use the word password"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password2">Confirm Password</label>
+            <div class="controls">
+                <input class="input-block-level" name="Confirm Password" id="password2" placeholder="abcdefg1" value="" type="password" required="required" minlength="8"
+                    pattern="^(?!.*password)(?=.*[0-9])(?=.*[a-z]).{8,}$" title="At least 8 characters, at least one number, and at least one letter or symbol, and don't use the word password"
+                />
+            </div>
+        </div>
+        <apex:outputpanel styleclass="control-group" layout="block" rendered="{!ShowPromo}">
+            <label class="control-label visible-desktop" for="promo">Promo Code</label>
+            <div class="controls">
+                <input class="input-block-level" name="Promo Code" id="promo" placeholder="promo code" value="{!PrePopPromo}" type="text" />
+            </div>
+        </apex:outputpanel>
+        <p>By clicking <b>Create Profile</b>, I accept the TrueCost <a href="{!$Page.TermsOfUse}" target="_blank">Terms of Use</a> and <a href="{!$Page.Privacy}" target="_blank">Privacy Policy</a></p>
+        <div class="control-group">
+            <div class="controls">
+                <button id="register_submit" name="register_submit" class="btn btn-warning" data-loading-text="Creating Your Profile">Create Profile</button>
+            </div>
+        </div>
+    </form>
+    
+</apex:component>

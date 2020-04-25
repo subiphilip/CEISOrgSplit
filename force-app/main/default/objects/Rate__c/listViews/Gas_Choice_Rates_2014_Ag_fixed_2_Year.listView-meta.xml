@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Choice_Rates_2014_Ag_fixed_2_Year</fullName>
+    <columns>NAME</columns>
+    <columns>Program__c</columns>
+    <columns>Division__c</columns>
+    <columns>Confirmation_Code__c</columns>
+    <columns>Plan__c</columns>
+    <columns>Fixed_Rate__c</columns>
+    <columns>Fixed_Rate_Percentage__c</columns>
+    <columns>Price_Details__c</columns>
+    <columns>Notes__c</columns>
+    <columns>SG_Available_for_Dynamic__c</columns>
+    <columns>Confirmation_Code_Status__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>Index_Adder__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Rate__c.Gas_Choice_Rate</value>
+    </filters>
+    <filters>
+        <field>Confirmation_Code_Year__c</field>
+        <operation>equals</operation>
+        <value>2014</value>
+    </filters>
+    <filters>
+        <field>Program__c</field>
+        <operation>equals</operation>
+        <value>Ag</value>
+    </filters>
+    <filters>
+        <field>Plan__c</field>
+        <operation>equals</operation>
+        <value>Fixed (2 Year)</value>
+    </filters>
+    <label>2014 Ag Fixed 2 Year</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+    </sharedTo>
+</ListView>

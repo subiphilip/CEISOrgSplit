@@ -1,0 +1,289 @@
+<apex:page showHeader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false"  applyHtmlTag="false">
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"/>
+
+	<html ng-app="calcchoice" id="ng-app" xmlns:ng="http://angularjs.org">
+		<apex:composition template="Template_TC">
+			
+			<apex:define name="HeadTags">
+				<title>Calculation Choice - {!$Label.Page_Title_Company_Name}</title>
+				<!--[if lte IE 8]>
+						<script src="{!URLFOR($Resource.JSON3Polyfill)}"/>
+						<script>
+							document.createElement('datepicker');
+							document.createElement('datepicker-popup-wrap');       
+						</script>
+					<![endif]-->
+			</apex:define>
+			
+			<apex:define name="body">        
+				<div class="container" ng-controller="CalcChoiceCtrl">
+					<div class="row">
+						<div class="span12 ng-cloak" ng-if="!data.updateonly && !data.pageparam">
+							<h2>Usage Calculation<small><br/>Select how TrueCost calculates your electricity price</small></h2>
+							<div class="well well-large" ng-if="!data.PostLOA">
+								<c:Content_Viewer content="Calculation Choice Intro"/>
+							</div>
+						</div>
+						<div class="span12 ng-cloak" ng-if="data.updateonly && data.mode=='estimate'">
+							<h2>Update Premise Information</h2>
+						</div>
+					</div>                    
+					<div class="row choices ng-cloak" ng-if="data.mode==='none'">
+						<div class="span12" ng-if="APA.Premise__r.TDSP_Lookup__r.Meter_Data_Method__c==='Real-Time Interface'">
+							<div class="alert alert-success">
+								<h3>Load My Usage Data</h3>
+								<div class="clearfix"/>
+								<p class="lead">Simply provide your meter number and TrueCost will load your home's actual usage history in order to calculate your personalized pricing.</p>
+								<a class="btn btn-primary" ng-click="data.mode='data'">Get Started</a>
+							</div>
+							<hr/>
+						</div>
+						<div class="span12" ng-if="APA.Premise__r.TDSP_Lookup__r.Meter_Data_Method__c==='Automated LOA' && !data.PostLOA">
+							<div class="alert alert-error">
+								<h4>Your utility doesn't offer a real-time interface for importing meter data.</h4>
+								<div class="clearfix"/>
+								<p>We'll request your data and email you when it arrives (could be a few days).</p>
+								<a class="btn btn-primary" ng-click="data.mode='data'">Get Started</a>
+								<hr/>
+								<p>If you'd like to view plans now, please select one of the following options</p>
+							</div>
+							<hr/>
+						</div>
+						<div class="span12" ng-if="APA.Premise__r.TDSP_Lookup__r.Meter_Data_Method__c==='Automated LOA' && data.PostLOA">
+							<div class="alert alert-success">
+								<h4>We've requested your data</h4>
+								<div class="clearfix"/>
+								<p>TrueCost will email you when it arrives (could be a few days).</p>								
+								<hr/>
+								<p>If you'd like to view plans now, please select one of the following options</p>
+							</div>
+							<hr/>
+						</div>								
+						<div class="span4">
+							<h4>Estimate My Usage<br/><small>Show prices based on homes like mine.</small></h4>
+							<div class="clearfix"/>
+							<p>Answer five quick questions about your home and TrueCost will display prices based on homes with similar values.</p>
+							<a class="btn btn-default" ng-click="data.mode='estimate'">Get Started</a>
+							<hr class="visible-phone"/>
+						</div>
+						<div class="span4">
+							<h4>Select A Usage Profile<br/><small>Show prices based on a standard usage profile.*</small></h4>
+							<div class="clearfix"/>
+							<p>Select from three standard usage profiles and TrueCost will display prices based on the usage amount for that profile.</p>
+							<a class="btn btn-default"  ng-click="data.mode='profile'"> Get Started</a>
+							<hr class="visible-phone"/>
+						</div>
+						<div class="span4">
+							<h4>Enter Monthly Readings<br/><small>Type in usage for each month</small></h4>
+							<div class="clearfix"/>
+							<p>Enter the total kWh you use each month.  We'll show you prices based on your input.</p>
+							<a class="btn btn-default"  ng-click="data.mode='enter'"> Get Started</a>
+							<hr class="visible-phone"/>
+						</div>
+					</div>
+
+					<div class="row ng-cloak" ng-if="data.mode!='none'&& !data.updateonly && !data.pageparam">
+						<ul class="nav nav-tabs span12">
+						  <li class="first" ng-if="!data.PostLOA"><a ng-click="data.mode='data'">Load My Usage Data</a></li>
+						  <li class="second"><a ng-click="data.mode='estimate'">Estimate My Usage</a></li>
+						  <li class="third"><a ng-click="data.mode='profile'">Select A Usage Profile</a></li>
+						  <li class="fourth"><a ng-click="data.mode='enter'">Enter Monthly Readings</a></li>
+						  <li class="fifth"><a ng-click="data.mode='none'">Not sure?</a></li>
+						</ul>
+						<hr/>
+					</div>
+					<div class="clearfix"/>
+					<a id="forms"/>
+					<div class="row ng-cloak" id="meter_data" ng-if="data.mode==='data' && !data.PostLOA">
+						<div class="span8">
+							<h4>Load My Usage Data</h4>
+							<form class="well well-large" name="meterNumberForm" ng-submit="setMeterNumber()">
+
+								<div class="control-group" ng-class="{error: meterNumberForm.MeterNumber.$invalid}">
+									<label>Meter Number</label>
+									<input ng-model="data.mn" name="MeterNumber"  placeholder="87654321" value="" type="text" ng-maxlength="8" ng-pattern="data.MeterNumberRegex" ng-required="data.mode=='data'"  />
+									<span class="help-block" ng-show="meterNumberForm.MeterNumber.$invalid && APA.Premise__r.TDSP_Lookup__r.Name==='CenterPoint Energy Houston Electric'">In <b>CenterPoint Energy’s area</b>: Enter 8 digit number found 
+									on your bill or meter. Ignore any letters – drop the I at the beginning. The first number should be a 5, 6, 8 or 9.  Meter data is usually imported within 30 seconds. 
+									<br></br><br></br><b>Other utility areas</b>:
+									<p>1. Enter you meter number (Oncor uses 9 numbers and one of these alpha characters – SA, WE, LG or GE).</p>
+                                    					<p>2. Expect our email with a form asking for your electronic approval. Please reply as this is a necessary step so we can get data from the utility.</p>
+                                	 				<p>3. We will email you after data is loaded. It can take up to 3 days to obtain and load meter data.</p>
+									</span>
+								</div>  
+								<div class="control-group" ng-class="{error: !dataPermission}">
+									<label class="checkbox">
+										<input ng-model="dataPermission" name="dataPermission" type="checkbox" ng-required="data.mode=='data'"/>{!$Label.Meter_Data_Permission}
+									</label>
+								</div>
+								<input value="Import Data" class="btn btn-primary" type="submit" ng-disabled="meterNumberForm.$invalid"/>
+								<div ng-if="APA.Premise__r.TDSP_Lookup__r.Meter_Data_Method__c==='Real-Time Interface'">
+									<hr/>
+									<label class="checkbox">
+										<input ng-model="Account.Meter_Data_Email_Weekly__c" name="dataweekly" type="checkbox" />I want a <b>weekly</b> email of my usage data
+									</label>
+									<label class="checkbox">
+										<input ng-model="Account.Meter_Data_Email_Daily__c" name="datadaily" type="checkbox" />I want a <b>daily</b> email of my usage data
+									</label>
+								</div>
+
+							</form>
+						</div>
+						<div class="span4">
+							<h4>Find your Meter Number</h4>
+							<c:Content_Viewer content="Find your Meter Number"/>
+						</div>
+					</div>
+					<div class="row ng-cloak" id="estimateInProgress" ng-if="data.mode=='estimateInProgress'">
+						<div class="span12 alert alert-block alert-info">
+							<h3>Building Your Estimate</h3>
+							<p>TrueCost is finding homes similar to yours and building a profile based on their average usage throughout the year.</p>
+
+							<p>Then we'll show you plans based on that profile.  You can even tweak the estimate if you like.</p>
+						</div>
+					</div>
+					<div class="row ng-cloak" id="estimate" ng-if="data.mode=='estimate'">
+						<div class="span12">
+							<h4 ng-if="!data.updateonly">Estimate My Usage</h4>
+							<h4 class="hide" id="update_usage_header" ng-if="data.updateonly">Update Home Profile</h4>
+							<form class="well well-large" name="premiseInfoForm" ng-submit="setPremiseInfo()">
+								<div class="control-group" ng-class="{error: premiseInfoForm.SquareFeet.$invalid}">
+									<label>Square Feet</label>
+									<input ng-model="APA.Premise__r.Square_Feet__c" name="SquareFeet" placeholder="1900" value="" type="number" ng-required="mode=='estimate'"
+									ng-pattern="/^\d{3,5}$/" maxlength="5" min="100" max="99999"/>
+								</div>  
+								<div class="control-group" ng-class="{error: premiseInfoForm.YearBuilt.$invalid}">
+									<label>Year Built</label>
+									<input ng-model="APA.Premise__r.Year_Built__c" name="YearBuilt" placeholder="1995" value="" type="text" ng-pattern="/^(19|20)\d{2}$/" ng-required="data.mode=='estimate'" ng-maxlength="4" ng-minlength="4"/>
+								</div>  
+								<div class="control-group" ng-class="{error: premiseInfoForm.Occupants.$invalid}">
+									<label>Occupants</label>
+									<input name="Occupants" ng-model="APA.Premise__r.Occupants__c" placeholder="4" type="number" ng-pattern="/^\d$/" min="1" max="9" ng-required="data.mode=='estimate'"/>
+								</div>  
+								<div class="control-group">
+									<label>Heating</label>
+									<select id="heating" ng-model="APA.Premise__r.Heating_System__c">
+										<option value="Gas">Gas</option>
+										<option value="Electric">Electric</option>
+										<option value="Other">Other</option>
+									</select>
+								</div>  
+								<div class="control-group">
+									<label class="checkbox">
+										<input name="Pool" id="pool" type="checkbox" ng-model="APA.Premise__r.Pool__c"/>I have a pool
+									</label>
+									<input type="submit" class="btn btn-primary" id="submit_estimate" data-loading-text="Building Estimate..." 
+										ng-if="!data.updateonly" ng-disabled="premiseInfoForm.$invalid" value="Estimate Data"/>
+									<input type="submit" class="btn btn-primary" id="submit_estimate" data-loading-text="Building Estimate..."
+										ng-if="data.updateonly" ng-disabled="premiseInfoForm.$invalid" value="Update" />
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="row ng-cloak" id="profile" ng-if="data.mode=='profile'">
+						<div class="span12">
+							<h4>Select a Profile</h4>
+							<div class="well well-large">
+								<a class="btn btn-success btn-block" ng-click="setProfile('Small')"><strong>Small</strong> (500kWh/month)</a>
+								<a class="btn btn-warning btn-block" ng-click="setProfile('Medium')"><strong>Medium</strong> (1000 kWh/month)</a>
+								<a class="btn btn-danger btn-block" ng-click="setProfile('Large')"><strong>Large</strong> (2000 kWh/month)</a>
+							</div>
+						</div>
+					</div>
+					<div class="row ng-cloak" ng-if="data.mode=='enter'">
+						<div class="span6 offset3">
+							
+							<form class="form-horizontal well well-large" ng-submit="saveEntered()">
+								<h4 class="text-center">Enter Monthly Readings (kWh)</h4>
+								<div class="control-group">
+									<label class="control-label">January</label>
+									<div class="controls">
+										<input type="text" ng-model="enteredMonths[0]" required="required"  />
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">February</label>
+									<div class="controls">
+										<input type="text" ng-model="enteredMonths[1]" required="required" />
+									</div>
+								</div> 
+								<div class="control-group">
+									<label class="control-label">March</label>
+									<div class="controls">
+										<input type="text" ng-model="enteredMonths[2]" required="required" />
+									</div>
+								</div> 
+								<div class="control-group">
+									<label class="control-label">April</label>
+									<div class="controls">
+										<input type="text" ng-model="enteredMonths[3]" required="required" />
+									</div>
+								</div> 
+								<div class="control-group">
+									<label class="control-label">May</label>
+									<div class="controls">
+										<input type="text" ng-model="enteredMonths[4]" required="required" />
+									</div>
+								</div> 
+								<div class="control-group">
+									<label class="control-label">June</label>
+									<div class="controls">
+										<input type="text" ng-model="enteredMonths[5]" required="required" />
+									</div>
+								</div> 
+								<div class="control-group">
+									<label class="control-label">July</label>
+									<div class="controls">
+										<input type="text" ng-model="enteredMonths[6]" required="required" />
+									</div>
+								</div> 
+								<div class="control-group">
+									<label class="control-label">August</label>
+									<div class="controls">
+										<input type="text" ng-model="enteredMonths[7]" required="required" />
+									</div>
+								</div> 
+								<div class="control-group">
+									<label class="control-label">September</label>
+									<div class="controls">
+										<input type="text" ng-model="enteredMonths[8]" required="required" />
+									</div>
+								</div> 
+								<div class="control-group">
+									<label class="control-label">October</label>
+									<div class="controls">
+										<input type="text" ng-model="enteredMonths[9]" required="required" />
+									</div>
+								</div> 
+								<div class="control-group">
+									<label class="control-label">November</label>
+									<div class="controls">
+										<input type="text" ng-model="enteredMonths[10]" required="required" />
+									</div>
+								</div> 
+								<div class="control-group">
+									<label class="control-label">December</label>
+									<div class="controls">
+										<input type="text" ng-model="enteredMonths[11]" required="required" />
+									</div>
+								</div>                
+								<div class="controls">
+									<button class="btn btn-warning">Save Usage</button>
+								</div>          
+							</form>                                
+						</div>
+					</div>
+				</div>
+					
+			</apex:define>       
+			<apex:define name="footer-additional">
+				
+				<small>
+					<small>
+						<p>*<c:Content_Viewer content="Calculation Choice Footnote" simple="true"/></p><br/>
+					</small>
+				</small>
+			</apex:define>
+		</apex:composition>
+		<c:CalcChoiceScript />
+	</html>
+</apex:page>

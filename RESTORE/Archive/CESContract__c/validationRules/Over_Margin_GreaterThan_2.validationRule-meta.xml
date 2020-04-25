@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Over_Margin_GreaterThan_2</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR( 
+Margin_on_Over__c &lt; -1, 
+Margin_on_Over__c &gt; 2 
+)</errorConditionFormula>
+    <errorDisplayField>Margin_on_Over__c</errorDisplayField>
+    <errorMessage>CESC12: Margin on Over must be between ($1.00) and $2.00 per MMBtu</errorMessage>
+</ValidationRule>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Demand_Charge_for_TC__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF ( ISPICKVAL( Demand_Charge_Level__c , &#39;Unit&#39;)
+  , IF ( ISPICKVAL( MDQ_Unit__c , &#39;Therm&#39; )
+     , Demand_Charge__c * 0.1 
+     , Demand_Charge__c
+    )
+  , Demand_Charge__c 
+)</formula>
+    <label>Demand Charge for TC</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Producer_Services_Index_inactive</fullName>
+    <columns>NAME</columns>
+    <columns>Other_details__c</columns>
+    <columns>Account__c</columns>
+    <columns>Index_Rate_Name__c</columns>
+    <columns>Percent_of_Index__c</columns>
+    <columns>Start_Date_New__c</columns>
+    <columns>End_Date__c</columns>
+    <columns>Total_Volume__c</columns>
+    <columns>Volume_Entry_Type__c</columns>
+    <columns>Pricing_Terms__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Record_Type_Name__c</field>
+        <operation>contains</operation>
+        <value>producer services index</value>
+    </filters>
+    <filters>
+        <field>End_Date__c</field>
+        <operation>lessThan</operation>
+        <value>THIS_MONTH</value>
+    </filters>
+    <label>Producer Services Index - INACTIVE</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+        <role>Business_Technology</role>
+        <role>Producer_Services_Administration</role>
+        <role>Producer_Services_Management</role>
+        <role>Producer_Services_Sales</role>
+    </sharedTo>
+</ListView>

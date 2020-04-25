@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Populate_Comments_for_Rejected_or_Failed</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+$User.Profile_Name__c &lt;&gt; &quot;The System&quot;,
+OR(
+AND(
+ ISBLANK(TEXT(Rejection_Reason__c)),
+NOT(ISBLANK(Order_Rejection_Comments__c))
+),
+AND(
+ ISBLANK(Order_Rejection_Comments__c),
+NOT(ISBLANK(TEXT(Rejection_Reason__c)))
+),
+AND(
+ ISBLANK(TEXT( Failure_Reason__c )),
+NOT(ISBLANK(Order_Failure_Comments__c ))
+),
+AND(
+ ISBLANK(Order_Failure_Comments__c),
+NOT(ISBLANK(TEXT(Failure_Reason__c)))
+)      
+),
+
+OR(
+Record_Type_Name__c = &quot;Electric Order&quot;,
+Record_Type_Name__c = &quot;Commercial Electric Order&quot;
+)
+)</errorConditionFormula>
+    <errorMessage>Order07: For rejected or failed orders, comments are required for the applicable reason. Example: Order failure comments are required if a failure reason is selected, and rejection comments should only be populated if a rejection reason is selected.</errorMessage>
+</ValidationRule>

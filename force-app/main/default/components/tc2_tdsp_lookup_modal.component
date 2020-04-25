@@ -1,0 +1,136 @@
+<apex:component >
+  
+  <app-tdsp-lookup-modal inline-template='true' xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+    <div id="app-tdsp-lookup-modal" class="modal">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+              <button v-on:click="closeModal" class="delete is-large" aria-label="close"></button>
+              <div id="app-tdsp-lookup-modal-inside" class="modal-card-body has-text-centered">
+                  <div v-if="tdsp == true" class="modal-card-body-inner">
+                      <span class="is-size-3 icon-icon-check-green"></span>
+                      <h1 class="is-size-4 has-text-weight-semibold">Thank you.</h1>
+                  </div>
+                  <div v-if="tdspError == true" class="modal-card-body-inner">
+                      <span class="is-size-3 icon-icon-check-green"></span>
+                      <h1 class="is-size-4 has-text-weight-semibold">We currently serve Texas areas with electric choice. </h1>
+                  </div>
+                  <div v-if="tdsp == 'false' || tdsp == null" class="modal-card-body-inner">
+                      <span class="icon is-large has-text-info"><i class="far fa-bell fa-2x"></i></span>
+                      <h1 class="is-size-4 has-text-weight-semibold">Where will you need service?</h1>
+                      <p>Please enter your zip code</p>
+                      <p style="max-width:100px; margin:0 auto 10px auto; ">
+                      <input maxLength="5" id="zip" class="input borderless" type="text" name="zip" v-model="zip" required="required" style="text-align:center" /></p>
+                      <a class="button is-outlined is-primary is-rounded fixed-size animate-gradient-bg" v-on:click="lookupTDSP" v-bind:disabled="!hasZip">Continue</a>
+                      <br/>
+                      <!-- <a class="" v-on:click="closeModal" >Skip for now</a> -->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </app-tdsp-lookup-modal>
+
+  <script>
+  Vue.component('app-tdsp-lookup-modal', {
+
+    data: function () { 
+      return {
+        zip: '',
+        hasZip: false,
+        tdsp: TC.app.account.tdsp,
+        tdspError: false
+      } 
+    },
+    mounted: function() { 
+        let vm = this;
+        TC.app.appSubscribe.$on('tdspLookup', function(arg) {
+            vm.showModal();
+        });
+        TC.app.appSubscribe.$on('errorTDSP', function(arg) {
+            vm.tdsp = false;
+            vm.tdspError = true;
+            vm.tdspNotFound();
+            //TC.app.account.plans = null;
+            sessionStorage.removeItem('plans')
+            vm.showModal();
+        });
+        TC.app.appSubscribe.$on('updateTDSP', function(arg) {
+          vm.tdsp = TC.app.account.tdsp;
+          vm.tdspFound();
+          /*TC.app.account.zipSearchPlans = this.zip;
+          TC.app.account.premise.zip = this.zip;
+          TC.app.appShopPlans.zip = this.zip;*/
+        });
+    },
+    watch: {
+      zip: {
+        handler: function() {
+          if(this.zip.length >=5){
+            this.hasZip = true;
+          } else {
+            this.hasZip = false;
+          }
+        }
+      },
+    },  
+    props: [],
+    methods:{
+      tdspFound: function() {
+        var vm = this;
+        if(this.zip != undefined){
+          if(this.zip.hasOwnProperty('length')){
+            if(this.zip.length >= 5){
+              TC.app.account.premise.zip = this.zip;
+            }
+          }
+        }
+        /*TC.app.appShopPlans.zip = this.zip;
+        TTC.app.account.zipSearchPlans = this.zip;*/
+        if(!this.tdspError){
+          setTimeout(function(){ vm.closeModal(); }, TC.delay)
+        }
+        
+      },
+      tdspNotFound: function() {
+        
+        if(this.zip != undefined){
+          if(this.zip.hasOwnProperty('length')){
+            if(this.zip.length >= 5){
+              TC.app.account.premise.zip = this.zip;
+              TC.app.appShopPlans.zip = this.zip;
+              TC.app.appShopPlans.myZip = this.zip;
+              TC.app.appShopPlans.setPlansTotal(0)
+              var vm = this;
+              if(!this.tdspError){
+                setTimeout(function(){ vm.closeModal(); }, TC.delay)
+              }
+            }
+          }
+        }
+        
+      },
+      lookupTDSP: function(){
+        TC.app.account.zipSearchPlans = this.zip;
+        if(this.zip != undefined){
+          if(this.zip.hasOwnProperty('length')){
+            if(this.zip.length >= 5){
+              TC.app.account.updateTDSP()
+            }
+          }
+        }
+        
+        
+      },
+      showModal: function(){
+          TweenMax.to('#app-tdsp-lookup-modal', .24, {opacity:1, display:'block'});
+          TweenMax.fromTo('#app-tdsp-lookup-modal .modal-background', .5, {opacity:0}, {opacity:.8})
+          TweenMax.fromTo('#app-tdsp-lookup-modal .modal-card', .7, {y:-100, opacity:0, scale:1.3}, {y: 200, opacity:1, scale: 1, ease:Bounce.easeOut});
+      },
+      closeModal: function() {
+          TweenMax.fromTo('#app-tdsp-lookup-modal .modal-card', .24, {opacity:1}, {opacity:0, scale: 1.1, ease:Bounce.easeOut});
+          TweenMax.to('#app-tdsp-lookup-modal .modal-background', .24, {opacity:0})
+          TweenMax.to('#app-tdsp-lookup-modal', .24, {opacity:0, display:'none'});
+      }
+    }
+  });
+  </script>
+</apex:component>

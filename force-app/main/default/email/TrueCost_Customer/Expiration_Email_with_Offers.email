@@ -1,0 +1,41 @@
+<messaging:emailTemplate subject="Protect your electric rate" recipientType="Contact" relatedToType="Order__c">
+<messaging:plainTextEmailBody >
+
+</messaging:plainTextEmailBody>
+
+<messaging:htmlEmailBody >
+
+   <c:Visualforce_email_stylesheet2 />
+   
+   <table cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td>
+               <apex:image url="https://c.na1.content.force.com/servlet/servlet.ImageServer?id=01530000001w7m0&oid=00D30000000pOSg"/>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#FFFFFF" align="center">
+                <table width="650px" cellspacing="0" cellpadding="3" class="container">
+                    <tr>
+                        <td><c:RenewalEmail order="{!relatedTo.id}" OfferCountX="3"/></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td bgcolor="#FFFFFF" align="center">
+                <table width="650px" cellspacing="0" cellpadding="3" class="container">
+                    <tr>
+                        <td>
+                          
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+   
+
+</messaging:htmlEmailBody>
+
+</messaging:emailTemplate>

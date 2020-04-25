@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NIPSCO_Choice_Number_Rules</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ TDSP_Lookup__r.Allow_Enrollment__c,
+ TDSP_Lookup__r.Name = &#39;NIPSCO&#39;,
+ OR ( LEN( Account_Number__c ) &gt; 9,
+      LEN( Transport_ID__c ) &lt;&gt; 9, 
+      LEN( Meter_Number__c ) &gt; 9
+ )
+)</errorConditionFormula>
+    <errorMessage>Premise21: At least one of the NIPSCO choice identifiers does not conform to the validation rules:  Utility Account Number length &lt; 10, Transport ID length = 9, Meter Number &lt; 10.  Please correct the data in error and try again.</errorMessage>
+</ValidationRule>

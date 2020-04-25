@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Introduced__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>TrueCost has been presented to this REP</description>
+    <externalId>false</externalId>
+    <inlineHelpText>TrueCost has been presented to this REP</inlineHelpText>
+    <label>Introduced</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

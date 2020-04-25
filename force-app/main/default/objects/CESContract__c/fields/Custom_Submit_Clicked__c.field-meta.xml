@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Custom_Submit_Clicked__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>system field to track if the custom submit button was used to submit the record.  approval process requires this to be true</description>
+    <externalId>false</externalId>
+    <label>Custom Submit Clicked</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Market_Rate_Margin_GreaterThan_2</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR( 
+Market_Rate_Margin__c &lt; 0, 
+Market_Rate_Margin__c &gt; 2 
+)</errorConditionFormula>
+    <errorDisplayField>Market_Rate_Margin__c</errorDisplayField>
+    <errorMessage>CESC08: Market Rate Margin must be between $0.00 and $2.00 per MMBtu</errorMessage>
+</ValidationRule>

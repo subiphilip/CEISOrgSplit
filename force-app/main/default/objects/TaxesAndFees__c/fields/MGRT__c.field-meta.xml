@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MGRT__c</fullName>
+    <description>Tax rate on the Miscellaneous Gross Receipts Tax (as a decimal, not as a percent)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Tax rate on the Miscellaneous Gross Receipts Tax (as a decimal, not as a percent)</inlineHelpText>
+    <label>MGRT</label>
+    <precision>12</precision>
+    <required>false</required>
+    <scale>7</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

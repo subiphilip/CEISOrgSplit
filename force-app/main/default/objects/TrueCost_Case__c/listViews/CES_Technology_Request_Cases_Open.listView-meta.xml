@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CES_Technology_Request_Cases_Open</fullName>
+    <columns>NAME</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Requested_By__c</columns>
+    <columns>Status__c</columns>
+    <columns>Type__c</columns>
+    <columns>Priority__c</columns>
+    <columns>Subject__c</columns>
+    <columns>Requested_Due_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>TrueCost_Case__c.CES_Technology_Request</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Closed,Assigned</value>
+    </filters>
+    <label>CES Technology Request Cases Open</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+        <role>Business_Services</role>
+        <role>Business_Technology</role>
+        <role>Contract_Administration</role>
+    </sharedTo>
+</ListView>

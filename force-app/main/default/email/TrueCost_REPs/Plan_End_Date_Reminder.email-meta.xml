@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Lets REPs know they have a plan nearing/past end date</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>TrueCost_Customer</letterhead>
+    <name>Plan End Date Reminder</name>
+    <style>freeForm</style>
+    <subject>TrueCost REP Support: Plan End Date</subject>
+    <textOnly>{!Plan__c.REP_Profile__c},
+
+You have an active plan that is nearing/past its &quot;Plan End Date,&quot; and needs to be updated at your next convenience.  See below for details:
+
+Plan Name: {!Plan__c.Name}
+Plan End Date: {!Plan__c.Plan_End_Date__c}
+
+Click here to visit the REP Portal now, and feel free to let us know if we can assist you in any way.
+
+Thank you,
+
+TrueCost REP Support</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TDSP__c</fullName>
+    <externalId>false</externalId>
+    <label>TDSP</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CenterPoint Energy</fullName>
+                <default>true</default>
+                <label>CenterPoint Energy</label>
+            </value>
+            <value>
+                <fullName>Oncor</fullName>
+                <default>false</default>
+                <label>Oncor</label>
+            </value>
+            <value>
+                <fullName>TNMP</fullName>
+                <default>false</default>
+                <label>TNMP</label>
+            </value>
+            <value>
+                <fullName>AEPC</fullName>
+                <default>false</default>
+                <label>AEPC</label>
+            </value>
+            <value>
+                <fullName>AEPN</fullName>
+                <default>false</default>
+                <label>AEPN</label>
+            </value>
+            <value>
+                <fullName>Sharyland</fullName>
+                <default>false</default>
+                <label>Sharyland</label>
+            </value>
+            <value>
+                <fullName>Nueces</fullName>
+                <default>false</default>
+                <label>Nueces</label>
+            </value>
+            <value>
+                <fullName>Sharyland McAllen</fullName>
+                <default>false</default>
+                <label>Sharyland McAllen</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

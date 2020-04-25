@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Wants_Contact__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Customer wants REP contact about this</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Customer wants REP contact about this</inlineHelpText>
+    <label>Okay to Contact</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

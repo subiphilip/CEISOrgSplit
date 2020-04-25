@@ -1,0 +1,48 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" cache="false">
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+    <c:tc2_header title="TrueCost Electric Portal"
+        description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."
+    />
+    
+    <body class="has-background-white home">
+          
+          <section id="hero " class="hero is-large ">
+              <div class="hero-body">
+                  <div class="container has-text-centered ">
+                      <h1 class="title is-size-2-mobile is-animating ">Thanks for your participation!</h1>
+                      <h2 class="subtitle is-size-5-mobile is-animating " style="margin-top:0">The employee beta has ended.<br/> For questions/comments, please reach out <br/> to <a style=":hover:color:white;" href="mailto:Troy.Donovan@centerpointenergy.com">Troy Donovan Troy.Donovan@centerpointenergy.com</a>.</h2>
+                  </div>
+                  <div class="container is-vertical-center " style="margin-top: 1em;"> </div>
+                  <div class="has-bg-img" style="background-image:url({!URLFOR($Resource.v2_tc_resources_images, 'home_bg.jpg')});"></div>
+
+              </div>
+          </section>         
+                  
+          
+          <c:tc2_footer />
+          
+            <script>
+                
+                TC.fn.setup.Home = function() {
+                    TweenMax.from(".hero-body", 1, { "opacity": 0 });
+                    TweenMax.to(".has-bg-img", 1, { "opacity": 1 });
+                    TweenMax.from(".arrow-right", 1, { opacity: 0, x: -20, ease: Bounce.easeOut, delay: 1.4 });
+                    TweenMax.from(".button.is-medium.is-info", .3, { x: -10, ease: Bounce.easeIn, delay: 1.2 });
+                    TweenMax.fromTo("#appZip", .3, { opacity: 0, y: 50}, { display:"block", opacity: 1, y: 0, delay: 1.2 });
+                    TweenMax.fromTo("#cta-home-1", 0.3, { opacity: 0 }, { opacity: 1, display:"block", delay: 1 });
+                    TweenMax.fromTo(".video", 0.3, { opacity: 0 }, { opacity: 1, display:"block", delay: 1 });
+                    TweenMax.from("#cta-home-1 .column.column-left", 0.3, { opacity: "0", x: -100, delay: 1.5 });
+                    TweenMax.from("#cta-home-1 .column.column-right", 0.3, { opacity: "0", x: 100, delay: 1.5 });
+                };
+            
+                (function ($) {
+                    $(function () {
+                    'use strict';
+                     TC.fn.setup.Home();
+            
+                  })
+                })(jQuery);
+            </script>
+    </body> 
+  </html>
+</apex:page>

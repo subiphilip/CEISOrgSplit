@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rate_Type__c</fullName>
+    <description>What type of plan is this?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What type of plan is this?</inlineHelpText>
+    <label>Rate Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Fixed</fullName>
+                <default>true</default>
+                <label>Fixed</label>
+            </value>
+            <value>
+                <fullName>Variable</fullName>
+                <default>false</default>
+                <label>Variable</label>
+            </value>
+            <value>
+                <fullName>Index</fullName>
+                <default>false</default>
+                <label>Index</label>
+            </value>
+            <value>
+                <fullName>SmartFixed</fullName>
+                <default>false</default>
+                <label>SmartFixed</label>
+            </value>
+            <value>
+                <fullName>SmartBill</fullName>
+                <default>false</default>
+                <label>SmartBill</label>
+            </value>
+            <value>
+                <fullName>SmartCap</fullName>
+                <default>false</default>
+                <label>SmartCap</label>
+            </value>
+            <value>
+                <fullName>SmartBlended</fullName>
+                <default>false</default>
+                <label>SmartBlended</label>
+            </value>
+            <value>
+                <fullName>Blended</fullName>
+                <default>false</default>
+                <label>Blended</label>
+            </value>
+            <value>
+                <fullName>IndexNoSpread</fullName>
+                <default>false</default>
+                <label>IndexNoSpread</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

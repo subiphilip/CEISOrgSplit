@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Referral program email with code sent to participating, registered users that sign-up</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>TrueCost_Customer</letterhead>
+    <name>Refer A Friend Program</name>
+    <style>freeForm</style>
+    <subject>Start recommending TrueCost today</subject>
+    <textOnly>Thank you for participating in the TrueCost referral program.
+
+You&#39;ll earn a $5 gift card for each friend that uses your unique code at checkout for their first order.
+
+Your Referral Code: {!TrueCost_Case__c.Referral_Code__c}
+
+Terms and Conditions
+
+Please save this document for your records. Your referral code will later be displayed on your My Account page once your address has been verified.
+
+
+Sincerely,
+
+TrueCost Customer Support
+TrueCost@CenterPointEnergy.com
+800-461-3056
+
+Log into your account at MyTrueCost.com</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

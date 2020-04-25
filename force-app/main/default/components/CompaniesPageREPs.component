@@ -1,0 +1,21 @@
+<apex:component controller="ControllerForMobileMain">
+    <div class="text-center hidden-phone">
+        <apex:repeat value="{!REPs}" var="r">
+            <!--Page with review details for each REP-->
+            <apex:outputPanel styleclass="rep-mini-logo" layout="inline">
+                <a href="#{!r.id}"><img src="{!URLFOR($Resource.REPLogos, substitute(r.Logo_URL__c, 'resource/REPLogos/', ''))}" alt="{!r.name}" class="replogo"/></a>
+            </apex:outputPanel>
+        </apex:repeat>
+    </div>
+    <div class="row visible-phone inline" >
+        <center>
+        <apex:repeat value="{!REPs}" var="r" >
+            <!--Page with review details for each REP-->
+            <a href="#{!r.id}"><span style="white-space:nowrap;">{!r.name}</span></a>
+            <span class="muted">&nbsp;|&nbsp;</span>
+        </apex:repeat>
+        </center>
+    </div>
+ 
+    
+</apex:component>

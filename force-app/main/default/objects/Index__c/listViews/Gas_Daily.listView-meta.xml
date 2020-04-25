@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Daily</fullName>
+    <columns>Publication__c</columns>
+    <columns>Frequency__c</columns>
+    <columns>NAME</columns>
+    <columns>Description__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>OBJECT_ID</columns>
+    <columns>Current_Value__c</columns>
+    <columns>Entegrate_Index_Key__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Publication__c</field>
+        <operation>equals</operation>
+        <value>GD,Gas Daily</value>
+    </filters>
+    <label>Gas Daily</label>
+    <sharedTo>
+        <allInternalUsers/>
+    </sharedTo>
+</ListView>

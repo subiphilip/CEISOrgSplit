@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Friendly_URL__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>Used internally for TrueCost URLrewriter class.  Put in all lowercase with hyphens for spaces.  For example: friendly-name or reliant-energy etc.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Used internally for TrueCost URLrewriter class.  Put in all lowercase with hyphens for spaces.  For example: friendly-name or reliant-energy etc.</inlineHelpText>
+    <label>Friendly URL</label>
+    <length>30</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

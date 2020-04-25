@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Email_is_required_if_no_account</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISNULL(Account__c )</errorConditionFormula>
+    <errorDisplayField>Non_Account_Email__c</errorDisplayField>
+    <errorMessage>TCCase02: This account was not found by customer email.  The email is required.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Last_Fixed_Position__c</fullName>
+    <description>FOM for the last fixed position on this order</description>
+    <externalId>false</externalId>
+    <inlineHelpText>FOM for the last fixed position on this order</inlineHelpText>
+    <label>Last Fixed Position</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

@@ -1,0 +1,36 @@
+<apex:page showHeader="false" sidebar="false" cache="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false"> 
+   
+   <html><!--<html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">-->
+      <c:tc2_header title="What About Other Companies? - {!$Label.Page_Title_Company_Name}"
+         description="" />
+      <style>
+        
+      </style>
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="What About Other Companies?" subHeadline="" />
+    
+             <div id="" class="container"> 
+                <div class="has-margin-3">
+                  <div class="columns content box has-margin-3">
+
+                  <div class="">
+                    <div><!--<div style="padding:20px;">-->
+                      <h2>What about companies not on TrueCost yet?</h2><br></br>
+                      <p style="text-align:center"><script type="text/javascript" >document.write('<script src="http' + ( ("https:" == document.location.protocol) ? "s" : "") + '://www.surveygizmo.com/s3/js/987160/fa44a88e7cee?__ref=' + escape(document.location) + '" type="text/javascript" ></scr'  + 'ipt>');</script><noscript>This survey is powered by SurveyGizmo's <a href="http://www.surveygizmo.com">online survey software</a>. <a href="http://www.surveygizmo.com/s3/jsfallback/987160/fa44a88e7cee">Please take my survey now</a></noscript>
+                      </p>                                     
+
+                    </div>
+                  </div>
+                      
+                </div>
+               </div>
+
+             </div>
+         </div>    
+         
+        <c:tc2_footer />
+      </body>
+   </html>
+</apex:page>

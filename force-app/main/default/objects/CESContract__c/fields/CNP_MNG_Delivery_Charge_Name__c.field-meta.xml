@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CNP_MNG_Delivery_Charge_Name__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE( Utility_Rate_Name__r.Name
+  , &#39;CNP MNG Firm-C&#39;, &#39;DIST  MGC Firm-C Distribution + GAP&#39;
+  , &#39;CNP MNG SVDF-A&#39;, &#39;DIST  MGC SVDF-A Distribution&#39;
+  , &#39;CNP MNG SVDF-B&#39;, &#39;DIST  MGC SVDF-B Distribution&#39;
+  , &#39;CNP MNG LVDF&#39;, &#39;DIST  MGC LVDF Distribution&#39;
+  , NULL
+)</formula>
+    <label>CNP MNG Delivery Charge Name</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

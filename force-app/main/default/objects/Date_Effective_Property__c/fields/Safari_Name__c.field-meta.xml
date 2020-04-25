@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Safari_Name__c</fullName>
+    <description>this is not used anymore.  the property value has a formula to derive this value.</description>
+    <externalId>false</externalId>
+    <formula>IF(Name == &#39;Rate Class&#39;
+  , &#39;Service Class&#39;
+  , IF(Name  == &#39;Monthly Firm Demand Charge&#39;
+      , &#39;Monthly Firm Demand&#39;
+      , Name
+    )
+)</formula>
+    <label>Safari Name</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

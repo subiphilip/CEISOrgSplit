@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Choice_Rates</fullName>
+    <columns>NAME</columns>
+    <columns>Program__c</columns>
+    <columns>Division__c</columns>
+    <columns>Confirmation_Code_Year__c</columns>
+    <columns>Confirmation_Code__c</columns>
+    <columns>Plan__c</columns>
+    <columns>Price_Details__c</columns>
+    <columns>Notes__c</columns>
+    <columns>Publicly_Available__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Rate__c.Gas_Choice_Rate</value>
+    </filters>
+    <label>Gas Choice Rates</label>
+    <sharedTo>
+        <allInternalUsers/>
+    </sharedTo>
+</ListView>

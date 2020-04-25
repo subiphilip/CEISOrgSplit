@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nebraska_Distribution_Threshhold__c</fullName>
+    <defaultValue>40</defaultValue>
+    <description>Monthly volume subject to the STEP 1 cost...Currently 40 therms</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Monthly volume subject to the STEP 1 cost...Currently 40 therms</inlineHelpText>
+    <label>Resi Distribution Threshhold</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

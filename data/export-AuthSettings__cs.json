@@ -1,0 +1,17 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "AuthSettings__c",
+                "referenceId": "AuthSettings__cRef1"
+            },
+            "Facebook_OAuth_Link_Link__c": "https://login.salesforce.com/services/auth/link/00D30000000pOSgEAM/TrueCost_Facebook",
+            "Facebook_oAuth_link__c": "https://login.salesforce.com/services/auth/sso/00D30000000pOSgEAM/TrueCost_Facebook",
+            "Facebook_OAuth_Login_Link__c": "https://login.salesforce.com/services/auth/sso/00D30000000pOSgEAM/TrueCost_FacebookLoginOnly",
+            "Name": "a0j30000009F5Qr",
+            "TrueCost_Post_registration_start_page__c": "/addaddressafterregistration",
+            "TrueCost_RegisterPage__c": "https://fullsbx-centerpointenergy.cs43.force.com/RegisterSec",
+            "TrueCost_Secure_URL__c": "https://fullsbx-centerpointenergy.cs43.secure.force.com/"
+        }
+    ]
+}

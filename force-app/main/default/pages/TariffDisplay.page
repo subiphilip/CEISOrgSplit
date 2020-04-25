@@ -1,0 +1,236 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+   <html><!--<html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">-->
+      <c:tc2_header title="TDU Fees - {!$Label.Page_Title_Company_Name}"
+         description="Definitions for the types of charges on your electric bill" />
+      <style>
+        
+      </style>
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="TDU Fees" subHeadline="Transmission and Distribution Utility (TDU) Monthly Pass-Through Charges for Residential Service" />
+    
+             <div id="" class="container"> 
+                <div class="has-margin-3">
+                  <div class="columns content box has-margin-3">
+
+                  <div class="">
+                    <div style="padding:20px;">
+                      <!-- CENTERPOINT ENERGY HOUSTON ELECTRIC CEHE -->
+                      <h3><b>CenterPoint Energy (Houston)</b></h3>
+                      <hr></hr>
+
+                      <h4>Customer Charge per month</h4>
+                      <p>Standard customer charge per retail customer per month</p>
+                      <!--<p>$1.62000 per month</p>-->
+
+                      <h4>Metering Charge per month</h4>
+                      <p>Standard metering (meter-reading) charge per retail customer per month</p>
+                      <!--<p>$3.85000 per month</p>-->
+
+                      <h4>AMS Surcharge</h4>
+                      <p>Additional payment for the implementation of Advanced Meters in Houston</p>
+                      <!--<p>$0.00000 per month</p>-->
+                      
+                      <h4>Energy Efficiency Cost Recovery Factor (EECRF)</h4>
+                      <p>Charge for the TDU's cost recovery of energy efficiency programs</p>
+                      <!--<p>$0.000728 per month</p>-->
+                      
+                      <h4>Transmission System Charge</h4>
+                      <p>Charge for electricity transmission from the generating plants to electrical substations</p>
+                      <!--<p>$0.00844 per kWh Usage</p>-->
+                      
+                      <h4>Distribution System Charge</h4>
+                      <p>Charge for electricity distribution (local electric wiring)</p>
+                      <!--<p>$0.01649 per kWh Usage</p>-->
+                      
+                      <h4>Transition Charges (Schedule TC2, TC3, SRC, and TC5)</h4>
+                      <p>Charges assessed by a TDU for the costs associated with the transition to a competitive, deregulated market</p>
+                      <!--<p>$0.006116 per kWh Usage</p>-->
+                      
+                      <h4>Nuclear Decommissioning Charge</h4>
+                      <p>A fee that covers the cost of safely removing a nuclear generation facility from service</p>
+                      <!--<p>$0.00001 per kWh Usage</p>-->
+                      
+                      <h4>Transmission Cost Recovery Factor (Rider TCRF)</h4>
+                      <p>A fee (or credit) that accounts for changes in wholesale transmission rates without the need of a TDU rate case</p>
+                      <!--<p>$0.008758 per kWh Usage</p>-->
+                      
+                      <h4>Accumulated Deferred Federal Income Tax (ADFIT) Credit</h4>
+                      <p>A credit to provide customers federal income tax benefits associated with Hurricane Ike restoration costs</p>
+                      <!--<p>$-0.000137 per kWh Usage</p>-->
+                      
+                      <h4>Distribution Cost Recovery Factor (Rider DCRF)</h4>
+                      <p>A fee that accounts for changes in distribution-invested capital without filing a full rate case</p>
+                      <!--<p>$0.000762 per kWh Usage</p>-->
+                      <!--<p>Total of TDU delivery charges (per month): $5.47000</p>
+                      <p>Total of TDU delivery charges (per kWh): $0.041165*</p>-->
+                      
+                      <br></br>
+                      <!-- ONCOR -->
+                      <h3><b>Oncor Electric Delivery</b></h3>
+                      <hr></hr>
+
+                      <h4>Customer Charge per month</h4>
+                      <p>Standard customer charge per retail customer per month</p>
+                      <!--<p>$0.90000 per month</p>-->
+
+                      <h4>Metering Charge per month</h4>
+                      <p>Standard metering (meter-reading) charge per retail customer per month</p>
+                      <!--<p>$2.52000 per month</p>-->
+
+                      <h4>AMS Surcharge</h4>
+                      <p>Additional payment for the implementation of Advanced Meters in utility area</p>
+                      <!--<p>$0.000</p>-->
+                      
+                      <h4>Energy Efficiency Cost Recovery Factor (EECRF)</h4>
+                      <p>Charge for the TDU's cost recovery of energy efficiency programs</p>
+                      <!--<p>$0.000766 per kWh Usage</p>-->
+                      
+                      <h4>Distribution System Charge</h4>
+                      <p>Charge for electricity distribution (local electric wiring)</p>
+                      <!--<p>$0.0198410 per kWh Usage</p>-->
+                      
+                      <h4>Transition Charges (Schedule TC1)</h4>
+                      <p>Charges assessed by a TDU for the costs associated with the transition to a competitive, deregulated market</p>
+                      <!--<p>$0.00000 per kWh Usage</p>-->
+                      
+                      <h4>Nuclear Decommissioning Charge</h4>
+                      <p>A fee that covers the cost of safely removing a nuclear generation facility from service</p>
+                      <!--<p>$0.00017 per kWh Usage</p>-->
+                      
+                      <h4>Transmission Cost Recovery Factor (Rider TCRF)</h4>
+                      <p>A fee (or credit) that accounts for changes in wholesale transmission rates without the need of a TDU rate case</p>
+                      <!--<p>$0.015920 per kWh Usage</p>-->
+                      
+                      <h4>Rate Case Expenses Surcharges (Rider RCE, RCE2, RCE3)</h4>
+                      <p>Charges that allow the TDU to recover expenses associated with rate cases</p>
+                      <!--<p>$0.000049 per kWh Usage</p>-->
+                      <!--<p>Total of TDU delivery charges (per month): $3.42000</p>
+                      <p>Total of TDU delivery charges (per kWh): $0.0272*</p>-->
+                      
+                      <br></br>
+                      <!-- TNMP -->
+                      <h3><b>TNMP (Texas-New Mexico Power)</b></h3>
+                      <hr></hr>
+
+                      <h4>Customer Charge per month</h4>
+                      <p>Standard customer charge per retail customer per month</p>
+                      <!--<p>$4.00000 per month</p>-->
+
+                      <h4>Metering Charge per month</h4>
+                      <p>Standard metering (meter-reading) charge per retail customer per month</p>
+                      <!--<p>$1.25000 per month</p>-->
+
+                      <h4>AMS Surcharge</h4>
+                      <p>Additional payment for the implementation of Advanced Meters in utility area</p>
+                      <!--<p>$3.40000 per month</p>-->
+                      
+                      <h4>Energy Efficiency Cost Recovery Factor (EECRF)</h4>
+                      <p>Charge for the TDU's cost recovery of energy efficiency programs</p>
+                      <!--<p>$0.001268 per kWh Usage</p>-->
+                      
+                      <h4>Distribution System Charge</h4>
+                      <p>Charge for electricity distribution (local electric wiring)</p>
+                      <!--<p>$0.01735 per kWh Usage</p>-->             
+                      
+                      <h4>Transmission Cost Recovery Factor (Rider TCRF)</h4>
+                      <p>A fee (or credit) that accounts for changes in wholesale transmission rates without the need of a TDU rate case</p>
+                      <!--<p>$0.016176 per kWh Usage</p>-->
+                      
+                      <h4>Competition Transition Charge (Rider CTC)</h4>
+                      <p>Charge for recovery of a TDU's non-securitized costs associated with the transition to competition (similar to Transition Charges)</p> 
+                      <!--<p>$0.00248 per kWh Usage</p>-->  
+                      <!--<p>Total of TDU delivery charges (per month): $8.65000</p>
+                      <p>Total of TDU delivery charges (per kWh): $0.036961*</p>-->
+                      
+                      <br></br>
+                      <!-- AEP Central -->
+                      <h3><b>AEP Central (American Electric Power)</b></h3>
+                      <hr></hr>
+
+                      <h4>Customer Charge per month</h4>
+                      <p>Standard customer charge per retail customer per month</p>
+                      <!--<p>$3.19000 per month</p>-->
+
+                      <h4>Metering Charge per month</h4>
+                      <p>Standard metering (meter-reading) charge per retail customer per month</p>
+                      <!--<p>$3.55000 per month</p>-->
+
+                      <h4>AMS Surcharge</h4>
+                      <p>Additional payment for the implementation of Advanced Meters in utility area</p>
+                      <!--<p>$2.26000 per month</p>-->
+                      
+                      <h4>Energy Efficiency Cost Recovery Factor (EECRF)</h4>
+                      <p>Charge for the TDU's cost recovery of energy efficiency programs</p>
+                      <!--<p>$0.000504 per kWh Usage</p>-->
+                      
+                      <h4>Transmission System Charge</h4>
+                      <p>Charge for electricity transmission from the generating plants to electrical substations</p>
+                      <!--<p>$0.00519 per kWh Usage</p>-->
+                      
+                      <h4>Distribution System Charge</h4>
+                      <p>Charge for electricity distribution (local electric wiring)</p>
+                      <!--<p>$0.01392 per kWh Usage<p>-->    
+                      
+                      <h4>Transition Charges (Schedule TC2 and TC3)</h4>
+                      <p>Charges assessed by a TDU for the costs of transition to a competitive, deregulated market. TC is zero as of 1-29-16</p>
+                      <!--<p>$0.00585 per kWh Usage</p>-->
+                      
+                      <h4>Nuclear Decommissioning Charge</h4>
+                      <p>A fee that covers the cost of safely removing a nuclear generation facility from service</p>
+                      <!--<p>$0.00002 per kWh Usage</p>-->           
+                      
+                      <h4>Transmission Cost Recovery Factor (Rider TCRF)</h4>
+                      <p>A fee (or credit) that accounts for changes in wholesale transmission rates without the need of a TDU rate case</p>
+                      <!--<p>$0.006517 per kWh Usage</p>-->
+                      <!--<p>Total of TDU delivery charges (per month): $9.00000</p>
+                      <p>Total of TDU delivery charges (per kWh): $0.04121*</p>-->
+                      
+                      <br></br>
+                      <!-- AEP North -->
+                      <h3><b>AEP North (American Electric Power)</b></h3>
+                      <hr></hr>
+
+                      <h4>Customer Charge per month</h4>
+                      <p>Standard customer charge per retail customer per month</p>
+                      <!--<p>$2.94000 per month</p>-->
+
+                      <h4>Metering Charge per month</h4>
+                      <p>Standard metering (meter-reading) charge per retail customer per month</p>
+                      <!--<p>$5.24000 per month</p>-->
+
+                      <h4>AMS Surcharge</h4>
+                      <p>Additional payment for the implementation of Advanced Meters in utility area</p>
+                      <!--<p>$2.35000 per month</p>-->
+                      
+                      <h4>Energy Efficiency Cost Recovery Factor (EECRF)</h4>
+                      <p>Charge for the TDU's cost recovery of energy efficiency programs</p>
+                      <!--<p>$0.00043 per kWh Usage</p>-->
+                      
+                      <h4>Transmission System Charge</h4>
+                      <p>Charge for electricity transmission from the generating plants to electrical substations</p>
+                      <!--<p>$0.00580 per kWh Usage</p>-->
+                      
+                      <h4>Distribution System Charge</h4>
+                      <p>Charge for electricity distribution (local electric wiring)</p>    
+                      <!--<p>$0.01901 per kWh Usage</p>-->      
+                      
+                      <h4>Transmission Cost Recovery Factor (Rider TCRF)</h4>
+                      <p>A fee (or credit) that accounts for changes in wholesale transmission rates without the need of a TDU rate case</p>
+                      <!--<p>$0.008657</p>-->                                   
+                      
+                      <c:Content_Viewer content="Tariff Display"/>
+                    </div>
+                  </div>
+                      
+                </div>
+               </div>
+
+             </div>
+         </div>    
+         
+        <c:tc2_footer />
+      </body>
+   </html>
+</apex:page>

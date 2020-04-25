@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lost_Reasoning__c</fullName>
+    <description>Why did we lose this opportunity?  Select reason here and add comments to the &quot;Notes&quot; field.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Why did we lose this opportunity?  Select reason here and add comments to the &quot;Notes&quot; field.</inlineHelpText>
+    <label>Reason for Lost Opportunity</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Agent Conflict</fullName>
+                <default>false</default>
+                <label>Agent Conflict</label>
+            </value>
+            <value>
+                <fullName>Business Closed</fullName>
+                <default>false</default>
+                <label>Business Closed</label>
+            </value>
+            <value>
+                <fullName>Business Sold</fullName>
+                <default>false</default>
+                <label>Business Sold</label>
+            </value>
+            <value>
+                <fullName>CES Profile</fullName>
+                <default>false</default>
+                <label>CES Profile</label>
+            </value>
+            <value>
+                <fullName>Competitor</fullName>
+                <default>false</default>
+                <label>Competitor</label>
+            </value>
+            <value>
+                <fullName>Contract</fullName>
+                <default>false</default>
+                <label>Contract</label>
+            </value>
+            <value>
+                <fullName>Credit</fullName>
+                <default>false</default>
+                <label>Credit</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Price</fullName>
+                <default>false</default>
+                <label>Price</label>
+            </value>
+            <value>
+                <fullName>Product</fullName>
+                <default>false</default>
+                <label>Product</label>
+            </value>
+            <value>
+                <fullName>Stayed with Utility</fullName>
+                <default>false</default>
+                <label>Stayed with Utility</label>
+            </value>
+            <value>
+                <fullName>Storage Valuation</fullName>
+                <default>false</default>
+                <label>Storage Valuation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

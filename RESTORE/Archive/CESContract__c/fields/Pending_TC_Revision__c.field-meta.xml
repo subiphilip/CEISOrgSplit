@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pending_TC_Revision__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates whether the contract is currently pending generation/delivery of a revised TC.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Indicates whether the contract is currently pending generation/delivery of a revised TC.</inlineHelpText>
+    <label>Pending TC Revision</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

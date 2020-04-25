@@ -1,0 +1,36 @@
+<apex:page showHeader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false">
+    
+
+    <apex:composition template="Template_TC">
+        
+        <apex:define name="HeadTags">
+            <c:ForceSSLScript />
+            <title>Login - {!$Label.Page_Title_Company_Name}</title>
+            <!-- <link rel="canonical" href="{!$Setup.AuthSettings__c.TrueCost_Secure_URL__c}/{!$CurrentPage.Name}"/> -->
+            <meta name="description" content="Login to Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+        </apex:define>
+        <apex:define name="body">  
+            <div class="container">
+                <div class="row">
+                    <div class="span4 offset4">
+                        <h3>Login to TrueCost</h3>
+                        <hr/>
+                        <a class="btn btn-primary btn-block" href="{!$Setup.AuthSettings__c.Facebook_OAuth_Login_Link__c}?site={!urlencode($Setup.AuthSettings__c.TrueCost_Secure_URL__c)}&startURL={!$CurrentPage.Parameters.starturl}">
+                            Sign in with Facebook
+                        </a>
+                        
+                        
+                        <hr/>
+                        <c:TrueCostLoginRemote />
+                        
+                       
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </apex:define>
+    </apex:composition>
+    <c:remoteLoginScript />
+    
+</apex:page>

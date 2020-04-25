@@ -1,0 +1,107 @@
+<apex:component >
+<div id="rate-calculator" class="mt-large" style="height:50px; margin-top:100px;"></div>
+<div id="trigger-rate-container" class=""></div>
+  <section xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+    <div id="appRateHome" class="savings-outer gradient-background">
+        <div class="has-text-centered has-text-white ">
+            <span class="icon is-large ">
+                <span class="icon-icon-bolt icon-icon-bolt-white"></span>
+            </span>
+            <h3 class="head is-size-medium has-text-weight-bold ">What’s the all-in price you’re currently paying?</h3>
+            <div class="is-rounded savings-inner">
+                <p class="is-size-3 ">
+                    <span>Last month I used </span>
+                    <label class="visuallyhidden" for="monthlykwh">kWh</label>
+                    <input v-mask="'#####'" class="input borderless-inherit" id="historyKwh" v-model="historyKwh" v-bind="historyKwh" type="text" placeholder="" style="max-width: 200px;" />
+                    <span> kWh<br/> and my last bill was $</span>
+                    <label class="visuallyhidden" for="monthlybill">monthly bill</label>
+                    <input  class="input borderless-inherit" id="historyBill" v-model="historyBill" v-bind="historyBill" type="text" placeholder="" style="max-width: 200px;" />
+                    <br/>My zip code is
+                    <label class="visuallyhidden" for="zip">{{zip}}</label>
+                    <input v-mask="'#####'" class="input borderless-inherit" id="zip" type="text" v-model="zip" v-bind="zip" style="width: 180px;" />
+                </p>
+
+                <div class="mt-large">
+
+                </div>
+
+            </div>
+            <div>
+            <button class="button is-rounded is-info is-inverted is-medium animate-gradient-bg " v-on:click="calculate">CALCULATE ALL-IN COST</button>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+
+             TC.app.appRateHome = new Vue({
+                el: '#appRateHome',
+                data: {
+                  historyKwh:TC.app.account.historyKwh,
+                  historyBill:TC.app.account.historyBill,
+                  kwh:TC.app.account.historyPriceKwh,
+                  averageCost:0,
+                  zip:TC.app.account.premise.zip
+                },
+                methods: {
+                    changeKwh: function() {
+                        if(this.historyBill && this.historyKwh > 0){
+                            TC.fn.navigateTo("{!$Page.SHOP_PLANS}");
+                        }
+                    },
+                    calculate: function() {
+                        if(this.historyBill && this.historyKwh > 0){
+                            this.kwh = (this.historyBill / this.historyKwh) * 100;
+                            this.kwh = this.kwh.toFixed(1);
+                            TC.app.account.zip = this.zip;
+                            TC.app.account.zipSearchPlans = this.zip;
+                            TC.app.account.historyBill = this.historyBill;
+                            TC.app.account.historyKwh = this.historyKwh;
+                            TC.app.account.historyPriceKwh = this.kwh;
+                            TC.fn.navigateTo("{!$Page.SHOP_PLANS}?calculate=true");
+
+                            dataLayer.push({ 'visitNumber': '2', 'event': 'visitNumberSet' });
+                        }
+                    }
+                },
+                mounted: function() {
+
+                    if(TC.app.account.plans.length > 0){
+                        var sum = TC.app.account.plans.reduce(function(a, b) { return b.kwhTC; });
+                        this.averageCost = sum / TC.app.account.plans.length;
+                        this.averageCost = this.averageCost.toFixed(2) * 100;
+                    }
+                },
+                watch: {
+                    zip: {
+                      handler: function() {
+                        TC.app.account.premise.zip = this.zip;
+                      }
+                    },
+                    historyKwh: {
+                      handler: function() {
+                        TC.app.account.historyKwh = this.historyKwh;
+                      }
+                    },
+                    historyBill: {
+                      handler: function() {
+                        TC.app.account.historyBill = this.historyBill;
+                      }
+                    },
+                    kwh: {
+                      handler: function() {
+                        TC.app.account.kwh = this.kwh;
+                      }
+                    }
+                }
+             });
+
+          })
+        })(jQuery);
+    </script>
+
+</apex:component>

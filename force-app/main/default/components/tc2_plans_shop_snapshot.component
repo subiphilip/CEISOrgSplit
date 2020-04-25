@@ -1,0 +1,158 @@
+<apex:component >
+
+  <script>
+
+  var appPlansShopSnapshot = Vue.component('app-plans-shop-snapshot', {
+    data: function () {
+        return {
+            excerptHTML:'',
+            myplan: this.myplan,
+            rewards: this.myplan,
+            graphData: this.myplan,
+            about: this.myplan.ratePlan.Plan__r.REP_Profile__r.About_Us__c,
+            planDetailsPath: "/Shop_Plans_Details?id=" + this.myplan.id,
+            planId: this.myplan.id,
+            reviewURL: '/Shop_Plans_Review?id=' + this.myplan.repId,
+            loadRewards: true,
+            myrewards: []
+        }
+    },
+    beforeMount: function(){
+
+    },
+    mounted: function() {
+        this.excerpt();
+        this.reviewURL = '/Shop_Plans_Review?id=' + this.myplan.repId
+        debugger;
+    },
+    methods: {
+      setPlanById: function() {
+            debugger;
+            var plans = JSON.parse(sessionStorage.getItem('plans'));
+            //var planId = this.planId;
+            var planId = this.myplan.id;
+            var plan = _.find(plans, function (obj) { return obj.id == planId;  })
+            sessionStorage.setItem('plan', JSON.stringify(plan));
+            window.parent.location.href = "/Shop_Plans_Details?id=" + planId; // this.planDetailsPath;
+      },
+      excerpt: function(){
+            this.excerptHTML = $.parseHTML(this.about)[0].data;
+      },
+        
+      visibilityChanged: function(isVisible, entry) {
+
+        if(isVisible){
+          this.$refs.callGraph[0].callGraph();
+          this.$refs.callRewards[0].callRewards();
+          this.about = this.myplan.ratePlan.Plan__r.REP_Profile__r.About_Us__c;
+          this.reviewURL = '/Shop_Plans_Review?id=' + this.myplan.repId
+          this.excerpt();
+        }
+      }
+    },
+    props: ['myplan']
+
+    });
+</script>
+
+<app-plans-shop-snapshot inline-template='true' v-bind:myplan='plan' style="min-height:400px;" xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+
+<div id="appPlansShopSnapshot" >
+      <div class="tabcontent rate-box is-details">
+          <div class="columns">
+              <div class="column mt-small">
+                  <div class="is-size-6">
+                      <strong>About <span v-html="myplan.title"></span></strong>
+                      <!-- <p>All-in cost includes this plan's fees associated with your actual usage. We estimate your monthly bill based on your all-in cost of
+                      {{myplan.kwhTC}}¢ kWh so there are no surprises.</p> -->
+                      <p v-html="myplan.description" />
+                      <br/>
+                      <a  v-on:click="setPlanById()" class="is-size-6 ">
+                        <strong>More details, fact sheet  &amp; disclosures</strong>
+                      </a>
+                      <br/>
+                      <br/>
+                      <strong>About {{myplan.company}}</strong>
+                      <div v-html="excerptHTML"></div>
+                      <br/>
+                      <p class="has-text-weight-semibold"><a target="_parent" v-bind:href="reviewURL">Check out verified reviews</a></p>
+                  </div>
+              </div>
+              <div class="is-divider-vertical "></div>
+              <div class="column mt-small is-one-fifth mlr-medium">
+                  <p class="is-card-header">ADVERTISED PRICE</p>
+                  <p class="is-size-3">{{myplan.kwh1000}}¢ kWh</p>
+                    <p><strong>Why the Difference?</strong></p>
+                    <ul class="ul-price-card fees">
+                      <li>Based on exact usage of 1,000 kWh/mo.</li>
+                      <li>Does not include fees and taxes</li>
+                    </ul>
+                    <p style="margin-top:20px;"><strong>Potential Fees</strong></p>
+                    <ul class="ul-price-card fees">
+                        <li v-if="myplan.ratePlan.Minimum_Usage_Charge__c > 0">Your TrueCost estimate includes this plan's &#36;{{myplan.ratePlan.Minimum_Usage_Charge__c}} fee for any month that your usage is less than&nbsp; {{myplan.ratePlan.Minimum_Usage_Charge_Threshold_kWh__c}} kilowatt-hours.</li>
+                        <li v-if="myplan.ratePlan.Minimum_Usage_Charge2__c > 0">Your TrueCost estimate includes this plan's &#36;{{myplan.ratePlan.Minimum_Usage_Charge2__c}} fee for any month that your usage is less than&nbsp; {{myplan.ratePlan.Minimum_Usage_Charge_Threshold2__c}} but at least&nbsp;{{myplan.ratePlan.Minimum_Usage_Charge_Threshold_kWh__c}} kilowatt-hours.</li>
+                        <li v-if="myplan.ratePlan.Minimum_Usage_Charge3__c > 0">Your TrueCost estimate includes this plan's &#36;{{myplan.ratePlan.Minimum_Usage_Charge3__c}} fee for any month that your usage is less than&nbsp; {{myplan.ratePlan.Minimum_Usage_Charge_Threshold3__c}} but at least&nbsp;{{myplan.ratePlan.Minimum_Usage_Charge_Threshold2__c}} kilowatt-hours.</li>
+                        <li v-if="myplan.ratePlan.Cancellation_Fee_Type__c == 'Fixed'">This plan has a &#36;{{myplan.ratePlan.Cancellation_Fee__c}} fee for early cancellation. </li>
+                        <li v-if="myplan.ratePlan.Cancellation_Fee_Type__c == 'Flat Fee X Remaining Months'">This plan has a &#36;{{myplan.ratePlan.Cancellation_Fee__c}}  fee per remaining contract month for early cancellation. </li>
+                        <li v-if="myplan.ratePlan.Cancellation_Fee_Type__c == 'Calculated Estimate'">This plan has the following cancellation fee: &#36;{{myplan.ratePlan.Cancellation_Fee_Description__c}} </li>
+                        <li v-if="myplan.ratePlan.Same_Day_Move_In_Fee__c > 0">Same Day Move-in:&#36;{{myplan.ratePlan.Same_Day_Move_In_Fee__c}}</li>
+                        <li v-if="myplan.ratePlan.Changed_Start_Date_Fee__c > 0">Changed Start Day: &#36;{{myplan.ratePlan.Changed_Start_Date_Fee__c}} </li>
+                        <li v-if="myplan.ratePlan.Self_Selected_Switch_Fee__c > 0">Self-selected Switch: &#36;{{myplan.ratePlan.Self_Selected_Switch_Fee__c}}</li>
+                        <li v-if="myplan.ratePlan.Disconnect_Fee__c > 0">Disconnect: &#36;{{myplan.ratePlan.Disconnect_Fee__c}} </li>
+                        <li v-if="myplan.ratePlan.Reconnect_Fee__c > 0">Re-connect: &#36;{{myplan.ratePlan.Reconnect_Fee__c}} </li>
+                        <li v-if="myplan.ratePlan.Third_Party_Payment_Fee__c > 0">3rd-party payment: {{myplan.ratePlan.Third_Party_Payment_Fee__c}} </li>
+                        <li v-if="myplan.ratePlan.Reminder_Fee__c > 0">Reminder: &#36;{{myplan.ratePlan.Reminder_Fee__c}} </li>
+                        <li v-if="myplan.ratePlan.Insufficient_Funds_Cancelled_Checks__c > 0">Insufficient Funds: &#36;{{myplan.ratePlan.Insufficient_Funds_Cancelled_Checks__c}} </li>
+                        <li v-if="myplan.ratePlan.Excessive_Payments_Fee__c > 0">Excessive Payments: &#36;{{myplan.ratePlan.Excessive_Payments_Fee__c}} </li>
+                        <li v-if="myplan.ratePlan.Paper_Bill_Request_Fee__c > 0">Paper Bill Request: &#36;{{myplan.ratePlan.Paper_Bill_Request_Fee__c}}  </li>
+                        <li v-if="myplan.ratePlan.Manual_Assistance_Fee__c > 0">Manual Assistance: &#36;{{myplan.ratePlan.Manual_Assistance_Fee__c}} </li>
+                        <li v-if="myplan.ratePlan.Move_in_Fee__c > 0">Move-in with New Meter: &#36;{{myplan.ratePlan.Move_in_Fee__c}} </li>
+                        <li v-if="myplan.ratePlan.Late_Payment_Fee__c > 0">Late Payment: &#36;{{myplan.ratePlan.Late_Payment_Fee__c}}</li>
+                        <li v-if="myplan.ratePlan.Monthly_Base_Charge__c > 0">Monthly Based Fee: &#36;{{myplan.ratePlan.Monthly_Base_Charge__c}}</li>
+                    </ul>
+              </div>
+              <div class="is-divider-vertical"></div>
+              <div class="column mt-small is-small-no-flex  ">
+                  <p class="is-card-header" style="line-height:15px;">AVERAGE MONTHLY BILL ESTIMATES</p>
+                  <br/>
+
+                  <!-- <c:tc2_plans_shop_details_rewards /> -->
+                  <!--  <app-plans-shop-details-rewards  v-bind:rewards='plan'/> -->
+                  <c:tc2_plans_shop_details_graph />
+                  <app-plans-shop-details-graph inline-template='true' v-bind:myplan='myplan' ref="callGraph" v-observe-visibility="{callback: visibilityChanged,once: false}">
+                    <div id="appPlansShopDetailsGraph">
+                      <canvas v-bind:id="'graph_'+planId" class='mychart' width="400" height="400"></canvas>
+                    </div>
+                  </app-plans-shop-details-graph>
+
+                  <c:tc2_plans_shop_details_rewards />
+                  <app-plans-shop-details-rewards inline-template='true' v-bind:rewards='myplan' ref="callRewards" v-observe-visibility="{callback: visibilityChanged,once: false}">
+                    <div id="appPlansShopDetailsRewards" >
+                      <div class="is-divider-horizontal " v-show="myrewards.length > 0"></div>
+                        <p style="margin-top:20px;" v-show="myrewards.length > 0"><strong>Rewards</strong></p>
+                        <ul class="ul-price-card fees" v-for="(reward,index) in myrewards">
+                          <li>{{reward.Reward_Description__c}}</li>
+                        </ul>
+                    </div>
+                  </app-plans-shop-details-rewards>
+
+
+
+                  <span v-if="myplan.ratePlan.Usage_Discount_Amount__c > 0">
+                    <div class="is-divider-horizontal "></div>
+                    <p style="margin-top:20px;"><strong>Discounts</strong></p>
+                    <ul class="ul-price-card fees">
+                      <li>Your TrueCost estimate includes this plan's &#36;{{myplan.ratePlan.Usage_Discount_Amount__c}} credit for any month that your usage is more than&nbsp; {{myplan.ratePlan.Usage_Discount_Minimum__c}} kilowatt-hours.</li>
+                    </ul>
+                  </span>
+
+
+
+              </div>
+          </div>
+    </div>
+    </div>
+
+</app-plans-shop-snapshot>
+
+</apex:component>

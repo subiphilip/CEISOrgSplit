@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Top_FAQ__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Top FAQs display on the home FAQ page instead in addition to being found underneath their category</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Top FAQs display on the home FAQ page instead in addition to being found underneath their category</inlineHelpText>
+    <label>Top FAQ</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bill_Group_Updates_with_Errors</fullName>
+    <columns>NAME</columns>
+    <columns>Bill_Group__c</columns>
+    <columns>External_ID__c</columns>
+    <columns>Sync_Ran__c</columns>
+    <columns>Reviewed__c</columns>
+    <columns>Error_Length__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Bill_Group__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Error_Length__c</field>
+        <operation>notEqual</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>Operation_Type__c</field>
+        <operation>equals</operation>
+        <value>Update</value>
+    </filters>
+    <label>Bill Group Updates with Errors</label>
+    <language>en_US</language>
+</ListView>

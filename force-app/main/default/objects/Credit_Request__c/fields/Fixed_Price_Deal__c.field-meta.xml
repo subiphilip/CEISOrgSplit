@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fixed_Price_Deal__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check this box if you are requesting credit approval for a fixed price deal.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check this box if you are requesting credit approval for a fixed price deal.</inlineHelpText>
+    <label>Fixed Price Deal</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

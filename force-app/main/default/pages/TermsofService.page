@@ -1,0 +1,25 @@
+<apex:page showHeader="false" sidebar="false" cache="true" applyBodyTag="false" expires="43200" docType="html-5.0" standardStylesheets="false">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>{!$Label.Page_Title_Terms_of_Service} - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="robots" content="noindex"/>
+        </apex:define>
+        <!--apex:define name="breadcrumbs">
+            <apex:outputpanel styleClass="breadcrumbs" layout="block">
+                <apex:outputlink value="{!$Page.homepage}">Home</apex:outputlink>
+                <apex:outputlink value="{!$Page.TermsofUse}" styleClass="last">{!$Label.Page_Title_Terms_of_Service}</apex:outputlink>
+            </apex:outputpanel>            
+        </apex:define-->
+        
+        <apex:define name="body">
+            <div class="container">
+                <h2>{!$Label.Page_Title_Terms_of_Service}</h2>
+                <c:Content_Viewer content="Terms of Service"/>
+                <c:Content_Viewer content="Terms of Service Part 2"/>
+            </div>
+        </apex:define>
+        
+        
+    </apex:composition>
+</apex:page>

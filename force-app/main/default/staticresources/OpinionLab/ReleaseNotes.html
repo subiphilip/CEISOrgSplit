@@ -1,0 +1,221 @@
+<b>5.9.0</b><br>
+* Enhancement: (OG-335) New responsive/WCAG waypoint solution<br><br>
+* Enhancement: (OG-335) New responsive/WCAG invite solution<br><br>
+* Enhancement: (OG-335) New WCAG tab and bar solutions<br><br>
+* Enhancement: (OG-335) New double touch feature for all opt-in solutions<br><br>
+* Enhancement: (OG-335) Consistent invite experience across browsers/devices (pop-up monitor window)<br><br>
+* Downgrade: No more weighted invite.<br><br>
+
+<b>5.8.4</b><br>
+* Bugfix: (VS-39) Fix of multiple monitor window triggers when switching domains/protocols<br><br>
+
+<b>5.8.3</b><br>
+ * Bugfix: (VS-69) Fix of incorrect query parameter construction for invite monitor window<br><br>
+
+<b>5.8.2</b><br>
+ * Enhancement: Setting OOo object against the window object<br><br>
+ * Enhancement: Cleaning up some bar.js logic<br><br>
+ * Enhancement: localizing a variable for tab solution<br><br>
+
+<b>5.8.1</b><br>
+* Enhancement: (CLIENTREQ-6930) Adding a parameter for comment card closing screen reader text<br><br>
+* Deprication/Bugfix: (CLIENTREQ-32) removing support for POSITION_FIXED_SUPPORTED<br><br>
+* Bugfix: (CLIENTREQ-32) Fix for comment card rendering in parent window for Chrome iOS<br><br>
+
+<b>5.8.0</b><br>
+* Enhancement: (CLIENTDEV-5386) Updating invitation prompt<br><br>
+* Enhancement: (CLIENTDEV-5430) Updating tab layout<br><br>
+* Enhancement: (CLIENTREQ-6785) Updating regex for IOS7 and IOS6<br><br>
+* Bugfix: (CLIENTREQ-6738) Fixing page scrolling in IE8 compatability mode for Bar solution<br><br>
+
+<b>5.7.7</b><br>
+* Bugfix (CLIENTSUPPORT-2364) Add support for pagehide for ios devices.<br><br>
+* Bugfix (CLIENTSUPPORT-2400) Add support for scroll bars in FF and IE for UCC cards rendered by invite.<br><br>
+* Bugfix (CLIENTSUPPORT-2507) Add support for smart banners.<br><br>
+
+<b>5.7.6</b><br>
+* Bugfix: (CLIENTSUPPORT-2281) Fix accidental global variable leak of curtop, ie7, windowName and i.<br><br>
+* Bugfix: (CLIENTSUPPORT-2323) Add resizeable=yes to our window.open function so that IE will allow resizing of the popup window.<br><br>
+
+<b>5.7.5</b><br>
+* New Feature: (CLIENTDEV-5244) New rake task "release:fullumd" to enable UMD (RequireJS/AMD) support.<br><br>
+* Bugfix: (CLIENTSUPPORT-2128) Fix accidental card fire for popunder invitation on Safari.<br><br>
+
+<b>5.7.4</b><br>
+* New Feature: (CLIENTDEV-5205) Support RequireJS/AMD enviornments for opt-in implementations.<br><br>
+* Bugfix: (CLIENTSUPPORT-2068) fix reference to clickTaleSID.<br><br>
+
+<b>5.7.3</b><br>
+* Bugfix: (CLIENTSUPPORT-2000) Invite weight persists across domains/protocols.<br><br>
+
+<b>5.7.2</b><br>
+* Bugfix: (CLIENTSUPPORT-1958) Upon initial load, Invitation monitor not registering itself to opening window.<br><br>
+
+<b>5.7.1</b><br>
+* Enhancement: (CLIENTSUPPORT-1871) Smoother scrolling experience with Bar implementation on IE8 and greater.<br>
+* Bugfix: (CLIENTSUPPORT-1870) Fix unwanted IE10 dialog shown with onExit event implementation.<br><br>
+
+<b><font color="red" size="6">5.7</font></b><br>
+* New Feature: (UCC-204) UCC: Disable on page when on mobile<br>
+* New Feature: (CLIENTSUPPORT-1662) Added new tab tabindex option that allows the tab index to be configured to a number or removed.<br>
+* Enhancement: (CLIENTSUPPORT-1632) Prevent Invitation window from focusing to soon on Windows with Firefox.<br>
+* Enhancement: (CLIENTSUPPORT-1632)Expose invitation reference to launched popup window to be monitored by custom scripts<br>
+* Enhancement: (CLIENTSUPPORT-1632)Allow Invitation implementation for non-link friendly domain change<br>
+* Bugfix: (CLIENTSUPORT-1705) Tab workaround for FF19 fixed position issue (https://bugzilla.mozilla.org/show_bug.cgi?id=844178)<br>
+* Bugfix: (UCC-202) UCC: Prevent onpage horizontal scroll for IE9<br>
+* Bugfix: (UCC-203) UCC: Move the on page close button to prevent overlap with UCC submit button<br><br>
+<hr color="black" width="100%" size="3">
+<b>5.6.7</b><br>
+
+* New Feature: (CLIENTSUPPORT-1546) Added new tab wcagBasePath option for 508 compliance.<br>
+* Enhancement: (CLIENTSUPPORT-1606) Updated OL logo on invitation prompt window.<br>
+* Bugfix: (CLIENTSUPPORT-1626) Corrected screen reader issue created in v5.6.6 release<br><br>
+
+<b>5.6.6</b><br>
+
+* Enhancement: (CLIENTSUPPORT-1520) Adjust floating activation to be touchend for better mobile experience.<br>
+* Enhancement: (CLIENTSUPPORT-1520) Added Kindle to mobile detection.<br><br>
+
+<b>5.6.5</b><br>
+
+* Enhancement: (CLIENTSUPPORT-1443) Adds conditional Chrome alert necessary for focusing the comment card when an area is abandon<br><br>
+
+<b>5.6.4</b><br>
+
+* Enhancement: (CLIENTSUPPORT-1195) Adjusts accessibility text for oo-objects and on page cards.<br>
+* Enhancement: (CLIENTSUPPORT-1244) disableFormElements now includes < button > elements<br>
+* Enhancement: (CLIENTSUPPORT-1244) disableLinks now targets area maps with matching HREF values<br>
+* Enhancement: (CLIENTSUPPORT-1243) Invite query params now account for two question marks<br>
+* New Feature: (CLIENTSUPPORT-1243) Invite object now has truncatePrevCurrentMetrics and disablePrevCurrentMetrics options<br><br>
+
+<b>5.6.3</b><br>
+
+* Enhancement: (CLIENTSUPPORT-1194) Adds accessibility upgrades to bar and on page cards.<br>
+* Enhancement: (CLIENTSUPPORT-1195) Adds file describing the oocode cookie use <br>
+* Enhancement: (CLIENTSUPPORT-1196) Cleans up form after on page comment card is shown<br><br>
+
+
+<b>5.6.2</b><br>
+
+* fix problem with ie and prompt<br>
+* asm will again respect newWindow size<br><br>
+
+<b>5.6.1</b><br>
+
+* asm popups in invitation will have scrollbars<br><br>
+
+<b><font color="red">5.6</font></b><br>
+
+* Adds prompt functionality to an onEntry event.<br>
+* Changes prompt to be embedded in host markup rather than an ajax request<br><br>
+<hr color="black" width="100%" size="3">
+<b>5.5.9</b><br>
+
+* Adds close button of on page card to tab index for screen reader users.<br><br>
+
+<b>5.5.8</b><br>
+
+* Defers setting referer until last possible moment for Ocode instances to pick up any changes to url that does not cause page refresh.<br><br>
+
+<b>5.5.7</b><br>
+
+* Fixes Thank you window close link in combination with custom comment card endpoint<br><br>
+
+<b>5.5.6</b><br>
+
+* Adds legacyVariables override support to Ocode instances.<br><br>
+
+<b>5.5.5</b><br>
+
+* Fixes issue with tabbing through a form and input element is at the bottom of the page. Bar will no longer cover up input.<br><br>
+
+<b>5.5.4</b><br>
+
+* Fixes graphics in IE6<br><br>
+
+<b>5.5.3</b><br>
+
+* Addresses iOS postition: fixed issues<br><br>
+
+<b>5.5.2</b><br>
+
+* Defers positioning floating logo until all other layout calculations have occured.<br><br>
+
+<b>5.5.1</b><br>
+
+* Fixes never show again time problem<br><br>
+
+<b><font color="red">5.5</font></b><br>
+
+* Interface elements given a face lift<br>
+* Just passing a string to referrerRewrite will replace entire referer with specified string<br>
+* No more link elements in interface to avoid any client scripts that might modify links<br><br>
+<hr color="black" width="100%" size="3">
+<b>5.4.17</b><br>
+
+* Fixes issue having to do with opt-in cookie using a custom name<br><br>
+
+<b>5.4.16</b><br>
+
+* Take in to account the offset top of the on page card when determining height and scrollability of on page card<br><br>
+
+<b>5.4.15</b><br>
+
+* Get's rid of collisions with Function.prototype.bind<br><br>
+
+<b>5.4.14</b><br>
+
+* Enables position: fixed in ie7+ when the browser does not support position: fixed<br><br>
+
+<b>5.4.13</b><br>
+
+* Fixes issue with tab positioning in IE 7<br><br>
+
+<b>5.4.12</b><br>
+
+* Fixes issue with tab positioning in iOS 4 and 5 having to do with faulty feature detection.<br><br>
+
+<b>5.4.11</b><br>
+
+* Allows clients to call OOo.Ocode.prototype.reflowBar() (a.k.a instanceVariable.reflowBar()) to reposition bar after dynmically changing page height (only a problem in browsers that don't support posiition: fixed)<br><br>
+
+<b>5.4.10</b><br>
+
+* Fixed floating, bar and tab positioning in iOS 4 and 5<br><br>
+
+<b>5.4.9</b><br>
+
+* Fixed issue with onPageCard and IE6 being served from ssl enabled sites.<br><br>
+
+<b>5.4.8</b><br>
+
+* Fixed problem with reading tealeafCookie in Invitation<br><br>
+
+<b>5.4.7</b><br>
+
+* beforePrompt callback added to invitation<br>
+* asm popups have scrollbars added by default<br><br>
+
+<b>5.4.6</b><br>
+
+* Fixed timing problems with advanced invitation methodologies<br><br>
+
+<b>5.4.5</b><br>
+
+* Fixed inifite scrolling issue in ie7 having to do with the floating logo<br><br>
+
+<b>5.4.4</b><br>
+
+* Fixed a regression that occured (amusingly enough) when abstracting out functionality to make engine more unit testable. The bug had to do with using custom comment card endpoints with on page cards.<br><br>
+
+<b>5.4.3</b><br>
+
+* Fixed issue with cookie being set correctly if there is an extra entry after the tld in the location.host. Example: www.opinionlab.com.extra<br><br>
+
+<b>5.4.2</b><br>
+
+* onClickCallback for floating, bar, tab<br>
+* onClickCallback for yes and no buttons on Invitation<br>
+* Updated monitor window look<br>
+* Disabling Invitation for mobile browsers (it has no chance of working correctly)<br>
+* Fixed problem with Safari 5 and monitor window loading comment card too soon<br><br><br>

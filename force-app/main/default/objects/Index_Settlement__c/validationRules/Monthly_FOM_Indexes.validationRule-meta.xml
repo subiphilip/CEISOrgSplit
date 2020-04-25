@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Monthly_FOM_Indexes</fullName>
+    <active>true</active>
+    <description>can&#39;t have non FOM dates</description>
+    <errorConditionFormula>AND(
+ISPICKVAL(Period__c , &#39;Monthly&#39;), 
+day(Effective_Date__c)!=1,
+ ispickval(Index__r.Publication__c, &#39;Inside FERC&#39;)
+)</errorConditionFormula>
+    <errorDisplayField>Effective_Date__c</errorDisplayField>
+    <errorMessage>IndexSettle01: You can only have Inside FERC FOM settlements on the first of the month.</errorMessage>
+</ValidationRule>

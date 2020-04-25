@@ -1,0 +1,10 @@
+[
+    {
+        "sobject": "AuthSettings__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "export-AuthSettings__cs.json"
+        ]
+    }
+]

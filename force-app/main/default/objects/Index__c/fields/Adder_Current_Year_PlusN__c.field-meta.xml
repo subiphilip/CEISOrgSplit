@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Adder_Current_Year_PlusN__c</fullName>
+    <defaultValue>0</defaultValue>
+    <description>Adder for Current Year Plus N months for NYMEX Bid Ask Last price based on buy back or sell.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Adder for Current Year Plus N months for NYMEX Bid Ask Last price based on buy back or sell.</inlineHelpText>
+    <label>Adder - Current Year PlusN</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>7</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

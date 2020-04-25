@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cost_Wacog__c</fullName>
+    <externalId>false</externalId>
+    <formula>BLANKVALUE( Nymex_Rollup_Wacog__c, 0) + BLANKVALUE( Fin_Basis_Rollup_Wacog__c, 0) + BLANKVALUE( Phy_Prem_Rollup_Wacog__c, 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Cost Wacog</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

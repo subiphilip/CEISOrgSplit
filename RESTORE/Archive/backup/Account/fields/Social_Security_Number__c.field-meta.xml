@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Social_Security_Number__c</fullName>
+    <description>Customer SSN.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Why do we need this?  You social security number is used by electric providers to confirm your identity (should you need to call them in the future to discuss your account) and credit history.</inlineHelpText>
+    <label>Social Security No.</label>
+    <length>9</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

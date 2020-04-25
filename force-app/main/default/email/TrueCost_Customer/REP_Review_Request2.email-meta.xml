@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Tells customers to review their REP 45 days after buying a plan</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>TrueCost_Customer</letterhead>
+    <name>REP Review Request2</name>
+    <style>freeForm</style>
+    <subject>Rate {!Order__c.REP_Profile__c} on TrueCost</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

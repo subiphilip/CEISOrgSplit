@@ -1,0 +1,63 @@
+<apex:page showHeader="false" sidebar="false" controller="SupportLinks" cache="true" expires="43200" applyBodyTag="false" docType="html-5.0" standardStylesheets="false">
+    <!--SHOW AND HIDE SCRIPT -->
+    <apex:includeScript value="{!$Resource.showhide_js}"/>  
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Questions About TrueCost - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>
+        
+        <apex:define name="body">        
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span8">
+                        <h2>
+                            Questions about TrueCost<br/>
+                        </h2>
+                        <div class="well well-large">
+                            <c:Content_Viewer content="About TrueCost FAQ Intro"/>
+                        </div>
+                        
+                        <ul class="inline pull-right">
+                            <li><a href="javascript:void(0)" onclick="hideClass('answer');" class="btn">Collapse All</a></li>
+                            <li><a href="javascript:void(0)" onclick="showClass('answer');" class="btn">Expand All</a></li>
+                        </ul>
+                        
+                        <h4>
+                            <apex:outputtext styleClass="category" value="Category: Most Common" rendered="{!$CurrentPage.parameters.cat==null}" /> 
+                            <apex:outputtext styleClass="category" value="Category: {!$CurrentPage.parameters.cat}" rendered="{!$CurrentPage.parameters.cat!=null}" /> 
+                        </h4>
+                        
+                        <apex:outputPanel layout="block" id="notopic">
+                            <dl>
+                                <apex:repeat var="faq1" value="{!TCfaq}">
+                                    <dt>
+                                        <apex:outputLink value="javascript:void(0)" onclick="toggleID('{!faq1.id}');">{!faq1.Question__c}</apex:outputLink>
+                                    </dt>
+                                    <dd id="{!faq1.id}" class="answer" style="display: none;">
+                                        <apex:outputfield value="{!faq1.Answer__c}"></apex:outputfield>
+                                        
+                                    </dd>
+                                    <hr/>
+                                </apex:repeat>
+                            </dl>
+                        </apex:outputPanel>
+                        <div class="alert alert-block">
+                            <strong>Don't see your question here?</strong>
+                            <a href="{!$Page.contactus}">Let us know!</a>
+                        </div> 
+                    </div>
+                    <div class="span4">
+                        <c:truecostrecentblogposts />
+                        <hr/>
+                        <c:ChartMiniNarrow />
+                        <hr/>
+                        <c:RandomPoll />
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+        </apex:define>       
+        
+    </apex:composition>
+</apex:page>

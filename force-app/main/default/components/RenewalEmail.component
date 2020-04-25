@@ -1,0 +1,79 @@
+<apex:component controller="RenewalEmailController" access="global">
+	
+	<apex:attribute name="OfferCountX" type="Integer" access="global" description="How many plans to show in the offers table" assignTo="{!OfferCount}"/>
+	<apex:attribute name="order" type="String" access="global" description="The order we're pulling data for" assignTo="{!orderId}"/>
+
+	<hr/>
+
+	<p>Dear {!o.First_Name__c},</p>
+   
+   <p>According to our records, your electric plan with <b>{!o.REP_Profile__r.name}</b> expire{!if(o.Plan_Expiration__c<today(), 'd', 's')} around&nbsp; 
+   		<b>
+	   		<apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+	    		<apex:param value="{!o.Plan_Expiration__c}" /> 
+			</apex:outputText>
+		</b>
+		<apex:outputPanel rendered="{!o.Plan_Expiration__c>today()}">
+		(check your bill for the actual expiration date)
+		</apex:outputPanel>
+		 .  
+		<apex:outputPanel rendered="{!o.Plan_Expiration__c>today()}">
+		That's <b>{!round(o.Plan_Expiration__c-today(), 0)}</b> days from now.
+		</apex:outputPanel>
+	</p>
+
+	<p>The advertised price on your plan was <b>{!round(o.kWh_rate_1000__c, 1)}</b> cents/kWh.</p>
+	
+	<!--generic, we don't know the REP's price-->
+	<p>
+	The average price for customers in the CenterPoint electric territory* who don't renew their contract and move to a variable rate is <b>{!round(Variable, 1)}</b>
+	cents/kWh, a <b>{!round(((Variable-o.kWh_rate_1000__c)/o.kWh_rate_1000__c)*100, 0)}%</b> increase.</p>
+
+	<apex:outputPanel rendered="{!offers.size>0}">
+		<p>Here are some current prices on plans from TrueCost, with prices calculated based on information you provided.  Click any plan to login to TrueCost and go straight to that plan.</p>
+
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th class="text-center"></th>
+					<th class="text-center">Company</th>
+					<th class="text-center">Plan</th>
+					<th class="text-center">Months</th>
+					<th class="text-center">Advertised</th>
+					<th class="text-center">TrueCost Estimate</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<apex:repeat var="p" value="{!offers}">
+					
+						<tr>
+							<td class="text-center">
+								<a class="btn btn-warning btn-mini" href="https://centerpointenergy.secure.force.com/sitelogin?starturl={!urlencode('/plandetails?id='&p.rateplan.id&'&rep='&p.rateplan.plan__r.rep_profile__r.id)}">View</a>
+							</td>
+							<td class="text-center">{!p.rateplan.plan__r.rep_profile__r.name}</td>
+							<td class="text-center">{!p.rateplan.plan__r.name}</td>
+							<td class="text-center">{!p.rateplan.plan__r.contract_length__c} </td>
+							<td class="text-center">{!round(p.rateplan.X1000_kWh_rate__c, 1)} <small><small>&cent;/kWh</small></small></td>
+							<td class="text-center">{!round(p.pricekWh*100, 1)} 
+								<small><small>&cent;/kWh</small></small>
+							</td>
+						</tr>
+				</apex:repeat>
+			</tbody>
+		</table>
+	</apex:outputPanel>
+
+	<p>You can see all available plans <a href="https://centerpointenergy.secure.force.com/sitelogin?starturl=/shopplans">here</a>.</p>
+
+	<p><b>Already switched?</b>  <a href="http://www.surveygizmo.com/s3/1464426/expired-order-survey?orderid={!o.id}">Let us know</a> so we can stop worrying about your rate.</p>
+	
+	<apex:outputPanel rendered="{!offers.size>0}">
+		<p>Please note--these prices and plans were available when this email was sent.  Prices change, and plans change, so what is shown in this email may not still be available, or the price may have changed.</p>
+	</apex:outputPanel>
+
+	<p><small><small>* based on a survey of the most recent variable rates posted online by the ten largest providers by market share.  Your provider's actual rate may be higher or lower than the average.</small></small></p>
+	
+
+	
+</apex:component>

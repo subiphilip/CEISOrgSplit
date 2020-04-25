@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conga_Workflow_Trigger__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>For the automatic reply to new orders from the website.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For the automatic reply to new orders from the website.</inlineHelpText>
+    <label>Conga Workflow Trigger</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Incentive_must_have_a_customer_email</fullName>
+    <active>false</active>
+    <errorConditionFormula>and( Record_Type_Name__c =&#39;Gas Choice Sign Up&#39;, Incentive__c, isblank( Customer_Email__c ))</errorConditionFormula>
+    <errorDisplayField>Customer_Email__c</errorDisplayField>
+    <errorMessage>Order04: If you want to offer the incentive, you must collect the customer email.  If they customer does not use email, please enter gaschoice@centerpointenergy.com as the email address so that the customer can get their reward card.</errorMessage>
+</ValidationRule>

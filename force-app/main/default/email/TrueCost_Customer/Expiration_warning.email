@@ -1,0 +1,19 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<p>Dear {!Order__c.00N30000007atbG}, <br><br>Thank you&nbsp;for using TrueCost&nbsp;to enroll in your current electric plan.&nbsp;&nbsp;&nbsp; <br><br>According to our records*, your contract with&nbsp; {!Order__c.00N30000006ohjz} expires on {!Order__c.Plan_Expiration__c}.<br><br>TrueCost can help you find the best electric plan to meet your needs, whether you stay with your current retail electric provider or try a new one.&nbsp; Best of all, the information you provided is&nbsp;securely saved in our system, so we can quickly get a new order placed. </p>
+<p>&nbsp;</p>
+<p><font color="#3333ff"><b><a href="http://www.mytruecost.com/shopplans">Get started shopping now (log in required).</a></b></font><br><br>If you have any questions, please email us or call us at&nbsp;<span style="font-size: medium; ">(800) 461-3056&nbsp;</span>Monday through Friday, 8 a.m. to 5 p.m. Central Standard Time.</p>
+<p>&nbsp;</p>
+<p>Thank you,</p>
+<p><br></p>
+<p>TrueCost Customer Support</p>
+<p><a href="mailto:TrueCost@CenterPointEnergy.com">TrueCost@CenterPointEnergy.com</a></p>
+<p>800-461-3056</p>
+<p>&nbsp;</p>
+<p><span style="background-color: rgb(255, 255, 255); ">Log into your account at&nbsp;</span><a href="http://www.mytruecost.com/myaccount" style="background-color: rgb(255, 255, 255); ">MyTrueCost.com</a>
+</p>
+<p>&nbsp;</p>
+<p><font size="1">*The Public Utility Commission of Texas also requires that&nbsp;Retail Electric Providers notify their customers 14 days before a fixed-rate electric plan under contract with their company is about to expire.&nbsp; <br><br></font><br><br><br><br></p>]]></td>
+</tr>
+</table>

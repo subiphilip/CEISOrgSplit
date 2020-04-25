@@ -1,0 +1,157 @@
+<apex:component >
+
+<apex:attribute name="title" description="" type="string" required="false"/>
+<apex:attribute name="description" description="" type="string" required="false"/>
+
+<head>
+    
+    <c:tc2_tracking ></c:tc2_tracking>
+
+    <!-- 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=es6"></script> 
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    -->
+    <apex:includeScript value="{!URLFOR($Resource.v2_tc_resources_vender_js, 'IntersectionObserver.js')}"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    
+    <meta name="google-site-verification" content="FrgWlxsRtcd881uG1S1qm7UiyutPYCuZu7Y5ormWz8w" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=no" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.js"></script>
+    <script src='https://cdn.polyfill.io/v2/polyfill.js?features?feature=Array.prototype.findIndex'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/flexibility/2.0.1/flexibility.js'></script>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <apex:stylesheet value="{!URLFOR($Resource.v2_tc_resources_vender_css, 'vender.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.v2_tc_resources_styles_css, 'style.css')}"/>
+    <link rel="icon" href="{!URLFOR($Resource.v2_tc_resources_images, 'tc-fav.png')}" type="image/x-icon" />
+    <title>{!title}</title>
+    
+
+    <apex:includeScript value="{!URLFOR($Resource.v2_tc_resources_vender_js, 'vender.js')}"/>
+    <c:tc2_mainjs />
+    
+    <style>
+    
+    html.async-hide {
+      opacity: 1 !important;
+    }
+
+    html, #wrapper, h1.title, h2.subtitle, #appZip {
+      opacity: 0;
+    }
+    .is-card-header {
+      text-transform: uppercase;
+    }
+    .dot {
+      background:#ddd;
+      border-radius:50%;
+      padding:10px;
+      display: inline-block;
+      position: relative;
+      top: 30px;
+    }
+    .app-reminder .band.alert {
+        background: #0d93d4; /* Old browsers */
+        background: -moz-linear-gradient(left, #0d93d4 0%, #08d2e3 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(left, #0d93d4 0%,#08d2e3 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to right, #0d93d4 0%,#08d2e3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0d93d4', endColorstr='#08d2e3',GradientType=1 ); /* IE6-9 */
+    }
+    .app-save-for-later .btn-fixed-side .txt,
+    .app-reminder .btn-fixed-side .txt {
+      opacity:0;
+    }
+    .app-save-for-later .btn-fixed-side,
+    .app-reminder .btn-fixed-side {
+      display:none;
+      position: fixed;
+      right: 5px;
+      top: 45%;
+      border-radius: 30px;
+      box-shadow: 2px 6px 10px rgba(0,0,0,.25);
+      background: linear-gradient(to right, #0d93d4 0%,#08d2e3 100%);
+      z-index: 3;
+    }
+    .app-save-for-later .btn-fixed-side {
+      top:30%;
+    }
+    .app-save-for-later .button .icon:first-child:not(:last-child),
+    .app-reminder .button .icon:first-child:not(:last-child) {
+      margin-left:0;
+      margin-right:0;
+    }
+    .is-transparent {
+      background:transparent;
+    }
+    
+    @font-face {
+      font-family: 'icomoon';
+      src:  url('{!URLFOR($Resource.v2_tc_resources_fonts)}/icomoon.eot?eacbzv');
+      src:  url('{!URLFOR($Resource.v2_tc_resources_fonts)}/icomoon.eot?eacbzv#iefix') format('embedded-opentype'),
+      url('{!URLFOR($Resource.v2_tc_resources_fonts)}/icomoon.ttf?eacbzv') format('truetype'),
+      url('{!URLFOR($Resource.v2_tc_resources_fonts)}/icomoon.woff?eacbzv') format('woff'),
+      url('{!URLFOR($Resource.v2_tc_resources_fonts)}/icomoon.svg?eacbzv#icomoon') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+        font-family: "Font Awesome 5 Free";
+        font-weight: normal;
+        font-style : normal;
+        src : url("{!URLFOR($Resource.v2_tc_resources_fonts)}/fa-solid-900.woff2") format("woff2");
+    }
+    @font-face {
+        font-family: "Proxima Nova";
+        font-weight: normal;
+        font-style : normal;
+        src : url("{!URLFOR($Resource.v2_tc_resources_fonts)}/ProximaNova-Reg.otf") format("opentype");
+    }
+    @font-face {
+        font-family: "Proxima Nova";
+        font-weight: 800;
+        font-style : bold;
+        src : url("{!URLFOR($Resource.v2_tc_resources_fonts)}/ProximaNova-Extrabold.otf") format("opentype");
+    }
+    @font-face {
+        font-family: "Proxima Nova";
+        font-weight: 600;
+        src : url("{!URLFOR($Resource.v2_tc_resources_fonts)}/ProximaNova-Sbold.otf") format("opentype");
+    }
+    @font-face {
+        font-family: "Proxima Nova";
+        font-weight: 500;
+        src : url("{!URLFOR($Resource.v2_tc_resources_fonts)}/ProximaNova-Sbold.otf") format("opentype");
+    }
+    
+    @font-face {
+      font-family: 'Font Awesome 5 Free';
+      font-style: normal;
+      font-weight: 900;
+      src: url("{!URLFOR($Resource.v2_tc_resources_fonts)}/fa-solid-900.eot");
+      src: url("{!URLFOR($Resource.v2_tc_resources_fonts)}/fa-solid-900.eot?#iefix") format("embedded-opentype"), 
+      url("{!URLFOR($Resource.v2_tc_resources_fonts)}/fa-solid-900.woff2") format("woff2"), url("{!URLFOR($Resource.v2_tc_resources_fonts)}/fa-solid-900.woff") format("woff"), 
+      url("{!URLFOR($Resource.v2_tc_resources_fonts)}/fa-solid-900.ttf") format("truetype"), 
+      url("{!URLFOR($Resource.v2_tc_resources_fonts)}/fa-solid-900.svg#fontawesome") format("svg"); 
+    }
+    
+    </style>
+
+    <script>
+      
+      (function(){return (function templatePolyfill(){"use strict";if("content"in document.createElement("template")){return false;}var templates=document.getElementsByTagName("template");var plateLen=templates.length;for(var x=0;x<plateLen;++x){var template=templates[x];var content=template.childNodes;var fragment=document.createDocumentFragment();while(content[0]){fragment.appendChild(content[0]);}template.content=fragment;}}());}());
+    </script>
+    
+</head>
+
+
+
+      
+      
+</apex:component>

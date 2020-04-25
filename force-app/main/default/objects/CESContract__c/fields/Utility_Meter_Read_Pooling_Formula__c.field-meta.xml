@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Utility_Meter_Read_Pooling_Formula__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(TEXT( Utility_Meter_Read_Pooling__c ),
+  &#39;applicable meter read/pooling fees&#39;,1,
+  &#39;$5.00 per facility per month&#39;, 5,
+  &#39;$1.50 per facility per month&#39;, 1.50,
+  &#39;$10.00 per facility per month&#39;, 10,
+  &#39;$15.00 per facility per month&#39;, 15,
+  NULL
+)</formula>
+    <label>Utility Meter Read Pooling Formula</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

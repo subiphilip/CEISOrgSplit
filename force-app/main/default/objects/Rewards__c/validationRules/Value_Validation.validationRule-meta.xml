@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Value_Validation</fullName>
+    <active>false</active>
+    <description>If Reward type is cash or retail (has a $ value), value is required</description>
+    <errorConditionFormula>AND( OR(ISNULL(Reward_Value__c ),  Reward_Value__c = 0) , 
+
+OR( ISPICKVAL( Reward_Type__c , &quot;Cash Back (flat $ amount)&quot;),  ISPICKVAL( Reward_Type__c , &quot;Retail Items&quot;), 
+ISPICKVAL( Reward_Type__c , &quot;Home Protection&quot;),
+ISPICKVAL( Reward_Type__c , &quot;Bill Credit&quot;),
+ISPICKVAL( Reward_Type__c , &quot;Charitable Donation&quot;)
+
+)
+)</errorConditionFormula>
+    <errorDisplayField>Reward_Value__c</errorDisplayField>
+    <errorMessage>Reward04: $ Value must be entered for this type of reward or incentive.</errorMessage>
+</ValidationRule>

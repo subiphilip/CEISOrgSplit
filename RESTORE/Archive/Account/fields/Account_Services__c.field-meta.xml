@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Services__c</fullName>
+    <description>Field indicates which Account Services program is the customer currently enrolled in</description>
+    <externalId>false</externalId>
+    <label>Account Services</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>MAO</fullName>
+                <default>false</default>
+                <label>MAO</label>
+            </value>
+            <value>
+                <fullName>MAO &amp; OLB</fullName>
+                <default>false</default>
+                <label>MAO &amp; OLB</label>
+            </value>
+            <value>
+                <fullName>MAO &amp; ABD</fullName>
+                <default>false</default>
+                <label>MAO &amp; ABD</label>
+            </value>
+            <value>
+                <fullName>MAO &amp; BP/LMB</fullName>
+                <default>false</default>
+                <label>MAO &amp; BP/LMB</label>
+            </value>
+            <value>
+                <fullName>MAO, OLB &amp; ABD</fullName>
+                <default>false</default>
+                <label>MAO, OLB &amp; ABD</label>
+            </value>
+            <value>
+                <fullName>MAO,OLB &amp; BP/LMB</fullName>
+                <default>false</default>
+                <label>MAO,OLB &amp; BP/LMB</label>
+            </value>
+            <value>
+                <fullName>MAO, ABD &amp; BP/LMB</fullName>
+                <default>false</default>
+                <label>MAO, ABD &amp; BP/LMB</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

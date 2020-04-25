@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>At or Above</fullName>
+        <default>false</default>
+        <label>At or Above</label>
+    </customValue>
+    <customValue>
+        <fullName>At or Below</fullName>
+        <default>false</default>
+        <label>At or Below</label>
+    </customValue>
+    <masterLabel>Strike Price Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

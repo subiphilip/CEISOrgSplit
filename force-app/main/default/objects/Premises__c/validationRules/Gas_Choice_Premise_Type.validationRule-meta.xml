@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Choice_Premise_Type</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( Record_Type_Name__c = &quot;Gas Choice Premise&quot;, 
+
+OR( ISNULL(Premise_Type__c), 
+AND( 
+Premise_Type__c &lt;&gt; &quot;AGR&quot;, 
+Premise_Type__c &lt;&gt;&quot;RES&quot;, 
+Premise_Type__c &lt;&gt; &quot;COM&quot;,
+Premise_Type__c &lt;&gt; &quot;IND&quot;  
+) 
+) 
+)</errorConditionFormula>
+    <errorDisplayField>Premise_Type__c</errorDisplayField>
+    <errorMessage>Premise09: Gas Choice premise requires a valid Type like IND, AGR, RES, or COM</errorMessage>
+</ValidationRule>

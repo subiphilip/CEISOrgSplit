@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Language_Preference__c</fullName>
+    <description>What language does the customer want to receive communications in?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What language does the customer want to receive communications in?</inlineHelpText>
+    <label>Language Pref.</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>English</fullName>
+                <default>true</default>
+                <label>English</label>
+            </value>
+            <value>
+                <fullName>Spanish</fullName>
+                <default>false</default>
+                <label>Spanish</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

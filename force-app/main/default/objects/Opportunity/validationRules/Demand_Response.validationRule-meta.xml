@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Demand_Response</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+
+TEXT( Business_Type__c) = &quot;Demand Response&quot;,
+
+OR(
+NOT(ISNULL( Term_Volume__c )),
+
+NOT(ISNULL(  Unit_Margin__c  ))
+)
+)</errorConditionFormula>
+    <errorMessage>Oppt09: Only Total Margin is required for Demand Response business, please leave  term volume and unit margin BLANK.</errorMessage>
+</ValidationRule>

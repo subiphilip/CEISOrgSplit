@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Commercial_Peak_Month_Capacity_Cost_Dth__c</fullName>
+    <description>how much each peak month Dth of usage costs, in capacity charges</description>
+    <externalId>false</externalId>
+    <formula>if (Commercial_Avg_Peak_Month__c&gt;0, 
+
+( Commercial_Peak_Day__c/( Commercial_Peak_Day__c+ Residential_Peak_Day__c+ Industrial_Peak_Day_Capacity__c ) * Total_demand_charge_for_Pin__c ) / (Commercial_Avg_Peak_Month__c /10),
+
+Residential_Capacity_Cost_per_Dth__c
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>how much each peak month Dth of usage costs, in capacity charges</inlineHelpText>
+    <label>Commercial Peak Month Capacity Cost (Dth</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

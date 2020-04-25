@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Market_Report_Live_Link__c</fullName>
+    <description>see what the customer would see</description>
+    <externalId>false</externalId>
+    <formula>if(
+ CampaignId = &quot;70130000000eugJ&quot;,
+&quot;http://centerpointenergy.force.com/ces/markethubGC?contactid=&quot;&amp;Contact.Id&amp;&quot;&amp;campaignid=&quot;&amp;CampaignId,
+if(
+ CampaignId = &quot;70130000000eO9N&quot;,
+&quot;http://centerpointenergy.force.com/ces/weeklymarketreport?contactid=&quot;&amp;Contact.Id&amp;&quot;&amp;campaignid=&quot;&amp;CampaignId,
+if(
+ OR(CampaignId = &quot;70130000000e1J0&quot;,CampaignId = &quot;70130000000e1J2&quot;),
+&quot;http://centerpointenergy.force.com/ces/markethub?contactid=&quot;&amp;Contact.Id&amp;&quot;&amp;campaignid=&quot;&amp;CampaignId,
+&quot;http://centerpointenergy.force.com/ces/marketreport?contactid=&quot;&amp;Contact.Id&amp;&quot;&amp;campaignid=&quot;&amp;CampaignId
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>see what the customer would see</inlineHelpText>
+    <label>Market Report Live Link</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

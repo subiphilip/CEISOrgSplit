@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivery_Obligation__c</fullName>
+    <externalId>false</externalId>
+    <label>Delivery Obligation</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Firm</fullName>
+                <default>false</default>
+                <label>Firm</label>
+            </value>
+            <value>
+                <fullName>Secondary Firm</fullName>
+                <default>false</default>
+                <label>Secondary Firm</label>
+            </value>
+            <value>
+                <fullName>Interruptible</fullName>
+                <default>false</default>
+                <label>Interruptible</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

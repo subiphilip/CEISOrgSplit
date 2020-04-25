@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Value__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(NOT(ISBLANK(Consultant__c))
+  , Consultant__r.Name
+  , IF(NOT(ISBLANK(Text_Value__c))
+      , Text_Value__c 
+      , IF(NOT(ISBLANK(Numeric_Value__c))
+          , TEXT(Numeric_Value__c)
+          , IF(NOT(ISBLANK(Rate_Class__c))
+              , Rate_Class__r.Name_Key__c 
+              , IF(NOT(ISBLANK(Pipeline__c))
+                  , Pipeline__r.Pipeline_Code__c
+                  , IF(Checkbox_Value__c
+                      , &#39;Yes&#39;
+                      , null
+                    )
+                )
+            )
+        )
+    )
+)</formula>
+    <label>Value</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

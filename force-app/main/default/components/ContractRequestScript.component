@@ -1,0 +1,2519 @@
+<apex:component controller="ContractRequestController">
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.compat.min.js"/>
+<script>
+
+	var myModule = angular.module('ConReqMdl', ['ngForce', 'ui.bootstrap']);
+
+	myModule.directive("scrollcheck", function ($window) {
+	    return function(scope, element, attrs) {
+	    	scope:false,
+	        angular.element($window).bind("scroll", function() {
+	        	console.log('pageyoffset');
+	        	console.log(this.pageYOffset);
+	    		if(this.pageYOffset > 240){
+				    //begin to scroll
+				    scope.boolChangeClass = true;
+
+				    //console.log('greater than 200');
+				}
+				else {
+				    //lock it back into place
+				    scope.boolChangeClass = false;
+				    //console.log('not greater than 200');
+				}
+	            scope.$apply();
+	        });
+	    };
+	});
+	
+	/*
+	myModule.directive("newscrollcheck", function ($window) {
+	    return function(scope, element, attrs) {
+	    	scope:false,
+	        angular.element($window).bind("scroll", function() {
+	        	console.log('pageyoffset');
+	        	console.log(this.pageYOffset);
+	    		if(this.pageYOffset > 240 && this.pageYOffset <= 450){
+				    //begin to scroll				    
+				    scope.boolChangeClass = true;
+				    scope.boolChangeTCClass = false;
+				    console.log('over 240');
+
+				    //console.log('greater than 200');
+				}
+				else if (this.pageYOffset > 450){
+				    //lock it back into place
+				    scope.boolChangeClass = true;
+				    scope.boolChangeTCClass = true;
+				    console.log('over 450');
+				} else {
+					scope.boolChangeClass = false;
+				    scope.boolChangeTCClass = false;
+				}
+	            scope.$apply();
+	        });
+	    };
+	});
+	*/
+
+	myModule.controller('ConReqCtrl', function($scope, $q, $window, $location, $anchorScroll, $timeout, sharingService, paramService, vfr, GetContacts, CreateCRPs, ApplySettings, CancelSettings, SubmitRequest, UpdateCharge) {
+		$scope.data={optyId:"", objectID:"", acctID:"", exists:false, isOpen:true, savedisabled:false, startDate:"", tst:"", errLabel:"", mode:"Display", loadComplete:false, objectLink:"", agreeTypes:[], contractMode:"Edit", showFees:false, showPTs:false, showPremises:true, showTC:false, showContacts:true, showAgree:false, showGeneral:false, useUpstreamLookup:false, showFuel:false, selectedStatus:"All", refreshSection:0, showContactMessage:false, showPremiseMessage:false, showRefreshMessage:false, refreshMsg:null, showContactEntry:false, showPremiseEntry:false,param:"", showVolume:false, showRefreshTC:false, refreshComplete:true, showContactAssign:false};
+
+		$scope.data.optyId = '{!$CurrentPage.Parameters.optyId}';
+		$scope.data.objectID = '{!$CurrentPage.Parameters.Id}';
+		console.log('log id: '+$scope.data.objectID);
+
+		$scope.data.recordTypes = [];
+		$scope.data.selectedRecordType;
+
+		//$scope.data.contractChargeRecType = '012V00000000RAL'; //prod = 0120M0000019VbE
+
+		$scope.data.userId = '{!$User.Id}';
+		$scope.data.userName = '{!$User.FirstName}' + ' ' + '{!$User.LastName}';
+		$scope.data.user = {
+			"Id":$scope.data.userId,
+			"FirstName":'{!$User.FirstName}',
+			"LastName":'{!$User.LastName}',
+			"Name":$scope.data.userName,
+		}
+
+		$scope.data.currDate = new Date();
+
+		console.log($scope.data.currDate);
+
+		paramService.setParam('you da man!');
+		$scope.data.svc = paramService.get();
+		console.log($scope.data.svc.param);
+
+		setWatches();
+
+		function timeZoneShift(d){
+        	return moment(d).add('minutes', moment(d).zone()).toDate();
+    	}
+
+    	vfr.query("select id, name from RecordType where sObjectType = 'Customer_Charge__c' and name = 'Contract Charge' limit 1").then(
+    			function (response){
+    				$scope.data.contractChargeRecType = response.records[0].Id;
+    			},
+    			function (error){
+    				console.log('contract charge record type error');
+    				console.log(error);
+    			}
+    		);
+
+
+    	// get opportunity
+    	vfr.query("select id, name, AccountId, Account.Name, LDC2__c, LDC2__r.Name, LDC2__r.Default_Pricing_Scenario__c, LDC2__r.Default_Pricing_Scenario__r.Name, LDC2__r.Default_Pricing_Scenario__r.Pipeline__r.Name, LDC2__r.Default_Pricing_Type__c, LDC2__r.Default_Pricing_Type__r.Name, Term__c, LDC2__r.CES_Office__c, LDC2__r.CES_Office__r.Name, LDC2__r.CES_Office__r.Old_email__c, Start_Date__c, LDC2__r.State__c, LDC2__r.State_2__c, LDC2__r.State_3__c, LDC2__r.State_4__c, LDC2__r.State_5__c, LDC2__r.Utility_Code__c, LDC2__r.MDQ_Required_for_Firm_Premises__c from Opportunity where id= '{!$CurrentPage.Parameters.optyId}'").then(
+    			function (response){
+    				$scope.opty = response.records[0];
+    				// get account
+    				vfr.query("select id, name, BillingStreet, BillingCity, BillingState, BillingPostalCode, Phone, Fax from Account where id='"+$scope.opty.AccountId+"'").then(
+    						function (response){
+    							$scope.account = response.records[0];
+
+    							// get contacts for this account
+    							GetContacts($scope.account.Id).then(
+    									function (response){
+    										$scope.contacts = response;
+    										console.log('contacts returned');
+    										console.log(response);
+    										
+    										// get premises
+			    							queryPremises().then(
+			    									function (response){
+
+			    										// get contract request record types
+						    							vfr.query("select id, name, Description from RecordType where SobjectType = 'Contract_Request__c' and IsActive = true order by Name").then(
+						    									function (response){
+						    										$scope.data.recordTypes = response.records;
+
+						    										//if ({!not(isnull($CurrentPage.Parameters.Id))}){
+						    										if ($scope.data.objectID !== ""){
+															    		// request exists
+															    		queryRequest().then();
+															    		
+															    	} else {
+															    		$scope.data.mode = "Edit";
+
+															    		// create new contract request
+															    		$scope.request = {
+															    			"Account__c":$scope.opty.AccountId,
+															    			"Account__r":$scope.account,
+															    			"Opportunity__c":$scope.opty.Id,
+															    			"Opportunity__r":$scope.opty,
+															    			"CES_Office__c":$scope.opty.LDC2__r.CES_Office__c,
+															    			"CES_Office__r":$scope.opty.LDC2__r.CES_Office__r,
+															    			"Utility__c":$scope.opty.LDC2__c,
+															    			"Utility__r":$scope.opty.LDC2__r,
+															    			"Start_Date__c":$scope.opty.Start_Date__c,
+															    			"Term__c":$scope.opty.Term__c,
+															    			"Other_Details__c":"",
+															    			"Invoice_Accounts_Payable__c":false,
+															    			"Invoice_Address_is_Notice_Address__c":false
+															    		};
+
+															    		if (angular.isDefined($scope.opty.LDC2__r.Default_Pricing_Type__c)){
+															    			$scope.request.Pricing__c = $scope.opty.LDC2__r.Default_Pricing_Type__c;
+																    		$scope.request.Pricing__r = $scope.opty.LDC2__r.Default_Pricing_Type__r;
+															    		}
+
+															    		if (angular.isDefined($scope.opty.LDC2__r.Default_Pricing_Scenario__c)){
+															    			$scope.request.Pricing_Scenario__c = $scope.opty.LDC2__r.Default_Pricing_Scenario__c;
+															    			$scope.request.Pricing_Scenario__r = $scope.opty.LDC2__r.Default_Pricing_Scenario__r;
+															    		}
+															    		console.log($scope.request);
+															    		$scope.data.loadComplete = true;
+
+															    	}
+
+															    	// get picklist values for new agreement type
+															    	vfr.describePicklistValues("Contract_Request__c","New_Agreement_Type__c").then(
+																		function (response){
+																			angular.forEach(response, function(dt, key){
+																				$scope.data.agreeTypes.push(dt.value);
+																			})
+																		}, function (error){
+																			console.log('AgreeType Picklist init');
+																			console.log(error);
+																		}
+																	);
+						    									},
+						    									function (error){
+						    										console.log(error);
+						    									}
+						    								);
+														
+													},
+													function (error){
+														console.log(error);
+													}
+			    							);
+    									},
+    									function (error){
+    										console.log(error);
+    									}
+    								);
+    						}, 
+    						function (error){
+    							console.log(error);
+    						}
+    					);
+    			},
+    			function (error){
+    				console.log(error);
+    			}
+    		);
+	
+		function queryPremises(){
+			var premiseString = "select id, name, Account_Number__c, premise_nickname__c, Electric_Service_Address_City__c, Electric_Service_Address_State2__c, Pipeline_Lookup__c, Pipeline_Lookup__r.Name, LDC_Rate_Class__c, LDC_Rate_Class__r.Name, Premise_Status_Formula__c, Contract_Request__c, Contract_Request__r.Name from Premises__c where Account__c = '"+$scope.account.Id+"' and TDSP_Lookup__c = '"+ $scope.opty.LDC2__c +"' and ( Electric_Service_Address_State2__c ='"+ $scope.opty.LDC2__r.State__c +"' or Electric_Service_Address_State2__c ='"+ $scope.opty.LDC2__r.State_2__c +"' or Electric_Service_Address_State2__c ='"+ $scope.opty.LDC2__r.State_3__c +"' or Electric_Service_Address_State2__c ='"+ $scope.opty.LDC2__r.State_4__c +"' or Electric_Service_Address_State2__c ='"+ $scope.opty.LDC2__r.State_5__c +"' ) order by Pipeline_Lookup__r.Name, premise_nickname__c, account_number__c";
+
+			return vfr.query(premiseString).then(
+						function (response){
+							console.log('existing premises');
+							console.log(response);
+							$scope.existingPremises = response.records;
+
+							// create field and default to false
+							angular.forEach($scope.existingPremises, function(prem, key){
+								prem.inRequest = false;
+								prem.visible = true;
+							});
+						},
+						function (error){
+							console.log('existing premises error');
+							console.log(error);
+						}
+				);
+		}
+
+		function getCRPremises(){
+			return vfr.query("select id, name, Contract_Request__c, Premise__c, Premise__r.Premise_Nickname__c, Premise__r.Account_Number__c, Premise__r.Electric_Service_Address_City__c, Premise__r.Electric_Service_Address_State2__c, Premise__r.Pipeline_Lookup__r.Name, Premise__r.LDC_Rate_Class__r.Name, Premise__r.Premise_Status_Formula__c from Contract_Request_Premise__c where Contract_Request__c = '"+$scope.data.objectID+"'").then(
+					function (response){
+						console.log('crp records');
+						console.log(response);
+						$scope.crps = response.records;
+
+						// set which existing premises are on the request
+						setPremiseInRequest();
+						// create list of existing premises not on this request
+						buildRemainingPremises();
+					},
+					function (error){
+						console.log('crp error');
+						console.log(error);
+					}
+				);
+		}
+
+		function queryRequest(){
+			return vfr.query("select id, name, Account__c, CES_Office__c, CES_Office__r.Name, CES_Office__r.Customer_Number__c, Consultant__c, Consultant__r.Name, Consultant__r.Default_Consultant_Margin__c, Consultant__r.Default_consultant_unit_fee__c, Contact_For_Confirmations__c, Contact_for_Confirmations__r.Name, Contact_for_Confirmations__r.MailingStreet, Contact_for_Confirmations__r.MailingCity, Contact_for_Confirmations__r.MailingState, Contact_for_Confirmations__r.Email, Contact_for_Confirmations__r.Phone, Contact_for_Confirmations__r.Fax, Contact_For_Invoices__c, Contact_for_Invoices__r.Name, Contact_for_Invoices__r.MailingStreet, Contact_for_Invoices__r.MailingCity, Contact_for_Invoices__r.MailingState, Contact_for_Invoices__r.Email, Contact_for_Invoices__r.Phone, Contact_for_Invoices__r.Fax, Contact_For_Notices__c, Contact_for_Notices__r.Name, Contact_for_Notices__r.MailingStreet, Contact_for_Notices__r.MailingCity, Contact_for_Notices__r.MailingState, Contact_for_Notices__r.Email, Contact_for_Notices__r.Phone, Contact_for_Notices__r.Fax, Existing_Base_Agreement__c, Existing_Base_Agreement__r.Name, Existing_Base_Agreement__r.Invoice_Accounts_Payable__c, Existing_Base_Agreement__r.Invoice_Address_is_Notice_Address__c, Existing_Base_Agreement__r.Contact_for_Notices__c, Existing_Base_Agreement__r.Contact_for_Confirmations__c, Existing_Base_Agreement__r.Contact_for_Invoices__c, Existing_Base_Agreement__r.Billing_Address__c, Existing_Base_Agreement__r.Billing_City__c, Existing_Base_Agreement__r.Billing_State__c, Existing_Base_Agreement__r.Billing_Postal_Code__c, Existing_Base_Agreement__r.Billing_Phone__c, Existing_Base_Agreement__r.Billing_Fax__c, Existing_Base_Agreement__r.Billing_Email__c, Existing_Base_Agreement__r.Contacts_Selected__c, Existing_Base_Agreement__r.Contract_Number_and_Type__c, New_Agreement_Type__c, Number_of_Premises__c, Opportunity__c, Other_Details__c, Pricing__c, Pricing__r.Name, Pricing__r.Base_Pricing_Default__c, Pricing__r.Contract_Volume_Required__c, Pricing__r.Is_FOM_Price_Type__c, Pricing_Scenario__c, Pricing_Scenario__r.Name, Request_Objects_Created__c, Request_Submitted__c, Start_Date__c, Term__c, Utility__c, Utility__r.Name, Utility__r.LDC_Default_Unit__c, Utility__r.MDQ_Required_for_Firm_Premises__c, RecordTypeId, Invoice_Accounts_Payable__c, Invoice_Address_is_Notice_Address__c, Billing_Address__c, Billing_City__c, Billing_State__c, Billing_Postal_Code__c, Billing_Phone__c, Billing_Fax__c, Billing_Email__c, Needs_New_Agreement__c, CES_Office__r.Old_email__c, Request_Utility_Subtype__c from Contract_Request__c where id = '"+$scope.data.objectID+"'").then(
+    				function (response){
+    					$scope.request = response.records[0];
+    					console.log(response);
+
+    					// hide premises if request was submitted
+    					$scope.data.showPremises = !$scope.request.Request_Objects_Created__c;
+    					console.log('show premises state:');
+    					console.log($scope.data.showPremises);
+
+    					// set contract mode
+    					if ($scope.request.Request_Submitted__c){
+    						$scope.data.contractMode = 'Display';
+    					} else {$scope.data.contractMode = 'Edit';}
+
+    					$scope.data.objectLink = '%26id%3D'+$scope.request.Id;
+						console.log($scope.data.objectLink);
+
+						// get selected record type
+    					return vfr.query("select id, name, description from RecordType where SobjectType = 'Contract_Request__c' and id='"+$scope.request.RecordTypeId+"'").then(
+    							function (response){
+    								$scope.data.selectedRecordType = response.records[0];
+    								$scope.setMomentCreateDate();
+    								console.log(response);
+
+    								// populate selected premises since a request exists
+    								//updateSelectedPremises();
+
+    								// get cprs and assigned premise list
+    								return getCRPremises().then(
+    										function (response){
+    											console.log('crp finished success');
+    											console.log(response);
+    											resetCanvas();
+    											return queryTC().then();
+    										},
+    										function (error){
+    											console.log('crp error');
+    											console.log(error);
+    											resetCanvas();
+    										}
+    									);
+    								//resetCanvas();
+    								//return queryTC().then();
+    							},
+    							function (error){
+    								console.log(error);
+    							}
+    						);
+    				},
+    				function (error){
+    					console.log(error);
+    				}
+    			);
+		}
+
+		function queryTC(){
+			// get any contract objects created from this request
+			var tcQuery = "select id, name, RecordTypeId, RecordType.Name, Account__c, Opportunity__c, Utility_Lookup__c, Product_Subtype_Lookup__c, Product_Subtype_Lookup__r.Name, "+
+						"Product_Subtype_Lookup__r.CNP_MNG_Pricing_Type__c, Product_Subtype_Lookup__r.CES_Pricing_Rate_Type__c, Product_Subtype_Lookup__r.Receipt_Obligation_Applies__c, Product_Subtype_Lookup__r.Contract_Volume_Required__c, Product_Subtype_Lookup__r.Cashout_Obligation_Applies__c, Product_Subtype_Lookup__r.Fuel_Rates_Apply__c, Base_Pricing__c, "+
+						"Pricing_Scenario__c, CES_Office__c, Contract_Admin_Mailbox__c, Effective_Date__c, Start_Date_New__c, Term_New__c, Other_Details__c, Active__c, "+
+						"Contract_Status__c, MDQ_Unit__c, Billing_Type__c,  Consultant__c, Consultant_Margin_Pctg__c, Consultant_Unit_Margin__c, Field_Validation_Check__c, Validation_Check__c,  Contract_Request__c, "+
+						"Contract_Request_Type__c, Volume_Validation_Check__c, Volume_Entry_Type__c, Existing_Base_Agreement__c, Existing_Base_Agreement__r.Name, Existing_Base_Agreement__r.Contacts_Selected__c, Contact_for_Confirmations__c, "+
+						"Contact_for_Notices__c, Contact_for_Invoices__c, Invoice_Accounts_Payable__c, Invoice_Address_is_Notice_Address__c, Billing_Address__c, Billing_City__c, "+
+						"Billing_State__c, Billing_Postal_Code__c, Billing_Phone__c, Billing_Fax__c, Billing_Email__c, Pricing_Terms__c, Receipt_Obligation_Terms__c, "+
+						"Agency_Services__c, Auto_Renew__c, Delivery_Obligation__c, Delivery_Point__c, Pipeline_Lookup__c, Pipeline_Lookup__r.Name, "+
+						"Renewal_Notice_Days__c, Renewal_Term__c, Telemetry__c, Transport_Fuel__c, Utility_Cashout__c, Utility_Meter_Read_Pooling__c, Utility_Zone__c, "+
+						"Utility_Transportation__c, Over_Index_Name__c, Over_Index_Name__r.Name, Over_Adder__c, Margin_on_Over__c, Under_Index_Name__c, Under_Index_Name__r.Name, Under_Adder__c, "+
+						"Margin_on_Under__c, Cashout_Obligation_Terms__c, Cashout_Over_Index_Name__c, Cashout_Over_Index_Name__r.Name, Cashout_Over_Adder__c, Cashout_Over_Margin__c, Cashout_Under_Index_Name__c, Cashout_Under_Index_Name__r.Name, "+
+						"Cashout_Under_Adder__c, Cashout_Under_Margin__c, Index_Rate_Name__c, Index_Rate_Name__r.Name, Index_Adder__c, Margin_on_Index__c, Market_Rate_Index_Name__c, Market_Rate_Index_Name__r.Name, Market_Rate_Margin__c, "+
+						"Administrative_Charge__c, Administrative_Charge_Level__c, Demand_Charge__c, Demand_Charge_Level__c, Fixed_Fees__c, Fixed_Fee_Level__c, Management_Fee__c, Management_Fee_Level__c, Interstate_Pipeline_Demand__c, Interstate_Pipeline_Demand_Level__c, "+
+						"Upstream_Transport__c, Upstream_Transport_Commodity_ACA_Fees__c, Upstream_Transport_Fuel_Charges__c, Upstream_Transport_Fee__c, "+
+						"Utility_Rate_Name__c, Utility_Rate_Name__r.Name, Allow_Nomination_Change__c, Transport_Bill_Consolidation__c, Upstream_Transport_Fee_Lookup__c, Upstream_Transport_Fee_Lookup__r.Name, "+
+						"LDC_Fuel_Rate__c, LDC_Fuel_Rate__r.Name, Pipeline_Fuel_Rate__c, Pipeline_Fuel_Rate__r.Name, Over_LDC_Fuel_Rate__c, Over_LDC_Fuel_Rate__r.Name, Over_Pipeline_Fuel_Rate__c, Over_Pipeline_Fuel_Rate__r.Name, "+
+						"Under_LDC_Fuel_Rate__c, Under_LDC_Fuel_Rate__r.Name, Under_Pipeline_Fuel_Rate__c, Under_Pipeline_Fuel_Rate__r.Name, Daily_Volume_Type__c, OFO_Applies__c "+
+						" from CESContract__c where Contract_Request__c ='"+$scope.request.Id+"'";
+			
+			//resetCanvas();
+
+			return vfr.query(tcQuery).then(
+					function (response){
+						$scope.createdObjects = response.records;
+						console.log('number of created objects');
+						console.log($scope.createdObjects.length);
+
+						angular.forEach($scope.createdObjects, function(val, key){
+							if (val.RecordType.Name.search("Agreement") == -1){
+								// this is the TC
+								$scope.data.tc = val;
+								console.log('tc');
+								console.log(val);
+								
+								// show TC section
+								//if (!$scope.request.Request_Submitted__c){$scope.data.showTC = true;}
+
+								// hide contacts section
+								//$scope.data.showContacts = false;
+
+								// set fee checkboxes
+								if (angular.isDefined($scope.data.tc.Administrative_Charge__c) || 
+									angular.isDefined($scope.data.tc.Demand_Charge__c) || 
+									angular.isDefined($scope.data.tc.Fixed_Fees__c) ||
+									angular.isDefined($scope.data.tc.Management_Fee__c)){
+									$scope.data.showFees = true;
+								}
+								// set pass through checkboxes
+								if (angular.isDefined($scope.data.tc.Utility_Meter_Read_Pooling__c) || 
+									angular.isDefined($scope.data.tc.Utility_Balancing__c) || 
+									angular.isDefined($scope.data.tc.Utility_Cashout__c) ||
+									(angular.isDefined($scope.data.tc.Transport_Fuel__c) && $scope.data.tc.Transport_Fuel__c) ||
+									angular.isDefined($scope.data.tc.Utility_Transportation__c) || 
+									angular.isDefined($scope.data.tc.Upstream_Transport__c) ||
+									angular.isDefined($scope.data.tc.Upstream_Transport_Commodity_ACA_Fees__c) ||
+									angular.isDefined($scope.data.tc.Upstream_Transport_Fee__c) ||
+									angular.isDefined($scope.data.tc.Upstream_Transport_Fuel_Charges__c)){
+									$scope.data.showPTs = true;
+								}
+								// display upstream lookup
+								if (angular.isDefined($scope.data.tc.Upstream_Transport_Fee_Lookup__c) && angular.isDefined($scope.data.tc.Upstream_Transport_Fee_Lookup__r.Id)){
+									$scope.data.showPTs = true;
+									$scope.data.useUpstreamLookup = true;
+								}
+								// display fuel fields
+								//if ((angular.isDefined($scope.data.tc.LDC_Fuel_Rate__c) && angular.isDefined($scope.data.tc.LDC_Fuel_Rate__r.Id)) || (angular.isDefined($scope.data.tc.Pipeline_Fuel_Rate__c) && angular.isDefined($scope.data.tc.Pipeline_Fuel_Rate__r.Id))){
+								//	$scope.data.showFuel = true;
+								//}
+								// set contract mode
+								if ($scope.data.tc.Field_Validation_Check__c == 'Passed'){
+		    						$scope.data.contractMode = 'Display';
+		    					}
+							} else {
+								// this is the agreement
+								$scope.data.agree = val;
+								console.log('agreement');
+								console.log(val);
+							}
+							
+						});
+
+						// set the navigation view
+						if (angular.isDefined($scope.data.tc)){
+							$scope.processNavigation('TC');
+						} else if (angular.isDefined($scope.data.agree)){
+							$scope.processNavigation('Agree');
+						}
+
+						// get contract details if they exist for the tc
+						if (angular.isDefined($scope.data.tc)){
+							return vfr.query("select id, name, Contract_Month__c, Volume__c from Position__c where CES_Contract__c='"+$scope.data.tc.Id+"'").then(
+									function (response){
+										console.log('contract details found from query');
+										$scope.data.details = response.records;
+
+										for (var i = 0, len = $scope.data.details.length; i < len; i++) {
+							        		$scope.data.details[i].CorrectDate = moment(timeZoneShift($scope.data.details[i].Contract_Month__c)).format('MMMYY');
+										}
+										computeTotalVol();
+
+										// get contract charges if they exist for the tc
+										return queryContractCharges().then(
+													function (response){
+														$scope.data.loadComplete = true;
+													},
+													function (error){
+														console.log('get contract charge error');
+														console.log(error);
+														$scope.data.loadComplete = true;
+													}
+												);
+
+										/*
+										return vfr.query("select id, name, Charge_Type__r.Name, Charge_Type__r.Category__c, Contract__c, Start_Date__c, End_Date__c, Charge_Level__c, Rate__c, Index_Lookup__c, Index_Lookup__r.Name from Customer_Charge__c where Contract__c ='"+$scope.data.tc.Id+"'").then(
+												function (response){
+													$scope.data.charges = response.records;
+													$scope.data.loadComplete = true;
+												},
+												function (error){
+													console.log('get contract charge error');
+													console.log(error);
+													$scope.data.loadComplete = true;
+												}
+											)
+										*/
+										
+									},
+									function (error){
+										console.log(error);
+										$scope.data.loadComplete = true;
+									}
+								);
+							
+						} else {$scope.data.loadComplete = true;}
+						
+					},
+					function (error){
+						console.log(error);
+					}
+				);
+		}
+
+		function queryContractCharges(){
+			return vfr.query("select id, name, Charge_Type__r.Name, Charge_Type__r.Category__c, Contract__c, Start_Date__c, End_Date__c, Charge_Level__c, Rate__c, Index_Lookup__c, Index_Lookup__r.Name, Utility_Loss_Index__c, Utility_Loss_Index__r.Name, Pipeline_Loss_Index__c, Pipeline_Loss_Index__r.Name, Applicable_Fees_not_Specified__c, Suppress_From_TC__c from Customer_Charge__c where Contract__c ='"+$scope.data.tc.Id+"'").then(
+					function (response){
+						$scope.data.charges = response.records;
+						//$scope.data.loadComplete = true;
+						angular.forEach($scope.data.charges, function(chg, key){
+							if (chg.Charge_Level__c == 'Contract (Flat)'){
+								chg.chargePer = 'per month';
+								chg.chargeDecimal = 2;
+							} else if (chg.Charge_Level__c == 'Premise (Flat)'){
+								chg.chargePer = 'per premise per month';
+								chg.chargeDecimal = 2;
+							} else {
+								chg.chargePer = 'per ' + $scope.data.tc.MDQ_Unit__c;
+								chg.chargeDecimal = 5;
+							}
+						});
+					},
+					function (error){
+						console.log('get contract charge error');
+						console.log(error);
+						$scope.data.loadComplete = true;
+					}
+				)
+		}
+
+		function buildRemainingPremises(){
+			//$scope.remainingPrems
+			$scope.existingPremises = _.reject($scope.existingPremises,function (prem){ return prem.inRequest == true; });
+
+			console.log('building remaining premises');
+			console.log($scope.existingPremises);
+		}
+
+		function setPremiseInRequest(){
+			console.log('marking assigned premises');
+			angular.forEach($scope.crps, function(crp, key){
+				if (_.find($scope.existingPremises, function(ep){return ep.Id == crp.Premise__c}) != undefined){
+					console.log('passes defined');
+					$scope.flipSinglePremise(crp.Premise__c, true, false);
+				}
+			});
+		}
+
+		function updateSelectedPremises(){
+			$scope.data.selectedPremises = _.where($scope.existingPremises, {'inRequest': true});
+			console.log($scope.data.selectedPremises.length);
+		}
+
+		function savePremiseAssignments(){
+			var crps = [];
+
+			$scope.data.savedisabled = true;
+
+			angular.forEach($scope.data.selectedPremises, function(prem, key){
+				var crp = {
+						"Contract_Request__c":$scope.request.Id,
+						"Premise__c":prem.Id
+					}
+
+				crps.push(crp);
+			});
+
+			return CreateCRPs(JSON.stringify(crps)).then(
+					function (response){
+						console.log('save - crp creation success');
+						console.log(response);
+
+						getCRPremises().then(
+								function (response){
+									console.log('saveassignments, get crp success');
+									console.log(response);
+									updateSelectedPremises();
+								},
+								function (error){
+									console.log('saveassignments, get crp error');
+									console.log(error);
+								}
+							);
+					},
+					function (error){
+						console.log('save - crp creation error');
+						console.log(error);
+						$scope.data.savedisabled = false;
+					}
+				);
+		}
+
+		function validate(deep){ //1 = create, 2 = partial validation, 3 = full validation
+			var msg = "";
+			
+			// check for record type
+			if (angular.isUndefined($scope.data.selectedRecordType)){
+				msg = msg + "Request Type must be selected.  ";
+			} else {
+				// check agreement fields
+				if ($scope.data.selectedRecordType.Name == 'TC Only-Existing Agreement'){
+					if (angular.isUndefined($scope.request.Existing_Base_Agreement__r) || angular.isUndefined($scope.request.Existing_Base_Agreement__r.Id)){
+						msg = msg + "An Agreement must be selected for this Request Type.  ";
+					}
+				} else if (angular.isUndefined($scope.request.New_Agreement_Type__c) || $scope.request.New_Agreement_Type__c == ""){
+					msg = msg + "An Agreement Type must be selected for this Request Type.  ";
+				}
+			}
+
+			// check for office
+			if (angular.isUndefined($scope.request.CES_Office__r) || angular.isUndefined($scope.request.CES_Office__r.Id)){
+				msg = msg + "CES Office must be selected.  ";
+			}
+
+			// only check these fields if a TC is being requested
+			if ($scope.data.selectedRecordType.Name != 'New Agreement Only'){
+				// check start date
+				if (angular.isUndefined($scope.request.Start_Date__c) || $scope.request.Start_Date__c == ""){
+					msg = msg + "Start Date must be entered.  ";
+				}
+
+				// check term
+				if (angular.isUndefined($scope.request.Term__c) || $scope.request.Term__c == null){
+					msg = msg + "Term must be entered.  ";
+				}
+
+				// check Pricing
+				if (angular.isUndefined($scope.request.Pricing__r) || angular.isUndefined($scope.request.Pricing__r.Id)){
+					msg = msg + "Pricing must be selected.  ";
+				}
+
+				// check scenario
+				if (angular.isUndefined($scope.request.Pricing_Scenario__r) || angular.isUndefined($scope.request.Pricing_Scenario__r.Id)){
+					msg = msg + "Pricing Scenario must be selected.  ";
+				}
+			}
+
+			// only check these if the request has previously been created in the database and a deep validation was selected
+			if (angular.isDefined($scope.request.Id) && deep == true){
+				// check for premises assigned to request if this is not agreement only
+				if ($scope.data.selectedRecordType.Name != 'New Agreement Only' && (angular.isUndefined($scope.crps) || $scope.crps.length == 0)){
+					msg = msg + "Premises must be assigned to the request.  ";
+				}
+
+				if (angular.isUndefined($scope.request.Existing_Base_Agreement__r)){
+					// check for contact assignments if this is a new agreement
+					msg = msg + $scope.checkSelectedContacts();
+				} else if ($scope.data.selectedRecordType.Name == 'TC Only-Existing Agreement' || angular.isUndefined($scope.request.Existing_Base_Agreement__r.Contact_for_Confirmations__r)) {
+					// check for confirmation contact missing on agreement if this is TC only request
+					msg = msg + $scope.checkSelectedConfirmationContact();
+				}
+			}	
+
+			console.log(msg);
+			
+
+			return msg;
+		}
+
+		function getRequestObjectValues(){
+			var objValue = {
+        		"Account__c":$scope.opty.AccountId,
+				"Opportunity__c":$scope.opty.Id,
+				"CES_Office__c":$scope.request.CES_Office__r.Id,
+				"Utility__c":$scope.opty.LDC2__c,
+				"RecordTypeID":$scope.data.selectedRecordType.Id,
+				"Other_Details__c":$scope.request.Other_Details__c,
+				"Invoice_Accounts_Payable__c":$scope.request.Invoice_Accounts_Payable__c,
+				"Invoice_Address_is_Notice_Address__c":$scope.request.Invoice_Address_is_Notice_Address__c
+        	}
+
+        	// populate TC required fields
+        	if ($scope.data.selectedRecordType.Name != 'New Agreement Only'){
+        		objValue.Start_Date__c = $scope.request.Start_Date__c;
+        		objValue.Term__c = $scope.request.Term__c;
+        		objValue.Pricing__c = $scope.request.Pricing__r.Id;
+				objValue.Pricing_Scenario__c = $scope.request.Pricing_Scenario__r.Id;
+        	}
+
+        	// populate agreement
+        	if (angular.isDefined($scope.request.Existing_Base_Agreement__r) && $scope.request.Existing_Base_Agreement__r != ""){
+        		objValue.Existing_Base_Agreement__c = $scope.request.Existing_Base_Agreement__r.Id;
+        	} else {
+        		// no agreement selected so populate new agreement type
+        		objValue.New_Agreement_Type__c = $scope.request.New_Agreement_Type__c;
+        	}
+
+        	// populate contacts
+        	if (angular.isDefined($scope.request.Contact_for_Confirmations__r) && $scope.request.Contact_for_Confirmations__r != null){
+        		objValue.Contact_for_Confirmations__c = $scope.request.Contact_for_Confirmations__r.Id;
+        	}
+
+        	if (angular.isDefined($scope.request.Contact_for_Notices__r) && $scope.request.Contact_for_Notices__r != null){
+        		objValue.Contact_for_Notices__c = $scope.request.Contact_for_Notices__r.Id;
+        	}
+        	
+        	if (angular.isDefined($scope.request.Contact_for_Invoices__r) && $scope.request.Contact_for_Invoices__r != null && $scope.request.Contact_for_Invoices__r != ""){
+        		objValue.Contact_for_Invoices__c = $scope.request.Contact_for_Invoices__r.Id;
+        	} else {
+        		// process ap billing contact
+        		if ($scope.request.Invoice_Accounts_Payable__c && !$scope.request.Invoice_Address_is_Notice_Address__c){
+        			// billing address was specified
+        			objValue.Billing_Address__c = $scope.request.Billing_Address__c;
+        			objValue.Billing_City__c = $scope.request.Billing_City__c;
+        			objValue.Billing_State__c = $scope.request.Billing_State__c;
+        			objValue.Billing_Postal_Code__c = $scope.request.Billing_Postal_Code__c;
+        			objValue.Billing_Phone__c = $scope.request.Billing_Phone__c;
+        			objValue.Billing_Fax__c = $scope.request.Billing_Fax__c;
+        			objValue.Billing_Email__c = $scope.request.Billing_Email__c;
+        		}
+        	}
+
+        	// populate consultant
+        	if (angular.isDefined($scope.request.Consultant__r)){
+        		objValue.Consultant__c = $scope.request.Consultant__r.Id;
+        	}
+
+        	return objValue;
+		}
+
+		function saveRequest(){
+			var objValue = getRequestObjectValues();
+
+    		// update
+    		objValue.Id = $scope.data.objectID;
+    		return vfr.update('Contract_Request__c',objValue.Id, objValue).then(
+    				function (response){
+    					console.log('update success');
+    					console.log(response);
+
+    					return savePremiseAssignments();
+    				},
+    				function (error){
+    					console.log(error);
+    				}
+    			);
+		}
+
+		function saveTC(){
+			$scope.data.savedisabled = true;
+
+			// check volume entry type before saving
+			if ($scope.data.tc.Product_Subtype_Lookup__r.Contract_Volume_Required__c){
+				if ($scope.data.tc.Pricing_Terms__c == 'Daily'){
+					$scope.data.tc.Volume_Entry_Type__c = $scope.data.tc.Pricing_Terms__c;
+				} else if ($scope.data.tc.Pricing_Terms__c == 'Monthly' && (angular.isUndefined($scope.data.tc.Volume_Entry_Type__c) || $scope.data.tc.Volume_Entry_Type__c == "" || $scope.data.tc.Volume_Entry_Type__c == null)){// default volume entry for Monthly Terms is 'Monthly' if not defined
+					$scope.data.tc.Volume_Entry_Type__c = $scope.data.tc.Pricing_Terms__c;
+				}
+				//$scope.data.tc.Volume_Entry_Type__c = $scope.data.tc.Pricing_Terms__c;
+			}
+			if ($scope.data.tc.Volume_Entry_Type__c == 'Monthly' && angular.isDefined($scope.data.tc.Daily_Volume_Type__c)){
+				$scope.data.tc.Daily_Volume_Type__c = null;
+			}
+
+			var copy = angular.copy($scope.data.tc);
+			console.log(copy);
+
+			delete copy.$$hashKey;
+			delete copy.RecordType;
+			delete copy.Product_Subtype_Lookup__r;
+			delete copy.Name;
+			delete copy.Field_Validation_Check__c;
+			delete copy.Volume_Validation_Check__c;
+			delete copy.Validation_Check__c;
+			delete copy.attributes;
+
+			// base agreement
+			if (angular.isDefined(copy.Existing_Base_Agreement__r) && angular.isDefined(copy.Existing_Base_Agreement__r.Id)){
+				copy.Existing_Base_Agreement__c = copy.Existing_Base_Agreement__r.Id;
+			} else {
+				copy.Existing_Base_Agreement__c = null;
+			}
+			delete copy.Existing_Base_Agreement__r;
+
+			// pricing rates
+			if (angular.isDefined(copy.Index_Rate_Name__r)){
+				if (angular.isDefined(copy.Index_Rate_Name__r.Id)){
+					copy.Index_Rate_Name__c = copy.Index_Rate_Name__r.Id;
+				} else {
+					copy.Index_Rate_Name__c = null;
+				}
+				delete copy.Index_Rate_Name__r;
+			}
+			if (angular.isDefined(copy.Market_Rate_Index_Name__r)){
+				if (angular.isDefined(copy.Market_Rate_Index_Name__r.Id)){
+					copy.Market_Rate_Index_Name__c = copy.Market_Rate_Index_Name__r.Id;
+				} else {
+					copy.Market_Rate_Index_Name__c = null;
+				}
+				delete copy.Market_Rate_Index_Name__r;
+			}
+			if (angular.isDefined(copy.Utility_Rate_Name__r)){
+				if (angular.isDefined(copy.Utility_Rate_Name__r.Id)){
+					copy.Utility_Rate_Name__c = copy.Utility_Rate_Name__r.Id;
+				} else {
+					copy.Utility_Rate_Name__c = null;
+				}
+				delete copy.Utility_Rate_Name__r;
+			}
+			// fuel rates
+			if (angular.isDefined(copy.LDC_Fuel_Rate__r) && angular.isDefined(copy.LDC_Fuel_Rate__r.Id)){
+				copy.LDC_Fuel_Rate__c = copy.LDC_Fuel_Rate__r.Id;
+			} else { copy.LDC_Fuel_Rate__c = null; }
+			delete copy.LDC_Fuel_Rate__r;
+
+			if (angular.isDefined(copy.Pipeline_Fuel_Rate__r) && angular.isDefined(copy.Pipeline_Fuel_Rate__r.Id)){
+				copy.Pipeline_Fuel_Rate__c = copy.Pipeline_Fuel_Rate__r.Id;
+			} else { copy.Pipeline_Fuel_Rate__c = null; }
+			delete copy.Pipeline_Fuel_Rate__r;
+
+
+			// over, under, cashout rates
+			if (angular.isDefined(copy.Over_Index_Name__r)){
+				if (angular.isDefined(copy.Over_Index_Name__r.Id)){
+					copy.Over_Index_Name__c = copy.Over_Index_Name__r.Id;
+				} else {
+					copy.Over_Index_Name__c = null;
+				}
+				delete copy.Over_Index_Name__r;
+			}
+			if (angular.isDefined(copy.Under_Index_Name__r)){
+				if (angular.isDefined(copy.Under_Index_Name__r.Id)){
+					copy.Under_Index_Name__c = copy.Under_Index_Name__r.Id;
+				} else {
+					copy.Under_Index_Name__c = null;
+				}
+				delete copy.Under_Index_Name__r;
+			}
+			if (angular.isDefined(copy.Cashout_Over_Index_Name__r)){
+				if (angular.isDefined(copy.Cashout_Over_Index_Name__r.Id)){
+					copy.Cashout_Over_Index_Name__c = copy.Cashout_Over_Index_Name__r.Id;
+				} else {
+					copy.Cashout_Over_Index_Name__c = null;
+				}
+				delete copy.Cashout_Over_Index_Name__r;
+			}
+			if (angular.isDefined(copy.Cashout_Under_Index_Name__r)){
+				if (angular.isDefined(copy.Cashout_Under_Index_Name__r.Id)){
+					copy.Cashout_Under_Index_Name__c = copy.Cashout_Under_Index_Name__r.Id;
+				} else {
+					copy.Cashout_Under_Index_Name__c = null;
+				}
+				delete copy.Cashout_Under_Index_Name__r;
+			}
+			// fuel rates
+			if (angular.isDefined(copy.Over_LDC_Fuel_Rate__r) && angular.isDefined(copy.Over_LDC_Fuel_Rate__r.Id)){
+				copy.Over_LDC_Fuel_Rate__c = copy.Over_LDC_Fuel_Rate__r.Id;
+			} else { copy.Over_LDC_Fuel_Rate__c = null; }
+			delete copy.Over_LDC_Fuel_Rate__r;
+
+			if (angular.isDefined(copy.Over_Pipeline_Fuel_Rate__r) && angular.isDefined(copy.Over_Pipeline_Fuel_Rate__r.Id)){
+				copy.Over_Pipeline_Fuel_Rate__c = copy.Over_Pipeline_Fuel_Rate__r.Id;
+			} else { copy.Over_Pipeline_Fuel_Rate__c = null; }
+			delete copy.Over_Pipeline_Fuel_Rate__r;
+
+			if (angular.isDefined(copy.Under_LDC_Fuel_Rate__r) && angular.isDefined(copy.Under_LDC_Fuel_Rate__r.Id)){
+				copy.Under_LDC_Fuel_Rate__c = copy.Under_LDC_Fuel_Rate__r.Id;
+			} else { copy.Under_LDC_Fuel_Rate__c = null; }
+			delete copy.Under_LDC_Fuel_Rate__r;
+
+			if (angular.isDefined(copy.Under_Pipeline_Fuel_Rate__r) && angular.isDefined(copy.Under_Pipeline_Fuel_Rate__r.Id)){
+				copy.Under_Pipeline_Fuel_Rate__c = copy.Under_Pipeline_Fuel_Rate__r.Id;
+			} else { copy.Under_Pipeline_Fuel_Rate__c = null; }
+			delete copy.Under_Pipeline_Fuel_Rate__r;
+
+
+			// pipeline
+			if (angular.isDefined(copy.Pipeline_Lookup__r) && angular.isDefined(copy.Pipeline_Lookup__r.Id)){
+				copy.Pipeline_Lookup__c = copy.Pipeline_Lookup__r.Id;
+			} else {copy.Pipeline_Lookup__c = null;}
+			delete copy.Pipeline_Lookup__r;
+
+			// upstream pipeline rate
+			if (angular.isDefined(copy.Upstream_Transport_Fee_Lookup__r) && angular.isDefined(copy.Upstream_Transport_Fee_Lookup__r.Id)){
+				copy.Upstream_Transport_Fee_Lookup__c = copy.Upstream_Transport_Fee_Lookup__r.Id;
+			} else {copy.Upstream_Transport_Fee_Lookup__c = null;}
+			delete copy.Upstream_Transport_Fee_Lookup__r;
+
+
+			return vfr.update('CESContract__c',copy.Id, copy).then(
+				
+					function (response){
+						console.log('tc update success');
+						console.log(response);
+						$scope.data.tcErrorMsg = null;
+						$scope.data.contractMode = 'Display';
+						//return response;
+						//$scope.data.savedisabled = false;
+
+						// refresh validation fields
+						vfr.query("select id, Validation_Check__c, Field_Validation_Check__c, Volume_Validation_Check__c from CESContract__c where Id ='"+$scope.data.tc.Id+"'").then(
+								function (response){
+									$scope.data.tc.Validation_Check__c = response.records[0].Validation_Check__c;
+									$scope.data.tc.Field_Validation_Check__c = response.records[0].Field_Validation_Check__c;
+									$scope.data.tc.Volume_Validation_Check__c = response.records[0].Volume_Validation_Check__c;
+								},
+								function (error){
+									console.log(error);
+									return error;
+								}
+							);
+					},
+					function (error){
+						console.log('tc update error');
+						console.log(error);
+						console.log(error[0].message);
+						$scope.data.tcErrorMsg = error[0].message;
+						return error;
+						//$scope.data.savedisabled = false;
+					}
+				
+				);
+		}
+
+		function computeTotalVol(){
+        	var total = 0;
+			for (var i = 0, len = $scope.data.details.length; i < len; i++) {
+				total = total + $scope.data.details[i].Volume__c * 1;
+			}
+			$scope.data.TotalVolume = total;
+        }
+
+        function resetCanvas(){
+        	// clear variables
+			delete $scope.data.tc;
+			delete $scope.data.agree;
+
+			//init visibility
+			//$scope.data.showGeneral = true;
+			$scope.data.showContacts = true;
+			$scope.data.showPremises = true;
+			$scope.data.showTC = false;
+			$scope.data.showAgree = false;
+			$scope.data.showCharges = false;
+        }
+
+        function clearCanvas(){
+        	// clear variables
+			delete $scope.data.tc;
+			delete $scope.data.agree;
+
+			//init visibility
+			$scope.data.showContacts = false;
+			$scope.data.showPremises = false;
+			$scope.data.showTC = false;
+			$scope.data.showAgree = false;
+			$scope.data.showCharges = false;
+        }
+
+        function setWatches(){
+        	$scope.$watch(
+				'paramService.vals',
+				function(newValue, oldValue){
+					console.log('caught a change:');
+					console.log(newValue);
+					console.log(oldValue);
+					if (newValue===oldValue){
+						//console.log('not firing'); return;
+					}
+					
+				}, true
+			);
+        }
+
+		/*
+		function asyncCheckAgreement(){
+
+			// check to see if an agreement needs to be created
+			if ($scope.data.selectedRecordType.Name == "New Agreement Only" || $scope.data.selectedRecordType.Name == "New Agreement and TC"){
+				var agree = {
+					"Account__c":$scope.account.Id,
+					"Opportunity__c":$scope.opty.Id,
+					"CES_Office__c":$scope.request.CES_Office__r.Id,
+					"Contract_Admin_Mailbox__c":$scope.request.CES_Office__r.Old_email__c,
+					"Effective_Date__c":$scope.data.currDate,
+					"Contact_for_Confirmations__c":$scope.request.Contact_for_Confirmations__r.Id,
+					"Contact_for_Notices__c":$scope.request.Contact_for_Notices__r.Id,
+					"Contract_Status__c":"Not Submitted",
+					"Pricing_Terms__c":null,
+					"Receipt_Obligation_Terms__c":null,
+					"Field_Validation_Check__c":"Passed System"
+				}
+
+				// populate applicable invoice address fields
+				if (angular.isUndefined($scope.request.Contact_for_Invoices__r) || $scope.request.Contact_for_Notices__r == null){
+					agree.Invoice_Accounts_Payable__c = $scope.request.Invoice_Accounts_Payable__c;
+					agree.Invoice_Address_is_Notice_Address__c = $scope.request.Invoice_Address_is_Notice_Address__c;
+					if (!$scope.request.Invoice_Address_is_Notice_Address__c){
+						agree.Billing_Address__c = $scope.request.Billing_Address__c;
+						agree.Billing_City__c = $scope.request.Billing_City__c;
+						agree.Billing_State__c = $scope.request.Billing_State__c;
+						agree.Billing_Postal_Code__c = $scope.request.Billing_Postal_Code__c;
+						agree.Billing_Phone__c = $scope.request.Billing_Phone__c;
+						agree.Billing_Fax__c = $scope.request.Billing_Fax__c;
+					}
+				} else {
+					agree.Contact_for_Invoices__c = $scope.request.Contact_for_Invoices__r.Id;
+				}
+
+				// populate contract request if this is only an agreement
+				if ($scope.data.selectedRecordType.Name == 'New Agreement Only'){
+					agree.Contract_Request__c = $scope.request.Id;
+					agree.Contract_Request_Type__c = $scope.data.selectedRecordType.Name;
+				}
+
+				return vfr.query("select id, name from RecordType where name = '"+$scope.request.New_Agreement_Type__c+"' and SobjectType = 'CESContract__c'").then(
+						function (response){
+							agree.RecordTypeId = response.records[0].Id;
+
+
+							return vfr.create('CESContract__c', agree, agree).then(
+									function (response){
+										console.log('agreement created');
+										return vfr.query("select id, Name, RecordTypeId from CESContract__c where Id ='"+response.id+"'").then(
+												function (response){
+													console.log(response);
+													$scope.request.Existing_Base_Agreement__r = response.records[0];
+													return response.records[0];
+												},
+												function (error){
+													console.log(error);
+												}
+											);
+									},
+									function (error){
+										console.log(error);
+									}
+								);
+
+						},
+						function (error){
+							console.log(error);
+						}
+					);
+			} else {
+				// return agreement object as a promise
+				var deferred = $q.defer();
+
+				deferred.resolve($scope.request.Existing_Base_Agreement__r);
+
+				return deferred.promise;
+			}
+		}
+
+		function asyncCheckTCCreation(){
+
+			if ($scope.data.selectedRecordType.Name == 'New Agreement Only'){
+				var deferred = $q.defer();
+
+				// return nothing
+				deferred.resolve(null);
+				return deferred.promise;
+			} else {
+				// TC needs to be created
+				var recType = "";
+
+				if (angular.isDefined($scope.request.Request_Utility_SubType__c) && $scope.request.Request_Utility_SubType__c != ""){
+					recType = $scope.request.Pricing__r.Name + " " + $scope.request.Request_Utility_SubType__c;
+				} else {
+					recType = $scope.request.Pricing__r.Name;
+				}
+
+				vfr.query("select id from RecordType where Name ='"+recType+"' and SObjectType = 'CESContract__c'").then(
+						function (response){
+							var tc = {
+								"RecordTypeId":response.records[0].Id,
+								"Account__c":$scope.account.Id,
+								"Opportunity__c":$scope.opty.Id,
+								"Utility_Lookup__c":$scope.request.Utility__r.Id,
+								"Product_Subtype_Lookup__c":$scope.request.Pricing__r.Id,
+								"Base_Pricing__c":$scope.request.Pricing__r.Base_Pricing_Default__c,
+								"Pricing_Scenario__c":$scope.request.Pricing_Scenario__r.Id,
+								"CES_Office__c":$scope.request.CES_Office__r.Id,
+								"Contract_Admin_Mailbox__c":$scope.request.CES_Office__r.Old_email__c,
+								"Effective_Date__c":$scope.data.currDate,
+								"Start_Date_New__c":$scope.request.Start_Date__c,
+								"Term_New__c":$scope.request.Term__c,
+								"Other_Details__c":$scope.request.Other_Details__c,
+								"Contract_Status__c":"Not Submitted",
+								"MDQ_Unit__c":$scope.request.Utility__r.LDC_Default_Unit__c,
+								"Field_Validation_Check__c":"Failed: Required fields missing values",
+								"Contract_Request__c"$scope.request.Id,
+								"Contract_Request_Type__c":$scope.data.selectedRecordType.Name,
+							}
+
+							// populate consultant fields if applicable
+							if (angular.isDefined($scope.request.Consultant__r)){
+								tc.Consulant__c = $scope.request.Consultant__r.Id;
+
+								if (angular.isDefined($scope.request.Consultant__r.Default_Consultant_Margin__c)){
+									tc.Consultant_Margin_Pctg__c = $scope.request.Consultant__r.Default_Consultant_Margin__c;
+								}
+
+								if (angular.isDefined($scope.request.Consultant__r.Default_consultant_unit_fee__c)){
+									tc.Consultant_Unit_Margin__c = $scope.request.Consultant__r.Default_consultant_unit_fee__c;
+								}
+							}
+
+							// set volume settings
+							if ($scope.request.Pricing__r.Contract_Volume_Required__c){
+								tc.Volume_Validation_Check__c = "Failed: Volumes are required";
+
+								// set volume entry type to monthly unless the pricing is FOM
+								if ($scope.request.Pricing__r.Is_FOM_Price_Type__c){
+									tc.Volume_Entry_Type__c = 'Monthly';
+								}
+							}
+
+							// set agreement and contact information
+							tc.Existing_Base_Agreement__c = $scope.request.Existing_Base_Agreement__r.Id;
+
+							if ($scope.data.selectedRecordType == "TC Only-Existing Agreement"){
+								tc.Contact_for_Notices__c = $scope.request.Existing_Base_Agreement__r.Contact_for_Notices__c;
+								tc.Contact_for_Confirmations__c = $scope.request.Existing_Base_Agreement__r.Contact_for_Confirmations__c;
+
+								if ($scope.request.Existing_Base_Agreement__r.Invoice_Accounts_Payable__c){
+									tc.Invoice_Accounts_Payable__c = $scope.request.Existing_Base_Agreement__r.Invoice_Accounts_Payable__c;
+
+									if (!$scope.request.Existing_Base_Agreement__r.Invoice_Address_is_Notice_Address__c){
+										tc.Billing_Address__c = $scope.request.Existing_Base_Agreement__r.Billing_Address__c;
+										tc.Billing_City__c = $scope.request.Existing_Base_Agreement__r.Billing_City__c;
+										tc.Billing_State__c = $scope.request.Existing_Base_Agreement__r.Billing_State__c;
+										tc.Billing_Postal_Code__c = $scope.request.Existing_Base_Agreement__r.Billing_Postal_Code__c;
+										tc.Billing_Phone__c = $scope.request.Existing_Base_Agreement__r.Billing_Phone__c;
+										tc.Billing_Fax__c = $scope.request.Existing_Base_Agreement__r.Billing_Fax__c;
+									} else {
+										tc.Invoice_Address_is_Notice_Address__c = $scope.request.Existing_Base_Agreement__r.Invoice_Address_is_Notice_Address__c;
+									}
+								}
+							} else {
+								tc.Contact_for_Notices__c = $scope.request.Contact_for_Notices__c;
+								tc.Contact_for_Confirmations__c = $scope.request.Contact_for_Confirmations__c;
+
+								if ($scope.request.Invoice_Accounts_Payable__c){
+									tc.Invoice_Accounts_Payable__c = $scope.request.Invoice_Accounts_Payable__c;
+
+									if (!$scope.request.Invoice_Address_is_Notice_Address__c){
+										tc.Billing_Address__c = $scope.request.Billing_Address__c;
+										tc.Billing_City__c = $scope.request.Billing_City__c;
+										tc.Billing_State__c = $scope.request.Billing_State__c;
+										tc.Billing_Postal_Code__c = $scope.request.Billing_Postal_Code__c;
+										tc.Billing_Phone__c = $scope.request.Billing_Phone__c;
+										tc.Billing_Fax__c = $scope.request.Billing_Fax__c;
+									} else {
+										tc.Invoice_Address_is_Notice_Address__c = $scope.request.Invoice_Address_is_Notice_Address__c;
+									}
+								}
+							}
+
+							// update problem fields for manual entry
+							if ($scope.request.Pricing_Scenario__r.Name == 'Manual Contract Entry'){
+								tc.Pricing_Terms__c = null;
+								tc.Receipt_Obligation_Terms_c = null;
+							} else {
+
+							}
+							
+
+
+						},
+						function (error){
+							console.log(error);
+						}
+					);
+			}
+		}
+		*/
+
+		$scope.getParam = function(){
+			$scope.data.param = sharingService.getParam();
+		}
+
+		$scope.setParam = function(){
+			sharingService.setParam($scope.data.tc.Id);
+		}
+
+		$scope.setVisible = function(){
+			sharingService.setVisible($scope.data.showVolume);
+		}
+
+		$scope.flipVolume = function(){
+			$scope.data.showVolume = !$scope.data.showVolume;
+			$scope.setParam();
+			console.log($scope.getParam());
+			$scope.setVisible();
+		}
+
+		$scope.flipAllPremises = function(onOff){
+			angular.forEach($scope.existingPremises, function(prem){
+				prem.inRequest = onOff;
+			});
+			updateSelectedPremises();
+		}
+
+		$scope.flipSinglePremise = function (premid, onOff, refresh){
+			_.where($scope.existingPremises, {'Id': premid})[0].inRequest=onOff;
+			if (refresh === undefined || refresh === true){
+				updateSelectedPremises();
+			}
+		}
+
+		$scope.deleteCRP = function(crpId){
+			$scope.data.savedisabled = true;
+			vfr.del('Contract_Request_Premise__c',crpId).then(
+					function (response){
+						console.log('crp delete success');
+						console.log(response);
+
+						queryPremises().then(
+								function (response){
+									console.log('delete - query premise success');
+									console.log(response);
+
+									getCRPremises().then(
+											function (response){
+												console.log('delete, get crp success');
+												console.log(response);
+												updateSelectedPremises();
+												$scope.data.savedisabled = false;
+											},
+											function (error){
+												console.log('delete, get crp error');
+												console.log(error);
+												$scope.data.savedisabled = false;
+											}
+										);
+								},
+								function (error){
+									console.log('delete - query premise error');
+									console.log(error);
+									$scope.data.savedisabled = false;
+								}
+							);
+					},
+					function (error){
+						console.log('delete crp error');
+						console.log(error);
+						$scope.data.savedisabled = false;
+					}
+				);
+		}
+
+		$scope.premisesRemaining = function(){
+			var ps = _.where($scope.existingPremises, {'inRequest':false, 'visible':true})
+			console.log('premise remaining');
+			console.log(ps);
+
+			if (ps.length == 0){return false;}else{return true;}
+		}
+
+		$scope.assignContact = function (conid, cType){
+			console.log('contact assignment');
+			console.log(_.where($scope.contacts, {'conId': conid})[0]);
+			if (cType == 'confirm'){
+				$scope.request.Contact_for_Confirmations__r = _.where($scope.contacts, {'conId': conid})[0].acr.Contact;
+				console.log($scope.request.Contact_for_Confirmations__r);
+			} else if (cType == 'notice'){
+				$scope.request.Contact_for_Notices__r = _.where($scope.contacts, {'conId': conid})[0].acr.Contact;
+			} else if (cType == 'invoice'){
+				$scope.request.Contact_for_Invoices__r = _.where($scope.contacts, {'conId': conid})[0].acr.Contact;
+			}
+		}
+
+		$scope.assignContactOLD = function (conid, cType){
+			console.log('contact assignment');
+			console.log(_.where($scope.contacts, {'conId': conid})[0]);
+			if (cType == 'confirm'){
+				$scope.request.Contact_for_Confirmations__r = _.where($scope.contacts, {'conId': conid})[0].con;
+				console.log($scope.request.Contact_for_Confirmations__r);
+			} else if (cType == 'notice'){
+				$scope.request.Contact_for_Notices__r = _.where($scope.contacts, {'conId': conid})[0].con;
+			} else if (cType == 'invoice'){
+				$scope.request.Contact_for_Invoices__r = _.where($scope.contacts, {'conId': conid})[0].con;
+			}
+		}
+
+		$scope.flipBillingContact = function(onOff){
+			$scope.request.Invoice_Accounts_Payable__c = onOff;
+			$scope.request.Invoice_Address_is_Notice_Address__c = onOff;
+		}
+
+		$scope.hideBillingAddressEdit = function(onOff){
+			$scope.request.Invoice_Address_is_Notice_Address__c = onOff;
+			if (onOff){
+				$scope.data.mode = 'Display';
+			} else {
+				$scope.data.mode = 'Edit';
+			}
+		}
+
+		$scope.processNavigation = function(navPoint){
+			//$scope.data.showGeneral = false;
+			$scope.data.showContacts = false;
+			$scope.data.showPremises = false;
+			$scope.data.showTC = false;
+			$scope.data.showAgree = false;
+			$scope.data.showVolume = false;
+			$scope.data.showRefreshTC = false;
+			sharingService.setVisible(false);
+			if (navPoint == 'Contact'){ $scope.data.showContacts = true; }//$scope.data.showGeneral = true;} 
+			else if (navPoint == 'Premise'){ $scope.data.showPremises = true; }//$scope.data.showGeneral = true;} 
+			else if (navPoint == 'TC'){ $scope.data.showTC = true; }
+			else if (navPoint == 'Agree'){ $scope.data.showAgree = true; }
+			else if (navPoint == 'Volume'){
+				if (!$scope.request.Request_Submitted__c){$scope.data.showRefreshTC = true;} //only show refesh div if entry allowed
+				else {$scope.data.showTC = true;} //if entry is not allowed, show tc div still
+
+				$scope.flipVolume();
+			}
+			//else if (navPoint == 'General'){ $scope.data.showGeneral = true; }
+		}
+
+		$scope.setMomentCreateDate = function(){
+			//format start date for premise creation field
+			$scope.data.createDate = moment(timeZoneShift($scope.request.Start_Date__c)).format('MM/DD/YY');
+			console.log('create date');
+			console.log($scope.data.createDate);
+		}
+
+		$scope.filterPremises = function(){
+			angular.forEach($scope.existingPremises, function(prem){
+				if (!prem.inRequest && ($scope.data.selectedStatus == 'All' || prem.Premise_Status_Formula__c == $scope.data.selectedStatus)){
+					console.log('visible true');
+					prem.visible = true;
+				} else {
+					console.log('visible false');
+					prem.visible = false;
+				}
+			});
+			console.log(showDetail);
+		}
+
+		$scope.showTimedMessage = function(msg){
+			$scope.data.refreshMsg = msg;
+			$scope.data.showRefreshMessage=true; 
+
+			$timeout(
+				function () { 
+						$scope.data.showRefreshMessage = false;
+						$scope.data.refreshMsg = null;
+					}, 3000);
+		}
+
+		$scope.refreshContacts = function(){
+			GetContacts($scope.account.Id).then(
+	    			function (response){
+						$scope.contacts = response;
+						console.log('contacts refresh success');
+						console.log(response);
+						refreshSection = 0;
+						// show message briefly
+						$scope.showTimedMessage('contacts refreshed!');
+						/*
+						$scope.data.showContactMessage=true; 
+     					$timeout(function () { $scope.data.showContactMessage = false; }, 3000);
+     					*/
+					},
+					function (error){
+						console.log('contacts refresh error');
+						refreshSection = 0;
+					}
+    			);
+		}
+
+		$scope.refreshPremises = function(){
+			queryPremises().then(
+	    			function (response){
+						refreshSection = 0;
+						//$scope.data.selectedStatus = 'All';
+						setPremiseInRequest();
+						buildRemainingPremises();
+						$scope.filterPremises();
+						$scope.showTimedMessage('premises refreshed!');
+						/*
+						$scope.data.showPremiseMessage=true; 
+	 					$timeout(function () { $scope.data.showPremiseMessage = false; }, 3000);
+	 					*/
+					},
+					function (error){
+						refreshSection = 0;
+					}
+	    		);
+		}
+
+		$scope.refreshTC = function(){
+			clearCanvas();
+			queryTC().then();
+		}
+
+		$scope.checkValidation = function(){
+			return $scope.tcForm.$valid;
+		}
+
+		$scope.myFunction = function(section) {
+		    refreshSection = section;
+		    $window.onblur = function() {  
+				console.log('>onblur');
+
+			    //refreshSection = section;  
+			    console.log(refreshSection);
+			};  
+
+		    $window.onfocus = function() {  
+		    	console.log('>onfocus');
+		    	console.log(refreshSection);
+		    	
+		    	if (refreshSection == 1){ // refresh page
+		    		$window.top.location = '/apex/ContractRequestPage?optyId='+$scope.opty.Id+'&id='+$scope.data.objectID;
+		    	}
+		    	else if (refreshSection == 2){ // refresh contacts
+		    		$scope.refreshContacts();
+		    	}
+		    	else if (refreshSection == 3){ // refresh premises
+		    		$scope.refreshPremises();
+		    	}
+			};
+
+		    //console.log(hasFocus ? 'focused' : 'not focused');
+		};
+
+		$scope.startContactEntry = function(){
+			$scope.data.newContact = {
+    			"AccountId":$scope.account.Id,
+    			"Account":$scope.account,
+    			"MailingStreet":$scope.account.BillingStreet,
+    			"MailingCity":$scope.account.BillingCity,
+    			"MailingState":$scope.account.BillingState,
+    			"MailingPostalCode":$scope.account.BillingPostalCode,
+    			"Phone":$scope.account.Phone,
+    			"Fax":$scope.account.Fax,
+    			"Active__c":true,
+    		};
+
+    		$scope.data.showContactEntry = true;
+    		console.log('new contact');
+    		console.log($scope.data.newContact);
+		}
+
+		$scope.cancelContactEntry = function(){
+			delete $scope.data.newContact;
+			$scope.data.showContactEntry = false;
+		}
+
+		$scope.saveContact = function(){
+			$scope.data.newContact.AccountId = $scope.data.newContact.Account.Id;
+			delete $scope.data.newContact.Account;
+
+			// insert
+    		vfr.create('Contact', $scope.data.newContact, $scope.data.newContact).then(
+    				function (response){
+    					console.log('contact insert success');
+    					console.log(response);
+
+    					if ($scope.data.newContact.AccountId != $scope.account.Id){
+    						// user added contact for a different account than the one assigned to this request
+    						// add the new contact as a related contact for this request account
+    						var relation = {
+    							"AccountId": $scope.account.Id,
+    							"ContactId": response.id,
+    							"IsActive": true
+    						}
+
+    						saveContactAssign(relation);
+    						
+    					} else {				
+	    					GetContacts($scope.account.Id).then(
+	    							function (response){
+	    								$scope.contacts = response;
+							
+										//clear entry screen
+	    								delete $scope.data.newContact;
+	    								$scope.data.showContactEntry = false;
+
+	    								// show message briefly
+										$scope.showTimedMessage('contacts refreshed!');
+	    							}
+    						);
+	    				}
+    				},
+    				function (error){
+    					console.log(error);
+    					$scope.showTimedMessage(error);
+    				}
+    			);
+		}
+
+		$scope.startNewContactAssign = function(){
+			$scope.data.newAssignContact = {
+    			"AccountId":$scope.account.Id,
+    			"IsActive":true
+    		};
+
+    		$scope.data.showContactAssign = true;
+    		console.log('new contact assign');
+    		console.log($scope.data.newAssignContact);
+		}
+
+		$scope.cancelNewContactAssign = function(){
+			delete $scope.data.newAssignContact;
+			$scope.data.showContactAssign = false;
+		}
+
+		$scope.doAssignContact = function(){
+			console.log($scope.data.newAssignContact);
+			$scope.data.newAssignContact.ContactId = $scope.data.newAssignContact.Contact.Id;
+			delete $scope.data.newAssignContact.Contact;
+
+			// insert
+			saveContactAssign($scope.data.newAssignContact);
+		}
+
+		function saveContactAssign(relation){
+			vfr.create('AccountContactRelation', relation, relation).then(
+				function (response){
+					GetContacts($scope.account.Id).then(
+							function (response){
+								$scope.contacts = response;
+					
+								//clear entry and assign screens
+								delete $scope.data.newContact;
+								delete $scope.data.newAssignContact;
+								$scope.data.showContactEntry = false;
+								$scope.data.showContactAssign = false;
+
+								// show message briefly
+								$scope.showTimedMessage('contacts refreshed!');
+							}
+					);
+				},
+				function (error){
+					console.log('accountcontactrelation error');
+					console.log(error);
+				}
+			);
+		}
+
+		$scope.startChargeEntry = function(currIndex){
+			if (currIndex == -1){
+				$scope.data.newCharge = {
+					"Contract__c":$scope.data.tc.Id,
+					"RecordTypeID":$scope.data.contractChargeRecType,
+					"Applicable_Fees_not_Specified__c":false,
+					"Suppress_From_TC__c":false
+				}
+				$scope.data.newChargeLabel = 'New';
+			} else {
+				$scope.data.newCharge = $scope.data.charges[currIndex];
+				$scope.data.newChargeLabel = 'Edit';
+			}
+			$scope.data.showChargeEntry = true;
+		}
+
+		$scope.cancelChargeEntry = function(){
+			delete $scope.data.newCharge;
+			$scope.data.showChargeEntry = false;
+		}
+
+		$scope.checkGenericLanguage = function(){
+			console.log($scope.data.newCharge.Charge_Level__c);
+			if ($scope.data.newCharge.Charge_Level__c == 'Unit Loss'){
+				$scope.data.newCharge.Applicable_Fees_not_Specified__c = true;
+			} else {$scope.data.newCharge.Applicable_Fees_not_Specified__c = false;}
+		}
+
+		$scope.saveCharge = function(){
+			$scope.data.newCharge.Charge_Type__c = $scope.data.newCharge.Charge_Type__r.Id;
+
+			if (angular.isUndefined($scope.data.newCharge.Charge_Type__r.Category__c) || $scope.data.newCharge.Charge_Type__r.Category__c != 'Fuel Loss'){
+				if (angular.isDefined($scope.data.newCharge.Index_Lookup__r) && angular.isDefined($scope.data.newCharge.Index_Lookup__r.Id)){
+					$scope.data.newCharge.Index_Lookup__c = $scope.data.newCharge.Index_Lookup__r.Id;
+					delete $scope.data.newCharge.Rate__c;
+				} else {
+					// no index is assigned so delete the index id in the event it was previously populated
+					delete $scope.data.newCharge.Index_Lookup__c;
+				}
+				delete $scope.data.newCharge.Index_Lookup__r;
+				delete $scope.data.newCharge.Utility_Loss_Index__c;
+				delete $scope.data.newCharge.Pipeline_Loss_Index__c;
+				delete $scope.data.newCharge.Utility_Loss_Index__r;
+				delete $scope.data.newCharge.Pipeline_Loss_Index__r;
+			} else if ($scope.data.newCharge.Charge_Type__r.Category__c == 'Fuel Loss') {
+
+				if (angular.isDefined($scope.data.newCharge.Utility_Loss_Index__r) && angular.isDefined($scope.data.newCharge.Utility_Loss_Index__r.Id)){
+					$scope.data.newCharge.Utility_Loss_Index__c = $scope.data.newCharge.Utility_Loss_Index__r.Id;
+				} else {
+					// no utility loss is assigned so delete the loss id in the event it was previously populated
+					delete $scope.data.newCharge.Utility_Loss_Index__c;
+				}
+				
+
+				if (angular.isDefined($scope.data.newCharge.Pipeline_Loss_Index__r) && angular.isDefined($scope.data.newCharge.Pipeline_Loss_Index__r.Id)){
+					$scope.data.newCharge.Pipeline_Loss_Index__c = $scope.data.newCharge.Pipeline_Loss_Index__r.Id;
+				} else {
+					// no pipeline loss is assigned so delete the loss id in the event it was previously populated
+					delete $scope.data.newCharge.Pipeline_Loss_Index__c;
+				}
+				delete $scope.data.newCharge.Utility_Loss_Index__r;
+				delete $scope.data.newCharge.Pipeline_Loss_Index__r;
+				delete $scope.data.newCharge.Index_Lookup__r;
+				delete $scope.data.newCharge.Index_Lookup__c;
+				delete $scope.data.newCharge.Rate__c;
+			}
+			
+			delete $scope.data.newCharge.Charge_Type__r;
+			delete $scope.data.newCharge.chargePer;
+			delete $scope.data.newCharge.chargeDecimal;
+
+			if (angular.isDefined($scope.data.newCharge.Id)){
+				//update
+				delete $scope.data.newCharge.$$hashKey;
+				UpdateCharge(JSON.stringify($scope.data.newCharge)).then(
+	    				function (response){
+	    					queryContractCharges().then(
+	    							function (response){
+				    					console.log('charge update success');
+				    					$scope.data.showChargeEntry = false;
+				    					delete $scope.data.newCharge;
+				    				},
+				    				function (error){
+				    					console.log('get contract charge 3 error');
+										console.log(error);
+										$scope.data.showChargeEntry = false;
+										delete $scope.data.newCharge;
+				    				}
+				    			);
+	    				},
+	    				function (error){
+	    					console.log('charge update error');
+	    					console.log(error);
+	    					$scope.data.savedisabled = false;
+	    					delete $scope.data.newCharge;
+	    				}
+	    			);
+			} else {
+				//insert
+				vfr.create('Customer_Charge__c', $scope.data.newCharge, $scope.data.newCharge).then(
+						function (response){
+							queryContractCharges().then(
+									function (response){
+										$scope.data.showChargeEntry = false;
+									},
+									function (error){
+										console.log('get contract charge 2 error');
+										console.log(error);
+										$scope.data.showChargeEntry = false;
+									}
+								);
+						},
+						function (error){
+							console.log('charge insert error');
+							console.log(error);
+						}
+
+					);
+			}
+		}
+
+		$scope.deleteCharge = function(currPos){
+			$scope.data.savedisabled = true;
+			vfr.del("Customer_Charge__c",$scope.data.charges[currPos].Id).then(
+					function (response){
+						queryContractCharges().then(
+									function (response){
+										$scope.data.savedisabled = false;
+									},
+									function (error){
+										console.log('get contract charge after delete error');
+										console.log(error);
+										$scope.data.savedisabled = false;
+									}
+								);
+						
+					},
+					function (error){
+						console.log(error);
+						$scope.data.savedisabled = false;
+					}
+				);
+		}
+
+		$scope.startPremiseEntry = function(){
+			$scope.data.newPremise = {
+    			"Account__c":$scope.account.Id,
+    			"Premise_Nickname__c":$scope.account.Name,
+    			"Electric_Service_Address__c":$scope.account.BillingStreet,
+    			"Electric_Service_Address_City__c":$scope.account.BillingCity,
+    			"Electric_Service_Address_State2__c":$scope.account.BillingState,
+    			"Electric_Service_Address_Zip__c":$scope.account.BillingPostalCode,
+    			"TDSP_Lookup__c":$scope.opty.LDC2__r.Id,
+    			"CES_Office__c":$scope.request.CES_Office__r.Id,
+    			"Sales_Rep__r":$scope.data.user,
+    			"Default_Delivery_Point__c":'Utility Citygate',
+    			"RecordTypeId":'012300000019Fh8',
+    			"Division":'02d30000000PB5s',
+    			"Property_Effective_Date__c":moment($scope.data.currDate).startOf('month').toDate(),
+    		};
+
+    		console.log($scope.data.newPremise.Property_Effective_Date__c);
+
+    		if (angular.isDefined($scope.opty.LDC2__r.Default_Pricing_Scenario__r) && angular.isDefined($scope.opty.LDC2__r.Default_Pricing_Scenario__r.Pipeline__r)){
+    			$scope.data.newPremise.Pipeline_Lookup__r = $scope.opty.LDC2__r.Default_Pricing_Scenario__r.Pipeline__r;
+    		}
+
+    		$scope.data.showPremiseEntry = true;
+    		console.log('new premise');
+    		console.log($scope.data.newPremise);
+		}
+
+		$scope.cancelPremiseEntry = function(){
+			delete $scope.data.newPremise;
+			$scope.data.showPremiseEntry = false;
+		}
+
+		$scope.savePremise = function(){
+			$scope.data.newPremise.Sales_Rep__c = $scope.data.newPremise.Sales_Rep__r.Id;
+			if (angular.isDefined($scope.data.newPremise.Premise_Primary_Contact__r) && angular.isDefined($scope.data.newPremise.Premise_Primary_Contact__r.Id)){
+				$scope.data.newPremise.Premise_Primary_Contact__c = $scope.data.newPremise.Premise_Primary_Contact__r.Id;
+			}
+			if (angular.isDefined($scope.data.newPremise.LDC_Rate_Class__r) && angular.isDefined($scope.data.newPremise.LDC_Rate_Class__r.Id)){
+				$scope.data.newPremise.LDC_Rate_Class__c = $scope.data.newPremise.LDC_Rate_Class__r.Id;
+			}
+			if (angular.isDefined($scope.data.newPremise.Pipeline_Lookup__r) && angular.isDefined($scope.data.newPremise.Pipeline_Lookup__r.Id)){
+				$scope.data.newPremise.Pipeline_Lookup__c = $scope.data.newPremise.Pipeline_Lookup__r.Id;
+			}
+			delete $scope.data.newPremise.Premise_Primary_Contact__r;
+			delete $scope.data.newPremise.Sales_Rep__r;
+			delete $scope.data.newPremise.LDC_Rate_Class__r;
+			delete $scope.data.newPremise.Pipeline_Lookup__r;
+
+			// insert
+    		vfr.create('Premises__c', $scope.data.newPremise, $scope.data.newPremise).then(
+    				function (response){
+    					console.log('premise insert success');
+    					console.log(response);
+    					
+    					$scope.refreshPremises();
+						delete $scope.data.newPremise;
+						$scope.data.showPremiseEntry = false;
+    					
+    					/*
+    					queryPremises().then(
+    							function (response){
+    														
+									//clear entry screen
+    								delete $scope.data.newPremise;
+    								$scope.data.showPremiseEntry = false;
+
+    								console.log('run filter');
+    								$scope.filterPremises();
+
+    								// show message briefly
+									$scope.showTimedMessage('premises refreshed!');
+    							}
+    						);*/
+    				},
+    				function (error){
+    					console.log(error);
+    					$scope.showTimedMessage(error);
+    				}
+    			);
+		}
+
+		$scope.applySettings = function(){
+
+			$scope.data.savedisabled = true;
+			$scope.data.refreshComplete = false;
+
+			var msg = validate(true);
+
+			if (msg != ""){
+				// errors were received during validation
+				$scope.data.errorMsg = msg;
+				$scope.data.savedisabled = false;
+				$scope.data.refreshComplete = true;
+			} else {
+				var applyMsg = "";
+
+				$scope.data.errorMsg = msg;
+				saveRequest().then(
+					function (response){
+						ApplySettings($scope.request.Id).then(
+							function (response){
+								console.log(response);
+								applyMsg = response;
+
+								if (applyMsg.substr(0,1) == '/'){
+									//$window.top.location = '/apex/ContractRequestPage?optyId='+$scope.opty.Id+'&id='+$scope.request.Id;
+									queryRequest().then(
+										function (response){
+											$scope.data.savedisabled = false;
+											$scope.data.refreshComplete = true;
+										}
+									);
+								} else {
+									$scope.data.errorMsg = applyMsg;
+									$scope.data.savedisabled = false;
+								}
+							},
+							function (error){
+								console.log(error);
+							}
+						);
+					}
+					);
+
+				
+				/*
+				// get agreement record
+				var promise = asyncCheckAgreement();
+				console.log(promise);
+				promise.then(
+						function (response){
+							console.log('success');
+							console.log(response);
+
+							// check to see if tc needs to be created
+
+						},
+						function (error){
+							console.log(error);
+						}
+					);
+				*/
+			}
+		}
+
+		$scope.deleteSettings = function (){
+			$scope.data.savedisabled = true;
+			vfr.del("Contract_Request__c",$scope.request.Id).then(
+					function (response){
+						$window.top.location = "/"+$scope.opty.Id;
+					},
+					function (error){
+						console.log(error);
+						$scope.data.savedisabled = false;
+					}
+				);
+		}
+
+		$scope.cancelAppliedSettings = function (){
+			$scope.data.savedisabled = true;
+			$scope.data.refreshComplete = false;
+
+			CancelSettings($scope.request.Id).then(
+					function (response){
+						console.log(response);
+
+						var reqVal = {"Request_Objects_Created__c":false};
+						vfr.update("Contract_Request__c",$scope.request.Id,reqVal,reqVal).then(
+								function (response){
+									console.log(response);
+									queryRequest().then(
+										function (response){
+											$scope.data.savedisabled = false;
+											$scope.data.refreshComplete = true;
+										}
+									);
+									//$window.top.location = '/apex/ContractRequestPage?optyId='+$scope.opty.Id+'&id='+$scope.request.Id;
+								},
+								function (error){
+									console.log(error);
+									$scope.data.savedisabled = false;
+								}
+							);
+					},
+					function (error){
+						console.log(error);
+					}
+				);
+		}
+
+		$scope.saveTheTC = function (){
+			saveTC().then(
+					function (response){
+						$scope.data.savedisabled = false;
+						console.log(response);
+						$scope.showTimedMessage('save completed!');
+					}
+				);
+		}
+
+		$scope.submitRequest = function (){
+			saveTC().then(
+					function (response){
+						if (angular.isUndefined(response)){
+							$scope.submitRequestPlain();
+							// save was successful so try to submit
+							/*
+							var con = null;
+							if (angular.isDefined($scope.data.tc)){con = $scope.data.tc;}else{con = $scope.data.agree;}
+
+							SubmitRequest(con.Id).then(
+									function (response){
+										console.log(response);
+										if (response.substr(0,1) == '/'){
+											console.log('submit ok');
+											// set request submitted
+											$scope.request.Request_Submitted__c = true;
+											var reqVal = {"Request_Submitted__c":true}
+											vfr.update("Contract_Request__c",$scope.request.Id,reqVal).then(
+													function (response){
+														console.log('request submitted update');
+														$scope.data.contractMode = 'Display';
+														$window.top.location = "/"+$scope.opty.Id;
+													},
+													function (error){
+														console.log(error);
+													}
+												);
+
+											$scope.data.savedisabled = false;
+										} else {
+											console.log('submit error');
+											$scope.data.savedisabled = false;
+										}
+									},
+									function (error){
+										console.log(error);
+										$scope.data.savedisabled = false;
+									}
+								);
+							*/
+						} else{
+							$scope.data.savedisabled = false;
+						}
+					}
+				);
+		}
+
+		$scope.submitRequestPlain = function(){
+			$scope.data.savedisabled = true;
+			
+        	var con = null;
+			if (angular.isDefined($scope.data.tc)){con = $scope.data.tc;}else{con = $scope.data.agree;}
+
+			SubmitRequest(con.Id).then(
+					function (response){
+						console.log(response);
+						if (response.substr(0,1) == '/'){
+							console.log('submit ok');
+							// set request submitted
+							$scope.request.Request_Submitted__c = true;
+							var reqVal = {"Request_Submitted__c":true}
+							vfr.update("Contract_Request__c",$scope.request.Id,reqVal).then(
+									function (response){
+										console.log('request submitted update');
+										$scope.data.contractMode = 'Display';
+										$window.top.location = "/"+$scope.opty.Id;
+									},
+									function (error){
+										console.log(error);
+									}
+								);
+
+							$scope.data.savedisabled = false;
+						} else {
+							console.log('submit error');
+							$scope.data.savedisabled = false;
+						}
+					},
+					function (error){
+						console.log(error);
+						$scope.data.savedisabled = false;
+					}
+				);
+        }
+
+		$scope.gotoVolume = function(){
+			$location.hash('pricingDetail');
+			$anchorScroll();
+		}
+
+		$scope.displayPremiseDiv = function(){
+			//only show premise div once request is created and then only until objects are created UNLESS the show button was pressed
+			if (angular.isDefined($scope.request.Id) && $scope.data.selectedRecordType.Name != 'New Agreement Only'){
+				if ($scope.request.Request_Objects_Created__c){
+					if ($scope.data.showPremises){return true;} else {return false;}
+				} else {return true;}
+			} else {return false;}
+		}
+
+		$scope.displayContactsDiv = function(){
+			// show the contacts div for tc only request if agreement is missing confirmation contact
+			
+			if ($scope.data.selectedRecordType.Name != 'TC Only-Existing Agreement'){
+				//console.log('not an existing agreement -- show contacts');
+				return true;
+			} else if (angular.isDefined($scope.request.Existing_Base_Agreement__r) && angular.isUndefined($scope.request.Existing_Base_Agreement__r.Contact_for_Confirmations__c)){ //!$scope.request.Existing_Base_Agreement__r.Contacts_Selected__c){ 
+				// agreement is populated but is missing a contact for confirmations
+				return true;
+			} else{ 
+				//console.log('is existing agreement all contacts selected -- hide contacts');
+				return false;
+			}
+		}
+
+		$scope.checkNewPremiseUtilLocal = function(){
+			if ($scope.request.CES_Office__r.Customer_Number__c == 1){
+				if($scope.opty.LDC2__r.State__c == 'IL'){
+					return 'NC-IL';
+				} else {
+					return 'NC-IN';
+				}
+			} else {
+				return $scope.opty.LDC2__r.Utility_Code__c;
+			}
+		}
+
+		$scope.checkSelectedConfirmationContact = function() {
+			var msg = "";
+
+			// check for contact assignments for this request if not already assigned on agreement
+			if ((angular.isUndefined($scope.request.Contact_for_Confirmations__r) || $scope.request.Contact_for_Confirmations__r == null) && angular.isUndefined($scope.request.Existing_Base_Agreement__r.Contact_for_Confirmations__c)){
+				msg = msg + "Confirmations contact must be selected.  ";
+			}
+
+			return msg;
+		}
+
+		$scope.checkSelectedContacts = function() {
+			var msg = "";
+
+			// check for contact assignments
+			if (angular.isUndefined($scope.request.Contact_for_Notices__r) || $scope.request.Contact_for_Notices__r == null){
+				msg = msg + "Notices contact must be selected.  ";
+			}
+			if (angular.isUndefined($scope.request.Contact_for_Confirmations__r) || $scope.request.Contact_for_Confirmations__r == null){
+				msg = msg + "Confirmations contact must be selected.  ";
+			}
+			if (angular.isUndefined($scope.request.Contact_for_Invoices__r) || $scope.request.Contact_for_Invoices__r == null){
+				if (!$scope.request.Invoice_Accounts_Payable__c){
+					msg = msg + "Invoices contact must be selected or Select Accounts Payable.  ";
+				} else if (!$scope.request.Invoice_Address_is_Notice_Address__c && (angular.isUndefined($scope.request.Billing_Address__c) || angular.isUndefined($scope.request.Billing_City__c) || angular.isUndefined($scope.request.Billing_State__c) || angular.isUndefined($scope.request.Billing_Postal_Code__c) || $scope.request.Billing_Address__c == null || $scope.request.Billing_City__c == null || $scope.request.Billing_State__c == null || $scope.request.Billing_Postal_Code__c == null || $scope.request.Billing_Address__c == "" || $scope.request.Billing_City__c == "" || $scope.request.Billing_State__c == "" || $scope.request.Billing_Postal_Code__c == "")){
+						msg = msg + "Invoice Address information is required if Accounts Payable is selected and Notices Address is not.  ";
+				}
+			}
+
+			return msg;
+		}
+
+		$scope.initUpstreamFee = function(){
+			// set up either the look up or the value
+			
+			if($scope.data.useUpstreamLookup){
+				$scope.data.tc.Upstream_Transport_Fee__c = null;
+			} else {
+				delete $scope.data.tc.Upstream_Transport_Fee_Lookup__r;
+			}
+			/*
+			console.log('upstream transport lookup:');
+			console.log($scope.data.tc.Upstream_Transport_Fee_Lookup__r);
+			console.log('upstream transport fee:');
+			console.log($scope.data.tc.Upstream_Transport_Fee__c);
+			*/
+		}
+
+/*
+		$scope.initFuelRates = function(){
+			// clear lookups if set to false
+			
+			if(!$scope.data.showFuel){
+				delete $scope.data.tc.LDC_Fuel_Rate__r;
+				delete $scope.data.tc.Pipeline_Fuel_Rate__r;
+				delete $scope.data.tc.Over_LDC_Fuel_Rate__r;
+				delete $scope.data.tc.Over_Pipeline_Fuel_Rate__r;
+				delete $scope.data.tc.Under_LDC_Fuel_Rate__r;
+				delete $scope.data.tc.Under_Pipeline_Fuel_Rate__r;
+			}
+		}
+*/
+
+		$scope.queryAsyncOffice = function (str){
+			return vfr.query("select Id, Name, Customer_Number__c, Old_email__c from Account where Name like '%"+str+"%' and RecordTypeId='012300000019HZ0' order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('office async error');
+				}
+			);
+		}
+
+		$scope.queryAsyncPricing = function (str){
+			return vfr.query("select Id, Name from Rate__c where (Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') and RecordTypeId = '012300000019FNY' and Active__c = true and (All_CES_Locations__c = true OR Specific_CES_Location_1__c ='"+$scope.request.CES_Office__r.Id+"' OR Specific_CES_Location_2__c ='"+$scope.request.CES_Office__r.Id+"') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncPricingError error');
+				}
+			);
+		}
+
+		$scope.queryAsyncScenario = function (str){
+			return vfr.query("select Id, Name from Pipeline_Scenario__c where Active__c = true AND (Name = 'Manual Contract Entry' OR ((Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') AND Utility__c = '"+$scope.request.Utility__c+"')) order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncScenarioError error');
+				}
+			);
+		}
+
+		$scope.queryAsyncConsultant = function(str){
+			return vfr.query("select Id, Name, Default_Consultant_Margin__c, Default_consultant_unit_fee__c from Account where RecordTypeId = '012300000018b9t' and Type = 'Paid Consultant' and (Search_Code__c like '%"+str+"%' or name like '%"+str+"%')")
+				.then(
+					function(response){
+						
+						return response.records;
+					}, function(error){
+						console.log('AsyncConsultantError error');
+					}
+				);
+		}
+
+		$scope.queryAsyncAgreement = function (str){
+			return vfr.query("select Id, Name, Contacts_Selected__c, Contract_Number_and_Type__c from CESContract__c where Account__c = '"+$scope.account.Id+"' AND (Search_Code__c like '%"+str+"%' OR Contract_Number_and_Type__c like '%"+str+"%') AND (RecordType.Name = 'Version 3 Enabling Agreement' OR RecordType.Name = 'NAESB 2002 Enabling Agreement' OR RecordType.Name = 'Version 2 Enabling Agreement' OR RecordType.Name = 'NAESB 2006 Enabling Agreement' OR RecordType.Name = 'Version 3.2 Enabling Agreement' OR RecordType.Name = 'Customer Enabling Agreement' OR RecordType.Name = 'Version 4 Enabling Agreement' OR RecordType.Name = 'Version 4.1 Enabling Agreement') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncAgreementError error');
+				}
+			);
+		}
+
+		$scope.queryAsyncUtilityRate = function (str){
+			return vfr.query("select Id, Name from Index__c where RecordType.Name = 'Utility' and Index_Rate__c = true and Active__c = true and Utility_1__c = '"+$scope.request.Utility__c+"' and (Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncUtilityRateError error');
+				}
+			);
+		}
+
+		$scope.queryAsyncMarketRate = function (str){
+			return vfr.query("select Id, Name from Index__c where RecordType.Name = 'Market Price' and Index_Rate__c = true and Active__c = true and (All_Locations__c = true or CES_Location_1__c = '"+$scope.request.CES_Office__c+"' or CES_Location_2__c = '"+$scope.request.CES_Office__c+"' or CES_Location_3__c = '"+$scope.request.CES_Office__c+"' or CES_Location_4__c = '"+$scope.request.CES_Office__c+"' or Utility_1__c = '"+$scope.request.Utility__c+"') and (Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncMarketRateError error');
+				}
+			);
+		}
+
+		$scope.queryAsyncIndexRate = function (str){
+			return vfr.query("select Id, Name from Index__c where (RecordType.Name = 'Index' or RecordType.Name = 'Market Price') and Index_Rate__c = true and Active__c = true and (All_Locations__c = true or CES_Location_1__c = '"+$scope.request.CES_Office__c+"' or CES_Location_2__c = '"+$scope.request.CES_Office__c+"' or CES_Location_3__c = '"+$scope.request.CES_Office__c+"' or CES_Location_4__c = '"+$scope.request.CES_Office__c+"' or Utility_1__c = '"+$scope.request.Utility__c+"') and (Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncIndexRateError error');
+				}
+			);
+		}
+
+		$scope.queryAsyncOverRate = function (str){
+			return vfr.query("select Id, Name from Index__c where Over_Rate__c = true and Active__c = true and (All_Locations__c = true or CES_Location_1__c = '"+$scope.request.CES_Office__c+"' or CES_Location_2__c = '"+$scope.request.CES_Office__c+"' or CES_Location_3__c = '"+$scope.request.CES_Office__c+"' or CES_Location_4__c = '"+$scope.request.CES_Office__c+"' or Utility_1__c = '"+$scope.request.Utility__c+"') and (Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncOverRateError error');
+				}
+			);
+		}
+
+		$scope.queryAsyncUnderRate = function (str){
+			return vfr.query("select Id, Name from Index__c where Under_Rate__c = true and Active__c = true and (All_Locations__c = true or CES_Location_1__c = '"+$scope.request.CES_Office__c+"' or CES_Location_2__c = '"+$scope.request.CES_Office__c+"' or CES_Location_3__c = '"+$scope.request.CES_Office__c+"' or CES_Location_4__c = '"+$scope.request.CES_Office__c+"' or Utility_1__c = '"+$scope.request.Utility__c+"') and (Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncUnderRateError error');
+				}
+			);
+		}
+
+		$scope.queryAsyncPipeline = function (str){
+			return vfr.query("select Id, Name from Pipeline__c where Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%' order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncPipelineError error');
+				}
+			);
+		}
+
+		$scope.queryAsyncUpstreamPipelineRate = function (str){
+			return vfr.query("select Id, Name from Index__c where RecordType.Name = 'Pipeline Rate' and Contract_Charge_Rate__c = true and Active__c = true and Name like 'Upstream Pipeline Transport%' and (All_Locations__c = true or CES_Location_1__c = '"+$scope.request.CES_Office__c+"' or CES_Location_2__c = '"+$scope.request.CES_Office__c+"' or CES_Location_3__c = '"+$scope.request.CES_Office__c+"' or CES_Location_4__c = '"+$scope.request.CES_Office__c+"' or Utility_1__c = '"+$scope.request.Utility__c+"') and (Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncUpstreamPipelineRateError error');
+				}
+			);
+		}
+
+		$scope.queryAsyncLDCFuelRate = function (str){
+			return vfr.query("select Id, Name from Index__c where RecordType.Name = 'Utility' and Fuel_Rate__c = true and Active__c = true and Utility_1__c = '"+$scope.request.Utility__c+"' and (All_Locations__c = true or CES_Location_1__c = '"+$scope.request.CES_Office__c+"' or CES_Location_2__c = '"+$scope.request.CES_Office__c+"' or CES_Location_3__c = '"+$scope.request.CES_Office__c+"' or CES_Location_4__c = '"+$scope.request.CES_Office__c+"') and (Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncLDCFuelRateError error');
+				}
+			);
+		}
+
+		$scope.queryAsyncPipelineFuelRate = function (str){
+			return vfr.query("select Id, Name from Index__c where RecordType.Name = 'Pipeline Rate' and Fuel_Rate__c = true and Active__c = true and (All_Locations__c = true or CES_Location_1__c = '"+$scope.request.CES_Office__c+"' or CES_Location_2__c = '"+$scope.request.CES_Office__c+"' or CES_Location_3__c = '"+$scope.request.CES_Office__c+"' or CES_Location_4__c = '"+$scope.request.CES_Office__c+"') and (Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncPipelineFuelRateError error');
+				}
+			);
+		}
+
+		// new contact asyncs
+		$scope.queryAsyncAccount = function (str){
+			return vfr.query("select Id, Name from Account where Name like '%"+str+"%' order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('account async error');
+				}
+			);
+		}
+
+		$scope.queryAsyncUnrelatedContact = function (str){
+			return vfr.query("select id, Name, FirstName, LastName from contact where Active__c = true and Name like '%"+str+"%' order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('contact unrelated async error');
+				}
+			);
+		}
+
+		// new premise asyncs
+		$scope.queryAsyncUser = function (str){
+			return vfr.query("select Id, FirstName, LastName, Name from User where Profile_Name__c like '%CES%' and Name like '%"+str+"%' order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('user async error');
+				}
+			);
+		}
+
+		$scope.queryAsyncContact = function (str){
+			return vfr.query("select id, Name, FirstName, LastName from contact where accountid ='"+$scope.account.Id+"' and Active__c = true and Name like '%"+str+"%' order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('contact async error');
+				}
+			);
+		}
+
+		$scope.queryAsyncRateClass = function (str){
+			return vfr.query("select Id, Name from LDC_Rate_Class__c where LDC__c ='"+$scope.opty.LDC2__r.Id+"' and Name like '%"+str+"%' order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('rateclass async error');
+				}
+			);
+		}
+
+		// contract charge asyncs
+		$scope.queryAsyncChargeType = function (str){
+			return vfr.query("select Id, Name, Category__c from Charge_Type__c where Is_Contract_Charge_Type__c = true and Name like '%"+str+"%' order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('chargetype async error');
+				}
+			);
+		}
+
+		$scope.queryAsyncChargeRate = function (str){
+			return vfr.query("select Id, Name from Index__c where Contract_Charge_Rate__c = true and Active__c = true and (Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncChargeRateError error');
+				}
+			);
+		}
+
+		$scope.queryAsyncUtilityFuelRate = function (str){
+			return vfr.query("select Id, Name from Index__c where RecordType.Name = 'Utility' and Fuel_Rate__c = true and Active__c = true and (Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncUtilityFuelRateError error');
+				}
+			);
+		}
+
+		$scope.queryAsyncPipelineFuelRate = function (str){
+			return vfr.query("select Id, Name from Index__c where RecordType.Name = 'Pipeline Rate' and Fuel_Rate__c = true and Active__c = true and (Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncPipelineFuelRateError error');
+				}
+			);
+		}
+
+		$scope.refreshPageNow = function(){
+			$window.top.location = '/apex/ContractRequestPage?optyId='+$scope.opty.Id+'&id='+$scope.data.objectID;
+		}
+
+		$scope.CreateRequest = function() {
+			$scope.data.savedisabled=true;
+			$scope.data.refreshComplete = false;
+
+        	var msg = validate(false);
+
+        	if (msg != ""){
+				// errors were received during validation
+				$scope.data.errorMsg = msg;
+				$scope.data.savedisabled = false;
+				$scope.data.refreshComplete = true;
+			} else {
+				var objValue = getRequestObjectValues();
+
+				// insert
+        		vfr.create('Contract_Request__c', objValue, objValue).then(
+        				function (response){
+        					console.log('insert success');
+        					console.log(response);
+        					$scope.data.objectID = response.id;
+        					//$scope.request.Id = response.id;
+        					//$scope.data.objectID = response.id;
+        					$scope.data.mode = 'Display';
+        					
+
+        					//$scope.data.objectLink = '%26id%3D'+response.id;
+        					//$window.top.location = '/apex/ContractRequestPage?optyId='+$scope.opty.Id+'&id='+response.id;
+        					console.log($scope.data.objectID);
+        					queryRequest().then(
+        						function (response){
+        							$scope.data.savedisabled = false;
+        							$scope.data.refreshComplete = true;
+        						}
+        						);
+        				},
+        				function (error){
+        					console.log(error);
+        					$scope.data.savedisabled = false;
+        					$scope.data.refreshComplete = true;
+        				}
+        			);
+	        	
+        	}
+		}
+		
+        $scope.SaveData = function() {
+
+        	$scope.data.savedisabled=true;
+
+        	var msg = validate(false);
+
+			if (msg != ""){
+				// errors were received during validation
+				$scope.data.errorMsg = msg;
+				$scope.data.savedisabled = false;
+			} else {
+	        	saveRequest().then(
+	        			function (response){
+	        				$scope.data.savedisabled = false;
+	        				$scope.data.errorMsg = msg;
+	        				$scope.showTimedMessage('save completed!');
+	        			},
+	        			function (error){
+	        				$scope.data.savedisabled = false;
+	        				$scope.data.errorMsg = msg;
+	        				$scope.showTimedMessage('save error!');
+	        			}
+	        		);
+        	}
+        }
+
+	});	
+
+	myModule.factory('GetContacts', ['$q', '$rootScope', function($q, $rootScope){
+			return function(acct) {
+				var deferred = $q.defer();
+
+				Visualforce.remoting.Manager.invokeAction(
+	            	'{!$RemoteAction.ContractRequestController.getAccountContacts}',
+	            	acct, 
+	            	function(result, event){
+	            		$rootScope.$apply(function() {
+	                        if (event.status) {
+	                            deferred.resolve(result);
+	                        } else {
+	                            deferred.reject(event);
+	                        }
+	                	})
+	            	},
+	            	{ buffer: true, escape: true, timeout: 30000 }
+	            );
+
+	            return deferred.promise;
+			}
+	}]);
+
+	myModule.factory('CreateCRPs', ['$q', '$rootScope', function($q, $rootScope){
+			return function(crps) {
+				var deferred = $q.defer();
+
+				Visualforce.remoting.Manager.invokeAction(
+	            	'{!$RemoteAction.ContractRequestController.CreateCRPs}',
+	            	crps, 
+	            	function(result, event){
+	            		$rootScope.$apply(function() {
+	                        if (event.status) {
+	                            deferred.resolve(result);
+	                        } else {
+	                            deferred.reject(event);
+	                        }
+	                	})
+	            	},
+	            	{ buffer: true, escape: true, timeout: 30000 }
+	            );
+
+	            return deferred.promise;
+			}
+	}]);
+
+	myModule.factory('ApplySettings', ['$q', '$rootScope', function($q, $rootScope){
+			return function(req) {
+				var deferred = $q.defer();
+
+				Visualforce.remoting.Manager.invokeAction(
+	            	'{!$RemoteAction.ContractRequestController.CreateContractFromRequest}',
+	            	req, 
+	            	function(result, event){
+	            		$rootScope.$apply(function() {
+	                        if (event.status) {
+	                            deferred.resolve(result);
+	                        } else {
+	                            deferred.reject(event);
+	                        }
+	                	})
+	            	},
+	            	{ buffer: true, escape: true, timeout: 30000 }
+	            );
+
+	            return deferred.promise;
+			}
+	}]);
+
+	myModule.factory('CancelSettings', ['$q', '$rootScope', function($q, $rootScope){
+			return function(req) {
+				var deferred = $q.defer();
+
+				Visualforce.remoting.Manager.invokeAction(
+	            	'{!$RemoteAction.ContractRequestController.DeleteContractsOnRequest}',
+	            	req, 
+	            	function(result, event){
+	            		$rootScope.$apply(function() {
+	                        if (event.status) {
+	                            deferred.resolve(result);
+	                        } else {
+	                            deferred.reject(event);
+	                        }
+	                	})
+	            	},
+	            	{ buffer: true, escape: true, timeout: 30000 }
+	            );
+
+	            return deferred.promise;
+			}
+	}]);
+
+	myModule.factory('SubmitRequest', ['$q', '$rootScope', function($q, $rootScope){
+			return function(cid) {
+				var deferred = $q.defer();
+
+				Visualforce.remoting.Manager.invokeAction(
+	            	'{!$RemoteAction.ContractRequestController.SubmitContractRequest}',
+	            	cid, 
+	            	function(result, event){
+	            		$rootScope.$apply(function() {
+	                        if (event.status) {
+	                            deferred.resolve(result);
+	                        } else {
+	                            deferred.reject(event);
+	                        }
+	                	})
+	            	},
+	            	{ buffer: true, escape: true, timeout: 30000 }
+	            );
+
+	            return deferred.promise;
+			}
+	}]);
+
+	myModule.factory('UpdateCharge', ['$q', '$rootScope', function($q, $rootScope){
+			return function(chg) {
+				var deferred = $q.defer();
+
+				Visualforce.remoting.Manager.invokeAction(
+	            	'{!$RemoteAction.ContractRequestController.updateContractCharge}',
+	            	chg, 
+	            	function(result, event){
+	            		$rootScope.$apply(function() {
+	                        if (event.status) {
+	                            deferred.resolve(result);
+	                        } else {
+	                            deferred.reject(event);
+	                        }
+	                	})
+	            	},
+	            	{ buffer: true, escape: true, timeout: 30000 }
+	            );
+
+	            return deferred.promise;
+			}
+	}]);
+
+	//angular.element(document).ready(function() {
+    //  angular.bootstrap(document.getElementById('cescDetail'), ['cescDetail']);
+    //});
+
+</script>
+
+<c:Ngforce />
+<c:AngularServices />
+</apex:component>

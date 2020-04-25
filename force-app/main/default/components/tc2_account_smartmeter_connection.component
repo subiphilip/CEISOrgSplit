@@ -1,0 +1,28 @@
+<apex:component Controller="MyAccount">
+  <script>
+  (function ($) {
+      $(function () {
+
+          TC.app.account.smartMeter = new Vue({
+             el: '#appAccountSmartMeter',
+             data: { 
+                premise: "{!thePremise}",
+                meterDataPermission: "{!MeterDataPermission}",
+                dataRequestStatus: "{!dataRequestStatus}",
+                shareMeterData: "{!ShareMeterData}",
+              },
+             methods: { },
+             mounted: function() {
+              if(TC.app.appShopPlans !== undefined){
+                TC.app.appShopPlans.smartMeterStatus = this.dataRequestStatus;
+              }
+             },
+             watch: { }
+          });
+
+    })
+  })(jQuery);
+
+  
+  </script>
+</apex:component>

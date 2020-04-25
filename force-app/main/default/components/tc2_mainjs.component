@@ -1,0 +1,1147 @@
+<apex:component controller="ControllerForMobileMain">
+
+  <c:tc2_monthly_billing />
+
+  <script>
+    TC = {
+      version: 0.1,
+      author: 'MyTrueCost.com',
+      app: {},
+      scrollMagic: {},
+      api: null,
+      cms: [],
+      dom: {},
+      fn: {setup: {}},
+      account: {},
+      sf: {resource: {}},
+      delay: 1000,
+      delayFast: 100,
+      settings: {}
+    };
+
+    TC.routes = {
+        esidComplete: '/Lookup_ESID_Complete',
+        accountMoving: '/Account_Moving',
+        accountSchedule: '/Account_Schedule',
+        accountDetails: '/Account_Details',
+        accountDisclosure: '/Account_Disclosure',
+        shopPlans: '/Shop_Plans',
+        accountReview: '/Account_Review',
+        accountSubmit: '/Account_Complete'
+    };
+    TC.sf.resource = { images: '{!URLFOR($Resource.v2_tc_resources_images)}' + '/' }
+
+    TC.settings.showSmallBusiness = {!$Setup.TrueCostSystemVariables__c.Show_Small_Business__c}
+
+    TC.scrollMagic.controller = new ScrollMagic.Controller();
+
+    TC.fn.getLeadId = function(){
+      var cookie = document.cookie.match('(^|;) ?apex__LeadId=([^;]*)(;|$)');
+      cookie = cookie ? cookie[2] : null
+      if (cookie) {
+        var leadId = cookie;
+        ControllerForMobileMain.getLead(leadId,
+            function(result, event) {
+
+                /*$j("#first_name").val(result.FirstName);
+                $j("#last_name").val(result.LastName);
+                $j("#email").val(result.Email);*/
+
+            }
+        );
+        return leadId;
+      }
+    }
+    TC.fn.setLeadId = function(leadId){
+      document.cookie = 'apex__LeadId='+leadId;
+    }
+
+    TC.fn.uniquString = function(){
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      for (var i = 0; i < 25; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+      return text;
+    }
+    TC.fn.createLead = function(status){
+
+      var email = '';
+      if(TC.app.account.email != undefined){
+        email = TC.app.account.email;
+      }
+
+      ControllerForMobileMain.createLead(TC.fn.uniquString(), status, email, function(result,event){
+
+          if(result !== null) {
+            TC.app.account.leadId = result[0].Id;
+            TC.fn.setLeadId(result[0].Id);
+            TC.fn.updateLead();
+          }
+      });
+    }
+
+    TC.fn.promptSaveNow = function(){
+        window.onbeforeunload = function () {
+          var sfl = (TC.app.account.isSaveForLater == 'true' || TC.app.account.isSaveForLater == true) ? true : false;
+            if(sfl != true){
+              if (!TC.app.account.isDirty) {
+                  TC.app.appSubscribe.$emit('saveForLater', TC.app.account)
+              }
+              return false;
+            } else {
+              $(window).unbind();
+              return undefined;
+            }
+          }
+    }
+    TC.fn.updateLead = function(){
+
+      if(TC.app.account.leadId == null){
+        TC.fn.createLead('enrollment')
+      } else {
+        ControllerForMobileMain.updateLead(
+          TC.app.account.leadId,
+          (TC.app.account.email !== null)? TC.app.account.email : '',
+          (TC.app.account.zipSearchPlans!== null)? TC.app.account.zipSearchPlans : '',
+          (TC.app.account.firstName !== null) ? TC.app.account.firstName : '',
+          (TC.app.account.lastName !== null) ? TC.app.account.lastName : '',
+          (TC.app.account.phone !== null) ? TC.app.account.phone : '',
+          (TC.app.account.premise.street !== null) ? TC.app.account.premise.street : '',
+          (TC.app.account.plan.company !== undefined) ? TC.app.account.plan.company : '',
+          (TC.app.account.dob !==null) ? moment(TC.app.account.dob).format('MM/DD/YYYY') : '01/30/2000',
+          (TC.app.account.premise.smartMeterAuthorize !== undefined) ?  TC.app.account.premise.smartMeterAuthorize : false,
+          JSON.stringify({
+            uid: sessionStorage.getItem('uid'),
+            accountId: sessionStorage.getItem('accountId'),
+            leadId: sessionStorage.getItem('leadId'),
+            email: sessionStorage.getItem('email'),
+            firstName: sessionStorage.getItem('firstName'),
+            lastName: sessionStorage.getItem('lastName'),
+            phone: sessionStorage.getItem('phone'),
+            ssn: sessionStorage.getItem('ssn'),
+            dob: sessionStorage.getItem('dob'),
+            language: sessionStorage.getItem('language'),
+            historyKwh: sessionStorage.getItem('historyKwh'),
+            historyBill: sessionStorage.getItem('historyBill'),
+            historyPriceKwh: sessionStorage.getItem('historyPriceKwh'),
+            isReminded: sessionStorage.getItem('isReminded'),
+            isSaveForLater: sessionStorage.getItem('isSaveForLater'),
+            switchDate: sessionStorage.getItem('switchDate'),
+            altContactCheck: sessionStorage.getItem('altContactCheck'),
+            altContactFirstName: sessionStorage.getItem('altContactFirstName'),
+            altContactLastName: sessionStorage.getItem('altContactLastName'),
+            altContactLastFour: sessionStorage.getItem('altContactLastFour'),
+            altContactPhone: sessionStorage.getItem('altContactPhone'),
+            altMailingCheck: sessionStorage.getItem('altMailingCheck'),
+            altMailingStreet: sessionStorage.getItem('altMailingStreet'),
+            altMailingCity: sessionStorage.getItem('altMailingCity'),
+            altMailingState: sessionStorage.getItem('altMailingState'),
+            altMailingZip: sessionStorage.getItem('altMailingZip'),
+            plan: JSON.parse(sessionStorage.getItem('plan')),
+            plansCompare: JSON.parse(sessionStorage.getItem('plansCompare')),
+            serviceType: sessionStorage.getItem('serviceType'),
+            serviceDate: sessionStorage.getItem('serviceDate'),
+            tdsp: sessionStorage.getItem('tdsp'),
+            tdspRegion: sessionStorage.getItem('tdspRegion'),
+            zipSearchPlans: sessionStorage.getItem('zipSearchPlans'),
+            plansFiltered: JSON.parse(sessionStorage.getItem('plansFiltered')),
+            shopFilters: {
+                companies: (sessionStorage.getItem('shopFilters') !== null) ? JSON.parse(sessionStorage.getItem('shopFilters')).companies : {},
+                features: (sessionStorage.getItem('shopFilters') !== null) ? JSON.parse(sessionStorage.getItem('shopFilters')).features : {},
+                contracts: (sessionStorage.getItem('shopFilters') !== null) ? JSON.parse(sessionStorage.getItem('shopFilters')).contracts : {},
+            },
+            order: JSON.parse(sessionStorage.getItem('order')),
+            orderProcessed: JSON.parse(sessionStorage.getItem('orderProcessed')),
+            page: sessionStorage.getItem('page'),
+            companies: JSON.parse(sessionStorage.getItem('companies')),
+            contracts: JSON.parse(sessionStorage.getItem('contracts')),
+            premise: {
+              type: sessionStorage.getItem('premiseType'),
+              id: sessionStorage.getItem('premisId'),
+              esid: sessionStorage.getItem('esid'),
+              street: sessionStorage.getItem('street'),
+              city: sessionStorage.getItem('city'),
+              state: sessionStorage.getItem('state'),
+              zip: sessionStorage.getItem('zip'),
+              unit: sessionStorage.getItem('unit'),
+              premiseId: sessionStorage.getItem('premiseId'),
+              recordId: '',
+              premiseResult: (sessionStorage.getItem('premiseResult') !== null) ? JSON.parse(sessionStorage.getItem('premiseResult')) : {},
+              smartMeter: sessionStorage.getItem('smartMeter')
+            }
+          }),
+          (TC.app.account.language !== null) ? TC.app.account.language : 'english',
+          (TC.app.account.switchDate !== null) ? moment(TC.app.account.switchDate).format('MM/DD/YYYY') : '01/30/2000',
+            function(result,event){
+        });
+      }
+
+    }
+
+    TC.fn.getLeadById = function(id){
+      ControllerForMobileMain.getLead(id, function(result,event){
+        if(result !== null){
+          sessionStorage.clear();
+          if(result.hasOwnProperty('SessionStore__c')){
+            var res = result.SessionStore__c.replace(/quot;/g, '"');
+            res = res.replace(/\&/g, '');
+            res = res.replace(/\amp;/g, '');
+            res = res.replace(/\=/g, ':');
+            res = JSON.parse(res);
+          } else {
+            res = result;
+          }
+
+          TC.fn.updateSessionFromLead(res);
+        }
+      });
+    }
+
+    TC.fn.updateSessionFromLead = function(res) {
+      if(res.firstName !== undefined) TC.app.account.firstName = res.firstName;
+      if(res.lastName !== undefined) TC.app.account.lastName = res.lastName;
+      if(res.uid !== undefined) TC.app.account.uid = res.uid;
+      if(res.accountId !== undefined) TC.app.account.accountId = res.accountId;
+      if(res.Id !== undefined) TC.app.account.leadId = res.Id;
+      if(res.email !== undefined) TC.app.account.email = res.email;
+      if(res.Phone !== undefined) TC.app.account.phone = res.Phone;
+      if(res.ssn !== undefined) TC.app.account.ssn = res.ssn;
+      if(res.dob !== undefined) TC.app.account.dob = res.Dob;
+      if(res.language !== undefined) TC.app.account.language = res.language;
+      if(res.historyKwh !== undefined) TC.app.account.historyKwh = res.historyKwh;
+      if(res.historyBill !== undefined) TC.app.account.historyBill = res.historyBill;
+      if(res.historyPriceKwh !== undefined) TC.app.account.historyPriceKwh = res.historyPriceKwh;
+      if(res.isReminded !== undefined) TC.app.account.isReminded = res.isReminded;
+      if(res.isSaveForLater !== undefined) TC.app.account.isSaveForLater = res.isSaveForLater;
+      if(res.switchDate !== undefined) TC.app.account.switchDate = res.switchDate;
+      if(res.altContactCheck !== undefined) TC.app.account.altContactCheck = res.altContactCheck;
+      if(res.altContactFirstName !== undefined) TC.app.account.altContactFirstName = res.altContactFirstName;
+      if(res.altContactLastName !== undefined) TC.app.account.altContactLastName = res.altContactLastName;
+      if(res.altContactLastFour !== undefined) TC.app.account.altContactLastFour = res.altContactLastFour;
+      if(res.altContactPhone !== undefined) TC.app.account.altContactPhone = res.altContactPhone;
+      if(res.altMailingCheck !== undefined) TC.app.account.altMailingCheck = res.altMailingCheck;
+      if(res.altMailingStreet !== undefined) TC.app.account.altMailingStreet = res.altMailingStreet;
+      if(res.altMailingCity !== undefined) TC.app.account.altMailingCity = res.altMailingCity;
+      if(res.altMailingState !== undefined) TC.app.account.altMailingState = res.altMailingState;
+      if(res.altMailingZip !== undefined) TC.app.account.altMailingZip = res.altMailingZip;
+      if(res.plan !== undefined) TC.app.account.plan = res.plan;
+      if(res.plansCompare !== undefined) TC.app.account.plansCompare = res.plansCompare;
+      if(res.serviceType !== undefined) TC.app.account.serviceType = res.serviceType;
+      if(res.serviceDate !== undefined) TC.app.account.serviceDate = res.serviceDate;
+      if(res.tdsp !== undefined) TC.app.account.tdsp = res.tdsp;
+      if(res.tdspRegion !== undefined) TC.app.account.tdspRegion = res.tdspRegion;
+      if(res.zipSearchPlans !== undefined) TC.app.account.zipSearchPlans = res.zipSearchPlans;
+      if(res.plansFiltered !== undefined) TC.app.account.plansFiltered = res.plansFiltered;
+      if(res.shopFilters !== undefined) TC.app.account.shopFilters = res.shopFilters;
+      if(res.order !== undefined) TC.app.account.order = res.order;
+      if(res.orderProcessed !== undefined) TC.app.account.orderProcessed = res.orderProcessed;
+      if(res.page !== undefined) TC.app.account.page = res.page;
+      if(res.companies !== undefined) TC.app.account.companies = res.companies;
+      if(res.contracts !== undefined) TC.app.account.contracts = res.contracts;
+
+      if(res.premise !== undefined){
+        if(res.premise.street !== undefined) TC.app.account.premise.street = res.premise.street;
+        if(res.premise.premiseResult !== undefined) TC.app.account.premise.premiseResult = res.premise.premiseResult;
+
+        if(res.premise.unit !== undefined) TC.app.account.premise.unit = res.premise.unit;
+        if(res.premise.city !== undefined) TC.app.account.premise.city = res.premise.city;
+        if(res.premise.state !== undefined) TC.app.account.premise.state = res.premise.state;
+        if(res.premise.zip !== undefined) TC.app.account.premise.zip = res.premise.zip;
+        if(res.premise.zip !== undefined) {
+          TC.app.account.zip = res.premise.zip;
+          TC.app.account.premise.zip = res.premise.zip;
+          TC.app.account.premise.type = res.premise.type;
+          TC.app.account.premise.esid = res.premise.esid;
+          if(TC.app.appShopPlans !== undefined) TC.app.appShopPlans.zip = res.premise.zip;
+          if(TC.app.appShopPlans !== undefined) TC.app.appShopPlans.myZip = res.premise.zip;
+          TC.app.account.zipSearchPlans = res.premise.zip;
+          if(TC.app.account.premise.type !== null) {
+            if(TC.app.account.premise.type == 'Small Non-Residential'){
+              TC.app.account.planPremiseType = 'Commercial';
+            } else {
+              TC.app.account.planPremiseType = 'Residential';
+            }
+          }
+
+        }
+
+        if(res.yearbuilt !== undefined) TC.app.appHomeProfile.yearbuilt = res.yearbuilt;
+        if(res.heatingsystem !== undefined) TC.app.appHomeProfile.heatingsystem = res.heatingsystem;
+        if(res.pool !== undefined) TC.app.appHomeProfile.pool = res.pool;
+        if(res.occupants !== undefined) TC.app.appHomeProfile.occupants = res.occupants;
+        if(res.houseSize !== undefined) TC.app.appHomeProfile.houseSize = res.houseSize;
+        if(res.houseSqft !== undefined) TC.app.appHomeProfile.houseSqft = res.houseSqft;
+      } else {
+        if(res.Street !== undefined) TC.app.account.premise.street = res.Street;
+        if(res.State !== undefined) TC.app.account.premise.state = res.State;
+        if(res.PostalCode !== undefined) TC.app.account.premise.zip = res.PostalCode;
+        if(res.PostalCode !== undefined) {
+          let stripZip = res.PostalCode.split('-')[0];
+          TC.app.account.zipSearchPlans = stripZip;
+          TC.app.account.zip = stripZip;
+          TC.app.account.premise.zip = stripZip;
+          sessionStorage.setItem('zipSearchPlans', stripZip);
+        }
+      }
+
+      if(res.page !== null && res.page !== undefined){
+        TC.fn.navigateTo("/"+res.page);
+      }
+    }
+
+    TC.fn.getApa = function(){
+      let uid = "{!$User.Id}";
+      if(TC.app.account.uid == null || TC.app.account.uid == undefined){
+        TC.app.account.uid = uid;
+        console.log(" -- Use APEX uid -- ");
+      }
+      ControllerForMobileMain.getAPAsafe(TC.app.account.uid, function(result,event){
+        if(result !== null){
+          var myaddress = result.Premise__r.Electric_Service_Address__c;
+          var mystreet;
+          if(myaddress.indexOf('#') >= 0){
+            mystreet = myaddress.substr(0,myaddress.indexOf('#')-1)
+          } else {
+            mystreet = result.Premise__r.Electric_Service_Address__c;
+          }
+          var myzip = result.Premise__r.Electric_Service_Address_Zip__c.substr(0,5);
+          var myunit = (myaddress.indexOf('#') >= 0) ? myaddress.substr(myaddress.indexOf('#')+1) : "";
+          TC.app.account.apa = result;
+          var myaccount = {
+            firstName: result.Account__r.FirstName,
+            lastName: result.Account__r.LastName,
+            uid: '{!$User.Id}',
+            accountId: result.Account__r.Id,
+            email: result.Account__r.PersonEmail,
+            language: result.Account__r.Language_Preference__c,
+            page: null,
+          }
+
+          if(TC.app.account.updatePremise != "false"){
+            myaccount.tdsp = true;
+            myaccount.tdspRegion = result.Premise__r.TDSP_Lookup__r.Name;
+            myaccount.zipSearchPlans = myzip;
+            myaccount.yearbuilt = result.Premise__r.Year_Built__c;
+            myaccount.heatingsystem = result.Premise__r.Heating_System__c;
+            myaccount.pool = result.Premise__r.Pool__c;
+            myaccount.occupants = result.Premise__r.Occupants__c;
+            myaccount.houseSqft = result.Premise__r.Square_Feet__c;
+            myaccount.premise = {
+              state: result.Premise__r.Electric_Service_Address_State2__c,
+              city: result.Premise__r.Electric_Service_Address_City__c,
+              zip: myzip,
+              unit: myunit,
+              Id: result.Premise__r.ID,
+              street: mystreet,
+              esid: result.Premise__r.ESID__c,
+              //type: result.Premise__r.POLR_Customer_Class__c,
+              type: result.Premise__r.Premise_Type__c,
+              premiseResult: result.Premise__r
+            }
+            if(myaccount.premise.type !== null) {
+              if(myaccount.premise.type == 'Small Non-Residential'){
+                TC.app.account.planPremiseType = 'Commercial';
+              }
+            }
+          } else {
+            myaccount.tdsp = TC.app.account.tdsp;
+            myaccount.tdspRegion = TC.app.account.tdspRegion;
+            myaccount.zipSearchPlans = TC.app.account.zipSearchPlans;
+            myaccount.yearbuilt = TC.app.appHomeProfile.yearbuilt;
+            myaccount.heatingsystem = TC.app.appHomeProfile.heatingsystem;
+            myaccount.pool = TC.app.appHomeProfile.pool;
+            myaccount.occupants = TC.app.appHomeProfile.occupants;
+            myaccount.houseSqft = result.Premise__r.Square_Feet__c;
+            myaccount.premise = TC.app.account.premise
+          }
+          TC.app.account.updatePremise = true;
+          TC.fn.updateSessionFromLead(myaccount)
+        }
+      });
+
+    }
+
+    TC.fn.onClickTween = function(event){
+        event.stopPropagation();
+        var ele = $(event.target).closest('.level-item');
+        if(ele.hasClass('is-active')){
+            ele.removeClass('is-active');
+        } else {
+            ele.addClass('is-active');
+        }
+        TweenMax.from(ele, .24, { scale:.8, ease:Bounce.easeOut});
+        ele.mouseout(function(e){
+            TweenMax.to(e.target, .24, { scale:1});
+        })
+    };
+    TC.fn.navigateTo = function(path){
+        window.location.href = path;
+    };
+    TC.fn.animateUI = function() {
+      TweenMax.to("html", .24, {"opacity":1});
+      TweenMax.to("#wrapper", .24, {"display":"block", "opacity":1});
+      TweenMax.to('.hero', .24, {opacity:1, y:"0px"});
+      TweenMax.fromTo("#wrapper>div", .24, {opacity:0}, {opacity:1})
+      TweenMax.fromTo("h1.title", .24, {opacity:0, y:"-20px"}, {opacity:1, y:0, delay:.8})
+      TweenMax.fromTo("h2.subtitle", .24, {opacity:0, y:"-20px"}, {opacity:1, y:0, delay:.9})
+    }
+
+    TC.fn.setup.ZipInput = function () {
+      $('.field input').on('focus', function (e) {
+        $(e.currentTarget.parentElement).find('label').css('opacity', 0)
+      });
+      $('.field input').on('blur', function (e) {
+        if ($(e.currentTarget).val() <= 0) {
+          $(e.currentTarget.parentElement).find('label').css('opacity', 1)
+        }
+      });
+    };
+
+    TC.app.account = new Vue({
+      el: '#account',
+      data: {
+          companyName: sessionStorage.getItem('companyName'),
+          companyTaxId: sessionStorage.getItem('companyTaxId'),
+          companyDuns: sessionStorage.getItem('companyDuns'),
+          review: sessionStorage.getItem('review'),
+          rating: sessionStorage.getItem('rating'),
+          updatePremise: sessionStorage.getItem('updatePremise'),
+          isLoggedIn: sessionStorage.getItem('isLoggedIn'),
+          isDirty: false,
+          guest: {!ISPICKVAL($User.UserType,'Guest')},
+          uid: sessionStorage.getItem('uid'),
+          leadSource: sessionStorage.getItem('leadSource'),
+          accountId: sessionStorage.getItem('accountId'),
+          leadId: sessionStorage.getItem('leadId'),
+          email: sessionStorage.getItem('email'),
+          firstName: sessionStorage.getItem('firstName'),
+          lastName: sessionStorage.getItem('lastName'),
+          phone: sessionStorage.getItem('phone'),
+          ssn: sessionStorage.getItem('ssn'),
+          dob: sessionStorage.getItem('dob'),
+          language: sessionStorage.getItem('language'),
+          phoneSMS: '',
+          historyKwh: sessionStorage.getItem('historyKwh'),
+          historyBill: sessionStorage.getItem('historyBill'),
+          historyPriceKwh: sessionStorage.getItem('historyPriceKwh'),
+          optIn: false,
+          privacypolicy: false,
+          isReminded: sessionStorage.getItem('isReminded'),
+          isSaveForLater: sessionStorage.getItem('isSaveForLater'),
+          switchDate: sessionStorage.getItem('switchDate'),
+          altContactCheck: sessionStorage.getItem('altContactCheck'),
+          altContactFirstName: sessionStorage.getItem('altContactFirstName'),
+          altContactLastName: sessionStorage.getItem('altContactLastName'),
+          altContactLastFour: sessionStorage.getItem('altContactLastFour'),
+          altContactPhone: sessionStorage.getItem('altContactPhone'),
+          altMailingCheck: sessionStorage.getItem('altMailingCheck'),
+          altMailingStreet: sessionStorage.getItem('altMailingStreet'),
+          altMailingCity: sessionStorage.getItem('altMailingCity'),
+          altMailingState: sessionStorage.getItem('altMailingState'),
+          altMailingZip: sessionStorage.getItem('altMailingZip'),
+          plan: (sessionStorage.getItem('plan') !== null && sessionStorage.getItem('plan') !== 'undefined') ? JSON.parse(sessionStorage.getItem('plan')) : [],
+          plansCompare: (JSON.parse(sessionStorage.getItem('plansCompare'))) ? JSON.parse(sessionStorage.getItem('plansCompare')) : [],
+          serviceType: sessionStorage.getItem('serviceType'),
+          serviceDate: sessionStorage.getItem('serviceDate'),
+          zipDefault: '77002',
+          tdsp: sessionStorage.getItem('tdsp'),
+          tdspRegion: sessionStorage.getItem('tdspRegion'),
+          zipSearchPlans: sessionStorage.getItem('zipSearchPlans'),
+          plans: (JSON.parse(sessionStorage.getItem('plans'))) ? JSON.parse(sessionStorage.getItem('plans')) : [],
+          plansFiltered: (JSON.parse(sessionStorage.getItem('plansFiltered'))) ? JSON.parse(sessionStorage.getItem('plansFiltered')) : [],
+          shopFilters: {
+              companies: (sessionStorage.getItem('shopFilters') !== null) ? JSON.parse(sessionStorage.getItem('shopFilters')).companies : [],
+              features: (sessionStorage.getItem('shopFilters') !== null) ? JSON.parse(sessionStorage.getItem('shopFilters')).features : [],
+              contracts: (sessionStorage.getItem('shopFilters') !== null) ? JSON.parse(sessionStorage.getItem('shopFilters')).contracts : [],
+          },
+          order: (JSON.parse(sessionStorage.getItem('order'))) ? JSON.parse(sessionStorage.getItem('order')) : {},
+          orderProcessed: (JSON.parse(sessionStorage.getItem('orderProcessed'))) ? JSON.parse(sessionStorage.getItem('orderProcessed')) : {},
+          page: sessionStorage.getItem('page'),
+          apa: (JSON.parse(sessionStorage.getItem('apa'))) ? JSON.parse(sessionStorage.getItem('apa')) : {},
+          register: {},
+          companies: (JSON.parse(sessionStorage.getItem('companies'))) ? JSON.parse(sessionStorage.getItem('companies')) : [],
+          contracts: (JSON.parse(sessionStorage.getItem('contracts'))) ? JSON.parse(sessionStorage.getItem('contracts')) : [],
+          planPremiseType: sessionStorage.getItem('planPremiseType'),
+          planInterestType: sessionStorage.getItem('planInterestType'),
+          premise: {
+            type: sessionStorage.getItem('premiseType'),
+            id: sessionStorage.getItem('premisId'),
+            esid: sessionStorage.getItem('esid'),
+            street: sessionStorage.getItem('street'),
+            city: sessionStorage.getItem('city'),
+            state: sessionStorage.getItem('state'),
+            zip: sessionStorage.getItem('zip'),
+            unit: sessionStorage.getItem('unit'),
+            premiseId: sessionStorage.getItem('premiseId'),
+            recordId: '',
+            smartMeter: sessionStorage.getItem('smartMeter'),
+            premiseResult: (sessionStorage.getItem('premiseResult') !== null && sessionStorage.getItem('premiseResult') !== 'undefined') ? JSON.parse(sessionStorage.getItem('premiseResult')) : {},
+          }
+      },
+      methods: {
+        setAccount: function() {
+        },
+        isValid: function() {
+        },
+        updateTDSP: function(){
+            var vm = this;
+            if(this.zipSearchPlans != undefined){
+              if(this.zipSearchPlans.length >= 5){
+                ControllerForMobileMain.GetTDSPsByZip(this.zipSearchPlans, function(result,event){
+                  TC.app.account.tdspRegion = result;
+                  if(result.length == 0){
+                    TC.app.appSubscribe.$emit('errorTDSP', vm.tdsp);
+                  }else if(result == "CenterPoint Energy Houston Electric"){
+                      vm.tdsp = true;
+                      TC.app.appSubscribe.$emit('updateTDSP', vm.tdsp);
+                  } else {
+                      TC.app.appSubscribe.$emit('updateTDSP', vm.tdsp);
+                      vm.tdsp = false;
+                  }
+
+                });
+              }
+            }
+        },
+        updateCompanies: function(){
+          if(this.plans !== null) {
+            var flags = [], l = this.plans.length, i;
+            this.companies = [];
+            for( i=0; i<l; i++) {
+                if( flags[this.plans[i].company]) continue;
+                flags[this.plans[i].company] = true;
+                this.companies.push({'title' :this.plans[i].company });
+            }
+            if(TC.app.appShopPlans !== undefined){
+                TC.app.appShopPlans.companies = this.companies;
+            }
+            this.companies.sort(function(a, b){
+                if(a.title < b.title) return -1;
+                if(a.title > b.title) return 1;
+                return 0;
+            })
+          }
+
+        },
+        updateContracts: function(){
+          if(this.plans !== null) {
+            var flags = [], l = this.plans.length, i;
+            this.contracts = [];
+            for( i=0; i<l; i++) {
+                if( flags[this.plans[i].contract]) continue;
+                flags[this.plans[i].contract] = true;
+                this.plans[i].num = this.plans[i].contract.split(" ")[0]
+                this.contracts.push({ 'title': this.plans[i].contract, 'int': parseInt(this.plans[i].num)});
+            }
+            this.contracts.sort(function(a, b){
+                if(a.int < b.int) return -1;
+                if(a.int > b.int) return 1;
+                return 0;
+            })
+            if(TC.app.appShopPlans !== undefined){
+                TC.app.appShopPlans.contracts = this.contracts;
+            }
+          }
+        },
+        setupSaveForLaterHijack: function(){
+          this.isDirty = false;
+          /*window.addEventListener('beforeunload', event => {
+              const confirmationText = 'Foo Are you sure?';
+              if (!this.isDirty) {
+                TC.app.appSubscribe.$emit('saveForLater', TC.app.account);
+                event.returnValue = confirmationText; // Gecko, Trident, Chrome 34+
+                return confirmationText;              // Gecko, WebKit, Chrome <34
+              } else {
+                this.isDirty = false;
+              }
+          });*/
+        }
+
+      },
+      mounted: function() {
+        this.page = location.pathname.replace('/','') + window.location.search + window.location.hash
+        var vm = this;
+        setTimeout(function(){
+          TC.fn.animateUI();
+        }, TC.delay)
+      },
+      watch: {
+        companyName: {
+          handler: function() {
+            sessionStorage.setItem('companyName', this.companyName);
+          },
+        },
+        companyTaxId: {
+          handler: function() {
+            sessionStorage.setItem('companyTaxId', this.companyTaxId);
+          },
+        },
+        companyDuns: {
+          handler: function() {
+            sessionStorage.setItem('companyDuns', this.companyDuns);
+          },
+        },
+        page: {
+          handler: function() {
+            sessionStorage.setItem('page', this.page);
+          },
+        },
+        uid: {
+          handler: function() {
+            sessionStorage.setItem('uid', this.uid);
+          },
+        },
+        accountId: {
+          handler: function() {
+            sessionStorage.setItem('accountId', this.accountId);
+          },
+        },
+        leadId: {
+          handler: function() {
+            sessionStorage.setItem('leadId', this.leadId);
+          },
+        },
+        leadSource: {
+          handler: function() {
+            sessionStorage.setItem('leadSource', this.leadSource);
+          },
+        },
+        firstName: {
+          handler: function() {
+            sessionStorage.setItem('firstName', this.firstName);
+          },
+        },
+        isLoggedIn: {
+          handler: function() {
+            sessionStorage.setItem('isLoggedIn', this.isLoggedIn);
+          },
+        },
+        updatePremise: {
+          handler: function() {
+            sessionStorage.setItem('updatePremise', this.updatePremise);
+          },
+        },
+        review: {
+          handler: function() {
+            sessionStorage.setItem('review', this.review);
+          },
+        },
+        rating: {
+          handler: function() {
+            sessionStorage.setItem('rating', this.rating);
+          },
+        },
+        lastName: {
+          handler: function() {
+            sessionStorage.setItem('lastName', this.lastName);
+          },
+        },
+        email: {
+          handler: function() {
+            sessionStorage.setItem('email', this.email);
+          },
+        },
+        phone: {
+          handler: function() {
+            sessionStorage.setItem('phone', this.phone);
+          },
+        },
+        privacypolicy: {
+          handler: function() {
+            sessionStorage.setItem('privacypolicy', this.privacypolicy);
+          },
+        },
+        historyBill: {
+          handler: function() {
+            sessionStorage.setItem('historyBill', this.historyBill);
+          },
+        },
+        historyKwh: {
+          handler: function() {
+            sessionStorage.setItem('historyKwh', this.historyKwh);
+          },
+        },
+        historyPriceKwh: {
+          handler: function() {
+            sessionStorage.setItem('historyPriceKwh', this.historyPriceKwh);
+          },
+        },
+        altContactCheck: {
+          handler: function() {
+            sessionStorage.setItem('altContactCheck', this.altContactCheck);
+          },
+        },
+        isReminded: {
+          handler: function() {
+            sessionStorage.setItem('isReminded', this.isReminded);
+          },
+        },
+        isSaveForLater: {
+          handler: function() {
+            sessionStorage.setItem('isSaveForLater', this.isSaveForLater);
+          },
+        },
+        switchDate: {
+          handler: function() {
+            sessionStorage.setItem('switchDate', this.switchDate);
+          },
+        },
+        altContactFirstName: {
+          handler: function() {
+            sessionStorage.setItem('altContactFirstName', this.altContactFirstName);
+          },
+        },
+        altContactLastName: {
+          handler: function() {
+            sessionStorage.setItem('altContactLastName', this.altContactLastName);
+          },
+        },
+        altContactLastFour: {
+          handler: function() {
+            sessionStorage.setItem('altContactLastFour', this.altContactLastFour);
+          },
+        },
+        altContactPhone: {
+          handler: function() {
+            sessionStorage.setItem('altContactPhone', this.altContactPhone);
+          },
+        },
+        altMailingCheck: {
+          handler: function() {
+            sessionStorage.setItem('altMailingCheck', this.altMailingCheck);
+          },
+        },
+        altMailingStreet: {
+          handler: function() {
+            sessionStorage.setItem('altMailingStreet', this.altMailingStreet);
+          },
+        },
+        altMailingCity: {
+          handler: function() {
+            sessionStorage.setItem('altMailingCity', this.altMailingCity);
+          },
+        },
+        altMailingState: {
+          handler: function() {
+            sessionStorage.setItem('altMailingState', this.altMailingState);
+          },
+        },
+        altMailingZip: {
+          handler: function() {
+            sessionStorage.setItem('altMailingZip', this.altMailingZip);
+          },
+        },
+        dob: {
+          handler: function() {
+            sessionStorage.setItem('dob', this.dob);
+          },
+        },
+        language: {
+          handler: function() {
+            sessionStorage.setItem('language', this.language);
+          },
+        },
+        ssn: {
+          handler: function() {
+            sessionStorage.setItem('ssn', this.ssn);
+          },
+        },
+        zipSearchPlans: {
+          handler: function() {
+            this.updateTDSP(this.zipSearchPlans);
+            sessionStorage.setItem('zipSearchPlans', this.zipSearchPlans);
+          },
+        },
+        tdsp: {
+          handler: function() {
+            sessionStorage.setItem('tdsp', this.tdsp);
+          },
+        },
+        tdspRegion: {
+          handler: function() {
+            sessionStorage.setItem('tdspRegion', this.tdspRegion);
+          },
+        },
+        companies: {
+          handler: function() {
+            sessionStorage.setItem('companies', JSON.stringify(this.companies));
+          }
+        },
+        contracts: {
+          handler: function() {
+            sessionStorage.setItem('contracts', JSON.stringify(this.contracts));
+          }
+        },
+        plans: {
+          handler: function() {
+            this.updateCompanies();
+            this.updateContracts();
+            sessionStorage.setItem('plans', JSON.stringify(this.plans));
+          },
+          deep: true,
+        },
+        plansCompare: {
+          handler: function() {
+            sessionStorage.setItem('plansCompare', JSON.stringify(this.plansCompare));
+          },
+          //deep: true,
+        },
+        plansFiltered: {
+          handler: function() {
+            sessionStorage.setItem('plansFiltered', JSON.stringify(this.plansFiltered));
+          }
+        },
+        shopFilters: {
+          handler: function() {
+            sessionStorage.setItem('shopFilters', JSON.stringify(this.shopFilters));
+          },
+          deep: true
+        },
+        plan: {
+          handler: function() {
+            sessionStorage.setItem('plan', JSON.stringify(this.plan));
+          },
+          deep: true,
+        },
+        premise: {
+          handler: function() {
+          },
+          deep: true,
+        },
+        'premise.type': {
+          handler: function() {
+            sessionStorage.setItem('type', this.premise.type);
+          },
+        },
+        'planPremiseType': {
+          handler: function() {
+            sessionStorage.setItem('planPremiseType', this.planPremiseType);
+          },
+        },
+        'planInterestType': {
+          handler: function() {
+            sessionStorage.setItem('planInterestType', this.planInterestType);
+          },
+        },
+        'premise.premiseId': {
+          handler: function() {
+            sessionStorage.setItem('premiseId', this.premise.premiseId);
+          },
+        },
+        'premise.smartMeter': {
+          handler: function() {
+            sessionStorage.setItem('smartMeter', this.premise.smartMeter);
+          },
+        },
+        'premise.premiseResult': {
+          handler: function() {
+            sessionStorage.setItem('premiseResult', JSON.stringify(this.premise.premiseResult));
+          },
+        },
+        'premise.id': {
+          handler: function() {
+            sessionStorage.setItem('premiseId', this.premise.id);
+          },
+        },
+        'premise.esid': {
+          handler: function() {
+            sessionStorage.setItem('esid', this.premise.esid);
+          },
+        },
+        'premise.unit': {
+          handler: function() {
+            sessionStorage.setItem('unit', this.premise.unit);
+          },
+        },
+        'premise.street': {
+          handler: function() {
+            sessionStorage.setItem('street', this.premise.street);
+          },
+        },
+        'premise.city': {
+          handler: function() {
+            sessionStorage.setItem('city', this.premise.city);
+          },
+        },
+        'premise.state': {
+          handler: function() {
+            sessionStorage.setItem('state', this.premise.state);
+          },
+        },
+        'premise.zip': {
+          handler: function() {
+            if(this.premise.zip !== undefined){
+              if(this.premise.zip.length >= 5){
+                this.updateTDSP(this.premise.zip);
+                if(TC.app.appShopPlans !== undefined){
+                  //TC.app.appShopPlans.myZip = this.premise.zip;
+                  //TC.app.appShopPlans.changeZip()
+                }
+              }
+            }
+
+            sessionStorage.setItem('zip', this.premise.zip);
+          },
+        },
+        serviceType: {
+          handler: function() {
+            sessionStorage.setItem('serviceType', this.serviceType);
+          },
+        },
+        serviceDate: {
+          handler: function() {
+            sessionStorage.setItem('serviceDate', this.serviceDate);
+          },
+        },
+        order: {
+          handler: function() {
+            sessionStorage.setItem('order', JSON.stringify(this.order));
+          },
+        },
+        orderProcessed: {
+          handler: function() {
+            sessionStorage.setItem('orderProcessed', JSON.stringify(this.orderProcessed));
+          },
+        },
+        apa: {
+          handler: function() {
+            sessionStorage.setItem('apa', JSON.stringify(this.apa));
+          },
+        },
+        register: {
+          handler: function() {
+            sessionStorage.setItem('register', JSON.stringify(this.register));
+          },
+        },
+
+      },
+    });
+
+    TC.fn.openTab = function (evt, tabName, planId) {
+
+      var i, tabcontent, tablinks, elemm, arrow;
+
+      elem = $('#details[data-id="'+evt.currentTarget.dataset.id+'"]');
+
+      arrow = $(evt.currentTarget.parentElement).find('.animate-arrow');
+      if(arrow.length > 0){
+        if(arrow.hasClass('is-active')){
+          arrow.removeClass('is-active')
+          TweenMax.to(arrow, .2, {rotation:0});
+        } else {
+          arrow.addClass('is-active')
+          TweenMax.to(arrow, .2, {rotation:180});
+          //TC.app.appSubscribe.$emit('callRewards_'+planId, planId);
+        }
+
+      }
+
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" is-active", "");
+      }
+
+      //document.getElementById(evt.currentTarget.dataset.id).style.display = "block";
+      //evt.currentTarget.className += " is-active";
+
+      //elem.toggle();
+
+      if(elem.css("display") == "none"){
+        elem.css("display","block")
+      } else {
+        elem.css("display","none")
+      }
+      elem.toggleClass('is-active');
+      elem.find('.tabcontent').css("display","block")
+      TweenMax.fromTo(elem, .2, {opacity:0, y:-20}, {opacity:1, y:0});
+      // call graph to load
+    }
+
+    TC.fn.closeAllTabs = function () {
+
+      var i, tabcontent, tablinks, elemm, arrow;
+
+      elem = $('#details');
+
+      arrow = $('#details .animate-arrow');
+      arrow.removeClass('is-active')
+      TweenMax.to('.animate-arrow', .2, {rotation:180});
+
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" is-active", "");
+      }
+
+      elem.css("display","none")
+      elem.removeClass('is-active');
+      // call graph to load
+    }
+    TC.fn.openPlanDetailsTab = function (evt, tabName) {
+        var i, tabcontent, tablinks;
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" is-active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " is-active";
+    }
+
+    TC.fn.openCustomTab = function (evt, tabName) {
+      var i, tabcontent, tablinks;
+
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" is-active", "");
+      }
+
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " is-active";
+    }
+
+
+    TC.api = new Vue({
+      el: '#appAPI',
+      data: { },
+      methods: {
+
+      },
+      mounted: function() {
+      },
+      watch: {
+      },
+    });
+
+    TC.app.appSubscribe = new Vue();
+
+
+    TC.app.appHomeProfile = new Vue({
+      el: '#appHomeProfile',
+      data: {
+        yearbuilt: sessionStorage.getItem('yearbuilt'),
+        heatingsystem: sessionStorage.getItem('heatingsystem'),
+        pool: sessionStorage.getItem('pool'),
+        occupants: sessionStorage.getItem('occupants'),
+        houseSize: (sessionStorage.getItem('houseSize') !== null) ? sessionStorage.getItem('houseSize') : 'medium',
+        houseSqft: (sessionStorage.getItem('houseSqft')  !== null) ? sessionStorage.getItem('houseSqft') : '2300',
+      },
+      methods: {},
+      mounted: function() {
+      },
+      watch: {
+
+        yearbuilt: {
+          handler: function() {
+            sessionStorage.setItem('yearbuilt', this.yearbuilt);
+          },
+        },
+        heatingsystem: {
+          handler: function() {
+            sessionStorage.setItem('heatingsystem', this.heatingsystem);
+          },
+        },
+        pool: {
+          handler: function() {
+            sessionStorage.setItem('pool', this.pool);
+          },
+        },
+        occupants: {
+          handler: function() {
+            sessionStorage.setItem('occupants', this.occupants);
+          },
+        },
+        houseSize: {
+          handler: function() {
+            TC.app.appSubscribe.$emit('homeSizeUpdated', TC.app.appHomeProfile.houseSize);
+            sessionStorage.setItem('houseSize',this.houseSize);
+          },
+        },
+        houseSqft: {
+          handler: function() {
+            sessionStorage.setItem('houseSqft', parseInt(this.houseSqft));
+          },
+        }
+      },
+    });
+
+    TC.fn.checkLeadId = function(){
+      var leadId = "{!$CurrentPage.parameters.leadId}";
+      var leadIdCookie = TC.fn.getLeadId();
+      if(TC.app.account.leadId == null){
+
+        if(leadId !== ''){
+          TC.fn.getLeadById(leadId);
+          TC.fn.getLeadId()
+        }
+      }
+    }
+
+    TC.fn.checkZipInURL = function(){
+      var myZip = "{!$CurrentPage.parameters.zip}";
+      if(myZip != ''){
+          TC.app.account.zipSearchPlans = myZip;
+        TC.app.account.premise.zip = myZip;
+        if(TC.app.appShopPlans != undefined){
+          TC.app.appShopPlans.myZip = myZip;
+          TC.app.appShopPlans.zip = myZip;
+        }
+        TC.app.account.zipDefault = myZip;
+        console.log("Zip from param " + myZip);
+      } else {
+        myZip = TC.app.account.zipDefault
+      }
+
+      return myZip;
+    }
+
+    TC.fn.checkRatingOrderNum = function(){
+      var ratingOrderNum = "{!$CurrentPage.parameters.ordernum}";
+      return ratingOrderNum;
+    }
+
+    TC.fn.initialize = function () {
+      TC.fn.setup.ZipInput();
+      TC.fn.checkLeadId();
+    };
+
+
+    (function ($) {
+      $(function () {
+        'use strict';
+        TC.fn.initialize();
+
+      })
+    })(jQuery);
+
+  </script>
+
+
+  <script type="text/x-template" id="template-modal-loader">
+    <div id="app-modal-loader" class="modal">
+          <div class="modal-background"></div>
+          <div class="modal-card" style="width: 340px; height: 200px; margin: 0 auto">
+
+              <div id="app-compare-limit-modal-inside" class="modal-card-body has-text-centered animate-gradient-bg">
+                  <div class="modal-card-body-inner">
+                      <span class="icon is-large has-text-info">
+                      <div class="lds-ring"><div></div><div></div><div></div><div></div></div></span>
+                      <h1 class="is-size-4 has-text-weight-semibold"></h1>
+                      <p>{{details}}</p>
+
+              </div>
+          </div>
+      </div>
+  </script>
+
+
+</apex:component>

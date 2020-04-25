@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Maximum_Annual_Usage__c</fullName>
+    <description>At what usage would we not want to offer a smart bill?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>At what usage would we not want to offer a smart bill?</inlineHelpText>
+    <label>Maximum Annual Usage</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

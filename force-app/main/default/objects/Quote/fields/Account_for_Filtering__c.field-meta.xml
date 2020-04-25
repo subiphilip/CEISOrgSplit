@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_for_Filtering__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>quick action populates this account from the quote opportunity&#39;s account</description>
+    <externalId>false</externalId>
+    <inlineHelpText>quick action populates this account from the quote opportunity&#39;s account</inlineHelpText>
+    <label>Account for Filtering</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Quotes (Account)</relationshipLabel>
+    <relationshipName>Quotes3</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Lookup</type>
+</CustomField>

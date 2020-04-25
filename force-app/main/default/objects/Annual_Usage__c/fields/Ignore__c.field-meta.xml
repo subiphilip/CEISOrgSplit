@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ignore__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Do not consider this annual usage when calculating costs for the customer</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Do not consider this annual usage when calculating costs for the customer</inlineHelpText>
+    <label>Ignore</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

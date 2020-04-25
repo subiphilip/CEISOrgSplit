@@ -1,0 +1,13 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "TaxesAndFees__c",
+                "referenceId": "TaxesAndFees__cRef1"
+            },
+            "MGRT__c": 0.01997,
+            "Name": "a093000000OK9D6",
+            "PUCA__c": 0.001667
+        }
+    ]
+}

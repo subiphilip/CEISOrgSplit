@@ -1,0 +1,10 @@
+[
+    {
+        "sobject": "TaxesAndFees__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "export-TaxesAndFees__cs.json"
+        ]
+    }
+]

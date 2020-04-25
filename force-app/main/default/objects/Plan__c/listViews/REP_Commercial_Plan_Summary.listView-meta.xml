@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>REP_Commercial_Plan_Summary</fullName>
+    <columns>REP_Profile__c</columns>
+    <columns>NAME</columns>
+    <columns>Plan_ID__c</columns>
+    <columns>Active__c</columns>
+    <columns>Plan_Start_Date__c</columns>
+    <columns>Plan_End_Date__c</columns>
+    <columns>Rate_Type__c</columns>
+    <columns>Rate_Class_del__c</columns>
+    <columns>Contract_Length__c</columns>
+    <columns>Renewable_Content__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>REP_Profile__c</field>
+        <operation>notContain</operation>
+        <value>*CNP,CenterPoint,Bogus,Falsus,Fakergy,Constellation,Seminole,SGES,Vista</value>
+    </filters>
+    <filters>
+        <field>Rate_Type__c</field>
+        <operation>equals</operation>
+        <value>Fixed</value>
+    </filters>
+    <filters>
+        <field>Rate_Class_del__c</field>
+        <operation>equals</operation>
+        <value>Commercial</value>
+    </filters>
+    <filters>
+        <field>Archived__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>REP Commercial Plan Summary</label>
+    <language>en_US</language>
+</ListView>

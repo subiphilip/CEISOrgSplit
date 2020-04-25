@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Source_Object_Sync_Field_Name__c</fullName>
+    <description>the field from the source object that has the value to be sent to safari</description>
+    <externalId>false</externalId>
+    <inlineHelpText>the field from the source object that has the value to be sent to safari</inlineHelpText>
+    <label>Source Object Sync Field Name</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

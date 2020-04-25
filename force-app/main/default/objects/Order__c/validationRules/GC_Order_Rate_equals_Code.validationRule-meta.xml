@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GC_Order_Rate_equals_Code</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( RecordTypeId = &quot;012300000018SzH&quot;, RIGHT( Rate__r.Name , 5)  &lt;&gt;  Confirmation_Code__c  )</errorConditionFormula>
+    <errorMessage>Order03: Confirmation Code must match the Rate (last 5 digits).</errorMessage>
+</ValidationRule>

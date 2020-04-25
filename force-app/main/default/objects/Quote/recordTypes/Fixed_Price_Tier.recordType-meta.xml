@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fixed_Price_Tier</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>Fixed_Pricing_Compact_Layout</compactLayoutAssignment>
+    <label>Fixed Price Tier</label>
+</RecordType>

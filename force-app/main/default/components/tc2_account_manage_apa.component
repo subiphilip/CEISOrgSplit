@@ -1,0 +1,97 @@
+<apex:component controller="ControllerForChangeAPA" allowDML="true">
+  <div id="appAccountManageAPA">
+    <div class="columns">
+      <div class="column is-card-header is-one-fourth" >Address</div>
+      <div class="column is-card-header">Type</div>
+      <!-- div class="column is-card-header">Allow Smart Meter Status</div> -->
+      <div class="column is-card-header">Effective Date</div>
+
+      <div class="column is-card-header"></div>
+      <div class="column is-card-header"></div>
+    </div>
+    <apex:repeat value="{!APAstoManage}" var="APA" >
+      <div class="columns">
+
+        <div class="column  is-one-fourth" style="position:relative; ">
+          <apex:outputText rendered="{!(APA.selected)}">
+           <!-- .steps .step-item.is-completed .step-marker -->
+            <div class="steps" style="position:absolute; display:inline-block; top: -8px; left: -20px;"><span class="step-item is-completed"><span class="step-marker" style="transform: scale(.6);"><span class="icon"><i class="fa fa-check"></i></span></span></span></div>
+          </apex:outputText>
+           <!-- <apex:commandlink action="{!Submit}" Value="Set As My Home"  rendered="{!NOT(APA.selected)}">
+               <apex:param name="SelectedAPA" value="{!APA.APAid}" assignTo="{!SelectedAPA}"/>
+           </apex:commandlink> -->
+           <apex:outputText value="{!APA.PremiseAddress}"/>
+        </div>
+        <div class="column" ><apex:outputText value="{!APA.PremiseType}" /></div>
+        <!-- <div class="column"><apex:outputText value="{!APA.DataPermission}"/></div> -->
+        <div class="column"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!APA.createddate}"/></apex:outputText></div>
+        <div class="column">
+           <apex:commandlink action="{!ShopPlans}" Value="Shop Plans" rendered="{!APA.PremiseType=='Residential'}">
+               <apex:param name="SelectedAPA" value="{!APA.APAid}" assignTo="{!SelectedAPA}"/>
+           </apex:commandlink>
+           <apex:commandlink action="{!ShopPlansCommercial}" Value="Shop Small Business Plans" rendered="{!APA.PremiseType!='Residential'}">
+               <apex:param name="SelectedAPA" value="{!APA.APAid}" assignTo="{!SelectedAPA}"/>
+           </apex:commandlink>
+        </div>
+        <div class="column">
+             <apex:commandlink action="{!DeleteAPA}" Value="Remove" rerender="service-address-table">
+                 <apex:param name="SelectedAPA" value="{!APA.APAid}" assignTo="{!SelectedAPA}"/>
+             </apex:commandlink>
+        </div>
+      </div>
+    </apex:repeat>
+  </div>
+
+
+
+
+  <script>
+
+  TC.app.appAccountManageAPA = new Vue({
+     el: '#appAccountManageAPA',
+     data: {
+       userId: '{!$User.Id}',
+       apaList: []
+     },
+     methods: {
+
+     },
+     mounted: function() {
+       sessionStorage.setItem('pathStart','add-service');
+     },
+     watch: { },
+  });
+
+  </script>
+
+  <!-- <apex:datatable value="{!APAstoManage}" var="APA"  width="100%" id="service-address-table" headerClass="text-left">
+             <apex:column headervalue="Address">
+                 <apex:outputText value="{!APA.PremiseAddress}" styleClass="wrap-long"></apex:outputText>
+             </apex:column>
+
+            <apex:column headervalue="Type">
+                <apex:outputText value="{!APA.PremiseType}" styleClass="wrap-long"></apex:outputText>
+            </apex:column>
+
+             <apex:column headervalue="Added">
+                <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" styleClass="wrap-long">
+                    <apex:param value="{!APA.createddate}"/>
+                </apex:outputText>
+             </apex:column>
+
+             <apex:column headervalue="">
+                <apex:outputText value="Default Address" rendered="{!(APA.selected)}"></apex:outputText>
+                <apex:commandlink action="{!Submit}" Value="Set as Default"  rendered="{!NOT(APA.selected)}" styleClass="btn btn-default btn-mini wrap-long">
+                    <apex:param name="SelectedAPA" value="{!APA.APAid}" assignTo="{!SelectedAPA}"/>
+                </apex:commandlink>
+             </apex:column>
+
+             <apex:column headervalue="">
+                <apex:commandlink action="{!DeleteAPA}" Value="Delete" rerender="service-address-table" styleClass="btn btn-danger btn-mini wrap-long">
+                    <apex:param name="SelectedAPA" value="{!APA.APAid}" assignTo="{!SelectedAPA}"/>
+                </apex:commandlink>
+             </apex:column>
+
+        </apex:datatable>  -->
+
+</apex:component>

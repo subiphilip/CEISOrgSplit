@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Accept_Change_Warning__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>checking this box allows term changes and provides user&#39;s acceptance of the effects of the change</description>
+    <externalId>false</externalId>
+    <inlineHelpText>checking this box allows term changes and provides user&#39;s acceptance of the effects of the change</inlineHelpText>
+    <label>Accept Change Warning</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

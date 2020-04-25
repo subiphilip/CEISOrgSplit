@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Mark_Renewal_Status_Future</fullName>
+        <field>Order_Renewal_Status__c</field>
+        <literalValue>Future</literalValue>
+        <name>Mark Renewal Status: Future</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <tasks>
+        <fullName>Customer_reminded_of_order_deposit_status_after_21_days</fullName>
+        <assignedToType>owner</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Customer reminded of order deposit status after 21 days.</subject>
+    </tasks>
+    <tasks>
+        <fullName>Order_Failure_Notification</fullName>
+        <assignedTo>sphilip@cies.com.cnp2</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>The REP has indicated that this order failed, see order for details.  Please update this task as &quot;Completed&quot; after resolving with REP.</description>
+        <dueDateOffset>3</dueDateOffset>
+        <notifyAssignee>true</notifyAssignee>
+        <priority>High</priority>
+        <protected>false</protected>
+        <status>In Progress</status>
+        <subject>Order Failure Notification</subject>
+    </tasks>
+</Workflow>

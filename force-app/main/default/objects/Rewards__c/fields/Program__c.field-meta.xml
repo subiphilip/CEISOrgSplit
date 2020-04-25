@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Program__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check this box if this reward is a Program type offer where you will assign multiple choices that a customer will have for selecting rewards or incentives.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check this box if this reward is a Program type offer where you will assign multiple choices that a customer will have for selecting rewards or incentives.</inlineHelpText>
+    <label>Program</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

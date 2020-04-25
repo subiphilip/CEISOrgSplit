@@ -1,0 +1,196 @@
+<apex:page Controller="OrderProcessing" sidebar="false" tabStyle="Order__c">
+    
+     <apex:pageMessages />
+    <apex:tabPanel id="all" >
+        <apex:tab label="New" name="name1">
+<!-- Shows when an order is being rejected -->
+            <apex:pageBlock title="Why are you rejecting this order?" rendered="{!NOT(isnull(RejectedOrder))}"> 
+            
+                <apex:form >
+                    <apex:pageBlockSection >
+                    <apex:inputField required="true" styleClass="picklist_hide_none" value="{!RejectedOrder.Rejection_Reason__c}">
+                    </apex:inputField>
+                    <apex:inputfield value="{!RejectedOrder.Order_Rejection_Comments__c}"/>
+                        
+                    </apex:pageBlockSection>
+                    <apex:commandButton value="Submit Rejection" action="{!FinishReject}"/>
+                    <apex:commandButton value="Cancel" action="{!CancelReject}"/>
+                </apex:form>
+                
+            </apex:pageBlock>
+
+<!-- Shows for new orders-->
+            <apex:pageBlock title="New Orders" rendered="{!isnull(RejectedOrder)}"> 
+                <apex:pageMessage severity="warning" rendered="error"/>
+                Click Approve if you agree to post the switch or move-in for that customer.<br/>
+                Click Renew if the customer is already yours and no switch is necessary (moves order to confirmed).<br/>
+                Click Deposit Required if you want this customer but they need to pay a deposit before the switch can happen.<br/>
+                    <apex:form id="neworderform">
+                        <apex:commandButton value="Approve" action="{!Approve}" rerender="table1, table2, table3, table4"/>
+                        <apex:commandButton value="Renew" action="{!Renew}" rerender="table1, table2, table3, table4"/>
+                        <apex:commandButton value="Reject" action="{!StartReject}"/>
+                        <apex:commandButton value="Deposit Required" action="{!ApproveWithDeposit}" rerender="table1, table2, table3, table4"/>
+                        <apex:outputPanel id="NewOrderResults">
+                        <apex:pageBlockTable value="{!neworderlist}" var="item" id="table1">
+                            <apex:column >
+                                <apex:inputCheckbox value="{!item.selected}" />
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputLink value="{!$Page.REPOrderDetails}?id={!item.ord.id}" target="_blank">Details</apex:outputLink>
+                                
+                            </apex:column>
+                            <apex:column value="{!item.ord.name}"/>
+                            <apex:column value="{!item.ord.InitialDateofService__c}"/>
+                            <apex:column value="{!item.ord.ESIID_Number__c}"/>
+                            <apex:column value="{!item.ord.Premise_Order_Type__c}"/>
+                            <apex:column value="{!item.ord.parent_account__r.name}"/>
+                            <apex:column value="{!item.ord.createddate}"/>
+                            <apex:column value="{!item.ord.Order_Expiration_Date__c}"/>
+                            <apex:column value="{!item.ord.REP_Profile__c}"/>
+                        
+                        </apex:pageBlockTable> 
+                        </apex:outputPanel>
+                    </apex:form>
+                
+            </apex:pageBlock>
+<!-- Tab for Pending Orders -->   
+        </apex:tab>
+        
+        <apex:tab label="Pending Deposit" name="name4">
+            <apex:pageBlock title="Why are you rejecting this order?" rendered="{!NOT(isnull(RejectedOrder))}"> 
+            
+                <apex:form >
+                    <apex:pageBlockSection >
+                    <apex:inputField required="true" value="{!RejectedOrder.Rejection_Reason__c}"/>
+                    <apex:inputfield value="{!RejectedOrder.Order_Rejection_Comments__c}"/>
+                        
+                    </apex:pageBlockSection>
+                    <apex:commandButton value="Submit Rejection" action="{!FinishReject}"/>
+                    <apex:commandButton value="Cancel" action="{!CancelReject}"/>
+                </apex:form>
+            </apex:pageBlock>
+            
+            <apex:pageBlock title="Orders Pending Deposit" rendered="{!isnull(RejectedOrder)}">
+                    Click Approve once the customer has met your deposit requirements and you're starting the switch<br/>
+                    Click Reject if the customer is not going to complete the deposit requirements.<br/>
+                    <apex:form id="depositOrders">
+                        <apex:commandButton value="Approve" action="{!Approve}" rerender="table1, table2, table3, table4"/>
+                        <apex:commandButton value="Reject" action="{!RejectFromDeposit}" />                       
+                        <apex:outputPanel id="DepositOrderResults">
+                        <apex:pageBlockTable value="{!PendingDepositOrderList}" var="item" id="table4">
+                            <apex:column >
+                                <apex:inputCheckbox value="{!item.selected}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputLink value="{!$Page.REPOrderDetails}?id={!item.ord.id}" target="_blank">Details</apex:outputLink>                                
+                            </apex:column>
+                            <apex:column value="{!item.ord.name}"/>
+                            <apex:column value="{!item.ord.InitialDateofService__c}"/>
+                            <apex:column value="{!item.ord.ESIID_Number__c}"/>
+                            <apex:column value="{!item.ord.Premise_Order_Type__c}"/>
+                            <apex:column value="{!item.ord.parent_account__r.name}"/>
+                            <apex:column value="{!item.ord.createddate}"/>
+                            <apex:column value="{!item.ord.REP_Profile__c}"/>
+                        
+                        </apex:pageBlockTable> 
+                        </apex:outputPanel>
+                    </apex:form>
+                
+            </apex:pageBlock>
+        </apex:tab>
+        
+        
+        <apex:tab label="Pending Confirmation" name="name2" id="PendingTab">
+            <apex:pageBlock title="Why didn't this switch complete?" id="failreason" rendered="{!NOT(isnull(FailedOrder))}">
+            
+                <apex:form >
+                    <apex:pageBlockSection >
+                        <apex:inputField required="true" value="{!FailedOrder.Failure_Reason__c}"/>
+                        <apex:inputfield value="{!FailedOrder.Order_Failure_Comments__c}"/>
+                        <apex:outputfield value="{!FailedOrder.name}"/>
+                    </apex:pageBlockSection>
+                    <apex:commandButton value="Submit Failure" action="{!FinishFail}"/>
+                    <apex:commandButton value="Cancel" action="{!CancelFail}"/>
+                </apex:form>
+            </apex:pageBlock>
+            <apex:pageBlock title="Approved Orders requiring confirmation" id="conf" rendered="{!isnull(FailedOrder)}">
+            Click Confirm when these transactions are completed (you're flowing power to the customer).<br/>
+            Click Fail if the transaction did not complete and you will not serve the customer.<br/>
+                
+                    <apex:form id="pendingconfirmation">
+                        <apex:commandButton value="Confirm" action="{!Confirm}" rerender="table2, table3"/>
+                        <apex:commandButton value="Fail" action="{!Fail}" />
+                        
+                        <apex:outputPanel id="PendingConfirmationOrderResults">
+                        <apex:pageBlockTable value="{!PendingConfirmationOrdersList}" var="item" id="table2">
+                            <apex:column >
+                                <apex:inputCheckbox value="{!item.selected}" disabled="{!and(not(isnull(item.ord.InitialDateofService__c)), item.ord.InitialDateofService__c>today() )}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputLink value="{!$Page.REPOrderDetails}?id={!item.ord.id}" target="_blank">Details</apex:outputLink>                                
+                            </apex:column>
+                            <apex:column value="{!item.ord.name}"/>
+                            <apex:column value="{!item.ord.InitialDateofService__c}"/>
+                            <apex:column value="{!item.ord.ESIID_Number__c}"/>
+                            <apex:column value="{!item.ord.Premise_Order_Type__c}"/>
+                            <apex:column value="{!item.ord.parent_account__r.name}"/>
+                            <apex:column value="{!item.ord.createddate}"/>
+                            <apex:column value="{!item.ord.REP_Profile__c}"/>
+                        
+                        </apex:pageBlockTable> 
+                        </apex:outputPanel>
+                    </apex:form>
+                
+            </apex:pageBlock>
+        </apex:tab>
+        <apex:tab label="Confirmed" name="name3">
+            <apex:pageBlock title="Confirmed Orders">
+                
+                    <apex:form id="confirmedorders">
+                                               
+                        <apex:outputPanel id="ConfirmedOrderResults">
+                        <apex:pageBlockTable value="{!ConfirmedOrdersList}" var="item" id="table3">
+                            <apex:column >
+                                <!--  <apex:inputCheckbox value="{!item.selected}"/> -->
+                            </apex:column>
+                            <apex:column >
+                                <apex:outputLink value="{!$Page.REPOrderDetails}?id={!item.ord.id}" target="_blank">Details</apex:outputLink>
+                                
+                            </apex:column>
+                            <apex:column value="{!item.ord.name}"/>
+                            <apex:column value="{!item.ord.InitialDateofService__c}"/>
+                            <apex:column value="{!item.ord.ESIID_Number__c}"/>
+                            <apex:column value="{!item.ord.Premise_Order_Type__c}"/>
+                            <apex:column value="{!item.ord.parent_account__r.name}"/>
+                            <apex:column value="{!item.ord.createddate}"/>
+                            <apex:column value="{!item.ord.REP_Profile__c}"/>
+                        
+                        </apex:pageBlockTable> 
+                        </apex:outputPanel>
+                    </apex:form>
+                
+            </apex:pageBlock>
+        </apex:tab>
+        <apex:tab label="Export" name="name6">
+           <apex:pageBlock title="Export Orders">
+                
+                    <apex:form id="exportdorders">
+                                               
+                        <apex:outputPanel id="ExportOrderResults">
+                
+                  
+                           
+                                <apex:outputLink value="{!$Page.ExportToExcel}?id={!repprofile}" target="_blank">Export All Orders to Excel</apex:outputLink>
+                                
+                           
+                        </apex:outputPanel>
+                    </apex:form>
+                
+            </apex:pageBlock>
+                     
+                
+          
+        </apex:tab>
+    </apex:tabPanel>
+  
+</apex:page>

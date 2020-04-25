@@ -1,0 +1,52 @@
+<apex:component >
+	<apex:attribute name="starRating" type="decimal" description="stars to display" required="true"></apex:attribute>
+    <apex:attribute name="link" type="boolean" description="link to another url based on REP if" required="false" default="true"></apex:attribute>
+	<apex:attribute name="reviewCount" type="decimal" description="the count of the ratings to display"></apex:attribute>
+	<apex:attribute name="REPid" type="id" description="The REP being reviewed. If you don't pass an ID, the review count is not displayed"></apex:attribute>
+    <apex:attribute name="Aggregate" default="true" required="false" type="boolean"
+        description="Mark false if the rating is an individual customer's rating.  Otherwise, schema.org tagging will assume it's an aggregate rating.  Effects are invisible to customers but can affect search enginges"/>
+    
+    <!-- version for aggregate = true-->
+	<apex:outputpanel Styleclass="ratewrapper" layout="block" rendered="{!and(not(isnull(starRating)), Aggregate)}">
+        <div itemprop ="aggregateRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating">
+            <meta content="{!starRating}" itemprop="ratingValue"/>
+            <meta content="{!reviewCount}" itemprop="reviewCount"/>
+            <meta content="1" itemprop="worstRating"/>
+            <meta content="5" itemprop="bestRating"/>
+            
+            <div class="rate" >
+                <apex:outputlink styleClass="rate-link" value="readreviews?id={!REPid}" title="{!(round(reviewCount, 0))} Customer Reviews" disabled="{!not(link)}">
+                    <b style="width: {!(starRating/5)*100}%"></b>
+                </apex:outputlink>         
+            </div>  
+            <apex:outputpanel styleclass="rate-count" layout="block" rendered="{!!isnull(REPid)}">
+                <apex:outputlink value="readreviews?id={!REPid}" disabled="{!not(link)}">
+                    ({!(round(reviewCount, 0))})
+                </apex:outputlink>               
+            </apex:outputpanel>
+        </div>
+    </apex:outputpanel>
+    
+    <!-- version for aggregate = false-->
+    <apex:outputpanel Styleclass="ratewrapper" layout="block" rendered="{!and(not(isnull(starRating)), not(Aggregate))}">
+         <span itemprop="reviewRating" itemscope="itemscope" itemtype="http://schema.org/Rating">
+            <meta content="{!starRating}" itemprop="ratingValue"/>
+            <meta itemprop="worstRating" content = "1"/>
+            <meta itemprop="bestRating" content = "5"/>
+            <div class="rate" >
+                <apex:outputlink styleClass="rate-link" value="readreviews?id={!REPid}" title="{!(round(reviewCount, 0))} Customer Reviews" disabled="{!not(link)}">
+                    <b style="width: {!(starRating/5)*100}%"></b>
+                </apex:outputlink>         
+            </div>  
+            <apex:outputpanel styleclass="rate-count" layout="block" rendered="{!!isnull(REPid)}">
+                <apex:outputlink value="readreviews?id={!REPid}" disabled="{!not(link)}">
+                    ({!(round(reviewCount, 0))})
+                </apex:outputlink>               
+            </apex:outputpanel>
+        </span>
+    </apex:outputpanel>
+     
+    <apex:outputpanel Styleclass="ratewrapper none" layout="block" rendered="{!isnull(starRating)}">
+    	<apex:outputtext value="No reviews" />
+    </apex:outputpanel>
+</apex:component>

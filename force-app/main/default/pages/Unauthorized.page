@@ -1,0 +1,39 @@
+<apex:page showHeader="false" sidebar="false" cache="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false">
+    
+
+   <!--apex:composition template="Template_TC"></apex:composition-->
+        <c:GoogleAnalyticsTrackingCodeScript />
+        <script>        
+            _gaq.push(['_link', '{!$Setup.AuthSettings__c.TrueCost_Secure_URL__c}/sitelogin?starturl={!$CurrentPage.Parameters.starturl}']); 
+        </script>
+   
+<!-- original    
+    <apex:composition template="{!$Site.Template}">
+        <apex:define name="HeadTags">
+            <title>Login Required - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="robots" content="noindex"/>
+        </apex:define>
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <h1>You've requested a page that's only available to registered users.<br/>
+                            <small>Please log in to TrueCost to continue. We'll take you to where you were trying to go. </small>
+                        </h1>
+                        <br/>
+                        <br/>
+                        <div class="row">
+                            <div class="span4 offset4 well well-large">
+                                <a class="btn btn-primary btn-block" href="{!$Setup.AuthSettings__c.Facebook_OAuth_Login_Link__c}?site={!urlencode($Setup.AuthSettings__c.TrueCost_Secure_URL__c)}">Use Facebook</a>
+                                <hr/>
+                                <c:TrueCost_login rendered="{!$Site.LoginEnabled && ISPICKVAL($User.UserType,'Guest')}" id="siteLogin"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </apex:define>
+    </apex:composition>
+    <site:previewAsAdmin />
+    -->
+</apex:page>

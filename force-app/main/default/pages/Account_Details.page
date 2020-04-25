@@ -1,0 +1,772 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" controller="ControllerForMobileMain">
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+    <c:tc2_header title="TrueCost Electric Portal" description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."/>
+
+    <body class="has-background-grey-light has-navbar-fixed-top">
+
+      <div id="wrapper">
+        <c:tc2_navbar />
+        <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-3.jpg" headline="Tell Me more"/>
+
+        <div id="appAccountDetails">
+          <section>
+            <div class="container">
+              <div class="has-margin-3 has-text-centered">
+                <h2 class="is-size-4 has-text-weight-bold padding-sides">Please fill in the information below</h2>
+
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <form v-on:submit="validateBeforeSubmit" method="post">
+
+              <div class="container form ">
+
+                <div v-show="isCommercial">
+                  <div class="box is-form-no-padding">
+                    <div class="inner">
+                      <div class="columns">
+                        <div class="column form-column" style="margin-bottom: 4.5em;">
+                          <h1>The electric company will need your Small Business Name (DBA). Please then enter either Personal SSN, EIN (Tax ID number) or DUNS.</h1>
+
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded has-icons-right">
+                                  <label class="form-label" for="companyName">Small Business Name</label>
+                                  <input id="companyName" maxlength="100" minlength="3"  class="input borderless" type="text" name="companyName" v-model="companyName" />
+                                  <span v-show="validateCompanyName" class="help is-danger">Must provide small business name</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded has-icons-right">
+                                  <label class="form-label" for="companyTaxId">EIN (Tax ID Number)</label>
+                                  <input id="companyTaxId" maxlength="20" minlength="8" v-mask="'#########'" class="input borderless" type="text" name="companyTaxId" v-model="companyTaxId" />
+                                    <span v-show="validateCompanyTaxId" class="help is-danger">Must provide small business tax id</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded has-icons-right">
+                                  <label class="form-label" for="companyDuns">DUNS</label>
+                                  <input id="companyDuns" maxlength="20" minlength="8" v-mask="'#########'" class="input borderless" type="text" name="companyDuns" v-model="companyDuns" />
+                                    <span v-show="validateCompanyDuns" class="help is-danger">Must provide small business DUNS</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded has-icons-right tooltip is-tooltip-multiline is-tooltip-right" data-tooltip="Retail Electric Providers (REPs) require an SSN to verify your identity.">
+                                  <label class="form-label" for="ssn">Social Security Number</label>
+                                  <input id="ssn" maxlength="20" minlength="9" v-mask="'###-##-####'" class="input borderless" type="text" name="ssn" v-model="ssn" />
+                                  <span class="icon is-small is-right">
+                                    <i class="fas fa-lock" style="margin-right:15px;"></i>
+                                    <i class="icon-icon-info is-size-6"></i>
+                                  </span>
+                                  <span v-show="validateSSN" class="help is-danger">Social security number is required</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="box is-form-no-padding">
+                  <div class="inner">
+                    <div class="columns">
+
+                      <!-- <p v-if="errors.length"> <b>Please correct the following error(s):</b> <ul> <li v-for="error in errors">{{ error }}</li> </ul> </p> -->
+
+                      <div class="column form-column" style="margin-bottom: 4.5em;">
+                        <h1>Personal Information</h1>
+                        <span >
+                          <div class="field is-horizontal" v-if="TC.app.account.guest">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="firstname">First Name</label>
+                                  <input id="firstName" maxlength="20" pattern="" minlength="1" class="input borderless" type="text" name="firstName" v-model="firstName" required="required"/>
+                                  <span v-show="validateFirstName" class="help is-danger">First name is required</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="field is-horizontal" v-if="TC.app.account.guest">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="lastname">Last Name</label>
+                                  <input id="lastName" maxlength="20" minlength="1" class="input borderless" type="text" name="lastName" v-model="lastName" required="required"/>
+                                  <span v-show="validateLastName" class="help is-danger">Last name is required</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="phone">Phone Number</label>
+                                  <input id="phone" v-mask="'(###) ###-####'" class="input borderless" type="tel" name="phone" v-model="phone" required="required"/>
+                                  <span v-show="validatePhone" class="help is-danger">Phone number is required</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="field is-horizontal" v-if="TC.app.account.guest">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="email">Email Address</label>
+                                  <input id="email" maxlength="100" minlength="3" class="input borderless" type="text" name="email" v-model="email" required="required"/>
+                                  <span v-show="emailExists" class="help is-danger">Email already exists</span>
+                                  <span v-show="validateEmail" class="help is-danger">Email is required</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </span>
+
+                        <div class="field is-horizontal" v-if="!isCommercial">
+                          <div class="field-body">
+                            <div class="field">
+                              <p class="control is-expanded has-icons-right tooltip is-tooltip-multiline is-tooltip-right" data-tooltip="Retail Electric Providers (REPs) require an SSN to verify your identity.">
+                                <label class="form-label" for="ssn">Social Security Number</label>
+                                <input id="ssn" maxlength="20" minlength="9" v-mask="'###-##-####'" class="input borderless" type="text" name="ssn" v-model="ssn" required="required"/>
+                                <span class="icon is-small is-right">
+                                  <i class="fas fa-lock" style="margin-right:15px;"></i>
+                                  <i class="icon-icon-info is-size-6"></i>
+                                </span>
+                                <span v-show="validateSSN" class="help is-danger">Social security number is required</span>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                          <div class="field-body">
+                            <div class="field">
+                              <p class="control is-expanded has-icons-right">
+                                <label class="form-label" for="dob">Date of Birth (mm/dd/yyyy)</label>
+                                <input id="dob" maxlength="20" minlength="8" v-mask="'##/##/####'" class="input borderless" type="text" name="dob" v-model="dob" required="required"/>
+                                <span v-show="validateDOB" class="help is-danger">Must be 18 or older</span>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                          <div class="field-body">
+                            <div class="field">
+                              <p class="control is-expanded has-icons-right">
+                                <label class="form-label" for="language">Select Preferred Language</label>
+                                <div class="select" id="language" style="margin-top:30px !important;">
+                                  <select v-model="language">
+                                    <option v-bind:value="{type: 'english'}">English</option>
+                                    <option v-bind:value="{type: 'spanish'}">Spanish</option>
+                                  </select>
+                                </div>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <article class="media padding-sides">
+                          <figure class="media-left">
+                            <div class="checkbox">
+                              <span><input v-model="altContactCheck" name="altContactCheck" id="altContactCheck" type="checkbox"/></span>
+                            </div>
+                          </figure>
+                          <div class="media-content">
+                            <label for="altContactCheck">
+                              I want an alternate person to be able to discuss my account</label>
+                          </div>
+                        </article>
+
+                        <article class="media padding-sides">
+                          <figure class="media-left">
+                            <div class="checkbox">
+                              <span><input v-model="altMailingCheck" name="altMailingCheck" id="altMailingCheck" type="checkbox"/></span>
+                            </div>
+                          </figure>
+                          <div class="media-content">
+                            <label for="altMailingCheck">
+                              I have a different mailing address</label>
+                          </div>
+                        </article>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div v-show="altContactCheck">
+                  <div class="box is-form-no-padding">
+                    <div class="inner">
+                      <div class="columns">
+                        <div class="column form-column" style="margin-bottom: 4.5em;">
+                          <h1>Alternate Contact</h1>
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="altContactFirstname">Alternate First Name</label>
+                                  <input id="altContactFirstName" maxlength="20" data-inputmask="'regex': '[a-zA-Z]{1,20}', 'greedy' : false" class="input borderless" type="text" name="altContactFirstName" v-model="altContactFirstName"/>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="altContactLastName">Alternate Last Name</label>
+                                  <input id="altContactLastName" maxlength="20" data-inputmask="'regex': '[a-zA-Z]{1,20}', 'greedy' : false" class="input borderless" type="text" name="altContactLastName" v-model="altContactLastName"/>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="altContactPhone">Alternate Phone Number</label>
+                                  <input id="altContactPhone" maxlength="20" v-mask="'(###) ###-####'" class="input borderless" type="tel" name="altContactPhone" v-model="altContactPhone"/>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="altContactLastFour">Alternate Last 4 SSN Digits</label>
+                                  <input v-validate="'required|altContactLastFour'" id="altContactLastFour" maxlength="4" minlength="4" v-mask="'####'" class="input borderless" type="text" name="altContactLastFour" v-model="altContactLastFour"/>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div v-show="altMailingCheck">
+                  <div class="box is-form-no-padding">
+                    <div class="inner">
+                      <div class="columns">
+                        <div class="column form-column" style="margin-bottom: 4.5em;">
+                          <h1>Alternate Mailing Address</h1>
+
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="altMailingStreet">Alternate Mailing Street</label>
+                                  <input id="altMailingStreet" maxlength="100" class="input borderless" type="text" name="altMailingStreet" v-model="altMailingStreet"/>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="altMailingCity">Alternate Mailing City</label>
+                                  <input id="altMailingCity" maxlength="20" class="input borderless" type="text" name="altMailingCity" v-model="altMailingCity"/>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="altMailingState">Alternate Mailing State</label>
+                                  <input id="altMailingState" maxlength="20" class="input borderless" type="text" name="altMailingState" v-model="altMailingState"/>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="altMailingZip">Alternate Mailing Zip</label>
+                                  <input id="altMailingZip" maxlength="20" class="input borderless" type="text" name="altMailingZip" v-model="altMailingZip"/>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <article class="media padding-sides">
+                    <figure class="media-left">
+                      <div class="checkbox">
+                        <span><input v-model="privacypolicy" name="acknowledgement" id="acknowledgement" type="checkbox" required="required"/></span>
+                      </div>
+                    </figure>
+                    <div class="media-content">
+                      <label for="acknowledgement">I agree that CenterPoint Energy may collect, use, and share my social security number and other personal information with electric companies to enroll me in this plan and other plans I select in the future, and for other
+                        purposes. I agree to the TrueCost
+                        <a target="_blank" href="{!$Page.Privacy}">Privacy Policy</a>.</label>
+                    </div>
+                  </article>
+                </div>
+
+                <div>
+                  <div class="has-text-centered ">
+                    <br/>
+                    <input class="button is-primary is-rounded fixed-size animate-gradient-bg" type="submit" value="CONFIRM MY PROFILE"/>
+                    <p >A move-in or switch can only be made by<br/>
+                      the electric service applicant or their agent.</p>
+                    <p class="link-back">
+                      <a class="has-text-weight-semibold is-size-8" v-on:click="goBack()">Go Back</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          <c:tc2_modal_login />
+          <app-modal-login/>
+        </div>
+      </div>
+      <c:tc2_footer />
+
+      <script>
+        (function ($) {
+          $(function () {
+            'use strict';
+
+            TC.app.appAccountDetails = new Vue({
+              el: '#appAccountDetails',
+              data: {
+                errors: [],
+                firstName: TC.app.account.firstName,
+                lastName: TC.app.account.lastName,
+                phone: TC.app.account.phone,
+                email: TC.app.account.email,
+                emailExists: false,
+                ssn: TC.app.account.ssn,
+                dob: TC.app.account.dob,
+                companyName: TC.app.account.companyName,
+                companyTaxId: TC.app.account.companyTaxId,
+                companyDuns: TC.app.account.companyDuns,
+                language: {
+                  type: 'english'
+                },
+                privacypolicy: (TC.app.account.privacypolicy == 'true')
+                  ? true
+                  : false,
+                altContactCheck: (TC.app.account.altContactCheck == 'true')
+                  ? true
+                  : false,
+                altContactFirstName: TC.app.account.altContactFirstName,
+                altContactLastName: TC.app.account.altContactLastName,
+                altContactLastFour: TC.app.account.altContactLastFour,
+                altContactPhone: TC.app.account.altContactPhone,
+                altMailingCheck: (TC.app.account.altMailingCheck == 'true')
+                  ? true
+                  : false,
+                altMailingStreet: TC.app.account.altMailingStreet,
+                altMailingCity: TC.app.account.altMailingCity,
+                altMailingState: TC.app.account.altMailingState,
+                altMailingZip: TC.app.account.altMailingZip,
+                validateFirstName: false,
+                validateLastName: false,
+                validateEmail: false,
+                validatePhone: false,
+                validateSSN: false,
+                validateDOB: false,
+                validateCompanyName: false,
+                validateCompanyTaxId: false,
+                validateCompanyDuns: false,
+                isValid: false,
+                isCommercial: false,
+                hasOneCompanyId: false
+              },
+              methods: {
+                goBack: function () {
+                  window.history.back();
+                },
+                onSelectConfirm: function () {
+                  TC.fn.navigateTo(TC.routes.accountDisclosure + '?id=' + TC.app.account.plan.id);
+                },
+                checkValidation: function () {
+                  this.errors = [];
+                  this.validateFirstName = false;
+                  this.validateLastName = false;
+                  this.validateEmail = false;
+                  this.validatePhone = false;
+                  this.validateSSN = false;
+                  this.validateDOB = false;
+                  this.validateCompanyName = false;
+                  this.validateCompanyTaxId = false;
+                  this.validateCompanyDuns = false;
+                  this.hasOneCompanyId = false;
+
+                  if (this.isCommercial) {
+                    if(this.companyName == '' || this.companyName == null){
+                      this.validateCompanyName = true;
+                      this.errors.push('companyName');
+                    }
+                    if(this.companyTaxId == '' || this.companyTaxId == null){
+                      this.validateCompanyTaxId = true;
+                      this.errors.push('companyTaxId');
+                    } else {
+                      if(this.companyTaxId.length < 9){
+                        this.validateCompanyTaxId = true;
+                        this.errors.push('companyTaxId');
+                      } else {
+                        this.hasOneCompanyId = true;
+                        this.validateCompanyTaxId = false;
+                        this.validateCompanyDuns = false;
+                        this.validateSSN = false;
+                      }
+                    }
+                    if(!this.hasOneCompanyId){
+                      if(this.companyDuns == '' || this.companyDuns == null){
+                        this.validateCompanyDuns = true;
+                        this.errors.push('companyDuns');
+                      } else {
+                        if(this.companyDuns.length < 9){
+                          this.validateCompanyDuns = true;
+                          this.errors.push('companyDuns');
+                        } else {
+                          this.hasOneCompanyId = true;
+                          this.validateCompanyDuns = false;
+                          this.validateCompanyTaxId = false;
+                          this.validateSSN = false;
+                        }
+                      }
+                    }
+
+                    if(!this.hasOneCompanyId){
+                      if (this.ssn == "" || this.ssn == null ) {
+                          this.validateSSN = true;
+                          this.errors.push('ssn');
+                      } else {
+                        this.validateSSN = false;
+                      }
+                    }
+
+                    if(this.hasOneCompanyId){
+                      this.errors = [];
+                    }
+
+                    console.log(this.errors);
+
+                  }
+
+                  if (!this.privacypolicy) {
+                    this.errors.push('policy');
+                  }
+
+                  if (TC.app.account.guest) {
+                    if (this.firstName == "" || this.firstName == null) {
+                      this.validateFirstName = true;
+                      this.errors.push('firstName');
+                    }
+                    if (this.lastName == "" || this.lastName == null) {
+                      this.validateLastName = true;
+                      this.errors.push('lastName');
+                    }
+                    if (this.email == "" || this.email == null) {
+                      if (!this.emailExists) {
+                        this.validateEmail = true;
+                        this.errors.push('email');
+                      }
+                    }
+                    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    if (!this.validateEmail) {
+                      if (!re.test(String(this.email).toLowerCase())) {
+                        if (!this.emailExists) {
+                          this.validateEmail = true;
+                          this.errors.push('email');
+                        }
+                      }
+                    }
+                    if (this.emailExists) {
+                      this.errors.push('email');
+                    }
+                  }
+
+                  if (this.phone == "" || this.phone == null) {
+                    // if(this.phone.length < 9){
+                    this.validatePhone = true;
+                    this.errors.push('phone');
+                    //}
+                  }
+                  if (this.phone !== null) {
+                    if (this.phone.hasOwnProperty('length')) {
+                      if (this.phone.length < 13) {
+                        this.validatePhone = true;
+                        this.errors.push('phone');
+                      }
+
+                    }
+                  }
+
+                  if (this.ssn == "" || this.ssn == null ) {
+                    // if(this.ssn.length < 9){
+                    if(!this.isCommercial){
+                      this.validateSSN = true;
+                      this.errors.push('ssn');
+                    }
+                  }
+                  if (this.ssn !== null) {
+                    if(!this.hasOneCompanyId){
+                      if (this.ssn.hasOwnProperty('length')) {
+                        if (this.ssn.length < 11) {
+                          this.validateSSN = true;
+                          this.errors.push('ssn');
+                        }
+
+                      }
+                    }
+                  }
+
+                  if (this.dob == "" || this.dob == null) {
+                    this.validateDOB = true;
+                    this.errors.push('dob');
+
+                  } else {
+                    if (moment().diff(this.dob, 'years') < 18) {
+                      this.validateDOB = true;
+                      this.errors.push('dob');
+                    }
+                  }
+                  if (this.dob !== null) {
+                    if (this.dob.hasOwnProperty('length')) {
+                      if (this.dob.length < 10) {
+                        this.validateDOB = true;
+                        this.errors.push('dob');
+                      }
+
+                    }
+                  }
+
+                  if (this.errors.length <= 0) {
+                    this.isValid = true;
+                  } else {
+                    this.isValid = false;
+                  }
+                },
+                validateBeforeSubmit: function (e) {
+                  e.preventDefault();
+
+                  if (this.isValid) {
+                    this.onSelectConfirm();
+                  }
+
+                  e.preventDefault();
+                },
+                checkExistingEmail: function (_email) {
+                  this.emailExists = false;
+                  let vm = this;
+                  ControllerForMobileMain.CheckExistingEmail(_email, function (result, event) { // GAC
+                    if (result !== 'Success') {
+                      vm.emailExists = true;
+                      vm.isValid = false;
+                      vm.errors.push('email');
+                      if (TC.app.account.guest) {
+                        TC.app.appSubscribe.$emit('modalLogin', TC.app.account);
+                      }
+
+                    } else {
+                      vm.emailExists = false;
+                    }
+                  });
+                }
+              },
+              mounted: function () {
+                this.language.type = (TC.app.account.language == null)
+                  ? 'english'
+                  : TC.app.account.language;
+                TC.app.appMenu.isProgress = true;
+                TC.app.appMenu.step = 4;
+                TC.app.appPlansCompareBar.hideSnackBar();
+                if (this.email != '') {
+                  this.checkExistingEmail(this.email);
+                }
+
+                if(TC.app.account.planPremiseType == 'Commercial'){
+                  this.isCommercial = true;
+                }
+                dataLayer.push({
+                  'event': 'checkout',
+                  'ecommerce': {
+                    'checkout': {
+                      'actionField': {
+                        'step': 5
+                      },
+                      'products': [
+                        {
+                          'name': TC.app.account.plan.title,
+                          'brand': TC.app.account.plan.company,
+                          'variant': TC.app.account.plan.contract,
+                          'price': Math.min(TC.app.account.plan.ratePlan.Plan__r.Contract_Length__c * 5),
+                          'quantity': '1'
+                        }
+                      ]
+                    }
+                  }
+                });
+              },
+              watch: {
+                companyName: {
+                  handler: function () {
+                    this.checkValidation();
+                    TC.app.account.companyName = this.companyName;
+                  }
+                },
+                companyTaxId: {
+                  handler: function () {
+                    this.checkValidation();
+                    TC.app.account.companyTaxId = this.companyTaxId;
+                  }
+                },
+                companyDuns: {
+                  handler: function () {
+                    this.checkValidation();
+                    TC.app.account.companyDuns = this.companyDuns;
+                  }
+                },
+                firstName: {
+                  handler: function () {
+                    this.checkValidation();
+                    TC.app.account.firstName = this.firstName;
+                  }
+                },
+                lastName: {
+                  handler: function () {
+                    this.checkValidation();
+                    TC.app.account.lastName = this.lastName;
+                  }
+                },
+                phone: {
+                  handler: function () {
+                    this.checkValidation();
+                    TC.app.account.phone = this.phone;
+                  }
+                },
+                email: {
+                  handler: function () {
+                    this.checkValidation();
+                    if (this.email.length > 3) {
+                      this.checkExistingEmail(this.email);
+                    }
+                    TC.app.account.email = this.email;
+                  }
+                },
+                ssn: {
+                  handler: function () {
+                    this.checkValidation();
+                    TC.app.account.ssn = this.ssn;
+                  }
+                },
+                dob: {
+                  handler: function () {
+                    this.checkValidation();
+                    TC.app.account.dob = this.dob;
+                  }
+                },
+                language: {
+                  handler: function () {
+                    TC.app.account.language = this.language.type;
+                  }
+                },
+                privacypolicy: {
+                  handler: function () {
+                    this.checkValidation();
+                    TC.app.account.privacypolicy = this.privacypolicy;
+                  }
+                },
+                altContactCheck: {
+                  handler: function () {
+                    TC.app.account.altContactCheck = this.altContactCheck;
+                  }
+                },
+                altContactFirstName: {
+                  handler: function () {
+                    TC.app.account.altContactFirstName = this.altContactFirstName;
+                  }
+                },
+                altContactLastName: {
+                  handler: function () {
+                    TC.app.account.altContactLastName = this.altContactLastName;
+                  }
+                },
+                altContactLastFour: {
+                  handler: function () {
+                    TC.app.account.altContactLastFour = this.altContactLastFour;
+                  }
+                },
+                altContactPhone: {
+                  handler: function () {
+                    TC.app.account.altContactPhone = this.altContactPhone;
+                  }
+                },
+                altMailingCheck: {
+                  handler: function () {
+                    TC.app.account.altMailingCheck = this.altMailingCheck;
+                  }
+                },
+                altMailingStreet: {
+                  handler: function () {
+                    TC.app.account.altMailingStreet = this.altMailingStreet;
+                  }
+                },
+                altMailingCity: {
+                  handler: function () {
+                    TC.app.account.altMailingCity = this.altMailingCity;
+                  }
+                },
+                altMailingState: {
+                  handler: function () {
+                    TC.app.account.altMailingState = this.altMailingState;
+                  }
+                },
+                altMailingZip: {
+                  handler: function () {
+                    TC.app.account.altMailingZip = this.altMailingZip;
+                  }
+                }
+              }
+            });
+
+          })
+        })(jQuery);
+      </script>
+
+    </body>
+
+  </html>
+</apex:page>

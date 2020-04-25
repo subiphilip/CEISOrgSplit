@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Card_Required_For_Payment__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>A credit/Debit card is required for this plan&#39;s bill payment.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>A credit/Debit card is required for this plan&#39;s bill payment.</inlineHelpText>
+    <label>Credit/Debit Card Required for Payment</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ALL_MES_Contacts</fullName>
+    <columns>FULL_NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CONTACT.TITLE</columns>
+    <columns>CONTACT.PHONE1</columns>
+    <columns>CONTACT.EMAIL</columns>
+    <columns>Contact_Owner_Name__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>MES_Contact__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>ALL MES Contacts</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+        <role>Mobile_Energy_Solutions</role>
+        <role>Mobile_Energy_Solutions_Management</role>
+    </sharedTo>
+</ListView>

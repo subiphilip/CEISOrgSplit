@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_with_SP_and_ST</fullName>
+    <columns>NAME</columns>
+    <columns>Supply_Pool__c</columns>
+    <columns>Service_Type__c</columns>
+    <columns>Start_Date__c</columns>
+    <columns>End_Date__c</columns>
+    <columns>Template_Deal_Num__c</columns>
+    <columns>Template_Version_Num__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All with SP and ST</label>
+</ListView>

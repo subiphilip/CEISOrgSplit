@@ -1,0 +1,594 @@
+<apex:component access="global" controller="TC2SwitchReminderPlans">
+    <apex:attribute access="global" name="lead" description="" type="Lead" assignTo="{!recipient}"  />
+        <apex:attribute access="global" name="myRecipient" type="Lead" description="" assignTo="{!recipient}"/>
+            <apex:attribute access="global" name="myRelatedTo"  type="Lead" description=""  assignTo="{!relatedTo}"/>
+                <div style="display:none">{!myRecipient.Zip__c}</div>
+                <html>
+                    <body style="margin: 0 !important; padding: 0 !important;">
+                        <style>
+                        list-plans {
+                        position: relative;
+                        z-index: 0;
+                        }
+                        .rate-box {
+                        opacity: 0;
+                        }
+                        .rate-box.view-details {
+                        margin-bottom: 0em;
+                        z-index: 1;
+                        position: relative;
+                        }
+                        .columns {
+                        margin-left: 0em;
+                        margin-right: 0em;
+                        margin-top: 0em;
+                        margin-bottom: 0em;
+                        }
+                        .columns:last-child {
+                        margin-bottom: 0em;
+                        margin-top: 0em;
+                        margin-right: 0em;
+                        margin-left: 0em;
+                        }
+                        .columns:not(:last-child) {
+                        margin-bottom: 0em;
+                        margin-top: 0em;
+                        margin-right: 0em;
+                        margin-left: 0em;
+                        }
+                        .column {
+                        display: block;
+                        flex-basis: 0px;
+                        flex-grow: 1;
+                        flex-shrink: 1;
+                        padding-top: 0em;
+                        padding-right: 0em;
+                        padding-bottom: 0em;
+                        padding-left: 0em;
+                        background-image: initial;
+                        background-position-x: initial;
+                        background-position-y: initial;
+                        background-size: initial;
+                        background-repeat-x: initial;
+                        background-repeat-y: initial;
+                        background-attachment: initial;
+                        background-origin: initial;
+                        background-clip: initial;
+                        background-color: rgb(255, 255, 255);
+                        }
+                        span {
+                        font-style: inherit;
+                        font-weight: inherit;
+                        }
+                        .rate-box .inline {
+                        display: inline-block;
+                        vertical-align: middle;
+                        }
+                        img, audio, video {
+                        height: auto;
+                        max-width: 100%;
+                        }
+                        img {
+                        height: auto;
+                        max-width: 100%;
+                        }
+                        .is-size-5 {
+                        font-size: 1.25rem;
+                        }
+                        [class^="icon-"], [class*=" icon-"] {
+                        speak: none;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-variant-ligatures: normal;
+                        font-variant-caps: normal;
+                        font-variant-numeric: normal;
+                        font-variant-east-asian: normal;
+                        text-transform: none;
+                        line-height: 1;
+                        font-size: 3em;
+                        -webkit-font-smoothing: antialiased;
+                        font-family: icomoon;
+                        }
+                        .icon-icon-star-half::before {
+                        content: "";
+                        color: rgb(245, 202, 35);
+                        }
+                        .icon-icon-star-full::before {
+                        color: rgb(245, 202, 35);
+                        content: "";
+                        }
+                        .is-desktop {
+                        display: inline-block;
+                        }
+                        a {
+                        color: rgb(15, 146, 212);
+                        cursor: pointer;
+                        text-decoration-line: none;
+                        text-decoration-style: initial;
+                        text-decoration-color: initial;
+                        }
+                        a:hover {
+                        color: rgb(54, 54, 54);
+                        }
+                        .is-divider, .is-divider-vertical {
+                        display: block;
+                        position: relative;
+                        border-top-width: 0.1rem;
+                        border-top-style: solid;
+                        border-top-color: rgb(219, 219, 219);
+                        height: 0.1rem;
+                        margin-top: 2rem;
+                        margin-right: 0px;
+                        margin-bottom: 2rem;
+                        margin-left: 0px;
+                        text-align: center;
+                        }
+                        .is-divider-vertical::before {
+                        top: 0rem;
+                        bottom: 0rem;
+                        border-left-width: 0.09rem;
+                        border-left-style: solid;
+                        border-left-color: rgb(219, 219, 219);
+                        }
+                        .rate-box .is-divider-vertical {
+                        margin-top: 0em;
+                        margin-right: 0em;
+                        margin-bottom: 0em;
+                        margin-left: 0em;
+                        padding-top: 0em;
+                        padding-right: 0em;
+                        padding-bottom: 0em;
+                        padding-left: 0em;
+                        }
+                        html, body, p, ol, ul, li, dl, dt, dd, blockquote, figure, fieldset, legend, textarea, pre, iframe, hr, h1, h2, h3, h4, h5, h6 {
+                        margin-top: 0px;
+                        margin-right: 0px;
+                        margin-bottom: 0px;
+                        margin-left: 0px;
+                        padding-top: 0px;
+                        padding-right: 0px;
+                        padding-bottom: 0px;
+                        padding-left: 0px;
+                        }
+                        .has-text-weight-semibold {
+                        font-weight: 600;
+                        }
+                        p {
+                        line-height: 140%;
+                        }
+                        .rate-box .price-card-details {
+                        padding-top: 0em;
+                        padding-right: 1em;
+                        padding-bottom: 0em;
+                        padding-left: 1em;
+                        font-size: 1.1em;
+                        }
+                        ul {
+                        list-style-type: none;
+                        list-style-position: initial;
+                        list-style-image: initial;
+                        }
+                        .ul-price-card {
+                        list-style-type: disc;
+                        }
+                        .checkbox, .radio {
+                        cursor: pointer;
+                        display: inline-block;
+                        line-height: 1.25;
+                        position: relative;
+                        }
+                        button, input, select, textarea {
+                        margin-top: 0px;
+                        margin-right: 0px;
+                        margin-bottom: 0px;
+                        margin-left: 0px;
+                        }
+                        body, button, input, select, textarea {
+                        font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+                        }
+                        input[type="checkbox"], input[type="radio"] {
+                        vertical-align: baseline;
+                        }
+                        .checkbox input, .radio input {
+                        cursor: pointer;
+                        }
+                        input {
+                        font-family: "Proxima Nova", sans-serif;
+                        }
+                        input::placeholder {
+                        opacity: 1;
+                        color: inherit;
+                        }
+                        input:focus {
+                        border-top-width: initial;
+                        border-right-width: initial;
+                        border-bottom-width: initial;
+                        border-left-width: initial;
+                        border-top-style: initial;
+                        border-right-style: initial;
+                        border-bottom-style: initial;
+                        border-left-style: initial;
+                        border-top-color: transparent;
+                        border-right-color: transparent;
+                        border-bottom-color: transparent;
+                        border-left-color: transparent;
+                        border-image-source: initial;
+                        border-image-slice: initial;
+                        border-image-width: initial;
+                        border-image-outset: initial;
+                        border-image-repeat: initial;
+                        outline-offset: 0px;
+                        }
+                        .column.is-small-no-flex {
+                        flex-grow: 0;
+                        flex-shrink: 0;
+                        flex-basis: auto;
+                        }
+                        .is-card-header {
+                        font-weight: 600;
+                        color: rgb(122, 122, 122);
+                        font-size: 0.9rem;
+                        }
+                        .rate-box .is-card-header {
+                        font-weight: 600;
+                        color: rgb(122, 122, 122);
+                        font-size: 0.9em;
+                        }
+                        .is-size-3 {
+                        font-size: 2rem;
+                        }
+                        .rate-box p.is-size-3 {
+                        padding-top: 0.1em;
+                        padding-right: 0em;
+                        padding-bottom: 0.1em;
+                        padding-left: 0em;
+                        }
+                        .dropdown {
+                        display: inline-flex;
+                        position: relative;
+                        vertical-align: top;
+                        }
+                        .delete, .modal-close, .is-unselectable, .button, .file, .breadcrumb, .pagination-previous, .pagination-next, .pagination-link, .pagination-ellipsis, .tabs {
+                        user-select: none;
+                        }
+                        .button, .input, .textarea, .select select, .file-cta, .file-name, .pagination-previous, .pagination-next, .pagination-link, .pagination-ellipsis {
+                        -webkit-appearance: none;
+                        align-items: center;
+                        border-top-width: 1px;
+                        border-right-width: 1px;
+                        border-bottom-width: 1px;
+                        border-left-width: 1px;
+                        border-top-style: solid;
+                        border-right-style: solid;
+                        border-bottom-style: solid;
+                        border-left-style: solid;
+                        border-top-color: transparent;
+                        border-right-color: transparent;
+                        border-bottom-color: transparent;
+                        border-left-color: transparent;
+                        border-image-source: initial;
+                        border-image-slice: initial;
+                        border-image-width: initial;
+                        border-image-outset: initial;
+                        border-image-repeat: initial;
+                        border-top-left-radius: 4px;
+                        border-top-right-radius: 4px;
+                        border-bottom-right-radius: 4px;
+                        border-bottom-left-radius: 4px;
+                        box-shadow: none;
+                        display: inline-flex;
+                        font-size: 1rem;
+                        height: 2.25em;
+                        justify-content: flex-start;
+                        line-height: 1.5;
+                        padding-bottom: calc(0.375em - 1px);
+                        padding-left: calc(0.625em - 1px);
+                        padding-right: calc(0.625em - 1px);
+                        padding-top: calc(0.375em - 1px);
+                        position: relative;
+                        vertical-align: top;
+                        }
+                        .button {
+                        background-color: rgb(255, 255, 255);
+                        border-top-color: rgb(219, 219, 219);
+                        border-right-color: rgb(219, 219, 219);
+                        border-bottom-color: rgb(219, 219, 219);
+                        border-left-color: rgb(219, 219, 219);
+                        border-top-width: 1px;
+                        border-right-width: 1px;
+                        border-bottom-width: 1px;
+                        border-left-width: 1px;
+                        color: rgb(54, 54, 54);
+                        cursor: pointer;
+                        justify-content: center;
+                        padding-bottom: calc(0.375em - 1px);
+                        padding-left: 0.75em;
+                        padding-right: 0.75em;
+                        padding-top: calc(0.375em - 1px);
+                        text-align: center;
+                        white-space: nowrap;
+                        }
+                        .button.is-white {
+                        background-color: transparent;
+                        border-top-color: rgb(255, 255, 255);
+                        border-right-color: rgb(255, 255, 255);
+                        border-bottom-color: rgb(255, 255, 255);
+                        border-left-color: rgb(255, 255, 255);
+                        color: rgb(255, 255, 255);
+                        }
+                        .button.details:active, .button.details.is-active, .button.details:hover {
+                        background-color: rgb(255, 255, 255);
+                        }
+                        .rate-box .button.details {
+                        color: rgb(13, 168, 217);
+                        padding-top: 0em;
+                        padding-right: 0em;
+                        padding-bottom: 0em;
+                        padding-left: 0em;
+                        }
+                        .button .icon, .button .icon.is-small, .button .icon.is-medium, .button .icon.is-large {
+                        height: 1.5em;
+                        width: 1.5em;
+                        }
+                        .button .icon:first-child:not(:last-child) {
+                        margin-left: calc(-0.375em - 1px);
+                        margin-right: 0.1875em;
+                        }
+                        .button .icon:last-child:not(:first-child) {
+                        margin-left: 0.1875em;
+                        margin-right: calc(-0.375em - 1px);
+                        }
+                        .button .icon:first-child:last-child {
+                        margin-left: calc(-0.375em - 1px);
+                        margin-right: calc(-0.375em - 1px);
+                        }
+                        .icon {
+                        align-items: center;
+                        display: inline-flex;
+                        justify-content: center;
+                        height: 1.5rem;
+                        width: 1.5rem;
+                        }
+                        .icon.is-small {
+                        height: 1rem;
+                        width: 1rem;
+                        }
+                        .fa, .fas {
+                        font-family: "Font Awesome 5 Free";
+                        font-weight: 900;
+                        }
+                        .fa, .fas, .far, .fal, .fab {
+                        -webkit-font-smoothing: antialiased;
+                        display: inline-block;
+                        font-style: normal;
+                        font-variant-ligatures: normal;
+                        font-variant-caps: normal;
+                        font-variant-numeric: normal;
+                        font-variant-east-asian: normal;
+                        text-rendering: auto;
+                        line-height: 1;
+                        }
+                        .fa-angle-down::before {
+                        content: "";
+                        }
+                        .animate-arrow i {
+                        transition-duration: 0.3s;
+                        transition-timing-function: ease;
+                        transition-delay: 0s;
+                        transition-property: all;
+                        right: 0px;
+                        }
+                        .animate-arrow:hover i {
+                        transition-duration: 0.3s;
+                        transition-timing-function: ease;
+                        transition-delay: 0s;
+                        transition-property: all;
+                        animation-duration: 0.3s;
+                        animation-timing-function: ease;
+                        animation-delay: 0s;
+                        animation-iteration-count: 1;
+                        animation-direction: normal;
+                        animation-fill-mode: none;
+                        animation-play-state: running;
+                        animation-name: MoveArrow;
+                        position: relative;
+                        right: 0px;
+                        }
+
+                        .has-text-centered {
+                        text-align: center;
+                        }
+                        .button.is-info {
+                        background-color: rgb(13, 168, 217);
+                        border-top-color: transparent;
+                        border-right-color: transparent;
+                        border-bottom-color: transparent;
+                        border-left-color: transparent;
+                        color: rgb(255, 255, 255);
+                        }
+                        .button.is-info.is-outlined {
+                        background-color: transparent;
+                        border-top-color: rgb(13, 168, 217);
+                        border-right-color: rgb(13, 168, 217);
+                        border-bottom-color: rgb(13, 168, 217);
+                        border-left-color: rgb(13, 168, 217);
+                        color: rgb(13, 168, 217);
+                        }
+                        .button.is-large {
+                        font-size: 1.5rem;
+                        }
+                        .button.is-rounded {
+                        border-top-left-radius: 290486px;
+                        border-top-right-radius: 290486px;
+                        border-bottom-right-radius: 290486px;
+                        border-bottom-left-radius: 290486px;
+                        padding-left: 32px;
+                        padding-right: 32px;
+                        margin-top: 0.5em;
+                        margin-right: 0.5em;
+                        margin-bottom: 0.5em;
+                        margin-left: 0.5em;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        font-weight: 500;
+                        font-size: 14.4px;
+                        height: inherit;
+                        text-transform: uppercase;
+                        border-top-width: 2px;
+                        border-right-width: 2px;
+                        border-bottom-width: 2px;
+                        border-left-width: 2px;
+                        }
+                        .button.fixed-size {
+                        min-width: 150px;
+                        }
+                        .animate-gradient-bg {
+                        transition-duration: 0.3s;
+                        transition-timing-function: ease;
+                        transition-delay: 0s;
+                        transition-property: all;
+                        }
+                        .animate-gradient-bg:hover {
+                        animation-duration: 5s;
+                        animation-timing-function: ease;
+                        animation-delay: 0s;
+                        animation-iteration-count: infinite;
+                        animation-fill-mode: none;
+                        animation-play-state: running;
+                        animation-name: GradientAnimate;
+                        animation-direction: alternate;
+                        background-image: linear-gradient(270deg, rgb(15, 146, 212), rgb(9, 209, 227), rgb(15, 146, 212), rgb(9, 209, 227));
+                        background-position-x: initial;
+                        background-position-y: initial;
+                        background-repeat-x: initial;
+                        background-repeat-y: initial;
+                        background-attachment: initial;
+                        background-origin: initial;
+                        background-clip: initial;
+                        background-color: initial;
+                        background-size: 400% 400%;
+                        color: white;
+                        }
+                        .tabcontent {
+                        display: none;
+                        }
+                        .rate-box.is-details {
+                        margin-top: -1em;
+                        }
+                        .rate-box.is-details .columns {
+                        padding-top: 1em;
+                        }
+                        .is-size-6 {
+                        font-size: 1rem;
+                        }
+                        strong {
+                        color: rgb(54, 54, 54);
+                        font-weight: 700;
+                        }
+                        a strong {
+                        color: currentcolor;
+                        }
+                        .column.mt-small.is-one-fifth.mlr-medium {
+                        margin-right: 1.12em;
+                        margin-bottom: auto;
+                        margin-left: 1.12em;
+                        margin-top: 1.8em;
+                        }
+                        #appPlansShopDetailsGraph {
+                        position: relative;
+                        left: -20px;
+                        overflow-x: hidden;
+                        overflow-y: hidden;
+                        width: 220px;
+                        }
+                        .is-divider-horizontal {
+                        height: 2px;
+                        background-image: initial;
+                        background-position-x: initial;
+                        background-position-y: initial;
+                        background-size: initial;
+                        background-repeat-x: initial;
+                        background-repeat-y: initial;
+                        background-attachment: initial;
+                        background-origin: initial;
+                        background-clip: initial;
+                        background-color: rgb(221, 221, 221);
+                        margin-top: 1em;
+                        margin-right: -1.7em;
+                        margin-bottom: 1em;
+                        margin-left: -1.7em;
+                        }
+                        </style>
+                        <div class="list-plans">
+                          <!-- 00Q2F000004T51LUAS
+                          ResultsContainer:[
+                              green_score=0,
+                              price=1328.063462687170125,
+                              price_score=0,
+                              pricekWh=0.0968046842107420457030395801443254,
+                              rank=null,
+                              rateplan=Rate__c:{Id=a0Q0M00000J5TtKUAV,
+                              Record_Type_Name__c=Residential,
+                              Plan__c=a0O0M00000GT2DOUA1,
+                              Cancellation_Fee__c=295.00,
+                              TDSP__c=a0R30000004l6DaEAI,
+                              Renewal_Offer__c=false,
+                              Usage_Discount_Amount__c=100.00,
+                              Usage_Discount_Minimum__c=700,
+                              Energy_Base_Rate_cents__c=13.54000,
+                              X1000_kWh_rate__c=8.20000,
+                              X2000_kWh_rate_cents__c=12.90000,
+                              X500_kWh_rate_cents__c=18.80000,
+                              Advertised_Rate__c=8.20000,
+                              Late_Payment_Fee__c=5%,
+                              Cancellation_Fee_Type__c=Fixed,
+                              RecordTypeId=012300000017ceAAAQ},
+                              rewardsText=null,
+                              saved=false,
+                              star_score=0,
+                              total_score=0,
+                              year_score=0
+                          ]
+                          -->
+                            TESTING: {!Plans}
+                            <div class="rate-box view-details" style="opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);">
+                                <div class="columns">
+                                    <div class="column mt-smaller left-logo-box is-one-fifth">
+                                        <span class="inline logo "><img alt="Power Express" src="https://centerpointenergy--qa.lightning.force.com/resource/REPLogos/PowerExpressLogo.png" class="inline logo-image" /></span> <span class="inline logo-stars"><i class=" is-size-5  icon-icon-star-half icon-icon-star-full"></i> <i class=" is-size-5  icon-icon-star-half icon-icon-star-full"></i> <i class=" is-size-5  icon-icon-star-half icon-icon-star-full"></i> <i class=" is-size-5  icon-icon-star-half icon-icon-star-full"></i> <i class=" is-size-5  icon-icon-star-half"></i></span>
+                                        <div class="is-desktop"><a href="/Shop_Plans_Review?id=a0P3000000CMpMwEAL">View Reviews</a></div>
+                                    </div>
+                                    <div class="is-divider-vertical"></div>
+                                    <div class="column mt-small">
+                                        <p class="is-size-5 has-text-weight-semibold ">H Town9</p>
+                                        <div class="price-card-details ">
+                                            <ul class="ul-price-card">
+                                                <li>9 Month Contract</li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                    <div class="is-divider-vertical"></div>
+                                    <div class="column mt-small is-small-no-flex left-item" style="display: inline-block;">
+                                        <p class="is-card-header ">ALL-IN COST</p>
+                                        <p class="is-size-3 is-size-4-mobile">9.5¢ kWh</p>
+                                        <p class="">(Includes fees &amp; taxes)</p>
+                                        <div class="dropdown "><button data-id="a0Q0M00000IR2sgUAD" class="button details is-white has-text-weight-semibold"><span>See Details</span> <span class="icon is-small animate-arrow"><i aria-hidden="true" class="fas fa-angle-down"></i></span></button></div>
+                                    </div>
+
+                                    <div class="is-divider-vertical"></div>
+                                    <div class="column mt-small is-small-no-flex  has-text-centered">
+                                        <div class="is-desktop">
+                                            <p class="is-card-header">AVERAGE BILL</p>
+                                            <p class="is-size-3">$ 109.05/mo</p>
+                                        </div>
+                                        <a class="button fixed-size is-info is-large is-rounded is-outlined animate-gradient-bg">SIGN ME UP</a>
+                                        <div class="dropdown is-mobile"><button data-id="a0Q0M00000IR2sgUAD" class="button details is-white has-text-weight-semibold"><span>See Details</span> <span class="icon is-small animate-arrow"><i aria-hidden="true" class="fas fa-angle-down"></i></span></button></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </body>
+                </html>
+            </apex:component>

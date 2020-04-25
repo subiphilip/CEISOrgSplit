@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Green_Order__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This customer purchased a 100% renewable/green plan.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This customer purchased a 100% renewable/green plan.</inlineHelpText>
+    <label>Green Order?</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

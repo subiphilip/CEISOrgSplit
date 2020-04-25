@@ -1,0 +1,13 @@
+<apex:component >
+  <h3>Select Your Service Area</h3>
+  <ul class="unstyled">
+      <li><a href="{!$Page.ElectricPriceTrendsPlayground}?plan=3" >Three-Month Plans</a></li>
+      <li><a href="{!$Page.ElectricPriceTrendsPlayground}?plan=6" >Six-Month Plans</a></li>
+      <li><a href="{!$Page.ElectricPriceTrendsPlayground}?plan=12" >Twelve-Month Plans</a></li>
+      <li><a href="{!$Page.ElectricPriceTrendsPlayground}?plan=24" >Twenty-Four-Month Plans</a></li>
+      <li><a href="{!$Page.ElectricPriceTrendsPlayground}?plan=Green" >Renewable Plans</a></li>
+      <li><a href="{!$Page.ElectricPriceTrendsPlayground}?plan=Variable" >Variable Plans</a></li>
+      <li><a href="{!$Page.ElectricPriceTrendsPlayground}?plan=2Year" >2 Year Chart</a></li>
+      <li><a href="{!$Page.ElectricPriceTrendsPlayground}?plan=3Year" >3 Year Chart</a></li>
+  </ul>
+</apex:component>

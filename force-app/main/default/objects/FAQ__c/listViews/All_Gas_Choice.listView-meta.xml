@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Gas_Choice</fullName>
+    <columns>NAME</columns>
+    <columns>Category__c</columns>
+    <columns>Question__c</columns>
+    <columns>Answer__c</columns>
+    <columns>Reviewed__c</columns>
+    <columns>Top_FAQ__c</columns>
+    <columns>UPDATEDBY_USER</columns>
+    <columns>Stage__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>FAQ__c.Gas_Choice_FAQ</value>
+    </filters>
+    <label>All Gas Choice</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+    </sharedTo>
+</ListView>

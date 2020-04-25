@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Residual_Billing_for_Residential_Orders__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check this box if you wish to pay TrueCost based on $5 a month per active contract each month (maximum of 18 months or $90).</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check this box if you wish to pay TrueCost based on $5 a month per active contract each month (maximum of 18 months or $90).</inlineHelpText>
+    <label>Residual Billing for Residential Orders</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,54 @@
+<apex:page showheader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="false">
+    
+    <apex:composition template="Template_CES">
+        
+        <apex:define name="body"> 
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+
+                            
+                            
+                            <h3>About Us</h3>
+                            <br></br>
+                            <p><h4>CenterPoint Energy, Inc.</h4></p>
+                            <blockquote>
+                                <div>
+                         CenterPoint Energy, Inc., headquartered in Houston, Texas, is a domestic energy delivery company that includes electric transmission and distribution, natural gas distribution and competitive natural gas sales and services operations. It serves more than five million metered customers primarily in Arkansas, Louisiana, Minnesota, Mississippi, Oklahoma and Texas. CenterPoint also owns a 58.3 percent limited partner interest in Enable Midstream Partners, which it jointly controls with OGE Energy Corp., with operations in major natural gas and liquids-rich producing areas of Oklahoma, Texas, Arkansas and Louisiana. With more than 8,700 employees, CenterPoint Energy and its predecessor companies have been in business for more than 135 years.
+
+<br/><br/>
+                                <a href="http://www.CenterPointEnergy.com">CenterPointEnergy.com</a>
+                                </div>
+                                </blockquote>
+                                <br/>
+                                <p><h4>CenterPoint Energy Services, Inc.</h4></p>
+                            <blockquote>
+                                <div>
+                         CenterPoint Energy Services, Inc. (CES) is CenterPoint Energy, Inc.’s natural gas sales and services business that provides energy solutions to more than 25,000 commercial, industrial, utility and residential customers in 20 states.
+                               <br/><br/>
+                               <a href="http://www.CenterPointEnergy.com/CES">CenterPointEnergy.com/CES</a>
+                                </div>
+                                </blockquote>
+                          
+                            <hr/>
+                        
+                       
+                    
+                   
+                    </div>
+                </div>
+            </div>
+        </apex:define>       
+    </apex:composition>
+    <script>
+        $j=jQuery.noConflict();
+        $j("#signup_button").click(function(){
+            window.location.href = '{!$CurrentPage.url}'+'&ca_email='+$j("#ca_email").val();
+        });
+    </script>
+    
+            <c:CampaignAutomation campaignId="70130000000eGpc" status="Responded" leads="true" source="Oct 2013 Webinar"
+    canCreateCampMembers="true" email="{!$CurrentPage.Parameters.ca_email}" rendered="{!not(isblank($CurrentPage.Parameters.ca_email))}"/>
+    
+
+</apex:page>

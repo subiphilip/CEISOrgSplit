@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Credit_Request</fullName>
+    <availability>online</availability>
+    <description>Creates a new credit request</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>true</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>600</height>
+    <isResizable>true</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>New Credit Request</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>/a1G/e
+?CF00N3000000B72ab={!Opportunity.Account}
+&amp;CF00N3000000B72ag={!Opportunity.Name}
+&amp;00N3000000B72cS={!Opportunity.Business_Type__c}
+&amp;00N3000000B72cc={!Opportunity.Type}
+&amp;CF00N3000000B73hs={!Opportunity.OwnerFullName}
+&amp;00N3000000B8BSp={!Account.BillingStreet}
+&amp;00N3000000B8BSm={!Account.BillingCity}
+&amp;00N3000000B8BSo={!Account.BillingState}
+&amp;00N3000000B8BSq={!Account.BillingPostalCode}
+&amp;00N3000000B8BSn={!Account.BillingCountry}
+&amp;00N3000000B72cm={!Opportunity.Opty_Account_SIC_Code__c}
+&amp;00N3000000B72cr={!Opportunity.Opty_Account_DUNS_Number__c}
+&amp;00N3000000B72cw={!Opportunity.Opty_Account_Fed_Tax_ID__c}
+&amp;00N3000000B72dL={!Opportunity.Opty_Contact__c}
+&amp;00N3000000B72dQ={!Opportunity.Opty_Contact_Phone__c}
+&amp;00N3000000B72dV={!Opportunity.Opty_Contact_Fax__c}
+&amp;00N3000000B72da={!Opportunity.Opty_Contact_Email__c}
+&amp;CF00N3000000B72al={!Opportunity.Opty_Consultant_Contact__c}
+&amp;00N3000000B72df={!Opportunity.Opty_Consultant_Account__c}
+&amp;00N3000000B72dk={!Opportunity.Opty_Consultant_Phone__c}
+&amp;00N3000000B72dp={!Opportunity.Opty_Consultant_Fax__c}
+&amp;00N3000000B72du={!Opportunity.Opty_Consultant_Email__c}
+&amp;00N3000000B72es={!Opportunity.LDC_State__c}
+&amp;00N3000000B72dz={!Opportunity.Start_Date__c}
+&amp;00N3000000B72e4={!Opportunity.Term__c}
+&amp;00N3000000B7PFN={!Opportunity.Term_Volume__c}
+&amp;CF00N3000000B76NJ={!User.Assigned_Credit_Analyst__c}
+&amp;00N3000000B7Fii={!User.CES_Contract_Email__c}
+&amp;00N3000000B7peY={!Opportunity.Term_Days__c}
+&amp;00N3000000B72e9=3.25</url>
+</WebLink>

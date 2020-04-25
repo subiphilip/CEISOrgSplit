@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Lets REPs and admins know that an order has been in deposit status for 10 days</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>TrueCost_Customer</letterhead>
+    <name>Order In Deposit Status for 10 days</name>
+    <style>freeForm</style>
+    <subject>TrueCost Order {!Order__c.Name} Pending Deposit</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

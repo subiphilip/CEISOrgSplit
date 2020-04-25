@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Non_CEHE</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>Premise__c</columns>
+    <columns>Meter_Data_Request_Status__c</columns>
+    <columns>Premise_Record_Type__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>TDSP__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>TDSP__c</field>
+        <operation>notContain</operation>
+        <value>centerpoint,none</value>
+    </filters>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>LAST_MONTH</value>
+    </filters>
+    <filters>
+        <field>TDSP__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <label>Non-CEHE</label>
+    <language>en_US</language>
+</ListView>

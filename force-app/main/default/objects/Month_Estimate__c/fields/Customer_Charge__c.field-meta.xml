@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Charge__c</fullName>
+    <description>Monthly flat cost per customer (not TDSP pass-through)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Monthly flat cost per customer (not TDSP pass-through)</inlineHelpText>
+    <label>Customer Charge</label>
+    <precision>12</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

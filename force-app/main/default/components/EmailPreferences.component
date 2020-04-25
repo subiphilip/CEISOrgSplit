@@ -1,0 +1,55 @@
+<apex:component controller="ControllerForMobileMain" allowDML="true">
+    <label class="checkbox" id="weekly_email">
+        <input type="checkbox" value="" id="weekly_email_checkbox"/>
+        Send me a weekly email that shows my usage data 
+    </label>
+
+<!--
+    <label class="checkbox" id="daily_email">
+        <input type="checkbox" value="" id="daily_email_checkbox"/>
+        Send me a daily email that shows my usage data 
+    </label>
+    
+ -->
+    <script>
+        $j=jQuery.noConflict();
+        
+        ControllerForMobileMain.GetPreferences('{!$user.id}', 'Meter_Data_Email_Weekly__c', function(result, event){
+            if (event.status){
+                $j("#weekly_email_checkbox").prop("checked", result);
+                $j("#weekly_email_checkbox").click(function(){UpdateWeeklyPrefs()});
+            } else{
+                alert(result);
+            }
+        });
+
+        ControllerForMobileMain.GetPreferences('{!$user.id}', 'Meter_Data_Email_Daily__c', function(result, event){
+            if (event.status){
+                $j("#daily_email_checkbox").prop("checked", result);
+                $j("#daily_email_checkbox").click(function(){UpdatePrefs()});
+            } else{
+                alert(result);
+            }
+        });
+
+    
+        function UpdateWeeklyPrefs(){
+            ControllerForMobileMain.SetPreferences('{!$user.id}', $j("#weekly_email_checkbox").prop("checked"), 'Meter_Data_Email_Weekly__c', function(result, event){
+                if (event.status){
+                } else{
+                    alert(result);
+                }
+            });
+        }
+
+          function UpdatePrefs(){
+            ControllerForMobileMain.SetPreferences('{!$user.id}', $j("#daily_email_checkbox").prop("checked"), 'Meter_Data_Email_Daily__c', function(result, event){
+                if (event.status){
+                } else{
+                    alert(result);
+                }
+            });
+        }
+    </script>
+    
+</apex:component>

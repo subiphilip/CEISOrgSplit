@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Minimum_Maximum_Usage</fullName>
+    <active>true</active>
+    <description>If there is a minimum, there must be a maximum and vice versa.</description>
+    <errorConditionFormula>OR(AND(NOT(ISBLANK(Minimum_Annual_Usage__c)),ISBLANK(Maximum_Annual_Usage__c)), AND(NOT(ISBLANK(Maximum_Annual_Usage__c)),ISBLANK(Minimum_Annual_Usage__c)))</errorConditionFormula>
+    <errorDisplayField>Maximum_Annual_Usage__c</errorDisplayField>
+    <errorMessage>Rate09: Both a minimum AND maximum is required if either one is populated.</errorMessage>
+</ValidationRule>

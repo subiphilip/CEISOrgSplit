@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TOU_Profile_Complete__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>there&#39;s an attachment in place that contains the TOU profile for this customer</description>
+    <externalId>false</externalId>
+    <inlineHelpText>there&#39;s an attachment in place that contains the TOU profile for this customer</inlineHelpText>
+    <label>TOU Profile Complete</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

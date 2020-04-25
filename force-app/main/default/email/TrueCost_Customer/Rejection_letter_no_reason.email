@@ -1,0 +1,18 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<font size="3" face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">Dear</font><font size="3" face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">&nbsp;{!Order__c.First_Name__c},</font><br><br><font size="3" face="arial">Thank you for using TrueCost to enroll in a new electric plan. &nbsp;Unfortunately, &nbsp;{!Order__c.REP_Profile__c} has decided not to accept your order at this time.<font size="3">&nbsp;</font></font><br><br><font size="3" face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">Please feel free to contact us by phone or email and we would be happy to help determine the reasoning for the rejection, or return and we can help you find another retail electric provider at <a href="http://www.mytruecost.com/shopplans?RateClass=Residential">MyTrueCost.com</a>. Best of all, the information you provided is all securely saved in our system, so you can quickly get your new order placed.</font><br><br>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font face="arial">If you have any questions, please email us or call us at</font>
+<span style="font-size: medium; ">(800) 461-3056</span><font face="arial">&nbsp;Monday through Friday, 8 a.m. to 5 p.m. Central Standard Time.&nbsp;</font></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font face="arial"><br></font></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font face="arial">Thank you,</font></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font face="arial"><br></font></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font face="arial">TrueCost Customer Support</font></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font face="arial"><a href="mailto:TrueCost@CenterPointEnergy.com">TrueCost@CenterPointEnergy.com</a></font></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size: medium; ">(800) 461-3056</span>
+</div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font face="arial"><br></font></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="background-color: rgb(255, 255, 255); ">Log into your account at&nbsp;</span><a href="http://www.mytruecost.com/myaccount" style="background-color: rgb(255, 255, 255); ">MyTrueCost.com</a>
+</div><br><br><br><br><br><br><br><br><br><br>]]></td>
+</tr>
+</table>

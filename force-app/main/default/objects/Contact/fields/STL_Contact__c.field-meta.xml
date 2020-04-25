@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>STL_Contact__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Primary STL Safari contact.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Primary STL Safari contact.</inlineHelpText>
+    <label>STL Contact</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

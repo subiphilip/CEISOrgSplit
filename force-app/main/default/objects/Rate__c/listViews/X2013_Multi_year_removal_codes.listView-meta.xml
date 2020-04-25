@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2013_Multi_year_removal_codes</fullName>
+    <booleanFilter>1 AND 2 AND 3</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Confirmation_Code__c</columns>
+    <columns>Plan__c</columns>
+    <columns>Price_Details__c</columns>
+    <columns>Confirmation_Code_Status__c</columns>
+    <columns>Fixed_Rate__c</columns>
+    <columns>Fixed_Rate_Percentage__c</columns>
+    <columns>Index_Adder__c</columns>
+    <columns>Index_Rate_Percentage__c</columns>
+    <columns>Program__c</columns>
+    <columns>Division__c</columns>
+    <columns>Index_reference__c</columns>
+    <columns>Notes__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Rate__c.Gas_Choice_Rate</value>
+    </filters>
+    <filters>
+        <field>Notes__c</field>
+        <operation>contains</operation>
+        <value>removal</value>
+    </filters>
+    <filters>
+        <field>Confirmation_Code_Year__c</field>
+        <operation>equals</operation>
+        <value>2013</value>
+    </filters>
+    <label>2013 Multi-year removal codes</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+    </sharedTo>
+</ListView>

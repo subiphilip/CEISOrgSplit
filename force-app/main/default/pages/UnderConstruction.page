@@ -1,0 +1,19 @@
+<apex:page docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false">
+
+  <apex:composition template="Template_TC">
+    <apex:define name="body">
+    <div class="container"> 
+        <div class="row">
+            <div class="span12">
+                <h1>We're making some improvements to TrueCost.</h1>
+                <div class="well well-large">
+                    Thanks for visiting.  We're down temporarily to make some changes to TrueCost.  Please check back again soon.
+                </div>
+            </div>
+        </div>
+    </div>
+      <apex:image url="{!URLFOR($Resource.SiteSamples, 'img/tools.gif')}"/>
+    </apex:define>
+    
+  </apex:composition>
+</apex:page>

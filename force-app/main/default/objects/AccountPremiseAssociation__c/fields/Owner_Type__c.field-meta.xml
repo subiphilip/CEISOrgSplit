@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Owner_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Owner Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Well Owner</fullName>
+                <default>false</default>
+                <label>Well Owner</label>
+            </value>
+            <value>
+                <fullName>Royalty Owner</fullName>
+                <default>false</default>
+                <label>Royalty Owner</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

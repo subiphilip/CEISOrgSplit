@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Order_Bill_Doc__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Which bill document does was this order initially billed on?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Which bill document does was this order initially billed on?</inlineHelpText>
+    <label>Order Bill Doc</label>
+    <referenceTo>Billing_Documents__c</referenceTo>
+    <relationshipLabel>Orders</relationshipLabel>
+    <relationshipName>Orders</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

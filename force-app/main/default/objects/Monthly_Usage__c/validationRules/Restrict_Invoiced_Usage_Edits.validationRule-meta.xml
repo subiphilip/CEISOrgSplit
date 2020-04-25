@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Invoiced_Usage_Edits</fullName>
+    <active>false</active>
+    <description>do not allow edits to usage records that were generated from a safari invoice process.</description>
+    <errorConditionFormula>AND(
+  Invoiced__c == true,
+  Allow_Last_Update__c == false,
+  NOT(
+  OR(
+    $User.Profile_Name__c = &#39;System Administrator&#39;,
+    $User.Profile_Name__c = &#39;The System&#39;
+  )
+ )
+)</errorConditionFormula>
+    <errorMessage>MonthlyUsage01:  Safari invoiced usage can only be changed through the Safari invoicing process.  Please contact a Billing Analyst.</errorMessage>
+</ValidationRule>

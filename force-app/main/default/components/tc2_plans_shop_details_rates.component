@@ -1,0 +1,15 @@
+<apex:component >
+
+   <!--  <apex:attribute name="Rate" description="Which plan do you want the component to render?" type="Rate__c" required="true" />
+    <apex:attribute name="kWhPrice" description="Estimated Annual Cost per kWh" type="string" required="true" />
+    <apex:attribute name="AnnualPrice" description="Estimated Annual Cost" type="string" required="true" />
+    <apex:attribute name="HideAdvertised" description="Prevents the advertised rate from showing" type="boolean" required="false" default="false"/> 
+    <apex:attribute name="ShowContact" description="Prevents the advertised rate from showing" type="boolean" required="false" default="false"/>    
+    
+    <apex:outputtext value="{0, number, ###,###,###,##0.00}"> <apex:param value="{!Rate.X1000_kWh_rate__c}"/> </apex:outputtext>
+    <apex:outputtext value="{0, number, ###,###,###,##0.00}"> <apex:param value="{!value(AnnualPrice)/12}"/> </apex:outputtext>
+    <apex:outputtext value="{0, number, ###,###,###,##0.00}"> <apex:param value="{!value(AnnualPrice)/12}"/> </apex:outputtext> 
+    <apex:outputtext value="{0, number, ###,###,###,##0.00}"> <apex:param value="{!round(value(AnnualPrice), 0)}"/> </apex:outputtext>
+     --> 
+    
+</apex:component>

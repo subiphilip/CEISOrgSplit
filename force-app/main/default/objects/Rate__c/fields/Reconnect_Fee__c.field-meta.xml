@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reconnect_Fee__c</fullName>
+    <description>REP processing Fee to reconnect a customer who had been previously disconnected by the REP</description>
+    <externalId>false</externalId>
+    <inlineHelpText>REP processing Fee to reconnect a customer who had been previously disconnected by the REP</inlineHelpText>
+    <label>Reconnect Fee</label>
+    <precision>7</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

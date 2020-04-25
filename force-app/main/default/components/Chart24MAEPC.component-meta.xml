@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>23.0</apiVersion>
+    <description>TrueCost Electric Price Index Google Chart for 24 Month Fixed Rate Plans for AEP Central</description>
+    <label>Chart24MAEPC</label>
+</ApexComponent>

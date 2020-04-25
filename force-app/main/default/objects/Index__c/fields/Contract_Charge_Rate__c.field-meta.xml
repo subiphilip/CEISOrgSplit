@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_Charge_Rate__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This index can be selected for a contract charge lookup rate</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This index can be selected for a contract charge lookup rate</inlineHelpText>
+    <label>Contract Charge Rate</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

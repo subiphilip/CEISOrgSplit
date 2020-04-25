@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Program__c</fullName>
+    <description>Gas choice program</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Gas choice program</inlineHelpText>
+    <label>Program</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Ag</fullName>
+                <default>false</default>
+                <label>Ag</label>
+            </value>
+            <value>
+                <fullName>Nebraska</fullName>
+                <default>false</default>
+                <label>Nebraska</label>
+            </value>
+            <value>
+                <fullName>Wyoming</fullName>
+                <default>false</default>
+                <label>Wyoming</label>
+            </value>
+            <value>
+                <fullName>Copano Pipeline</fullName>
+                <default>false</default>
+                <label>Copano Pipeline</label>
+            </value>
+            <value>
+                <fullName>Kinder Morgan Texas</fullName>
+                <default>false</default>
+                <label>Kinder Morgan Texas</label>
+            </value>
+            <value>
+                <fullName>Energy Transfer</fullName>
+                <default>false</default>
+                <label>Energy Transfer</label>
+            </value>
+            <value>
+                <fullName>Enterprise</fullName>
+                <default>false</default>
+                <label>Enterprise</label>
+            </value>
+            <value>
+                <fullName>Gulf South Pipeline Texas</fullName>
+                <default>false</default>
+                <label>Gulf South Pipeline Texas</label>
+            </value>
+            <value>
+                <fullName>Enbridge</fullName>
+                <default>false</default>
+                <label>Enbridge</label>
+            </value>
+            <value>
+                <fullName>Kinder Morgan Tejas</fullName>
+                <default>false</default>
+                <label>Kinder Morgan Tejas</label>
+            </value>
+            <value>
+                <fullName>Gathering</fullName>
+                <default>false</default>
+                <label>Gathering</label>
+            </value>
+            <value>
+                <fullName>Transmission</fullName>
+                <default>false</default>
+                <label>Transmission</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

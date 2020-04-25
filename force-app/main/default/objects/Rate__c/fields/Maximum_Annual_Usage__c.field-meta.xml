@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Maximum_Annual_Usage__c</fullName>
+    <description>How much yearly kWh usage is allowed for a customer to have this rate.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How much yearly kWh usage is allowed for a customer to have this rate.</inlineHelpText>
+    <label>Maximum Annual Usage (kWh)</label>
+    <precision>12</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

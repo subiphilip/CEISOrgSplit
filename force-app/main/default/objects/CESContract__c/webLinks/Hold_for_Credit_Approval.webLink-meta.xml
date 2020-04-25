@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hold_for_Credit_Approval</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Hold for Credit Approval</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>/apex/CESActionsPage?id={!CESContract__c.Id}&amp;param=HoldforCreditApproval</url>
+</WebLink>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Storage_Compact_Layout</fullName>
+    <fields>Account__c</fields>
+    <fields>Start_Date_New__c</fields>
+    <fields>End_Date__c</fields>
+    <fields>Contract_Status__c</fields>
+    <fields>Storage_Strategy__c</fields>
+    <fields>Parent_Contract__c</fields>
+    <fields>Parent_Storage_Contract__c</fields>
+    <fields>Storage_Type__c</fields>
+    <label>Storage Compact Layout</label>
+</CompactLayout>

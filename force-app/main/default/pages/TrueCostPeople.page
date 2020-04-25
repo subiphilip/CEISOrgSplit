@@ -1,0 +1,36 @@
+<apex:page showHeader="false" sidebar="false" cache="true" expires="43200" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" controller="ControllerForTrueCostPeople">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>TrueCost People - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>   
+        
+        <apex:define name="body">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h2>
+                            TrueCost People<br/>
+                            <small>Meet the people who make TrueCost work</small>
+                        </h2> 
+                    </div>
+                </div>
+                <apex:repeat value="{!People}" var="p">
+                    <div class="row-fluid">                            
+                        
+                        <div class="span9" itemscope="itemscope" itemtype="http://schema.org/Person">
+                            <h4 itemprop="name">{!p.name}</h4>                            
+                            <span itemprop="description">
+                                <apex:outputText escape="false" value="{!p.description}"/> 
+                            </span>
+                        </div>
+                        <div class="span3 text-center">
+                            <img width="150" src="{!URLFOR($Resource.imgPeople, p.image)}" alt="{!p.name}" itemprop="image"/>
+                        </div>
+                    </div>    
+                    <hr/>
+                </apex:repeat>
+            </div>
+        </apex:define>
+    </apex:composition>
+</apex:page>

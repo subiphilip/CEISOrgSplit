@@ -1,0 +1,3 @@
+{!Order__c.CreatedBy} just placed an order for {!Order__c.REP_Profile__c}'s {!Order__c.Plan__c}.
+
+Link: {!Order__c.Link}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_CES_Standard_Solution__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Will this solution be the standard for all CES business units?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Will this solution be the standard for all CES business units?</inlineHelpText>
+    <label>Is CES Standard Solution</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

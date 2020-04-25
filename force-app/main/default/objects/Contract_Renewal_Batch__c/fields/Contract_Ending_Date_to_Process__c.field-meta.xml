@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_Ending_Date_to_Process__c</fullName>
+    <description>process contracts that end with this date</description>
+    <externalId>false</externalId>
+    <inlineHelpText>process contracts that end with this date</inlineHelpText>
+    <label>Contract Ending Date to Process</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

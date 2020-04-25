@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LDC_Fuel_Rate__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>LDC Fuel Rate</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Index__c.Fuel_Rate__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <filterItems>
+            <field>Index__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Utility</value>
+        </filterItems>
+        <filterItems>
+            <field>Index__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <infoMessage>Please select an active Utility Fuel rate</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Index__c</referenceTo>
+    <relationshipLabel>Positions (LDC Fuel Rate)</relationshipLabel>
+    <relationshipName>Positions8</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

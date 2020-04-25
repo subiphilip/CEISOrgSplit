@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Contract_Expiration__c</fullName>
+    <description>When does the account&#39;s current contract expire (non-CES)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>When does the account&#39;s current contract expire (non-CES)</inlineHelpText>
+    <label>Current Gas Contract Expiration</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

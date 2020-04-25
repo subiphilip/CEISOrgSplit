@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>float</fullName>
+        <default>false</default>
+        <label>float</label>
+    </customValue>
+    <customValue>
+        <fullName>fix</fullName>
+        <default>false</default>
+        <label>fix</label>
+    </customValue>
+    <customValue>
+        <fullName>yes</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>yes</label>
+    </customValue>
+    <customValue>
+        <fullName>no</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>no</label>
+    </customValue>
+    <masterLabel>Flex Option</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

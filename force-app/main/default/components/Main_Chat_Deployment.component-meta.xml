@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>25.0</apiVersion>
+    <description>Goes in the global header, just script to power the chat</description>
+    <label>Main Chat Deployment</label>
+</ApexComponent>

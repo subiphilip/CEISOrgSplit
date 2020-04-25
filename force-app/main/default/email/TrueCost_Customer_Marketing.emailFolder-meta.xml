@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accessType>Shared</accessType>
+    <name>TrueCost Customer Marketing</name>
+    <publicFolderAccess>ReadWrite</publicFolderAccess>
+    <sharedTo>
+        <role>Communications183141</role>
+        <role>Executive_Team</role>
+        <role>Legal</role>
+        <role>MarketDevelopmentManager</role>
+        <role>Marketing</role>
+        <role>Mass_Markets</role>
+    </sharedTo>
+</EmailFolder>

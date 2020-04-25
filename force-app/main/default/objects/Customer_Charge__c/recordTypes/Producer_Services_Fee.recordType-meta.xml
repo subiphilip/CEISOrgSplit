@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Producer_Services_Fee</fullName>
+    <active>true</active>
+    <label>Producer Services Fee</label>
+    <picklistValues>
+        <picklist>Charge_Level__c</picklist>
+        <values>
+            <fullName>Contract %28Flat%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract Unit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Premise %28Flat%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unit</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Safari_Sync_Status__c</picklist>
+        <values>
+            <fullName>Pending Sync</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sync Complete</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>Adjustment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gathering Fee</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

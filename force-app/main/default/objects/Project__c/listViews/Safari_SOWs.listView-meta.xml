@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Safari_SOWs</fullName>
+    <columns>NAME</columns>
+    <columns>Overview__c</columns>
+    <columns>Approval_Status__c</columns>
+    <columns>Status__c</columns>
+    <columns>Parent_Project__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Project_Environment__c</field>
+        <operation>equals</operation>
+        <value>Safari</value>
+    </filters>
+    <filters>
+        <field>Project_Type__c</field>
+        <operation>equals</operation>
+        <value>SOW</value>
+    </filters>
+    <label>Safari SOWs</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Plan_Name_Length</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( Record_Type_Name__c = &quot;Electric Plan&quot;, LEN(Name)&gt; 42)</errorConditionFormula>
+    <errorDisplayField>Name</errorDisplayField>
+    <errorMessage>Plan02: The maximum length of the plan name is 42 characters.</errorMessage>
+</ValidationRule>

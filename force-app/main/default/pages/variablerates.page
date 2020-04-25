@@ -1,0 +1,72 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" controller="VariableRatesController">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Variable Rates - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="description" content="View variable rates from providers like Reliant Energy, Direct Energy, TXU, Green Mountain, and more.  See the price you'll pay when your contract expires" />
+        </apex:define>
+       
+        
+        <apex:define name="body">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span8">
+                    	<div class="pull-right"> 
+                            <c:ShareThisSmall URL="{!left($Site.CurrentSiteUrl, len($Site.CurrentSiteURL)-1)}{!URLFOR($Page.ElectricPriceTrendsSummary)}"/>
+                        </div>
+                        <h1>Current Variable Rates<br/>
+                            <small>CenterPoint Energy Houston Electric Service Territory</small>
+                        </h1>
+
+						<div class="alert">
+							<c:Content_Viewer content="Variable Rate Introduction"/>
+						</div>
+
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>Provider</th>
+									<th>Variable Rate</th>
+                                    <th>Last Update</th>
+								</tr>
+							</thead>
+							<tbody>
+								<apex:repeat value="{!REPs}" var="r">
+									<tr>
+										<th>{!r.Name}</th>
+										<th>{!round(r.Curent_CEHE__c, 2)} &cent;/kWh</th>
+                                        <th><apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                            <apex:param value="{!r.CEHE_Variable_Rate_Last_Updated__c}" /> 
+                                        </apex:outputText></th>
+									</tr>
+								</apex:repeat>
+							</tbody>
+						</table>
+
+                        <h6><small class="muted">Variable rates obtained from providers' websites on the indicated date.  Variable rates can change often.  Maintained by Bobby Dornbos<a href="https://plus.google.com/101271406270641647443?rel=author" rel="author">+</a></small></h6>
+
+                        <div class="alert alert-success">
+                            <h4>Don't want to pay these prices?</h4><br/>
+                            <a href="" class="btn btn-primary">Shop Plans</a> to see our best fixed rates.
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div>
+                            <c:ChartMiniNarrow2Yr />
+                        </div>
+                        <hr/>
+                        <div >
+                            <c:RandomPoll />
+                        </div> 
+                        <hr/>
+                        <div >
+                            <c:RandomReview />
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+</apex:page>

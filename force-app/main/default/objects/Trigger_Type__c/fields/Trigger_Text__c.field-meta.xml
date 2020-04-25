@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Trigger_Text__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( Locks_Nymex__c &amp;&amp; Locks_Fin_Basis__c &amp;&amp; Locks_Phy_Prem__c, &quot;Fixed Price&quot;
+  , IF(Locks_Nymex__c &amp;&amp; Locks_Fin_Basis__c, &quot;Fixed Price&quot;
+      , IF(Locks_Fin_Basis__c &amp;&amp; Locks_Phy_Prem__c, &quot;Fixed Basis&quot;
+          , IF(Locks_Fin_Basis__c, &quot;Fixed Basis&quot;
+              , IF(Locks_Nymex__c, &quot;Fixed Commodity&quot;, &quot;&quot;)
+            )
+        )
+    )
+)</formula>
+    <label>Trigger Text</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

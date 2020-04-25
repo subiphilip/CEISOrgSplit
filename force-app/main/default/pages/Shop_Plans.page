@@ -1,0 +1,55 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" cache="false">
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+    <c:tc2_header title="TrueCost Electric Portal" description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."/>
+    
+    <style>
+        #providers .level-item p,
+        #features .level-item p, 
+        #contractlength .level-item p {
+            pointer-events: none;
+        }
+    </style>
+    <body class="has-background-grey-light has-navbar-fixed-top">
+
+      <div id="wrapper">
+        <c:tc2_navbar />
+
+        <!-- HEADER -->
+        <div id="appShopPlans">
+          <!-- <app-tdsp-lookup-modal /> -->
+          <c:tc2_tdsp_lookup_modal />
+          <app-modal-save-for-later/>
+          <!-- <app-modal-rate-calculator /> -->
+          <c:tc2_modal_rate_calculator />
+          <c:tc2_modal_link_off />
+          <app-modal-link-off/>
+
+          <!-- <c:tc2_hero_inner bgImage='hero-1.jpg' headline="Shop plans for {{zip}}" /> -->
+          <section id="hero" class="hero is-black is-medium">
+            <div class="hero-body has-bg-img-houses" style="background-image:url({!URLFOR($Resource.v2_tc_resources_images, 'hero-1.jpg')});">
+              <div class="container has-text-centered">
+                <h2 class="subtitle is-size-6-mobile ">Change your zip code to check another area</h2>
+                <h1 class="title is-size-2-mobile ">SHOP {{premiseType}} PLANS FOR
+                  <label class="visuallyhidden" for="zip">zip code</label>
+                  <input class="input borderless-inherit" id="zip" type="text" v-bind:placeholder="zip" v-model="myZip" maxlength="5" style="width: 180px;"/>
+                  <button class="button fixed-size is-info is-large is-rounded is-inverted btn-search" v-on:click="changeZip">
+                    <i class="fas fa-search fa-2x"></i>
+                  </button>
+                </h1>
+              </div>
+            </div>
+          </section>
+
+          <c:tc2_ui_shop_plans_sort />
+        </div>
+        <span v-if="plansTotal <= 0 && !isLoadingPlans">
+          <c:tc2_plans_shop maxPlans="10" routeTo="{!$Page.Account_Moving}"/>
+        </span>
+      </div>
+      <c:tc2_footer />
+      <c:tc2_scripts_shop_plans />
+
+      <script language='JavaScript1.1' async='' src='//pixel.mathtag.com/event/js?mt_id=1458590&mt_adid=223710&mt_exem=&mt_excl=&v1=&v2=&v3=&s1=&s2=&s3='></script>
+    </body>
+  </html>
+</apex:page>

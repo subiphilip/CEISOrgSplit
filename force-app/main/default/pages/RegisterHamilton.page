@@ -1,0 +1,65 @@
+<!-- 
+2/16/2012   Shane McLaughlin    limited zip codes displayed in registration selection to 5 digits--visualforce expression using LEFT()
+3/1/2012    Shane McLaughlin    Converted error messages (zipcode and small Comm) to managed content
+Added rendered statements to allow agent to Register Customers
+3/14/2012   Barry Glasco        Changed Register Page to RegisterSec.page for https redirect                                
+-->
+
+<apex:page id="Registration" showHeader="false" controller="ControllerForMobileMain" title="Register" docType="html-5.0" sidebar="false" standardStylesheets="false" applyBodyTag="false">
+    
+    <apex:composition template="Template_TC">       
+        <apex:define name="HeadTags">
+            <title>Support Hamilton!- {!$Label.Page_Title_Company_Name}</title>
+            <meta name="description" Content="Create a profile on TrueCost to view plans based on your personal electric usage patterns.  Signing up for a new electric plan supports Hamilton Middle School." />
+        </apex:define>
+        
+        <apex:define name="body" >
+            <div class="container-fluid">
+                <div class="row-fluid">
+                	<div class="span6">
+                    	<div class="">
+                    		<img src="https://www.houstonisd.org/cms/lib2/tx01001591/centricity/template/42/logos/hamiltonms.png" alt="hamilton middle school" class="pull-left" style="height:90px;"/>
+                    		<h1>Welcome, Hamilton Middle School<br/>
+                            	<small>Extra Credit Program</small>
+                        	</h1>	
+                    	</div>
+                    	<hr/>
+                        
+                        <div>
+
+							<img src="https://www.houstonisd.org/cms/lib2/TX01001591/Centricity/Domain/9328/IMG_9633.jpg" alt="hamilton middle school principal Wendy Hampton" class="pull-left" width="30%" style="margin-right:15px;"/>
+
+
+                            <p class="lead">Dear family, friends and neighbors of Hamilton Middle School,</p>
+ 
+                            <p class="lead">We are excited to be partnering with <b>myTrueCost.com</b>, a service of CenterPoint Energy, for a new and creative way to raise additional funds for the school.  </p>
+
+                            <p class="lead">Through the everyday process we all have to take care of, choosing an electricity plan for our home or business, we will have the opportunity to earn valuable donation dollars.</p>
+
+                            <p class="lead">I would first like to thank you for your support in this fundraising endeavor.  Each time you purchase electricity through <b>myTrueCost.com</b> they make a donation to our school. </p>
+
+                            <p class="lead">Those donations can be put toward any of our important initiatives, such as adding more academic choices for our students, improving interior spaces and campus grounds or getting parents and community more involved.</p>
+                            
+                            <p class="lead">You have been very supportive to Hamilton over the years and I truly thank you for continuing that support here.</p>
+
+                            <p class="lead">Sincerely,<br/>
+                            Wendy Hampton<br/>
+                            Principal</p>
+                        </div>
+
+                    </div>
+
+                    <div class="span6">
+                        <div class="well well-large">   
+                            <c:RemoteReg showphone="false" showpromo="true" PrePopPromo="hamilton"/>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </apex:define>
+        
+        
+    </apex:composition>
+    <c:RemoteRegScript />
+</apex:page>

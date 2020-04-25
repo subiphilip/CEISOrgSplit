@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Customer_Only__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check this box if the reward/incentive is only available for NEW customers.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check this box if the reward/incentive is only available for NEW customers.</inlineHelpText>
+    <label>New Customer Only</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

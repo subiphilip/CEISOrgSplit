@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>progress-circle</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Desktop-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-751.000000, -381.000000)">
+        <g id="progress-circle" transform="translate(752.000000, 382.000000)">
+            <circle id="Oval" stroke="#FFFFFF" stroke-width="2" fill="#64AD6A" fill-rule="evenodd" cx="14" cy="14" r="14"></circle>
+            <path d="M19.8243851,11.3676655 L12.2568703,18.9961557 C12.1615034,19.0922906 12.0062266,19.0922906 11.9108597,18.9961557 L8.23247969,15.2881212 C7.92250677,14.9756519 7.92250677,14.4672769 8.23247969,14.1548077 C8.38745087,13.9985268 8.59099192,13.920448 8.79459409,13.920448 C8.99819627,13.920448 9.20176788,13.9985576 9.35670849,14.1548077 L11.5538758,16.3696698 C11.695459,16.5123623 11.8837168,16.5909341 12.083865,16.5909341 C12.2841049,16.5909341 12.4723628,16.5123315 12.6139154,16.369639 L18.7001257,10.234352 C19.0100069,9.92188268 19.5144121,9.92188268 19.8243851,10.234352 C20.1343274,10.5468212 20.1343274,11.0551962 19.8243851,11.3676655 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

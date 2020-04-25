@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Volume_price_break_threshhold__c</fullName>
+    <defaultValue>100</defaultValue>
+    <description>How many therms/year does the customer need to use before we start a price break?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How many therms/year does the customer need to use before we start a price break?</inlineHelpText>
+    <label>Volume price break threshhold</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

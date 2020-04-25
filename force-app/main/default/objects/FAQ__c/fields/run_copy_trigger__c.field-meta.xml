@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>run_copy_trigger__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>System only field that tells trigger to copy draft content to production.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>System only field that tells trigger to copy draft content to production.</inlineHelpText>
+    <label>run copy trigger</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

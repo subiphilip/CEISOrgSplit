@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Projects_complete</fullName>
+    <columns>Project_Environment__c</columns>
+    <columns>Project_Type__c</columns>
+    <columns>NAME</columns>
+    <columns>Overview__c</columns>
+    <columns>Requested_By__c</columns>
+    <columns>Assigned_to_User__c</columns>
+    <columns>Completion_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Completed,Cancelled</value>
+    </filters>
+    <label>Projects complete</label>
+    <language>en_US</language>
+</ListView>

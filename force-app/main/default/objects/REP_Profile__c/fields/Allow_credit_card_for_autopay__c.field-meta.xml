@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_credit_card_for_autopay__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Customers can enter CC# information to sign up for autopay</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Customers can enter CC# information to sign up for autopay</inlineHelpText>
+    <label>Allow credit card for autopay</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

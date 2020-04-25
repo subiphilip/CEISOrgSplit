@@ -1,0 +1,103 @@
+<apex:component Controller="ControllerForMobileMain"> 
+
+  <script>
+  Vue.component('app-plans-shop-details-graph', {
+    data: function () {
+        return {
+            myplan: this.myplan,
+            planId: this.myplan.id,
+            months: [],
+            ctx: {}
+        }
+    },
+    mounted: function() {
+    	
+    },
+    methods: {
+    	callGraph: function(){
+    		var vm = this;
+    		ControllerForMobileMain.getdetailscostlist('{!$User.id}', this.planId, function(result,event){
+	        	var res = result.replace(/quot;/g, '"');
+	            res = res.replace(/&/g, '');
+	            res = JSON.parse(res);
+	        	//google.charts.load('current', {packages: ['corechart']});
+	        	vm.months.push(res)
+	  		  	//google.charts.setOnLoadCallback(vm.drawChart);
+	  		  	vm.ctx = document.getElementById('graph_'+vm.planId);
+	  		  	if(vm.ctx != null) {
+	  		  		vm.drawChart();
+	  		  	}
+	        });	
+    	},
+    	drawChart: function(){
+    		
+	        var myChart = new Chart(this.ctx, {
+			    type: 'line',
+			    data: {
+			        labels: ['J','F','M','A','M','J','J','A','S','O','N','D'],
+			        datasets: [{
+			        	label: '',
+			            data: [
+			            	this.months[0][0].Total__c.toFixed(2),
+							this.months[0][1].Total__c.toFixed(2),
+							this.months[0][2].Total__c.toFixed(2),
+							this.months[0][3].Total__c.toFixed(2),
+							this.months[0][4].Total__c.toFixed(2),
+							this.months[0][5].Total__c.toFixed(2),
+							this.months[0][6].Total__c.toFixed(2),
+							this.months[0][7].Total__c.toFixed(2),
+							this.months[0][8].Total__c.toFixed(2),
+							this.months[0][9].Total__c.toFixed(2),
+							this.months[0][10].Total__c.toFixed(2),
+							this.months[0][11].Total__c.toFixed(2),
+			            ],
+			            backgroundColor: [
+			                'rgba(13, 168, 217, .5)'
+			            ],
+			            borderWidth: 0
+			        }]
+			    },
+			    options: {
+			    	legend: {
+				        display: false
+				    },
+				    title: {
+				    	display: false,
+				    },
+			        scales: {
+			            yAxes: [{
+			                ticks: {
+			                    callback: function(value, index, values) {
+			                        return '$' + value;
+			                    }
+			                },
+
+			            }]
+			        },
+			        tooltips: {
+			            callbacks: {
+			            	labelColor: function(tooltipItem, chart) {
+			                    return {
+			                        borderColor: 'rgba(13, 168, 217, .5)',
+			                        backgroundColor: 'rgba(13, 168, 217, .5)'
+			                    }
+			                },
+			                label: function(tooltipItem, data) {
+			                    var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+			                    if (label) {
+			                        label += '$';
+			                    }
+			                    label += Math.round(tooltipItem.yLabel * 100) / 100;
+			                    return label;
+			                }
+			            }
+			        }
+			    }
+			});
+    	}
+    }, 
+    props: ['myplan']
+    });
+</script>
+</apex:component>

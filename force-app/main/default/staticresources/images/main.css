@@ -1,0 +1,28 @@
+/* Added by Softway 26-july-2013
+ * 
+ * Justification :- right component
+ * 
+ *
+ */
+
+ .video-box{
+	background-image: linear-gradient(to bottom, rgb(243, 245, 247), rgb(255, 255, 255));
+	background-repeat: repeat-x;
+	border: 1px solid #d4d4d4;
+	border-radius: 4px;
+}
+
+.div-width-margin{margin:0 auto; width:93%;}
+.div-head-title{padding-top: 0.5em; margin-left:13px;}
+.div-hr{margin-left:14px; width: 90%;}
+.space-height{height:20px;}
+.space-height2{height:10px;}
+
+/******* landing_NR ********/
+.content_left {float: left;}
+.content_left p span{color:#3a87ad;font-weight: bold;}
+.content_left .lead {font-size:18px; line-height:26px; color:#5c5c5c;}
+ @media (max-width:767px){.rating{margin:0 0 20px; display:block;}.navbar-inner{margin:20px 0;}}
+.h2_spacing {margin-top:0; margin-bottom:17px; }
+.space_left_zero {margin-left:0 !important;}
+

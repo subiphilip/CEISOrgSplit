@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Margin_Percentage_on_Executed_Contract</fullName>
+    <active>true</active>
+    <description>If contract status = &#39;activated&#39;, then Consultant pay type != &#39;Margin Percentage&#39;</description>
+    <errorConditionFormula>AND(
+OR(ISNEW(), ISCHANGED(Consultant_Pay_Type__c)),
+ISPICKVAL(Contract__r.Contract_Status__c,&#39;Activated&#39;),
+ISPICKVAL(Consultant_Pay_Type__c, &#39;Margin Percentage&#39;)
+)</errorConditionFormula>
+    <errorMessage>Cannot select a Consultant Pay Type of &#39;Margin Percentage&#39; on an Activated contract</errorMessage>
+</ValidationRule>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nebraska_Dist_Fixed__c</fullName>
+    <description>Monthly fixed cost for Nebraska distribution</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Monthly fixed cost for Nebraska distribution</inlineHelpText>
+    <label>Dist Fixed</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

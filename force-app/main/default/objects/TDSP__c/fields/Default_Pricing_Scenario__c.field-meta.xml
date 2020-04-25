@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Default_Pricing_Scenario__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>Most commonly used settings option to be defaulted for contract requests</inlineHelpText>
+    <label>Default Pricing Scenario</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Pipeline_Scenario__c.Utility__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.Id</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Pipeline_Scenario__c</referenceTo>
+    <relationshipLabel>Utilities</relationshipLabel>
+    <relationshipName>Utilities</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

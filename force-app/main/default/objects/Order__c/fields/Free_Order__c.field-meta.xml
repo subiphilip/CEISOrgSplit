@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Free_Order__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Promotional or Incentive-based order.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Promotional or Incentive-based order.</inlineHelpText>
+    <label>Free Order</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

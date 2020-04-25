@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Default_Weather_Station_HOU__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Default Weather Station HOU</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Premises__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Weather Station</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Premises__c</referenceTo>
+    <relationshipLabel>Utilities</relationshipLabel>
+    <relationshipName>Utilities</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

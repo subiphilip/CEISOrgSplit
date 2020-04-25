@@ -1,0 +1,20 @@
+<apex:component controller="ControllerForREPStrip">
+    <apex:attribute name="Quantity" type="integer" required="false" default="24" description="How many REPs can we bring back?"/>
+
+    <div class="text-center repstrip" >
+    
+        <!--// added by Forthea //-->
+        <h1>Shop electric plans from over 20 different providers.</h1>
+    
+        <apex:repeat value="{!REPs}" var="r" rows="{!Quantity}">
+            <!--Page with review details for each REP-->
+            <span itemscope="itemscope" itemtype="http://schema.org/Corporation">
+                <apex:outputPanel style="display:inline-block; height:auto; margin:2px; width:{!100/(REPs.size/1.8)}%" layout="inline" >
+                    <meta itemprop="name" content="{!r.name}" />
+                    <!--a href="/electric-companies/{!r.friendly_url__c}"><img src="/{!r.Logo_URL__c}" alt="{!r.name}"/></a-->
+                    <a href="/electric-companies/{!r.friendly_url__c}"><img src="{!URLFOR($Resource.REPLogos, substitute(r.Logo_URL__c, 'resource/REPLogos/', ''))}" alt="{!r.name}" itemprop="logo"/></a>
+                </apex:outputPanel>
+            </span>
+        </apex:repeat>
+    </div>
+</apex:component>

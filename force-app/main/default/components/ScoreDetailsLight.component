@@ -1,0 +1,18 @@
+<apex:component >
+    
+    
+    <div id="score-summary">	
+        	
+        <p>Plans are scored on a 100-point scale based on how important you rate factors such as price, renewable content, customer satisfaction, and provider years in business.</p> 
+        <p>The chart displays how the score for each of the selected criteria combine for the total plan score.</p>
+        <center>
+            <div class="row">
+                <h1><div class="total-score text-center" id="total_score_text"></div></h1>
+                <div class="total-score-label text-center">Total Score</div>
+            </div>
+            <div id="score_Bar" class="row"></div>
+            
+        </center>
+    </div>
+    
+</apex:component>

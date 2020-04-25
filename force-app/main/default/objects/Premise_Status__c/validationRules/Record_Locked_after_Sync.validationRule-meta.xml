@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Record_Locked_after_Sync</fullName>
+    <active>true</active>
+    <description>record will not allow updates by unauthorized users after sync</description>
+    <errorConditionFormula>AND(
+ ISPICKVAL(Safari_Sync_Status__c, &#39;Sync Complete&#39;),
+ NOT(
+  OR(
+    CONTAINS($User.Profile_Name__c,&#39;CES Contract&#39;),
+    CONTAINS($User.Profile_Name__c,&#39;CES Gas Operations&#39;),
+    $User.Profile_Name__c = &#39;System Administrator&#39;,
+    $User.Profile_Name__c = &#39;The System&#39;
+  )
+ )
+)</errorConditionFormula>
+    <errorMessage>PremiseStatus02: Status has been synced with Safari and can only be modified by a transaction analyst.  Please contact your applicable transaction analyst group.</errorMessage>
+</ValidationRule>

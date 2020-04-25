@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DM_HSP_Interest__c</fullName>
+    <description>DM HSP Interest are items the lead has clicked but may or may not ordered</description>
+    <externalId>false</externalId>
+    <label>DM HSP Interests</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>TextArea</type>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>URL_for_new_customer_deposits__c</fullName>
+    <description>URL for new customer deposits</description>
+    <externalId>false</externalId>
+    <inlineHelpText>We&#39;ll show this link to customers that need to pay a deposit on your website as part of their signup process.</inlineHelpText>
+    <label>URL for new customer deposits</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Url</type>
+</CustomField>

@@ -1,0 +1,90 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "PartnerAPI__c",
+                "referenceId": "PartnerAPI__cRef1"
+            },
+            "Active__c": true,
+            "Brand_string__c": "newleaf",
+            "Endpoint__c": "http://www.newleafgreenenergy.com/api-ng/place-order.php",
+            "Name": "New Leaf Energy",
+            "Partner_code__c": "23",
+            "Password__c": "nL64green681",
+            "Username__c": "cNptrue8tco"
+        },
+        {
+            "attributes": {
+                "type": "PartnerAPI__c",
+                "referenceId": "PartnerAPI__cRef2"
+            },
+            "Active__c": true,
+            "Endpoint__c": "https://cgsupplierreg.sourcegas.com/sap/bc/srt/rfc/sap/z_cg_selfserv_enrl_rfc/500/zsn_cg_signup/zbn_cg_signup",
+            "Name": "SourceGas",
+            "Password__c": "Sourcegas5",
+            "Username__c": "Cgs_ctrpt1"
+        },
+        {
+            "attributes": {
+                "type": "PartnerAPI__c",
+                "referenceId": "PartnerAPI__cRef3"
+            },
+            "Active__c": true,
+            "Brand_string__c": "bounce",
+            "Endpoint__c": "https://www.bounceenergy.com/api-ng/place-order.php",
+            "Name": "Bounce Energy",
+            "Partner_code__c": "448",
+            "Password__c": "7kbzlhSw",
+            "Username__c": "centerpoint"
+        },
+        {
+            "attributes": {
+                "type": "PartnerAPI__c",
+                "referenceId": "PartnerAPI__cRef4"
+            },
+            "Active__c": true,
+            "Dynamic_Endpoint__c": "https://na1.dm-us.informaticacloud.com/saas/api/v2/job",
+            "Endpoint__c": "https://dm-us.informaticacloud.com/ma/api/v2/user/login",
+            "Name": "InformaticaCloud",
+            "Password__c": "Pax45lgd",
+            "Saved_Token__c": "iN4bMkX6vl4bygxQ",
+            "Username__c": "shanemclaughlin@centerpointenergy.com"
+        },
+        {
+            "attributes": {
+                "type": "PartnerAPI__c",
+                "referenceId": "PartnerAPI__cRef5"
+            },
+            "Active__c": true,
+            "Brand_string__c": "fcp",
+            "Endpoint__c": "https://www.firstchoicepower.com/api-ng/place-order.php",
+            "Name": "First Choice Power",
+            "Partner_code__c": "508",
+            "Password__c": "brandsne342",
+            "Username__c": "mytruecost_fcp"
+        },
+        {
+            "attributes": {
+                "type": "PartnerAPI__c",
+                "referenceId": "PartnerAPI__cRef6"
+            },
+            "Active__c": true,
+            "Brand_string__c": "direct",
+            "Endpoint__c": "https://www.directenergy.com/api-ng/place-order.php",
+            "Name": "Direct Energy",
+            "Partner_code__c": "40",
+            "Password__c": "brandsne342",
+            "Username__c": "mytruecost_de"
+        },
+        {
+            "attributes": {
+                "type": "PartnerAPI__c",
+                "referenceId": "PartnerAPI__cRef7"
+            },
+            "Active__c": true,
+            "Name": "TriEagle Energy",
+            "Partner_code__c": "CENTERPOINT",
+            "Username__c": "8419827582276416762857489"
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+<apex:component >
+    
+    <script>
+    $j=jQuery.noConflict();
+    
+    $j("#login_submit").click(function(){Login();});
+    $j("#password").on('keyup', function(){
+        noenter(event);
+    });
+    
+    function Login(){
+        $j("#login_submit").button('loading');
+        var pagename = '{!$CurrentPage.Parameters.starturl}'; //login to the page specified in the url
+        if (!pagename) {
+            pagename='/';  //if no page name, login to the homepage
+        } else{
+            pagename=pagename.toLowerCase();
+            if (pagename==='/sitelogin') pagename='/'; //no infintite loop traps!
+            if (pagename==='/centerpoint_energy' || pagename==='/save') pagename='/shopplans'; //no infintite loop
+        }
+        ControllerForMobileMain.RemoteLogin($j("#email").val(),$j("#password").val(), pagename, function(result2, event){            
+            if (result2!='login error'){
+                dataLayer.push({'event':'success', 'successMessage':'Successful Login'});
+                var decoded = result2.replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '');               
+
+                window.location.href=decoded;
+            } else{
+                dataLayer.push({'event':'error', 'errorFunction':'RemoteLogin', 'errorObject':{'errorCode':'Login Error', 'errorMessage':'Incorrect Username/Password'}});
+                $j("#login_submit").button('reset');
+                $j("#login_error").show();
+            }
+        });
+        
+    }
+    
+
+
+    function noenter(event)  {
+        try{
+            if (event && event.keyCode == 13 || event.which == 13) {
+                Login();
+                return false;
+             } else {
+                return true;
+             }
+        } catch(err){return true;}
+     }
+    
+    </script>
+</apex:component>

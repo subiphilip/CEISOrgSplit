@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>City_Name__c</columns>
+    <columns>City_Sales_Tax_Rate__c</columns>
+    <columns>City_Type__c</columns>
+    <columns>Combined_Tax_Rate__c</columns>
+    <columns>County_Sales_Tax_Rate__c</columns>
+    <columns>Franchise_Fees__c</columns>
+    <columns>Main_Division_Name__c</columns>
+    <columns>Main_Division_Type__c</columns>
+    <columns>State_Sales_Tax_Rate__c</columns>
+    <columns>Subdivision_Name__c</columns>
+    <columns>Subdivision__c</columns>
+    <columns>Tax_Area_ID__c</columns>
+    <columns>Unit_of_Measure__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+    </sharedTo>
+</ListView>

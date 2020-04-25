@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Last_Opportunity__c</fullName>
+    <description>for testing DLRS only for now</description>
+    <externalId>false</externalId>
+    <inlineHelpText>for testing DLRS only for now</inlineHelpText>
+    <label>Last Opportunity</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

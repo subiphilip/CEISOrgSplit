@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_C_I_Gas_Opportunity</fullName>
+    <availability>online</availability>
+    <displayType>massActionButton</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>New C&amp;I Gas Opportunity</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <requireRowSelection>false</requireRowSelection>
+    <url>/006/e?retURL=%2F{!Account.Id}&amp;accid={!Account.Id}
+&amp;RecordTypeId=012300000019K8K&amp;cancelURL=%2F{!Account.Id}</url>
+</WebLink>

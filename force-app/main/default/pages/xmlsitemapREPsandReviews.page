@@ -1,0 +1,46 @@
+<apex:page contentType="text/xml" controller="ControllerForMobileMain">
+    <urlset xmlns="http://www.google.com/schemas/sitemap/0.84"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.google.com/schemas/sitemap/0.84
+    http://www.google.com/schemas/sitemap/0.84/sitemap.xsd">
+        <apex:repeat value="{!REPs}" var="x">
+            
+                <url>
+                    <loc>http://www.mytruecost.com/readreviews?id={!x.id}</loc>
+                    <lastmod>
+                        <apex:outputText value="{0,date,yyyy-MM-dd}">
+                            <apex:param value="{!x.lastmodifieddate}" />
+                        </apex:outputText> 
+                    </lastmod>
+                    <changefreq>daily</changefreq>
+                    <priority>1.00</priority>
+                </url>
+            
+                <url>
+                    <loc>http://www.mytruecost.com/electric-companies/{!x.Friendly_URL__c}</loc>
+                    <lastmod>
+                        <apex:outputText value="{0,date,yyyy-MM-dd}">
+                            <apex:param value="{!x.lastmodifieddate}" />
+                        </apex:outputText> 
+                    </lastmod>
+                    <changefreq>daily</changefreq>
+                    <priority>1.00</priority>
+                </url>
+            
+        </apex:repeat>
+        <apex:repeat value="{!ActivePlans}" var="x">
+            
+                <url>
+                    <loc>http://www.mytruecost.com/plandetails?id={!x.id}</loc>
+                    <lastmod>
+                        <apex:outputText value="{0,date,yyyy-MM-dd}">
+                            <apex:param value="{!today()}" />
+                        </apex:outputText> 
+                    </lastmod>
+                    <changefreq>daily</changefreq>
+                    <priority>1.00</priority>
+                </url>
+         
+        </apex:repeat>
+    </urlset>
+</apex:page>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Errors</fullName>
+    <booleanFilter>1 or 2</booleanFilter>
+    <columns>NAME</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>Index_Future__c</columns>
+    <columns>Index_Parent__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Index_Parent__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>Index_Future__c</field>
+        <operation>equals</operation>
+    </filters>
+    <label>Errors</label>
+    <language>en_US</language>
+</ListView>

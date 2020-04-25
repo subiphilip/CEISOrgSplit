@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Meter_Data_Email_Daily__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Customer wants daily email of meter data.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Customer wants daily email of meter data.</inlineHelpText>
+    <label>Meter Data Email Daily</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,44 @@
+<apex:page showHeader="false" sidebar="false" standardcontroller="Content_Item__c" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="true" expires="43200" >
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>{!Content_Item__c.Name} - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="description" content="{!content_item__c.definition__c}" />
+        </apex:define>
+        
+        <apex:Define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h1>
+                            Electric Terms and Fees<br/>
+                            <small>Learn to speak like an electric expert</small>
+                        </h1>
+                        
+                        <div class="well well-large">
+                            <dl>    
+                                <dt>
+                                    {!Content_Item__c.Name}
+                                </dt>
+                                <dd>
+                                    <c:Content_Viewer content="{!Content_Item__c.Name}"/>
+                                </dd>
+                                
+                            </dl>
+                        </div>
+                        <a href="{!$Page.glossary}" class="btn btn-warning">More Glossary Terms</a>    
+                        <a href="{!$Page.fees}" class="btn btn-warning">More Electric Fees</a>
+                    </div>
+                    
+                    <div class="span4">
+                        <c:ChartMiniNarrow /> 
+                        <hr/>
+                        <c:truecostrecentblogposts PostLimit="10"/>
+                        <hr/>
+                        <c:RandomPoll />    
+                    </div>
+                </div>
+            </div>
+        </apex:Define>
+    </apex:composition>
+</apex:page>

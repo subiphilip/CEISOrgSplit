@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sync_Value__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(CONTAINS(Safari_Key__c, &#39;LIVE&#39;), Sync_User_Field__r.Name == &#39;AllProductType&#39;, Value__c == &#39;Market Price&#39;), &#39;Index&#39;, Value__c)</formula>
+    <label>Sync Value</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

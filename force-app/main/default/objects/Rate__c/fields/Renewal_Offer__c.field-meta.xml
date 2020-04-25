@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Renewal_Offer__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Is this pricing for renewal customers?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Is this pricing for renewal customers?</inlineHelpText>
+    <label>Renewal Offer</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

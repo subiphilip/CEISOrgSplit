@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Default_Plans_to_Show__c</fullName>
+    <defaultValue>4</defaultValue>
+    <description>How many plans should be shown by default on the shopping page.  Make this a multiple of 4 for visual evenness</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How many plans should be shown by default on the shopping page.  Make this a multiple of 4 for visual evenness</inlineHelpText>
+    <label>Default Plans to Show</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

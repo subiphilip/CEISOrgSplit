@@ -1,0 +1,23 @@
+<apex:component >
+
+<script type="text/javascript" src="http://aptonic.github.com/ab.js/ab.js"></script>
+
+<script>
+var myAbTest = ABTest({
+    name: "Traffic_Test",
+    customVarSlot: 1,
+    variations: {
+        first_variation: function () {
+            //window.location.href='/'
+        },
+        another_variation: function () {
+            window.location.href='/Home'
+        },
+        control: function () {
+        	window.location.href='/Home'
+        }
+    }
+});
+</script> 
+
+</apex:component>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deposit_Instructions__c</fullName>
+    <description>What steps should a customer follow to pay a deposit?  This will be sent to customers via email.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What steps should a customer follow to pay a deposit?  This will be sent to customers via email.</inlineHelpText>
+    <label>Deposit Instructions</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

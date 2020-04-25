@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Acquisition</fullName>
+        <default>false</default>
+        <label>Acquisition</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Advertisement</fullName>
+        <default>false</default>
+        <label>Advertisement</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Convertant</fullName>
+        <default>false</default>
+        <label>Convertant</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Customer Service</fullName>
+        <default>false</default>
+        <label>Customer Service</label>
+    </standardValue>
+    <standardValue>
+        <fullName>D&amp;B Hoovers</fullName>
+        <default>false</default>
+        <label>D&amp;B Hoovers</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Employee Referral</fullName>
+        <default>false</default>
+        <label>Employee Referral</label>
+    </standardValue>
+    <standardValue>
+        <fullName>External Referral</fullName>
+        <default>false</default>
+        <label>External Referral</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Partner</fullName>
+        <default>false</default>
+        <label>Partner</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Public Relations</fullName>
+        <default>false</default>
+        <label>Public Relations</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Qualified Transport Customer List</fullName>
+        <default>false</default>
+        <label>Qualified Transport Customer List</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Seminar - Internal</fullName>
+        <default>false</default>
+        <label>Seminar - Internal</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Seminar - Partner</fullName>
+        <default>false</default>
+        <label>Seminar - Partner</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Trade Show</fullName>
+        <default>false</default>
+        <label>Trade Show</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Web</fullName>
+        <default>false</default>
+        <label>Web</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Word of mouth</fullName>
+        <default>false</default>
+        <label>Word of mouth</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Transmission Pipelines</fullName>
+        <default>false</default>
+        <label>Transmission Pipelines</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other LDCs</fullName>
+        <default>false</default>
+        <label>Other LDCs</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Economic Development Councils</fullName>
+        <default>false</default>
+        <label>Economic Development Councils</label>
+    </standardValue>
+</StandardValueSet>

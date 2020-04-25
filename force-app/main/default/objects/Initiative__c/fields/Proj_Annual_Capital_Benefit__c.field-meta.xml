@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proj_Annual_Capital_Benefit__c</fullName>
+    <description>The projected annual capital benefit from the initiative</description>
+    <externalId>false</externalId>
+    <inlineHelpText>currency value with no decimals</inlineHelpText>
+    <label>Proj. Annual Capital Benefit</label>
+    <precision>16</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CES_Competitor__c</fullName>
+    <externalId>false</externalId>
+    <label>CES Competitor</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AEP Energy</fullName>
+                <default>false</default>
+                <label>AEP Energy</label>
+            </value>
+            <value>
+                <fullName>Ambit Illinois</fullName>
+                <default>false</default>
+                <label>Ambit Illinois</label>
+            </value>
+            <value>
+                <fullName>Ameren Energy</fullName>
+                <default>false</default>
+                <label>Ameren Energy</label>
+            </value>
+            <value>
+                <fullName>Amerimax</fullName>
+                <default>false</default>
+                <label>Amerimax</label>
+            </value>
+            <value>
+                <fullName>AM Gas</fullName>
+                <default>false</default>
+                <label>AM Gas</label>
+            </value>
+            <value>
+                <fullName>Anadarko</fullName>
+                <default>false</default>
+                <label>Anadarko</label>
+            </value>
+            <value>
+                <fullName>Atmos Energy</fullName>
+                <default>false</default>
+                <label>Atmos Energy</label>
+            </value>
+            <value>
+                <fullName>Border</fullName>
+                <default>false</default>
+                <label>Border</label>
+            </value>
+            <value>
+                <fullName>BP Energy</fullName>
+                <default>false</default>
+                <label>BP Energy</label>
+            </value>
+            <value>
+                <fullName>Champion</fullName>
+                <default>false</default>
+                <label>Champion</label>
+            </value>
+            <value>
+                <fullName>Clearwater Enterprises</fullName>
+                <default>false</default>
+                <label>Clearwater Enterprises</label>
+            </value>
+            <value>
+                <fullName>Compass Energy</fullName>
+                <default>false</default>
+                <label>Compass Energy</label>
+            </value>
+            <value>
+                <fullName>Comverge</fullName>
+                <default>false</default>
+                <label>Comverge</label>
+            </value>
+            <value>
+                <fullName>ConEd</fullName>
+                <default>false</default>
+                <label>ConEd</label>
+            </value>
+            <value>
+                <fullName>Conoco Phillips</fullName>
+                <default>false</default>
+                <label>Conoco Phillips</label>
+            </value>
+            <value>
+                <fullName>Constellation</fullName>
+                <default>false</default>
+                <label>Constellation</label>
+            </value>
+            <value>
+                <fullName>Corn Belt Energy</fullName>
+                <default>false</default>
+                <label>Corn Belt Energy</label>
+            </value>
+            <value>
+                <fullName>Direct Energy</fullName>
+                <default>false</default>
+                <label>Direct Energy</label>
+            </value>
+            <value>
+                <fullName>Dominion Retail</fullName>
+                <default>false</default>
+                <label>Dominion Retail</label>
+            </value>
+            <value>
+                <fullName>Energy Transfer</fullName>
+                <default>false</default>
+                <label>Energy Transfer</label>
+            </value>
+            <value>
+                <fullName>Exelon Energy</fullName>
+                <default>false</default>
+                <label>Exelon Energy</label>
+            </value>
+            <value>
+                <fullName>First Energy</fullName>
+                <default>false</default>
+                <label>First Energy</label>
+            </value>
+            <value>
+                <fullName>Gateway Energy</fullName>
+                <default>false</default>
+                <label>Gateway Energy</label>
+            </value>
+            <value>
+                <fullName>Glacial Energy</fullName>
+                <default>false</default>
+                <label>Glacial Energy</label>
+            </value>
+            <value>
+                <fullName>Hess</fullName>
+                <default>false</default>
+                <label>Hess</label>
+            </value>
+            <value>
+                <fullName>Hudson Energy</fullName>
+                <default>false</default>
+                <label>Hudson Energy</label>
+            </value>
+            <value>
+                <fullName>IGS Energy</fullName>
+                <default>false</default>
+                <label>IGS Energy</label>
+            </value>
+            <value>
+                <fullName>Indiana Gas &amp; Electric</fullName>
+                <default>false</default>
+                <label>Indiana Gas &amp; Electric</label>
+            </value>
+            <value>
+                <fullName>Integrys Energy</fullName>
+                <default>false</default>
+                <label>Integrys Energy</label>
+            </value>
+            <value>
+                <fullName>Johnson Controls</fullName>
+                <default>false</default>
+                <label>Johnson Controls</label>
+            </value>
+            <value>
+                <fullName>Just Energy</fullName>
+                <default>false</default>
+                <label>Just Energy</label>
+            </value>
+            <value>
+                <fullName>Laclede Energy Resources</fullName>
+                <default>false</default>
+                <label>Laclede Energy Resources</label>
+            </value>
+            <value>
+                <fullName>Lakeshore Energy</fullName>
+                <default>false</default>
+                <label>Lakeshore Energy</label>
+            </value>
+            <value>
+                <fullName>Liberty Power</fullName>
+                <default>false</default>
+                <label>Liberty Power</label>
+            </value>
+            <value>
+                <fullName>Luminent</fullName>
+                <default>false</default>
+                <label>Luminent</label>
+            </value>
+            <value>
+                <fullName>Mc2</fullName>
+                <default>false</default>
+                <label>Mc2</label>
+            </value>
+            <value>
+                <fullName>MidAmerican</fullName>
+                <default>false</default>
+                <label>MidAmerican</label>
+            </value>
+            <value>
+                <fullName>Multiut</fullName>
+                <default>false</default>
+                <label>Multiut</label>
+            </value>
+            <value>
+                <fullName>MX Energy</fullName>
+                <default>false</default>
+                <label>MX Energy</label>
+            </value>
+            <value>
+                <fullName>Natural Gas Processors, Inc.</fullName>
+                <default>false</default>
+                <label>Natural Gas Processors, Inc.</label>
+            </value>
+            <value>
+                <fullName>Nextera</fullName>
+                <default>false</default>
+                <label>Nextera</label>
+            </value>
+            <value>
+                <fullName>Nicor Advanced Energy</fullName>
+                <default>false</default>
+                <label>Nicor Advanced Energy</label>
+            </value>
+            <value>
+                <fullName>Nicor Enerchange</fullName>
+                <default>false</default>
+                <label>Nicor Enerchange</label>
+            </value>
+            <value>
+                <fullName>Nordic Energy</fullName>
+                <default>false</default>
+                <label>Nordic Energy</label>
+            </value>
+            <value>
+                <fullName>Oklahoma Energy Source</fullName>
+                <default>false</default>
+                <label>Oklahoma Energy Source</label>
+            </value>
+            <value>
+                <fullName>ONEOK Energy Services</fullName>
+                <default>false</default>
+                <label>ONEOK Energy Services</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>PPL Energy Plus</fullName>
+                <default>false</default>
+                <label>PPL Energy Plus</label>
+            </value>
+            <value>
+                <fullName>ProLiance Energy</fullName>
+                <default>false</default>
+                <label>ProLiance Energy</label>
+            </value>
+            <value>
+                <fullName>Realgy Energy</fullName>
+                <default>false</default>
+                <label>Realgy Energy</label>
+            </value>
+            <value>
+                <fullName>Rhoads Energy</fullName>
+                <default>false</default>
+                <label>Rhoads Energy</label>
+            </value>
+            <value>
+                <fullName>Santanna Energy</fullName>
+                <default>false</default>
+                <label>Santanna Energy</label>
+            </value>
+            <value>
+                <fullName>Seminole</fullName>
+                <default>false</default>
+                <label>Seminole</label>
+            </value>
+            <value>
+                <fullName>Shell</fullName>
+                <default>false</default>
+                <label>Shell</label>
+            </value>
+            <value>
+                <fullName>Shipley</fullName>
+                <default>false</default>
+                <label>Shipley</label>
+            </value>
+            <value>
+                <fullName>SourceGas</fullName>
+                <default>false</default>
+                <label>SourceGas</label>
+            </value>
+            <value>
+                <fullName>South Jersey Energy Solutions</fullName>
+                <default>false</default>
+                <label>South Jersey Energy Solutions</label>
+            </value>
+            <value>
+                <fullName>Spark Energy</fullName>
+                <default>false</default>
+                <label>Spark Energy</label>
+            </value>
+            <value>
+                <fullName>Stand Energy Corporation</fullName>
+                <default>false</default>
+                <label>Stand Energy Corporation</label>
+            </value>
+            <value>
+                <fullName>Suez</fullName>
+                <default>false</default>
+                <label>Suez</label>
+            </value>
+            <value>
+                <fullName>Tenaska</fullName>
+                <default>false</default>
+                <label>Tenaska</label>
+            </value>
+            <value>
+                <fullName>Tiger Natural Gas</fullName>
+                <default>false</default>
+                <label>Tiger Natural Gas</label>
+            </value>
+            <value>
+                <fullName>Twin Eagle</fullName>
+                <default>false</default>
+                <label>Twin Eagle</label>
+            </value>
+            <value>
+                <fullName>Tylex</fullName>
+                <default>false</default>
+                <label>Tylex</label>
+            </value>
+            <value>
+                <fullName>UGI Energy Services</fullName>
+                <default>false</default>
+                <label>UGI Energy Services</label>
+            </value>
+            <value>
+                <fullName>US Energy Services</fullName>
+                <default>false</default>
+                <label>US Energy Services</label>
+            </value>
+            <value>
+                <fullName>Utility</fullName>
+                <default>false</default>
+                <label>Utility</label>
+            </value>
+            <value>
+                <fullName>Vanguard</fullName>
+                <default>false</default>
+                <label>Vanguard</label>
+            </value>
+            <value>
+                <fullName>Vectren Source</fullName>
+                <default>false</default>
+                <label>Vectren Source</label>
+            </value>
+            <value>
+                <fullName>Vista Energy Marketing</fullName>
+                <default>false</default>
+                <label>Vista Energy Marketing</label>
+            </value>
+            <value>
+                <fullName>Washington Gas</fullName>
+                <default>false</default>
+                <label>Washington Gas</label>
+            </value>
+            <value>
+                <fullName>Windy City Energy, Inc</fullName>
+                <default>false</default>
+                <label>Windy City Energy, Inc</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

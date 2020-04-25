@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>false</available>
+    <description>Lets admins know when a REP name changes</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>TrueCost_Customer</letterhead>
+    <name>REP Name Change</name>
+    <style>freeForm</style>
+    <subject>REP Profile Name Change</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

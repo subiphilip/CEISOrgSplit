@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>two_Weekly_Orders</fullName>
+    <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+    <columns>NAME</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>OWNER.LAST_NAME</columns>
+    <columns>Parent_Account__c</columns>
+    <columns>REP_Profile__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Commission__c</columns>
+    <columns>PMVI_Flag__c</columns>
+    <columns>Order_Expiration_Date__c</columns>
+    <columns>Plan__c</columns>
+    <columns>Rate__c</columns>
+    <columns>Order_Status__c</columns>
+    <columns>InitialDateofService__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>equals</operation>
+        <value>LAST_N_WEEKS:2</value>
+    </filters>
+    <filters>
+        <field>Record_Type_Name__c</field>
+        <operation>equals</operation>
+        <value>Electric Order</value>
+    </filters>
+    <filters>
+        <field>Order_Status__c</field>
+        <operation>equals</operation>
+        <value>New/Successfully Submitted,Pending Information,Pending Switch Hold</value>
+    </filters>
+    <filters>
+        <field>Order_Status__c</field>
+        <operation>equals</operation>
+        <value>Approved Pending Deposit,Approved Pending Confirmation,Confirmed</value>
+    </filters>
+    <label>Last Two Week&#39;s TrueCost Orders</label>
+    <sharedTo>
+        <allInternalUsers/>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Electric_Premise_Zip</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( Record_Type_Name__c = &quot;Electric Premise&quot;, 
+
+ISNULL( Electric_Service_Address_Zip__c )
+)</errorConditionFormula>
+    <errorDisplayField>Electric_Service_Address_Zip__c</errorDisplayField>
+    <errorMessage>Premise07: Zip is required.</errorMessage>
+</ValidationRule>

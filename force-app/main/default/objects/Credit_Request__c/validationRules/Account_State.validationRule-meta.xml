@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_State</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+
+NOT(ISNULL(Corporate_Address_State__c)),
+
+LEN( Corporate_Address_State__c ) &lt;&gt; 2, 
+
+NOT(CONTAINS(&quot;AB:AL:AK:AZ:AR:CA:CO:CT:DE:DC:FL:GA:HI:&quot; &amp; 
+&quot;ID:IL:IN:IA:KS:KY:LA:ME:MD:MA:MI:MN:MS:MO:MT:&quot; &amp; 
+&quot;NE:NV:NH:NJ:NM:NY:NC:ND:OH:OK:ON:OR:PA:RI:SC:&quot; &amp; 
+&quot;SD:TN:TX:UT:VT:VA:WA:WV:WI:WY:PR&quot;, Corporate_Address_State__c))
+)</errorConditionFormula>
+    <errorDisplayField>Corporate_Address_State__c</errorDisplayField>
+    <errorMessage>CR06: Please use a two-letter capitalized abbreviation for Corporate Address State.</errorMessage>
+</ValidationRule>

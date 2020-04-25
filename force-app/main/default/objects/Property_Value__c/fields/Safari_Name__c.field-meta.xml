@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Safari_Name__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( Property__r.Name == &#39;Rate Class&#39;
+  , IF(OR(CONTAINS(Safari_Key__c, &#39;MPLS&#39;), CONTAINS(Safari_Key__c, &#39;STL&#39;), CONTAINS(Safari_Key__c, &#39;HOU&#39;))
+     , &#39;Service Class&#39;
+     , IF(AND(CONTAINS(Safari_Key__c, &#39;LIVE&#39;), OR(Utility_Code__c == &#39;PGLC&#39;,Utility_Code__c == &#39;NShore&#39;,Utility_Code__c == &#39;Nicor&#39;))
+         , &#39;TransportRider&#39;
+         , &#39;Transport Rate&#39;
+       )
+    )
+  , IF(Property__r.Name  == &#39;Monthly Firm Demand Charge&#39;
+      , IF(CONTAINS(Safari_Key__c, &#39;MPLS&#39;)
+          , &#39;Monthly Firm Demand&#39;
+          , &#39;Monthly Demand Charge&#39;
+        )
+      , IF(Property__r.Name  == &#39;Pooling / Meter Read&#39;
+          , IF(CONTAINS(Safari_Key__c, &#39;MPLS&#39;)
+              , &#39;Pool Charge&#39;
+              , Property__r.Name
+            )
+          , IF(Property__r.Name == &#39;MDQ&#39;
+              , IF(AND(CONTAINS(Safari_Key__c, &#39;LIVE&#39;),Utility_Code__c == &#39;Nicor&#39;)
+                  , &#39;MDCQ&#39;
+                  , Property__r.Name
+                )
+              , IF(Property__r.Name == &#39;Storage Capacity&#39;
+                  , IF(Utility_Code__c == &#39;Nicor&#39;
+                      , &#39;SBSCapacity&#39;
+                      , IF(OR(Utility_Code__c == &#39;PGLC&#39;,Utility_Code__c == &#39;NShore&#39;)
+                          ,&#39;ABCapacity&#39;
+                          , IF(OR(Utility_Code__c == &#39;NIPSCO&#39;,Utility_Code__c == &#39;NIPS-T&#39;)
+                              , &#39;BankCap&#39;
+                              , Property__r.Name
+                            )
+                        )
+                    )
+                  , Property__r.Name
+                )
+            )
+        )
+    )
+)</formula>
+    <label>Safari Name</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

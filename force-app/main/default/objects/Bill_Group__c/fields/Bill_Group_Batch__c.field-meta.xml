@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bill_Group_Batch__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>this is the &quot;Safari Billing Cycle&quot; and is dependent upon the CES Office field to be populated</inlineHelpText>
+    <label>Bill Group Batch</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Bill_Group_Batch__c.CES_Office__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.CES_Office__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Bill_Group_Batch__c</referenceTo>
+    <relationshipLabel>Bill Groups</relationshipLabel>
+    <relationshipName>Bill_Groups</relationshipName>
+    <required>true</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

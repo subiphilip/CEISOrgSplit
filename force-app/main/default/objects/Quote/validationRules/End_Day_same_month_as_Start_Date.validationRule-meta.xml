@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>End_Day_same_month_as_Start_Date</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+NOT(ISBLANK(End_Day__c)),
+MONTH( End_Date__c ) &lt;&gt; MONTH( End_Day__c )
+)</errorConditionFormula>
+    <errorMessage>End Day must for the same month as Start Date</errorMessage>
+</ValidationRule>

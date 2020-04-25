@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Phone_of_Authorized__c</fullName>
+    <description>Phone number of the customer&#39;s authorized agent</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Phone number of the customer&#39;s authorized agent</inlineHelpText>
+    <label>Phone of Authorized</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Phone</type>
+</CustomField>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approval_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Approval Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Submitted to Ensite</fullName>
+                <default>false</default>
+                <label>Submitted to Ensite</label>
+            </value>
+            <value>
+                <fullName>EnSite Approved</fullName>
+                <default>false</default>
+                <label>EnSite Approved</label>
+            </value>
+            <value>
+                <fullName>CES Approved</fullName>
+                <default>false</default>
+                <label>CES Approved</label>
+            </value>
+            <value>
+                <fullName>Submitted for CES Approval</fullName>
+                <default>true</default>
+                <label>Submitted for CES Approval</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

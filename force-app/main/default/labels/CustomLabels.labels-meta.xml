@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Accept_Disclosures</fullName>
+        <categories>enroll</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Accept Disclosures</shortDescription>
+        <value>I accept the content of the Terms of Service, Electricity Facts Label, and Your Rights as a Customer in links above.  I also understand that I can cancel this order without penalty by contacting {0} within 3 federal business days.  I designate {0} to take necessary steps to establish new service or switch my electric service.</value>
+    </labels>
+    <labels>
+        <fullName>Accept_Disclosures_Commercial</fullName>
+        <categories>enroll</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Accept Disclosures Commercial</shortDescription>
+        <value>I understand I will be contacted separately by {0} with a contract and terms of service which may need to be completed prior to initiating the switch or establishing new service. I designate {0} to take necessary steps to establish new service or switch my electric service.</value>
+    </labels>
+    <labels>
+        <fullName>Advertised_kWh_explanation</fullName>
+        <categories>Help Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Advertised kWh explanation</shortDescription>
+        <value>Advertised price is based on a &quot;typical&quot; 1,000 kWh/month average use within your service territory.  This is the price that a retailer may advertise.  It may be different from (and less accurate than) the price shown on TrueCost because we calculate the price based on a specific usage you&#39;ve selected.</value>
+    </labels>
+    <labels>
+        <fullName>Blog_Meta_Description</fullName>
+        <categories>meta, blog</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Blog Meta Description</shortDescription>
+        <value>Follow Texas electric rates, electric companies, and TrueCost with our News and Insights blog.  Includes the CenterPoint Energy Electric Price Index.</value>
+    </labels>
+    <labels>
+        <fullName>CES_Community_Change_Password_Link</fullName>
+        <categories>CES Community</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CES Community Change Password Link</shortDescription>
+        <value>https://extsso.centerpointenergy.com/auth/module.php/icsgw/forgotpassword.php?AuthId=authidcs</value>
+    </labels>
+    <labels>
+        <fullName>Cents_per_kWh_explanation</fullName>
+        <categories>HelpText, Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cents per kWh explanation</shortDescription>
+        <value>This per kWh rate may differ from what is advertised elsewhere. That’s by design. TrueCost adds up all available plan details (base cost, taxes, applicable fees and even incentives) to derive your true per-kWh price.
+
+TrueCost recommends that you shop using monthly or annual costs instead of kWh pricing.</value>
+    </labels>
+    <labels>
+        <fullName>Changed_Start_Date_Fee</fullName>
+        <categories>HelpText, Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Changed Start Date Fee</shortDescription>
+        <value>Fee for each additional change to the service start date.</value>
+    </labels>
+    <labels>
+        <fullName>Copyright</fullName>
+        <categories>Template, Footer</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Copyright</shortDescription>
+        <value>2018 CenterPoint Energy</value>
+    </labels>
+    <labels>
+        <fullName>Credit_Card</fullName>
+        <categories>enroll, credit card</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Credit Card</shortDescription>
+        <value>Certain plans require a credit/debit card to enroll. TrueCost does not charge your credit card, but will pass this information to the REP.</value>
+    </labels>
+    <labels>
+        <fullName>Credit_Card_Text</fullName>
+        <categories>enroll, credit card</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Credit Card Text</shortDescription>
+        <value>This plan requires a credit/debit card to enroll. TrueCost does not charge your credit card, but will pass this information to {0}.</value>
+    </labels>
+    <labels>
+        <fullName>Critical_Care</fullName>
+        <categories>enroll</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Critical Care</shortDescription>
+        <value>If you believe you qualify for critical care, please check this box and complete the necessary form through your utility.</value>
+    </labels>
+    <labels>
+        <fullName>Customer_Support_Hours</fullName>
+        <categories>TrueCost</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customer Support Hours</shortDescription>
+        <value>between 8am and 5pm Central Time</value>
+    </labels>
+    <labels>
+        <fullName>Customer_Support_Phone_Number</fullName>
+        <categories>TrueCost</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customer Support Phone Number</shortDescription>
+        <value>(800) 461-3056</value>
+    </labels>
+    <labels>
+        <fullName>Default_Switch</fullName>
+        <categories>Enroll, Radio Button, Switch</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Default Switch</shortDescription>
+        <value>I&#39;m already receiving service at this address.  I&#39;ll take the first available switch date (no fee)</value>
+    </labels>
+    <labels>
+        <fullName>Disclosure_document_message</fullName>
+        <categories>enroll</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Disclosure document message</shortDescription>
+        <value>{0} can provide copies of these documents by mail or email upon request that will explain the terms of your agreement and how to exercise your right of rescission (change your mind).</value>
+    </labels>
+    <labels>
+        <fullName>Disconnect_Fee</fullName>
+        <categories>HelpText, Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Disconnect Fee</shortDescription>
+        <value>Standard processing fee for disconnection of service.</value>
+    </labels>
+    <labels>
+        <fullName>Electric_Companies_Subhead</fullName>
+        <categories>Subhead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Electric Companies Subhead</shortDescription>
+        <value>Learn more about the participating companies offering electric plans on TrueCost</value>
+    </labels>
+    <labels>
+        <fullName>Excessive_Payments_Fee</fullName>
+        <categories>HelpText, Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Excessive Payments Fee</shortDescription>
+        <value>Fee for more than 5 separate payments processed in a billing cycle/month.</value>
+    </labels>
+    <labels>
+        <fullName>FAQ_Subhead</fullName>
+        <categories>FAQ, Subhead</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FAQ Subhead</shortDescription>
+        <value>Giving you insight into the expertise behind TrueCost</value>
+    </labels>
+    <labels>
+        <fullName>Facebook_Headline</fullName>
+        <categories>facebook</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Facebook Headline</shortDescription>
+        <value>CenterPoint Energy TrueCost</value>
+    </labels>
+    <labels>
+        <fullName>Facebook_Subhead</fullName>
+        <categories>facebook</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Facebook Subhead</shortDescription>
+        <value>My new electric plan</value>
+    </labels>
+    <labels>
+        <fullName>Fee_Display_Disclaimer</fullName>
+        <categories>Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fee Display Disclaimer</shortDescription>
+        <value>TrueCost provides you fee information based on input from the Electric Company.  Please consult the Electricity Facts Label and Terms of Service for the final word on fees.</value>
+    </labels>
+    <labels>
+        <fullName>Fee_Display_Disclaimer_Commercial</fullName>
+        <categories>Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fee Display Disclaimer Commercial</shortDescription>
+        <value>TrueCost provides you fee information based on input from the Electric Company. Please consult their commercial and terms for the final word on fees.</value>
+    </labels>
+    <labels>
+        <fullName>Fixed_Position_Report_Exclude_Trigger_Type_List</fullName>
+        <categories>Lock Types</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fixed Position Report Exclude Trigger Type List</shortDescription>
+        <value>NYMEX + Financial Basis Lock</value>
+    </labels>
+    <labels>
+        <fullName>Gas_Choice_Phone_Number</fullName>
+        <categories>gas choice</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Gas Choice Phone Number</shortDescription>
+        <value>(800) 893-8460</value>
+    </labels>
+    <labels>
+        <fullName>Home_Page_Meta_Description</fullName>
+        <categories>meta home</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Home Page Meta Description</shortDescription>
+        <value>Compare the true cost of electric rates from multiple companies based on how you use electricity.  Find the right plan and switch today!</value>
+    </labels>
+    <labels>
+        <fullName>Insufficient_Funds_Cancelled_Checks</fullName>
+        <categories>HelpText, Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Insufficient Funds/Cancelled Checks</shortDescription>
+        <value>Fee for returned/unsuccessful bill payments due to insufficient funds, cancelled checks, etc.</value>
+    </labels>
+    <labels>
+        <fullName>Late_Payment_Charge</fullName>
+        <categories>HelpText, Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Late Payment Fee</shortDescription>
+        <value>Fee for payments made after original due date, expressed as a % of past due amounts.</value>
+    </labels>
+    <labels>
+        <fullName>Lorem_Ipsum</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lorem Ipsum</shortDescription>
+        <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nulla sem, venenatis nec egestas vitae, tempor nec diam. In tincidunt, metus at pretium faucibus, eros nulla vestibulum elit, eu consectetur quam mauris quis diam. Ut ipsum turpis, dictum iaculis commodo vitae, eleifend in tortor. Nulla nec lacus eget ligula tempor porttitor ut vitae massa. Quisque aliquet eros id eros aliquam vestibulum. Nullam nec dictum enim. Phasellus a risus felis. Nulla facilisi. Ut et pretium ligula. Nullam id eros nibh, sit amet tempor mauris.
+
+Duis placerat tempus dapibus. Vivamus quis ante ut mi aliquet vehicula. Proin nec odio eget elit venenatis dignissim sit amet at arcu. In porta, eros sed volutpat iaculis, purus dolor feugiat mauris, non convallis arcu justo eu odio. Cras eleifend feugiat ligula non rhoncus. Duis vel nisl diam. Nam fringilla, sem at tempor ornare, velit nunc aliquet turpis, sed tempor velit lorem id lacus.</value>
+    </labels>
+    <labels>
+        <fullName>Manual_Assistance_Fee</fullName>
+        <categories>HelpText, Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Manual Assistance Fee</shortDescription>
+        <value>Fee for live billing/payment assistance via phone call or online live chat.</value>
+    </labels>
+    <labels>
+        <fullName>MetaTags_Electric_Price_Trends_Summary</fullName>
+        <categories>Meta Tags</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MetaTags--Electric Price Trends Summary</shortDescription>
+        <value>&lt;meta name=&quot;description&quot; content=&quot;Track Houston electric prices and rate trends for fixed rate plans with the CenterPoint Energy Electric Price Index.&quot;&gt;
+&lt;meta property=&quot;og:title&quot; content=&quot;Electric Price Index&quot;/&gt;
+&lt;meta property=&quot;og:url&quot; content=&quot;http://www.mytruecost.com/electricpricetrendssummary&quot;/&gt;
+&lt;meta property=&quot;og:site_name&quot; content=&quot;TrueCost Electric Portal&quot;/&gt;
+&lt;meta property=&quot;og:type&quot; content=&quot;website&quot;/&gt;</value>
+    </labels>
+    <labels>
+        <fullName>Meter_Data_Permission</fullName>
+        <categories>Checkbox, Consent, Meter Data</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Meter Data Permission</shortDescription>
+        <value>I certify that I am authorized to view usage data for this address.  I allow TrueCost to access the meter data for my address.</value>
+    </labels>
+    <labels>
+        <fullName>Monthly_Cost_Explanation</fullName>
+        <categories>Help Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Monthly Cost Explanation</shortDescription>
+        <value>Monthly Cost is an average of the plan&#39;s estimated cost over a 12 month period (like what you might pay on an &quot;average monthly billing&quot; payment option).</value>
+    </labels>
+    <labels>
+        <fullName>Move</fullName>
+        <categories>Enroll, Radio Button, Switch</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Move</shortDescription>
+        <value>I&#39;m moving to this address.</value>
+    </labels>
+    <labels>
+        <fullName>MoveSwitchFeeDisclaimer</fullName>
+        <categories>enroll, fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MoveSwitchFeeDisclaimer</shortDescription>
+        <value>Move and switch fees are based on a typical meter for existing construction.  New installations and non-standard meters may have higher fees.</value>
+    </labels>
+    <labels>
+        <fullName>Move_in_Fee</fullName>
+        <categories>Fees, Help Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Move-in Fee</shortDescription>
+        <value>A cost charged by the electric company for move-ins (starting service at a new address).</value>
+    </labels>
+    <labels>
+        <fullName>New_Meter_Move_in</fullName>
+        <categories>Help, fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>New Meter Move-in</shortDescription>
+        <value>Move-in fee if a new meter installation is not required</value>
+    </labels>
+    <labels>
+        <fullName>Page_Subtitle_TDSP_Help</fullName>
+        <categories>Subhead, TDSP Help</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Subtitle TDSP Help</shortDescription>
+        <value>Find your city in the lists below</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_About_Centerpoint</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - About Centerpoint</shortDescription>
+        <value>About Centerpoint Energy</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_About_The_Index</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - About The Index</shortDescription>
+        <value>Electric Price Index</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_About_TrueCost</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - About TrueCost</shortDescription>
+        <value>About TrueCost</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_BandwidthExceeded</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Bandwidth Exceeded</shortDescription>
+        <value>Bandwidth Exceeded</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Blog</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Blog</shortDescription>
+        <value>News and Insights</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Bugs</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Bugs</shortDescription>
+        <value>Report a Bug</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Change_Password</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Change Password</shortDescription>
+        <value>Change Password</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Company_Name</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Company Name</shortDescription>
+        <value>TrueCost Electric Portal</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Contact_Us</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Contact Us</shortDescription>
+        <value>Contact Us</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Electric_Companies</fullName>
+        <categories>Page Title, Electric Companies</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Electric Companies</shortDescription>
+        <value>Electric Companies</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Electrice_Price_Trends_Summary</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Electrice Price Trends Summary</shortDescription>
+        <value>Electric Price Trends</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Enroll</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Enroll</shortDescription>
+        <value>Place Order: Step 1/3</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Enroll_Confirmation</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Enroll Confirmation</shortDescription>
+        <value>Place Order: Step 3/3</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Enroll_CreditCard</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Deposit Credit Card</shortDescription>
+        <value>Place Order: Step Deposit</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Enrollment_Success</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Enrollment Success</shortDescription>
+        <value>Place Order: Complete</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_FAQ</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - FAQ</shortDescription>
+        <value>Frequently Asked Questions (FAQ)</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Fees</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Fees</shortDescription>
+        <value>Fees</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Forgot_Password</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Forgot Password</shortDescription>
+        <value>Forgot Password</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Glossary</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Glossary</shortDescription>
+        <value>Glossary of TrueCost Terms</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Home_Page</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Home Page</shortDescription>
+        <value>Home Page</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Homepage</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Homepage</shortDescription>
+        <value>Welcome to TrueCost</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_HowIsTheIndexCalculated</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - HowIsTheIndexCalculated</shortDescription>
+        <value>How the Index is Calculated</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Ideas</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Ideas</shortDescription>
+        <value>Ideas and Suggestions</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_InMaintenance</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - InMaintenance</shortDescription>
+        <value>Currently In Maintenance</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_LandingPageforBeta</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - LandingPageforBeta</shortDescription>
+        <value>Welcome to TrueCost Beta</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Login</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Login</shortDescription>
+        <value>Login Page</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_My_Account</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - My Account</shortDescription>
+        <value>My Account</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_One_Year_Plans</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - One Year Plans</shortDescription>
+        <value>One-Year Fixed Rate Plans</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Plan_Disclosures</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Plan Disclosures</shortDescription>
+        <value>Place Order: Step 2/3</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Privacy_Policy</fullName>
+        <categories>Page Title, Privacy Policy</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title-Privacy Policy</shortDescription>
+        <value>Privacy Policy</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Read_Reviews</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Read Reviews</shortDescription>
+        <value>Customer Reviews</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Shop_Plans</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Shop Plans</shortDescription>
+        <value>Shop For Electricity Plans</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Sitemap</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title Sitemap</shortDescription>
+        <value>Site Map</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Six_Month_Plans</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Six Month Plans</shortDescription>
+        <value>6-Month Fixed Rate Plans</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_TDSP_Help</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title TDSP Help</shortDescription>
+        <value>Which TDSP are you in?</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Terms_of_Service</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Terms of Service</shortDescription>
+        <value>Terms of Use</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_TrueCost_Beta</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - TrueCost Beta</shortDescription>
+        <value>TrueCost Beta</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Two_Year_Plans</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Two Year Plans</shortDescription>
+        <value>Two-Year Fixed Rate Plans</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Unauthorized</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Unauthorized</shortDescription>
+        <value>Unauthorized Access</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_Under_Construction</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - Under Construction</shortDescription>
+        <value>Under Construction</value>
+    </labels>
+    <labels>
+        <fullName>Page_Title_UpdateAddress</fullName>
+        <categories>Page Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Title - UpdateAddress</shortDescription>
+        <value>Update Address</value>
+    </labels>
+    <labels>
+        <fullName>Paper_Bill_Request_Fee</fullName>
+        <categories>HelpText, Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Paper Bill Request Fee</shortDescription>
+        <value>This charge occurs if you request a paper bill</value>
+    </labels>
+    <labels>
+        <fullName>Plan_Disclosures_Deposit_Language</fullName>
+        <categories>enroll, deposit</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Plan Disclosures Deposit Language</shortDescription>
+        <value>{0} will determine if a deposit is required to begin your service and you will be notified.  If necessary, you can arrange the deposit with {0}.</value>
+    </labels>
+    <labels>
+        <fullName>Print_Save_EFL</fullName>
+        <categories>enroll</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Print Save EFL</shortDescription>
+        <value>You may print or save official information about this plan by clicking on these links.</value>
+    </labels>
+    <labels>
+        <fullName>Reconnect_Fee</fullName>
+        <categories>HelpText, Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reconnect Fee</shortDescription>
+        <value>Standard processing fee for reconnection of service.</value>
+    </labels>
+    <labels>
+        <fullName>Reminder_Fee</fullName>
+        <categories>HelpText, Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reminder Fee</shortDescription>
+        <value>Fee for reminder of past-due bill via phone call.</value>
+    </labels>
+    <labels>
+        <fullName>SSNQuestion</fullName>
+        <categories>HelpText, Enroll, SSN</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SSNQuestion</shortDescription>
+        <value>Retail Electric Providers (REPs) require an SSN to verify your identity.</value>
+    </labels>
+    <labels>
+        <fullName>SSN_Agreement_Message</fullName>
+        <categories>Legal</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SSN Agreement Message</shortDescription>
+        <value>I agree that CenterPoint may collect, use and share my Social Security number and other personal information with electric companies to enroll me in this plan and other plans I select in the future, and for credit check, identity verification and collection purposes once I establish service.  I agree to the terms of the TrueCost</value>
+    </labels>
+    <labels>
+        <fullName>Same_Day_Movein_Fee</fullName>
+        <categories>HelpText, Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Same Day Move in Fee</shortDescription>
+        <value>Fee for processing a same-day move-in.</value>
+    </labels>
+    <labels>
+        <fullName>Self_Selected_Switch_Date</fullName>
+        <categories>Enroll, Radio Button, Switch</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Self Selected Switch Date</shortDescription>
+        <value>I&#39;m not moving.  I need my switch on a specific date (fee may apply)</value>
+    </labels>
+    <labels>
+        <fullName>Self_Selected_Switch_Fee</fullName>
+        <categories>Fees, Help Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Self Selected Switch Fee</shortDescription>
+        <value>Charge for customers who select a switch date rather than taking the first available switch.</value>
+    </labels>
+    <labels>
+        <fullName>Switch_Authorization_Language</fullName>
+        <categories>enroll</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Switch Authorization Language</shortDescription>
+        <value>By clicking submit, I affirm that I am (or my agent is) authorized to select electric service for the Service Address listed above and hereby authorize {0} to switch my service.</value>
+    </labels>
+    <labels>
+        <fullName>Switch_Fee_warning</fullName>
+        <categories>Fee, Switch</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Switch Fee warning</shortDescription>
+        <value>Selecting a switch date may incur a fee from your Electric Company. More information about possible fees will be presented on the next page.</value>
+    </labels>
+    <labels>
+        <fullName>TLS_Warning_Help_URL_Link_Text</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TLS Warning Help URL Link Text</shortDescription>
+        <value>Instructions</value>
+    </labels>
+    <labels>
+        <fullName>TLS_Warning_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TLS Warning Message</shortDescription>
+        <value>This device is using TLS 1.0 to access Salesforce, and TLS 1.0 will no longer work after {effective_date}.</value>
+    </labels>
+    <labels>
+        <fullName>Third_Party_Payment_Fee</fullName>
+        <categories>HelpText, Fee</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Third Party Payment Fee</shortDescription>
+        <value>Fee for bill payment issued through a third-party payment source.</value>
+    </labels>
+    <labels>
+        <fullName>Why_we_need_your_SSN</fullName>
+        <categories>SSN, Enroll, Helptext</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Why we need your SSN</shortDescription>
+        <value>Your Social Security Number is used by your Electric Company to verify your identity and to prevent fraud.  TrueCost stores it in an encrypted format and shares it with your selected company when your order is submitted.  
+
+Please see our privacy policy for more details on how we secure and share personal information.</value>
+    </labels>
+    <labels>
+        <fullName>Yearly_Cost_Explanation</fullName>
+        <categories>Help Text</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Yearly Cost Explanation</shortDescription>
+        <value>Annual Costs for plans less than 12 months assume constant prices and are intended for comparison purposes only.  The plan&#39;s price may change during the year.</value>
+    </labels>
+</CustomLabels>

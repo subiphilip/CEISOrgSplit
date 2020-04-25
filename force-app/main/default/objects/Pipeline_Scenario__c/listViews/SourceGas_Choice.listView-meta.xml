@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SourceGas_Choice</fullName>
+    <columns>NAME</columns>
+    <columns>Fuel__c</columns>
+    <columns>Pipeline_Commodity__c</columns>
+    <columns>Winter_Swing__c</columns>
+    <columns>Summer_Swing__c</columns>
+    <columns>Demand_Charge__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Utility__c</field>
+        <operation>contains</operation>
+        <value>SourceGas</value>
+    </filters>
+    <filters>
+        <field>NAME</field>
+        <operation>notContain</operation>
+        <value>SG</value>
+    </filters>
+    <label>SourceGas Choice</label>
+</ListView>

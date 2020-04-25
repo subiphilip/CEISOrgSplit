@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CES_Margin_Wacog__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( ISBLANK(Consultant_Pctg__c), BLANKVALUE(Total_Margin_Rollup_Wacog__c, 0), BLANKVALUE(Total_Margin_Rollup_Wacog__c, 0) - BLANKVALUE(Consultant_Fee_Rollup_Wacog__c, 0) )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>X CES Margin Wacog</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

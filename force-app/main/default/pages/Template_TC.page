@@ -1,0 +1,370 @@
+<apex:page docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" id="template_tc" applyBodyTag="false" cache="true">
+    
+
+    <head>
+        <script type="text/javascript"> if (!window.console) console = {log: function() {}}; </script>
+        <link href="https://plus.google.com/b/104486031549961118105" rel="publisher"/>
+        <meta property="og:site_name" content="myTrueCost.com"/>
+
+        <!-- <c:jQueryMinAsComponent/> -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"/>        
+        <script src="//cdn.optimizely.com/js/6127944940.js"/>
+       <!--
+            <style id="antiClickjack">body{display:none !important;}</style>
+            <script type="text/javascript">
+            if (self === top) {
+                var antiClickjack = document.getElementById("antiClickjack");
+                antiClickjack.parentNode.removeChild(antiClickjack);
+            } else {
+                top.location = self.location;
+            }
+            </script>
+        -->
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <!-- <c:BootstrapCSSMin/> -->
+        <link href="//netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+        <c:BootstrapCustom />
+        <apex:insert name="HeadTags" />
+        
+        
+    </head>
+    
+    <body>
+        <c:GoogleTagManager />
+        
+        
+        <div class="">
+            <div class="row" id="header_bar">
+                <div class="pull-right hidden-phone" id="welcome-login">
+                    <apex:outputpanel id="loggedin" rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}">
+                        <div class="pull-right text-right">
+                            Welcome, <strong>{!$User.FirstName}</strong><br/>
+                            <a href="{!$Page.myaccount}" class="btn btn-primary btn-small">My Account</a>
+                            <a href="{!$Site.Prefix}/secur/logout.jsp" class="btn btn-default btn-small">{!$Label.site.logout}</a>
+                        </div>         
+                    </apex:outputpanel>
+                    
+                    <apex:outputpanel id="notloggedin" rendered="{!ISPICKVAL($User.UserType,'Guest')}">
+                        <div class="pull-right text-right">
+                            Welcome to <strong>TrueCost</strong><br/>
+
+                            <apex:outputPanel layout="inline" rendered="{!$Setup.TrueCostSystemVariables__c.Chat_is_Available__c}">
+                                    <a id="liveagent_button_online_5733000000000Um" href="javascript://Chat" style="display: none;" onclick="liveagent.startChat('5733000000000Um')" class="btn btn-warning btn-small">
+                                        Chat with Us
+                                    </a>
+                                    <div id="liveagent_button_offline_5733000000000Um" style="display: none;" class="btn btn-info btn-small" >
+                                        Live Chat Offline <!-- Offline Chat Content isn't anything--just hidden-->
+                                    </div>
+                            </apex:outputPanel>
+                            <a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.RegisterSec}"  class="btn btn-primary btn-small" >Create Profile</a>
+                            <a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.SiteLogin}?starturl=/{!$CurrentPage.Name}" class="btn btn-success btn-small" >Login</a>
+                        </div>         
+                    </apex:outputpanel>              
+                    
+                    
+                </div>
+                
+                <div class="">
+                    <span class="logo" itemscope="itemscope" itemtype="http://schema.org/Organization">
+                        <meta itemprop="name" content="CenterPoint Energy" />
+                        <meta itemprop="email" content="truecost@centerpointenergy.com" />
+                        <meta itemprop="foundingDate" content="1866" />
+                        <a href="http://www.centerpointenergy.com" target="_blank" itemprop="url">
+                            <div id="cnp_logo">
+                                <img src="{!URLFOR($Resource.imgCNP, 'CNPlogoTransparent.png')}" title="CenterPoint Energy" alt="CenterPoint Energy logo" itemprop="logo"/>
+                            </div>
+                        </a>
+                    </span>
+                    <span class="wordmark">
+                        <a href="{!$Page.homepage}">
+                            <div id="wordmark">
+                                <img src="{!URLFOR($Resource.imgCNP, 'TCWordmarkTransparent.png')}" title="TrueCost Electric Portal" alt="TrueCost Electric Portal" />
+                            </div>
+                        </a>        
+                    </span>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="navbar" id="main-nav">
+                <div class="navbar-inner">
+                    <div class="">
+                        
+                        <a class="brand" id="mobile-brand" href="{!$Page.HomePage}">
+                            <div id="mobile-logo">
+                                <img src="{!URLFOR($Resource.imgCNP, 'CNPlogoTransparent.png')}"  />
+                            </div>
+                            <div id="mobile-wordmark">
+                                <img src="{!URLFOR($Resource.imgCNP, 'TCWordmarkTransparent.png')}" title="TrueCost Electric Portal" />
+                            </div>
+                        </a>
+                        
+                        <a class="btn btn-navbar pull-right" data-toggle="collapse" data-target=".nav-collapse" id="menu_button">
+                            Menu
+                        </a>
+                        
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                
+                                <li><a href="{!$Page.homepage}">Home</a></li>   
+                                
+                                <apex:outputPanel rendered="{!(ISPICKVAL($User.UserType,'Guest'))}" layout="none">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Shop Plans<b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{!$Page.shopplans}?RateClass=Residential">Residential</a></li>
+                                            <li><a href="{!$Page.shopplans}?RateClass=Commercial">Commercial</a></li>
+                                        </ul>
+                                    </li>
+                                </apex:outputPanel>
+                                
+                                <apex:outputPanel rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}" layout="none">
+                                    <li><a href="{!$Page.shopplans}">Shop Plans</a></li>   
+                                </apex:outputPanel>
+                                
+                                <apex:outputPanel rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}" layout="none">
+                                    <li class="visible-phone"><a href="{!$Page.IntervalDataExplorer}">View Usage</a></li>
+                                    <li class="visible-phone"><a href="{!$Page.myaccount}">My Account</a></li>
+                                    <li class="visible-phone"><a href="{!$Site.Prefix}/secur/logout.jsp">{!$Label.site.logout}</a></li>
+                                    
+                                    
+                                </apex:outputPanel>
+                                <apex:outputpanel rendered="{!ISPICKVAL($User.UserType,'Guest')}" layout="none">
+                                    <li class="visible-phone"><a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.SiteLogin}?starturl=/{!$CurrentPage.Name}" styleClass="last">Login</a></li>
+                                    <li class="visible-phone"><a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.RegisterSec}">Create Profile</a></li>                                    
+                                </apex:outputpanel>
+                                
+                                <li>
+                                    <a href="{!$Page.ElectricCompanies}">Companies</a>
+                                </li>
+                                <!--<li>
+                                    <a href="{!$Page.ElectricPriceTrendsSummary}">Price Trends</a>
+                                </li>-->
+                                <!-- <li><a href="{!$Page.truecostblog}">News &amp; Insights</a></li> -->
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{!$Page.AboutTrueCost}">About TrueCost</a></li>
+                                        <li><a href="{!$Page.AboutCenterPoint}">About CenterPoint Energy</a></li>
+                                        <li><a href="{!$Page.ElectricCompanies}">Electric Companies</a></li>
+                                        <li><a href="{!$Page.QuestionsAboutTrueCost}">Questions About TrueCost</a></li>
+                                        <!--<li><a href="{!$Page.TrueCostPeople}">TrueCost People</a></li>-->
+                                        <li><a href="{!$Page.TrueCostServiceTerritory}">TrueCost Service Territory</a></li>
+                                    </ul>
+                                </li>
+                                
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Support <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{!$Page.FAQ}">FAQ</a></li>
+                                        <li><a href="{!$Page.Fees}">Common Electric Fees</a></li>
+                                        <li><a href="{!$Page.Glossary}">Glossary of Terms</a></li>
+                                        <li><a href="{!$Page.ContactUs}">Contact Us</a></li>
+                                        <li class="divider"></li>
+                                        <apex:outputPanel layout="none" rendered="{!$Setup.TrueCostSystemVariables__c.Sales_Phone_in_Header__c}">
+                                            <li><a href="tel:18004613056">Call {!$Label.Customer_Support_Phone_Number}</a></li>
+                                        </apex:outputPanel>
+                                        <li><a href="mailto:TrueCost@CenterPointEnergy.com">Email Us</a></li>
+                                        <apex:outputPanel layout="none" rendered="{!$Setup.TrueCostSystemVariables__c.Chat_is_Available__c}">
+                                            <li>
+                                                <a id="liveagent_button_online_5733000000000Um" href="javascript://Chat" style="display: none;" onclick="liveagent.startChat('5733000000000Um')">
+                                                    Chat
+                                                </a>
+                                                <div id="liveagent_button_offline_5733000000000Um" style="display: none;" class="btn btn-info btn-small" >
+                                                    Live Chat Offline <!-- Offline Chat Content isn't anything--just hidden-->
+                                                </div>
+                                            </li>
+                                        </apex:outputPanel>
+                                        
+                                    </ul>
+                                </li>
+                                
+                                
+                                
+                                
+                            </ul>
+                            <form class="navbar-form pull-right text-right hidden-phone" action="{!$Page.SearchResults}">
+                                <div class="input-append">
+                                    <input type="text" class="span2" placeholder="Search" name="q"/>
+                                    <button type="submit" class="btn"><i class="icon-search"></i></button>
+                                </div>
+                            </form>   
+                        </div><!--/.nav-collapse -->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <apex:insert name="breadcrumbs" /> 
+        </div>
+        
+        <div class="phone-body">
+            <apex:insert name="body" />
+        </div>
+        
+        <div class="footer container-fluid" id="megafooter">
+
+            <div class="row-fluid hidden-phone" >
+                <div class="span12 muted">   
+
+                    <span class="pull-right">
+                        <span class="st_facebook_large" st_url="{!$CurrentPage.URL}" displayText=''></span>
+                        <span class="st_twitter_large" st_url="{!$CurrentPage.URL}" displayText=''></span>
+                        <span class="st_plusone_large" st_url="{!$CurrentPage.URL}" st_title=""></span>
+                        <span class="st_linkedin_large" st_url="{!$CurrentPage.URL}" displayText=''></span>
+                        <span class="st_email_large" st_url="{!$CurrentPage.URL}" displayText=''></span>
+                        <span class="st_sharethis_large" st_url="{!$CurrentPage.URL}" displayText=''></span>
+                    </span> 
+                    <span>
+                        <h4>CenterPoint Energy TrueCost Electric Portal</h4>
+                        <p>CenterPoint Intelligent Energy Solutions LLC,  IES, which manages TrueCost, is not the same legal entity as CenterPoint Energy Resources Corp. (CERC) or CenterPoint Energy Houston Electric, LLC (CEHE). You do not have to buy products or services from IES in order to continue to receive quality regulated services from CERC or CEHE.</p>
+                        <p>Looking for other CenterPoint Energy services? <a class="muted" href="http://centerpointenergy.com">Click here</a></p>
+                    </span>   
+                    <hr class="muted" />
+                </div>
+            </div>
+            <div class="row-fluid hidden-phone">    
+                <div class="span2 muted">
+                    <h4>Shop for Electricity</h4>
+                    <ul class="unstyled">
+                        <li><a class="muted" href="{!$Page.ShopPlans}">Shop Plans</a></li>                        
+                        <li><a class="muted" href="{!$Page.ElectricCompanies}">Companies</a></li>
+                        <li><a class="muted" href="{!$Page.ReadReviews}">Company Reviews</a></li>
+                        <li><a class="muted" href="{!$Page.rating}">Rate your Provider</a></li>
+                        <li><a class="muted" href="{!$Page.meterdata}">Smart Meter Data</a></li>
+                        <li><a class="muted" href="{!$Page.variablerates}">Variable Rates</a></li>
+                    </ul>
+                </div>
+                <!--<div class="span2 muted">
+                    <h4>Price Trends</h4>
+                    <ul class="unstyled">
+                        <li><a class="muted" href="{!$Page.ElectricPriceTrendsSummary}?tdsp=CenterPoint">CenterPoint Energy</a></li>
+                        <li><a class="muted" href="{!$Page.ElectricPriceTrendsSummary}?tdsp=Oncor">Oncor</a></li>
+                        <li><a class="muted" href="{!$Page.ElectricPriceTrendsSummary}?tdsp=TNMP">Texas New Mexico Power</a></li>
+                        <li><a class="muted" href="{!$Page.ElectricPriceTrendsSummary}?tdsp=AEPN">AEP North</a></li>
+                        <li><a class="muted" href="{!$Page.ElectricPriceTrendsSummary}?tdsp=AEPC">AEP Central</a></li>
+                        <li><a class="muted" href="{!$Page.ElectricPriceTrendsSummary}?tdsp=Sharyland">Sharyland Utilities</a></li>
+                    </ul>
+                </div>-->
+
+                <div class="span2 muted">
+                    <h4>My Account</h4>
+                    <ul class="unstyled">
+                        <apex:outputpanel rendered="{!ISPICKVAL($User.UserType,'Guest')}" layout="none">
+                            <li><a class="muted" href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.RegisterSec}">Create Profile</a></li>
+                            <li><a class="muted" href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.SiteLogin}?starturl=/{!$CurrentPage.Name}">Log in</a></li>
+                            <li><a class="muted" href="{!$Page.ForgotPassword}">Password Help</a></li>
+                        </apex:outputpanel>
+                        <apex:outputpanel rendered="{!not(ISPICKVAL($User.UserType,'Guest'))}" layout="none">
+                            <li><a class="muted" href="{!$Page.myaccount}">Account Home</a></li>
+                            <li><a class="muted" href="{!$Page.IntervalDataExplorer}">View Usage</a></li>
+                            <li><a class="muted" href="{!$Page.AddAddressAfterRegistration}">Add Service Address</a></li>
+                            <li><a class="muted" href="{!$Site.Prefix}/secur/logout.jsp">{!$Label.site.logout}</a></li>
+                        </apex:outputpanel>
+                        <li><a class="muted" href="http://www.centerpointenergy.com/services/naturalgas/residential/myaccountonline">Gas Customer Login</a></li>
+                    </ul>
+                </div>
+                
+
+                <div class="span2 muted">
+                    <h4>Learn</h4>
+                    <ul class="unstyled">
+                        <li><a class="muted" href="{!$Page.truecostblog}">News and Insights</a></li>
+                        <li><a class="muted" href="{!$Page.FAQ}">Electric Shopping FAQ</a></li>
+                        <li><a class="muted" href="{!$Page.fees}">Electric Fees</a></li>
+                        <li><a class="muted" href="{!$Page.Glossary}">Glossary of Electric Terms</a></li>
+                        <li><a class="muted" href="{!$Page.AllPolls}">View All Polls</a></li>
+                        
+                    </ul>
+                </div>
+
+                <div class="span2 muted">
+                    <h4>Get Help</h4>
+                    <ul class="unstyled">
+                        <apex:outputPanel layout="none" rendered="{!$Setup.TrueCostSystemVariables__c.Chat_is_Available__c}">
+                            <li>
+                                <a id="liveagent_button_online_5733000000000Um" href="javascript://Chat" style="display: none;" onclick="liveagent.startChat('5733000000000Um')">
+                                    Chat Now (Live!)
+                                </a>
+                            </li>
+                        </apex:outputPanel>                     
+                        <li><a class="muted" href="{!$Page.contactus}">Contact Us</a></li>
+                        <li><a class="muted" href="{!$Page.sitemappublic}">Site Map</a></li>
+                        <li><a class="muted" href="{!$Page.TDSPHelp}">What's my TDSP?</a></li>
+                        <li><a class="muted" href="{!$Page.ESIDLookup}">ESID Lookup</a></li>
+                        
+                    </ul>
+                </div>
+
+                <div class="span2 muted">
+                    <h4>About</h4>
+                    <ul class="unstyled">
+                        <li><a class="muted" href="{!$Page.AboutTrueCost}">About TrueCost</a></li>
+                        <li><a class="muted" href="{!$Page.AboutCenterPoint}">About CenterPoint Energy</a></li>
+                        <li><a class="muted" href="{!$Page.QuestionsAboutTrueCost}">TrueCost FAQ</a></li>
+                        <!--<li><a class="muted" href="{!$Page.TrueCostPeople}">TrueCost People</a></li>-->
+                        <li><a class="muted" href="http://www.centerpointenergy.com/careers">Careers</a></li>                        
+                        <li><a class="muted" href="{!$Page.Privacy}">Privacy Policy</a></li>
+                        <li><a class="muted" href="{!$Page.TermsofUse}">Terms of Use</a></li>
+                    </ul>               
+                </div>     
+
+                
+            </div>
+            <br/><br/>
+
+            <div class="row-fluid">
+                <div class="span12 text-left muted">
+                    <!--<apex:insert name="footer-additional"></apex:insert>--> <!--<a class="muted" href="http://centerpointenergy.com">Other CenterPoint Energy services?</a>-->
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12 text-left muted">
+                    <small>
+                        <small>
+                             <!--<p>CenterPoint Intelligent Energy Solutions LLC,  IES, which manages TrueCost, is not the same legal entity as CenterPoint Energy Resources Corp. (CERC) or CenterPoint Energy Houston Electric, LLC (CEHE), nor is IES regulated by the Railroad Commission of Texas or the Public Utility Commission of Texas. You do not have to buy products or services from IES in order to continue to receive quality regulated services from CERC or CEHE.</p>-->                       
+                        </small>
+                    </small>
+                </div>
+                
+            </div>
+            <div class="row-fluid">
+                <div class="span12 text-left muted">                        
+                    <small><small>&copy;{!$Label.copyright}</small></small>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <!-- <c:jQueryUIAsComponent/> -->
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"/>
+
+        <!-- <c:jQueryCookieAsComponent/> -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"/>
+
+        <!-- <c:BootstrapMinJs/> -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"/>
+        
+
+        <apex:insert name="PageSpecificScripts" />
+            
+        <script async="async" src="https://ws.sharethis.com/button/buttons.js" />
+        <!-- <c:Main_Chat_Deployment rendered="{!$Setup.TrueCostSystemVariables__c.Chat_is_Available__c}" /> -->
+        <script type="text/javascript">
+            window.onerror = function(msg, url, line) {
+                dataLayer.push({'event':'error', 'errorFunction':'Unknown', 'errorObject':{'errorType':'Generic Uncaught JS Error', 'errorMessage': msg + '--line: ' +line}});
+                var suppressErrorAlert = true; // If you return true, then error alerts (like in older versions of IE) will be suppressed.
+                return suppressErrorAlert;
+            };
+        </script>
+        
+
+    </body>
+</apex:page>

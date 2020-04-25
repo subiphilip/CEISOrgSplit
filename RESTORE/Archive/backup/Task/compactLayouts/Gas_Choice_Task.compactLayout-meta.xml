@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Choice_Task</fullName>
+    <fields>OwnerId</fields>
+    <fields>Subject</fields>
+    <fields>WhatId</fields>
+    <fields>ActivityDate</fields>
+    <fields>Status</fields>
+    <label>Gas Choice Task</label>
+</CompactLayout>

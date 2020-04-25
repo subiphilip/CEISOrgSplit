@@ -1,0 +1,33 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Title - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>
+        
+        <!--apex:define name="breadcrumbs">
+        <apex:outputpanel styleClass="breadcrumbs" layout="block">
+        <apex:outputlink value="{!$Page.homepage}">Home</apex:outputlink>
+        <apex:outputlink value="{!$Page.MeterData}" styleClass="last">Meter Data</apex:outputlink>
+    </apex:outputpanel>            
+    </apex:define-->
+        
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h1>Head<br/>
+                            <small>Sub</small>
+                        </h1>
+                    </div>
+                    <div class="span4">
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+</apex:page>

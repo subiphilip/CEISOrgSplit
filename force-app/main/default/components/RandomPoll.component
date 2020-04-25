@@ -1,0 +1,12 @@
+<apex:component controller="ControllerForRandomPoll">
+    <h3>Current Poll</h3>
+    <apex:outputpanel rendered="{!pollcount>0}" layout="block">
+		<script type="text/javascript">
+			{!thescript} 
+		</script>
+	</apex:outputpanel>
+	
+	<apex:outputpanel rendered="{!pollcount==0}" layout="block">
+		There are no polls at this time
+	</apex:outputpanel>
+</apex:component>

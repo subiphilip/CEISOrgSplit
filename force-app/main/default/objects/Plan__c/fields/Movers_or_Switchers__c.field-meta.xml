@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Movers_or_Switchers__c</fullName>
+    <description>Who should see this plan?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Who should see this plan?</inlineHelpText>
+    <label>Movers or Switchers</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>All</fullName>
+                <default>true</default>
+                <label>All</label>
+            </value>
+            <value>
+                <fullName>Movers only</fullName>
+                <default>false</default>
+                <label>Movers only</label>
+            </value>
+            <value>
+                <fullName>Switchers only</fullName>
+                <default>false</default>
+                <label>Switchers only</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

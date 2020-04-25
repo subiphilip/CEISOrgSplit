@@ -1,0 +1,32 @@
+<apex:component >
+    <apex:attribute type="Rate__c" name="Rate" required="true" description="the rate (contains all the document links and the record type so the component knows if it's Residential or Commercial." />
+    <apex:attribute type="string" name="page" required="true" description="Details or Checkout" default="Checkout"/>
+    
+    <!--For Plan Details Page-->
+    <apex:outputPanel rendered="{!page='Details'}">
+        <apex:outputpanel layout="block" styleClass="section-content" rendered="{!and(not(isnull(Rate.Link_for_EFL__c)), not(isnull(Rate.Link_for_TOS__c)), not(isnull(Rate.Link_for_YRAC__c)))}">
+            <ul>
+                <li><apex:outputLink value="{!Rate.Link_for_EFL__c}" target="_blank">Electricity Facts Label</apex:outputLink></li>
+                <li><apex:outputLink value="{!Rate.Link_for_TOS__c}" target="_blank">Terms of Service</apex:outputLink></li>
+                <li><apex:outputLink value="{!Rate.Link_for_YRAC__c}" target="_blank">Your Rights as a Customer</apex:outputLink></li>
+            </ul>
+        </apex:outputpanel> 
+        <apex:outputpanel layout="block" styleClass="section-content" rendered="{!and(Rate.Record_Type_Name__c!='Residential', and(isnull(Rate.Link_for_EFL__c), isnull(Rate.Link_for_TOS__c), isnull(Rate.Link_for_YRAC__c)))}">
+                Plan details will be sent to your email address by the electric company when they receive and accept your order.
+        </apex:outputpanel>
+    </apex:outputPanel>
+    
+    <!--for the checkout page -->
+    <apex:outputPanel rendered="{!page='Checkout'}">
+        <apex:outputpanel layout="block" styleClass="indent-div" rendered="{!and(not(isnull(Rate.Link_for_EFL__c)), not(isnull(Rate.Link_for_TOS__c)), not(isnull(Rate.Link_for_YRAC__c)))}">
+            <ul>
+                <li><apex:outputLink value="{!Rate.Link_for_EFL__c}" target="_blank">Electricity Facts Label</apex:outputLink></li>
+                <li><apex:outputLink value="{!Rate.Link_for_TOS__c}" target="_blank">Terms of Service</apex:outputLink></li>
+                <li><apex:outputLink value="{!Rate.Link_for_YRAC__c}" target="_blank">Your Rights as a Customer</apex:outputLink></li>
+            </ul>
+        </apex:outputpanel> 
+        <apex:outputpanel layout="block" styleClass="section-content" rendered="{!and(Rate.Record_Type_Name__c!='Residential', and(isnull(Rate.Link_for_EFL__c), isnull(Rate.Link_for_TOS__c), isnull(Rate.Link_for_YRAC__c)))}">
+                Plan details will be sent to your email address by the electric company when they receive and accept your order.
+        </apex:outputpanel>
+    </apex:outputPanel>
+</apex:component>

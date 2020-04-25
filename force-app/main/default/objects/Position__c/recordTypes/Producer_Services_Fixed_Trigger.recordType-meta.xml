@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Producer_Services_Fixed_Trigger</fullName>
+    <active>true</active>
+    <label>Producer Services Fixed Trigger</label>
+    <picklistValues>
+        <picklist>Safari_Sync_Status__c</picklist>
+        <values>
+            <fullName>Pending Sync</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sync Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sync in Progress</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

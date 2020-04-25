@@ -1,0 +1,5 @@
+<apex:page >
+
+    <apex:enhancedList height="800" type="Order__c" rowsPerPage="200" customizable="true" />
+    
+</apex:page>

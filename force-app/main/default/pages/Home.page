@@ -1,0 +1,102 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyHtmlTag="false" applyBodyTag="false" showHeader="false" sidebar="false">
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+    <head>
+    <meta name="google-site-verification" content="vQ6hvUPDW-7OJ7HkKVaxmxm5BSWte8VSjH7d7gnmUjY" /> <!-- <meta name="google-site-verification" content="FrgWlxsRtcd881uG1S1qm7UiyutPYCuZu7Y5ormWz8w"/> -->
+    <c:tc2_header title="TrueCost Electric Portal" description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."/>
+    </head>
+    <body class="has-background-white home" style="display:none;">
+
+      <c:tc2_navbar />
+
+      <section id="hero " class="hero is-large ">
+        <div class="hero-body" style="overflow:hidden;">
+          <div class="container has-text-centered ">
+            <h1 class="title is-size-2-mobile is-animating ">WELCOME TO
+            </h1>
+            <h1 class="title is-size-2-mobile is-spaced is-animating ">ELECTRIC PRICE TRANSPARENCY</h1>
+            <h2 class="subtitle is-size-5-mobile is-animating ">We use better data to get you past an "advertised price" to your true, all-in cost</h2>
+          </div>
+          <div class="container is-vertical-center " style="margin-top: 1em;">
+            <form id="appZip" v-on:submit="submitZip">
+              <div class="field has-addons is-grouped-centered">
+                <p class="control has-text-grey">
+                  <label class="form-label-4" for="zip">Enter Your Zip Code...
+                  </label>
+                  <input class="input is-medium" maxlength="5" minlength="5" v-mask="'#####'" id="zip" type="text" v-model="zip" v-on:keydown.enter="submit"/>
+                </p>
+                <p class="control">
+                  <button role="button" aria-label="button enter zip" title="button enter zip" class="button is-medium is-info animate-gradient-bg" type="submit">
+                    <span class="visuallyhidden">Enter zip code</span>
+                    <span class="icon-icon-arrow-right arrow-right"></span>
+                  </button>
+                </p>
+              </div>
+            </form>
+
+          </div>
+          <!-- <div class="btn-small-business"><a href="{!$Page.Home_Commercial}">Shop Small Business</a></div> -->
+          <div class="has-bg-img" style="background-image:url({!URLFOR($Resource.v2_tc_resources_images, 'home_bg.jpg')});"></div>
+
+        </div>
+      </section>
+      <div id="trigger-cta-home-1" class=""></div>
+
+      <div id="trigger-navbar" class="" style="position: relative; top:0px;"></div>
+
+      <section id="cta-home-1" class=" has-background-white " style="opacity:0">
+        <div class="container">
+          <div class="columns button-cards">
+            <div class="column has-text-centered column-card column-left">
+              <span class="icon is-large has-text-info ">
+                <span class="icon-icon-bolt icon-icon-bolt-blue"></span>
+              </span>
+              <h3 class="is-size-3 is-size-4-mobile has-text-weight-bold ">Show Me the Plans</h3>
+              <p class="is-size-6 is-size-6-mobile has-card-text-centered  ">If you’re comfortable with purchasing or switching electric plans and don’t need guidance, let’s go shopping!</p>
+              <a class="button is-info is-rounded is-outlined animate-gradient-bg mt-large" href="{!$Page.Shop_Plans}">Shop Plans</a>
+            </div>
+            <div class="is-divider-vertical no-margin"></div>
+            <div class="column has-text-centered column-card column-right ">
+              <span class="icon is-large has-text-info ">
+                <span class="icon-icon-calculator"></span>
+              </span>
+              <h3 class="is-size-3 is-size-4-mobile has-text-weight-bold ">Help me get started</h3>
+              <p class="is-size-6 is-size-6-mobile has-card-text-centered ">If you’re moving or have never picked an electric plan before,<br/>
+                we can help you get started</p>
+              <a class="button is-info is-rounded is-outlined animate-gradient-bg mt-large" href="{!$Page.Get_Started_Moving}">GET STARTED</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="trigger-video-container" class=""></div>
+      <section class="has-background-white-ter ">
+        <div class="container video" style="opacity:0">
+          <div class="columns">
+            <div class="column cn is-mobile" style="background-image:url('{!URLFOR($Resource.v2_tc_resources_images, 'video.jpg')}');"></div>
+            <div class="column cn is-5 is-5 is-over-right">
+              <div class="box is-description ">
+                <h3 class="is-size-3 has-text-weight-bold ">We Don't Sell Ads or Preferred Treatment... We Speak Truth</h3>
+                <p class="is-size-6 has-card-text-left ">We built this for you. We exist to help you understand the complexities of electric choice. We pride ourselves on price transparency which shows you the all-in cost for the way you use electricity.</p>
+                <a href="{!$Page.About_True_Cost}" class="is-white has-text-info has-text-weight-semibold animate-arrow">
+                  <span>HOW DOES IT WORK</span>
+                  <span class="icon is-small ">
+                    <i class="fas fa-arrow-right "></i>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="column cn is-desktop poster" style="background-image:url('{!URLFOR($Resource.v2_tc_resources_images, 'video.jpg')}');"></div>
+            <div id="trigger-cta-home-2" class=""></div>
+          </div>
+        </div>
+      </section>
+
+
+      <c:tc2_ui_quotes />
+      <c:tc2_savings_today />
+      <c:tc2_footer />
+      <c:tc2_scripts_home />
+      <script language='JavaScript1.1' async='' src='//pixel.mathtag.com/event/js?mt_id=1458589&mt_adid=223710&mt_exem=&mt_excl=&v1=&v2=&v3=&s1=&s2=&s3='></script>
+    </body>
+  </html>
+</apex:page>

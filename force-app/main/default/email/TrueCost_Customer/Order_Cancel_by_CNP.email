@@ -1,0 +1,12 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<p><span style="background-color: rgb(255, 255, 255); ">Dear {!Order__c.First_Name__c},</span></p>
+<p>&nbsp;</p>
+<p>As you requested, your order with&nbsp;{!Order__c.REP_Profile__c} has been cancelled. We hope you're able to find a plan that best suits your needs.<br><br><b>Order Tracking Number:&nbsp;</b> {!Order__c.Name}<br><b>Electric Provider:</b> {!Order__c.REP_Profile__c}</p><p><b style="font-size: 12pt;">Order Status:</b><span style="font-size: 12pt;">&nbsp;{!Order__c.Order_Status__c}</span></p>
+<p>&nbsp;</p>
+<p>Have a great day!</p><p><br></p><p>Regards,</p>
+<p>&nbsp;</p>
+<p>TrueCost Customer Support</p>]]></td>
+</tr>
+</table>

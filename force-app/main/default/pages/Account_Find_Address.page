@@ -1,0 +1,72 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" controller="ControllerForMobileMain">
+    
+ 
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org" xmlns:v-focus="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+    description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."
+  />
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+    
+    <div id="wrapper">
+    
+        <c:tc2_navbar />
+        <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-2.jpg" headline="CREATE PASSWORD" />
+        <!-- HEADER -->
+        <div id="appAccountCompletePassword">
+            <section>
+                <div class="container">
+                    <div class="has-margin-3 has-text-centered">
+                        <h2  class="is-size-4 has-text-weight-bold padding-sides">Setting up your account!</h2>
+                    </div>
+                </div>
+            </section>
+
+            
+        </div>
+        
+        
+    </div>
+    
+    <c:Ngforce />
+    <c:tc2_footer />
+    <script>
+            (function($) {
+                $(function() {
+                    'use strict';
+
+                    TC.app.appAccountCompletePassword = new Vue({
+                        el: '#appAccountCompletePassword',
+                        data: {
+                            errors: [],
+                            email: TC.app.account.email,
+                            password: sessionStorage.getItem('tmp')
+                        },
+                        mounted: function() {
+                        	TC.app.appSubscribe.$emit('addLoaderQueue', {'id':'changepassword'});
+                        	this.onResetPassword();
+                        },
+                        methods: {
+                            
+                            onResetPassword(){
+                                ControllerForMobileMain.changePasswordTC2(
+                                    this.password, 
+                                    this.password, 
+                                    'Summer123@',
+                                    function(result, event){
+                                        TC.fn.getApa();
+                                        TC.fn.navigateTo("{!$Page.Account_Profile}");
+                                    }
+                                );
+                            },
+                        }
+                    });
+
+                })
+
+            })(jQuery);
+        </script>
+    
+  </body>
+  </html>
+</apex:page>

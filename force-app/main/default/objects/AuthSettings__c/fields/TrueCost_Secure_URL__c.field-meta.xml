@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrueCost_Secure_URL__c</fullName>
+    <description>Secure url for TrueCost, like secure.centerpointenergy.force.com (PRD) or https://qa-centerpointenergy.cs13.force.com for sandboxes</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Secure url for TrueCost, like secure.centerpointenergy.force.com (PRD) or https://qa-centerpointenergy.cs13.force.com for sandboxes</inlineHelpText>
+    <label>TrueCost Secure URL</label>
+    <length>255</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

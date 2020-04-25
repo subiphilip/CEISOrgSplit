@@ -1,0 +1,133 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" controller="EnrollRemoteController2" cache="false">
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+      description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+    <div id="wrapper">
+    <c:tc2_navbar />
+    <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-3.jpg" headline="Almost There!" />
+        <div id="appAccountDetails">
+            <section>
+                <div class="container">
+                    <div class="has-margin-3 has-text-centered">
+                        <h2 class="is-size-4 has-text-weight-bold padding-sides">Here are some things {{company}} wants you to know<br/> ahead of signing up for this plan
+</h2>
+                    </div>
+                </div>
+            </section>
+            <section>
+              <form  v-on:submit="validateBeforeSubmit"  method="post">  
+                  <div class="container details  singup-bottom-padding">
+                      <div class="box has-heavy-shadow" style="padding: 2em;">
+                          <p class="is-size-5 has-text-weight-semibold">{!$Label.Print_Save_EFL}</p>
+                          <br/>
+                          <p class="is-size-6">
+                            <apex:outputText value="{!$Label.Disclosure_document_message}">
+                                <apex:param value="{!enrollrate.plan__r.rep_profile__r.name}"/>
+                            </apex:outputText>
+                          </p>                          
+                          <br/>
+                          <p class="is-size-5 has-text-weight-semibold">Potential Fees</p>
+                          <p class="is-size-6"><c:FeeDisplay rateid="{!enrollrate.id}"/> </p>
+                          <br/>
+                          <p class="is-size-6">
+                            <apex:outputText value="{!$Label.Plan_Disclosures_Deposit_Language}">
+                                <apex:param value="{!enrollrate.plan__r.rep_profile__r.name}"/>
+                            </apex:outputText>
+                          </p>
+                          <br/>
+                          <div class="ic-link-outer">
+                              <c:EFLYRACTOSComponent rate="{!enrollrate}" page="Checkout" /> 
+                          </div>
+                      </div>
+                      <div>
+                          <article class="media padding-sides">
+                              <figure class="media-left">
+                                  <div class="checkbox">
+                                      <span><input name="acknowledgement" v-model="acknowledgement" id="acknowledgement" type="checkbox"  required="required" /></span>
+                                  </div>
+                              </figure>
+                              <div class="media-content">
+                                  <label for="acknowledgement"><apex:outputText value="{!$Label.Accept_Disclosures}">
+                                      <apex:param value="{!enrollrate.plan__r.rep_profile__r.name}"/>
+                                  </apex:outputText></label>                                          
+                              </div>
+                          </article>
+
+                      </div>
+                      <div>
+                          <div class="has-text-centered ">
+                              <br/>
+                              <input class="button is-primary is-rounded fixed-size animate-gradient-bg" type="submit" value="REVIEW MY ORDER" />
+                              <p class="link-back"><a class="has-text-weight-semibold is-size-8" href="/Account_Details">Edit My Profile Information</a></p>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+          </section>
+        </div>
+</div>
+        <c:tc2_footer />
+    
+    <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+             
+             TC.app.appAccountDetails = new Vue({
+                el: '#appAccountDetails',
+                data: {
+                    acknowledgement: false,
+                    errors:[],
+                    company:''
+                },
+                methods: {
+                    onSelectConfirm: function() {
+                        TC.fn.navigateTo(TC.routes.accountReview+'?id='+TC.app.account.plan.id);
+                    },
+                    validateBeforeSubmit: function(e) {
+                      this.errors = [];
+                      if (!this.acknowledgement) {
+                        this.errors.push('Do you accept the terms?');
+                      }
+                      
+                      if(this.errors.length <= 0){
+                          this.onSelectConfirm();
+                      }
+                
+                      e.preventDefault();
+                    }
+                },  
+                mounted: function() { 
+                    TC.fn.createLead('enrollment');
+                    this.company = TC.app.account.plan.company;
+                    TC.app.appMenu.isProgress = true;
+                    TC.app.appMenu.step = 5;
+                    TC.app.appPlansCompareBar.hideSnackBar();
+
+                    dataLayer.push({
+                      'event': 'checkout',
+                      'ecommerce': {
+                        'checkout': {
+                          'actionField': { 'step': 6 },
+                          'products': [{                            
+                            'name': TC.app.account.plan.title,
+                            'brand': TC.app.account.plan.company,
+                            'variant': TC.app.account.plan.contract,
+                            'price': Math.min(TC.app.account.plan.ratePlan.Plan__r.Contract_Length__c * 5),
+                            'quantity': '1'
+                           }]
+                        }
+                      }
+                    })
+                }
+             });
+    
+          })
+        })(jQuery);
+    </script>
+
+  </body>
+  </html>
+</apex:page>

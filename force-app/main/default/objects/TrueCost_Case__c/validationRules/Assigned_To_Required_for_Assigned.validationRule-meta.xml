@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Assigned_To_Required_for_Assigned</fullName>
+    <active>true</active>
+    <description>if status is assigned, then assigned to must be populated (CES Technology Request)</description>
+    <errorConditionFormula>AND(
+  Record_Type_Name__c == &quot;CES Technology Request&quot;,
+  TEXT(Status__c) == &quot;Assigned&quot;,
+  ISBLANK(Assigned_To__c)
+)</errorConditionFormula>
+    <errorDisplayField>Assigned_To__c</errorDisplayField>
+    <errorMessage>TCCase03: This case must be assigned to a User if status is Assigned.</errorMessage>
+</ValidationRule>

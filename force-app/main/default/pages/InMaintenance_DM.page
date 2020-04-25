@@ -1,0 +1,108 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" cache="false">
+    
+    <apex:composition template="{!$Site.Template}">
+        <apex:define name="HeadTags">
+            <title>Temporarily down for maintenance</title>
+            <meta name="description" content="This site is currently undergoing scheduled maintenance" />
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <h1>Start, Stop or Transfer Your Natural Gas Service<br/>
+                        Start New Natural Gas Service </h1>
+                        
+                        <h4>You're on your way to getting safe, reliable natural gas service. You can also easily add, transfer, or stop service, because everything we do centers around you.</h4>
+                        <p><b>To get started you will need:</b></p>
+                        <ul style="color: black;">
+                          <li><span>CenterPoint Energy account number (if existing customer)</span></li>
+                          <li><span>Move dates</span></li>
+                          <li><span>Payment method ready (for initial deposit if required)</span></li>  
+                        </ul>
+                       
+                       <form action="https://acc-www.centerpointenergy.com/en-us/residential/customer-service/start-stop-transfer-service/start-natural-gas-service?sa=ho" method="get" target="_blank">
+                        <button type="submit">START NEW SERVICE</button>
+                       </form>
+                       
+                       <p><b>For homes with existing natural gas connections,</b> please submit the start service from seven (7) days before your scheduled move-in date to initiate billing cycle and begin gas service. 
+                       Start service requests are usually completed within three (3) business days.</p>
+                       
+                       <h1>Transfer Natural Gas Service</h1>
+                       <p>If you're already a CenterPoint Energy customer, but moving to a new location, you can complete a service transfer.</p>
+                       
+                       <form action="https://acc-www.centerpointenergy.com/en-us/residential/customer-service/start-stop-transfer-service/transfer-natural-gas-service?sa=ho" method="get" target="_blank">
+                        <button type="submit">TRANSFER SERVICE</button>
+                       </form>
+
+                       <br></br>    
+                       
+                       <form action="https://acc-www.centerpointenergy.com/en-us/residential/customer-service/start-stop-transfer-service/stop-natural-gas-service?sa=ho" method="get" target="_blank">
+                        <button type="submit">STOP GAS SERVICE</button>
+                       </form>               
+                       
+<!--   <div >
+    <h3 widow class="headline"><b>Start, Stop or Transfer Your Natural Gas Service</b></h3>
+    </div>
+    
+  <div>
+
+    <h4 style="padding-top: 10px;">Start New Natural Gas Service</h4>
+    <p style="padding-top: 20px;"> You're on your way to getting safe, reliable natural gas service.You can also easily add, transfer or stop service, because everything we do centers around you.</p>
+
+    <p><b>To get started you will need :</b></p>
+    <ul style="color: black;">
+      <li ><span>CenterPoint Energy account number (if existing customer)</span></li>
+      <li ><span>Move dates</span></li>
+      <li ><span>Payment method ready(for initial deposit if required)</span></li>
+     
+    </ul>
+    
+    <div style="padding-left: 20px;">
+    <button mat-button role="button" aria-label="start my service"  class="btn btn-primary  btn-small" (keyup.enter)="OnClickStart()" (click)="OnClickStart()"> START New SERVICE</button>
+      </div>
+  <br/>
+  <p><b>For homes with existing natural gas connections,</b>please submit the start service form seven(7) days
+  before your scheduled move-in date to initiate billing cycle and begin gas service. Start service requests are usually completed within three (3) business days.</p>
+
+        
+</div>
+
+<div>
+    <h4 style="padding-top: 10px;">Transfer Natural Gas Service</h4>
+    <p style="padding-top: 25px;"> If you're already a CenterPoint Energy customer, but moving to a new location, you can request a service transfer.</p>
+
+</div>
+
+<div>
+  
+    <div style="padding-left: 20px;">
+        <button mat-button role="button" aria-label="start my service"  class="btn btn-primary  btn-small" (keyup.enter)="OnClickTransfer()" (click)="OnClickTransfer()"> Transfer Service</button>
+          </div>
+          <br/>
+          <div style="padding-left: 20px;">
+              <button mat-button role="button" aria-label="start my service"  class="btn btn-primary  btn-small" (keyup.enter)="OnClickStop()" (click)="OnClickStop()"> Stop Gas Service</button>
+                </div>
+
+ 
+
+</div>
+--> 
+
+                        <!--<h1>SITE UNDER MAINTENANCE<br/>
+                        </h1>
+                        
+                        <h4>This site is currently undergoing scheduled maintenance from 11:30PM on Friday, October 11th until Sunday, October 13th 6:30PM CT. Please re-visit after that time. Thank you!</h4>
+
+                        <p>We apologize for the inconvenience.</p>-->
+
+                    </div>
+                    
+
+                </div>
+            </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+</apex:page>

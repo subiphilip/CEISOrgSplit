@@ -1,0 +1,310 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" controller="ControllerForMobileMain">
+    
+ 
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org" xmlns:v-focus="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+    description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."
+  />
+
+  <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"/>
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+    
+    <div id="wrapper">
+    
+        <c:tc2_navbar />
+        <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-2.jpg" headline="CREATE ACCOUNT" subheadline="See plan prices based on your home's past electric usage" />
+        <!-- HEADER -->
+        <div id="appAccountRegister">
+            <section>
+                <div class="container">
+                    <div class="has-margin-3 has-text-centered">
+                        <h2  class="is-size-4 has-text-weight-bold padding-sides">Get pricing as individual as you are</h2>
+                    </div>
+                </div>
+            </section>
+
+            <section >
+                    <form v-on:submit="validateBeforeSubmit" method="post">
+    
+                        <div class="container form singup-bottom-padding">
+                            <div class="box is-form-no-padding">
+                                <div class="inner">
+                                    <div class="columns">
+
+                                        <div class="column form-column" style="margin-bottom: 4.5em;">
+                                            
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                  <div class="field">
+                                                    <p v-if="errors.length">
+                                                      <b>Please correct the following error(s):</b>
+                                                      <ul>
+                                                        <li v-for="error in errors">{{ error }}</li>
+                                                      </ul>
+                                                    </p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="firstName">First Name</label>
+                                                            <input id="firstName" class="input borderless" type="text" name="firstName" v-model="firstName"  maxlength="50" required="required" />
+                                                            <span v-show="validateFirstName" class="help is-danger">First name is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="lastName">Last Name</label>
+                                                            <input id="lastName" class="input borderless" type="text" name="lastName" v-model="lastName" required="required" maxlength="50" />
+                                                            <span v-show="validateLastName" class="help is-danger">First name is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="email">Email</label>
+                                                            <input id="email" class="input borderless" type="text" name="email" v-model="email" required="required" maxlength="50" />
+                                                            <span v-show="emailExists" class="help is-danger">Email already exists</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="password">Password</label>
+                                                            <input id="password" class="input borderless" type="password" name="password" v-model="password" required="required" 
+                                                            minlength="8" pattern="^(?!.*password)(?=.*[0-9])(?=.*[a-z]).{8,}$" 
+                                                            title="At least 8 characters, at least one number, and at least one letter or symbol, and don't user the word password"/>
+                                                            <span v-show="validatePassword" class="help is-danger">Password is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="password">Password Confirm</label>
+                                                            <input id="passwordConfirm" class="input borderless" type="password" name="passwordConfirm"
+                                                            v-model="passwordConfirm" required="required"  minlength="8" />
+                                                            <span v-show="validatePasswordMatch" class="help is-danger">Password must match</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+    
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="has-text-centered ">
+                                    <br/>
+                                    <p>By clicking Create My Account, I accept the TrueCost <a href="{!$Page.termsofuse}" target='_blank'>Terms of Use</a> and <a href="{!$Page.Privacy}" target='_blank'>Privacy Policy</a></p>
+
+                                    <input class="button is-primary is-rounded fixed-size animate-gradient-bg" type="submit" value="CREATE MY ACCOUNT" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+            </section>
+            
+        </div>
+        
+        
+    </div>
+    
+    <c:Ngforce />
+    <c:tc2_footer />
+    <script>
+            (function($) {
+                $(function() {
+                    'use strict';
+
+                    TC.app.appAccountRegister = new Vue({
+                        el: '#appAccountRegister',
+                        data: {
+                            errors: [],
+                            email: TC.app.account.email,
+                            firstName: TC.app.account.firstName,
+                            lastName: TC.app.account.lastName,
+                            password: '',
+                            passwordConfirm: '',
+                            validatePassword: false,
+                            validatePasswordMatch: false,
+
+                            emailExists: false,
+                            validateFirstName: false,
+                            validateLastName: false,
+                            validateEmail: false,
+                            validateTerms: false,
+                        },
+                        mounted: function() {
+                            //Inputmask().mask(document.querySelectorAll("input"));
+                            if(this.email != '') {
+                                this.checkExistingEmail(this.email);
+                            }
+                            if(this.tdsp == true || this.tdsp == 'true'){
+                                $("#shop_plans_component").hide();
+                            }
+                            
+
+                        },
+                        watch: {
+                            email: {
+                                handler: function() {
+                                    this.checkExistingEmail(this.email)
+                                    TC.app.account.email = this.email;
+                                }
+                            },
+                            firstName: {
+                                handler: function() {
+
+                                    TC.app.account.firstName = this.firstName;
+                                }
+                            },
+                            lastName: {
+                                handler: function() {
+                                    TC.app.account.lastName = this.lastName;
+                                }
+                            },
+                            password: {
+                                handler: function() {
+                                }
+                            },
+                            passwordConfirm: {
+                                handler: function() {
+                                }
+                            }
+                        },
+                        methods: {
+                            validateBeforeSubmit: function(e){
+                                e.preventDefault();
+
+                                this.errors = [];
+                                this.validateFirstName = false;
+                                this.validateLastName = false;
+                                this.validateEmail = false;
+                                this.validatePassword = false;
+                                this.validatePasswordMatch = false;
+                                if(this.firstName == ""){
+                                    this.validateFirstName = true;
+                                    this.errors.push('First name is requred');
+                                }
+                                if(this.lastName == ""){
+                                    this.validateLastName = true;
+                                    this.errors.push('Last name is requred');
+                                }
+                                if(this.email == ""){
+                                    this.validateEmail = true;
+                                    this.errors.push('Email is requred');
+                                }
+                                if(this.emailExists){
+                                    this.emailExists = true;
+                                    this.errors.push('Email already exists');
+                                }
+                                if(this.password == ""){
+                                    this.validatePassword = true;
+                                }
+                                if(this.password !== this.passwordConfirm) {
+                                    this.validatePasswordMatch = true;
+                                    this.errors.push('Passwords must match');
+                                }
+                                 
+                                 if(this.errors.length <= 0){
+                                    this.register();
+                                 } else {
+                                 }
+
+                             },
+                            checkExistingEmail: function(_email) {
+                                 this.emailExists = false;
+                                 let vm = this;
+                                 ControllerForMobileMain.CheckExistingEmail(_email, function(result,event){ // GAC
+                                     if(result !== 'Success'){
+                                         vm.emailExists = true;
+                                     } else {
+                                         vm.emailExists = false;
+                                     }
+                                 });
+                             },
+                             register: function(){
+                                 var vm = this;
+                                 TC.app.appSubscribe.$emit('addLoaderQueue', {'id':'register','status':'Registering your account'});
+                                 ControllerForMobileMain.RegisterTC2(this.firstName,this.lastName,this.email,this.password, null, null, function(result,event){ // GAC
+                                    
+                                    if(result == null){
+                                        TC.app.appAccountRegister.remoteLogin();
+                                    } else {
+                                        if(result == "That email address has already been used.") {
+                                            TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'setupShopPlans'});
+                                            vm.errors.push('email')
+                                            vm.emailExists = true;
+                                        } else {
+                                            var res = result.replace(/quot;/g, '"');
+                                            res = res.replace(/&/g, '');
+                                            res = JSON.parse(res);
+                                             if (res.status == "success" && event.status) { 
+                                                TC.app.account.uid = res.user;
+                                                TC.app.appAccountRegister.remoteLogin();
+                                             }
+                                        }
+                                    }
+                                     
+                                 });
+                            },
+                            /*createAccount: function(){
+                                ControllerForMobileMain.RemoteCreateTC2(TC.app.account.uid, TC.app.account.premise.premiseId, function(result, event){
+                                    var res = result.replace(/quot;/g, '"');
+                                    res = res.replace(/&/g, '');
+                                    res = JSON.parse(res);
+                                    if (res.status == "success" && event.status) { 
+                                        TC.app.account.accountId = res.account;
+                                        TC.app.appAccountRegister.remoteLogin();
+                                     }
+                                });
+                            },*/
+                            remoteLogin: function() {
+                                var vm = this;
+                                TC.app.appSubscribe.$emit('addLoaderQueue', {'id':'changepassword'});
+                                ControllerForMobileMain.RemoteLogin(this.email,this.password, '{!$Page.Shop_Plans}', function(result2, event){ 
+                                    if (result2!='login error'){
+
+                                        var decoded = result2.replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '');               
+                                        window.location.href=decoded;
+                                        
+                                    } else{
+                                        TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'createprofile'});
+                                        TC.app.appAccountRegister.errors.push("Your email and password were not correct.")
+                                    }
+                                    
+                                });
+                            }
+                        }
+                    });
+
+                })
+
+
+
+            })(jQuery);
+        </script>
+    
+  </body>
+  </html>
+</apex:page>

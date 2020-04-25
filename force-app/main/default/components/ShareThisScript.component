@@ -1,0 +1,14 @@
+<apex:component >
+	<script type="text/javascript">var switchTo5x=true;</script>
+	<script type="text/javascript"
+		src="https://ws.sharethis.com/button/buttons.js"></script>
+	<script type="text/javascript">
+        stLight.options({
+                publisher:'f77e84bc-6484-4205-84ea-3cf52db35bcb',
+                headerTitle:'{!$CurrentPage.Name}',
+                theme:'5',
+                onhover: false,
+                embeds:'true'
+        });
+</script>
+</apex:component>

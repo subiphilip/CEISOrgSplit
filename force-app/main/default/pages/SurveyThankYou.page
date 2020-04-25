@@ -1,0 +1,46 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Thank you for completing our survey - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="description" content="description" />
+        </apex:define>
+       
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h1>Thank you for completing our survey</h1>
+                    
+                    <p class="lead">What should you do next?</p>
+
+                            <p class="lead"><a href="{!$Page.SiteLogin}" class="btn btn-warning">Log in </a> Log in to view electric plans now</p>
+
+                            <p class="lead"><a href="{!$Page.ElectricPriceTrendsSummary}" class="btn btn-success">Price Trends</a> See how prices are trending this year</p>
+                            
+                            <p class="lead"><a href="{!$Page.ElectricCompanies}" class="btn btn-primary">Electric Companies</a> View all the electric companies on TrueCost</p>
+
+                    </div>
+
+                    <div class="span4">                        
+                        <div>
+                            <c:electricpricetrendslinks />
+                        </div>
+                        <hr/>
+                        <div >
+                            <c:truecostrecentblogposts />
+                        </div>
+                        <hr/>
+                        <div >
+                            <c:RandomPoll />
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+    <!--just a comment, please ignore xyz12a89a98sdfasdfjkashdlkjfhalkjhsdfasdf345  new folder test auto-->
+</apex:page>

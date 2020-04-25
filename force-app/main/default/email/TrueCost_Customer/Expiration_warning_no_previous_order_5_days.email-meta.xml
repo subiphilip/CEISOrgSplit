@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Note to tell customers that their contract is expiring (contracts not placed through TrueCost)</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>TrueCost_Customer</letterhead>
+    <name>Expiration warning--no previous order 5 days</name>
+    <style>freeForm</style>
+    <subject>Your electric plan is going to expire soon</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

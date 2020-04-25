@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fixed_day_of_month_less_then_29</fullName>
+    <active>true</active>
+    <description>the fixed billing day of month must be less than 29</description>
+    <errorConditionFormula>Fixed_Billing_Day_of_Month__c &gt; 28</errorConditionFormula>
+    <errorDisplayField>Fixed_Billing_Day_of_Month__c</errorDisplayField>
+    <errorMessage>BillGroup01: The Fixed Billing Day of Month must be blank or less than 29</errorMessage>
+</ValidationRule>

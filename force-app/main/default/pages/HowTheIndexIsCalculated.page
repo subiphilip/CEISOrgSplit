@@ -1,0 +1,121 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" cache="true" expires="43200">
+    
+   <html><!--<html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">-->
+      <c:tc2_header title="{!$Label.Page_Title_HowIsTheIndexCalculated} - {!$Label.Page_Title_Company_Name}"
+         description="" />
+      <style>
+        
+      </style>
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="How the Index is Calculated" subHeadline="" />
+    
+             <div id="" class="container"> 
+                <div class="has-margin-3">
+                  <div class="columns content box has-margin-3">
+
+                  <div class="">
+                    <div><!--<div style="padding:20px;">-->
+                      <h3>{!$Label.Page_Title_HowIsTheIndexCalculated}</h3>
+                      <!--<c:Content_Viewer content="How the Index is Calculated"/>-->
+                      <h8><b>Component Plans</b></h8>
+                      <p>The CenterPoint Energy Electric Price Index (the Index) is a numerical average of a broad selection of publicly available residential electric plans with the following 
+                      characteristics:</p>   
+                      <ul>
+                          <li>Contract term of six months, one year or two years, as applicable</li>
+                          <li>Fixed rate during the contract term</li>
+                          <li>Less than 100 percent renewable content</li>
+                          <li>Available in one of the regions of Texas where customers have retail choice</li>
+                          <li>Open to all residential customers and not subject to other availability restrictions (i.e. employees, friends and family plans, usage thresholds or similar programs)</li>
+                      </ul> 
+                      <p>The data is collected each business day and the Index is published weekly on this website each Thursday.</p>
+                      <p>The Index excludes plans that may meet the stated criteria but that CenterPoint Energy believes do not represent the market due to unusual fees, limited availability or other 
+                      special circumstances. For example, we do not incorporate plans that require the use of solar panels or other generating devices.</p>
+                      <br></br>
+                      
+                      <h8><b>Service Areas</b></h8>
+                      <p>The Index is calculated for all Texas service areas where electric choice is offerred. These territories include:</p>
+                       <ul>
+                          <li><b>CenterPoint Energy Houston Electric</b> - Houston</li>
+                          <li><b>Oncor</b> - Dallas/Ft. Worth</li>
+                          <li><b>American Electric Power (AEP) Central</b> - Corpus Christi/Laredo/McAllen/San Benito/Victoria</li>
+                          <li><b>Sharyland Utilities</b> - Brady/Celeste/Colorado City/Mission/McAllen/Stanton</li>
+                          <li><b>American Electric Power (AEP) North</b> - Abilene/Alpine/San Angelo/Vernon</li>
+                          <li><b>Texas-New Mexico Power (TNMP)</b> - North-Central/Gulf Coast/West</li>
+                      </ul>    
+                      <p>To learn more about service areas, <a href="{!$Page.TDSPHelp}">click here</a></p>
+                      <br></br>
+                      
+                      <h8><b>Assumed Usage</b></h8>
+                      <p>The total annual and monthly cost with respect to this group of plans is calculated based on a typical customer profile as determined by the 
+                      Public Utility Commission of Texas (PUCT). The profile is for a customer who uses 12,000 kilowatt-hours (kWh) per year 
+                      (or an average of 1,000 kWh per month), and this varies by service area.   Each service territory's typical customer 
+                      profile is shown in the following graphs.</p>
+                      <p style="text-align:center"><apex:image value="{!$Resource.MonthlyUsage_CenterPoint}" width="500" height="500" alt="Monthly Usage for the CenterPoint Energy Houston Electric Service Area"/></p>
+                      <p style="text-align:center"><apex:image value="{!$Resource.MonthlyUsage_Oncor}" width="500" height="500" alt="Monthly Usage for the Oncor Service Area Map"/></p>
+                      <p style="text-align:center"><apex:image value="{!$Resource.MonthlyUsage_AEPCentral}" width="500" height="500" alt="Monthly Usage for the AEP Central/Sharyland Service Area"/></p>
+                      <p style="text-align:center"><apex:image value="{!$Resource.MonthlyUsage_AEPNorth}" width="500" height="500" alt="Monthly Usage for the AEP North Service Area"/></p>
+                      <p style="text-align:center"><apex:image value="{!$Resource.MonthlyUsage_TNMP}" width="500" height="500" alt="Monthly Usage for the TNMP Service Area"/></p>
+                      <p>We then apply the calculated values for these profiles for each applicable plan, including all recurring charges and fees. The resulting cost 
+                      is a monthly average so that the seasonal effects are eliminated, which is similar to signing up for a plan with "average billing" or "budget billing."</p>
+                      <br></br>
+                      
+                     <h8><b>What's not included</b></h8>
+                     <p>CenterPoint Energy does not include these non-recurring fees in the calculations:</p>
+                       <ul>
+                          <li>Termination fees</li>
+                          <li>Fees not included in the default rate (cancelled check fees, disconnect/reconnect fees, customer service fees)</li>
+                          <li>Incentives or rewards programs added as customer enticements</li>
+                      </ul>
+                      <br></br>
+                      
+                     <h8><b>Other Indexes</b></h8>
+                     <p>Besides the primary index number (calculated from one-year plans) we perform identical calculations for the pool of applicable 6-month and two-year plans.</p>
+                     <br></br>
+                     
+                     <h8><b><i>Houston Chronicle</i></b></h8>
+                     <p>The Index, as it appears in the <i>Houston Chronicle</i>, shows applicable one-year plan prices in cents per-kilowatt-hour. Published on Sundays, the Index includes 
+                     electric rates through the Thursday preceding publication. The following week's chart then picks up the data from the prior week's business days. Holiday schedules 
+                     may also affect what data is included and excluded.</p>
+                     <p>The Index as it appears in the <i>Chronicle</i> also includes the highest-priced and lowest-priced plans for each week. The conversion between average monthly cost and 
+                     per-kilowatt hour cost is conveniently divided by 1,000.</p>
+                     <p style="text-align:center">Example: $104.07/month = 10.407 cents/kilowatt hour</p>
+                     <p>For comparison purposes, the average monthly cost of a 24,000 kilowatt-hour/year (or an average of 2,000 kWh per month) customer is also included. These calculations 
+                     are based on the following usage profile (also created by the PUCT):</p>
+                     <p style="text-align:center"><apex:image url="{!$Resource.MonthlyUsage_HoustonChronicle}" width="500" height="500" alt="Monthly Usage"/></p>
+                     <br></br>
+                     
+                     <h8><b>Green Premium</b></h8>
+                     <p>The green premium is defined as the average monthly cost for 100 percent renewable plans of a given contract length (for example, one year), less the average 
+                     monthly cost for plans with less than 100 percent renewable content and based on the assumed usage profile for a 12,000 per-kilowatt-hour/year user. The green 
+                     premium may be thought of as an answer to the question: "On average, how much more per month would the average monthly payment be for a 100-percent-renewable 
+                     version of a plan with the same contract length?"</p>
+                         <p style="text-align:center">Example:<br></br>
+                         100% renewable plan at $104.07/month<br></br>
+                         <u>less  Non-100% renewable plan at $100.00/month</u><br></br>
+                         Green Premium of $ 4.07/month</p>
+                     <br></br>
+                     
+                     <h8><b>CenterPoint Energy makes no warranties regarding the Index.</b></h8>
+                     <p>CenterPoint Energy may provide analysis and commentary on the Index through blogs and on its website, and may include forward-looking statements about energy markets 
+                     (Information). This Information is intended only to assist you with decisions related to choosing a residential electric plan and does not consider your unique personal 
+                     situation. While we aim to provide valuable insight into the competitive retail electric market, <b>CENTERPOINT ENERGY MAKES NO WARRANTIES, EXPRESS OR IMPLIED, OR 
+                     REPRESENTATIONS AS TO THE ACCURACY OF THIS INFORMATION AND ASSUMES NO LIABILITY OR RESPONSIBILITY FOR ANY ERRORS OR OMISSIONS IN THE INFORMATION BEING PRESENTED. YOU 
+                     EXPRESSLY AGREE THAT IT IS YOUR SOLE RESPONSIBILITY TO INDEPENDENTLY EVALUATE THE ACCURACY, CORRECTNESS OR COMPLETENESS OF THE INFORMATION PRIOR TO MAKING A DECISION 
+                     REGARDING YOUR RETAIL ELECTRIC PLAN AND PROVIDER.</b></p>
+                        
+
+                    </div>
+                  </div>
+                      
+                </div>
+               </div>
+
+             </div>
+         </div>    
+         
+        <c:tc2_footer />
+      </body>
+   </html>
+</apex:page>

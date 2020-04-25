@@ -1,0 +1,119 @@
+<apex:page showHeader="false" applyBodyTag="false" applyHtmlTag="false" docType="html-5.0" standardStylesheets="false" controller="HSPSController" cache="false">
+  <html lang="en">
+  <head>
+    <meta name="google-site-verification" content="vQ6hvUPDW-7OJ7HkKVaxmxm5BSWte8VSjH7d7gnmUjY" />
+    
+    <!-- Anti-flicker snippet  -->
+    <style>.async-hide { opacity: 0 !important} </style>
+    <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+    h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+    (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+    })(window,document.documentElement,'async-hide','dataLayer',4000,
+    {'GTM-KB9XD48':true});</script>
+    
+    <!-- Modified Analytics tracking code with Optimize plugin  -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-22823219-4', 'auto');
+      ga('require', 'GTM-KB9XD48');
+      
+    </script>
+    
+    
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TZZGMRP');</script>
+
+    <meta charset="utf-8"></meta>
+    <title>CenterPoint Energy</title>
+    <base href="/move/"></base>
+    <!-- <script src="https://www.centerpointenergy.com/_layouts/15/init.js"></script> -->
+    <link rel="stylesheet"  href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"/>
+    <apex:stylesheet value="{!URLFOR($Resource.gas_implementation_production_v2, 'styles.css')}"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"></meta>
+
+  </head>
+  <body data-enable-history="false" data-design="new">
+  
+  
+    
+    <style>
+      .hs-water-line{ width:50px; margin-top:-20px;}
+    </style>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TZZGMRP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <script type="text/javascript">
+        
+    window.CPE = {
+      assetPath: "{!URLFOR($Resource.gas_implementation_production_v2, '/assets')}",
+      api: "https://cnpdigitalmove-sbx.us-e2.cloudhub.io//api",
+      hsp_s_plans: [],
+      variantDefault: 3,
+      content: {
+        hsp_title: "Affordable Repair Plans from HomeServe for CenterPoint Energy Customers",
+        hsp_subtitle: "CenterPoint Energy has selected HomeServe to offer affordable emergency repair plans that can help provide protection against costly and inconvenient repairs to systems through their homes and properties",
+        hsp_headline_bundle: "Would you be interested in protecting your home's gas and water lines?",
+        hsp_headline_multiple_steps: "Would you be interested in this plan?",
+        hsp_subhead_bundle: "Would you be interested in protecting your home's gas lines?"
+      }
+    };
+    
+    window.googleOptimizeExperimentID = 'SVIe3k2aS-mhY-n9wlRblw';
+    
+    if(window.location.href.indexOf('move.centerpointenergy.com') <= 0){
+        window.CPE.api = "https://cnpdigitalmove-sbx.us-e2.cloudhub.io/api"
+    }
+    
+  </script>
+    <apex:repeat value="{!objlist}" var="plans"> 
+        
+      <script> 
+        var plan = {
+          'name': '{!plans.Name}',
+          'selected': false,
+          'icon':    '<i class="fa fa-fire"></i>',
+          'headline':    '{!plans.Headline__c}',
+          'active':    '{!plans.Active__c}',
+          'activeDate':    '{!plans.Activation_Date__c}',
+          'confirmationName':    '{!plans.Confirmation_Name__c}',
+          'productName':    '{!plans.Product_Name__c}',
+          'icon':    '{!plans.Icon__c}',
+          'id':    '{!plans.Plan_Id__c}',
+          'priceList':    '{!plans.Price_List__c}',
+          'priceNet':    '{!plans.Price_Net__c}',
+          'detailsLink':    '{!plans.Product_Details_Link__c}',
+          'terms':    '{!plans.Terms_URL__c}',
+          'sort_order': '{!plans.sort_order__c}',
+          'downsell': '{!plans.downsell__c}',
+          'leading': '{!plans.leading__c}'
+        }
+        if('{!plans.Active__c}' == 'true'){
+            var activeDate = new Date(plan.activeDate);
+            activeDate = activeDate.getTime();
+            var now = new Date();
+            now = now.getTime();
+            if(now > activeDate){
+                CPE.hsp_s_plans.push(plan);
+            }
+        }
+      </script>
+      <div id="{!plans.Name}" style="display:none">
+          <apex:outputText value="{!plans.Product_Body__c}" escape="false" />
+      </div>
+    </apex:repeat>  
+
+  <app-root></app-root>
+
+  <apex:includeScript html-defer="defer" value="{!URLFOR($Resource.gas_implementation_production_v2, 'runtime.js')}"/>
+  <apex:includeScript html-defer="defer" value="{!URLFOR($Resource.gas_implementation_production_v2, 'polyfills.js')}"/>
+  <apex:includeScript html-defer="defer" value="{!URLFOR($Resource.gas_implementation_production_v2, 'main.js')}"/>
+
+  </body>
+  </html>
+</apex:page>

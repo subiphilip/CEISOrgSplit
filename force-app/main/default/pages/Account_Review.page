@@ -1,0 +1,336 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" controller="EnrollRemoteController2"  >
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+      description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+    <div id="wrapper">
+        <c:tc2_navbar />
+        <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-3.jpg" headline="Review your order details" />
+            <div id="appAccountSummary">
+                <!-- <c:tc2_modal_create_password /> -->
+                <section>
+                  <div class="container form singup-bottom-padding">
+                      <div class="box has-heavy-has-no-shadow" style="margin-top:-2em;">
+
+
+                        <div class="is-card-header has-text-centered has-margin-top">YOU'LL RECEIVE SERVICE FROM</div>
+
+                          <div class="has-text-centered" style="padding: 1em;">
+                              <img v-bind:src="plan.logo" v-bind:alt="plan.company" />
+                              <p class="has-text-weight-semibold"><p v-html="plan.title"></p></p>
+                              <p class="is-size-7">{{rep.Customer_Service_Phone_Number__c}}</p>
+                              <p class="is-size-7">{{rep.Mailing_Street_Address__c}}</p>
+                              <p class="is-size-7">{{rep.Mailing_City__c}}, {{rep.Mailing_State__c}} {{rep.Mailing_Zip__c}}</p>
+                              <p class="is-size-7">PUCT NO. {{rep.PUCT_License_Number__c}}</p>
+                          </div>
+                          <div class="is-divider"></div>
+                              <div class="has-text-centered" style="padding: 1em;">
+                                <p class="is-size-5">{{plan.contract}}</p>
+
+                              </div>
+                          <div class="is-divider"></div>
+                          <!-- <div class="is-card-header has-text-centered has-margin-top">YOUR PLAN DETAILS</div> -->
+                          <div class="columns has-spacing has-text-centered">
+
+                              <div class="column " style="padding: 1em;">
+                                  <p class="is-card-header">ALL-IN COST</p>
+                                  <p class="is-size-3">{{plan.kwhTC}} kWh</p>
+
+                                  <p class="is-card-header">ADVERTISED PRICE</p>
+                                  <p class="is-size-3">{{plan.kwh1000}} kWh</p>
+
+                              </div>
+                              <div class="column " style="padding: 1em;">
+                                  <p class="is-card-header">AVERAGE BILL</p>
+                                  <p class="is-size-3">${{plan.costMonthly}}/mo</p>
+                              </div>
+                          </div>
+
+                          <div class="is-divider"></div>
+                          <div class="order-outer">
+                              <div class="order-details" v-if="isCommercial">
+                                  <p>
+                                      <span class="is-card-header">SMALL BUSINESS</span>
+                                      <span class="float-right"><a href="{!$Page.Account_Details}">Edit</a></span>
+                                  </p>
+                                  <p class="is-size-5">{{TC.app.account.companyName}}</p>
+                                  <p class="is-size-5">{{TC.app.account.companyTaxId}}</p>
+                                  <p class="is-size-5">{{TC.app.account.companyDuns}}</p>
+                              </div>
+                              <div class="order-details">
+                                  <p>
+                                      <span class="is-card-header">SERVICE ADDRESS</span>
+                                      <span class="float-right"><a href="{!$Page.Account_Create}">Edit</a></span>
+                                  </p>
+                                  <p class="is-size-5">{{TC.app.account.premise.street}}</p>
+                                  <p class="is-size-5">{{TC.app.account.premise.city}}, {{TC.app.account.premise.state}} {{TC.app.account.premise.zip}}</p>
+                              </div>
+                              <div class="order-details">
+                                  <p>
+                                      <span class="is-card-header">START DATE</span>
+                                      <span class="float-right"><a href="{!$Page.Account_Schedule}">Edit</a></span>
+                                  </p>
+                                  <p class="is-size-5">{{startDate}}</p>
+                              </div>
+                              <div class="order-details">
+                                  <p>
+                                      <span class="is-card-header">PROFILE INFORMATION</span>
+                                      <span class="float-right">
+                                        <a v-if="TC.app.account.guest" href="{!$Page.Account_Details}">Edit</a>
+                                        <a v-if="!TC.app.account.guest" href="{!$Page.Account_Profile_Edit}">Edit</a>
+                                      </span>
+                                  </p>
+                                  <p class="is-size-5 is-uppercase">{{TC.app.account.firstName}} {{TC.app.account.lastName}}</p>
+                                  <p class="is-size-5 is-uppercase">{{TC.app.account.phone}}</p>
+                                  <p class="is-size-5 is-uppercase">{{TC.app.account.email}}</p>
+                              </div>
+
+                              <div class="order-details" v-if="TC.app.account.altContactCheck">
+                                  <p>
+                                      <span class="is-card-header">ALTERNATE CONTACT</span>
+                                      <span class="float-right"><a href="{!$Page.Account_Details}">Edit</a></span>
+                                  </p>
+                                  <p class="is-size-5 is-uppercase">{{TC.app.account.altContactFirstName}} {{TC.app.account.altContactLastName}}</p>
+                                  <p class="is-size-5 is-uppercase">{{TC.app.account.altContactPhone}}</p>
+                                  <p class="is-size-5 is-uppercase">{{TC.app.account.altContactLastFour}}</p>
+                              </div>
+
+                              <div class="order-details" v-if="TC.app.account.altMailingCheck">
+                                  <p>
+                                      <span class="is-card-header">ALTERNATE MAILING ADDRESS</span>
+                                      <span class="float-right"><a href="{!$Page.Account_Details}">Edit</a></span>
+                                  </p>
+                                  <p class="is-size-5 is-uppercase">{{TC.app.account.altMailingStreet}} {{TC.app.account.altMailingCity}} </p>
+                                  <p class="is-size-5 is-uppercase">{{TC.app.account.altMailingState}}</p>
+                                  <p class="is-size-5 is-uppercase">{{TC.app.account.altMailingZip}}</p>
+                              </div>
+
+                          </div>
+                      </div>
+                      <div class="has-text-centered ">
+                          <br/>
+                          <a class="button is-primary is-rounded fixed-size animate-gradient-bg" v-on:click="onSelectConfirm()">SUBMIT MY ORDER</a>
+                          <p class="link-back"><a class="has-text-weight-semibold is-size-8" href="{!$Page.Shop_Plans}">Cancel</a></p>
+                      </div>
+                  </div>
+              </section>
+            </div>
+
+    </div>
+    <c:tc2_footer />
+    <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+
+             TC.app.appAccountSummary = new Vue({
+                el: '#appAccountSummary',
+                data: {
+                  plan: TC.app.account.plan,
+                  rep: TC.app.account.plan.ratePlan.Plan__r.REP_Profile__r,
+                  startDate: moment(TC.app.account.serviceDate).format('dddd LL'),
+                  order: {},
+                  isCommercial: false
+                },
+                methods: {
+                    onSelectConfirm: function() {
+
+                        // check to make sure Incentive__c is true to kick off order registration
+                        // TODO
+                        if(TC.app.account.uid == null || TC.app.account.uid == undefined){
+                          this.register();
+                        } else {
+                          this.setupOrder();
+                        }
+
+                    },
+                    register: function(){
+                      TC.app.appSubscribe.$emit('addLoaderQueue', {'id':'register','status':'Submitting my order to '+this.plan.company});
+                      debugger;
+                      var vm = this;
+                      Visualforce.remoting.Manager.invokeAction(
+                           '{!$RemoteAction.EnrollRemoteController2.RegisterTC2}',
+                            TC.app.account.firstName, TC.app.account.lastName, TC.app.account.email, 'Summer123@', null, null,
+                            function(result, event) {
+
+                              debugger;
+                                if(result == null){
+                                  alert("Error Registering your account. Please contact TrueCost.");
+                                  TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'lookupESID'});
+                                  console.log("Error Registering account " + ' ' +   TC.app.account.firstName + ' ' + TC.app.account.lastName + ' ' +TC.app.account.email);
+                                } else {
+                                  if(result !== "That email address has already been used." && result){
+                                     var res = result.replace(/quot;/g, '"');
+                                     res = res.replace(/&/g, '');
+                                     res = JSON.parse(res);
+                                    if (res.status == "success" && event.status) {
+                                      TC.app.account.uid = res.user;
+                                      vm.setupOrder();
+                                    } else {
+                                      TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'lookupESID'});
+
+                                    }
+                                  } else if(TC.app.account.uid !== null){
+                                    vm.setupOrder();
+                                  } else {
+                                    TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'lookupESID'});
+                                    alert('Please enter a unique email');
+                                  }
+                                }
+
+
+                            }, { buffer: true, escape: true, timeout: 30000 }
+                        );
+                    },
+
+                    setupOrder: function() {
+                      var vm = this;
+                      // get order
+                      TC.app.appSubscribe.$emit('addLoaderQueue', {'id':'setupOrder','status':'Saving order'});
+                      debugger;
+                      Visualforce.remoting.Manager.invokeAction(
+                          '{!$RemoteAction.EnrollRemoteController2.startOrderRegistered}',
+                          TC.app.account.uid, TC.app.account.plan.id,
+                          function(result, event) {
+                            debugger
+                              TC.app.account.order = result;
+                          }, { buffer: true, escape: true, timeout: 30000 }
+                      );
+
+                      // get rate
+                      Visualforce.remoting.Manager.invokeAction(
+                          '{!$RemoteAction.EnrollRemoteController2.getRepRate}',
+                          TC.app.account.plan.id,
+                          function(result, event) {
+
+                              TC.app.account.order.repRate = result;
+                              // Plan from Database
+                          }, { buffer: true, escape: true, timeout: 30000 }
+                      );
+
+                      // get APA
+                      Visualforce.remoting.Manager.invokeAction(
+                          '{!$RemoteAction.EnrollRemoteController2.getAPA}',
+                          TC.app.account.uid,
+                          function(result, event) {
+
+                              TC.app.account.apa = result;
+                          }, { buffer: true, escape: true, timeout: 30000 }
+                      );
+
+                      // get APA
+                      Visualforce.remoting.Manager.invokeAction(
+                          '{!$RemoteAction.EnrollRemoteController2.RemoteCreateTC2}',
+                          TC.app.account.uid, TC.app.account.premise.premiseId,
+                          function(result, event) {
+
+
+                              // add err if result is null
+
+                              var res = result.replace(/quot;/g, '"');
+                              res = res.replace(/&/g, '');
+                              res = JSON.parse(res);
+                              if (res.status == "success" && event.status) {
+                                  TC.app.account.accountId = res.account;
+                                  vm.processOrder();
+                              } else {
+                                TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'lookupESID'});
+
+                              }
+                          }, { buffer: true, escape: true, timeout: 30000 }
+                      );
+                    },
+
+                    processOrder: function(){
+
+                        TC.app.appSubscribe.$emit('addLoaderQueue', {'id':'processingOrder','status': this.plan.company + ' receiving order'});
+                        this.order.Id = TC.app.account.order.Id;
+                        this.order.Customer_Acceptance_of_Plan_Terms__c = true
+                        this.order.Payment_Card_Year__c = new Date().getFullYear().toString();
+                        this.order.Payment_Card_Month__c = '01 - January';
+                        this.order.Payment_Card_Type__c = 'Visa';
+                        this.order.Payment_Card_Address_State__c = 'TX';
+                        this.order.Mailing_State__c = TC.app.account.premise.state;
+                        this.order.Rate__c =  TC.app.account.plan.id;
+                        this.order.Parent_Account__c =  TC.app.account.accountId; // SAVE USER ID
+                        this.order.First_Name__c = TC.app.account.firstName
+                        this.order.Last_Name__c = TC.app.account.lastName
+                        this.order.Customer_Email__c = TC.app.account.email
+                        this.order.Customer_Phone_Number__c = TC.app.account.phone
+                        this.order.SSN__c =  TC.app.account.ssn;
+                        this.order.Premise__c = TC.app.account.premise.premiseId
+                        this.order.ESIID_Number__c = TC.app.account.premise.esid
+                        this.order.Service_Address__c = TC.app.account.premise.street;
+                        this.order.Service_City__c = TC.app.account.premise.city;
+                        this.order.Service_State__c = TC.app.account.premise.state;
+                        this.order.OwnerId = TC.app.account.plan.ratePlan.Plan__r.REP_Profile__r.OwnerId;
+                        this.order.Service_Zip__c = TC.app.account.premise.zip;
+                        this.order.Customer_Date_of_Birth__c = moment(TC.app.account.dob).format('YYYY-MM-DD');
+                        this.order.Plan__c = TC.app.account.plan.ratePlan.Plan__c
+                        this.order.Plan_ID__c = TC.app.account.plan.ratePlan.Plan__r.Plan_ID__c
+                        this.order.Contract_Length__c = TC.app.account.plan.ratePlan.Plan__r.Contract_Length__c
+                        this.order.REP_Profile__c = TC.app.account.plan.ratePlan.Plan__r.REP_Profile__c;
+                        this.order.EFL_URL_For_Order__c = TC.app.account.order.repRate.Link_for_EFL__c;
+                        this.order.kWh_rate_1000__c = TC.app.account.order.repRate.X1000_kWh_rate__c;
+                        this.order.Fixed_Energy_Rate__c = TC.app.account.plan.ratePlan.Energy_Base_Rate_cents__c;
+                        this.order.REP_Account__c = TC.app.account.plan.ratePlan.Plan__r.REP_Profile__r.REP_Account__c;
+                        this.order.TDSP__c = TC.app.account.tdspRegion;
+                        this.order.PMVI_Flag__c = (TC.app.account.serviceType == 'moveIn') ? true : false;
+                        this.order.Language_Preference__c = TC.app.account.language;
+                        this.order.Mailing_Street_Address__c = TC.app.account.altMailingStreet;
+                        this.order.Mailing_City__c = TC.app.account.altMailingCity;
+                        this.order.Phone_of_Authorized__c = TC.app.account.altContactPhone;
+                        this.order.Mailing_State__c = TC.app.account.altMailingState;
+                        this.order.Mailing_Zip_Code__c = TC.app.account.altMailingZip;
+                        this.order.Last_4_SSN_of_Authorized__c = TC.app.account.altContactLastFour;
+                        this.order.Authorized_Representative__c = TC.app.account.altContactFirstName + " "+ TC.app.account.altContactLastName;
+
+                        if(this.isCommercial){
+                          this.order.DBA_Name__c = TC.app.account.companyName;
+                          this.order.Tax_Id__c = TC.app.account.companyTaxId;
+                          this.order.DUNS__c = TC.app.account.companyDuns;
+                        }
+
+                        this.order.order_status__c='New/Successfully Submitted';
+                        this.order.InitialDateofService__c   = moment(TC.app.account.serviceDate).format('YYYY-MM-DD');
+                        TC.fn.updateOrder(this.order);
+
+                    }
+                },
+                mounted: function() {
+                    TC.app.appMenu.isProgress = true;
+                    TC.app.appMenu.step = 6;
+                    TC.app.appPlansCompareBar.hideSnackBar();
+
+                    if(TC.app.account.planPremiseType == 'Commercial'){
+                      this.isCommercial = true;
+                    }
+
+                    dataLayer.push({
+                      'event': 'checkout',
+                      'ecommerce': {
+                        'checkout': {
+                          'actionField': { 'step': 7 },
+                          'products': [{
+                            'name': TC.app.account.plan.title,
+                            'brand': TC.app.account.plan.company,
+                            'variant': TC.app.account.plan.contract,
+                            'price': Math.min(TC.app.account.plan.ratePlan.Plan__r.Contract_Length__c * 5),
+                            'quantity': '1'
+                           }]
+                        }
+                      }
+                    })
+                },
+                watch: {
+                },
+             });
+
+          })
+        })(jQuery);
+    </script>
+
+  </body>
+  </html>
+</apex:page>

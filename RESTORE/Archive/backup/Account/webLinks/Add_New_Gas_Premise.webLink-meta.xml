@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Add_New_Gas_Premise</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Add New Gas Premise</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>/a0N/e?ent=01I30000001X982&amp;RecordType=012300000019QLY
+&amp;CF00N3000000B7kms={!Account.Name}
+&amp;CF00N3000000B7kms_lkid={!Account.Id}
+&amp;00N3000000B7BY5={!Account.Name}
+&amp;00N30000006o0tW={!Account.BillingStreet}
+&amp;00N30000007bE5u={!Account.BillingCity}
+&amp;00N30000008ck0i={!Account.BillingState}
+&amp;00N30000006o0tV={!Account.BillingPostalCode}
+&amp;CF00N3000000B8NwB_lkid={!$User.Id}
+&amp;CF00N3000000B8NwB={!$User.FirstName} {!$User.LastName}
+&amp;saveURL=/{!Account.Id}
+&amp;cancelURL=/{!Account.Id}</url>
+</WebLink>

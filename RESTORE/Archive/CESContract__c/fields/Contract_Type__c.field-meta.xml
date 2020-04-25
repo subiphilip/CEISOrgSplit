@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_Type__c</fullName>
+    <description>Which type of contract is being used?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Which type of contract is being used?</inlineHelpText>
+    <label>Contract Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>NAESB Base</fullName>
+                <default>false</default>
+                <label>NAESB Base</label>
+            </value>
+            <value>
+                <fullName>Version 3 Base</fullName>
+                <default>false</default>
+                <label>Version 3 Base</label>
+            </value>
+            <value>
+                <fullName>TC on Existing Version 3 Base</fullName>
+                <default>false</default>
+                <label>TC on Existing Version 3 Base</label>
+            </value>
+            <value>
+                <fullName>NAESB Base with TC</fullName>
+                <default>false</default>
+                <label>NAESB Base with TC</label>
+            </value>
+            <value>
+                <fullName>TC on Existing NAESB</fullName>
+                <default>false</default>
+                <label>TC on Existing NAESB</label>
+            </value>
+            <value>
+                <fullName>Version 3 Base with TC</fullName>
+                <default>false</default>
+                <label>Version 3 Base with TC</label>
+            </value>
+            <value>
+                <fullName>Base Pricing</fullName>
+                <default>false</default>
+                <label>Base Pricing</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

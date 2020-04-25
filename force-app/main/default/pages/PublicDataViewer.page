@@ -1,0 +1,148 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" controller="ControllerForMobileMain">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Usage Data Viewer - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>
+        
+        <!--apex:define name="breadcrumbs">
+        <apex:outputpanel styleClass="breadcrumbs" layout="block">
+        <apex:outputlink value="{!$Page.homepage}">Home</apex:outputlink>
+        <apex:outputlink value="{!$Page.PublicDataViewer}" styleClass="last">Shared Usage Data</apex:outputlink>
+    </apex:outputpanel>            
+    </apex:define-->
+        
+        
+        <apex:define name="body">
+            <div class="container" >     
+                <div class="row">
+                    <div class="span12">
+                        <h3>View Usage Data</h3>
+                        
+                        <div class="well">
+                            A registered TrueCost user for this address has given us permission to share their data publicly.  <br/>
+                            
+                            To share your data via a unique personal link, visit your My Account page (registration required).
+                        </div>
+                        
+                        <h4>Electricity Usage<br/>
+                            <small>Kilowatt-hours (kWh) per month</small>    
+                        </h4>
+                        
+                        <div id="usage_chart"></div>
+                        <hr/>
+                        
+                        <h4>Estimated Monthly Electric Bill<br/>
+                            <small>Using the lowest 12-month rate currently on TrueCost</small>    
+                        </h4>
+                        
+                        <div id="cost_chart"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </apex:define>
+        
+        
+    </apex:composition>
+    <script type='text/javascript' src='https://www.google.com/jsapi'/>
+    
+    <script>
+        $j=jQuery.noConflict();
+    
+    //google chart stuff    
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    var months ;	var costs;                             
+    var options;              var chart; var chart2;
+   
+    
+    function getInitialData(){              
+        
+        createChart();
+        ControllerForMobileMain.FetchAddress(
+            '{!left($CurrentPage.Parameters.pid, 18)}', 
+            function(result, event)            
+            {if (event.status){
+                $j("#subtitle").text(result);
+            }                         else {
+                alert('Address not retrieved');
+            }
+             
+            });
+        
+        ControllerForMobileMain.pullRawMonthlies(
+            '{!left($CurrentPage.Parameters.pid, 18)}', 
+            function(result, event)            
+            {if (event.status){
+                if (result==null){
+                    alert('No data is available');
+                }
+                months.addRow(['Jan', result[0].Usage__c]);
+                months.addRow(['Feb', result[1].Usage__c]);
+                months.addRow(['Mar', result[2].Usage__c]);
+                months.addRow(['Apr', result[3].Usage__c]);
+                months.addRow(['May', result[4].Usage__c]);
+                months.addRow(['Jun', result[5].Usage__c]);
+                months.addRow(['Jul', result[6].Usage__c]);
+                months.addRow(['Aug', result[7].Usage__c]);
+                months.addRow(['Sep', result[8].Usage__c]);
+                months.addRow(['Oct', result[9].Usage__c]);
+                months.addRow(['Nov', result[10].Usage__c]);
+                months.addRow(['Dec', result[11].Usage__c]);
+                
+                chart.draw(months, options);
+            }                         else {
+            }
+             
+            });
+        
+        ControllerForMobileMain.PullMonthlyCost(
+            '{!left($CurrentPage.Parameters.pid, 18)}', 
+            function(result, event)            
+            {if (event.status){ 
+                cost.addRow(['Jan', result[0]]);
+                cost.addRow(['Feb', result[1]]);
+                cost.addRow(['Mar', result[2]]);
+                cost.addRow(['Apr', result[3]]);
+                cost.addRow(['May', result[4]]);
+                cost.addRow(['Jun', result[5]]);
+                cost.addRow(['Jul', result[6]]);
+                cost.addRow(['Aug', result[7]]);
+                cost.addRow(['Sep', result[8]]);
+                cost.addRow(['Oct', result[9]]);
+                cost.addRow(['Nov', result[10]]);
+                cost.addRow(['Dec', result[11]]);
+                
+                chart2.draw(cost, options);
+            }                         else {
+            }
+             
+            });
+        
+        
+    }
+    
+    function createChart(){  //does all the initial creation 
+        
+        options = {
+            colors: ['#fe9601'], legend:{position:'none'}, chartArea:{width:"80%", height:"75%"}, vAxis: {minValue: 0}
+        };
+        months = new google.visualization.DataTable();        
+        months.addColumn('string', 'Month');        months.addColumn('number', 'kWh');
+        cost = new google.visualization.DataTable();        
+        cost.addColumn('string', 'Month');        cost.addColumn('number', '$');      }      
+    
+    function drawChart() {
+        createChart();
+        chart = new google.visualization.AreaChart(document.getElementById('usage_chart'));     
+        chart2 = new google.visualization.AreaChart(document.getElementById('cost_chart')); 
+        getInitialData();       
+    }
+    
+    window.onresize=function(){
+        chart.draw(months, options);
+        chart2.draw(cost, options);
+    }
+    </script>
+</apex:page>

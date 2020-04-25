@@ -1,0 +1,53 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+    <apex:stylesheet value="{!URLFOR($Resource.Jquery, 'css/ui-lightness/jquery-ui-1.8.16.custom.css')}"/>
+    
+    <apex:composition template="Template_TC">    
+        <apex:define name="HeadTags">
+            <c:ForceSSLScript />
+            <title>Letting your old electric plan roll over can really cost you {!$Label.Page_Title_Company_Name}</title>
+            <!-- <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/{!$CurrentPage.Name}"/> -->
+            <meta name="description" content="People who use myTrueCost.com to purchase new electric plans report saving, on average, more than 20% on their rate." />
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <apex:outputPanel layout="none" rendered="{!(ISPICKVAL($User.UserType,'Guest'))}">
+                        <div class="span3">
+                            <div class="well">
+                                <c:RemoteReg showphone="false" showpromo="false"/>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    <div class="{!if((ISPICKVAL($User.UserType,'Guest')), 'span7', 'span10')}">
+                        <h2 class="text-info">Move on and get a new electric plan</h2>
+                        <img src="{!URLFOR($Resource.moving_img)}" class="pull-right"/>
+                        <p>Moving is a great reason to get rid of things that aren’t working, like your old electric plan. TrueCost lets you:</p>
+
+                        <p><strong class="text-info">SAVE TIME </strong>Compare more than 50 plans from electric companies side-by-side</p>
+                        <p><strong class="text-info">UNDERSTAND YOUR COST </strong>People who use TrueCost to switch electric plans report saving more than 20%* on their electric rate on average</p>
+                        <p><strong class="text-info">SWITCH NOW </strong>It’s easy and convenient </p>
+                        
+                        <div class="clearfix"/>
+                        <hr/>
+                        <p><small>CenterPoint Energy Services, Inc. (CES), which manages TrueCost, is not the same legal entity as CenterPoint Energy Resources Corp. (CERC) or CenterPoint Energy Houston Electric, LLC (CEHE), nor is CES regulated by the Railroad Commission of Texas or the Public Utility Commission of Texas. You do not have to buy products or services from CES in order to continue to receive quality regulated services from CERC or CEHE.</small></p>
+                        <p><small>*Savings based upon survey conducted in March 2013 of TrueCost customers who switched plans and is based on self-reported savings of electric rates. Plans and prices change daily. Your savings may not be the same. Visit myTrueCost.com for personalized plan services.</small></p>
+                        
+                        <p>Connect with us: 
+                            <c:ShareThisSmall styled="false" URL="{!left($Site.CurrentSiteUrl, len($Site.CurrentSiteURL)-1)}{!URLFOR($Page.homepage)}"/>
+                        </p>
+                    </div>
+                    <div class="span2">
+                        <c:SliderPortlet />
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
+        </apex:define>               
+        
+    </apex:composition>
+    <c:RemoteRegScript />
+        <c:sliderPortletScript />
+</apex:page>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CI_New_Firm_Requires_MDQ</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+ ISNEW(),
+ TDSP_Lookup__r.MDQ_Required_for_Firm_Premises__c,
+ OR(
+  ISPICKVAL(Default_Delivery_Obligation__c, &#39;Firm&#39;),
+  ISPICKVAL(Default_Delivery_Obligation__c, &#39;Secondary Firm&#39;)
+ ),
+ ISBLANK(MDQ__c)
+)</errorConditionFormula>
+    <errorDisplayField>MDQ__c</errorDisplayField>
+    <errorMessage>Premise14: C&amp;I firm premise requires an MDQ</errorMessage>
+</ValidationRule>

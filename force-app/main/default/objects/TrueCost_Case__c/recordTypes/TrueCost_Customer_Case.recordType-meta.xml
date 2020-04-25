@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrueCost_Customer_Case</fullName>
+    <active>true</active>
+    <label>TrueCost Customer Case</label>
+    <picklistValues>
+        <picklist>Assigned_Project_Status__c</picklist>
+        <values>
+            <fullName>Assigned</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Development</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Testing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Waiting</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Browser__c</picklist>
+        <values>
+            <fullName>Chrome</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Firefox</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Internet Explorer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Safari</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Business_Unit__c</picklist>
+        <values>
+            <fullName>Choice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Producer Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Retail C%26I</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Wholesale</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Entity_Type__c</picklist>
+        <values>
+            <fullName>Customer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>REP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TDSP</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Language__c</picklist>
+        <values>
+            <fullName>English</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Spanish</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Origin__c</picklist>
+        <values>
+            <fullName>Chat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outbound Call</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Phone</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Web</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Priority__c</picklist>
+        <values>
+            <fullName>High</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Low</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medium</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reason__c</picklist>
+        <values>
+            <fullName>AEP%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>API Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Account Changes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Account termination</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Address Not Found</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Apply Credit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancelled order</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comments%2FFeedback</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commercial Service</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Complex functionality</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Delegation Agreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deposit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dispute commission</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dispute customer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ERCOT alert</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ESID lookup</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Early termination %28move-out%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Early termination %28switch%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Entergy%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Existing problem</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fees</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Format</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gas%2FElectric phone%2Fchat question</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GasChoice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Instructions not clear</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Market question</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meter Data Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meter data reply</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Meter number</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Move-out after DNP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Negative feedback</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New problem</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Meter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oncor%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Order Failure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Order by Agent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Order status</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Order walkthrough %28web%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Out of office</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Page errors</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payment Arrangements</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Positive feedback</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Questions about a Plan</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Questions about an REP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>REP order performance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>REP services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Registration by Agent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Registration walkthrough %28web%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request full report</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request re-send</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Suggestion</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Survey</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Survey%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Switch%2FMove dates</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TDSP Fees</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TNMP%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technical - Browser assistance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technical - Complex functionality</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technical - Navigation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technical - Password reset</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Testing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>User didn%27t attend training</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Voicemail</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website question</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Escalated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>On Hold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Waiting for Customer Response</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>System_Environment__c</picklist>
+        <values>
+            <fullName>CMS%2FCCOM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gemini</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Informatica</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>N%2FA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Safari</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Salesforce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Various</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>API Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Address Matching</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancellation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Clawback</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comments%2FFeedback</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Complaint</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Feature Request</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inadvertent Switch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Actionable %28No Survey%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Order API Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Out of Office Reply</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outside of Service Territory %28AEP%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outside of Service Territory %28Entergy%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outside of Service Territory %28Oncor%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Outside of Service Territory %28TNMP%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Password Related</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Problem</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Question</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sales</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Testing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TrueCost Invoice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Utility</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

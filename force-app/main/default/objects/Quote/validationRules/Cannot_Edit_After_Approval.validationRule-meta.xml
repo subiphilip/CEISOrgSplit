@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cannot_Edit_After_Approval</fullName>
+    <active>true</active>
+    <description>Prevents the quote from being edited after approval has been completed.</description>
+    <errorConditionFormula>AND(OR(TEXT(Status) = &#39;Approved&#39;,TEXT(Status) = &#39;Activated&#39;, TEXT(Status) = &#39;Executed&#39;),  AND($User.Profile_Name__c != &#39;System Administrator&#39;, $User.Profile_Name__c  != &#39;CES Pricing Analyst Q219&#39;))</errorConditionFormula>
+    <errorMessage>This quote is in a locked status and can only be edited by a Pricing Analyst or System Administrator.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_Nomination_Change__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Can customer and/or CES change the volume specified in the TC?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Can customer and/or CES change the volume specified in the TC?</inlineHelpText>
+    <label>Allow Nomination Change</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

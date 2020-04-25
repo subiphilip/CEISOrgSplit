@@ -1,0 +1,35 @@
+<apex:component controller="ControllerForMobileMain" allowDML="true">
+    <apex:attribute name="pagename" type="string" required="false" default="homepage" description="What url would you like the customer to start on once the login is complete?"/>
+    
+    <div class="alert alert-error alert-block" id="login_error" style="display:none">
+        <b>Your email and/or password were not correct.</b>
+    </div>
+    
+    <form action="javascript:void(0);" class="well well-large">
+        <div class="control-group">
+            <label class="control-label visible-desktop" for="email">Email</label>
+            <div class="controls">
+                <input class="input-block-level" name="email" id="email" placeholder="email@somewhere.com" value="" type="email" required="required"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label visible-desktop" for="password">Password</label>
+            <div class="controls">
+                <input class="input-block-level" name="password" id="password" placeholder="password" value="" type="password" required="required" autocomplete="off"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                    <a href="" id="login_submit" name="login_submit" class="btn btn-success btn-block" data-loading-text="Logging In">Login</a>
+                    
+                <hr/>
+                <a href="{!$Page.ForgotPassword}" class="btn btn-default btn-block">Forgot Password?</a>
+                <a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.RegisterSec}" class="btn btn-warning btn-block">Create Profile</a>
+            </div>
+        </div>
+        
+    </form>
+    
+    
+    
+</apex:component>

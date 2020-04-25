@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Advertised_Rate_Formula__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+OR( Record_Type_Name__c = &quot;Residential&quot;,Record_Type_Name__c = &quot;Residential TOU&quot;), 
+ X1000_kWh_rate__c ,
+IF(
+Record_Type_Name__c = &quot;Commercial&quot;, 
+non_demand_1500_kWh_rate_cents__c,
+Null
+
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Advertised Rate (cents)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

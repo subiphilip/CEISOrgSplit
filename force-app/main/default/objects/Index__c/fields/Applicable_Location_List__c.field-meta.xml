@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Applicable_Location_List__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF ( All_Locations__c 
+  , &#39;CEIP-Houston, CES-Houston, CES-St Louis, CES-Illinois, CES-Minnesota&#39;
+  , IF ( Location_Specific_Rate__c 
+      , CES_Location_1__r.Name + &#39;, &#39; + 
+        CES_Location_2__r.Name + &#39;, &#39; +
+        CES_Location_3__r.Name + &#39;, &#39; +
+        CES_Location_4__r.Name + &#39;, &#39; +
+        CES_Location_5__r.Name
+      , &#39;&#39;
+     )
+)</formula>
+    <label>Applicable Location List</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

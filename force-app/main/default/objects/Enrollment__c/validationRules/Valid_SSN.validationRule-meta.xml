@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valid_SSN</fullName>
+    <active>true</active>
+    <description>Enforces 9-digit SSNs</description>
+    <errorConditionFormula>AND(
+NOT(REGEX(SSN__c, &quot;\\D*?(\\d\\D*?){9}&quot;)) ,
+Len(SSN__c)&gt;0
+)</errorConditionFormula>
+    <errorMessage>Enrollment04: Your Social Security Number must have nine numerals</errorMessage>
+</ValidationRule>

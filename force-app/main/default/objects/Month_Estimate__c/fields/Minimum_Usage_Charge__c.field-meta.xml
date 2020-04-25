@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Minimum_Usage_Charge__c</fullName>
+    <description>Charge for not using enough energy</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Charge for not using enough energy</inlineHelpText>
+    <label>Minimum Usage Charge</label>
+    <precision>12</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

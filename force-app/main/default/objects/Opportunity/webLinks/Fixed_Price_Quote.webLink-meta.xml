@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fixed_Price_Quote</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Fixed Price Quote</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>/setup/ui/recordtypeselect.jsp
+?ent=01IQ0000000DiYz&amp;retURL=%2F{!Opportunity.Id}
+&amp;save_new_url=%2Fa1q%2Fe%3F
+CF00NQ0000001Cqss={!Opportunity.Name}
+&amp;CF00NQ0000001Cqrl={!Opportunity.Account}
+&amp;cancelURL=%2F{!Opportunity.Id}</url>
+</WebLink>

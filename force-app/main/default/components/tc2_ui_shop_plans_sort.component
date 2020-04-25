@@ -1,0 +1,78 @@
+<apex:component >
+<span xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+<section class="has-background-white">
+  <div class="container filter-buttons" style='max-width: 900px;'>
+    <nav class="level buttons">
+      <p>Filter by:</p>
+      <div class="level-item has-text-centered" v-if="!isCommercial">
+        <a v-if="!isCommercial" class="button is-info has-text-weight-semibold is-medium is-rounded fixed-size is-outlined animate-gradient-bg" onclick="TC.fn.openPlanDetailsTab(event, 'homeprofile')">HOME PROFILE</a>
+        <a v-if="isCommercial" class="button is-info has-text-weight-semibold is-medium is-rounded fixed-size is-outlined animate-gradient-bg" onclick="TC.fn.openPlanDetailsTab(event, 'homeprofile')">BUSINESS PROFILE</a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a class="button is-info has-text-weight-semibold is-medium is-rounded fixed-size is-outlined animate-gradient-bg" onclick="TC.fn.openPlanDetailsTab(event, 'contractlength')">CONTRACT LENGTH</a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a class="button is-info has-text-weight-semibold is-medium is-rounded fixed-size is-outlined animate-gradient-bg" onclick="TC.fn.openPlanDetailsTab(event, 'features')">FEATURES</a>
+      </div>
+      <div class="level-item has-text-centered">
+        <a class="button is-info has-text-weight-semibold is-medium is-rounded fixed-size is-outlined animate-gradient-bg" onclick="TC.fn.openPlanDetailsTab(event, 'providers')">PROVIDERS</a>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="has-background-white has-border-top">
+
+  <c:tc2_ui_shop_plans_filters />
+
+  <div v-if="plansTotal > 0 && !isLoadingPlans && !isCommercial">
+    <div v-if="!isReminded && TC.app.account.guest">
+      <c:tc2_email_switch_reminder />
+      <app-reminder></app-reminder>
+    </div>
+  </div>
+
+</section>
+
+<section v-if="plansTotal > 0 && !isLoadingPlans">
+  <div class="container rateboxes">
+
+    <nav class="level results-level">
+      <div class="level-left">
+        <div class="level-item">
+          <p v-if="plansTotal > 0 " class="subtitle is-5">We found
+            <strong>{{plansTotal}}
+              electric plans</strong>
+            for zip code
+            {{zip}}.</p>
+        </div>
+
+      </div>
+      <div class="level-right" v-if="plansTotal > 0">
+        <div class="level-item">
+          <div class="dropdown is-hoverable is-large">
+            <div class="dropdown-trigger">
+              <button class="button is-medium borderless-dropdown" aria-haspopup="true" aria-controls="dropdown-menu">
+                <span>Sort Plans</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu is-medium" id="dropdown-menu" role="menu">
+              <div class="dropdown-content is-medium">
+                <a v-bind:class="{'is-active': sortBy == 'lowHigh'}" v-on:click='sortLowHigh' href="#" class="dropdown-item">Average Bill Low to High</a>
+                <a v-bind:class="{'is-active': sortBy == 'highLow'}" v-on:click='sortHighLow' href="#" class="dropdown-item">Average Bill High to Low</a>
+                <a v-bind:class="{'is-active': sortBy == 'customer'}" v-on:click='sortCustomer' href="#" class="dropdown-item">Customer Rating</a>
+                <a v-bind:class="{'is-active': sortBy == 'green'}" v-on:click='sortGreen' href="#" class="dropdown-item">Green Friendly</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+  </div>
+</section>
+</span>
+</apex:component>

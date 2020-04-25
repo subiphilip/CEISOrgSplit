@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Record_Locked</fullName>
+    <active>true</active>
+    <description>record cannot be modified if it is sync&#39;d with safari or if the contract has been submitted</description>
+    <errorConditionFormula>AND(
+ OR(
+   ISPICKVAL(Safari_Sync_Status__c, &#39;Sync Complete&#39;),
+   NOT(ISPICKVAL(Contract__r.Contract_Status__c, &#39;Not Submitted&#39;)) 
+ ),
+ RecordType.Name = &#39;Contract Charge&#39;,
+ NOT(
+  OR(
+    CONTAINS($User.Profile_Name__c,&#39;CES Contract&#39;),
+    $User.Profile_Name__c = &#39;System Administrator&#39;,
+    $User.Profile_Name__c = &#39;The System&#39;
+  )
+ )
+)</errorConditionFormula>
+    <errorMessage>Charge01: This Charge has been submitted with a contract and/or has been sync&#39;d with an external system and can only be modified by a transaction analyst.  Please contact your applicable transaction analyst group.</errorMessage>
+</ValidationRule>

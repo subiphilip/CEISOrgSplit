@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Interstate_Pipeline_Demand_Therm__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( ISPICKVAL( Interstate_Pipeline_Demand_Level__c , &#39;Unit&#39;)
+, Interstate_Pipeline_Demand__c * 0.1
+, Interstate_Pipeline_Demand__c 
+)</formula>
+    <label>Interstate Pipeline Demand Therm</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,1 @@
+<script type="text/javascript">  Event.observe(window, "load", function() {    var hint = new HintText();  });</script>

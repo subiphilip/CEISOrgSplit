@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Utility_Collective_Account__c</fullName>
+    <description>CNP collective account for multi-account invoice.  default is LIVE BILL</description>
+    <externalId>false</externalId>
+    <inlineHelpText>CNP collective account for multi-account invoice.  default is LIVE BILL</inlineHelpText>
+    <label>Utility Collective Account</label>
+    <length>50</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

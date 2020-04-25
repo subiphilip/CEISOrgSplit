@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reset_Line_Item_Fees__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>if checked, process builder will update related line item fees&#39; cost to 0.  system managed field</description>
+    <externalId>false</externalId>
+    <inlineHelpText>if checked, process builder will update related line item fees&#39; cost to 0.  system managed field</inlineHelpText>
+    <label>Reset Line Item Fees</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

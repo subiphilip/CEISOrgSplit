@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Renewal_Business_Approval_Status__c</fullName>
+    <description>Used for business approvals of term extensions as part of the contract renewal process.</description>
+    <externalId>false</externalId>
+    <label>Renewal Business Approval Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Manager Approved</fullName>
+                <default>false</default>
+                <label>Manager Approved</label>
+            </value>
+            <value>
+                <fullName>Director Approved</fullName>
+                <default>false</default>
+                <label>Director Approved</label>
+            </value>
+            <value>
+                <fullName>VP Approved</fullName>
+                <default>false</default>
+                <label>VP Approved</label>
+            </value>
+            <value>
+                <fullName>CEO Approved</fullName>
+                <default>false</default>
+                <label>CEO Approved</label>
+            </value>
+            <value>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+                <label>Submitted</label>
+            </value>
+            <value>
+                <fullName>Pending</fullName>
+                <default>false</default>
+                <label>Pending</label>
+            </value>
+            <value>
+                <fullName>Not Required</fullName>
+                <default>false</default>
+                <label>Not Required</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Get_Data</fullName>
+    <availability>online</availability>
+    <description>Kicks off UHIT request for this customer</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <height>600</height>
+    <linkType>url</linkType>
+    <masterLabel>Get Data</masterLabel>
+    <openType>sidebar</openType>
+    <protected>false</protected>
+    <url>/apex/UHITButtons?&amp;p={!Premises__c.Id}&amp;ret={!Premises__c.Id}</url>
+</WebLink>

@@ -1,0 +1,10 @@
+[
+    {
+        "sobject": "PartnerAPI__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "export-PartnerAPI__cs.json"
+        ]
+    }
+]

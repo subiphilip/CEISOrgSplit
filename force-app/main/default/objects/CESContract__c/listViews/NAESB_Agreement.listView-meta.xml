@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NAESB_Agreement</fullName>
+    <columns>NAME</columns>
+    <columns>Contract_Number_Formula__c</columns>
+    <columns>Effective_Date__c</columns>
+    <columns>Account__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>CESContract__c.NAESB_2002_Enabling_Agreement</value>
+    </filters>
+    <label>NAESB Agreement</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+        <group>CES_Gulf_Coast_Sales</group>
+        <group>CES_Midcontinent_SE_Sales</group>
+        <group>CES_Midwest_Sales</group>
+        <group>CES_North_Central_Sales</group>
+        <group>CES_Sales_Teams</group>
+        <group>CES_Utility_Sales</group>
+        <group>CES_Wisconsin_Sales</group>
+    </sharedTo>
+</ListView>

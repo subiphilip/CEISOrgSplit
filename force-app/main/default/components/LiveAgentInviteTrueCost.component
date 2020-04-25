@@ -1,0 +1,11 @@
+<apex:component >
+    <div id="liveagent_invite_button_573300000001ZqH" style="display:none;" class="well shadow-box-outline visible-desktop">
+        <h4>Need Help?</h4>
+            <a href="" class="btn btn-small btn-success" onclick="liveagent.startChat('573300000001ZqH')">
+                Start Chat
+        </a>
+            <a href="" class="btn btn-small btn-danger" onclick="liveagent.rejectChat('573300000001ZqH')">
+                No Thanks
+            </a>
+        </div>
+</apex:component>

@@ -1,0 +1,5 @@
+Dear {!Order__c.REP_Profile__c}, 
+
+An order was placed with your company by a TrueCost customer on {!Order__c.CreatedDate} .  We want to provide timely service to our customers, so any order not approved or rejected by its expiration date will be considered rejected and the customer will be informed that they need to select a different REP.
+
+The order number is {!Order__c.Name}.

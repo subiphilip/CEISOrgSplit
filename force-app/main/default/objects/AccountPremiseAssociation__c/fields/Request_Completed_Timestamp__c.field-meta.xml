@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Request_Completed_Timestamp__c</fullName>
+    <description>When did the last UHIT request for this APA complete?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>When did the last UHIT request for this APA complete?</inlineHelpText>
+    <label>Request Completed Timestamp</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

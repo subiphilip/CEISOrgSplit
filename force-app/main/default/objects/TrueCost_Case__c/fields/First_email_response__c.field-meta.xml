@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>First_email_response__c</fullName>
+    <description>When the agent moved the case to waiting for customer response.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>When the agent moved the case to waiting for customer response.</inlineHelpText>
+    <label>First email response</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

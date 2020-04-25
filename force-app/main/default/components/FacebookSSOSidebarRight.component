@@ -1,0 +1,13 @@
+<apex:component >
+	<apex:outputPanel styleClass="sidebarright" layout="block">
+            <div class="maintitle">Register using facebook</div>
+        	<center>    
+                <a href="{!$Setup.TrueCostSystemVariables__c.Facebook_sso_initialize__c}?site=https%3A%2F%2F{!urlencode($Setup.TrueCostSystemVariables__c.Main_URL__c)}&startURL=%2Faddaddressafterregistration"> 
+					<apex:image url="{!URLFOR($Resource.facebookF)}" alt="facebook sign-in"  />                
+                </a>
+                <br/>
+                    Don't want another account to remember? Create a TrueCost account with 
+                <a href="{!$Setup.TrueCostSystemVariables__c.Facebook_sso_initialize__c}?site=https%3A%2F%2F{!urlencode($Setup.TrueCostSystemVariables__c.Main_URL__c)}&startURL=%2Faddaddressafterregistration"> your Facebook login</a>!
+            </center>
+       </apex:outputPanel>
+</apex:component>

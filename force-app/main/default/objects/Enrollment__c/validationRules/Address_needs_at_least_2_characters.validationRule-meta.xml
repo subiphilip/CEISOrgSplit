@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Address_needs_at_least_2_characters</fullName>
+    <active>true</active>
+    <description>The address field is used for a SOSL query, so it needs to have at least two characters or there will be an error.</description>
+    <errorConditionFormula>AND(LEN( Address__c  )&lt;2, Len(Address__c)&gt;0)</errorConditionFormula>
+    <errorMessage>Enrollment01: The address field must contain at least two characters.</errorMessage>
+</ValidationRule>

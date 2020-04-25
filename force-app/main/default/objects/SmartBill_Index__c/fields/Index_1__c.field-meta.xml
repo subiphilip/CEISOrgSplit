@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Index_1__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>First index component</description>
+    <externalId>false</externalId>
+    <inlineHelpText>First index component</inlineHelpText>
+    <label>Index 1</label>
+    <referenceTo>Index__c</referenceTo>
+    <relationshipLabel>Used by</relationshipLabel>
+    <relationshipName>Index_Child</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

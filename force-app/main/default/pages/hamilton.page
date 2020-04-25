@@ -1,0 +1,128 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false" controller="ControllerForMobileMain">    
+
+<html ng-app="hamilton" id="ng-app" xmlns:ng="http://angularjs.org">
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"/>
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+        	<c:ForceSSLScript />
+            <title>Hamilton Middle School - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="description" content="myTrueCost.com supports Hamilton Middle School.  Sign up for electric service through TrueCost and earn extra credit rewards for Hamilton. " />
+        </apex:define>
+       
+        
+        <apex:define name="body" >
+            <div class="container-fluid" ng-controller="hamiltonCtrl">
+              
+                <div class="row-fluid">
+                    <div class="span8">
+                    	<div class="">
+                    		<img src="{!URLFOR($Resource.HamiltonMSLogo)}" alt="hamilton middle school" class="pull-left" style="height:90px;"/>
+                    		<h1>Welcome, Hamilton Middle School<br/>
+                            	<small>Extra Credit Program</small>
+                        	</h1>	
+                    	</div>
+                    	<hr/>
+                        
+                        <div>
+
+							<img src="https://www.houstonisd.org/cms/lib2/TX01001591/Centricity/Domain/9328/IMG_9633.jpg" alt="hamilton middle school principal Wendy Hampton" class="pull-left" width="30%" style="margin-right:15px;"/>
+
+
+							<p class="lead">Dear family, friends and neighbors of Hamilton Middle School,</p>
+ 
+							<p class="lead">We are excited to be partnering with <b>myTrueCost.com</b>, a service of CenterPoint Energy, for a new and creative way to raise additional funds for the school.  </p>
+
+							<p class="lead">Through the everyday process we all have to take care of, choosing an electricity plan for our home or business, we will have the opportunity to earn valuable donation dollars.</p>
+
+                        	<p class="lead">I would first like to thank you for your support in this fundraising endeavor.  Each time you purchase electricity through <b>myTrueCost.com</b> they make a donation to our school. </p>
+
+                        	<p class="lead">Those donations can be put toward any of our important initiatives, such as adding more academic choices for our students, improving interior spaces and campus grounds or getting parents and community more involved.</p>
+                        	
+                        	<p class="lead">You have been very supportive to Hamilton over the years and I truly thank you for continuing that support here.</p>
+
+                        	<p class="lead">Sincerely,<br/>
+							Wendy Hampton<br/>
+							Principal</p>
+                        	
+                        </div>
+                        <a href="https://s3.amazonaws.com/TrueCost/Extra+Credit+Programs/HamiltonInformation.pdf" class="muted">Additional Information</a>
+
+                    </div>
+                    <div class="span4 well" >
+                    	<div class="text-center ng-cloak" ng-if="data.guest">
+	                    	<h1>Get Started</h1>
+
+	                        <h4>I have a TrueCost profile that I want to connect to Hamilton</h4>
+	                        <a class="btn btn-success" href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.SiteLogin}?starturl=/hamilton">Login</a>
+	                        <hr/>
+	                        <h4>I'm new to TrueCost</h4>
+	                        <a class="btn btn-primary" href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.RegisterHamilton}">Create Profile</a>
+                        </div>
+                        <div class="text-center ng-cloak" ng-if="!data.guest">
+	                        <h4>Your Profile is connected to Hamilton.</h4>
+	                        <h4>You earn cash for your school by selecting an electric plan on TrueCost.</h4>
+	                        <a class="btn btn-warning" href="{!$Page.ShopPlans}">View Electric Plans</a>
+	                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </apex:define>
+
+        
+
+    </apex:composition>
+    <script>
+        	var myModule = angular.module('hamilton', ['ngForce'] );
+
+        	
+    
+		    function hamiltonCtrl($scope, vfr, GetAPA){
+		    	$scope.data={'guest':{!(ISPICKVAL($User.UserType,'Guest'))}};
+		    	var AccountToUpdate={'Web_Source__c':'Hamilton'};
+
+		    	//if logged in, then query the account, and update the promo code to be hamilton
+		    	if (!$scope.data.guest){
+		    		GetAPA('{!$User.Id}').then(
+		    			function(APA){
+		    				//console.log(APA);
+		    				return vfr.update('Account', APA.Account__r.Id, AccountToUpdate);
+		    			}
+	    			).then(
+	    				function(Account){},	    				
+	    				function(error){
+	    					dataLayer.push({'errorFunction':'SetHamiltonAsWebSource', 'errorObject':error, 'event':'error'});     						
+	    				}
+	    			)
+		    	}
+		    }
+		    
+		    myModule.factory('GetAPA', ['$q', '$rootScope', function($q, $rootScope) {
+		        return function(userid) {
+		            var deferred = $q.defer();
+		            
+		            Visualforce.remoting.Manager.invokeAction(
+		                '{!$RemoteAction.ControllerForMobileMain.getAPAsafe}',
+		                userid,
+		                function(result, event) {
+		                    $rootScope.$apply(function() {
+		                        if (event.status) {
+		                            deferred.resolve(result);
+		                        } else {
+		                            deferred.reject(event);
+		                        }
+		                    })
+		                        },
+		                { buffer: true, escape: true, timeout: 30000 }
+		            );
+		            
+		            return deferred.promise;
+		        }
+            
+            }]);
+
+        </script>
+
+        <c:Ngforce />
+</html>
+</apex:page>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Volume_Source__c</fullName>
+    <externalId>false</externalId>
+    <label>Volume Requirements Calculated From</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Forecast Volume</fullName>
+                <default>false</default>
+                <label>Forecast Volume</label>
+            </value>
+            <value>
+                <fullName>Contract Volume</fullName>
+                <default>false</default>
+                <label>Contract Volume</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,113 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" >
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+    description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."
+  />
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+    <div id="wrapper">
+        <c:tc2_navbar />
+        <c:tc2_hero_inner bgImage="hero-1.jpg" headline="Find the best rates" />
+        <!-- HEADER -->
+        <div id="appRates">
+            <section>
+                <div class="container">
+                    <div class="has-margin-3 has-text-centered">
+                        <h2 class="is-size-4 has-text-weight-bold padding-sides"> 
+                        Last month I used
+                        <label class="visuallyhidden" for="zip">{{historyKwh}}</label>
+                        <input class="input borderless-inherit" id="historyKwh" type="text" v-model="historyKwh" style="width: 180px;" />kWh and <br/> my last bill was $
+                        <label class="visuallyhidden" for="historyBill">{{historyBill}}</label>
+                        <input class="input borderless-inherit" id="historyBill" type="text" v-model="historyBill"  style="width: 180px;" />.
+                        <br/>My zip code is <!-- v-on:blur="changeKwh" v-on:keydown.enter="changeKwh" -->
+                        <label class="visuallyhidden" for="zip">{{zip}}</label>
+                        <input class="input borderless-inherit" id="zip" type="text" v-model="zip" style="width: 180px;" />
+                        
+                        </h2>
+                    </div>
+                </div>
+            </section>
+
+
+            
+            <section>
+                <div class="container rateboxes" v-if="kwh > 0">
+                    <div class="has-margin-3 mt-small">
+                        <h2 class="is-size-4  padding-sides">You are paying <span class="has-text-weight-bold">{{kwh}}&#xa2;</span> kWh.
+                        <span v-if="kwh > averageCost">
+                            There are plans available that have an estimated "all-in" cost <strong>lower than what you paid last month.</strong>
+                            
+                        </span>
+                        <span v-if="kwh <= averageCost">
+                            You have a great deal! Here are some comparable plans in your area.                           
+                        </span>
+                        </h2>
+                    </div>
+                </div>
+            </section>
+
+            <c:tc2_email_switch_reminder />
+            
+    
+        </div>
+    
+        <!-- <c:tc2_plans_shop maxPlans="3" routeTo="{!$Page.Account_Moving}"/> -->
+        
+    </div>
+    
+    <c:tc2_footer />
+
+    <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+             
+             TC.app.appRates = new Vue({
+                el: '#appRates',
+                data: {
+                  historyKwh:TC.app.account.historyKwh,
+                  historyBill:TC.app.account.historyBill,
+                  kwh:TC.app.account.historyPriceKwh,
+                  zip:TC.app.account.zip,
+                  averageCost:0
+                },
+                methods: { 
+                    changeKwh: function() {
+                        
+                        if(this.historyBill && this.historyKwh > 0){
+                            this.kwh = (this.historyBill / this.historyKwh) * 100;
+                            this.kwh = this.kwh.toFixed(1);
+                            
+                            TC.app.account.historyBill = this.historyBill;
+                            TC.app.account.historyKwh = this.historyKwh;
+                            TC.app.account.historyPriceKwh = this.kwh;
+                        } 
+                    },
+                    showModal: function() {
+                        TweenMax.to('#price-alert-modal', .24, {opacity:1, display:'block'});
+                        TweenMax.fromTo('.modal-background', .5, {opacity:0}, {opacity:.8})
+                        TweenMax.fromTo('.modal-card', .7, {y:-100, opacity:0, scale:1.3}, {y: 100, opacity:1, scale: 1, ease:Bounce.easeOut});
+                        TweenMax.to('.has-background-info.is-active', .7, {display:'block'});
+
+                    }
+                },  
+                mounted: function() { 
+                    this.changeKwh();
+                    /*if(TC.app.account.plans !== undefined){
+                        var sum = TC.app.account.plans.reduce(function(a, b) { return b.kwhTC; });
+                        this.averageCost = sum / TC.app.account.plans.length;
+                        this.averageCost = this.averageCost.toFixed(2) * 100;
+                    }
+                    */
+
+                },
+                watch: { 
+                },
+             });
+    
+          })
+        })(jQuery);
+    </script>
+  </body>
+  </html>
+</apex:page>

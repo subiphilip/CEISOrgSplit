@@ -1,0 +1,83 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+
+
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"/>
+
+<html ng-app="wep" id="ng-app" xmlns:ng="http://angularjs.org">
+<!--page should contain 2 parameters: APAid, and repsonse: weekly, daily, both, none-->
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Weekly Email Preview </title>
+            <meta name="description" content="description" />
+        </apex:define>
+       
+        
+        <apex:define name="body">
+            <div class="container" ng-controller="wepCtrl">
+                <div class="row">
+                    <div class="span8">
+                        <h1>Usage Emails from TrueCost</h1><hr/>
+                    	<div class="alert alert-info ng-cloak" ng-if="data.state==='processing'">
+                    		<h4>Processing your request...</h4>
+                    	</div>
+                    	<div class="alert alert-success ng-cloak" ng-if="data.state==='complete'">
+                    		<h3>Thanks for your reponse</h3>
+                    		<p class="lead ng-cloak" ng-if="data.search.selection==='daily' || data.search.selection==='both'">
+                    			Daily emails come out in the mornings.  You should receive your first one tomorrow.
+                    		</p>
+                    		<p class="lead ng-cloak" ng-if="data.search.selection==='weekly' || data.search.selection==='both'">
+                    			Weekly emails come out on Tuesday mornings.  You should see receive first one next Tuesday.
+                    		</p>
+
+                    		<p class="lead">You can change your data email preferences anytime by visiting <a href="{!$Page.MyAccount}">My Account</a>.</p>
+                    	</div>
+
+                    	<div class="alert alert-success ng-cloak" ng-if="data.state==='error'">
+                    		<h4>Thanks was an error processing your request.  Please <a href="{!$Page.ContactUs}">let us know</a> so we can help you.</h4>
+                    	</div>
+                    </div>
+
+                    <div class="span4">
+                        <div >
+                            <c:truecostrecentblogposts />
+                        </div>
+                        <hr/>
+                        <div >
+                            <c:RandomPoll />
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+
+    <script>
+
+	var myModule = angular.module('wep', ['ngForce'] );
+
+	function wepCtrl($scope, vfr, $location){
+		$scope.data={'state':'processing', 'search':$location.search()};
+		$scope.account = {Id:$scope.data.search.acctid, Meter_Data_Email_Daily__c:false, Meter_Data_Email_Weekly__c:false, Meter_Data_Email_None__c:false}
+		
+		if ($scope.data.search.selection==='weekly'){$scope.account.Meter_Data_Email_Weekly__c=true;}
+		if ($scope.data.search.selection==='none'){$scope.account.Meter_Data_Email_None__c=true;}
+		if ($scope.data.search.selection==='daily'){$scope.account.Meter_Data_Email_Daily__c=true;}
+		if ($scope.data.search.selection==='both'){$scope.account.Meter_Data_Email_Weekly__c=true; $scope.account.Meter_Data_Email_Daily__c=true;}
+
+		vfr.update('Account', $scope.account.Id, $scope.account).then(
+			function(result){
+				console.log(result);
+				$scope.data.state='complete';
+			}, function(error){
+				$scope.data.state='error';
+			}
+		);  
+		
+    } //end of app controller main body
+
+</script>
+<c:Ngforce />
+    </html>
+</apex:page>

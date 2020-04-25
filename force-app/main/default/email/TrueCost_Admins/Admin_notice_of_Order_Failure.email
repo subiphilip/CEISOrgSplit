@@ -1,0 +1,14 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="FONT-FAMILY: arial"><br></span></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><b>The following order for {!Order__c.REP_Profile__c} has been marked as failed. &nbsp;Please follow up with the REP to resolve this so that the order can be resubmitted.&nbsp;</b></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font face="arial"><br></font></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font face="arial"><u>Order Information:</u></font></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font face="arial">Order number:&nbsp;{!Order__c.Name}</font></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font face="arial">Company:&nbsp;{!Order__c.REP_Profile__c}</font></div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; ">Plan:&nbsp;</font><font face="arial">{!Order__c.Plan__c}</font></div><div><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">Link:&nbsp;</font><font face="arial">{!Order__c.Link}</font></div><div><font face="arial">Created Date:&nbsp;{!Order__c.CreatedDate}</font></div><div><font face="arial">Switch Date (If applicable):&nbsp;{!Order__c.InitialDateofService__c}</font></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><font face="arial" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; "><br></font>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; "><br></div>
+<div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; "><font face="arial"><br></font></div></div>]]></td>
+</tr>
+</table>

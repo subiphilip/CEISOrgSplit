@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Supplier__c</fullName>
+    <description>For Electric and Demand Response Opportunities only. Used to define the provider used when we closed the deal.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For Electric and Demand Response Opportunities only. Used to define the provider used when we closed the deal.</inlineHelpText>
+    <label>Supplier</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Business_Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Champion Energy</fullName>
+                <default>false</default>
+                <label>Champion Energy</label>
+            </value>
+            <value>
+                <fullName>ConEdison</fullName>
+                <default>false</default>
+                <label>ConEdison</label>
+            </value>
+            <value>
+                <fullName>GDF Suez</fullName>
+                <default>false</default>
+                <label>GDF Suez</label>
+            </value>
+            <value>
+                <fullName>Liberty Power</fullName>
+                <default>false</default>
+                <label>Liberty Power</label>
+            </value>
+            <value>
+                <fullName>MC2</fullName>
+                <default>false</default>
+                <label>MC2</label>
+            </value>
+            <value>
+                <fullName>MidAmerican</fullName>
+                <default>false</default>
+                <label>MidAmerican</label>
+            </value>
+            <value>
+                <fullName>NextEra</fullName>
+                <default>false</default>
+                <label>NextEra</label>
+            </value>
+            <value>
+                <fullName>Nordic Energy</fullName>
+                <default>false</default>
+                <label>Nordic Energy</label>
+            </value>
+            <value>
+                <fullName>EnerNOC</fullName>
+                <default>false</default>
+                <label>EnerNOC</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Electric</controllingFieldValue>
+            <valueName>Champion Energy</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Electric</controllingFieldValue>
+            <valueName>ConEdison</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Electric</controllingFieldValue>
+            <valueName>GDF Suez</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Electric</controllingFieldValue>
+            <valueName>Liberty Power</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Electric</controllingFieldValue>
+            <valueName>MC2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Electric</controllingFieldValue>
+            <valueName>MidAmerican</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Electric</controllingFieldValue>
+            <valueName>NextEra</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Electric</controllingFieldValue>
+            <valueName>Nordic Energy</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Demand Response</controllingFieldValue>
+            <valueName>EnerNOC</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

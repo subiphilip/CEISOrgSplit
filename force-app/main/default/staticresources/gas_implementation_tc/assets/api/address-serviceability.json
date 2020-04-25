@@ -1,0 +1,72 @@
+{
+  "contracts": [
+    {
+      "serviceOrderId": null,
+      "contractId": null,
+      "accountId": null,
+      "premiseId": "987654321",
+      "installationId": "654321",
+      "utilityContractId": null,
+      "forceOut": true,
+      "forceDate": "2018-01-23 00:00:00",
+      "premise": {
+        "address": {
+          "houseNumber": 123,
+          "street": "Main Street",
+          "aptNumber": null,
+          "city": "Houston",
+          "region": "TX",
+          "postalCode": "77002",
+          "zipPlus": null
+        },
+        "dunningProc": "F2",
+        "companyCode": "0082",
+        "n1": false,
+        "depositReq": true,
+        "premiseType": "R",
+        "depositAmount":"100.00",
+        "homeOwner": false
+      },
+      "hasDebt": false,
+      "darStatus": false,
+      "moveInDate": null,
+      "moveInStatus": null,
+      "moveOutStatus": null,
+      "serviceStatus": null
+    },
+    {
+      "serviceOrderId": null,
+      "contractId": null,
+      "accountId": null,
+      "premiseId": "8765456",
+      "installationId": "567545654",
+      "utilityContractId": null,
+      "forceOut": false,
+      "forceDate": null,
+      "premise": {
+        "address": {
+          "houseNumber": 78569,
+          "street": "Main Street",
+          "aptNumber": null,
+          "city": "Houston",
+          "region": "TX",
+          "postalCode": "77002",
+          "zipPlus": null
+        },
+        "dunningProc": "F2",
+        "companyCode": "0082",
+        "n1": false,
+        "depositReq": true,
+        "premiseType": "R",
+        "depositAmount":"100.00",
+        "homeOwner": false
+      },
+      "hasDebt": false,
+      "darStatus": false,
+      "moveInDate": null,
+      "moveInStatus": null,
+      "moveOutStatus": null,
+      "serviceStatus": null
+    }
+  ]
+}

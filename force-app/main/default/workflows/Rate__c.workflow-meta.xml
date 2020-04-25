@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>REP_New_Rate_Entry_Change</fullName>
+        <description>REP New Rate Entry/Change - Suspended</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>troy.donovan1@centerpointenergy.com.cnp2</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Internal_Messages/New_Rate_Created_Changed_INTERNAL</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Make_Rate_Inactive</fullName>
+        <field>Active__c</field>
+        <literalValue>0</literalValue>
+        <name>Make Rate Inactive</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Suspend_Rate</fullName>
+        <field>Suspended__c</field>
+        <literalValue>1</literalValue>
+        <name>Suspend Rate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Comm_Advertised_Rate</fullName>
+        <field>Advertised_Rate__c</field>
+        <formula>ROUND(non_demand_1500_kWh_rate_cents__c,2)</formula>
+        <name>Update Comm Advertised Rate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Resi_Advertised_Rate</fullName>
+        <field>Advertised_Rate__c</field>
+        <formula>ROUND(X1000_kWh_rate__c,1)</formula>
+        <name>Update Resi Advertised Rate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>Champion Commercial Turn-Off %28Med %26 High%29</fullName>
+        <active>false</active>
+        <formula>AND(  
+ Active__c = TRUE,
+Record_Type_Name__c = &quot;Commercial&quot;, 
+CONTAINS( Plan__r.REP_Profile__r.Name , &quot;Champion&quot;),
+ OR(INCLUDES( Load_Factor__c , &quot;Medium&quot;),
+  INCLUDES( Load_Factor__c , &quot;High&quot;)
+)
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Make_Rate_Inactive</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Commercial Advertised Rate</fullName>
+        <actions>
+            <name>Update_Comm_Advertised_Rate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( 
+Record_Type_Name__c = &quot;Commercial&quot;, 
+Active__c = TRUE, 
+OR( 
+ISCHANGED(non_demand_1500_kWh_rate_cents__c), 
+NOT(ISNULL(non_demand_1500_kWh_rate_cents__c)) 
+) 
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Entrust Commercial Turn-Off</fullName>
+        <active>true</active>
+        <formula>AND(  
+ Active__c = TRUE,
+Record_Type_Name__c = &quot;Commercial&quot;, 
+CONTAINS( Plan__r.REP_Profile__r.Name, &quot;Entrust&quot;) 
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Make_Rate_Inactive</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>8</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>New Rate Created%2FChanged and is suspended</fullName>
+        <actions>
+            <name>REP_New_Rate_Entry_Change</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Suspend_Rate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Plan__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Rate__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Rate,CES C&amp;I SubProduct</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Plan__c.Rate_Class_del__c</field>
+            <operation>equals</operation>
+            <value>Residential</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.Profile_Name__c</field>
+            <operation>contains</operation>
+            <value>REP</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.LastName</field>
+            <operation>notEqual</operation>
+            <value>Donovan,Dornbos,Pham,McLaughlin</value>
+        </criteriaItems>
+        <description>An Admin is notified when a new rate is created or an existing rate is changed.</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Rate suspended before publish</fullName>
+        <actions>
+            <name>Suspend_Rate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>A REPs rate is suspended until activated/published by an admin</description>
+        <formula>OR(
+AND( Active__c = TRUE, ISNEW(),  OR( Record_Type_Name__c = &quot;Residential&quot;, Record_Type_Name__c = &quot;Residential TOU&quot; )
+),
+AND( Active__c = TRUE, OR(ISCHANGED( Energy_Base_Rate_cents__c ) ,ISCHANGED( X1000_kWh_rate__c ), ISCHANGED( Link_for_EFL__c  )),OR( Record_Type_Name__c = &quot;Residential&quot;, Record_Type_Name__c = &quot;Residential TOU&quot; )
+)
+
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Residential Advertised Rate</fullName>
+        <actions>
+            <name>Update_Resi_Advertised_Rate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( 
+OR( Record_Type_Name__c = &quot;Residential&quot;,Record_Type_Name__c = &quot;Residential TOU&quot;), 
+Active__c = TRUE, 
+OR( 
+ISCHANGED(X1000_kWh_rate__c), 
+NOT(ISNULL(X1000_kWh_rate__c)) 
+) 
+)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

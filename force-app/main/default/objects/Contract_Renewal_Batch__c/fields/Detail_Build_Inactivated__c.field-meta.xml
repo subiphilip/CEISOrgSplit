@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Detail_Build_Inactivated__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(Status__c, &#39;Pending&#39;), false, 
+IF(ISPICKVAL(Status__c, &#39;Has Errors&#39;), false,
+IF(ISPICKVAL(Status__c, &#39;No Contracts to Process&#39;), false,
+IF(ISPICKVAL(Status__c, &#39;Detail Build Completed Successfully&#39;), false,
+IF(ISPICKVAL(Status__c, &#39;Detail Build Completed with Errors&#39;), false, true)))))</formula>
+    <label>Detail Build Inactivated</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

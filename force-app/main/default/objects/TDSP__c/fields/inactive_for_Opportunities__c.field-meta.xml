@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>inactive_for_Opportunities__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This LDC cannot be selected for opportunities</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This LDC cannot be selected for opportunities</inlineHelpText>
+    <label>inactive for Opportunities</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

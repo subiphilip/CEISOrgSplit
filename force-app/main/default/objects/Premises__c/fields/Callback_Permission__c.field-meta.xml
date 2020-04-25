@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Callback_Permission__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>The customer has said it&#39;s ok to call them back (ignoring the utility call limit)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The customer has said it&#39;s ok to call them back (ignoring the utility call limit)</inlineHelpText>
+    <label>Callback Permission</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

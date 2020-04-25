@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Other_Charges_or_Items__c</fullName>
+    <defaultValue>0</defaultValue>
+    <description>for anything else that&#39;s a constant fee and needs to get added but doesn&#39;t fit somewhere else</description>
+    <externalId>false</externalId>
+    <inlineHelpText>for anything else that&#39;s a constant fee and needs to get added but doesn&#39;t fit somewhere else</inlineHelpText>
+    <label>Other Charges or Items</label>
+    <precision>7</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

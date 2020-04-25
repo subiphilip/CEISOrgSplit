@@ -1,0 +1,48 @@
+<apex:component >
+    <apex:attribute name="data" type="decimal[]" description="Twelve values in month order (January, February, March, etc)"></apex:attribute>
+    <apex:outputpanel rendered="{!isnull(data)}">
+        No data available
+    </apex:outputpanel>
+    <div id="chart_div" ></div>
+    
+<!-- Here's the Google Chart Script-->
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Month');
+        data.addColumn('number', 'kWh Usage');
+        
+        data.addRows([
+          ['Jan', {!data[0]}], 
+          ['Feb', {!data[1]}],
+          ['Mar', {!data[2]}],
+          ['Apr', {!data[3]}],
+          ['May', {!data[4]}],
+          ['Jun', {!data[5]}],
+          ['Jul', {!data[6]}],
+          ['Aug', {!data[7]}],
+          ['Sep', {!data[8]}],
+          ['Oct', {!data[9]}],
+          ['Nov', {!data[10]}],
+          ['Dec', {!data[11]}]
+          
+        ]);
+
+        var options = {
+          
+          
+          colors: ['#fe9601'], legend:{position:'none'}, chartArea:{width:"85%", height:"80%"}, vAxis: {minValue: 0, title:'kilowatt-hours (kWh)'}
+          
+          
+          
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+</apex:component>

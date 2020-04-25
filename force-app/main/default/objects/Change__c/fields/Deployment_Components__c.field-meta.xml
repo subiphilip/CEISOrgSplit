@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deployment_Components__c</fullName>
+    <defaultValue>&quot;NOTE: Security and accessibility permissions for any new fields or objects will need to be edited after deployment.&quot;</defaultValue>
+    <description>What is this change set comprised of?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What is this change set comprised of?</inlineHelpText>
+    <label>Deployment Components</label>
+    <length>32768</length>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

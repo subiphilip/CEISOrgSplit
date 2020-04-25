@@ -1,0 +1,492 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" controller="ControllerForMobileMain">
+    <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+    <c:tc2_header title="TrueCost Electric Portal" description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+
+    <body class="has-background-grey-light has-navbar-fixed-top">
+
+        <div id="wrapper">
+            <c:tc2_navbar />
+            <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-1.jpg" headline="Edit My Account" />
+            
+            <div id="appAccountEdit">
+                <section>
+                    <div class="container">
+                        <div class="has-margin-3 has-text-centered">
+                            <h2 class="is-size-4 has-text-weight-bold padding-sides">Edit account information below</h2>
+
+                        </div>
+                    </div>
+                </section>
+    
+                <section>
+                    <form v-on:submit="validateBeforeSubmit" method="post">
+    
+                        <div class="container form singup-bottom-padding">
+                            <div class="box is-form-no-padding">
+                                <div class="inner">
+                                    <div class="columns">
+    
+                                        <!-- <p v-if="errors.length">
+                                            <b>Please correct the following error(s):</b>
+                                            <ul>
+                                                <li v-for="error in errors">{{ error }}</li>
+                                            </ul>
+                                        </p> -->
+    
+                                        <div class="column form-column" style="margin-bottom: 4.5em;">
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="firstname">First Name</label>
+                                                            <input id="firstName" maxlength="20" pattern="" minlength="1" 
+                                                             class="input borderless" type="text" name="firstName" v-model="firstName" required="required" />
+                                                             <span  v-show="validateFirstName" class="help is-danger">First name is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="lastname">Last Name</label>
+                                                            <input id="lastName" maxlength="20" minlength="1" 
+                                                             class="input borderless" type="text" name="lastName" v-model="lastName" required="required" />
+                                                             <span  v-show="validateLastName" class="help is-danger">Last name is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="phone">Phone Number</label>
+                                                            <input id="phone"
+                                                            v-mask="'(###) ###-####'"
+                                                            class="input borderless" type="tel" name="phone" v-model="phone" required="required" />
+                                                            <span  v-show="validatePhone" class="help is-danger">Phone number is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="email">Email Address</label>
+                                                            <input id="email" maxlength="100" minlength="3" 
+                                                             class="input borderless" type="text" name="email" v-model="email" required="required" />
+                                                            <span  v-show="emailExists" class="help is-danger">Email already exists</span>
+                                                            <span  v-show="validateEmail" class="help is-danger">Email is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded has-icons-right">
+                                                            <label class="form-label" for="dob">Date of Birth (mm/dd/yyyy)</label>
+                                                            <input id="dob"
+                                                             maxlength="20" minlength="8" 
+                                                             v-mask="'##/##/####'"
+                                                             class="input borderless" type="text" name="dob" v-model="dob" required="required" />
+                                                             <span  v-show="validateDOB" class="help is-danger">Date of birth is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="field is-horizontal">
+                                                    <div class="field-body">
+                                                        <div class="field">
+                                                            <p class="control is-expanded">
+                                                                <label class="form-label" for="street">Mailing Street</label>
+                                                                <input id="street" maxlength="100" 
+                                                                 class="input borderless" type="text" name="street" v-model="street"  />
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="field is-horizontal">
+                                                    <div class="field-body">
+                                                        <div class="field">
+                                                            <p class="control is-expanded">
+                                                                <label class="form-label" for="city">Mailing City</label>
+                                                                <input id="city" maxlength="20" 
+                                                                 class="input borderless" type="text" name="city" v-model="city"  />
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="field is-horizontal">
+                                                    <div class="field-body">
+                                                        <div class="field">
+                                                            <p class="control is-expanded">
+                                                                <label class="form-label" for="zip">Mailing Zip</label>
+                                                                <input id="zip" maxlength="20" 
+                                                                 class="input borderless" type="text" name="zip" v-model="zip"  />
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+
+
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded has-icons-right">
+                                                            <label class="form-label" for="language">Select Language</label>
+                                                            <div class="select" id="language" style="margin-top:30px !important;">
+                                                                <select v-model="language">
+                                                                    <option v-bind:value="{type: 'english'}">English</option>
+                                                                    <option v-bind:value="{type: 'spanish'}">Spanish</option>
+                                                                </select>
+                                                            </div>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <!-- <article class="media padding-sides">
+                                                <figure class="media-left">
+                                                    <div class="checkbox">
+                                                        <span><input v-model="altContactCheck" name="altContactCheck" id="altContactCheck" type="checkbox" /></span>
+                                                    </div>
+                                                </figure>
+                                                <div class="media-content">
+                                                    <label for="altContactCheck"> I want an alternate person to be able to discuss my account</label>
+                                                </div>
+                                            </article>
+    
+    
+                                            <article class="media padding-sides">
+                                                <figure class="media-left">
+                                                    <div class="checkbox">
+                                                        <span><input v-model="altMailingCheck" name="altMailingCheck" id="altMailingCheck" type="checkbox" /></span>
+                                                    </div>
+                                                </figure>
+                                                <div class="media-content">
+                                                    <label for="altMailingCheck"> I have a different mailing address</label>
+                                                </div>
+                                            </article> -->
+    
+    
+    
+                                        </div>
+    
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div v-show="altContactCheck">
+                                <div class="box is-form-no-padding">
+                                    <div class="inner">
+                                        <div class="columns">
+                                          <div  class="column form-column" style="margin-bottom: 4.5em;">
+                                              <h1>Alternate Contact</h1>
+                                                <div class="field is-horizontal">
+                                                    <div class="field-body">
+                                                        <div class="field">
+                                                            <p class="control is-expanded">
+                                                                <label class="form-label" for="altContactFirstname">Alternate First Name</label>
+                                                                <input id="altContactFirstName"
+                                                                    maxlength="20"
+                                                                 data-inputmask="'regex': '[a-zA-Z]{1,20}', 'greedy' : false"
+                                                                 class="input borderless" type="text" name="altContactFirstName" v-model="altContactFirstName"  />
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="field is-horizontal">
+                                                    <div class="field-body">
+                                                        <div class="field">
+                                                            <p class="control is-expanded">
+                                                                <label class="form-label" for="altContactLastName">Alternate Last Name</label>
+                                                                <input id="altContactLastName"
+                                                                    maxlength="20"
+                                                                 data-inputmask="'regex': '[a-zA-Z]{1,20}', 'greedy' : false"
+                                                                 class="input borderless" type="text" name="altContactLastName" v-model="altContactLastName"  />
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="field is-horizontal">
+                                                    <div class="field-body">
+                                                        <div class="field">
+                                                            <p class="control is-expanded">
+                                                                <label class="form-label" for="altContactPhone">Alternate Phone Number</label>
+                                                                <input id="altContactPhone"
+                                                                    maxlength="20"
+                                                                    v-mask="'(###) ###-####'"
+                                                                 class="input borderless" type="tel" name="altContactPhone" v-model="altContactPhone"  />
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                          </div>
+                                        </div>
+    
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div v-show="altMailingCheck">
+                                <div class="box is-form-no-padding">
+                                    <div class="inner">
+                                        <div class="columns">
+                                            <div class="column form-column" style="margin-bottom: 4.5em;">
+                                                <h1>Alternate Mailing Address</h1>
+    
+                                                <div class="field is-horizontal">
+                                                    <div class="field-body">
+                                                        <div class="field">
+                                                            <p class="control is-expanded">
+                                                                <label class="form-label" for="altMailingStreet">Alternate Mailing Street</label>
+                                                                <input id="altMailingStreet" maxlength="100" 
+                                                                 class="input borderless" type="text" name="altMailingStreet" v-model="altMailingStreet"  />
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="field is-horizontal">
+                                                    <div class="field-body">
+                                                        <div class="field">
+                                                            <p class="control is-expanded">
+                                                                <label class="form-label" for="altMailingCity">Alternate Mailing City</label>
+                                                                <input id="altMailingCity" maxlength="20" 
+                                                                 class="input borderless" type="text" name="altMailingCity" v-model="altMailingCity"  />
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="field is-horizontal">
+                                                    <div class="field-body">
+                                                        <div class="field">
+                                                            <p class="control is-expanded">
+                                                                <label class="form-label" for="altMailingState">Alternate Mailing State</label>
+                                                                <input id="altMailingState" maxlength="20" 
+                                                                 class="input borderless" type="text" name="altMailingState" v-model="altMailingState"  />
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="field is-horizontal">
+                                                    <div class="field-body">
+                                                        <div class="field">
+                                                            <p class="control is-expanded">
+                                                                <label class="form-label" for="altMailingZip">Alternate Mailing Zip</label>
+                                                                <input id="altMailingZip" maxlength="20" 
+                                                                 class="input borderless" type="text" name="altMailingZip" v-model="altMailingZip"  />
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            
+                            <div>
+    
+                                <div class="has-text-centered ">
+                                    <br/>
+                                    <input class="button is-primary is-rounded fixed-size animate-gradient-bg" type="submit" value="UPDATE MY PROFILE" />
+                                    <p class="link-back"><a class="has-text-weight-semibold is-size-8" v-on:click="goBack()">Go Back</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+    
+            </div>
+        </div>
+        <c:tc2_footer />
+
+        <script>
+            (function($) {
+                $(function() {
+                    'use strict';
+
+                    TC.app.appAccountEdit = new Vue({
+                        el: '#appAccountEdit',
+                        data: {
+                            errors: [],
+                            firstName: TC.app.account.firstName,
+                            lastName: TC.app.account.lastName,
+                            phone: TC.app.account.phone,
+                            email: TC.app.account.email,
+                            street: TC.app.account.premise.street,
+                            city: TC.app.account.premise.city,
+                            zip: TC.app.account.premise.zip,
+                            state: TC.app.account.premise.state,
+                            emailExists: false,
+                            dob: TC.app.account.dob,
+                            language: { type: 'english' },
+                            altContactCheck: (TC.app.account.altContactCheck == 'true') ? true : false,
+                            altContactFirstName: TC.app.account.altContactFirstName,
+                            altContactLastName: TC.app.account.altContactLastName,
+                            altContactLastFour: TC.app.account.altContactLastFour,
+                            altContactPhone: TC.app.account.altContactPhone,
+                            altMailingCheck: (TC.app.account.altMailingCheck == 'true') ? true : false,
+                            altMailingStreet: TC.app.account.altMailingStreet,
+                            altMailingCity: TC.app.account.altMailingCity,
+                            altMailingState: TC.app.account.altMailingState,
+                            altMailingZip: TC.app.account.altMailingZip,
+                            validateFirstName: false,
+                            validateLastName: false,
+                            validateEmail: false,
+                            validatePhone: false,
+                            validateDOB: false,
+                            isValid: false,
+                        },
+                        methods: {
+                            goBack: function() {
+                              window.history.back();
+                            },
+                            onSelectConfirm: function() { 
+                                  var vm = this;                                   
+                                  // TC.fn.navigateTo(TC.routes.accountDisclosure + '?id=' + TC.app.account.plan.id);
+                                  ControllerForMobileMain.putAddressDetails(
+                                    '{!$User.Id}', 
+                                    this.firstName,
+                                    this.lastName,
+                                    this.email,
+                                    this.phone, 
+                                    this.street, 
+                                    this.city, 
+                                    'TX', //$j("#state").val(), 
+                                    this.zip,
+                                    function(result,event){
+                                        if (result=='Success'){
+                                            //TC.fn.navigateTo("{!$Page.Account_Profile}");
+                                            vm.goBack();
+                                        } else{
+                                            alert(event);
+                                        }
+                                        
+                                    });   
+                            },
+                            
+                            validateBeforeSubmit: function(e) {
+                                    e.preventDefault();
+                                    this.onSelectConfirm();
+
+                            },
+                            checkExistingEmail: function(_email) {
+                                this.emailExists = false;
+                                let vm = this;
+                                ControllerForMobileMain.CheckExistingEmail(_email, function(result,event){ // GAC
+                                    if(result !== 'Success'){
+                                        //vm.emailExists = true;
+                                        vm.isValid = false;
+                                        vm.errors.push('email');
+                                    } else {
+                                        vm.emailExists = false;
+                                    }
+                                });
+                            }
+                        },
+                        mounted: function() {
+                            this.language.type = (TC.app.account.language == null) ? 'english' : TC.app.account.language;
+                        },
+                        watch: {
+                            firstName: {
+                                handler: function() {
+                                    TC.app.account.firstName = this.firstName;
+                                }
+                            },
+                            lastName: {
+                                handler: function() {
+                                    TC.app.account.lastName = this.lastName;
+                                }
+                            },
+                            phone: {
+                                handler: function() {
+                                    TC.app.account.phone = this.phone;
+                                }
+                            },
+                            email: {
+                                handler: function() {
+                                    TC.app.account.email = this.email;
+                                }
+                            },
+                            dob: {
+                                handler: function() {
+                                    TC.app.account.dob = this.dob;
+                                }
+                            },
+                            language: {
+                                handler: function() {
+                                    TC.app.account.language = this.language.type;
+                                }
+                            },
+                            altContactCheck: {
+                                handler: function() {
+                                    TC.app.account.altContactCheck = this.altContactCheck;
+                                }
+                            },
+                            altContactFirstName: {
+                                handler: function() {
+                                    TC.app.account.altContactFirstName = this.altContactFirstName;
+                                }
+                            },
+                            altContactLastName: {
+                                handler: function() {
+                                    TC.app.account.altContactLastName = this.altContactLastName;
+                                }
+                            },
+                            altContactLastFour: {
+                                handler: function() {
+                                    TC.app.account.altContactLastFour = this.altContactLastFour;
+                                }
+                            },
+                            altContactPhone: {
+                                handler: function() {
+                                    TC.app.account.altContactPhone = this.altContactPhone;
+                                }
+                            },
+                            altMailingCheck: {
+                                handler: function() {
+                                    TC.app.account.altMailingCheck = this.altMailingCheck;
+                                }
+                            },
+                            altMailingStreet: {
+                                handler: function() {
+                                    TC.app.account.altMailingStreet = this.altMailingStreet;
+                                }
+                            },
+                            altMailingCity: {
+                                handler: function() {
+                                    TC.app.account.altMailingCity = this.altMailingCity;
+                                }
+                            },
+                            altMailingState: {
+                                handler: function() {
+                                    TC.app.account.altMailingState = this.altMailingState;
+                                }
+                            },
+                            altMailingZip: {
+                                handler: function() {
+                                    TC.app.account.altMailingZip = this.altMailingZip;
+                                }
+                            },
+
+                        },
+                    });
+
+                })
+            })(jQuery);
+        </script>
+
+    </body>
+
+    </html>
+</apex:page>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sync_Ran__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>did the update sync job for the related record run yet?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>did the update sync job for the related record run yet?</inlineHelpText>
+    <label>Sync Ran</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

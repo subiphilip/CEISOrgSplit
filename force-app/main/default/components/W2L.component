@@ -1,0 +1,39 @@
+<apex:component controller="W2L" allowDML="true">
+    <apex:attribute type="string" description="What value will be saved to the LeadSource field" name="LeadSource" required="false" default="web-to-lead" assignTo="{!LeadSource}" />
+    <apex:attribute type="string" description="What value will be saved to the WebSource field" name="WebSource" required="false" default="web-to-lead" assignTo="{!WebSource}" />
+    
+    <apex:form id="theform">
+                <apex:outputPanel id="thetop">
+                    <apex:outputPanel layout="block" rendered="{!saved}">
+                        <b>Your information has been submitted.  Thank you!</b> 
+                                            </apex:outputPanel>
+                    <apex:outputPanel rendered="{!not(saved)}">
+                                               <apex:pageblock mode="edit"  tabstyle="plan__c"  >
+                            <apex:pageblocksection id="main-form" columns="1">                             
+                                <apex:inputfield value="{!l.FirstName}" styleClass="wide-form-field" required="true"/>
+                                <apex:inputfield value="{!l.LastName}" styleClass="wide-form-field" required="true"/>
+                                <!--apex:inputfield value="{!l.Title}" styleClass="wide-form-field"/-->
+                                <!--apex:inputfield value="{!l.Company}" styleClass="wide-form-field"/-->
+                                <apex:inputfield value="{!l.email}" styleClass="wide-form-field" required="true"/>                        
+                                <!--apex:selectlist value="{!l.description}" size="1" id="dropdown" label="Type" styleClass="wide-form-field">
+                                    <apex:selectOption itemValue="Non-profit" itemLabel="Non-profit"/>
+                                    <apex:selectOption itemValue="For-profit" itemLabel="For-profit"/>
+                                </apex:selectlist-->
+                            </apex:pageblocksection>                        
+                        </apex:pageblock>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:outputpanel layout="block" id="saved">
+                    <apex:outputpanel style="float:right; margin-top:15px"  layout="block" id="savedbutton" rendered="{!saved}">
+                        <apex:outputpanel styleClass="action-button" >
+                            <apex:commandLink action="{!reload}" value="Ok"  styleClass="action-button" rerender="thetop, buttons"  />
+                        </apex:outputpanel>
+                    </apex:outputpanel>
+                    <apex:outputpanel style="float:right; margin-top:15px"  layout="block" id="notsavedbutton" rendered="{!not(saved)}" >
+                        <apex:outputpanel styleClass="action-button" >
+                            <apex:commandLink action="{!saveL}" value="Submit"  styleClass="action-button" rerender="thetop, buttons,notsavedbutton,saved" />                       
+                        </apex:outputpanel>
+                    </apex:outputpanel>
+                </apex:outputpanel>
+            </apex:form>
+</apex:component>

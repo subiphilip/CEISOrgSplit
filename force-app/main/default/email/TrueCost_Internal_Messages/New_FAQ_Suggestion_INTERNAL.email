@@ -1,0 +1,6 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<div style="font-size: 12pt; background-color: rgb(255, 255, 255); ">{!FAQ__c.CreatedBy} created a new FAQ:<br><br>Category: {!FAQ__c.Category__c}<br><br>{!FAQ__c.Question__c}<br>{!FAQ__c.Answer__c}<br><br>Click on this link to edit or change status of this FAQ Suggestion:<br>{!FAQ__c.Link}<br><div><br></div><div>You can review the FAQ and mark it reviewed (checkbox).</div></div>]]></td>
+</tr>
+</table>

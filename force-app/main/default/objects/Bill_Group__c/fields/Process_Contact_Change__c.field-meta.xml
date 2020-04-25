@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Process_Contact_Change__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>set to true by an update on the related contact so to trigger a change.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>set to true by an update on the related contact so to trigger a change.</inlineHelpText>
+    <label>Process Contact Change</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

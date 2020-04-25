@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UP_Sync_OK_ALL__c</fullName>
+    <externalId>false</externalId>
+    <formula>AND(
+  OR(
+     ISBLANK( MDQ__c ),
+     UP_Sync_OK_MDQ__c  
+  ),
+  OR(
+    TEXT( Zone__c ) = NULL,
+    UP_Sync_OK_Area__c  
+  ),
+  OR(
+    NOT( Fuel_Charges_Apply__c ),
+    UP_Sync_OK_Fuel_Charges_Apply__c  
+  ),
+  OR(
+    ISBLANK( Pipeline_Lookup__c ),
+    UP_Sync_OK_Pipeline__c,
+    CONTAINS(Safari_Premise_Key__c,&#39;LIVE-&#39;)
+  ),
+  OR(
+    ISBLANK( LDC_Rate_Class__c ),
+    UP_Sync_OK_Rate_Class__c    
+  ),
+  OR(
+    NOT( Phone_Install__c ),
+    UP_Sync_OK_Telemetry__c   
+  ),
+  OR(
+    TEXT( Fuel_Rate__c ) = NULL,
+    UP_Sync_OK_Utility_Fuel_Rate__c   
+  ),
+  OR(
+    TEXT( Utility_Zone__c ) = NULL,
+    UP_Sync_OK_Zone__c    
+  ),
+  OR(
+    TEXT( Default_Delivery_Obligation__c ) = NULL,
+    UP_Sync_OK_Delivery_Type__c,
+    NOT(CONTAINS(Safari_Premise_Key__c,&#39;MPLS-&#39;))
+  )
+)</formula>
+    <label>UP Sync OK - ALL</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

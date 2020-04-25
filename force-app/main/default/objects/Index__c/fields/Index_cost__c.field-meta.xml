@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Index_cost__c</fullName>
+    <defaultValue>0</defaultValue>
+    <description>Cost of gas from the index.  For NYMEX, this is the collateral and exchange fee.  For trading points, it&#39;s the cost of delivery from the point to the pool.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Cost of gas from the index.  For NYMEX, this is the collateral and exchange fee.  For trading points, it&#39;s the cost of delivery from the point to the pool.</inlineHelpText>
+    <label>Index cost</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>7</scale>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,612 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" cache="false" applyHtmlTag="false" controller="GasChoiceController">
+
+<html ng-app="choice" id="ng-app" xmlns:ng="http://angularjs.org">    
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.6/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"/>
+    <script type="text/javascript"> if (!window.console) console = {log: function() {}}; </script>       
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="{!URLFOR($Resource.bootstrap, 'css/bootstrap.min.css')}" rel="stylesheet" media="screen"/>
+    <meta name="google-site-verification" content="B4OsqTqQ-X3H7mrOt4AQ_bIg7KK1Ef1fRLaoGkIfGqA" />
+</head>
+
+
+
+<body>
+    <c:GoogleTagManager />
+    <c:GCSTyleComponent />
+    <div class="row" id="header_bar">
+        <div class="pull-right hidden-phone" id="welcome-login">
+            <div class="pull-right text-right">
+                <h4 class="text-info no-margin">Call {!$Label.Gas_Choice_Phone_Number}</h4>  
+                <a class="btn btn-primary" href="mailto:gaschoice@centerpointenergy.com">Email </a>         
+                <a class="btn btn-warning" id="liveagent_button_online_573300000001Bj5" href="javascript://Chat" style="display: none;" onclick="liveagent.startChat('573300000001Bj5')">
+                    Chat <!-- Offline Chat Content -->
+                </a>
+                <div id="liveagent_button_offline_573300000001Bj5" style="display: none;">
+                    <!-- Offline Chat Content -->
+                </div>
+            </div>   
+        </div>
+        <div class="">
+            <span class="logo" itemscope="itemscope" itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="CenterPoint Energy" />
+                <meta itemprop="email" content="truecost@centerpointenergy.com" />
+                <meta itemprop="foundingDate" content="1866" />
+                <a href="http://www.centerpointenergy.com" target="_blank" itemprop="url">
+                    <div id="cnp_logo">
+                        <img src="{!$Resource.CNPlogoTransparent}" title="CenterPoint Energy" alt="CenterPoint Energy logo" itemprop="logo"/>
+                    </div>
+                </a>
+            </span>
+        </div>
+    </div>
+    <div class="navbar" id="main-nav">
+        <div class="navbar-inner">
+            <div class="">
+                
+                <a class="brand" id="mobile-brand" href="{!$Page.GasChoiceHome2}">
+                    <div id="mobile-logo">
+                        <img src="{!$Resource.CNPlogoTransparent}"  />
+                    </div>
+                </a>
+                
+                <a class="btn btn-navbar pull-right" data-toggle="collapse" data-target=".nav-collapse" id="menu_button">
+                    Menu
+                </a>
+                
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="{!$Page.gaschoicehome2}">Home</a></li>   
+                        <li><a href="{!$Page.gcindexoptions}">Rate Options</a></li>  
+                        <!--li><a href="{!$Page.GasChoicePlans}">2013-2014 Program </a></li>
+                        <li><a href="{!$Page.GasChoicePlans2}">2014-2015 Program </a></li-->
+                        <li><a href="{!$Page.gaschoiceFAQ}">FAQs</a></li>
+                        <li><a href="{!$Page.GCAboutCenterPoint}">About Us</a></li>
+                        <li class="visible-phone">
+                            <a href="mailto:gaschoice@centerpointenergy.com">Email </a>  
+                        </li>
+                        <li class="visible-phone">
+                            <a id="liveagent_button_online_573300000001Bj5" href="javascript://Chat" style="display: none;" onclick="liveagent.startChat('573300000001Bj5')">
+                                Chat <!-- Offline Chat Content -->
+                            </a>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->                        
+            </div>
+        </div>
+    </div>
+    
+    <div class="container phone-body" ng-controller="choiceCtrl">
+        <div ng-if="data.Page==='shop'" class="ng-cloak">
+            <div class="alert alert-info" ng-if="!offers">
+                <h4>Loading your natural gas offers...</h4>
+            </div>
+            <div class="alert alert-error" ng-if="offers==='noOffers'">
+                <h4>There are no plans currently available</h4>
+            </div>
+            <div ng-repeat="offer in formattedOffers">
+                <div class="row">
+                    <div class="span8 rate-panel" id="fixed-rate-graphic">
+                        <div class="plan-description">
+                            <span class="plan-name lead">{{offer.Name}}:</span > 
+                            <span ng-bind-html="offer.Description"></span>                          
+                        </div>
+                    </div>
+                    <a href="" ng-if="offer.12">
+                        <span class="text-center span2 alert no-padding" ng-click="setRate(offer.12)">
+                            <span class="muted">One Year:</span>
+                            <div ng-if="offer.RateType==='Index' || offer.RateType==='IndexNoSpread' || offer.RateType==='SmartCap'">{{offer.12.IndexReference}}+</div>
+                            <div ng-if="offer.RateType==='SmartFixed' || offer.RateType==='Fixed'">Fixed Price</div>
+                            <div ng-if="offer.RateType==='SmartBill'">Fixed Bill</div>
+                            <div ng-if="offer.RateType==='SmartBlended' || offer.RateType==='Blended' ">{{offer.12.IndexReference}}+${{offer.12.IndexAdder|number:3}},</div>
+                            <h1  ng-if="offer.RateType==='Index' || offer.RateType==='IndexNoSpread' || offer.RateType==='SmartCap'">${{offer.12.IndexAdder|number:3}}</h1>
+                            <h1  ng-if="offer.RateType==='SmartFixed' || offer.RateType==='SmartBlended' || offer.RateType==='Fixed' || offer.RateType==='Blended' ">${{offer.12.FixedPrice|number:3}}</h1> 
+                            <h1  ng-if="offer.RateType==='SmartBill'">${{offer.12.SBQ|number:2}}</h1>    
+                            <div ng-if="offer.RateType==='SmartCap'">with a cap of ${{offer.12.FixedPrice|number:2}}</div>                            
+                            <div ng-if="offer.RateType!=='SmartBill'"><small>per therm</small></div > 
+                            <div ng-if="offer.RateType==='SmartBill'"><small>each month</small></div > 
+                        </span>
+                    </a>
+                    <a href="" ng-if="offer.24">
+                        <span class="text-center span2 alert alert-success no-padding" ng-click="setRate(offer.24)">
+                            <span class="muted">Two Years:</span>
+                            <div ng-if="offer.RateType==='Index' || offer.RateType==='IndexNoSpread' || offer.RateType==='SmartCap'" >{{offer.24.IndexReference}}+</div>
+                            <div ng-if="offer.RateType==='SmartFixed' || offer.RateType==='Fixed'">Fixed Price</div>
+                            <div ng-if="offer.RateType==='SmartBill'">Fixed Bill</div>
+                            <div ng-if="offer.RateType==='SmartBlended' || offer.RateType==='Blended' ">{{offer.24.IndexReference}}+${{offer.24.IndexAdder|number:3}},</div>
+                            <h1  ng-if="offer.RateType==='Index' || offer.RateType==='IndexNoSpread' || offer.RateType==='SmartCap'">${{offer.24.IndexAdder|number:3}}</h1>      
+                            <h1  ng-if="offer.RateType==='SmartFixed' || offer.RateType==='SmartBlended' || offer.RateType==='Fixed' || offer.RateType==='Blended' ">${{offer.24.FixedPrice|number:3}}</h1>    
+                            <h1  ng-if="offer.RateType==='SmartBill'">${{offer.24.SBQ|number:2}}</h1>     
+                            <div ng-if="offer.RateType==='SmartCap'">with a cap of ${{offer.24.FixedPrice|number:2}}</div>                            
+                            <div ng-if="offer.RateType!=='SmartBill'"><small>per therm</small></div > 
+                            <div ng-if="offer.RateType==='SmartBill'"><small>each month</small></div > 
+
+                        </span>
+                    </a>
+                </div>
+                <hr/>
+            </div>
+
+            <div class="row">
+                <div class="span12">
+                    <hr/>
+                    <c:Content_Viewer content="Gas Choice Shopping Disclaimer" />  
+                </div>
+            </div>
+
+            <div class="row ng-cloak"  ng-if="!formattedOffers && data.Page==='shop'">
+                <div class="alert alert-error"><h4>No plans are available online right now.  Please contact us for quotes.</h4></div>
+            </div>
+        </div>
+
+        <div class="ng-cloak" ng-if="data.Page==='home' || data.Page==='AddressResults'">
+            <div class="row" ><!--home page-->
+                <div class="span3  blue-bold-block">
+                    <form class="nav-form">
+                        <div>
+                            <label class="field" for="Region" >Program Year</label>
+                            <select ng-model="data.ProgramYear" class="input-block-level"> 
+                                <option value="2014">2014-2015</option>  
+                                <option value="2013">2013-2014</option>
+                            </select>       
+                            <h5>and</h5>
+                        </div>  
+                        <div>
+                            <label class="visible-desktop">Account #</label>
+                            <input ng-model="data.SearchAccount" id="Account" placeholder="Account Number" class="input-block-level" ng-enter="AccountNumberSearch()"/>
+                            <a href="" class="btn btn-warning pull-right" ng-click="AccountNumberSearch()">Go</a>
+                            
+                        </div>  
+                        <div>
+                            <h5>or</h5>
+                            <div>                    
+                                <label class="visible-desktop">Service Address</label>  
+                                <input ng-model="data.SearchAddress" id="Account" placeholder="Service Address" class="input-block-level" ng-enter="AddressSearch()"/>
+                                <a href="" class="btn btn-warning pull-right" ng-click="AddressSearch()">Go</a>
+                                <div class="clearfix"/>
+                            </div> 
+                        </div>
+                    </form>      
+                </div>
+                <div class="span8">
+                    <img src="{!URLFOR($Resource.SGHomepageArt2)}" class="hidden-phone img-rounded img-polaroid ng-cloak" style="margin-top:5px;" ng-if="data.Page==='home'"/>
+                    <div class="alert alert-error ng-cloak" ng-if="!matches.length && data.Page==='AddressResults'">
+                        <h4>No address matches found</h4>
+                    </div>
+                    <div ng-if="matches.length && data.Page==='AddressResults'" class="ng-cloak">
+                        <h4>Please select your address</h4>
+                        <table class="table table-striped table-condensed">
+                            <thead><tr><th></th><th>Address</th><th>City</th><th>Zip</th><th>Type</th></tr></thead>
+                            <tbody>
+                                <tr ng-repeat="match in matches">
+                                    <td><a href="" class="btn btn-small" ng-click="selectAddress($index)">Select</a></td>
+                                    <td>{{match.Electric_Service_Address__c}}</td><td>{{match.Electric_Service_Address_City__c}}</td><td>{{match.Electric_Service_Address_Zip__c}}</td>
+                                    <td>{{match.Premise_Type__c}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <hr/>
+        
+            <div class="row" >
+                <div class="span3 ">
+                    <img src="{!URLFOR($Resource.GasChoiceImages, '/images/YOU-sidebar-image.jpg')}" alt="Giving You More Gas Choices" class="hidden-phone"/>
+                    
+                </div>
+                <div class="span8 ">
+                    <c:Content_Viewer content="Gas Choice Home Content" headline="true"/>   
+                </div>
+            </div><!--end home page-->
+        </div>
+
+        <div ng-if="data.Page==='thankYou'" class="ng-cloak">
+            <div class="alert alert-success">
+                <h4>Your Choice Gas Selection is complete</h4>
+                Your CenterPoint Energy verification code is {{data.OrderNumber}}.
+            </div>
+        </div>
+
+        <div ng-if="data.Page==='checkout'" class="ng-cloak">
+            <div class="row">
+                <div class="span12">
+                    <h1>Signing up is easy<br/>
+                        <small>Thanks for choosing CenterPoint Energy</small>
+                    </h1>
+                    
+                    
+                    <form class="well well-large text-left" ng-submit="placeOrder()" name="form1">
+                        <!--
+                                    <div class="span4 control-group" ng-if="rate.Plan__r.Rate_Class_del__c=='Residential' && !APA.Account__r.SSN__c" ng-class="{error: form1.ssn.$invalid}">
+                                        <label for="textinput6" class="control-label visible-desktop" >SSN*</label>
+                                        <input ng-model="order.SSN__c" name="ssn" id="ssn"  placeholder="Social Security #" type="text" 
+                                        ng-required="rate.Plan__r.Rate_Class_del__c=='Residential'" ng-pattern="/^\d\d\d-?\s*\d\d-?\s*\d\d\d\d$/"
+                                         />
+                                    </div>
+                        -->
+                        <div class="control-group">
+                            <label class="control-label visible-desktop">Account Number</label>
+                            <input required="true" ng-model="order.Account_Number__c" autofocus="true" type="text" pattern="[0-9]*" placeholder="account number"/>
+                        </div>
+                        <div class="control-group" ng-class="{error: form1.control.$invalid}">
+                            <label class="control-label visible-desktop" ng-if="data.isControlRequired">Control Number</label>
+                            <input  ng-if="data.isControlRequired" required="true" ng-model="order.Control__c" placeholder="9 digits, starting with 4 or 7" type="text" ng-pattern="/^(4|7)\d\d\d\d\d\d\d\d$/" name="control"/>
+                            <span class="text text-error" ng-if="form1.control.$invalid">9 digits, starting with 4 or 7</span>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label visible-desktop">Email</label>
+                            <input required="true" ng-model="order.Customer_Email__c" type="email" placeholder="email address"/>     
+                        </div>                       
+                                                  
+                        <a href="javascript:void(0)" class="btn btn-default" ng-click="data.Page='shop'">Back</a>
+                        <button type="submit" class="btn btn-warning" ng-disabled="form1.$invalid">Submit</button>
+
+                        
+                    </form>
+                    
+                    
+                    <h5>Plan Description</h5>
+                    <div class="well" >
+                        <span ng-bind-html="selectedOffer.p.Plan_Description__c"></span>
+                    </div>           
+                    <hr/>                        
+                    <h5>Rate Details</h5>
+                    <div class="well">
+                        <div ng-if="selectedOffer.p.Rate_Type__c!=='SmartBill'">
+                            {{selectedRate.Price_Details__c}}
+                        </div>
+                        <div ng-if="selectedOffer.p.Rate_Type__c==='SmartBill'">
+                            Your SmartBill monthly cost: ${{order.Smart_Bill_Quote__c}}
+                            <!--c:Content_Viewer content="SmartBill Terms and Conditions" /-->
+                        </div>
+                    </div>
+                </div>                    
+            </div>
+        </div>
+            
+    </div>
+
+    <div class="footer">
+            <div class="container">
+                <div class="row footer-row-1">
+                    
+                    <ul class="footer-links span6 text-center">                       
+                        <li><a href="{!$Page.CNPPrivacyPolicy}" >Privacy&nbsp;Policy</a></li>
+                        <li class="muted">|</li>
+                        <li><a href="{!$Page.CNPTermsOfUse}" >Terms&nbsp;of&nbsp;Use</a></li>
+                    </ul>
+                    
+                    <div class="span6 text-center footer-sharing">
+                        <span class="st_facebook_large" st_url="{!$CurrentPage.URL}" displayText=''></span>
+                        <span class="st_twitter_large" st_url="{!$CurrentPage.URL}" displayText=''></span>
+                        <span class="st_plusone_large" st_url="{!$CurrentPage.URL}" st_title=""></span>
+                        <span class="st_linkedin_large" st_url="{!$CurrentPage.URL}" displayText=''></span>
+                        <span class="st_email_large" st_url="{!$CurrentPage.URL}" displayText=''></span>
+                        <span class="st_sharethis_large" st_url="{!$CurrentPage.URL}" displayText=''></span>
+                    </div>
+                </div>
+                <div class="row">  
+                    <div class="span6 text-center muted">
+                        <apex:insert name="footer-additional" />
+                        <p>&copy;{!$Label.copyright}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script>
+        var myModule = angular.module('choice', ['ngForce', 'ngSanitize'] );
+    
+        function choiceCtrl($scope, GetAddressMatches, GetRemoteRates, GetRemoteConfCode, vfr){
+            $scope.data = {ProgramYear:'{!$Setup.GasChoiceCalcInputs__c.Next_Program_Year__c}', NoAccountFound:false, Page:'home'};
+            $scope.formattedOffers = {};
+            
+            
+            //functions
+
+            //address search
+            $scope.AddressSearch = function(){
+                GetAddressMatches($scope.data.SearchAddress).then(
+                    function(result){
+                        $scope.matches=result;
+                        $scope.data.Page='AddressResults';
+                        dataLayer.push({'angularScope': $scope, 'event':'pagechange', 'virtualUrl':'/AddressResults'});
+                    }, function(error){
+                        alert(error.message);
+                        dataLayer.push({'errorFunction':'AddressSearch', 'errorObject':error});
+                        dataLayer.push({'event':'error'});
+                    }
+                );
+            }
+            $scope.selectAddress = function( ordinal ) {
+                if ( ordinal >= 0 ) {                   
+                    $scope.data.selectedPremise = $scope.matches[ordinal];   
+                    GetRates();                
+                    $scope.data.Page='shop';
+                    dataLayer.push({'angularScope': $scope, 'event':'pagechange', 'virtualUrl':'/shop'});
+                    var task = {"Subject":"Website Visit", "WhatId":$scope.data.selectedPremise.Id, "Status":"Completed", "ActivityDate":new Date()} ;
+                    vfr.create("Task", task).then(function(result){}, function(error){});
+                }
+            };
+
+            $scope.setRate = function (rate){
+                $scope.selectedOffer=rate;
+                MakeOrder();
+                $scope.data.Page='checkout';
+                dataLayer.push({'angularScope': $scope, 'event':'pagechange'});
+            }
+
+            $scope.placeOrder = function (){
+                vfr.create('Order__c', $scope.order).then(
+                    function(result){ //query for order #
+                        vfr.query("Select id, Name from Order__c where id='"+result.id+"'").then(
+                            function(result2){
+                                $scope.data.OrderNumber=result2.records[0].Name;
+                                DoECommerce();
+                                $scope.data.Page='thankYou';
+                                dataLayer.push({'angularScope': $scope, 'event':'pagechange', 'virtualUrl':'/thankYou'});
+                                
+                            }
+                        );
+                    }, function(error){
+                        dataLayer.push({'errorFunction':'placeOrder', 'errorObject':error});
+                        dataLayer.push({'event':'error'});
+                        alert(error.message);
+                    }
+                );
+            }
+
+
+            //account number search
+            $scope.AccountNumberSearch = function(){
+                vfr.query("select id, Program__c, Division__c, Account_Number__c, Gas_Premise_Number__c, Premise_Type__c, Electric_Service_Address__c, SG_Account_Name__c, SG_Customer_Number__c, SG_DBA_Name__c, SG_First_Name__c, SG_Last_Name__c, SG_Second_Name__c, SG_Telephone__c from premises__c where Account_Number__c='" +$scope.data.SearchAccount+ "' and Record_Type_Name__c ='Gas Choice Premise' limit 1").then(
+                    function(result){
+                        if (result.records.length>0){
+                            $scope.data.selectedPremise = result.records[0];
+                            dataLayer.push({'event':'success', 'successMessage':'Successful Account Search: ' + $scope.data.selectedPremise.Account_Number__c});                            
+                            GetRates();                         
+                            $scope.data.Page='shop';
+                            dataLayer.push({'angularScope': $scope, 'event':'pagechange', 'virtualUrl':'/shop'});
+                            //log that this customer visited us--as an activity on their account
+                            var task = {"Subject":"Website Visit", "WhatId":$scope.data.selectedPremise.Id, "Status":"Completed", "ActivityDate":new Date()} ;
+                            vfr.create("Task", task).then(function(result){}, function(error){});
+                        } else {
+                            alert('No account found for ' + $scope.data.SearchAccount);
+                            dataLayer.push({'angularScope': $scope})
+                            dataLayer.push({'event':'log', 'logType': 'Acct# not found', 'logMethod':'AccountNumberSearch', 'logMessage':$scope.data.SearchAccount});
+
+                        }
+                    }, function(error){                     
+                        alert(error.message);
+                        dataLayer.push({'errorFunction':'AccountNumberSearch', 'errorObject':error});
+                        dataLayer.push({'event':'error'});
+                    }
+                );
+            }
+
+            function GetRates(){
+                GetRemoteRates($scope.data.selectedPremise.Id, $scope.data.ProgramYear).then(
+                    function(result){
+                        if (result){
+                            $scope.offers=result;
+                            PrepRates();                            
+                        } else {
+                            $scope.offers='noOffers';
+                            dataLayer.push({'errorFunction':'GetRates', 'errorObject':'No rates returned for '+$scope.data.selectedPremise.Id});
+                            dataLayer.push({'event':'error'});
+                        }
+                    }, function(error){
+                        dataLayer.push({'errorFunction':'GetRates', 'errorObject':error});
+                        dataLayer.push({'event':'error'});
+                        alert(error.message);
+                    }
+                );
+            }
+
+            function PrepRates(){
+                for (var x=0; x<$scope.offers.length; x++){ //make each plan
+                    $scope.formattedOffers[$scope.offers[x].p.Rate_Type__c]={};
+                }
+                for (var x=0; x<$scope.offers.length; x++){ //set a .12 and a .24 for each plan (if applicable) of the actual object
+                    $scope.formattedOffers[$scope.offers[x].p.Rate_Type__c].Description=$scope.offers[x].p.Plan_Description__c;
+                    $scope.formattedOffers[$scope.offers[x].p.Rate_Type__c].RateType=$scope.offers[x].p.Rate_Type__c;
+                    $scope.formattedOffers[$scope.offers[x].p.Rate_Type__c].Name=$scope.offers[x].p.Name;
+                    $scope.formattedOffers[$scope.offers[x].p.Rate_Type__c].Name= 
+                        $scope.formattedOffers[$scope.offers[x].p.Rate_Type__c].Name.replace(' (2 Year)', '');
+                    $scope.formattedOffers[$scope.offers[x].p.Rate_Type__c][$scope.offers[x].p.Contract_Length__c]=$scope.offers[x];
+                }
+
+            }
+
+            
+            function MakeOrder(){
+                $scope.order={Order_Status__c:'Ready To Submit'};
+
+                $scope.order.Premise__c = $scope.data.selectedPremise.Id;
+                $scope.order.First_Name__c = $scope.data.selectedPremise.SG_First_Name__c;
+                $scope.order.Last_Name__C = $scope.data.selectedPremise.SG_Last_Name__c;
+                $scope.order.Account_Number__c = $scope.data.selectedPremise.Account_Number__c;
+                $scope.order.Program__c = $scope.data.selectedPremise.Program__c;
+
+                //*** Something BIG here for the new code management stuff
+                GetRemoteConfCode($scope.selectedOffer, $scope.data.selectedPremise).then(
+                    function(result){
+                        $scope.selectedRate=result;
+                        $scope.order.Rate__c = $scope.selectedRate.Id;
+
+                        $scope.order.Plan__c = $scope.selectedOffer.p.Id;
+                        $scope.order.Contract_Length__c = $scope.selectedOffer.p.Contract_Length__c;
+                        $scope.order.Confirmation_Code_Year__c = $scope.selectedRate.Confirmation_Code_Year__c;
+                        $scope.order.REP_Profile__c = $scope.selectedOffer.p.REP_Profile__c;
+
+                        if ($scope.selectedOffer.p.Rate_Type__c==='Smart Bill' || $scope.selectedOffer.p.Rate_Type__c==='SmartBill'){
+                            $scope.order.Smart_Bill_Quote__c=$scope.selectedOffer.SBQ;
+                        }
+
+                        //depending on program year/"openness"--maybe a function of 'is control required?'
+                        $scope.order.confirmation_code__c = $scope.selectedRate.Confirmation_Code__c;
+                        $scope.data.isControlRequired=isControlRequired();
+                            dataLayer.push({'angularScope': $scope});
+                    }, function(error){                     
+                        dataLayer.push({'errorFunction':'MakeOrder', 'errorObject':error});
+                        dataLayer.push({'event':'error'});
+                        $scope.data.Page='RateCodeError';
+                    }
+                )
+                
+            }
+
+            function DoECommerce(){
+                dataLayer.push({
+                    'transactionId': $scope.data.OrderNumber,
+                    'transactionAffiliation': 'Gas Choice Web',
+                    'transactionTotal': 0,
+                    'transactionTax': 0,
+                    'transactionShipping': 0,
+                    'transactionCity':$scope.data.selectedPremise.Electric_Service_Address_City__c,
+                    'transactionState':$scope.data.selectedPremise.Electric_Service_Address_State2__c,
+                    'transactionCountry': 'USA',
+                    'transactionProducts': [{
+                        'sku': $scope.selectedRate.Confirmation_Code__c,
+                        'name': $scope.selectedOffer.p.Name,
+                        'category': $scope.data.selectedPremise.Division__c,
+                        'price': 0, //want that to be expected margin?
+                        'quantity': $scope.order.Contract_Length__c/12 //months
+                    }]
+                });
+                dataLayer.push({'event':'orderComplete'});
+            }
+
+            function isControlRequired(){
+                if ($scope.data.ProgramYear==='{!$Setup.GasChoiceCalcInputs__c.Current_Program_Year__c}') return true;
+
+                else {
+                    if ($scope.data.selectedPremise.Program__c==='Ag' && {!$Setup.GasChoiceCalcInputs__c.Ag_Enrollment_Open__c}) return true;
+                    if ($scope.data.selectedPremise.Program__c==='Nebraska' && {!$Setup.GasChoiceCalcInputs__c.NE_Enrollment_Open__c}) return true;
+                    if ($scope.data.selectedPremise.Program__c==='Wyoming' && {!$Setup.GasChoiceCalcInputs__c.WY_Enrollment_Open__c}) return true; 
+                }
+
+                return false;
+            }
+        }
+
+
+    
+
+
+
+        //factories
+        myModule.factory('GetAddressMatches', ['$q', '$rootScope', function($q, $rootScope) {
+            return function(address) {
+                var deferred = $q.defer();
+                
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.GasChoiceController.AddressSearch}',
+                    address,
+                    function(result, event) {
+                        $rootScope.$apply(function() {
+                            if (event.status) {
+                                deferred.resolve(result);
+                            } else {
+                                deferred.reject(event);
+                            }
+                        })
+                    },
+                    { buffer: true, escape: true, timeout: 30000 }
+                );
+                return deferred.promise;
+            }
+        }]);
+
+        myModule.factory('GetRemoteRates', ['$q', '$rootScope', function($q, $rootScope) {
+            return function(premiseid, progyear) {
+                var deferred = $q.defer();
+                //RemoteRates(string premiseid, boolean dynamic, string year){
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.GasChoiceController.RemoteOffers}',
+                    premiseid,
+                    progyear,
+                    function(result, event) {
+                        $rootScope.$apply(function() {
+                            if (event.status) {
+                                deferred.resolve(result);
+                            } else {
+                                deferred.reject(event);
+                            }
+                        })
+                    },
+                    { buffer: true, escape: true, timeout: 30000 }
+                );
+                return deferred.promise;
+            }
+        }]);
+
+        myModule.factory('GetRemoteConfCode', ['$q', '$rootScope', function($q, $rootScope) {
+            return function(offer, premise) {
+                var deferred = $q.defer();
+                //remove $$hashkey stuff
+                var premiseInternal = premise;
+                delete premiseInternal['$$hashKey'];
+                delete premiseInternal['attributes'];
+                //RemoteRates(string premiseid, boolean dynamic, string year){
+                Visualforce.remoting.Manager.invokeAction(
+                    '{!$RemoteAction.GasChoiceController.RemoteConfCode}',
+                    offer,
+                    premiseInternal,
+                    function(result, event) {
+                        $rootScope.$apply(function() {
+                            if (event.status) {
+                                deferred.resolve(result);
+                            } else {
+                                deferred.reject(event);
+                            }
+                        })
+                    },
+                    { buffer: true, escape: true, timeout: 30000 }
+                );
+                return deferred.promise;
+            }
+        }]);
+        //directives
+    
+        myModule.directive('ngEnter', function() {
+            return function(scope, element, attrs) {
+                element.bind("keydown keypress", function(event) {
+                    if(event.which === 13) {
+                        scope.$apply(function(){
+                            scope.$eval(attrs.ngEnter);
+                        });
+                        event.preventDefault();
+                    }
+                });
+            };
+        });
+
+       
+
+    </script>
+    <c:Ngforce />
+<!--lower script section-->
+    <script src="{!URLFOR($Resource.bootstrap, 'js/bootstrap.min.js')}" />
+    <script type="text/javascript">
+        if (!window._laq) { window._laq = []; }
+        window._laq.push(function(){liveagent.showWhenOnline('573300000001Bj5', document.getElementById('liveagent_button_online_573300000001Bj5'));
+            liveagent.showWhenOffline('573300000001Bj5', document.getElementById('liveagent_button_offline_573300000001Bj5'));
+        });
+    </script>
+    <script type='text/javascript' src='https://c.la1s1.salesforceliveagent.com/content/g/deployment.js'></script>
+    <script type='text/javascript'>
+        liveagent.init('https://d.la1s1.salesforceliveagent.com/chat', '572300000001BTb', '00D30000000pOSg');
+    </script>
+    <script async="async" src="https://ws.sharethis.com/button/buttons.js" />
+<!-- end lower script section-->
+
+</body>
+</html>
+
+
+
+</apex:page>

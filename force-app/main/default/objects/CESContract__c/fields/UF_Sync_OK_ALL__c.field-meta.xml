@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UF_Sync_OK_ALL__c</fullName>
+    <externalId>false</externalId>
+    <formula>OR(ISPICKVAL(Safari_Sync_Status__c, &#39;Sync Complete&#39;), 
+AND(
+  UF_Sync_OK_SalesForceID__c,
+  UF_Sync_OK_AllProductType__c,
+  UF_Sync_OK_CESUM__c,
+  UF_Sync_OK_Contract_Version__c,
+  UF_Sync_OK_GUM__c,
+  UF_Sync_OK_TGUM__c,
+  OR(
+     NOT( Agency_Services__c ),
+     UF_Sync_OK_Agency__c
+  ),
+  OR(
+     NOT( Base_Pricing__c ),
+     UF_Sync_OK_Base_Contract__c
+  ),
+  OR(
+    ISBLANK( Consultant_Unit_Margin__c ),
+    Consultant_Unit_Margin__c = 0,
+    UF_Sync_OK_CUM__c
+  ),
+  OR(
+    TEXT( Delivery_Obligation__c ) = NULL,
+    UF_Sync_OK_DealTranType__c
+  ),
+  OR(
+    ISBLANK( Delivery_Point__c ),
+    UF_Sync_OK_Delivery_Point__c
+  ),
+  OR(
+    ISBLANK( UDF_Product_Type__c ),
+    UF_Sync_OK_ProductType__c
+  ),
+  OR(
+     NOT( Storage_Valuation__c ),
+     UF_Sync_OK_Storage_Val__c
+  ),
+  OR(
+     NOT( Telemetry__c ),
+     UF_Sync_OK_Telemetry__c
+  ),
+  OR(
+     NOT( Transport_Fuel__c ),
+     UF_Sync_OK_Transport_Fuel__c
+  ),
+  OR(
+    TEXT( Upstream_Transport__c ) = NULL,
+    UF_Sync_OK_Upstream_Transport__c
+  ),
+  OR(
+    TEXT( Utility_Balancing__c ) = NULL,
+    CES_Office_Code__c = &#39;LIVE&#39;,
+    UF_Sync_OK_Utility_Balancing__c
+  ),
+  OR(
+    TEXT( Utility_Cashout__c ) = NULL,
+    CES_Office_Code__c = &#39;LIVE&#39;,
+    UF_Sync_OK_Utility_Cashout__c
+  ),
+  OR(
+    TEXT( Utility_Meter_Read_Pooling__c ) = NULL,
+    CES_Office_Code__c = &#39;LIVE&#39;,
+    UF_Sync_OK_Utility_Meter_Read__c
+  ),
+  OR(
+    TEXT( Utility_Transportation__c ) = NULL,
+    UF_Sync_OK_Utility_Transportation__c 
+  )
+)
+)</formula>
+    <label>UF Sync OK - ALL</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

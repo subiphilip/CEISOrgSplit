@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deal_Unit_Margin__c</fullName>
+    <description>see project 266 for old formula</description>
+    <externalId>false</externalId>
+    <formula>CASE( Product_Subtype_Lookup__r.Name ,
+  &#39;Market Price&#39;, BLANKVALUE(Margin_on_Index__c, 0),
+  &#39;Index Guaranteed Savings&#39;, CNP_MNG_Product_Margin__c - CNP_MNG_Guaranteed_Charge__c ,
+  &#39;Index Guaranteed Supply&#39;, IF(TEXT(CNP_MNG_Guaranteed_Charge_Discount_Level__c) = &#39;month&#39;, ((CNP_MNG_Guaranteed_Charge__c - (Contract_Maximum_Quantity__c * 5)) * Term_New__c / Opportunity__r.Term_Volume__c), CNP_MNG_Guaranteed_Charge__c - CNP_MNG_Product_Cost__c),
+  &#39;Index Guaranteed Value plus Supply&#39;, IF(TEXT(CNP_MNG_Guaranteed_Charge_Discount_Level__c) = &#39;month&#39;, ((CNP_MNG_Guaranteed_Charge__c - (Contract_Maximum_Quantity__c * 5)) * Term_New__c / Opportunity__r.Term_Volume__c) + CNP_MNG_Product_Margin__c, CNP_MNG_Guaranteed_Charge__c - CNP_MNG_Product_Cost__c + CNP_MNG_Product_Margin__c),
+  &#39;Index Guaranteed Value&#39;, CNP_MNG_Product_Margin__c,
+  &#39;Index Enhanced Supply&#39;, CNP_MNG_Guaranteed_Charge__c,
+  &#39;Lock Basis&#39;, Fixed_Price_Margin__c,
+  &#39;Lock NYMEX&#39;, Fixed_Price_Margin__c,
+  &#39;Lock Price&#39;, Fixed_Price_Margin__c,
+   BLANKVALUE(Margin_on_Index__c, 0) + BLANKVALUE(Consultant_Unit_Margin__c, 0)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Deal Unit Margin</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

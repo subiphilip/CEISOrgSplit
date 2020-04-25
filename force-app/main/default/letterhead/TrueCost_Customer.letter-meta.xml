@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Letterhead xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <backgroundColor>#FFFFFF</backgroundColor>
+    <bodyColor>#FFFFFF</bodyColor>
+    <bottomLine>
+        <color>#FFFFFF</color>
+        <height>0</height>
+    </bottomLine>
+    <description>This should be used for marketing and for notifications</description>
+    <footer>
+        <backgroundColor>#FFFFFF</backgroundColor>
+        <height>50</height>
+        <horizontalAlignment>Right</horizontalAlignment>
+        <logo>TrueCost_Images/TrueCost_URL_Footer.jpg</logo>
+        <verticalAlignment>Middle</verticalAlignment>
+    </footer>
+    <header>
+        <backgroundColor>#FFFFFF</backgroundColor>
+        <height>45</height>
+        <horizontalAlignment>Left</horizontalAlignment>
+        <logo>TrueCost_Images/Letterhead_top.png</logo>
+        <verticalAlignment>Top</verticalAlignment>
+    </header>
+    <middleLine>
+        <color>#f2f2f2</color>
+        <height>10</height>
+    </middleLine>
+    <name>TrueCost--Customer</name>
+    <topLine>
+        <color>#f2f2f2</color>
+        <height>10</height>
+    </topLine>
+</Letterhead>

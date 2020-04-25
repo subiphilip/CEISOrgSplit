@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Completed_CI_Initiatives</fullName>
+    <columns>NAME</columns>
+    <columns>Active_Initiative__c</columns>
+    <columns>Initiative_Name__c</columns>
+    <columns>CI_Team_Contact__c</columns>
+    <columns>CNP_Division__c</columns>
+    <columns>Confidential__c</columns>
+    <columns>Executive_Contact__c</columns>
+    <columns>Phase_of_Initiative__c</columns>
+    <columns>Initiative_Priority__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Phase_of_Initiative__c</field>
+        <operation>greaterOrEqual</operation>
+        <value>4</value>
+    </filters>
+    <label>Completed CI Initiatives</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Continuous_Improvement</group>
+    </sharedTo>
+</ListView>

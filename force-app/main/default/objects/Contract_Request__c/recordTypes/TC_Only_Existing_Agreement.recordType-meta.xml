@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TC_Only_Existing_Agreement</fullName>
+    <active>true</active>
+    <description>New TC only for an existing Agreement</description>
+    <label>TC Only-Existing Agreement</label>
+    <picklistValues>
+        <picklist>New_Agreement_Type__c</picklist>
+        <values>
+            <fullName>NAESB 2002 Enabling Agreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NAESB 2006 Enabling Agreement</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_Published__c</fullName>
+    <description>Why was this review published, or how was it verified?  Please chatter any notes or details.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Why was this review published, or how was it verified?  Please chatter any notes or details.</inlineHelpText>
+    <label>Reason Published</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bill Upload</fullName>
+                <default>false</default>
+                <label>Bill Upload</label>
+            </value>
+            <value>
+                <fullName>Confirmed with Utility</fullName>
+                <default>false</default>
+                <label>Confirmed with Utility</label>
+            </value>
+            <value>
+                <fullName>Purchased on TrueCost</fullName>
+                <default>false</default>
+                <label>Purchased on TrueCost</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

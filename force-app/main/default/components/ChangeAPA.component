@@ -1,0 +1,17 @@
+<apex:component controller="ControllerForChangeAPA" allowDML="true">
+    
+    <!--normal version-->
+    <apex:selectList value="{!SelectedAPA}" multiselect="false" size="1" rendered="{!$CurrentPage.Name!='myaccount'}">
+        <apex:selectOptions value="{!APAOptions}">            
+        </apex:selectOptions>
+        <apex:actionsupport event="onchange" action="{!Submit}"/>
+    </apex:selectList>
+    
+    <!--version without the manage addresses option; shows only on the myAccount page to avoid circular linking  -->
+    <apex:selectList value="{!SelectedAPA}" multiselect="false" size="1" rendered="{!$CurrentPage.Name='myaccount'}">
+        <apex:selectOptions value="{!APAOptionsNoManage}">            
+        </apex:selectOptions>
+        <apex:actionsupport event="onchange" action="{!Submit}"/>
+    </apex:selectList>
+    
+</apex:component>

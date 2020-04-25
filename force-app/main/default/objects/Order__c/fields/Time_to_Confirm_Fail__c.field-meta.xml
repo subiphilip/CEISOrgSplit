@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Time_to_Confirm_Fail__c</fullName>
+    <description>How long did it take the REP to confirm/fail the switch?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How long did it take the REP to confirm/fail the switch?</inlineHelpText>
+    <label>Time to Confirm/Fail</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

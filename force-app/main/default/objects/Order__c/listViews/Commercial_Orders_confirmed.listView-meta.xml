@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Commercial_Orders_confirmed</fullName>
+    <booleanFilter>1 AND 2 AND 3 AND 4 AND 5</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Parent_Account__c</columns>
+    <columns>REP_Profile__c</columns>
+    <columns>Plan__c</columns>
+    <columns>Rate__c</columns>
+    <columns>Contract_Length__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Order_Status__c</columns>
+    <columns>ESIID_Number__c</columns>
+    <columns>Premise_Order_Type__c</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>Order_Confirmed_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Record_Type_Name__c</field>
+        <operation>contains</operation>
+        <value>Electric</value>
+    </filters>
+    <filters>
+        <field>Record_Type_Name__c</field>
+        <operation>notContain</operation>
+        <value>Gas</value>
+    </filters>
+    <filters>
+        <field>kWh_rate_1000__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>Premise_Order_Type__c</field>
+        <operation>contains</operation>
+        <value>non</value>
+    </filters>
+    <filters>
+        <field>Order_Status__c</field>
+        <operation>equals</operation>
+        <value>Confirmed</value>
+    </filters>
+    <label>Confirmed Commercial Orders</label>
+    <sharedTo>
+        <allInternalUsers/>
+    </sharedTo>
+</ListView>

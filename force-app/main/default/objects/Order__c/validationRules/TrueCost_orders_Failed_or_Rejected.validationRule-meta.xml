@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrueCost_orders_Failed_or_Rejected</fullName>
+    <active>true</active>
+    <description>Orders can only be one or the other.</description>
+    <errorConditionFormula>AND(
+OR(
+Record_Type_Name__c = &quot;Electric Order&quot;,
+Record_Type_Name__c = &quot;Commercial Electric Order&quot;
+),
+NOT(ISBLANK(TEXT(Rejection_Reason__c))),
+NOT(ISBLANK(TEXT(Failure_Reason__c))),
+ $User.Profile_Name__c &lt;&gt; &quot;The System&quot;
+)</errorConditionFormula>
+    <errorMessage>Order06: For rejected orders, please only populate the Rejected Reason and Comments fields.  For failed orders, please only populate the Failure Reason and Comments fields.</errorMessage>
+</ValidationRule>

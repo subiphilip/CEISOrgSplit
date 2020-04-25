@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lock_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Lock Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Lock Citygate</fullName>
+                <default>false</default>
+                <label>Lock Citygate</label>
+            </value>
+            <value>
+                <fullName>Lock Basis</fullName>
+                <default>false</default>
+                <label>Lock Basis</label>
+            </value>
+            <value>
+                <fullName>Lock NYMEX</fullName>
+                <default>false</default>
+                <label>Lock NYMEX</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

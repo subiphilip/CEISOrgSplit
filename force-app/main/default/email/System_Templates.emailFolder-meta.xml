@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accessType>Shared</accessType>
+    <name>System Templates</name>
+    <publicFolderAccess>ReadOnly</publicFolderAccess>
+    <sharedTo>
+        <group>Administrators_System</group>
+        <group>Content_Editing</group>
+        <group>Contract_Adminstration</group>
+        <group>Credit_Request_Administration</group>
+        <group>CustomerService</group>
+        <group>Customer_Service_Primary</group>
+        <group>Cutting_Edge_Users</group>
+        <group>REPservice</group>
+        <role>BusinessManager</role>
+        <role>Business_Services</role>
+        <role>Communications183141</role>
+        <role>Contract_Administration</role>
+        <role>Credit</role>
+        <role>Customer_Service_Administration</role>
+        <role>Executive_Team</role>
+        <role>External_Agents</role>
+        <role>External_Agents_Managers</role>
+        <role>Internal_Agents</role>
+        <role>Legal</role>
+        <role>MarketDevelopmentManager</role>
+        <role>Marketing</role>
+        <role>Mass_Markets</role>
+        <role>REP</role>
+    </sharedTo>
+</EmailFolder>

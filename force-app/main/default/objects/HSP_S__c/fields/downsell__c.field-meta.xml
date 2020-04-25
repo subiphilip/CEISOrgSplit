@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>downsell__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>A downsell is displayed after the user is provided a bundle and does NOT select the bundle.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Downsell is followed by skipping a bundle</inlineHelpText>
+    <label>Downsell</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

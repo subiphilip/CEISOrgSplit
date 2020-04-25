@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Outstanding_Business_Approval__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( AND(Term__c &gt;12, TEXT(Status__c) = &#39;Submitted for Approval&#39;)
+    ,  IF(TEXT(Renewal_Business_Approval_Status__c)= &#39;Submitted&#39;, &#39;Manager Approval&#39;              
+      ,  IF(TEXT(Renewal_Business_Approval_Status__c) = &#39;Manager Approved&#39;
+                    ,IF( Monthly_Volume__c &gt; 10000, &#39;Director Approval&#39;, &#39;VP Approval&#39;) 
+             ,  IF(TEXT(Renewal_Business_Approval_Status__c) = &#39;Director Approved&#39;, &#39;VP Approval&#39;
+             ,  IF(TEXT(Renewal_Business_Approval_Status__c) = &#39;VP Approved&#39;, &#39;CEO Approval&#39;, null)))),null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Current Outstanding Business Approval</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

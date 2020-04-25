@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unsuspend</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Unsuspend</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>/* This code allows the javascript to access the API and push data into the Org.*/
+{!requireScript(&quot;/soap/ajax/10.0/connection.js&quot;)};
+sforce.connection.session = &quot;{!$Api.Session_ID}&quot;;
+
+function updateRate__c( )
+{
+try
+{
+var Rate__c = new sforce.SObject(&quot;Rate__c&quot;);
+Rate__c.Id = &quot;{!Rate__c.Id}&quot;;
+Rate__c.Suspended__c = &quot;FALSE&quot;;
+var result = sforce.connection.update([Rate__c]);
+if (result[0].getBoolean(&quot;success&quot;) == false ) {
+alert(result[0].errors.message);
+return;
+} 
+window.top.location.href=window.top.location.href;
+} 
+catch (e) {
+alert(e);
+}	
+}
+
+updateRate__c( );</url>
+</WebLink>

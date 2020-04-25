@@ -1,0 +1,46 @@
+<messaging:emailTemplate subject="Thanks for your order" recipientType="Contact" relatedToType="Order__c">
+<messaging:plainTextEmailBody >
+
+</messaging:plainTextEmailBody>
+<messaging:htmlEmailBody >
+    <c:Visualforce_email_stylesheet />    
+    <apex:image url="https://c.na1.content.force.com/servlet/servlet.ImageServer?id=01530000001w7m0&oid=00D30000000pOSg"/>
+    
+        
+    <apex:outputPanel layout="block" styleClass="basic-paragraph">
+        Dear {!recipient.FirstName}, 
+    </apex:outputpanel>     
+    
+    <!--confirmed orders-->
+    <apex:outputPanel layout="block" styleClass="basic-paragraph" rendered="{!relatedTo.Order_Status__c='Confirmed'}">
+        <p>We want to inform you that your order for a new electric plan is complete and you're now being served by {!relatedTo.REP_Profile__c}.</p>
+    </apex:outputpanel>   
+    
+    <apex:outputPanel layout="block" styleClass="basic-paragraph">
+        Your order number is {!relatedTo.Name}.
+    </apex:outputpanel>    
+    
+    <!--confirmed orders-->
+    <apex:outputPanel layout="block" styleClass="basic-paragraph" rendered="{!relatedTo.Order_Status__c='Confirmed'}">
+        What else can TrueCost help you with?
+        <ul>
+            <li>Log in to TrueCost to review your electric plan and when it expires. We'll also send you an email reminder when your contract is ready to expire.</li> 
+            <li>Keep up with the latest news about electricity and energy trends at our blog.</li>   
+            <li>Track electric prices using Electric Price Index.</li>
+        </ul>
+    </apex:outputpanel>
+
+    <apex:outputPanel layout="block" styleClass="basic-paragraph">
+        As required by the Public Utilities Commission of Texas, below you will find links* to the documents that apply to your plan with {!relatedTo.REP_Profile__c}.
+    </apex:outputpanel>
+
+    
+    
+    <apex:outputPanel styleClass="Footer">       
+        <apex:image styleClass="footer-logo" url="https://c.na1.content.force.com/servlet/servlet.ImageServer?id=01530000001w7YU&oid=00D30000000pOSg"/>
+        <apex:outputPanel styleClass="footer-tagline">
+            THE BETTER WAY TO SHOP FOR ELECTRIC PLANS 
+        </apex:outputPanel>
+    </apex:outputPanel>  
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

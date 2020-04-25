@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Database_to_Sync__c</fullName>
+    <description>if set to database code, informatica will initiate premise and bill group fields for safari sync</description>
+    <externalId>false</externalId>
+    <inlineHelpText>if set to database code, informatica will initiate premise and bill group fields for safari sync</inlineHelpText>
+    <label>Database to Sync</label>
+    <length>30</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

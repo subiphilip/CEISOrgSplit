@@ -1,0 +1,210 @@
+<apex:page showHeader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="true" expires="43200" Controller="ControllerForMobileMain">
+   <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+      <c:tc2_header title="{!$Label.Page_Title_Contact_Us} - {!$Label.Page_Title_Company_Name}"
+         description="Get answers to frequently asked questions about electric rates, electric providers, electric choice, switching plans, TrueCost, and CenterPoint Energy" />
+      <style>
+        #message{
+            border: 1px solid #ccc;
+            resize: none;
+            height: 220px;
+        }
+      </style>
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="Contact Us" subHeadline="" />
+    
+             <div id="appContact" > 
+                    <section>
+                    <form v-on:submit="validateBeforeSubmit" method="post">
+    
+                        <div class="container form singup-bottom-padding">
+                            <div class="box is-form-no-padding">
+                                <div class="inner">
+                                    <div class="columns">
+                                        
+                                        
+                                        <!-- <p v-if="errors.length">
+                                            <b>Please correct the following error(s):</b>
+                                            <ul>
+                                                <li v-for="error in errors">{{ error }}</li>
+                                            </ul>
+                                        </p> -->
+    
+                                        <div class="column form-column" style="margin-bottom: 4.5em;">
+
+                                            <div v-show="isSubmitted">
+                                                <p>Our TrueCost support team will begin looking at your request.  Thanks for using TrueCost to shop for electricity</p>
+                                            </div>
+
+                                            <div v-if="!isSubmitted">
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            If your issue is urgent, feel free to call us at (800) 461 3056. Our Customer Support hours are 8am - 5pm Central Time, Monday  through Friday. You can also email us at <a href="mailto:truecost@centerpointenergy.com">truecost@centerpointenergy.com</a>
+                                                        </p>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="name">Name</label>
+                                                            <input id="Name" maxlength="20" pattern="" minlength="1" 
+                                                             class="input borderless" type="text" name="fullName" v-model="fullName" required="required" />
+                                                             <span  v-show="validateName" class="help is-danger">First name is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="phone">Phone Number</label>
+                                                            <input id="phone"
+                                                            v-mask="'(###) ###-####'"
+                                                            class="input borderless" type="tel" name="phone" v-model="phone" required="required" />
+                                                            <span  v-show="validatePhone" class="help is-danger">Phone number is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="email">Email Address</label>
+                                                            <input id="email" maxlength="100" minlength="3" 
+                                                             class="input borderless" type="text" name="email" v-model="email" required="required" />
+                                                            <span  v-show="validateEmail" class="help is-danger">Email is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="checkbox">
+                                                            <input type="checkbox" id="checkbox"/> Please contact me (provide either email or phone)</label>
+                                                            
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div></div> -->
+
+                                            <!-- <article class="media padding-sides">
+                                                <figure class="media-left">
+                                                    <div class="checkbox">
+                                                        <span><input v-model="checkbox" name="checkbox" id="checkbox" type="checkbox" /></span>
+                                                    </div>
+                                                </figure>
+                                                <div class="media-content">
+                                                    <label for="checkbox"> Please contact me (provide either email and phone)</label>
+                                                </div>
+                                            </article> -->
+
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label"  for="email" style="top: -22px;">Message</label>
+                                                            <textarea id="message" maxlength="1000" minlength="3" 
+                                                             class="input borderless" type="text" name="description" v-model="description" required="required" ></textarea>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="has-text-centered " v-if="!isSubmitted">
+                                    <br/>
+                                    <input class="button is-primary is-rounded fixed-size animate-gradient-bg" type="submit" value="Submit" />
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </section>
+
+            </div>
+         </div>
+         
+        <c:tc2_footer />
+         <script>
+            (function ($) {
+                $(function () {
+                'use strict';
+                 
+                 TC.app.appContact = new Vue({
+                    el: '#appContact',
+                    data: { 
+                        email: TC.app.account.email,
+                        fullName: (TC.app.account.firstName != null || TC.app.account.firstName != undefined) ? TC.app.account.firstName + ' ' + TC.app.account.lastName : '',
+                        phone: TC.app.account.phone,
+                        description: '',
+                        checkbox: true,
+                        validateName: false,
+                        validatePhone: false,
+                        validateEmail: false,
+                        isSubmitted: false
+                    },
+                    methods: { 
+
+                        validateBeforeSubmit: function(e) {
+                            e.preventDefault();
+                            this.isSubmitted = true;
+                            ControllerForMobileMain.CreateRemoteCase(
+                            '{!$User.Id}', 
+                            this.fullName, 
+                            this.email, 
+                            this.phone, 
+                            this.description, 
+                            this.checkbox,
+                            navigator.userAgent,
+                            
+                            function(result,event){
+                                if (event){
+                                    
+                                } else {
+                                }    
+                            });
+                            
+                        }
+                    },
+                    mounted: function() { 
+                        var fn = TC.app.account.firstName;
+                        var ln = TC.app.account.lastName;
+                        if(fn != null && ln != null){
+                            this.fullName = TC.app.account.firstName + " " + TC.app.account.lastName
+                        }
+                    },
+                    watch: { 
+                        isSubmitted: {
+                          handler: function() {
+                            debugger;
+                          }
+                        }
+                    }
+                 });
+            
+              })
+            })(jQuery);
+         </script>
+      </body>
+   </html>
+</apex:page>

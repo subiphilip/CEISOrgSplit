@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Minimum_Usage_Less_Maximum_Usage</fullName>
+    <active>true</active>
+    <description>The minimum usage must be less than the maximum</description>
+    <errorConditionFormula>Maximum_Annual_Usage__c &lt;  Minimum_Annual_Usage__c</errorConditionFormula>
+    <errorDisplayField>Maximum_Annual_Usage__c</errorDisplayField>
+    <errorMessage>Rate10: The minimum annual usage must be LESS than the maximum.</errorMessage>
+</ValidationRule>

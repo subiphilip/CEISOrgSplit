@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Choice_Special_Codes</fullName>
+    <columns>NAME</columns>
+    <columns>Plan__c</columns>
+    <columns>Price_Details__c</columns>
+    <columns>Program__c</columns>
+    <columns>Division__c</columns>
+    <columns>Notes__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Record_Type_Name__c</field>
+        <operation>contains</operation>
+        <value>choice</value>
+    </filters>
+    <filters>
+        <field>Notes__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Notes__c</field>
+        <operation>notContain</operation>
+        <value>default,listed as a 2 year code,smartbill,provisional</value>
+    </filters>
+    <filters>
+        <field>Confirmation_Code_Year__c</field>
+        <operation>greaterThan</operation>
+        <value>2012</value>
+    </filters>
+    <filters>
+        <field>Notes__c</field>
+        <operation>notContain</operation>
+        <value>ATTN,DO NOT CHANGE,listed as two year code,do not use</value>
+    </filters>
+    <label>Gas Choice: Special Codes</label>
+    <language>en_US</language>
+    <sharedTo>
+        <allInternalUsers/>
+    </sharedTo>
+</ListView>

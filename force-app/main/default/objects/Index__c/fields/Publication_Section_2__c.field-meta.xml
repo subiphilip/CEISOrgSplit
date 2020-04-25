@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Publication_Section_2__c</fullName>
+    <externalId>false</externalId>
+    <label>Publication Section 2</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Publication_2__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>IF</fullName>
+                <default>false</default>
+                <label>IF</label>
+            </value>
+            <value>
+                <fullName>GD</fullName>
+                <default>false</default>
+                <label>GD</label>
+            </value>
+            <value>
+                <fullName>Appalachia</fullName>
+                <default>false</default>
+                <label>Appalachia</label>
+            </value>
+            <value>
+                <fullName>Canadian Gas</fullName>
+                <default>false</default>
+                <label>Canadian Gas</label>
+            </value>
+            <value>
+                <fullName>Citygates</fullName>
+                <default>false</default>
+                <label>Citygates</label>
+            </value>
+            <value>
+                <fullName>East Texas-North Louisiana Area</fullName>
+                <default>false</default>
+                <label>East Texas-North Louisiana Area</label>
+            </value>
+            <value>
+                <fullName>East-Houston-Katy</fullName>
+                <default>false</default>
+                <label>East-Houston-Katy</label>
+            </value>
+            <value>
+                <fullName>Louisiana-Onshore South</fullName>
+                <default>false</default>
+                <label>Louisiana-Onshore South</label>
+            </value>
+            <value>
+                <fullName>Mississippi-Alabama</fullName>
+                <default>false</default>
+                <label>Mississippi-Alabama</label>
+            </value>
+            <value>
+                <fullName>Oklahoma</fullName>
+                <default>false</default>
+                <label>Oklahoma</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+            <value>
+                <fullName>Rockies</fullName>
+                <default>false</default>
+                <label>Rockies</label>
+            </value>
+            <value>
+                <fullName>South-Corpus Christi</fullName>
+                <default>false</default>
+                <label>South-Corpus Christi</label>
+            </value>
+            <value>
+                <fullName>Northern Natural Gas Co</fullName>
+                <default>false</default>
+                <label>Northern Natural Gas Co</label>
+            </value>
+            <value>
+                <fullName>Upper Midwest</fullName>
+                <default>false</default>
+                <label>Upper Midwest</label>
+            </value>
+            <value>
+                <fullName>ANR Pipeline Co</fullName>
+                <default>false</default>
+                <label>ANR Pipeline Co</label>
+            </value>
+            <value>
+                <fullName>CenterPoint Energy Gas Transmission Co</fullName>
+                <default>false</default>
+                <label>CenterPoint Energy Gas Transmission Co</label>
+            </value>
+            <value>
+                <fullName>Colorado Interstate Gas Co</fullName>
+                <default>false</default>
+                <label>Colorado Interstate Gas Co</label>
+            </value>
+            <value>
+                <fullName>East Texas</fullName>
+                <default>false</default>
+                <label>East Texas</label>
+            </value>
+            <value>
+                <fullName>Florida Gas Transmission Co</fullName>
+                <default>false</default>
+                <label>Florida Gas Transmission Co</label>
+            </value>
+            <value>
+                <fullName>Natural Gas Pipeline Co of America</fullName>
+                <default>false</default>
+                <label>Natural Gas Pipeline Co of America</label>
+            </value>
+            <value>
+                <fullName>Northeast</fullName>
+                <default>false</default>
+                <label>Northeast</label>
+            </value>
+            <value>
+                <fullName>Northwest Pipeline Corp</fullName>
+                <default>false</default>
+                <label>Northwest Pipeline Corp</label>
+            </value>
+            <value>
+                <fullName>Oneok Gas Transportation LLC</fullName>
+                <default>false</default>
+                <label>Oneok Gas Transportation LLC</label>
+            </value>
+            <value>
+                <fullName>Panhandle Eastern Pipe Line Co</fullName>
+                <default>false</default>
+                <label>Panhandle Eastern Pipe Line Co</label>
+            </value>
+            <value>
+                <fullName>Rockies/Northwest</fullName>
+                <default>false</default>
+                <label>Rockies/Northwest</label>
+            </value>
+            <value>
+                <fullName>South Louisiana</fullName>
+                <default>false</default>
+                <label>South Louisiana</label>
+            </value>
+            <value>
+                <fullName>Southern Star Central Gas Pipeline Inc</fullName>
+                <default>false</default>
+                <label>Southern Star Central Gas Pipeline Inc</label>
+            </value>
+            <value>
+                <fullName>Tennessee Gas Pipeline Co</fullName>
+                <default>false</default>
+                <label>Tennessee Gas Pipeline Co</label>
+            </value>
+            <value>
+                <fullName>Texas Eastern Transmission Corp</fullName>
+                <default>false</default>
+                <label>Texas Eastern Transmission Corp</label>
+            </value>
+            <value>
+                <fullName>Texas Gas Transmission Corp</fullName>
+                <default>false</default>
+                <label>Texas Gas Transmission Corp</label>
+            </value>
+            <value>
+                <fullName>Transcontinental Gas Pipe Line Corp</fullName>
+                <default>false</default>
+                <label>Transcontinental Gas Pipe Line Corp</label>
+            </value>
+            <value>
+                <fullName>Trunkline Gas Co</fullName>
+                <default>false</default>
+                <label>Trunkline Gas Co</label>
+            </value>
+            <value>
+                <fullName>Midwest</fullName>
+                <default>false</default>
+                <label>Midwest</label>
+            </value>
+            <value>
+                <fullName>NYMEX</fullName>
+                <default>false</default>
+                <label>NYMEX</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Confirmation_Code_Status__c</fullName>
+    <description>For choice gas codes</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For choice gas codes</inlineHelpText>
+    <label>Confirmation Code Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Unactivated (not sent to the utility)</fullName>
+                <default>true</default>
+                <label>Unactivated (not sent to the utility)</label>
+            </value>
+            <value>
+                <fullName>Pending activation (sent to the utility)</fullName>
+                <default>false</default>
+                <label>Pending activation (sent to the utility)</label>
+            </value>
+            <value>
+                <fullName>Activated, not priced</fullName>
+                <default>false</default>
+                <label>Activated, not priced</label>
+            </value>
+            <value>
+                <fullName>Activated with pricing</fullName>
+                <default>false</default>
+                <label>Activated with pricing</label>
+            </value>
+            <value>
+                <fullName>Expired</fullName>
+                <default>false</default>
+                <label>Expired</label>
+            </value>
+            <value>
+                <fullName>Unactivated with order</fullName>
+                <default>false</default>
+                <label>Unactivated with order</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

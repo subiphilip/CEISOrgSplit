@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Wants_Contact__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>The customer wants us to contact him/her about this case</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Only applies to cases from the web form.</inlineHelpText>
+    <label>Wants Contact</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

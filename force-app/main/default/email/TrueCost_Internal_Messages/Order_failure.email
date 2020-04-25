@@ -1,0 +1,8 @@
+{!Order__c.REP_Profile__c} has indicated that an order failed.
+
+Order number: {!Order__c.Name}
+Customer: {!Order__c.00N30000006o0tB}
+Failure Reason:  {!Order__c.Failure_Reason__c}
+Failure Comments: {!Order__c.Order_Failure_Comments__c}
+
+***FOR INTERNAL USE ONLY***

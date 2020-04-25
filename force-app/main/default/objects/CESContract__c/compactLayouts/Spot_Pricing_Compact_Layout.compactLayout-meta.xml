@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Spot_Pricing_Compact_Layout</fullName>
+    <fields>Name</fields>
+    <fields>Account__c</fields>
+    <fields>Start_Day__c</fields>
+    <fields>End_Day__c</fields>
+    <fields>Contract_Status__c</fields>
+    <fields>Pricing_Scheme__c</fields>
+    <fields>service_type__c</fields>
+    <fields>supply_pool__c</fields>
+    <label>Spot Pricing Compact Layout</label>
+</CompactLayout>

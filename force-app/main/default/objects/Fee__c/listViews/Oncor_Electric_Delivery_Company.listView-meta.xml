@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Oncor_Electric_Delivery_Company</fullName>
+    <columns>NAME</columns>
+    <columns>Value__c</columns>
+    <columns>Basis__c</columns>
+    <columns>TDSP__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>TDSP__c</field>
+        <operation>equals</operation>
+        <value>Oncor Electric Delivery Company</value>
+    </filters>
+    <label>Oncor Electric Delivery Company</label>
+    <language>en_US</language>
+</ListView>

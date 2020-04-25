@@ -1,0 +1,659 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+
+<head>
+  <script type="text/javascript"> if (!window.console) console = {log: function() {}}; </script>
+  <link href="https://plus.google.com/b/104486031549961118105" rel="publisher"/>
+  <meta property="og:site_name" content="myTrueCost.com"/>
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"/>        
+ 
+  
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui"/>
+  <link href="{!URLFOR($Resource.CNPTrueCostHomepage, 'css/cnp-theme.css')}" rel="stylesheet" media="screen"/>
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="js/selectivizr-min.js"></script>
+  <![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script>
+    window.jQuery || document.write('<script src="{!URLFOR($Resource.CNPTrueCostHomepage, 'js/jquery-1.11.0.min.js')}"><\/script>')
+  </script>
+  <script src="{!URLFOR($Resource.CNPTrueCostHomepage, 'js/cnp.js')}" /> 
+
+
+  <title>Home - TrueCost Electric Portal</title>
+  <style>
+
+  </style>
+</head>
+
+<body id="cnp-natural-gas" class="cnp-logged-out line-of-business" data-grid-framework="b3" data-grid-color="#fff0f5" data-grid-opacity="0.5">
+
+
+
+<a href="#content" class="sr-only">Skip to main content</a>
+<div class="print-logo">
+  <img src="{!URLFOR($Resource.CNPTrueCostHomepage, 'images/logo.png')}" alt="CenterPoint Energy logo"/>
+</div>
+<div class="global-navbar">
+  <div class="container fit-to-edge">
+    <div class="simple-search">
+      <form>
+        <input class="navbar-search" type="search" name="search" placeholder="Search"/>
+        <input class="navbar-search-submit" type="submit" name="search-submit"/>
+      </form>
+    </div>
+    <div class="visible-md visible-lg">
+      <a href="http://www.centerpointenergy.com/_layouts/15/CNPCustomHandlers/SelfID.ashx?Method=CHANGELANGUAGE&Language=es-us' class='cnp-change-language" class="cnp-change-language">En Espa&#241;ol</a>
+    </div>
+    <div class="audience-links">
+      <a class="audience-link at" href="http://www.centerpointenergy.com/_layouts/15/CNPCustomHandlers/SelfID.ashx?Method=CHANGEAUDIENCE&Audience=residential&ServiceArea=texas&SubArea=houston">Residential</a>
+      <a class="audience-link" href="http://www.centerpointenergy.com/_layouts/15/CNPCustomHandlers/SelfID.ashx?Method=CHANGEAUDIENCE&Audience=business&ServiceArea=texas&SubArea=houston">Business</a>
+      <a class="audience-link" href="http://www.centerpointenergy.com/_layouts/15/CNPCustomHandlers/SelfID.ashx?Method=CHANGEAUDIENCE&Audience=corporate&ServiceArea=&SubArea=">Our Company</a>
+    </div>
+  </div>
+</div>
+
+<nav class="desktop-secondary">
+  <div class="row">
+    <div class="col-md-9 col-md-offset-3">
+      <div class="row">
+        <div class="col-md-9 change-service-area">
+          <p><span class="">Service Area: Houston Metro</span><a href="#" data-toggle="modal" data-target="#modal-change-service-area">Change</a></p> <!--<span class="cnp-locale">-->
+        </div>
+        <div class="col-md-3 personalize">
+          <p><a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.SiteLogin}?starturl=/{!$CurrentPage.Name}">TrueCost: Sign In</a> | <a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.RegisterSec}">Register</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<nav class="navbar yamm navbar-default" role="navigation" id="primary-navigation">
+  <div class="wrapper">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#cnp-navbar-collapse-links" data-parent="nav.navbar > .wrapper">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#cnp-navbar-collapse-search" data-parent="nav.navbar > .wrapper">
+        <span class="sr-only">Toggle search</span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img class="img-responsive" src="{!URLFOR($Resource.CNPTrueCostHomepage, 'images/logo.png')}" alt="CenterPoint Energy logo"/></a>
+    </div>
+    <div class="collapse navbar-collapse no-transition" id="cnp-navbar-collapse-search">
+      <form class="navbar-form navbar-left" role="search">
+        <div class="simple-search">
+          <input class="navbar-search" type="search" name="search" placeholder="Search" title="Search"/>
+          <input class="navbar-search-submit" type="submit" name="search-submit"/>
+        </div>
+     </form>
+    </div>
+    <div class="collapse navbar-collapse no-transition" id="cnp-navbar-collapse-links">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown yamm-fw">
+          <a href="#" data-toggle="dropdown" data-target="#" class="dropdown-toggle">Services</a>
+          <ul class="dropdown-menu">
+            <li>
+              <div class="yamm-content">
+                <div class="row">
+                  <ul class="col-sm-4 col-md-3 list-unstyled">
+                    <li><a href="http://www.centerpointenergy.com/en-us/residential/services/natural-gas">Natural Gas</a></li>
+                    <li><a href="http://www.centerpointenergy.com/en-us/residential/services/natural-gas/how-natural-gas-gets-to-you">How Natural Gas Gets To You</a></li>
+                    <li><a href="http://www.centerpointenergy.com/en-us/residential/services/natural-gas/natural-gas-benefits">Natural Gas Benefits</a></li>
+                    <li><a href="http://www.centerpointenergy.com/en-us/residential/services/natural-gas/natural-gas-prices">Natural Gas Prices</a></li>
+                    <li><a href="http://www.centerpointenergy.com/en-us/residential/services/natural-gas/natural-gas-appliances">Natural Gas Appliances</a></li>
+                    <li><a href="http://www.centerpointenergy.com/en-us/residential/services/natural-gas/natural-gas-technology">Natural Gas Technology</a></li>
+                    <li><a href="http://www.centerpointenergy.com/en-us/residential/services/natural-gas/natural-gas-vehicles">Natural Gas Vehicles</a></li>
+                  </ul>
+                  <ul class="col-sm-4 col-md-3 list-unstyled">
+                    <li><a href="http://www.centerpointenergy.com/en-us/residential/services/electric-utility">Electric Utility</a></li>
+                    <li><a href="http://www.centerpointenergy.com/en-us/residential/services/electric-utility/how-electricity-gets-to-you">How Electricity Gets To You</a></li>
+                    <li><a href="http://www.centerpointenergy.com/en-us/residential/services/electric-utility/strengthening-the-grid">Strengthening The Grid</a></li>
+                    <li><a href="http://www.centerpointenergy.com/en-us/residential/services/electric-utility/electric-technology">Electric Technology</a></li>
+                    <li><a href="http://www.centerpointenergy.com/en-us/residential/services/electric-utility/alternative-energy-resources">Alternative Energy Resources</a></li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown yamm-fw">
+          <a href="" data-toggle="dropdown" class="dropdown-toggle">Customer Service</a>
+          <ul class="dropdown-menu">
+            <div class="yamm-content">
+              <div class="row">
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/billing-payment">Billing &amp; Payment</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/billing-payment/make-a-payment">Make A Payment</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/billing-payment/paperless-billing">Paperless Billing</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/billing-payment/automatic-payment">Automatic Payment</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/billing-payment/average-monthly-billing">Average Monthly Billing</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/billing-payment/understanding-your-bill">Understanding Your Bill</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/billing-payment/need-help-paying-your-bill">Need Help Paying Your Bill?</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/electric-outage-center">Electric Outage Center</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/electric-outage-center/power-alert-service">Power Alert Service</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/electric-outage-center/report-streetlight-outages">Report Streetlight Outages</a></li>
+                  <li><a href="http://gis.centerpointenergy.com/outagetracker/">Outage Tracker</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/manage-your-natural-gas-account">Manage Your Natural Gas Account</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/new-customer">New Customer</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/start-stop-transfer-service">Start, Stop, Transfer Service</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/start-stop-transfer-service/start-natural-gas-service">Start Natural Gas Service</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/start-stop-transfer-service/stop-natural-gas-service">Stop Natural Gas Service</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/start-stop-transfer-service/transfer-natural-gas-service">Transfer Natural Gas Service</a></li>
+                  <li><a href="https://myaccount.centerpointenergy.com/app/accounts/public/gas_service_appointment_search.aspx">Track Service Request</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/customer-service/reporting">Reporting</a></li>
+                </ul>
+              </div>
+            </div>
+          </ul>
+        </li>
+        <li class="dropdown yamm-fw">
+          <a href="" data-toggle="dropdown" class="dropdown-toggle">Save Energy &amp; Money</a>
+          <ul class="dropdown-menu">
+            <div class="yamm-content">
+              <div class="row">
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/electric-efficiency-programs">Electric Efficiency Programs</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/electric-efficiency-programs/a-c-distributor-program">A/C Distributor System</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/electric-efficiency-programs/advanced-lighting-program">Advanced Lighting Program</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/electric-efficiency-programs/agencies-in-action">Agencies in Action</a></li>
+                  <li><a target='_blank' href="http://centerpoint.cool-saver.com/">CoolSaver AC Tune-Up Program</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/electric-efficiency-programs/emergency-standby-generator">Emergency Standby Generator</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/electric-efficiency-programs/energy-star-new-homes">Energy Star New Homes</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/electric-efficiency-programs/hard-to-reach-standard-offer">Hard to Reach Standard Offer</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/electric-efficiency-programs/residential-standard-offer">Residential Standard Offer</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/electric-efficiency-programs/smart-pool-program">Smart Pool Program</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/analyze-your-energy-use">Analyze Your Energy Use</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/building-remodeling-information">Building &amp; Remodeling Information</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/building-remodeling-information/building">Building</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/building-remodeling-information/remodeling">Remodeling</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/energy-efficient-appliances">Energy Efficient Appliances</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/efficiency-resources-and-tips">Efficiency Resources and Tips</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/efficiency-resources-and-tips/get-ready-for-winter">Get Ready for Winter</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/save-energy-money/electric-efficiency-tips">Electric Efficiency Tips</a></li>
+                </ul>
+              </div>
+            </div>
+          </ul>
+        </li>
+        <li class="dropdown yamm-fw">
+          <a href="#" data-toggle="dropdown" class="dropdown-toggle">Safety</a>
+          <ul class="dropdown-menu">
+            <div class="yamm-content">
+              <div class="row">
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/safety/natural-gas-safety">Natural Gas Safety</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/safety/natural-gas-safety/natural-gas-appliances">Natural Gas Appliances</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/safety/natural-gas-leak">Natural Gas Leak</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/safety/carbon-monoxide">Carbon Monoxide</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/safety/call-before-you-dig">Call Before You Dig</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/safety/electric-safety">Electric Safety</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/safety/electric-safety/electric-outages">Electric Outages</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/safety/electric-safety/electricity-theft">Electricity Theft</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/safety/electric-safety/trees-vegetation">Trees &amp; Vegetation</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/safety/electric-safety/electric-appliances">Electric Appliances</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/safety/electric-safety/electric-equipment">Electric Equipment</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/safety/meter-safety">Meter Safety</a></li>
+                </ul>
+              </div>
+            </div>
+          </ul>
+        </li>
+        <li class="dropdown yamm-fw">
+          <a href="#" data-toggle="dropdown" class="dropdown-toggle">In Your Community</a>
+          <ul class="dropdown-menu">
+            <div class="yamm-content">
+              <div class="row">
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/in-your-community/whats-going-on-in-your-region">What's Going On In Your Region</a></li>
+                </ul>
+               <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/in-your-community/electric-outage-center">Electric Outage Center</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/in-your-community/electric-outage-center/sign-up-for-power-alert-service">Sign Up for Power Alert Service</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/in-your-community/electric-outage-center/report-streetlight-outages">Report Streetlight Outages</a></li>
+                  <li><a target='_blank' href="http://gis.centerpointenergy.com/outagetracker/">Outage Tracker</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/in-your-community/giving-back">Giving Back</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/in-your-community/giving-back/corporate-giving">Corporate Giving</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/in-your-community/giving-back/community-development">Community Development</a></li>
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/in-your-community/giving-back/volunteer-outreach">Volunteer Outreach</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/in-your-community/environmental-responsibility">Environmental Responsibility</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/in-your-community/events">Events</a></li>
+                </ul>
+                <ul class="col-sm-4 col-md-3 list-unstyled">
+                  <li><a href="http://www.centerpointenergy.com/en-us/residential/in-your-community/local-news">Local News</a></li>
+                </ul>
+              </div>
+            </div>
+          </ul>
+        </li>
+       <!--<li class="no-treatment">
+          <a href="index.html" class="dropdown-toggle">My Accounts</a>
+        </li>-->
+      </ul>
+      <ul class="nav navbar-nav visible-xs visible-sm">
+        <li><a href="#">Sign In/Register</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <ol class="breadcrumb">
+    <li><a href="index.html">Home</a></li>
+    <li>TrueCost</li>
+  </ol>
+</div>
+
+<div class="container fit-to-edge">
+  <div class="row">
+    <!--
+      -- WEB PART ZONE 1
+      -->
+    <figure class="hero">
+  <img class="img-responsive" src="{!URLFOR($Resource.CNPTrueCostHomepage, 'images/titlebanner_truecost_desktop.jpg')}" alt="TrueCost Promo"/>
+  <figcaption>
+    <div class="hero-icon">Natural Gas</div>
+    <div class="hero-caption">
+      <h1>TrueCost</h1>
+      <p>The better way to shop, compare and switch your electric plan.</p>
+    </div>
+  </figcaption>
+</figure>
+
+    <div class="cnp-divider natural-gas">
+      <span class="caret"></span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">  
+  <div class="explore-our-services">
+  <h2>Explore Our Services</h2>
+  <h5>Shop for the best electric plan to fit your needs from over 40 electric companies</h5><br></br>
+  <ul>
+    <li class="cnp-natural-gas"><a href="{!$Page.shopplans}?RateClass=Residential"><span>Residential Plans</span></a></li>
+    <li class="cnp-electricity"><a href="{!$Page.shopplans}?RateClass=Commercial"><span>Commercial Plans</span></a></li>
+    <!-- <li class="cnp-electric-plans"><a href="#"><span>Electric Plans</span></a></li> -->
+  </ul>
+  </div>
+ </div>
+</div>
+
+<div class="container content fit-to-edge">
+  <div class="row">
+    <div class="col-md-4">
+      <!--
+        -- WEB PART ZONE 2
+        -->
+      <!--<h3>Quick Links</h3>-->
+      <ul class="list-unstyled natural-gas-quick-links">
+        <img class="img-responsive" src="{!URLFOR($Resource.CNPTrueCostHomepage, 'images/logo-truecost.png')}" alt="Home" />
+        <h3>Why TrueCost is Better - and Different</h3>
+        <li class=""><a href="{!$Page.ElectricCompanies}">About Electric Companies</a></li> <!--class="pay-bill"-->
+        <li class=""><a href="{!$Page.ElectricPriceTrendsSummary}">Price Trends</a></li> <!--class="start-stop-transfer-service"--> 
+        <li class=""><a href="{!$Page.truecostblog}">News and Insights</a></li> <!--class="extend-payment-due-date"-->
+        <li class=""><a href="{!$Page.AboutTrueCost}">About TrueCost</a></li> <!--class="setup-payment-plan"-->
+        <li class=""><a href="{!$Page.contactus}">Contact Us</a></li> <!--class="view-energy-usage"-->
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <!--
+        -- WEB PART ZONE 3
+        -->
+      <h3>Electric plans customized for you. Smart!</h3>
+      <div class="list-group">
+        <a class="list-group-item">
+          <!--<h5 class="list-group-item-heading">FACT:</h5>-->
+          <p class="list-group-item-text"><b>FACT:</b> You and your best friend can have the same electric plan yet pay very different kWh amounts. </p>
+        </a>
+        <a class="list-group-item">
+          <!--<h5 class="list-group-item-heading">HOW?</h5>-->
+          <p class="list-group-item-text"><b>HOW?</b> The electric rate you actually pay depends on how much electricity you use and when you use it. Minimum use fees, time-of-day rates and taxes make it complicated to calculate the real cost of an electricity plan.</p>
+        </a>
+        <a class="list-group-item">
+          <!--<h5 class="list-group-item-heading">PROBLEM SOLVED!</h5>-->
+          <p class="list-group-item-text"><b>PROBLEM SOLVED!</b> TrueCost does the math and shows you what you’ll pay up front for every plan you like. See for yourself how TrueCost is the better way to shop.</p>
+          <p class="list-group-item-text"><a target='_blank' href="https://vimeo.com/137527083"><img src="{!URLFOR($Resource.CNPTrueCostHomepage, 'images/truecost_vimeo-screen-shot.jpg')}"/></a></p> 
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <!--
+        -- WEB PART ZONE 4
+        -->
+      <!--<h3>About TrueCost</h3>--><br></br>
+      <div class="list-group">  
+        <a href="#" class="list-group-item">
+          <h5 class="list-group-item-heading">Personal Pricing</h5>
+          <p class="list-group-item-text">Get your <i>true</i> kWh cost of electric plans – not just advertised rates.</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h5 class="list-group-item-heading">Simple</h5>
+          <p class="list-group-item-text">Easy to shop and compare. Easy to switch. Easy to see how you could start saving.</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h5 class="list-group-item-heading">Convenient</h5>
+          <p class="list-group-item-text">Shop lots plans from many quality electric companies in one place. Sort plans by what’s important to you like price, customer satisfaction, green plans.</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h5 class="list-group-item-heading">Smart</h5>
+          <p class="list-group-item-text">Working with your smart meter, we can use your actual usage to estimate your kWh.</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h5 class="list-group-item-heading">Independent</h5>
+          <p class="list-group-item-text">Credible, reliable, objective. CenterPoint Energy doesn’t generate or sell electricity.</p>
+        </a>           
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="featured-content">
+  <div class="container">
+    <div class="row">
+      <!--
+        -- WEB PART ZONE 5 (M.9)
+        -->
+      <div class="featured-content-wrapper">
+        <img src="{!URLFOR($Resource.CNPTrueCostHomepage, 'images/natural-gas-calculator-promo.png')}" alt="Calculator"/>
+        <h4>What's the <i>true</i> kWh price you're currently paying?</h4>
+        <p>Use this calculator and a recent bill to do the math.</p>
+        <button type="button" class="btn btn-primary learn-more" data-toggle="modal" data-target="#cnp-bs-modal-default">Learn More</button>
+<!-- Modal div starts here -->
+<div class="modal" id="cnp-bs-modal-default" tabindex="-1" role="dialog" aria-labelledby="cnp-bs-modal-default-title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="cnp-bs-modal-default-title">Use this calculator and a recent bill to do the math.</h4>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="return false" oninput="amount.value = ((bill.valueAsNumber) / (kwh.valueAsNumber)) * (100)"> 
+          <p><label for="bill">1. Enter the total dollar amount of your electric bill last month</label><br/>
+          <input type="number" min="0" id="bill" name="bill"/></p>
+          <p><label for="kwh">2. Divide by the number of kilowatt hours (kWh) you used last month</label><br/>
+          <input type="number" min="10" id="kwh" value="0" name="kwh"/></p>
+          <p><strong><output name="amount" for="bill kwh">0</output> &cent; per kWh</strong></p>
+        </form>
+        <p>This is your true per kWh price. Is it more or less than the price you thought you signed up for? Use this price as the basis for shopping for a new plan.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <a data-dismiss="modal" href="#">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal div ends here -->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer>
+<!--
+  -- Two different footers:
+  -- 1. < 992px screens (tablet portrait and smaller)
+  -- 2. >= 992px screens (tablet landscape and higher)
+  -->
+<div class="small-screen">
+  <div class="container-fluid cnp-change-locale-audience">
+    <p><span class="cnp-locale">Service Area: Houston Metro</span></p>
+    <p><a href="#" data-toggle="modal" data-target="#cnp-modal-service-area">Change</a></p>
+  </div>
+  <div class="container-fluid corporate-links">
+    <div class="list-group">
+      <a href="http://www.centerpointenergy.com/en-us/corporate/about-us" class="list-group-item">About Us</a>
+      <a href="http://investors.centerpointenergy.com/" class="list-group-item">Investors</a>
+      <a href="http://www.centerpointenergy.com/en-us/Corporate/careers" class="list-group-item">Careers</a>
+      <a href='javascript:void(0);' class="list-group-item">Feedback</a>
+      <a href="http://www.centerpointenergy.com/en-us/corporate/contact-us/texas" class="list-group-item">Contact Us</a>
+    </div>
+    <div class="row contact-us">
+      <div class="col-xs-6">
+        <a href='tel:7136592111' class="cnp-call"><img src="{!URLFOR($Resource.CNPTrueCostHomepage, 'images/icon-phone.png')}" alt="Call"/></a>
+      </div>
+      <div class="col-xs-6">
+        <a href="http://www.centerpointenergy.com/en-us/Corp/Pages/CNP_Forms/Corporate_Contact_Us.aspx" class="cnp-email"><img src="{!URLFOR($Resource.CNPTrueCostHomepage, 'images/icon-email.png')}" alt="Email"/></a>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid sosumi">
+    <div class="row no-gutter">
+      <div class="col-xs-12">
+        <ul class="list-unstyled cnp-social-media">
+          <li><a target='_blank' href="https://www.facebook.com/CenterPointEnergy">Facebook</a></li>
+          <li><a target='_blank' href="https://twitter.com/energyinsights">@energyinsights</a></li>
+          <li><a target='_blank' href="https://www.twitter.com/cnpalerts">@cnpalerts</a></li>
+          <li><a target='_blank' href="https://www.youtube.com/user/centerpointenergyvid">YouTube</a></li>
+          <li><a target='_blank' href="https://www.linkedin.com/company/centerpoint-energy">LinkedIn</a></li>
+        </ul>
+        <p>Copyright &#169; 2016 CenterPoint Energy</p>
+        <ul class="list-inline piped">
+          <li><a href="http://www.centerpointenergy.com/en-us/corporate/legal/privacy-policy">Privacy</a></li>
+          <li><a href="http://www.centerpointenergy.com/en-us/corporate/legal/terms-of-use">Terms &amp; Conditions</a></li>
+          <li><a href="/_layouts/15/CNPCustomHandlers/SelfID.ashx?Method=CHANGELANGUAGE&Language=es-us" class="cnp-change-language">En Espa&#241;ol</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="large-screen">
+  <div class="fat-footer">
+    <div class="container">
+      <div class="row feedback">
+        <a href='javascript:void(0);'>Feedback</a>
+      </div>
+      <div class="row">
+        <div class="col-md-7 sitemap">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="list-group">
+                <a class="list-group-item" href="#">Services</a>
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/services/natural-gas'>Natural Gas</a>
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/services/electric-utility'>Electric Utility</a>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="list-group">
+                <a class="list-group-item" href="#">Customer Service</a>
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/customer-service/billing-payment'>Billing &amp; Payment</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/customer-service/electric-outage-center'>Electric Outage Center</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/customer-service/manage-your-natural-gas-account'>Manage Your Natural Gas Account</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/customer-service/new-customer'>New Customer</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/customer-service/start-stop-transfer-service'>Start, Stop, Transfer Service</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/customer-service/reporting'>Reporting</a>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="list-group">
+                <a class="list-group-item" href="#">Save Energy &amp; Money</a>
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/save-energy-money/electric-efficiency-programs'>Electric Efficiency Programs</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/save-energy-money/analyze-your-energy-use'>Analyze Your Energy Use</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/save-energy-money/building-remodeling-information'>Building &amp; Remodeling Information</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/save-energy-money/energy-efficient-appliances'>Energy Efficient Appliances</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/save-energy-money/efficiency-resources-and-tips'>Efficiency Resources and Tips</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="list-group">
+                <a class="list-group-item" href="#">Safety</a>
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/safety/natural-gas-safety'>Natural Gas Safety</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/safety/natural-gas-leak'>Natural Gas Leak</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/safety/carbon-monoxide'>Carbon Monoxide</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/safety/call-before-you-dig'>Call Before You Dig</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/safety/electric-safety'>Electric Safety</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/safety/meter-safety'>Meter Safety</a>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="list-group">
+                <a class="list-group-item" href="#">In Your Community</a>
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/in-your-community/whats-going-on-in-your-region'>What's Going On In Your Region</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/in-your-community/electric-outage-center'>Electric Outage Center</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/in-your-community/giving-back'>Giving Back</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/in-your-community/environmental-responsibility'>Environmental Responsibility</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/in-your-community/events'>Events</a> 
+                <a class='list-group-item' href='http://www.centerpointenergy.com/en-us/residential/in-your-community/local-news'>Local News</a>
+              </div>
+            </div>
+            <!--<div class="col-md-4">
+              <div class="list-group">
+                <a class="list-group-item" href="#">My Accounts</a>
+                <a class="list-group-item" href="#">Link 1</a>
+                <a class="list-group-item" href="#">Link 2</a>
+                <a class="list-group-item" href="#">Link 3</a>
+                <a class="list-group-item" href="#">Link 4</a>
+                <a class="list-group-item" href="#">Link 5</a>
+                <a class="list-group-item" href="#">Link 6</a>
+              </div>
+            </div>-->
+          </div>
+        </div>
+        <div class="col-md-2 col-lg-3">
+          <p>Contact Us</p>
+          <ul class="list-unstyled cnp-contact-us">
+            <li class="phone"><a href="tel:8001234567">800-123-4567</a></li>
+            <li class="phone"><a href="tel:7734567127">773-436-7127</a></li>
+            <li class="email"><a href="mailto:">Email Us</a></li>
+            <li class="snail-mail">
+              <address>
+                CenterPoint Energy, Inc.<br></br>
+                P.O. Box 4567<br></br>
+                Houston, Texas<br></br>
+                77210-4567
+              </address>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3 col-lg-2">
+          <p>Stay Connected</p>
+          <ul class="list-unstyled cnp-social-media">
+            <li><a href="https://www.facebook.com/CenterPointEnergy">Facebook</a></li>
+            <li><a href="https://twitter.com/energyinsights">@energyinsights</a></li>
+            <li><a href="https://www.twitter.com/cnpalerts">@cnpalerts</a></li>
+            <li><a href="https://www.youtube.com/user/centerpointenergyvid">YouTube</a></li>
+            <li><a href="https://www.linkedin.com/company/centerpoint-energy">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sosumi">
+    <div class="container">
+      <p>Copyright &#169; 2016 CenterPoint Energy</p>
+      <ul class="list-inline">
+        <li><a href="http://www.centerpointenergy.com/en-us/corporate/about-us">About Us</a></li>
+        <li><a href="http://investors.centerpointenergy.com/">Investors</a></li>
+        <li><a href="http://www.centerpointenergy.com/en-us/Corporate/careers">Careers</a></li>
+        <li><a href="http://www.centerpointenergy.com/en-us/corporate/legal/privacy-policy">Privacy</a></li>
+        <li><a href="http://www.centerpointenergy.com/en-us/corporate/legal/terms-of-use">Terms &#38; Conditions</a></li>
+        <li><a href="http://www.centerpointenergy.com/_layouts/15/CNPCustomHandlers/SelfID.ashx?Method=CHANGELANGUAGE&Language=es-us" class="cnp-change-language">En Espa&#241;ol</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</footer>
+
+<div class="modal" id="modal-change-service-area" tabindex="-1" role="dialog" aria-labelledby="modal-change-service-area-title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modal-change-service-area-title">Select a Service Area</h4>
+      </div>
+      <div class="modal-body">
+        <p>To serve you better please select from the list of service areas below to see relevant CenterPoint Energy information.</p>
+        <div class="selection-lists">
+          <div class="region state">
+            <p><strong>State</strong></p>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" id="modal-change-service-area-state">Select</button>
+              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu" id="modal-change-service-area-state-list" role="menu">
+                <li><a href="#">Arkansas</a></li>
+                <li><a href="#">Louisiana</a></li>
+                <li><a href="#">Minnesota</a></li>
+                <li><a href="#">Mississippi</a></li> 
+                <li><a href="#">Texas</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="region texas js-texas-region">
+            <p><strong>Region</strong></p>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default" id="modal-change-service-area-texas-region">Select</button>
+              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu" id="modal-change-service-area-texas-region-list" role="menu">
+                <li><a href="#houstonMetro">Houston Metro</a></li>
+                <li><a href="#notHouston">Not Houston Metro</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="modal-change-service-area-continue" disabled="true">Continue</button>
+        <a data-dismiss="modal" href="#">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</apex:page>

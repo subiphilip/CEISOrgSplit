@@ -1,0 +1,95 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" controller="ControllerForMobileMain">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>TrueCost Service Territory - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>
+       
+        <apex:define name="body">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span8">
+                        <div class="pull-right">
+                         <c:ShareThisSmall URL="{!left($Site.CurrentSiteUrl, len($Site.CurrentSiteURL)-1)}{!URLFOR($Page.AboutCenterPoint)}"/>
+                         </div>
+                         <br/>
+                             <c:Content_Viewer content="TrueCost Service Territory" headline="true" deck="true"/> 
+                         <hr/>
+                            <img src="{!URLFOR($Resource.TDSPCoverageMap)}" />
+                        
+                        <form action="javascript:void(0);" id="zip_code_form">
+                            <div class="control-group">
+                                <div class="span6 controls">
+                                    <h3>Enter your zip code!</h3>
+                                    <input class="input-block-level" maxlength="5" autofocus="autofocus" name="zip_code" id="zip_code" placeholder="Zip Code" value="" type="text" required="required" pattern="[0-9]{5}" title="5-digit Zip Code"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="span8 controls">
+                                    <input id="zip_submit" name="zip_submit" class="btn btn-warning" type="submit" value="Submit"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="span4">
+                        <div>
+                            <c:truecostrecentblogposts />
+                        </div>
+                        <hr/>
+                        <div >
+                            <c:electricpricetrendslinks />
+                        </div>
+                        <hr/>
+                        <div >
+                            <c:RandomPoll />
+                        </div> 
+                        </div>     
+                </div>
+            </div>
+        </apex:define>                           
+        
+    </apex:composition>
+    <script>
+        $j=jQuery.noConflict();
+    
+        $j("#zip_submit").click(function() {
+            //is the form valid?
+            if (!hasFormValidation()) {
+                zipCodeCheckSubmission();
+            }
+            else {
+                console.log('hasFormValidation was true');
+                if (!$j("#zip_code_form")[0].checkValidity()) {
+                    console.log('validation failed');
+                    //return false;
+                }
+                else {
+                    console.log('validation passed');
+                    zipCodeCheckSubmission();
+                }
+            }
+            
+        });
+    
+        function zipCodeCheckSubmission(){
+            ControllerForMobileMain.checkZip($j("#zip_code").val(), function(result, event){
+                if (result=='Now' || result=='Maybe'){
+                    $j.cookie("apex__ShopZip", $j("#zip_code").val(), { expires: 720 });
+                    window.location="{!$Page.shopplans}"; 
+                } else if (result=='Later'){
+                    alert('TrueCost does not serve your zip code yet, but plans to in the future.');
+                } else if (result=='No'){
+                    alert('TrueCost does not serve your zip code.');
+                }
+            });
+        }
+        function hasFormValidation() {
+            
+            var i = document.createElement('input');
+            console.log('check was: '+typeof i.validity === 'object');
+            return typeof i.validity === 'object';
+            
+        };  
+    </script>
+</apex:page>

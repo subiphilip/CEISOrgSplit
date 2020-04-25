@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Regular_Account__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Account responsible for this account (for example, premier Partners)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Account responsible for this account (for example, premier Partners)</inlineHelpText>
+    <label>Regular Account</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Accounts (Regular Account)</relationshipLabel>
+    <relationshipName>RelatedAccount</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

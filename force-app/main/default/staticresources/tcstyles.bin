@@ -1,0 +1,8 @@
+body{
+        background-image: url('{!$Resource.TrueCostBackground}')
+        }
+
+
+.navlink{
+        margin-left: 10px;
+        }

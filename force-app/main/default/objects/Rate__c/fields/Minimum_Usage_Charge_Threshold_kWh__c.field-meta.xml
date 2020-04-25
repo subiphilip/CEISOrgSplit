@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Minimum_Usage_Charge_Threshold_kWh__c</fullName>
+    <description>How many kWh does a customer need to use to avoid the Minimum Usage Charge?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How many kWh does a customer need to use to avoid the Minimum Usage Charge?</inlineHelpText>
+    <label>Minimum Usage Charge Threshold (kWh)</label>
+    <precision>5</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,32 @@
+<apex:component controller="Reminders" allowDML="true">
+    <!-- apex:outputlabel value="When does your current plan expire?" for="Date"/ -->
+    <apex:outputlabel value="Let us know when your current plan expires and we'll send you a reminder to come back and check the latest plans and prices." for="Date"/><br/>
+       
+    <apex:outputpanel layout="block" rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}" style="margin-top: 5px;">
+       <apex:inputfield value="{!prem.Current_Plan_Expiration_not_TrueCost__c}" id="Date" />       
+    </apex:outputpanel>
+    
+    <apex:outputpanel layout="block" rendered="{!ISPICKVAL($User.UserType,'Guest')}" style="margin-top: 5px;">       
+       <apex:pageBlock >
+           <apex:pageBlockSection >
+               <apex:inputField value="{!newlead.Current_Plan_Expiration__c}" id="date-lead" label="Expiration date"  /><br/>
+               <apex:inputField value="{!newlead.email}"  id="Email" label="Email Address&nbsp;&nbsp;&nbsp;"/>
+           </apex:pageBlockSection>
+       </apex:pageBlock>
+    </apex:outputpanel>
+    
+    <!-- registered user on the myAccount page-->
+    <apex:outputPanel styleClass="button-control" style="margin-left: 0px; margin-top: 5px;" rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}">
+        <apex:commandlink action="{!save}" value="Set Reminder" styleClass="btn btn-default btn-small" />       
+    </apex:outputPanel>
+    
+    <!--unreg user on the "reminders" landing page-->
+     <apex:outputPanel styleClass="button-container-bar" rendered="{!ISPICKVAL($User.UserType,'Guest')}">
+         <span class="action-button">
+             <apex:commandlink action="{!saveGuest}" value="Set Reminder"  styleClass="btn btn-large btn-primary"/>
+         </span>
+     </apex:outputPanel>
+    
+   
+    
+</apex:component>

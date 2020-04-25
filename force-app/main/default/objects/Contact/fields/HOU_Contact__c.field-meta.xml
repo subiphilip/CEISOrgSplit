@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HOU_Contact__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Primary HOU Safari contact.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Primary HOU Safari contact.</inlineHelpText>
+    <label>HOU Contact</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

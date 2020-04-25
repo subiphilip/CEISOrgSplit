@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Res_Avg_Peak_Month__c</fullName>
+    <description>For residential customers, the average of the two peak months&#39; volume (in Dth)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For residential customers, the average of the two peak months&#39; volume (in Dth)</inlineHelpText>
+    <label>Res Avg Peak Month</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

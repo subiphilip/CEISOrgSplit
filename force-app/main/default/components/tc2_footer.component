@@ -1,0 +1,192 @@
+<apex:component controller="RemoteTKController">
+   
+  <c:tc2_plans_compare_bar />
+  <div id="appFooter" style="margin-top:40px;">
+    <c:tc2_tdsp_lookup_modal />
+    <c:tc2_limit_compare_modal />
+    <c:tc2_modal_smart_meter_error />
+    <section id="footer" >
+       <footer class="footer ">
+           <nav class="level is-size-7 ">
+               <div class="level-left ">
+                   <p class="level-item ">© {{year}} CenterPoint Energy. All Rights Reserved</p>
+               </div>
+               <lu class="level-right">
+                   <li class="level-item "><a href="{!$Page.Lookup_ESID}">ESID Lookup</a></li>
+                   <li class="level-item "><a href="{!$Page.Contact}">Contact Us</a></li>
+                   <li class="level-item "><a href="{!$Page.termsofuse}" target='_blank'>Terms of Use</a></li>
+                   <li class="level-item "><a href="{!$Page.Privacy}" target='_blank'>Privacy Policy</a></li>
+               </lu>
+           </nav>
+           <div class="is-divider "></div>
+           <div class="">
+               <div class="content has-text-centered padding is-centered">
+                   <p class="is-size-7 ">CenterPoint Energy Intelligent Energy Solutions LLC, IES, which manages TrueCost, is not the same legal entity as CenterPoint Energy Resources Corp. (CERC) or CenterPoint Energy Houston Electric, LLC (CEHE). You do not have to buy products or services from IES in order to continue to receive quality regulated services from CERC or CEHE.</p>
+               </div>
+           </div>
+           <div class="content has-text-centered ">
+               <img class="img" src="{!URLFOR($Resource.v2_tc_resources_images, 'TrueCost_logo.svg')}" alt="True Cost Logos" />
+           </div>
+       </footer>
+    </section>
+  </div>
+  <script>
+   
+    
+    TC.fn.setup.toggleInput = function() {
+        
+        let fieldControlInputs = $('.field .control input');
+        for(let i = 0; i < fieldControlInputs.length; i++){
+            if(fieldControlInputs[i].value.length > 0){
+                $(fieldControlInputs[i]).parent().addClass('focused');
+            }
+        }
+        
+        $(fieldControlInputs).on('focus', function(e){             
+            if( e.type == 'focus' ){
+              $(e.currentTarget).parent().addClass('focused');
+            }
+            else{
+              $(e.currentTarget).parent().removeClass('focused');
+            }
+        });
+        if($('.address-lookup #pac-input').length){
+        
+            if($('.address-lookup #pac-input').val().length){
+                $('.address-lookup label').css('opacity',0)
+            }
+        }
+    
+        $("input:not(:radio)").focus(function() {
+            $(this).parents('.control').addClass('focused');
+        });
+        
+        $("input:not(:radio)").blur(function() {
+            var inputValue = $(this).val();
+            if (inputValue == "") {
+                $(this).removeClass('filled');
+                $(this).parents('.control').removeClass('focused');
+            } else {
+                $(this).addClass('filled');
+            }
+        })
+  
+    };
+    
+    
+    (function ($) {
+      $(function () {
+        setTimeout(function(){
+            TC.fn.updateOrder = function(order){
+                var vm = this;
+                Visualforce.remoting.Manager.invokeAction(
+                  '{!$RemoteAction.RemoteTKController.updat}', 
+                  'Order__c', order.Id, JSON.stringify(order), function(result){
+                    
+                    if(result !== null){
+                        var res = result.replace(/quot;/g, '"');
+                        res = res.replace(/&/g, '');
+                        res = JSON.parse(res);
+                        //TC.app.account.orderProcessed = res;
+
+                        vm.updateOrderToSumbmitted(res);
+                    } else {
+                        TC.fn.navigateTo("{!$Page.Account_Complete}?id=" + TC.app.account.plan.id)
+                    }
+                });
+            }
+
+            TC.fn.getRate = function(){
+                var vm = this;
+                // , Plan__c, Plan__r.Name, Plan__r.REP_Profile__c, REP_Account__c, Plan__r.REP_Profile__r.Name, Parent_Account__c
+                Visualforce.remoting.Manager.invokeAction(
+                  '{!$RemoteAction.RemoteTKController.query}', 
+                  "SELECT Id, Name, Plan__c, Plan__r.Name, Plan__r.REP_Profile__c, REP_Account__c, Plan__r.REP_Profile__r.Name, Parent_Account__c FROM Order__c WHERE Id='"+TC.fn.checkRatingOrderNum()+"'", 
+                  function(result){
+                    console.log(result);
+                    
+                    if(result !== null){
+                        var res = result.replace(/quot;/g, '"');
+                        res = res.replace(/&/g, '');
+                        res = JSON.parse(res);
+
+                        if(res.hasOwnProperty('records')){
+                          if(res.records) {
+                            TC.app.account.review = res.records[0];
+                          }
+                        }
+
+                    } else { }
+                });
+                
+            }
+
+            TC.fn.submitRating = function(e){
+                var vm = this; // REP_Account__c
+                
+                Visualforce.remoting.Manager.invokeAction(
+                  '{!$RemoteAction.RemoteTKController.create}', 
+                  'REP_Rating__c',
+                  '{"Rating__c": "'+e.rating+'", "Author__c": "'+TC.app.account.review.Parent_Account__c+'", "Order__c": "'+TC.app.account.review.Id+'", "REP_Account__c": "'+TC.app.account.review.REP_Account__c+'", "Wants_Contact__c": '+e.checkbox+', "Review__c": "'+e.message+'" , "REP_Profile__c": "'+TC.app.account.review.Plan__r.REP_Profile__c+'",  "Plan__c": "'+TC.app.account.review.Plan__c+'" }', 
+                  function(result){
+                    if(result !== null){
+                        var res = result.replace(/quot;/g, '"');
+                        res = res.replace(/&/g, '');
+                        res = JSON.parse(res);
+                        TC.app.account.rateing = res;
+                    } else { }
+                });                
+            }
+        }, TC.delay)
+
+        // 'Order__c', $scope.order.Id, $scope.order
+        TC.fn.updateOrderToSumbmitted = function(_order){
+          
+          var order = {};
+          order.id = _order.Id;
+          order.Order_Status__c='New/Successfully Submitted';
+          //order.OwnerId = $scope.rate.Plan__r.REP_Profile__r.OwnerId;
+          Visualforce.remoting.Manager.invokeAction(
+                  '{!$RemoteAction.RemoteTKController.updat}', 
+                  'Order__c', order.Id, JSON.stringify(order), function(result){
+                    TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'setupShopPlans'});
+                    if(result !== null){
+                        var res = result.replace(/quot;/g, '"');
+                        res = res.replace(/&/g, '');
+                        res = JSON.parse(res);
+                        TC.app.account.orderProcessed = res;
+                    } 
+                    TC.fn.navigateTo("{!$Page.Account_Complete}?id=" + TC.app.account.plan.id)
+                });
+        }; 
+        // TC.fn.setup.FixedFooter();
+        setTimeout(function(){
+            TC.fn.setup.toggleInput();
+        }, TC.delay)
+        setTimeout(function(){
+            TC.fn.setup.toggleInput();
+        }, TC.delay +1)
+
+
+        TC.app.appFooter = new Vue({
+           el: '#appFooter',
+           data: { 
+              year: (new Date()).getFullYear()
+           },
+           methods: { },
+           mounted: function() { },
+           watch: { }
+        });
+
+
+
+      })
+    })(jQuery);
+    
+    
+    
+  </script>
+  <c:tc2_account_smartmeter_connection />
+  
+    
+</apex:component>

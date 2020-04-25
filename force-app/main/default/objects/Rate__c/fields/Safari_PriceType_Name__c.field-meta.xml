@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Safari_PriceType_Name__c</fullName>
+    <externalId>false</externalId>
+    <label>Safari PriceType Name</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Agency Fixed Price</fullName>
+                <default>false</default>
+                <label>Agency Fixed Price</label>
+            </value>
+            <value>
+                <fullName>Agency Index Price</fullName>
+                <default>false</default>
+                <label>Agency Index Price</label>
+            </value>
+            <value>
+                <fullName>Demand Charge</fullName>
+                <default>false</default>
+                <label>Demand Charge</label>
+            </value>
+            <value>
+                <fullName>Fixed Price</fullName>
+                <default>false</default>
+                <label>Fixed Price</label>
+            </value>
+            <value>
+                <fullName>Fixed Price + Fuel</fullName>
+                <default>false</default>
+                <label>Fixed Price + Fuel</label>
+            </value>
+            <value>
+                <fullName>Fixed Price Plus %</fullName>
+                <default>false</default>
+                <label>Fixed Price Plus %</label>
+            </value>
+            <value>
+                <fullName>Fixed Vol &amp; Basis w/ Price Trigger</fullName>
+                <default>false</default>
+                <label>Fixed Vol &amp; Basis w/ Price Trigger</label>
+            </value>
+            <value>
+                <fullName>Fixed Vol &amp; Price w/ Basis Trigger</fullName>
+                <default>false</default>
+                <label>Fixed Vol &amp; Price w/ Basis Trigger</label>
+            </value>
+            <value>
+                <fullName>Fixed Vol Index</fullName>
+                <default>false</default>
+                <label>Fixed Vol Index</label>
+            </value>
+            <value>
+                <fullName>Fixed Vol Index + Fuel</fullName>
+                <default>false</default>
+                <label>Fixed Vol Index + Fuel</label>
+            </value>
+            <value>
+                <fullName>Fixed Vol Index Plus %</fullName>
+                <default>false</default>
+                <label>Fixed Vol Index Plus %</label>
+            </value>
+            <value>
+                <fullName>Fixed Volume</fullName>
+                <default>false</default>
+                <label>Fixed Volume</label>
+            </value>
+            <value>
+                <fullName>Fixed Volume &amp; Price + Fuel</fullName>
+                <default>false</default>
+                <label>Fixed Volume &amp; Price + Fuel</label>
+            </value>
+            <value>
+                <fullName>Fixed Volume Index w/Collar</fullName>
+                <default>false</default>
+                <label>Fixed Volume Index w/Collar</label>
+            </value>
+            <value>
+                <fullName>Fixed Volume Plus %</fullName>
+                <default>false</default>
+                <label>Fixed Volume Plus %</label>
+            </value>
+            <value>
+                <fullName>Fixed Volume Spot</fullName>
+                <default>false</default>
+                <label>Fixed Volume Spot</label>
+            </value>
+            <value>
+                <fullName>FOM Baseload Vol Index</fullName>
+                <default>false</default>
+                <label>FOM Baseload Vol Index</label>
+            </value>
+            <value>
+                <fullName>FOM Baseload Vol Index + Fuel</fullName>
+                <default>false</default>
+                <label>FOM Baseload Vol Index + Fuel</label>
+            </value>
+            <value>
+                <fullName>FOM Baseload Volume &amp; Price + Fuel</fullName>
+                <default>false</default>
+                <label>FOM Baseload Volume &amp; Price + Fuel</label>
+            </value>
+            <value>
+                <fullName>Gas Futures Purchase</fullName>
+                <default>false</default>
+                <label>Gas Futures Purchase</label>
+            </value>
+            <value>
+                <fullName>Higher</fullName>
+                <default>false</default>
+                <label>Higher</label>
+            </value>
+            <value>
+                <fullName>Index + Fuel</fullName>
+                <default>false</default>
+                <label>Index + Fuel</label>
+            </value>
+            <value>
+                <fullName>Index Plus Percent</fullName>
+                <default>false</default>
+                <label>Index Plus Percent</label>
+            </value>
+            <value>
+                <fullName>Index w/Collar</fullName>
+                <default>false</default>
+                <label>Index w/Collar</label>
+            </value>
+            <value>
+                <fullName>Index w/Split Basis</fullName>
+                <default>false</default>
+                <label>Index w/Split Basis</label>
+            </value>
+            <value>
+                <fullName>Indexed</fullName>
+                <default>false</default>
+                <label>Indexed</label>
+            </value>
+            <value>
+                <fullName>Lower</fullName>
+                <default>false</default>
+                <label>Lower</label>
+            </value>
+            <value>
+                <fullName>WACOG Detail</fullName>
+                <default>false</default>
+                <label>WACOG Detail</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

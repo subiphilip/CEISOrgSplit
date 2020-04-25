@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Exclude_From_Increm_Sync__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>system field.  Previously named Init_Related_Object_Safari_Sync__c.  Field marks sync&#39;d contracts to ignore for incremental sync.  Field also marks old non-sync records to be deleted.  Prevous desc: system field.  true will communicate to informatica to initialize related objects for safari sync</description>
+    <externalId>false</externalId>
+    <label>Exclude From Increm Sync</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

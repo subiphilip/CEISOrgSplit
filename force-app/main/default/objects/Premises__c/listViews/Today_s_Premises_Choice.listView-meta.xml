@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Today_s_Premises_Choice</fullName>
+    <columns>NAME</columns>
+    <columns>Program__c</columns>
+    <columns>DIVISION</columns>
+    <columns>Electric_Service_Address__c</columns>
+    <columns>SG_First_Name__c</columns>
+    <columns>SG_Last_Name__c</columns>
+    <columns>SG_Telephone__c</columns>
+    <columns>SG_Email__c</columns>
+    <columns>Account_Number__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>equals</operation>
+        <value>TODAY</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Premises__c.Gas_Choice_Premise</value>
+    </filters>
+    <label>Today&#39;s Premises (Choice)</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+    </sharedTo>
+</ListView>

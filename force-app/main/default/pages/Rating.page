@@ -1,0 +1,104 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false" >
+
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"/>
+    
+<html ng-app="ratings" id="ng-app" xmlns:ng="http://angularjs.org">  
+
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Create Rating - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="description" content="Rate your Eletric Provider" />
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container-fluid" ng-controller="RatingsCtrl">
+                <div class="row-fluid">
+                    <div class="span8">
+                        <h1>Rate Your Electric Provider<br/>
+                            <small>Your rating helps other customers make smarter choices</small>
+                        </h1>
+                        <hr/>
+
+			
+                        <div class="alert alert-info" ng-show="Guest" ng-cloak="ng-cloak"><!--for the unregistered user-->
+                        	<h4>You need a TrueCost profile to write reviews</h4>
+
+                        	<p>It takes just a second to set one up, and you can even use your facebook credentials so you don't have another username/password to keep up with.</p>
+
+                        	<p>You'll also need a copy of your electric bill handy.</p>
+
+                        	<a href="{!$Page.Register}" class="btn btn-warning">Create Profile</a>
+                        </div>
+						
+						<form ng-submit="Post()" ng-show="!success && !Guest" ng-cloak="ng-cloak">
+							<div class="control-group" ng-show="!Guest && !success && !OrderParam" ng-cloak="ng-cloak">
+								<label>Provider</label>
+								<select ng-model="Rating.REP_without_Order__c" ng-options="c.value as c.label for c in REPOptions" />
+							</div>
+
+							<div class="control-group">
+								<label>Rating </label>								
+								<div id="starholder" style="height:60px;" >
+	                                <div class="rate" id="stars">
+	                                    <span id="starsb">
+
+	                                        <b style="width: {{Rating.Rating__c*20}}%"></b> 
+	                                    </span>
+	                                    <a ng-click="Rating.Rating__c=5" title="Great">
+	                                        Rate 1/5			      		
+	                                    </a>
+	                                    <a ng-click="Rating.Rating__c=4" title="Good">
+	                                        Rate 2/5
+	                                    </a>
+	                                    <a ng-click="Rating.Rating__c=3" title="OK">
+	                                        Rate 3/5
+	                                    </a>
+	                                    <a ng-click="Rating.Rating__c=2" title="Poor">
+	                                        Rate 4/5
+	                                    </a>
+	                                    <a ng-click="Rating.Rating__c=1" title="Very bad">
+	                                        Rate 5/5
+	                                    </a>
+	                                </div> 
+	                            </div>
+                            </div>
+                            <h5>Click the orange stars to select a rating and write an optional review.</h5><br></br>
+                            <div class="control-group">
+                            	<label>Review</label>
+								<textarea rows="5" ng-model="Rating.Review__c" class="input-block-level"></textarea>
+							</div>
+
+							<label class="checkbox">                            	
+								<input type="checkbox" ng-model="Rating.Wants_Contact__c"/>It's ok for the provider to contact me about this review.
+							</label>
+
+
+							<div class="control-group" ng-show="!Guest && !success && !OrderParam" ng-cloak="ng-cloak">
+                            	<label>Upload a copy of your bill from the provider you're rating.</label>
+								<input type="file" onchange="setFile(this)" id="upload"/>
+							</div>
+								
+							
+							<button class="btn btn-warning" data-loading-text="Saving">Save Rating</button>
+						</form>
+
+						<div class="alert alert-success" ng-show="success" ng-cloak="ng-cloak">
+							<h3>Your rating has been saved.  Thank you!</h3>
+						</div>
+
+
+                    </div>
+
+                    <div class="span4">
+                        
+                    </div>
+                   
+                </div>
+            </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+    <c:RatingScript />
+    </html>
+</apex:page>

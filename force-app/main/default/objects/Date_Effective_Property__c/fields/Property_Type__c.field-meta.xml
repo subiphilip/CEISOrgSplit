@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Property_Type__c</fullName>
+    <description>specify what object this property applies to.  Blank applies to all supported objects</description>
+    <externalId>false</externalId>
+    <inlineHelpText>specify what object this property applies to.  Blank applies to all supported objects</inlineHelpText>
+    <label>Property Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Contract</fullName>
+                <default>false</default>
+                <label>Contract</label>
+            </value>
+            <value>
+                <fullName>Premise</fullName>
+                <default>false</default>
+                <label>Premise</label>
+            </value>
+            <value>
+                <fullName>Not Currently Used</fullName>
+                <default>false</default>
+                <label>Not Currently Used</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Premise__c</fullName>
+    <description>The premise that this usage is tied to.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The premise that this usage is tied to.</inlineHelpText>
+    <label>Premise</label>
+    <referenceTo>Premises__c</referenceTo>
+    <relationshipLabel>Annual Usage</relationshipLabel>
+    <relationshipName>Annual_Usage</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Meter_Data_Status__c</fullName>
+    <description>If the customer has provided access to their meter data, have we completed the request?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If the customer has provided access to their meter data, have we completed the request?</inlineHelpText>
+    <label>Meter Data Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Not requested</fullName>
+                <default>true</default>
+                <label>Not requested</label>
+            </value>
+            <value>
+                <fullName>Pending</fullName>
+                <default>false</default>
+                <label>Pending</label>
+            </value>
+            <value>
+                <fullName>Complete</fullName>
+                <default>false</default>
+                <label>Complete</label>
+            </value>
+            <value>
+                <fullName>Error</fullName>
+                <default>false</default>
+                <label>Error</label>
+            </value>
+            <value>
+                <fullName>Estimated</fullName>
+                <default>false</default>
+                <label>Estimated</label>
+            </value>
+            <value>
+                <fullName>Estimated with user adjustment</fullName>
+                <default>false</default>
+                <label>Estimated with user adjustment</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,157 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" >
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+      description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+    
+    <div id="wrapper">
+        <c:tc2_navbar />
+        
+        <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-2.jpg" headline="YOU GOT THE GOODS"  />
+
+       
+
+            <div id="appGetStartedGood">
+                <section><div class="container">
+                        <div class="has-margin-3 has-text-centered">
+                            <h2 class="is-size-4 has-text-weight-bold padding-sides">Please select your home profile</h2>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    
+                    <div class="container form  singup-bottom-padding">
+                        <div class="rating box is-form-no-padding">
+                            <form id="appHomeProfile" action="{!$Page.Shop_Plans}">
+                                <nav class="level house-boxes">
+                                    <div class="level-item column has-text-centered">
+                                        <input type="radio" name="house-size" v-model="houseSize" id="small" value="small" class="house-size" />
+                                        <label for="small">
+                                            <p class="level-title">SMALL</p>
+                                            <p class="level-icon"><span class="icon-icon-house-small"></span></p>
+                                            <p class="level-content">1500 SQFT or Less</p>
+                                        </label>
+                                    </div>
+                                    <div class="is-divider-vertical no-margin selectbox"></div>
+                                    <div class="level-item column has-text-centered">
+                                        <input type="radio" name="house-size" v-model="houseSize" id="medium" value="medium" class="house-size" />
+                                        <label for="medium">
+                                            <p class="level-title">MEDIUM</p>
+                                            <p class="level-icon"><span class="icon-icon-house-medium"></span></p>
+                                            <p class="level-content">1500-3000 SQFT</p>
+                                        </label>
+                                    </div>
+                                </nav>
+                                <div class="is-divider no-margin selectbox"></div>
+                                <nav class="level house-boxes">
+                                    <div class="level-item column has-text-centered">
+                                        <input type="radio" name="house-size" v-model="houseSize" id="large" value="large" class="house-size" />
+                                        <label for="large">
+                                            <p class="level-title">LARGE</p>
+                                            <p class="level-icon"><span class="icon-icon-house-large"></span></p>
+                                            <p class="level-content">More than 3000 SQFT</p>
+                                        </label>
+                                    </div>
+                                    <div class="is-divider-vertical no-margin selectbox"></div>
+                                    <div class="level-item column has-text-centered">
+                                        <input type="radio" name="house-size" v-model="houseSize" id="custom" value="custom" class="house-size" />
+                                        <label for="custom">
+                                            <p class="level-title">YOUR HOME</p>
+                                            <p class="level-icon"><span class="icon-icon-house-custom" /></p>
+                                            <p class="level-content">
+                                                <label class="visuallyhidden" for="sqft">SQFT</label>
+                                                <input class="input borderless" v-model="houseSqft" id="sqft" type="text" placeholder="SQFT" style="max-width: 80px; text-align: center; " />SQFT
+                                            </p>
+                                        </label>
+                                    </div>
+                                </nav>
+                                <div class="is-divider no-margin selectbox"></div>
+                                <div class="has-text-centered column form-column">
+                                    <input class="button is-primary is-rounded fixed-size" type="submit" v-on:click="updateSize" value="SHOP AVAILABLE PLANS" /><br/>
+                                    <a v-if="isBest" href="{!$Page.Get_Started_Best}">I changed my mind, show me the BEST!</a>
+                                    <a v-if="!isBest" href="{!$Page.Get_Started_Better}">I changed my mind, show me a BETTER option!</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+                
+            </div>
+    </div>
+    <c:tc2_footer />
+    
+    <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+             
+             TC.app.appGetStartedGood = new Vue({
+                el: '#appGetStartedGood',
+                data: {
+                    houseSize: '',
+                    houseSqft: TC.app.appHomeProfile.houseSqft,
+                    errors: [],
+                    email: TC.app.account.email,
+                    tdsp: '',
+                    serviceType: '',
+                    isGood: true,
+                    isBetter: true,
+                    isBest: true
+                },
+                methods: { 
+                    onSelectConfirm: function() {
+                    },
+                    updateSize: function(){
+                        TC.app.appHomeProfile.houseSqft = parseInt(this.houseSqft);
+                            if(this.houseSize == 'small'){
+                                TC.app.appHomeProfile.houseSqft = 1000;
+                                TC.app.appHomeProfile.houseSize = 'small';
+                            } else if(this.houseSize == 'large') {
+                                TC.app.appHomeProfile.houseSqft = 3200;
+                                TC.app.appHomeProfile.houseSize = 'large';
+                            } else if(this.houseSize == 'medium') {
+                                TC.app.appHomeProfile.houseSqft = 2300;
+                                TC.app.appHomeProfile.houseSize = 'medium';
+                            }
+                            TC.app.appHomeProfile.houseSize = this.houseSize;
+                    },
+                    validateBeforeSubmit: function(e) {
+                      
+                      if (!this.email) {
+                        this.errors.push('Email required.');
+                      }
+                      
+                      if(this.errors.length <= 0){
+                          this.onSelectConfirm();
+                      }
+                
+                      e.preventDefault();
+                    }
+                },  
+                mounted: function() { 
+                    sessionStorage.setItem('getStartedType','good');
+                    this.houseSize = TC.app.appHomeProfile.houseSize
+
+                    this.tdsp = TC.app.account.tdsp;
+                    this.serviceType = TC.app.account.serviceType;
+                    if(this.serviceType == "moveIn" || this.tdsp == 'false') {
+                        this.isBest = false;
+                    }
+                },
+                watch: { 
+                    houseSize: {
+                        handler: function() {
+                            this.updateSize();
+                        }
+                    }
+                },
+             });
+    
+          })
+        })(jQuery);
+    </script>
+
+  </body>
+  </html>
+</apex:page>

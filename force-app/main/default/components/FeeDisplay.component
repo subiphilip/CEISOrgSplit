@@ -1,0 +1,186 @@
+<apex:component Controller="ControllerForFeeDisplay"> 
+    
+    <apex:attribute name="rateid" type="id" description="the id for the rate whose fees you want the component to display" assignto="{!therateid}"  />
+    
+    <apex:outputpanel rendered="{!AND(NOT(ISNULL(thefees.Minimum_Usage_Charge__c)), thefees.Minimum_Usage_Charge__c!=0)}" layout="none">
+        <p>Your TrueCost estimate includes this plan's <B><apex:outputfield value="{!thefees.Minimum_Usage_Charge__c}"/></B> fee for any month that your usage is less than&nbsp;<B><apex:outputfield value="{!thefees.Minimum_Usage_Charge_Threshold_kWh__c}"/></B> kilowatt-hours.</p>
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!AND(NOT(ISNULL(thefees.Minimum_Usage_Charge2__c)), thefees.Minimum_Usage_Charge2__c!=0)}" layout="none">
+        <p>Your TrueCost estimate includes this plan's <B><apex:outputfield value="{!thefees.Minimum_Usage_Charge2__c}"/></B> fee for any month that your usage is less than&nbsp;<B><apex:outputfield value="{!thefees.Minimum_Usage_Charge_Threshold2__c}"/></B> but at least <B><apex:outputfield value="{!thefees.Minimum_Usage_Charge_Threshold_kWh__c}"/></B> kilowatt-hours.</p>
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!AND(NOT(ISNULL(thefees.Minimum_Usage_Charge3__c)), thefees.Minimum_Usage_Charge3__c!=0)}" layout="none">
+        <p>Your TrueCost estimate includes this plan's <B><apex:outputfield value="{!thefees.Minimum_Usage_Charge3__c}"/></B> fee for any month that your usage is less than&nbsp;<B><apex:outputfield value="{!thefees.Minimum_Usage_Charge_Threshold3__c}"/></B> but at least <B><apex:outputfield value="{!thefees.Minimum_Usage_Charge_Threshold2__c}"/></B> kilowatt-hours.</p>
+    </apex:outputpanel>
+	<apex:outputpanel rendered="{!AND(NOT(ISNULL(thefees.Usage_Discount_Amount__c)), thefees.Usage_Discount_Amount__c!=0)}" layout="none">
+        <p>Your TrueCost estimate includes this plan's <B><apex:outputfield value="{!thefees.Usage_Discount_Amount__c}"/></B> credit for any month that your usage is more than&nbsp;<B><apex:outputfield value="{!thefees.Minimum_Usage_Charge_Threshold3__c}"/></B> kilowatt-hours.</p>
+    </apex:outputpanel>
+   
+    <apex:outputPanel rendered="{!thefees.Cancellation_Fee_Type__c='Fixed'}">
+        <p>This plan has a
+            <B><apex:outputfield value="{!thefees.Cancellation_Fee__c}"/></B> 
+            fee for early cancellation.
+        </p>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!thefees.Cancellation_Fee_Type__c='Flat Fee X Remaining Months'}">
+        <p>This plan has a
+            <B><apex:outputfield value="{!thefees.Cancellation_Fee__c}"/></B> 
+            fee per remaining contract month for early cancellation.
+        </p>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!thefees.Cancellation_Fee_Type__c='Calculated Estimate'}">
+        <h5>This plan has the following cancellation fee:</h5>
+        <p class="muted"><apex:outputfield value="{!thefees.Cancellation_Fee_Description__c}"/>    </p>        
+        <hr/>
+    </apex:outputPanel>
+    
+    
+    <div class="row">
+        
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Same_Day_Move_In_Fee__c)), thefees.Same_Day_Move_In_Fee__c>0)}">
+            Same Day Move-in:
+            <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Same_Day_Movein_Fee}" >
+               <i class="icon-question-sign"/>
+            </a>
+            <apex:outputText value="{0, number, $###,###,###,###,###.00}" styleClass="pull-right">
+                <apex:param value="{!thefees.Same_Day_Move_In_Fee__c}"/>
+            </apex:outputText>
+            
+        </apex:outputPanel>
+        
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Changed_Start_Date_Fee__c)), thefees.Changed_Start_Date_Fee__c>0)}">
+            Changed Start Day:
+            <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Changed_Start_Date_Fee}" >
+                <i class="icon-question-sign"/>
+            </a>
+            <apex:outputText value="{0, number, $###,###,###,###,###.00}" styleClass="pull-right">
+                <apex:param value="{!thefees.Changed_Start_Date_Fee__c}"/>
+            </apex:outputText>
+            
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Self_Selected_Switch_Fee__c)), thefees.Self_Selected_Switch_Fee__c>0)}">
+            Self-selected Switch:
+            <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Self_Selected_Switch_Fee}" >
+                <i class="icon-question-sign"/>
+            </a>
+            <apex:outputText value="{0, number, $###,###,###,###,###.00}" styleClass="pull-right">
+                <apex:param value="{!thefees.Self_Selected_Switch_Fee__c}"/>
+            </apex:outputText>
+            
+            
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Disconnect_Fee__c)), thefees.Disconnect_Fee__c>0)}">
+            Disconnect:
+             <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Changed_Start_Date_Fee}" >
+                <i class="icon-question-sign"/>
+            </a>
+            <apex:outputText value="{0, number, $###,###,###,###,###.00}" styleClass="pull-right">
+                <apex:param value="{!thefees.Disconnect_Fee__c}"/>
+            </apex:outputText>
+           
+        </apex:outputPanel>
+        
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Reconnect_Fee__c)), thefees.Reconnect_Fee__c>0)}">
+            Re-connect:
+            <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Reconnect_Fee}" >
+                <i class="icon-question-sign"/>
+            </a>
+            <apex:outputText value="{0, number, $###,###,###,###,###.00}" styleClass="pull-right">
+                <apex:param value="{!thefees.Reconnect_Fee__c}"/>
+            </apex:outputText>
+            
+        </apex:outputPanel>
+        
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Third_Party_Payment_Fee__c)), thefees.Third_Party_Payment_Fee__c>0)}">
+            3rd-party payment:
+            <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Third_Party_Payment_Fee}" >
+               <i class="icon-question-sign"/>
+            </a>
+            <apex:outputText value="{0, number, $###,###,###,###,###.00}" styleClass="pull-right">
+                <apex:param value="{!thefees.Third_Party_Payment_Fee__c}"/>
+            </apex:outputText>
+            
+        </apex:outputPanel>
+        
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Reminder_Fee__c)), thefees.Reminder_Fee__c>0)}">
+            Reminder:
+            <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Reminder_Fee}" >
+              <i class="icon-question-sign"/>
+            </a>
+            <apex:outputText value="{0, number, $###,###,###,###,###.00}" styleClass="pull-right">
+                <apex:param value="{!thefees.Reminder_Fee__c}"/>
+            </apex:outputText>
+            
+        </apex:outputPanel>   
+        
+        
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Insufficient_Funds_Cancelled_Checks__c)), thefees.Insufficient_Funds_Cancelled_Checks__c>0)}">
+            Insufficient Funds:
+            <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Insufficient_Funds_Cancelled_Checks}" >
+                <i class="icon-question-sign"/>
+            </a>
+            <apex:outputText value="{0, number, $###,###,###,###,###.00}" styleClass="pull-right">
+                <apex:param value="{!thefees.Insufficient_Funds_Cancelled_Checks__c}"/>
+            </apex:outputText>
+            
+        </apex:outputPanel>
+        
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Excessive_Payments_Fee__c)), thefees.Excessive_Payments_Fee__c>0)}">
+            Excessive Payments:
+            <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Excessive_Payments_Fee}" >
+                <i class="icon-question-sign"/>
+            </a>
+            <apex:outputText value="{0, number, $###,###,###,###,###.00}" styleClass="pull-right">
+                <apex:param value="{!thefees.Excessive_Payments_Fee__c}"/>
+            </apex:outputText>
+            
+        </apex:outputPanel>    
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Paper_Bill_Request_Fee__c)), thefees.Paper_Bill_Request_Fee__c>0)}">
+            Paper Bill Request:
+            <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Paper_Bill_Request_Fee}" >
+                <i class="icon-question-sign"/>
+            </a>
+            <apex:outputText value="{0, number, $###,###,###,###,###.00}" styleClass="pull-right">
+                <apex:param value="{!thefees.Paper_Bill_Request_Fee__c}"/>
+            </apex:outputText>
+            
+        </apex:outputPanel>
+
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Manual_Assistance_Fee__c)), thefees.Manual_Assistance_Fee__c>0)}">
+            Manual Assistance:
+            <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Manual_Assistance_Fee}" >
+               <i class="icon-question-sign"/>
+            </a>
+            <apex:outputText value="{0, number, $###,###,###,###,###.00}" styleClass="pull-right">
+                <apex:param value="{!thefees.Manual_Assistance_Fee__c}"/>
+            </apex:outputText>
+            
+        </apex:outputPanel>
+
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Move_in_Fee__c)), thefees.Move_in_Fee__c>0)}">            
+            Move-in with New Meter:
+            <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.New_Meter_Move_in}" >
+                <i class="icon-question-sign"/>
+            </a>
+            <apex:outputText value="{0, number, $###,###,###,###,###.00}" styleClass="pull-right">
+                <apex:param value="{!thefees.Move_in_Fee__c}"/>
+            </apex:outputText>
+            
+        </apex:outputPanel>
+        
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!not(isnull(thefees.Late_Payment_Fee__c))}">
+            Late Payment: 
+            <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Late_Payment_Charge}" >
+                <i class="icon-question-sign"/>
+            </a>
+            <span class="pull-right">{!thefees.Late_Payment_Fee__c}</span>
+            
+        </apex:outputPanel>
+    </div>
+    <br/>
+    <div class="clearfix"/>
+    <div class="row">
+        <div class="span8">
+            <p>{!$Label.Fee_Display_Disclaimer}</p>
+        </div>
+    </div>
+</apex:component>

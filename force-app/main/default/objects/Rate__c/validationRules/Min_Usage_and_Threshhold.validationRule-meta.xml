@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Min_Usage_and_Threshhold</fullName>
+    <active>true</active>
+    <description>They go together like peanut butter and jelly this way also</description>
+    <errorConditionFormula>OR(AND(Minimum_Usage_Charge_Threshold_kWh__c &gt; 0, NOT(Minimum_Usage_Charge__c &gt; 0 )), AND(Minimum_Usage_Charge_Threshold_kWh__c &gt; 0, ISNULL(Minimum_Usage_Charge__c )))</errorConditionFormula>
+    <errorDisplayField>Minimum_Usage_Charge__c</errorDisplayField>
+    <errorMessage>Rate01: You must enter a minimum usage charge if you&#39;ve entered kWh threshold.  The value must also be a positive number, so please check for errors.</errorMessage>
+</ValidationRule>

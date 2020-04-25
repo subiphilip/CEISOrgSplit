@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>29.0</apiVersion>
+    <description>CorpComm tracking script on lines 6-18 in between &#39;GTM-3RF5&#39;); and  &lt;/script&gt; &lt;!-- End Google Tag Manager --&gt;</description>
+    <label>GoogleTagManager</label>
+</ApexComponent>

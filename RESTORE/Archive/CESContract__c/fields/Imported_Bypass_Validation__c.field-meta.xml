@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Imported_Bypass_Validation__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>system field.  set to true to ignore validations on indexes, etc that will be loaded later.  used for minimal data load to get contract ids in Salesforce</description>
+    <externalId>false</externalId>
+    <label>Imported Bypass Validation</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

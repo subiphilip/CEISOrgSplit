@@ -1,0 +1,115 @@
+sfdx force:source:deploy -p force-app/ -u wave2 -c
+
+sfdx force:org:create -s -f config/project-scratch-def.json -a PersonScratch 
+
+sfdx force:org:create -s -f config/project-scratch-def.json -a CES2 
+
+sfdx force:org:open
+
+Settings->Custom Objects->Turn on History Tracking for:  Account, Opportunity, 
+
+Settings->Feed Tracking->Turn on Feed Tracking for:  Tasks 
+
+sfdx force:source:push
+
+sfdx force:source:push -p path/to/source
+
+sfdx force:source:push -p force-app/main/default/standardValueSets/
+
+sfdx force:user:permset:assign -n Dreamhouse
+
+
+
+
+sfdx force:user:display --test-sk0ev7qhwyhc@example.com ci-user
+
+sfdx force:user:display ci-user
+
+sfdx force:org:display -u CES1 --verbose
+
+SELECT Division,Id,Name FROM Account WHERE Division = '02d30000000PB5nAAG' AND IsPersonAccount = false
+
+sfdx force:user:permset:assign --permsetname <permset_name> --targetusername <username/alias>
+
+=== Org Description
+KEY              VALUE
+───────────────  ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+Access Token     00D550000008EQK!AR8AQAvw86frV2uc18w19o2y5iiVK7aM26RAaTBI04c3h6ZcBTs5fdYpkegBeOdGHHvfZfrnJiCfDcsWzxuhb4tflAaN0_Ga
+Alias            CES1
+Client Id        PlatformCLI
+Created By       sphilip@cies.com
+Created Date     2020-04-20T18:32:41.000+0000
+Dev Hub Id       sphilip@cies.com
+Edition          Enterprise
+Expiration Date  2020-04-27
+Id               00D550000008EQKEA2
+Instance Url     https://java-dream-4647.cs41.my.salesforce.com/
+Org Name         Person Accounts Org
+Password         w_9Nv[(%2j
+Sfdx Auth Url    force://PlatformCLI::5Aep861ulCxXNoWflrRClnj1hS0tBk6a4_fhNCWhcBkH1SdqlsBzpME3Usxl_t1RFrvE8DqukX.hINfuJKCwEUa@java-dream-4647.cs41.my.salesforce.com/
+Status           Active
+Username         test-kquiptoc9hmf@example.com
+
+Token: 6BRU3JY6sdLD51rxLfYWB9LMk
+
+
+sfdx force:source:retrieve -m permissionsets:CEIS_Permset
+
+sfdx force:source:pull -m permissionsets:CEIS_Permset
+
+sfdx force:org:display -u PersonScratch --verbose
+
+sfdx force:source:status -a
+
+// cretae auth
+mkdir certificates
+cd certificates
+openssl genrsa -des3 -passout pass:salesforce -out server.pass.key 2048
+openssl rsa -passin pass:salesforce -in server.pass.key -out server.key
+rm server.pass.key
+openssl req -new -key server.key -out server.csr
+openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
+
+export CONSUMER_KEY=<connected app consumer key>
+export JWT_KEY_FILE=<example: /users/yourname/certificates/server.key>
+export HUB_USERNAME=<your Dev Hub username>
+
+
+export CONSUMER_KEY=3MVG9szVa2RxsqBYQegokmxAcUrRQ6fJOYfsbBRt8W5zerA2F_qelXhBkb0SGSDxid3aWg9mQnFqj0YdcCSOX
+export JWT_KEY_FILE=<example: E:\Data\VSCode\certificates\server.key
+export HUB_USERNAME=sphilip@cies.com.cnp2
+
+
+Google API Key
+"QCj31qQipBlNNZsYHibiDjKjI0c="
+AIzaSyBW1iIIwT5gobM0yaHdD5G-jBg6Y5EBU0Q
+
+
+sfdx force:data:tree:export --query "SELECT Analytics_Group_ID__c,bounceAPI__c,bounce__c,CertName__c,Chat_is_Available__c,CMEUser__c,Default_Plans_to_Show__c,Facebook_App_ID__c,Facebook_Moderator_ID__c,Facebook_sso_initialize__c,Main_URL__c,Name,Private_Beta__c,RegisterURL__c,REST_URL__c,Sales_Phone_in_Header__c,Show_About_TrueCost_in_private_beta__c,Show_Blog_in_Private_Beta__c,Show_cents_per_kWh__c,Show_Facebook_Comments__c,Show_Index_in_Private_Beta__c,Show_invitation_code_are__c,Show_only_Published_content__c,Show_Small_Business__c,sslurl__c,TriEagleAPI__c,UHITCallback__c FROM TrueCostSystemVariables__c" --prefix export-demo --outputdir data --plan
+
+sfdx force:data:tree:import --targetusername test-wvkpnfm5z113@example.com --plan data/export-demo-TrueCostSystemVariables__c-plan.json
+
+sfdx force:data:tree:import -u CES1 --plan data/export-demo-TrueCostSystemVariables__c-plan.json
+
+
+
+sfdx force:data:tree:export --query "SELECT Facebook_OAuth_Link_Link__c,Facebook_oAuth_link__c,Facebook_OAuth_Login_Link__c,Name,TrueCost_Post_registration_start_page__c,TrueCost_RegisterPage__c,TrueCost_Secure_URL__c FROM AuthSettings__c" --prefix export --outputdir data --plan
+
+sfdx force:data:tree:import -u CES1 --plan data/export-AuthSettings__c-plan.json
+
+
+
+sfdx force:data:tree:export --query "SELECT Active__c,Brand_string__c,Dynamic_Endpoint__c,Endpoint__c,Name,Partner_code__c,Password__c,Saved_Token__c,Username__c FROM PartnerAPI__c" --prefix export --outputdir data --plan
+
+sfdx force:data:tree:import -u CES1 --plan data/export-PartnerAPI__c-plan.json
+
+
+sfdx force:data:tree:export --query "SELECT Answer__c,Category__c,CorpComm_Editing__c,Draft_Answer__c,Draft_Question__c,Final_Review__c,Legal_Editing__c,Name,Public__c,Question__c,RecordTypeId,Reviewed__c,Stage__c,Top_FAQ__c FROM FAQ__c WHERE RecordTypeId = '012300000018tOFAAY'" --prefix export --outputdir data --plan
+
+sfdx force:data:tree:import -u CES1 --plan data/export-FAQ__c-plan.json
+
+
+
+sfdx force:data:tree:import -u CES1 --plan data/export-TaxesAndFees__c-plan.json
+
+

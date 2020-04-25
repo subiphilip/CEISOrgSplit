@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LDC_Rate_Class__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>LDC Rate Class</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>LDC_Rate_Class__c.LDC__r.Utility_Code__c</field>
+            <operation>equals</operation>
+            <value>CNP-TX</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>LDC_Rate_Class__c</referenceTo>
+    <relationshipLabel>Transport Exhibits</relationshipLabel>
+    <relationshipName>Transport_Exhibits</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,364 @@
+<apex:page docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" controller="ControllerForMobileMain" >
+
+<!-- trucost optimize -->
+<!-- Page-hiding snippet (recommended)  -->
+<style>.async-hide { opacity: 0 !important} </style>
+<script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+})(window,document.documentElement,'async-hide','dataLayer',4000,
+{'GTM-WDPHQM3':true});</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-22823219-1', 'auto', {allowLinker: true});
+  ga('require', 'GTM-WDPHQM3');
+  
+</script>
+<!-- trucost optimize -->
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Home - {!$Label.Page_Title_Company_Name}</title>
+            <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}"/>
+            <meta name="description" content="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+        </apex:define>
+        
+        <apex:define name="body">
+        <!-- custom styles should be moved to external stylesheet -->
+        <style>
+        .phone-body { min-height: 0; }
+        #main-nav, .navbarEven {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        #myCarousel > .carousel-inner {
+            height: 300px;
+        }
+        .carousel-indicators {
+            bottom: 15px;
+            top: auto;
+            margin: 0 auto;
+            right: 50%;
+        }
+        .carousel {
+            margin-bottom: 0;
+        }
+        .carousel-indicators li {
+            background-color: #fff;
+        }
+        .banner-celebrate {
+            background-image: url({!$Resource.celebrateBanner2});
+            background-size: cover;
+            background-position: 50% 50%;
+            height: 100%;
+        }
+        .banner5bulbs {
+            /*background-image: url(/resource/1465517094000/banner5bulbs);*/
+            background-image: url({!$Resource.banner5bulbs});
+            background-size: cover;
+            height: 100%;
+            background-position: 50% 50%;
+        }
+        .bannerHangingBulbs {
+            background-image: url({!$Resource.bannerHangingBulbs});
+            background-size: cover;
+            height: 100%;
+            background-position: 50% 50%;
+        }
+        .bannerOneBrightLightRenders {
+            background-image: url({!$Resource.bannerOneBrightLightRenders});
+            background-size: cover;
+            height: 100%;
+            background-position: 50% 50%;
+        }
+        .cta-block {
+            background-color: #fff;
+            -webkit-border-radius: 12px;
+            border-radius: 12px;
+            -webkit-box-shadow: 0 5px 10px 5px rgba(117,117,117,0.4);
+            box-shadow: 0 5px 10px 5px rgba(117,117,117,0.4);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            top: 50px;
+            
+            /* temporary - unless it works through all mobile devices */
+            height: 220px;
+            width: 560px;
+            padding: 10px 30px;
+            
+        }
+        .form-block {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 325px;
+        }
+        .custom-btn {
+            border-radius: 14px;
+            background: #0099dc url({!$Resource.custFormBtnBg}) 74px center no-repeat;
+            border: 1px solid #0099dc;
+            color: #fff;
+            text-shadow: none;
+        }
+        .custom-btn:hover {
+            background: #6ec5eb url({!$Resource.custFormBtnBg}) 74px center no-repeat;
+        }
+        .custom-btn span {
+            padding-right: 30px;
+        }
+        h1.fnt-27px {
+            font-size: 27px;
+        }
+        h1.text-info.fnt-20px {
+            font-size: 20px;
+            line-height: 28px;
+        }
+        .shorten-lead {line-height: 27px; margin-bottom: 10px;}
+        .inner-banner-wrapper {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            top: 30px;
+        }
+        .banner-headline {
+            /* color: #fff;
+            font-size: 36px;
+            font-weight: bold;
+            margin: 0 0 20px 0;
+            text-align: center;
+            text-shadow: 2px 2px #777777; */
+            color: #fff;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 0 20px 20px;
+            text-align: left;
+            text-shadow: 2px 2px #777777;
+        }
+        .cta-wrapper {
+            display: block;
+            margin: 0 auto;
+            width: 768px;
+            /*height: 100px;*/
+            background-color: black;
+        }
+        .col-one-half {
+            width: 48%;
+            float: left;
+            margin-left: 2%;
+        }
+        .col-one-qtr {
+            width: 23%;
+            float: left;
+            margin-left: 0%;
+        }
+        .ml0 {
+            margin-left: 0 !important;
+        }
+        .modal-custom {
+            background-color: #fff;
+            -webkit-border-radius: 12px;
+            border-radius: 12px;
+            -webkit-box-shadow: 0 5px 10px 5px rgba(117,117,117,0.4);
+            box-shadow: 0 5px 10px 5px rgba(117,117,117,0.4);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            /* top: 50px; */
+            min-height: 160px;
+            width: 310px;
+            padding: 10px 30px;
+        }
+        .modal-custom h2 {
+            font-size: 27px;
+        }
+        .txt-ctr {text-align: center;}
+        </style>
+            <div class="hidden-phone">
+                <div class="row-fluid carousel-row">
+                    <div class="span12">
+                        <div id="myCarousel" class="carousel slide">                                                                                    
+                            <!-- Carousel items -->
+                            <div class="carousel-inner">
+                                <div class="active item banner-celebrate">
+                                    <!-- INNER BANNER CONTENT -->
+                                    <!-- container -->
+                                    <div class="inner-banner-wrapper">
+                                        <!-- headline -->
+                                        <div class="col-one-qtr">
+                                        <h1 class="banner-headline">We're celebrating 6 years<br />
+                                        of helping Texans shop,<br />
+                                        compare and choose<br />
+                                        electric plans!</h1>
+                                        </div>
+                                        <!-- <h1 class="banner-headline">Compare Houston Area Electricity Plans</h1>
+                                        <div class="cta-wrapper">
+                                            <div class="col-one-half ml0">
+                                                <div class="modal-custom modal-1">
+                                                    <h2 class="text-info">What is Your True Cost?</h2>
+                                                    <p class="lead">Try Our Pricing Calculator.</p>
+                                                    <p class="txt-ctr"><a class="btn btn-success" href="/PriceCalculator">True Cost Calculator</a></p> 
+                                                </div>
+                                            </div>
+                                            <div class="col-one-half">
+                                                <div class="modal-custom modal-2">
+                                                    <h2 class="text-info">Ready to Shop Plans?</h2>
+                                                    <p class="lead">Enter your zip code to get started.</p>
+                                                    <div class="form-block">
+                                                        <form action="javascript:void(0);" id="zip_code_form" class="form-inline">
+                                                            <input class="" maxlength="5" name="zip_code" id="zip_code" placeholder="Enter Your Zip Code" value="" type="text" required="required" pattern="[0-9]{5}" title="5-digit Zip Code"/>
+                                                            <button class="btn btn-default custom-btn" id="zip_submit" name="zip_submit" type="submit"><span>Search</span></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+
+                                        <div class="col-one-half">
+                                        <div class="cta-wrapper">
+                                            
+
+                                            <!-- modal 1 -->
+                                            <div class="col-one-half ml0">
+                                                <div class="modal-custom modal-1">
+                                                    <h2 class="text-info">What is Your True Cost?</h2>
+                                                    <p class="lead">Try Our Pricing Calculator.</p>
+                                                    <p class="txt-ctr"><a class="btn btn-success" href="/PriceCalculator">True Cost Calculator</a></p> 
+                                                </div>
+                                            </div>
+                                            <!-- modal 2 -->
+                                            <div class="col-one-half">
+                                                <div class="modal-custom modal-2">
+                                                    <h2 class="text-info">Ready to Shop Plans?</h2>
+                                                    <p class="lead">Enter your zip code to get started.</p>
+                                                    <div class="form-block">
+                                                        <form action="javascript:void(0);" id="zip_code_form" class="form-inline">
+                                                            <input class="" maxlength="5" name="zip_code" id="zip_code" placeholder="Enter Your Zip Code" value="" type="text" required="required" pattern="[0-9]{5}" title="5-digit Zip Code"/>
+                                                            <button class="btn btn-default custom-btn" id="zip_submit" name="zip_submit" type="submit"><span>Search</span></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        </div>
+
+                                        <div class="col-one-qtr">
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            
+            <!-- PHONE CONTENT -->
+            <div class="container visible-phone">
+                <div class="row">
+                    <div class="span12">
+                        <h3>Save 20%* or more on your electricity cost</h3> 
+                        <p class="lead">Customers who found their plan using myTrueCost.com report saving an average of 20% on their electric bill.</p>
+                        
+                        <apex:outputPanel rendered="{!ISPICKVAL($User.UserType,'Guest')}">
+                            <a href="{!$Page.shopplans}" class="btn btn-warning visible-phone ">Plans</a>
+                            <a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.RegisterSec}" class="btn btn-primary visible-phone ">Create Profile</a>
+                            <a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.SiteLogin}?starturl=/{!$CurrentPage.Name}" class="btn btn-success visible-phone ">Login</a>
+                        </apex:outputPanel>
+                        
+                        <apex:outputPanel rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}">
+                            <a href="{!$Page.shopplans}" class="btn btn-warning visible-phone ">Plans</a>
+                            <a href="{!$Page.IntervalDataExplorer}" class="btn btn-primary visible-phone ">Usage</a>
+                            <a href="{!$Page.MyAccount}" class="btn btn-success visible-phone ">Account</a>
+                        </apex:outputPanel>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOGO STRIP -->
+            <div class="hidden-phone">
+                    <c:repsStripNew />
+            </div>
+            
+        </apex:define>   
+        <apex:define name="footer-additional">
+            <small>
+                <small>
+                    <p><c:Content_Viewer content="Savings Disclaimer" simple="true"/></p><br/>
+                </small>
+            </small>
+        </apex:define>
+    </apex:composition>
+
+<script> 
+        var $buoop = {c:2}; 
+        function $buo_f(){ 
+        var e = document.createElement("script"); 
+        e.src = "//browser-update.org/update.min.js"; 
+        document.body.appendChild(e);
+        };
+        try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+        catch(e){window.attachEvent("onload", $buo_f)}
+</script> 
+<script>
+        $j=jQuery.noConflict();
+    
+        $j("#zip_submit").click(function() {
+            //is the form valid?
+            if (!hasFormValidation()) {
+                zipCodeCheckSubmission();
+            }
+            else {
+                console.log('hasFormValidation was true');
+                if (!$j("#zip_code_form")[0].checkValidity()) {
+                    console.log('validation failed');
+                    //return false;
+                }
+                else {
+                    console.log('validation passed');
+                    zipCodeCheckSubmission();
+                }
+            }
+            
+        });
+    
+        function zipCodeCheckSubmission(){
+            ControllerForMobileMain.checkZip($j("#zip_code").val(), function(result, event){
+                
+                if ($j.cookie("apex__LeadId")) {
+                    $j.cookie("apex__NewZip", $j("#zip_code").val(), { expires: 720 });
+                }
+                
+                if (result=='Now' || result=='Maybe'){
+                    $j.cookie("apex__ShopZip", $j("#zip_code").val(), { expires: 720 });
+                    window.location="{!$Page.shopplans}"; 
+                } else if (result=='Later'){
+                    alert('TrueCost does not serve your zip code yet, but plans to in the future.');
+                } else if (result=='No'){
+                    alert('TrueCost does not serve your zip code.');
+                }
+            });
+        }
+        function hasFormValidation() {
+            
+            var i = document.createElement('input');
+            console.log('check was: '+typeof i.validity === 'object');
+            return typeof i.validity === 'object';
+            
+        };
+    </script>
+</apex:page>

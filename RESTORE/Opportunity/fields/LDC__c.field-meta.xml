@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LDC__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Select LDC (or upstream Pipeline).  Select &quot;None&quot; if LDC is not applicable.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Select LDC (or upstream Pipeline).  Select &quot;None&quot; if LDC is not applicable.</inlineHelpText>
+    <label>BAD LDC</label>
+    <referenceTo>LDC__c</referenceTo>
+    <relationshipLabel>Opportunities</relationshipLabel>
+    <relationshipName>Opportunity</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Max_Position_Rows_per_Deal_Ticket__c</fullName>
+    <defaultValue>20000</defaultValue>
+    <description>avoids the too many rowls soql visualforce issue.  How many positions can close in a single batch?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>avoids the too many rowls soql visualforce issue.  How many positions can close in a single batch?</inlineHelpText>
+    <label>Max Position Rows per Deal Ticket</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

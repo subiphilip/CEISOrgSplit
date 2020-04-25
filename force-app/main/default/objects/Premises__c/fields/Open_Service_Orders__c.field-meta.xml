@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Open_Service_Orders__c</fullName>
+    <description>Concatenation of all pending service orders by pipe ( | ) that includes the service order type and scheduled date ex: 07/07/2008,Move In|,Move Out to CSA</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Are there currently any scheduled move-ins/outs or switches?</inlineHelpText>
+    <label>Open Service Orders</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

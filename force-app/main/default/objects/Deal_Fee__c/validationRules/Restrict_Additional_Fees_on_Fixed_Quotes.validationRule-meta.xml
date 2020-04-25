@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restrict_Additional_Fees_on_Fixed_Quotes</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+
+Quote__r.RecordType.Name = &#39;Fixed Price Tier&#39;, 
+Fee_Type__r.Allow_User_Select__c = true, 
+TEXT(Fee_Type__r.Cost_Group__c) = &#39;99 - Other&#39;,
+Fee_Type__r.Name != &#39;Surrendered Storage Discount&#39;
+
+)</errorConditionFormula>
+    <errorMessage>DF01 - Cannot assign additional fees to a fixed tier quote. Only acceptable fees are consultant fees and surrendered storage discount.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Texas_New_Mexico_Power_COAST</fullName>
+    <columns>NAME</columns>
+    <columns>Value__c</columns>
+    <columns>Basis__c</columns>
+    <columns>TDSP__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>TDSP__c</field>
+        <operation>equals</operation>
+        <value>Texas New Mexico Power - COAST</value>
+    </filters>
+    <label>Texas New Mexico Power - COAST</label>
+    <language>en_US</language>
+</ListView>

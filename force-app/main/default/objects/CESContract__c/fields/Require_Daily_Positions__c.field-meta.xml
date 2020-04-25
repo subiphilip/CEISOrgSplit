@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_Daily_Positions__c</fullName>
+    <description>old logic:
+OR(
+ AND(
+    NOT(CONTAINS(Product_Subtype_Lookup__r.Name,&#39;FOM&#39;)),
+    OR(
+       CONTAINS(TEXT(Index_Rate_Name__r.Frequency__c),&#39;Da&#39;),
+       CONTAINS(TEXT(Market_Rate_Index_Name__r.Frequency__c),&#39;Da&#39;)
+    )
+  ),
+  ISPICKVAL(Daily_Volume_Type__c,&#39;Variable&#39;) 
+)</description>
+    <externalId>false</externalId>
+    <formula>OR(
+  CONTAINS(TEXT(Index_Rate_Name__r.Frequency__c),&#39;Da&#39;),
+  CONTAINS(TEXT(Market_Rate_Index_Name__r.Frequency__c),&#39;Da&#39;),
+  ISPICKVAL(Pricing_Terms__c, &#39;Daily&#39;)
+)</formula>
+    <label>Require Daily Positions</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

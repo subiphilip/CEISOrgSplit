@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Internal_Only__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Is this change only for internal admin, customer service, communications, etc. use?  Does this change affect the application?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Is this change only for internal admin, customer service, communications, etc. use?  Does this change affect the application?</inlineHelpText>
+    <label>Internal Only/Outside of Application</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

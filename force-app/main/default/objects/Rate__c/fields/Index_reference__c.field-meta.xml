@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Index_reference__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Which Index is used for the rate</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Which Index is used for the rate</inlineHelpText>
+    <label>Index Reference</label>
+    <referenceTo>Index__c</referenceTo>
+    <relationshipLabel>Rates</relationshipLabel>
+    <relationshipName>Rates</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

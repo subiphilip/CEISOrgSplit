@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Secondary_Physical_Basis__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Secondary Physical Basis</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For blended basis, the secondary index used</inlineHelpText>
+    <label>Secondary Physical Basis</label>
+    <referenceTo>Index__c</referenceTo>
+    <relationshipLabel>Secondary Physical Basis</relationshipLabel>
+    <relationshipName>SPB</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

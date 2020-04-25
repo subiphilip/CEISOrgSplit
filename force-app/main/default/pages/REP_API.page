@@ -1,0 +1,462 @@
+<apex:page showHeader="false" sidebar="false" controller="SupportLinks" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="true" expires="43200" >
+   <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+      <c:tc2_header title="REP API Documentation - {!$Label.Page_Title_Company_Name}"
+         description="Get answers to frequently asked questions about electric rates, electric providers, electric choice, switching plans, TrueCost, and CenterPoint Energy" />
+      <style>
+        .column {
+          word-wrap:break-word;
+        }
+        p {
+          max-width:900px;
+          word-wrap:break-word;
+        }
+        table td {
+          text-align: left;
+        }
+        table thead td{
+          font-weight:bold;
+        }
+      </style>
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="Getting started with API" subHeadline="Connect your system with TrueCost REST Oauth 2.0" />
+
+             <div id="appREPAPI" class="container" >
+
+                <span v-show="!hasSession">
+                  <div class="has-margin-3">
+                    <div class="columns content box has-margin-3">
+                      <div class="column" >
+                        <div style="padding:20px;">
+                          <h3>Login to review documentation</h3>
+                          <a class="button" href="/Login">Login</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+
+
+                
+
+                <span v-show="hasSession">
+                  <div class="has-margin-3">
+                    <div class="columns content box has-margin-3">
+                      <div class="column" >
+                        <div style="padding:20px;">
+                          <h3>How to get orders</h3>
+                          <p>
+                            The TrueCost "GET Orders" API allows participating Retail Electric Providers (REPs) to query and return their orders on the platform. This service can be used to expedite order processing for customers and minimize the manual effort of order entry for REP order processors. With the "GET Orders" service, you will be able to:
+                              <ul>
+                                <li>Get order details, including - plan, enrollment date and enrollment type information</li>
+                                <li>Get customer details, including - name, contact and address information and elements to determine credit worthiness (e.g. DoB, SSN)</li>
+                                <li>Get alternate contact and user session information (e.g. date/time of terms of service acceptance, session IP)</li>
+                              </ul>
+                          </p>
+
+                          <p>
+                            The service will return orders for the plans you manage through your active TrueCost platform REP accounts over the last 30 days. It will return only return 500 results per request.
+                          </p>
+
+                          <h3>GET Orders - Data Elements/Parameters</h3>
+                          <p>
+                            <table>
+                              <thead>
+                                <td>Field (TC REP Portal)</td>
+                                <td>Parameter Name</td>
+                                <td>Data Type</td>
+                                <td>Example</td>
+                                <td>Required</td>
+                              </thead>
+                              <tr>
+                                <td>Order Name</td>
+                                <td>Name</td>
+                                <td>Integer (8)</td>
+                                <td>184936</td>
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <td>Order Number</td>
+                                <td>Id</td>
+                                <td>String (25)</td>
+                                <td>a0M3000000BUYsLEAX</td>
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <td>Order Status</td>
+                                <td>Order_Status__c</td>
+                                <td>String (25)</td>
+                                <td>New/Successfully Submitted, Confirmed, Rejected</td>
+                                <td>Yes</td>
+                              </tr>
+                              <tr>
+                                <td>Rejection Reason</td>
+                                <td>Rejection_Reason__c</td>
+                                <td>String (25)</td>
+                                <td>Admin Rejection, Credit Quality, Customer Rescinded, Deposit Unpaid, Inaccurate Address</td>
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <td>Rejection Comments</td>
+                                <td>Order_Rejection_Comments__c</td>
+                                <td>String (255)</td>
+                                <td></td>
+                                <td>If rejected a comment is required</td>
+                              </tr>
+                              <tr>
+                                <td>Confirmation Date (On Flow Date)</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <td>Plan Expiration</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <td>Deposit Required</td>
+                                <td></td>
+                                <td>Boolean</td>
+                                <td>True</td>
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <td>Deposit</td>
+                                <td></td>
+                                <td>Currency</td>
+                                <td>$350.00</td>
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <td>REP Order ID</td>
+                                <td></td>
+                                <td>String (25)</td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <td>REP Order Sub Status</td>
+                                <td></td>
+                                <td>String (25)</td>
+                                <td></td>
+                                <td></td> 
+                              </tr>
+                              <tr>
+                                <td>REP Status</td>
+                                <td></td>
+                                <td>String (25)</td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <td>Exception</td>
+                                <td></td>
+                                <td>String (250)</td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                            </table> 
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+
+                <span v-show="hasSession">
+                  <div class="has-margin-3">
+                    <div class="columns content box has-margin-3">
+                      <div class="column" >
+                        <div style="padding:20px;">
+                          <h3>How to post orders</h3>
+                          <p>
+                            The TrueCost "POST Orders" API allows participating Retail Electric Providers (REPs) to update their orders on the TrueCost electric shopping platform. This service can be used to minimize the effort it takes to share updates on the progression of enrollments with your TrueCost partner. With the "POST Orders" service, you will be able to:
+                            <ul>
+                              <li>Share when an order is confirmed and provide the "on flow" and new "expiration" dates</li>
+                              <li>Share when an order is rejected, and provide a reason for rejection</li>
+                            </ul>
+                            </p>
+                            <p>The service will allow you to update order records submitted through the TrueCost platform REP accounts within the last 30 days.</p>
+                          <h3>POST Orders - Data Elements/Parameters</h3>
+                          <p>Example Post Request URL </p>
+                          <div style="padding:20px; border-radius:20px; background:#dfdfdf;">
+                            /services/apexrest/rep-api/v1/[REP Account ID]/[Order Name]
+                          </div>
+                          <br/>
+                          <p>Example Body Payload in Post Request</p>
+                          <div style="padding:20px; border-radius:20px; background:#dfdfdf;">
+                            <p >
+                              {<br/>
+                                  <div style="margin-left:50px;">
+                                    "updateOrder":  {<br/>
+                                        <div style="margin-left:75px;">
+                                          "order_status": "Confirmed",<br/>
+                                          "Rejection_Reason": "Credit Quality",<br/>
+                                          "Order_Rejection_Comments": "Fix the address",<br/>
+                                          "Plan_Expiration": "2020-08-04",<br/>
+                                          "Deposit": "34.22",<br/>
+                                          "Deposit_Requested": true,<br/>
+                                          "REPOrderSubStatus": "Anything can go here",<br/>
+                                          "repstatus": "Good to go",<br/>
+                                          "Exception_Date": "2020-04-06" <br/>
+                                        </div>
+                                      }<br/>
+                                  </div>
+                              }</p>
+                            </div>
+                          <p>
+                            <table>
+                              <thead>
+                                <td>Field (TC REP Portal)</td>
+                                <td>Parameter Name</td>
+                                <td>Data Type</td>
+                                <td>Example</td>
+                                <td>Required</td>
+                              </thead>
+
+                              <tr>
+                                <td>Order Status</td>
+                                <td>Order_Status__c</td>
+                                <td>String (25)</td>
+                                <td>New/Successfully Submitted, Confirmed, Rejected</td>
+                                <td>Yes</td>
+                              </tr>
+                              <tr>
+                                <td>Rejection Reason</td>
+                                <td>Rejection_Reason__c</td>
+                                <td>String (25)</td>
+                                <td>Admin Rejection, Credit Quality, Customer Rescinded, Deposit Unpaid, Inaccurate Address</td>
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <td>Rejection Comments</td>
+                                <td>Order_Rejection_Comments__c</td>
+                                <td>String (255)</td>
+                                <td></td>
+                                <td>If rejected a comment is required</td>
+                              </tr>
+                              
+                            </table> 
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+
+                
+
+
+                <span v-show="hasSession">
+                  <div class="has-margin-3" >
+                  <div class="columns content box has-margin-3">
+                    <div class="column">
+                      <div style="padding:20px;">
+                        <h3>First Step Authenticate</h3>
+                        <p>This will use get the code which will be used as a token to be used in the header for the Bearer Token</p>
+                        <a class="button" v-on:click="authenticate()">Get Access Code</a>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="has-margin-3" v-if="code.length > 0">
+                    <div class="columns content box has-margin-3">
+                      <div class="column" >
+                        <div style="padding:20px;">
+                          <h3>Second Step Get Access Token</h3>
+                          <p><strong>code:</strong> {{code}}</p>
+                          <a class="button" v-on:click="getAccessToken()">Get Access Token</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+
+
+                <span v-show="hasToken">
+                  <div class="has-margin-3">
+                    <div class="columns content box has-margin-3">
+                      <div class="column" >
+                        <div style="padding:20px;">
+                          <h3>Third Step Use the Access Token For REST API</h3>
+                          <p><strong>access_token</strong> {{access_token}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+                <span v-show="hasToken">
+                  <div class="has-margin-3">
+                    <div class="columns content box has-margin-3">
+                      <div class="column" >
+                        <div style="padding:20px;">
+                          <h3>Fourth Save Refresh Token</h3>
+                          <p><strong>id</strong>: {{tokenResponseJson.id}}</p>
+                          <p><strong>id_token</strong>: {{tokenResponseJson.id_token}}</p>
+                          <p><strong>refresh_token</strong>: {{tokenResponseJson.refresh_token}}</p>
+                          <p><strong>scope</strong>: {{tokenResponseJson.scope}}</p>
+                          <p><strong>signature</strong>: {{tokenResponseJson.signature}}</p>
+                          <p><strong>token_type</strong>: {{tokenResponseJson.token_type}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+
+                <span v-show="hasToken">
+                  <div class="has-margin-3">
+                    <div class="columns content box has-margin-3">
+                      <div class="column" >
+                        <div style="padding:20px;">
+                          <h3>Fifth Get Request Orders</h3>
+                          <p><strong>Get order endpoint:</strong> </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+
+                <div class="has-margin-3" v-show="hasSession">
+                  <div class="columns content box has-margin-3">
+                    <div class="column">
+                      <div style="padding:20px;">
+                        <h3>User Profile</h3>
+                        <p>{!$User.CommunityNickname}</p>
+                        <p>{!$User.Profile_Name__c}</p>
+                        <p>{!$User.ContactId}</p>
+                        <p>{!$User.Department}</p>
+                        <p>{!$User.UserRoleId}</p>
+
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+
+         </div>
+
+        <c:tc2_footer />
+         <script>
+            (function ($) {
+                $(function () {
+                'use strict';
+
+                 TC.app.appREPAPI = new Vue({
+                    el: '#appREPAPI',
+                    data: {
+                      client_id: "3MVG9d3kx8wbPieHDt7_RZrz7UrfKP3HKXOsBJCRhfEejZqGiJ0z0oMXrLIA_hMO8KPo7tia66UI3_uXto3Bm",
+                      callback_url: "https://qa-centerpointenergy.cs91.force.com/services/oauth2/success",
+                      site_url: "https://qa-centerpointenergy.cs91.force.com",
+                      client_secret: "1C2229A42CB2E4E7041DABBA15CC3AF254183151DC9C63525A1EA5CF07883528",
+                      clickthru: "",
+                      session: "",
+                      code: "",
+                      hasSession: false,
+                      tokenResponse: {},
+                      access_token: "",
+                      hasToken: false,
+                      tokenResponseJson: {}
+                    },
+                    methods: {
+                      authenticate: function(){
+                        
+                        var vm = this;
+                        var url = this.clickthru;
+                        var parameters = "location=1,width=800,height=650";
+                        parameters += ",left=" + (screen.width - 800) / 2 + ",top=" + (screen.height - 700) / 2;
+                        var win = window.open(url, 'connectPopup', parameters);
+                        var pollOAuth = window.setInterval(function () {
+                          console.log(win.document.URL);
+                          try{
+                            if (win.document.URL.indexOf("code") != -1) {
+                              vm.code = decodeURIComponent(win.document.URL.substr(win.document.URL.indexOf("code") + 5, win.document.URL.length));
+                              window.clearInterval(pollOAuth);
+                              win.close();
+                              sessionStorage.setItem('refresh', true);
+                            }
+                          }catch(exception){
+                            console.log(exception);
+                          }
+
+                        }, 2000);
+                        /*jQuery.ajax({
+                          type: "GET",
+                          url: this.clickthru,
+                          beforeSend: function (xhr) {
+                              xhr.setRequestHeader('Authorization', "OAuth " + this.session);
+                              xhr.setRequestHeader('Accept', "application/json");
+                              xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+                              xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET');
+
+                          },
+                          success: function (data) {
+                              alert("Holy Guacamole! - REST API is LOVELY")
+                              console.log(data);
+                          }
+                      });*/
+                      },
+
+                      getAccessToken: function(){
+                        var vm = this;
+
+                        var results = $.ajax({
+                          //url : vm.site_url + 'services/oauth2/token',
+                          url : 'c',
+                          type : 'POST',
+                          data : {
+                              grant_type : 'authorization_code',
+                              code : vm.code,
+                              client_id : vm.client_id,
+                              client_secret : vm.client_secret,
+                              redirect_uri: "https://qa-centerpointenergy.cs91.force.com/services/oauth2/success"
+                            },
+                            beforeSend: function (xhr) {
+
+                              //xhr.setRequestHeader("Authorization", "Bearer $token")
+                            },
+                            dataType: "json",
+                            success: function(response) {
+                               
+                               vm.tokenResponse = response;
+                               vm.access_token = response.access_token;
+                               vm.hasToken = true;
+                               vm.tokenResponseJson = {
+                                  "access_token": response.access_token,
+                                  "id": response.id,
+                                  "id_token": response.id_token,
+                                  "refresh_token": response.refresh_token,
+                                  "scope": response.scope,
+                                  "signature": response.signature,
+                                  "token_type": response.token_type
+                               }
+                            }
+
+                        });
+                      }
+                    },
+                    mounted: function() {
+                      //this.session = document.cookie.match(/(^|;\s*)sid=(.+?);/)[2];
+                      this.session = "{!$Api.Session_ID}";
+                      if(this.session == "NULL_SESSION_ID"){
+                        this.hasSession = false;
+                      } else {
+                        this.hasSession = true;
+                      }
+                      
+                      this.clickthru = this.site_url+"/services/oauth2/authorize?response_type=code&client_id="+this.client_id+"&redirect_uri="+this.callback_url
+                    },
+                    watch: { }
+                 });
+
+              })
+            })(jQuery);
+         </script>
+      </body>
+   </html>
+</apex:page>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InitialDateofService__c</fullName>
+    <description>Initial date of service.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Date the change to new REP will occur.</inlineHelpText>
+    <label>Date Requested</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

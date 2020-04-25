@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Miscellaneous_Gross_Receipts_Tax__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>A fee assessed to recover the miscellaneous gross receipts tax imposed on retail electric providers operating in an incorporated city or town having a population of more than 1,000.  Checking this adds the fee to plan details.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>A fee assessed to recover the miscellaneous gross receipts tax imposed on retail electric providers operating in an incorporated city or town having a population of more than 1,000.  Checking this adds the fee to plan details.</inlineHelpText>
+    <label>Add Miscellaneous Gross Receipts Tax</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Like_named_Unique_Account__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>this is a unique account which shares the name of another unrelated account</description>
+    <externalId>false</externalId>
+    <inlineHelpText>this is a unique account which shares the name of another unrelated account</inlineHelpText>
+    <label>Like-named Unique Account</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

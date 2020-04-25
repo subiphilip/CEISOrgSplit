@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consultant_Activation_Needed__c</fullName>
+    <description>formula for consultant change reporting</description>
+    <externalId>false</externalId>
+    <formula>AND(
+  Consultant__c &lt;&gt; Consultant_Change_Pending__c,
+  NOT(ISBLANK(Consultant_Change_Pending__c))
+)</formula>
+    <label>Consultant Activation Needed</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

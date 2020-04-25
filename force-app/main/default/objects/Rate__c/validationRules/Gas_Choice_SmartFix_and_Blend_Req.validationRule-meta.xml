@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Choice_SmartFix_and_Blend_Req</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+Record_Type_Name__c = &quot;Gas Choice Rate&quot;, 
+
+OR(
+CONTAINS( Plan__r.Name , &quot;SmartFixed&quot;), CONTAINS( Plan__r.Name , &quot;Blended&quot;)
+),
+
+ OR(
+Publicly_Available__c = TRUE,
+TEXT(Confirmation_Code_Status__c) = &quot;Activated with pricing&quot;
+),
+
+OR(Index_Adder__c = 0,  Index_Rate_Percentage__c = 0, ISNULL(Index_Adder__c), ISNULL(Index_Rate_Percentage__c), Fixed_Rate__c = 0, ISNULL(Fixed_Rate__c) , Fixed_Rate_Percentage__c = 0, ISNULL(Fixed_Rate_Percentage__c ))
+
+)</errorConditionFormula>
+    <errorMessage>Rate11: Activated or publicly available Gas Choice SmartFixed or Blended rates must have an appropriate Index Adder and %.</errorMessage>
+</ValidationRule>

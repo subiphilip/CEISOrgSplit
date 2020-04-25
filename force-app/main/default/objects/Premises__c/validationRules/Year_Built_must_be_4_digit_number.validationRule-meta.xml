@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Year_Built_must_be_4_digit_number</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND  (
+ NOT( ISBLANK( Year_Built__c )  ), 
+  OR(
+      LEN(Year_Built__c )&lt;&gt;4,
+      NOT( ISNUMBER(Year_Built__c )),
+       VALUE(Year_Built__c ) &gt; YEAR(TODAY()) 
+  )
+)</errorConditionFormula>
+    <errorDisplayField>Year_Built__c</errorDisplayField>
+    <errorMessage>Premise01: Please enter a valid year</errorMessage>
+</ValidationRule>

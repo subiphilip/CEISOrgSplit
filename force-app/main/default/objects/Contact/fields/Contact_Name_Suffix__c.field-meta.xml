@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_Name_Suffix__c</fullName>
+    <description>additional text to add to the contact name for invoicing, etc</description>
+    <externalId>false</externalId>
+    <inlineHelpText>additional text to add to the contact name for invoicing, etc</inlineHelpText>
+    <label>Contact Name Suffix</label>
+    <length>20</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

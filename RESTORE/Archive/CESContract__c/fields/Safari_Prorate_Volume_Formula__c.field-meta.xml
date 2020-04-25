@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Safari_Prorate_Volume_Formula__c</fullName>
+    <externalId>false</externalId>
+    <formula>case(
+ text(Prorate_Volumes_By__c),
+ &#39;Capacity Volume&#39;, &#39;0&#39;,
+ &#39;Annual Volume&#39;, &#39;1&#39;,
+ &#39;Even Distribution&#39;, &#39;2&#39;,
+ &#39;Billing Volume&#39;, &#39;3&#39;, 
+ &#39;3&#39;
+)</formula>
+    <label>Safari Prorate Volume Formula</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

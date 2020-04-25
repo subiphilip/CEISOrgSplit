@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Contract Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Placeholder for Safari</fullName>
+                <default>false</default>
+                <label>Placeholder for Safari</label>
+            </value>
+            <value>
+                <fullName>Not Submitted</fullName>
+                <default>true</default>
+                <label>Not Submitted</label>
+            </value>
+            <value>
+                <fullName>Submitted for SCA Approval</fullName>
+                <default>false</default>
+                <label>Submitted for SCA Approval</label>
+            </value>
+            <value>
+                <fullName>Business Type Approved</fullName>
+                <default>false</default>
+                <label>Business Type Approved</label>
+            </value>
+            <value>
+                <fullName>SCA Approved - Contract Creation</fullName>
+                <default>false</default>
+                <label>SCA Approved - Contract Creation</label>
+            </value>
+            <value>
+                <fullName>Paper Contract Issued</fullName>
+                <default>false</default>
+                <label>Paper Contract Issued</label>
+            </value>
+            <value>
+                <fullName>Language Negotiations</fullName>
+                <default>false</default>
+                <label>Language Negotiations</label>
+            </value>
+            <value>
+                <fullName>Language Approved</fullName>
+                <default>false</default>
+                <label>Language Approved</label>
+            </value>
+            <value>
+                <fullName>Language Rejected</fullName>
+                <default>false</default>
+                <label>Language Rejected</label>
+            </value>
+            <value>
+                <fullName>Contract Returned/Processing</fullName>
+                <default>false</default>
+                <label>Contract Returned/Processing</label>
+            </value>
+            <value>
+                <fullName>Processed/Activated</fullName>
+                <default>false</default>
+                <label>Processed/Activated</label>
+            </value>
+            <value>
+                <fullName>Manager Approved</fullName>
+                <default>false</default>
+                <label>Manager Approved</label>
+            </value>
+            <value>
+                <fullName>Signed and Sent to Customer</fullName>
+                <default>false</default>
+                <label>Signed and Sent to Customer</label>
+            </value>
+            <value>
+                <fullName>Dead</fullName>
+                <default>false</default>
+                <label>Dead</label>
+            </value>
+            <value>
+                <fullName>Customer Declined</fullName>
+                <default>false</default>
+                <label>Customer Declined</label>
+            </value>
+            <value>
+                <fullName>Holding for Credit Approval</fullName>
+                <default>false</default>
+                <label>Holding for Credit Approval</label>
+            </value>
+            <value>
+                <fullName>Pending Activation</fullName>
+                <default>false</default>
+                <label>Pending Activation</label>
+            </value>
+            <value>
+                <fullName>Finalized</fullName>
+                <default>false</default>
+                <label>Finalized</label>
+            </value>
+            <value>
+                <fullName>Customer Review</fullName>
+                <default>false</default>
+                <label>Customer Review</label>
+            </value>
+            <value>
+                <fullName>Pending</fullName>
+                <default>false</default>
+                <label>Pending</label>
+            </value>
+            <value>
+                <fullName>Activated</fullName>
+                <default>false</default>
+                <label>Activated</label>
+            </value>
+            <value>
+                <fullName>Termination Pending</fullName>
+                <default>false</default>
+                <label>Termination Pending</label>
+            </value>
+            <value>
+                <fullName>Submitted for Approval</fullName>
+                <default>false</default>
+                <label>Submitted for Approval</label>
+            </value>
+            <value>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+                <label>Rejected</label>
+            </value>
+            <value>
+                <fullName>Approved</fullName>
+                <default>false</default>
+                <label>Approved</label>
+            </value>
+            <value>
+                <fullName>Terminated</fullName>
+                <default>false</default>
+                <label>Terminated</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

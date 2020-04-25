@@ -1,0 +1,42 @@
+<apex:page showHeader="false" sidebar="false" controller="SupportLinks" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="true" expires="43200" >
+   <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+      <c:tc2_header title="Privacy Policy - {!$Label.Page_Title_Company_Name}"
+         description="Get answers to frequently asked questions about electric rates, electric providers, electric choice, switching plans, TrueCost, and CenterPoint Energy" />
+      <style>
+        
+      </style>
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             
+             <style>
+                table td, table th {
+                    text-align: left;
+                }
+             </style>
+    
+             <div id="appAbout" class=""> 
+                <div class="has-margin-3">
+                  <div class="columns content  has-margin-3">
+
+                  <div class="">
+                    <div style="padding:20px;">
+                      <apex:define name="body">
+                            <div class="">                
+                                <h1>Privacy Policy</h1>
+                                <c:Content_Viewer content="Privacy Policy"/>
+                            </div>
+                        </apex:define>
+                    </div>
+                  </div>
+
+                </div>
+               </div>
+
+             </div>
+         </div>
+         
+        <c:tc2_footer />
+      </body>
+   </html>
+</apex:page>

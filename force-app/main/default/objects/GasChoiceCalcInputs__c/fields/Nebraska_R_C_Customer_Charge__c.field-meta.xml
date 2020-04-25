@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nebraska_R_C_Customer_Charge__c</fullName>
+    <defaultValue>1.17</defaultValue>
+    <externalId>false</externalId>
+    <label>Nebraska R/C Customer Charge</label>
+    <precision>6</precision>
+    <required>true</required>
+    <scale>4</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LOA_Request</fullName>
+    <availability>online</availability>
+    <description>Creates an LOA to be sent to utility as an attachment. Added &amp;DefaultPDF=1</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>true</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>600</height>
+    <isResizable>true</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>LOA Request</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>https://composer.congamerge.com
+?sessionId={!API.Session_ID}
+&amp;serverUrl={!API.Partner_Server_URL_290}
+&amp;id={!AccountPremiseAssociation__c.Id}
+&amp;TemplateId=a1430000002MO4o
+&amp;LG0=0
+&amp;LG3=1
+&amp;LG4=1
+&amp;LG5={!$User.Id}
+&amp;FP0=1
+&amp;LG1=LOA+Generated
+&amp;LGAttachOption=2
+&amp;EmailTemplateId=00X30000001VX37
+&amp;EmailAdditionalTo={!IF( AccountPremiseAssociation__c.TDSP__c = 
+&quot;Oncor Electric Delivery Company&quot;,&quot;contactcenter@oncor.com&quot;,
+IF( AccountPremiseAssociation__c.TDSP__c =&quot;AEP Texas North Company&quot;,&quot;AEP_TX_USAGE_REQUESTS@AEP.COM&quot;,
+IF( AccountPremiseAssociation__c.TDSP__c =&quot;AEP Texas Central Company&quot;,&quot;AEP_TX_USAGE_REQUESTS@AEP.COM&quot;,
+IF( AccountPremiseAssociation__c.TDSP__c =&quot;Texas New Mexico Power - COAST&quot;,&quot;loa@tnmp.com&quot;,
+IF( AccountPremiseAssociation__c.TDSP__c =&quot;Texas New Mexico Power - NORTH&quot;,&quot;loa@tnmp.com&quot;,
+IF( AccountPremiseAssociation__c.TDSP__c =&quot;Nueces Electric Cooperative&quot;,&quot;Rbell@nueceselectric.org&quot; ,
+IF( AccountPremiseAssociation__c.TDSP__c =&quot;Sharyland Utilities&quot;,&quot;loarequests@sharyland.com&quot;,
+IF( AccountPremiseAssociation__c.TDSP__c =&quot;Sharyland Utilities McAllen&quot;,&quot;loarequests@sharyland.com&quot;
+,&quot;usage.req@centerpointenergy.com&quot;))))))))}
+&amp;EmailRelatedToId={!AccountPremiseAssociation__c.AccountId__c}
+&amp;EmailFromId=0D230000000KznO
+&amp;OFN={!AccountPremiseAssociation__c.Account__c}+-+LOA
+&amp;DS4=1</url>
+</WebLink>

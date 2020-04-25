@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <description>What stage of deployment is this change in?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What stage of deployment is this change in?</inlineHelpText>
+    <label>Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Backlog</fullName>
+                <default>true</default>
+                <label>Backlog</label>
+            </value>
+            <value>
+                <fullName>Development</fullName>
+                <default>false</default>
+                <label>Development</label>
+            </value>
+            <value>
+                <fullName>Code Review</fullName>
+                <default>false</default>
+                <label>Code Review</label>
+            </value>
+            <value>
+                <fullName>Deploy to QA</fullName>
+                <default>false</default>
+                <label>Deploy to QA</label>
+            </value>
+            <value>
+                <fullName>QA Approve</fullName>
+                <default>false</default>
+                <label>QA Approve</label>
+            </value>
+            <value>
+                <fullName>Communications Review</fullName>
+                <default>false</default>
+                <label>Communications Review</label>
+            </value>
+            <value>
+                <fullName>Upload to PRD/Comm Review</fullName>
+                <default>false</default>
+                <label>Upload to PRD/Comm Review</label>
+            </value>
+            <value>
+                <fullName>Deploy to PRD</fullName>
+                <default>false</default>
+                <label>Deploy to PRD</label>
+            </value>
+            <value>
+                <fullName>PRD Validation</fullName>
+                <default>false</default>
+                <label>PRD Validation</label>
+            </value>
+            <value>
+                <fullName>Complete</fullName>
+                <default>false</default>
+                <label>Complete</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>44.0</apiVersion>
+    <available>true</available>
+    <description>True Cost V2 Send Lead Switch Reminder</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>TC2 Switch Reminder</name>
+    <style>none</style>
+    <subject>Your Switch Reminder</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

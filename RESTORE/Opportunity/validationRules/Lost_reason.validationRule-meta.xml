@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lost_reason</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(TEXT(StageName) = &quot;Closed Lost&quot;, ISBLANK(TEXT( Lost_Reasoning__c )))</errorConditionFormula>
+    <errorDisplayField>Lost_Reasoning__c</errorDisplayField>
+    <errorMessage>Oppt01: Why was this opportunity lost?  Please pick a value from the &quot;Reason&quot; drop-down and include a brief explanation (if applicable) in the &quot;Notes.&quot;</errorMessage>
+</ValidationRule>

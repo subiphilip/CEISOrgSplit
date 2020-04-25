@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Publication_Section__c</fullName>
+    <externalId>false</externalId>
+    <label>Publication Section</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Publication__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>IF</fullName>
+                <default>false</default>
+                <label>IF</label>
+            </value>
+            <value>
+                <fullName>GD</fullName>
+                <default>false</default>
+                <label>GD</label>
+            </value>
+            <value>
+                <fullName>Appalachia</fullName>
+                <default>false</default>
+                <label>Appalachia</label>
+            </value>
+            <value>
+                <fullName>Canadian Gas</fullName>
+                <default>false</default>
+                <label>Canadian Gas</label>
+            </value>
+            <value>
+                <fullName>Citygates</fullName>
+                <default>false</default>
+                <label>Citygates</label>
+            </value>
+            <value>
+                <fullName>East Texas-North Louisiana Area</fullName>
+                <default>false</default>
+                <label>East Texas-North Louisiana Area</label>
+            </value>
+            <value>
+                <fullName>East-Houston-Katy</fullName>
+                <default>false</default>
+                <label>East-Houston-Katy</label>
+            </value>
+            <value>
+                <fullName>Louisiana-Onshore South</fullName>
+                <default>false</default>
+                <label>Louisiana-Onshore South</label>
+            </value>
+            <value>
+                <fullName>Mississippi-Alabama</fullName>
+                <default>false</default>
+                <label>Mississippi-Alabama</label>
+            </value>
+            <value>
+                <fullName>Oklahoma</fullName>
+                <default>false</default>
+                <label>Oklahoma</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+            <value>
+                <fullName>Rockies</fullName>
+                <default>false</default>
+                <label>Rockies</label>
+            </value>
+            <value>
+                <fullName>South-Corpus Christi</fullName>
+                <default>false</default>
+                <label>South-Corpus Christi</label>
+            </value>
+            <value>
+                <fullName>Northern Natural Gas Co</fullName>
+                <default>false</default>
+                <label>Northern Natural Gas Co</label>
+            </value>
+            <value>
+                <fullName>Upper Midwest</fullName>
+                <default>false</default>
+                <label>Upper Midwest</label>
+            </value>
+            <value>
+                <fullName>ANR Pipeline Co</fullName>
+                <default>false</default>
+                <label>ANR Pipeline Co</label>
+            </value>
+            <value>
+                <fullName>CenterPoint Energy Gas Transmission Co</fullName>
+                <default>false</default>
+                <label>CenterPoint Energy Gas Transmission Co</label>
+            </value>
+            <value>
+                <fullName>Colorado Interstate Gas Co</fullName>
+                <default>false</default>
+                <label>Colorado Interstate Gas Co</label>
+            </value>
+            <value>
+                <fullName>East Texas</fullName>
+                <default>false</default>
+                <label>East Texas</label>
+            </value>
+            <value>
+                <fullName>Florida Gas Transmission Co</fullName>
+                <default>false</default>
+                <label>Florida Gas Transmission Co</label>
+            </value>
+            <value>
+                <fullName>Natural Gas Pipeline Co of America</fullName>
+                <default>false</default>
+                <label>Natural Gas Pipeline Co of America</label>
+            </value>
+            <value>
+                <fullName>Northeast</fullName>
+                <default>false</default>
+                <label>Northeast</label>
+            </value>
+            <value>
+                <fullName>Northwest Pipeline Corp</fullName>
+                <default>false</default>
+                <label>Northwest Pipeline Corp</label>
+            </value>
+            <value>
+                <fullName>Oneok Gas Transportation LLC</fullName>
+                <default>false</default>
+                <label>Oneok Gas Transportation LLC</label>
+            </value>
+            <value>
+                <fullName>Panhandle Eastern Pipe Line Co</fullName>
+                <default>false</default>
+                <label>Panhandle Eastern Pipe Line Co</label>
+            </value>
+            <value>
+                <fullName>Rockies/Northwest</fullName>
+                <default>false</default>
+                <label>Rockies/Northwest</label>
+            </value>
+            <value>
+                <fullName>South Louisiana</fullName>
+                <default>false</default>
+                <label>South Louisiana</label>
+            </value>
+            <value>
+                <fullName>Southern Star Central Gas Pipeline Inc</fullName>
+                <default>false</default>
+                <label>Southern Star Central Gas Pipeline Inc</label>
+            </value>
+            <value>
+                <fullName>Tennessee Gas Pipeline Co</fullName>
+                <default>false</default>
+                <label>Tennessee Gas Pipeline Co</label>
+            </value>
+            <value>
+                <fullName>Texas Eastern Transmission Corp</fullName>
+                <default>false</default>
+                <label>Texas Eastern Transmission Corp</label>
+            </value>
+            <value>
+                <fullName>Texas Gas Transmission Corp</fullName>
+                <default>false</default>
+                <label>Texas Gas Transmission Corp</label>
+            </value>
+            <value>
+                <fullName>Transcontinental Gas Pipe Line Corp</fullName>
+                <default>false</default>
+                <label>Transcontinental Gas Pipe Line Corp</label>
+            </value>
+            <value>
+                <fullName>Trunkline Gas Co</fullName>
+                <default>false</default>
+                <label>Trunkline Gas Co</label>
+            </value>
+            <value>
+                <fullName>Midwest</fullName>
+                <default>false</default>
+                <label>Midwest</label>
+            </value>
+            <value>
+                <fullName>NYMEX</fullName>
+                <default>false</default>
+                <label>NYMEX</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>IF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>GD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Appalachia</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Canadian Gas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Citygates</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>East Texas-North Louisiana Area</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>East-Houston-Katy</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Louisiana-Onshore South</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Mississippi-Alabama</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Oklahoma</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Others</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Rockies</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>South-Corpus Christi</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Northern Natural Gas Co</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Upper Midwest</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>ANR Pipeline Co</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>CenterPoint Energy Gas Transmission Co</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Colorado Interstate Gas Co</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>East Texas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Florida Gas Transmission Co</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Natural Gas Pipeline Co of America</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Northeast</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Northwest Pipeline Corp</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Oneok Gas Transportation LLC</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Panhandle Eastern Pipe Line Co</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Rockies/Northwest</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>South Louisiana</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Southern Star Central Gas Pipeline Inc</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Tennessee Gas Pipeline Co</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Texas Eastern Transmission Corp</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Texas Gas Transmission Corp</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Transcontinental Gas Pipe Line Corp</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Trunkline Gas Co</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>Midwest</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>IF</controllingFieldValue>
+            <controllingFieldValue>GD</controllingFieldValue>
+            <controllingFieldValue>NGI</controllingFieldValue>
+            <controllingFieldValue>NYMEX</controllingFieldValue>
+            <controllingFieldValue>GSPL</controllingFieldValue>
+            <valueName>NYMEX</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

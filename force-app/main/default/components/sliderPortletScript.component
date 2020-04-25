@@ -1,0 +1,101 @@
+<apex:component >
+    <script>
+        $j=jQuery.noConflict();
+    	//$j(document).ready(function(){setupSliders();});
+        setupSliders();
+        $j("#search_plans_submit").click(function(){
+            //console.log('button was clicked');
+            SavePrefs();
+        });
+        var StoredAPA; 
+        cookieParametersSetup();
+    
+        
+        $j("#search_zip").keydown(function(event){
+            if(event.keyCode == 13) {
+                event.preventDefault();
+                SavePrefs();
+            }
+        });
+    
+    		//first, set up all info from the APA                
+			ShopRemote.getAccountInfo('{!$User.Id}', function(result, event){
+                if (event.status && result != null){
+                    console.log('APA data came back');
+                    $j("#search_zip").text(result.Premise__r.Electric_Service_Address_Zip__c.substring(0,5));
+                    APAtoSliders(result);
+                    StoredAPA=result;
+                } else{
+                	    
+                }
+                
+            });	
+    
+			//helper functions
+    		function setupSliders(){
+                console.log('in slider setup');
+            	$j(".jq_slider").slider({range:"min", min:0, max:100, step:1});
+                $j("#price_weight_slider").slider({range:"min", min:1, max:100, step:1});           
+            }
+    
+    		function cookieParametersSetup(){ //sets all the cookies if they're null
+                if(!$j.cookie("apex__ShopZip")) $j.cookie("apex__ShopZip", "77002", { expires: 90 });
+                if(!$j.cookie("apex__p")) $j.cookie("apex__p", "50", { expires: 90 });
+                if(!$j.cookie("apex__g")) $j.cookie("apex__g", "50", { expires: 90 });
+                if(!$j.cookie("apex__y")) $j.cookie("apex__y", "50", { expires: 90 });
+                if(!$j.cookie("apex__s")) $j.cookie("apex__s", "50", { expires: 90 });
+                
+                if({!isnull($CurrentPage.Parameters.RateClass)} && !$j.cookie("apex__RateClass")) {
+                    console.log('no cookie, no parameter');
+                    $j.cookie("apex__RateClass", "Residential", { expires: 90 }); //we got nothing
+                }else if ({!not(isnull($CurrentPage.Parameters.RateClass))}){
+                    console.log('there is a parameter');
+                    $j.cookie("apex__RateClass", "{!$CurrentPage.Parameters.RateClass}", { expires: 90 }); //there's a parameter
+                }
+                
+                CookieToSliders();                
+            }
+    		
+    		function APAtoSliders(result){
+                $j("#price_weight_slider").slider("value", result.Account__r.Price_weight__c);
+                $j("#green_weight_slider").slider("value", result.Account__r.Green_weight__c);
+                $j("#star_weight_slider").slider("value", result.Account__r.Star_weight__c);
+                $j("#year_weight_slider").slider("value", result.Account__r.Year_weight__c);
+            }
+    
+    		function CookieToSliders(){
+                $j("#price_weight_slider").slider("value", $j.cookie("apex__p"));
+                $j("#green_weight_slider").slider("value", $j.cookie("apex__g"));
+                $j("#star_weight_slider").slider("value", $j.cookie("apex__s"));
+                $j("#year_weight_slider").slider("value", $j.cookie("apex__y"));                
+                $j("#search_zip").val($j.cookie("apex__ShopZip"));
+            }
+    		
+    	//public static boolean SavePrefs(string userid, decimal p, decimal g, decimal s, decimal y, string z){
+        function SavePrefs(){
+            if(StoredAPA) {
+                ShopRemote.SavePrefsMini(
+                '{!$User.Id}', 
+                    $j("#price_weight_slider").slider("value"),//$j("#price_weight").val(), //decimal p, 
+                    $j("#green_weight_slider").slider("value"),//$j("#green_weight").val(), //decimal g, 
+                    $j("#star_weight_slider").slider("value"),//$j("#star_weight").val(), //decimal s, 
+                    $j("#year_weight_slider").slider("value"),//$j("#year_weight").val(), //decimal y, 
+                    $j("#search_zip").val(), //string z
+                function(result, event){
+                    //nothing to do
+                }
+            
+        	);
+            } else{
+            	$j.cookie("apex__g", $j("#green_weight_slider").slider("value"), { expires: 90 });
+                $j.cookie("apex__p", $j("#price_weight_slider").slider("value"), { expires: 90 });
+                $j.cookie("apex__s", $j("#star_weight_slider").slider("value"), { expires: 90 });
+                $j.cookie("apex__y", $j("#year_weight_slider").slider("value"), { expires: 90 });
+                $j.cookie("apex__ShopZip", $j("#search_zip").val(), { expires: 90 });
+            }
+            window.location = '{!$Page.ShopPlans}';
+        }
+    
+        </script>
+    	<script src="{!URLFOR($Resource.jQueryUIPunch)}"/>
+</apex:component>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Credit_Card_Requirements</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+ Record_Type_Name__c = &quot;Electric Plan&quot;,
+OR(
+ISPICKVAL( Credit_Debit_Card_Requirements__c ,&quot;Optional&quot;),
+ISPICKVAL( Credit_Debit_Card_Requirements__c ,&quot;Required&quot;)
+),
+ REP_Profile__r.Accept_American_Express__c = FALSE,
+ REP_Profile__r.Accept_Discover__c = FALSE,
+ REP_Profile__r.Accept_MasterCard__c = FALSE,
+ REP_Profile__r.Accept_Visa__c = FALSE
+)</errorConditionFormula>
+    <errorDisplayField>Credit_Debit_Card_Requirements__c</errorDisplayField>
+    <errorMessage>If credit/debit cards are optional/required for payment, you must specify which card types (AMEX, Discover, MasterCard, Visa) are accepted on the REP Profile.</errorMessage>
+</ValidationRule>

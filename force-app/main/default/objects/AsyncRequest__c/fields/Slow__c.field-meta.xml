@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Slow__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Slow ASRs can get blocked by UHIT traffic update, etc.  Only check this box if your job can wait for hours (could be at least 8 during overnight hours)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Slow ASRs can get blocked by UHIT traffic update, etc.  Only check this box if your job can wait for hours (could be at least 8 during overnight hours)</inlineHelpText>
+    <label>Slow</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

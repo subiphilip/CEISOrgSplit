@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>leading__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If an upsell is represented a leading must first be chosen. The user first sees the leading plan and if they select the leading plan they are then seen taken to an upsell plan.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This will be the first plan to display to the user before an upsell.</inlineHelpText>
+    <label>leading</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Arkansas_Well_Reporting_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Arkansas Well Reporting Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Conventional (Col D)</fullName>
+                <default>false</default>
+                <label>Conventional (Col D)</label>
+            </value>
+            <value>
+                <fullName>High Cost (Col E)</fullName>
+                <default>false</default>
+                <label>High Cost (Col E)</label>
+            </value>
+            <value>
+                <fullName>High Cost (Col H)</fullName>
+                <default>false</default>
+                <label>High Cost (Col H)</label>
+            </value>
+            <value>
+                <fullName>Marginal Conventional (Col C)</fullName>
+                <default>false</default>
+                <label>Marginal Conventional (Col C)</label>
+            </value>
+            <value>
+                <fullName>Marginal High Cost (Col G)</fullName>
+                <default>false</default>
+                <label>Marginal High Cost (Col G)</label>
+            </value>
+            <value>
+                <fullName>New Discovery (Col B)</fullName>
+                <default>false</default>
+                <label>New Discovery (Col B)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

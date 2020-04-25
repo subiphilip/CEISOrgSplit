@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reward_Choice_OR_Program</fullName>
+    <active>true</active>
+    <errorConditionFormula>and( Program__c =true,Choice__c=true)</errorConditionFormula>
+    <errorMessage>Reward07: Reward can be a Program OR a Choice, not both.</errorMessage>
+</ValidationRule>

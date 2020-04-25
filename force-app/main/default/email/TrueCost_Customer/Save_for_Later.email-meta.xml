@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>TrueCost_Customer</letterhead>
+    <name>Save for Later</name>
+    <style>freeForm</style>
+    <subject>Your Saved TrueCost Progress</subject>
+    <textOnly>{!Account.FirstName},
+
+Thank you for using TrueCost!  Because you saved your progress, you can return to your shopping experience when it is convenient to you. We look forward to helping you find the right plan for you!
+
+To start shopping again follow the link below:
+
+https://centerpointenergy.secure.force.com/Home?leadid={!Lead.Id}&amp;utm_medium=Email&amp;utm_source=save-my-progress
+
+If there&#39;s anything we can do for you that our online tools does not address, please send a note to truecost@centerpointenergy.com.
+
+Thank you,
+
+TrueCost Customer Support
+
+Log into your account at {!$Site.CurrentSiteUrl}/Login</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

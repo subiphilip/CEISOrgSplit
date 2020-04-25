@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Workflows_or_Triggers__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check this box to avoid workflows and triggers from firing.  This prevents any automated customer communication.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check this box to avoid workflows and triggers from firing.  This prevents any automated customer communication.</inlineHelpText>
+    <label>No Workflows or Triggers</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

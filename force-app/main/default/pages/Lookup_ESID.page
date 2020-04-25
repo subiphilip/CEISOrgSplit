@@ -1,0 +1,25 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" controller="ControllerForMobileMain">
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+      description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."
+  />
+  <body class="has-background-grey-light has-navbar-fixed-top">
+    <div id="wrapper">
+        <c:tc2_navbar />
+        <c:tc2_hero_inner bgImage="hero-1.jpg" headline="Let's Look Up Your ESID" />
+        <section>
+            <div class="container">
+                <div class="has-margin-3 has-text-centered">
+                    <h2 class="is-size-4 has-text-weight-bold padding-sides">Please enter your service address</h2>
+                </div>
+            </div>
+        </section>
+        <c:tc2_esid_lookup routeTo="{!$Page.Lookup_ESID_Complete}"/>
+        <script>
+          sessionStorage.setItem('pathStart','esid-lookup');
+        </script>
+    </div>
+    <c:tc2_footer />
+  </body>
+  </html>
+</apex:page>

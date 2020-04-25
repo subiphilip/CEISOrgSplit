@@ -1,0 +1,40 @@
+<apex:page showHeader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false">
+    
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Guided Tour - {!$Label.Page_Title_Company_Name}</title>
+            
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <center>
+                            No video?  View our <apex:outputLink target="_blank" value="{!$Page.Guided_Tour_NonFlash}"> non-flash version</apex:outputLink>                    
+                        </center>
+                    </div>
+                    <div class="span12">
+                        <center>
+                            <embed src="{!$Resource.Angelvision}" width="854" height="480" />
+                        </center>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </apex:define>    
+        <!--
+        <script type="text/javascript">
+        if(swfobject.hasFlashPlayerVersion("1")){
+            return true;
+        }
+        else{
+            window.location = "https://www.youtube.com/watch?v=98JXuSZrsxs&list=UUG8nTw-42fWVSOUPLciVXDQ&feature=plcp";
+        }
+        
+        </script>
+        -->
+    </apex:composition>
+</apex:page>

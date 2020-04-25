@@ -1,0 +1,121 @@
+<apex:component controller="ShopRemote">
+    <div class="modal hide fade" id="shopplans_clickthrough">
+        
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <p class="lead"><b>my<span class="text-info">TrueCost</span>.com</b>&mdash;electric plan shopping,<br/>customized for you.</p>
+            <p><strong class="text-info">Fact:</strong> Two people can pay different amounts per kWh on the same plan.</p>
+            <p>TrueCost can bring in your smart meter data and show you the <b>true cost</b> based on how you used electricity last year.</p>
+            
+            <apex:outputPanel rendered="{!(ISPICKVAL($User.UserType,'Guest'))}">
+                <p>
+                    <a href="{!$Page.Register}" class="btn btn-primary">Create a Profile</a> to get started.
+                </p>
+                <p>
+                    <a href="{!$Page.SiteLogin}" class="btn btn-success">Login</a> if you're already registered.
+                </p>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT((ISPICKVAL($User.UserType,'Guest')))}">
+                <div id="reg_no_premise_modal" style="display:none">
+                    <a href="{!$Page.AddAddressAfterRegistration}" class="btn btn-warning">Set up a service address</a> to get started.
+                </div>
+                <div id="prem_no_data_modal" style="display:none">
+                    <a href="{!$Page.Calculation_Choice}?mode=MeterData" class="btn btn-warning">Import your meter data</a> to get started.
+                </div>
+            </apex:outputPanel>
+            <hr/>
+            <span id="hasZipAnonymous" style="display:none">To view plans for <span id="cookiedZip">77002</span>, simply click outside this box.</span>
+
+            <form action="javascript:void(0);" id="zip_code_form" style="display:none">
+            To compare non-customized prices without your data, simply enter your zip code.  
+                <div class="input-append">
+                    <input class="" maxlength="5" autofocus="autofocus" name="zip_code" id="zip_code" placeholder="Zip Code" value="" type="text" required="required" pattern="[0-9]{5}" title="5-digit Zip Code"/>               
+                    <input id="zip_submit" name="zip_submit" class="btn btn-warning" type="submit" value="Submit"/>
+                </div>
+            </form>     
+            <span class="text-error" id="zipLater" style="display:none">TrueCost does not serve your zip code yet, but plans to in the future.</span>
+            <span class="text-error" id="zipNever" style="display:none">TrueCost does not serve your zip code.</span>
+
+        </div>
+        
+    </div>
+    
+    <script>
+    $j=jQuery.noConflict();    
+    var ces = ces || {};
+    ces.TrueCost = ces.TrueCost || {};
+
+    $j(".shopping-result-tiles").on("TilesComplete", function (e){
+        ces.TrueCost.ShoppingZipModalExecute();
+    });
+
+    $j("#zip_submit").click(function() {
+        //is the form valid?
+        if (!ces.TrueCost.hasFormValidation()) {
+            ces.TrueCost.zipCodeCheckSubmission();
+        }
+        else {
+            console.log('hasFormValidation was true');
+            if (!$j("#zip_code_form")[0].checkValidity()) {
+                console.log('validation failed');
+                //return false;
+            }
+            else {
+                console.log('validation passed');
+                ces.TrueCost.zipCodeCheckSubmission();
+            }
+        }
+        
+    });
+
+    ces.TrueCost.ShoppingZipModalExecute = function(){
+        var leadid = $j.cookie("apex__LeadId");
+        var streetaddy = $j.cookie("apex__StreetAddress");
+        if (leadid || streetaddy){
+            return;
+        }
+        if (typeof StoredAPA==='undefined'){ 
+            if($j.cookie('apex__seen_shop_clickthrough')!='1'){ 
+                $j('#reg_no_premise_modal').show();
+                $j('#shopplans_clickthrough').modal('toggle');
+                $j.cookie('apex__seen_shop_clickthrough', '1');
+                if ($j.cookie("apex__ShopZip")==='77002'){
+                    $j("#zip_code_form").show();
+                } else if ({!contains(lower($CurrentPage.Name), 'shopplans')}){        
+                    $j("#cookiedZip").text($j.cookie("apex__ShopZip"));
+                    $j("#hasZipAnonymous").show();
+                } else if ({!contains(lower($CurrentPage.Name), 'plandetails')}){
+                    $j("#zip_code_form").show();
+                }
+            }
+        } //has APA but no meter data permission 
+        else if (!StoredAPA.Meter_Data_Permission__c && $j.cookie('apex__seen_shop_clickthrough')!='1'){ 
+            $j('#prem_no_data_modal').show();
+            $j('#shopplans_clickthrough').modal('toggle');
+            $j.cookie('apex__seen_shop_clickthrough', '1');
+        }
+    }
+
+    ces.TrueCost.zipCodeCheckSubmission = function (){
+    debugger;
+        ShopRemote.checkZip($j("#zip_code").val(), function(result, event){
+            if (result=='Now' || result=='Maybe'){
+                $j.cookie("apex__ShopZip", $j("#zip_code").val(), { expires: 720 });
+                window.location.href="{!$Page.ShopPlans}";
+                //location.reload(false); //reload whichever page you're on 
+            } else if (result=='Later'){
+                $j('#zipLater').show();
+            } else if (result=='No'){
+                $j('#zipNever').show();
+            }
+        });
+    }
+
+    ces.TrueCost.hasFormValidation = function () {        
+        var i = document.createElement('input');
+        console.log('check was: '+typeof i.validity === 'object');
+        return typeof i.validity === 'object';
+        
+    };
+    </script>
+</apex:component>

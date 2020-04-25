@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Index_Adder_GreaterThan_2</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR(
+Index_Adder__c &lt; -2,
+Index_Adder__c  &gt; 3
+)</errorConditionFormula>
+    <errorDisplayField>Index_Adder__c</errorDisplayField>
+    <errorMessage>CESC06: Index Adder must be between ($1.00) and $2.00 per MMBtu</errorMessage>
+</ValidationRule>

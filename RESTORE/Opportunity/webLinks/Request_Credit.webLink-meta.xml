@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Request_Credit</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Request Credit</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/connection.js&quot;)}
+sforce.connection.sessionId = &quot;{!$Api.Session_ID}&quot;;
+
+var acct = sforce.connection.query(&quot; Select Name FROM Account WHERE Id = &#39;{!Opportunity.AccountId}&#39;&quot;);
+var records = acct.getArray(&quot;records&quot;);
+
+var update_obj = new sforce.SObject(&quot;Opportunity&quot;);
+var recid = &#39;{!Opportunity.Id}&#39;;
+update_obj.Id = &#39;{!Opportunity.Id}&#39;;
+update_obj.RecordTypeId = &#39;0120M000001DSSf&#39;;
+update_obj.Credit_Analyst__c = &#39;{!$User.Assigned_Credit_Analyst__c}&#39;;
+update_obj.CES_Contract_Email__c = &#39;{!$User.CES_Contract_Email__c}&#39;;
+update_obj.Account_Legal_Name__c = records[0].Name;
+update_obj.Opty_Credit_Price__c = &quot;3.25&quot;;
+update_obj.Credit_Request_Status__c = &quot;New/Pending Submission&quot;;
+
+
+var result = sforce.connection.update([update_obj]);
+
+if(result[0].success = &#39;true&#39;){
+parent.frames.location.replace(&quot;/&quot;+recid+&quot;/e?retURL=%2F&quot;+recid+&quot;&amp;00N3000000C8P4q=1&quot;);
+}else{
+alert(&#39;Please Contact your System Admin&#39;);
+}</url>
+</WebLink>

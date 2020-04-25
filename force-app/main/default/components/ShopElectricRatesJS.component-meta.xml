@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>28.0</apiVersion>
+    <description>Added unselect button - 12/8/14 (Line 117, 288-290)
+Last modified - 7/2/2014 12:56 PM</description>
+    <label>ShopElectricRatesJS</label>
+</ApexComponent>

@@ -1,0 +1,61 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+    <apex:composition template="Template_TC">
+        
+        <apex:define name="body">
+            <title>Explore Your Meter Data - {!$Label.Page_Title_Company_Name}</title>
+            <div class="">
+                <div class="span2 pull-right text-right">
+                    Unit
+                    <select name="data-unit" id="data-unit" class="input-small">
+                        <option value="15">15 Min</option>
+                        <option value="hour">Hour</option>
+                        <option value="day" selected="true">Day</option>
+                    </select>
+                </div>
+                <h1 class="hidden-phone">Explore Your Meter Data</h1>
+            </div>
+            <div class="clearfix">
+                <div class="">
+                    <!--something about change APA-->                                
+                    <div class="navbarEven" id="data_viewer_nav">
+                        <div class="navbar-inner ">
+                            <ul class="nav">
+                                <li><a href="javascript:;"  id="usage_chart_back"  >Earlier</a></li>
+                                <li><a href="javascript:;"  id="usage_chart_out" >Zoom Out</a></li>
+                                <li><a href="javascript:;"  id="usage_chart_in" >Zoom In</a></li>
+                                <li><a href="javascript:;"	id="usage_chart_forward" >Later</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div> <!--container-->
+            
+                    <div class="" id="usage_chart">
+                        <div class="alert alert-info alert-block">
+                            <p><strong>TrueCost is charting your meter data.</strong></p>
+                            <p>  You can view the data by day, hour, or 15-minute interval.</p></div>
+                    </div>
+                <div class="">
+                    <div class="">
+                        <form>
+                            <div class="date-controls pull-right text-right">
+                                <label>End</label>
+                                <input name="end_datetime" id="end_datetime" type="date" required="required" class="span5"/>
+                            </div>
+                            <div class="date-controls pull-left">
+                                <label>Start</label>
+                                <input name="start_datetime" id="start_datetime" type="date" required="required" class="span5"/>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            <div class="clearfix"/>
+        </apex:define>
+    </apex:composition>
+    
+    
+    
+    <c:MobileDataViewerScript />
+    
+</apex:page>

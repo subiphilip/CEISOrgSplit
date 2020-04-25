@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>New_REP_Rating</fullName>
+        <description>New REP Rating</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>sphilip@cies.com.cnp2</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Internal_Messages/New_REP_Rating_INTERNAL</template>
+    </alerts>
+    <alerts>
+        <fullName>REP_Rating_Disputed</fullName>
+        <description>REP Rating Disputed</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>sphilip@cies.com.cnp2</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Internal_Messages/REP_Rating_Disputed</template>
+    </alerts>
+    <alerts>
+        <fullName>REP_Rating_Notification_to_REPs</fullName>
+        <description>REP Rating Notification to REPs</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Notification_to_REPs_for_new_rating</template>
+    </alerts>
+    <rules>
+        <fullName>Disputed REP rating</fullName>
+        <actions>
+            <name>REP_Rating_Disputed</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>REP_Rating__c.Disputed__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>REP_Rating__c.REP_Comments__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>New REP Rating Created</fullName>
+        <actions>
+            <name>New_REP_Rating</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>A new REP rating has been created, and it must be reviewed.</description>
+        <formula>OR( ISNEW() , ISCHANGED( Review__c ), ISCHANGED(REP_without_Order__c))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>REP Rating Notification</fullName>
+        <actions>
+            <name>REP_Rating_Notification_to_REPs</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>REP_Rating__c.Rating__c</field>
+            <operation>lessThan</operation>
+            <value>5</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

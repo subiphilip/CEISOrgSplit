@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Facility_List__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Which facility list does this premise belong to?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Which facility list does this premise belong to?</inlineHelpText>
+    <label>Current Facility List</label>
+    <lookupFilter>
+        <active>false</active>
+        <booleanFilter>(1 AND 2) OR 3</booleanFilter>
+        <filterItems>
+            <field>$Source.Account__c</field>
+            <operation>equals</operation>
+            <valueField>Facility_List__c.Account__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>$Source.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>C&amp;I Premise Gas, C&amp;I Premise Electric</value>
+        </filterItems>
+        <filterItems>
+            <field>$Source.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Gas Choice Premise, Electric Premise</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Facility_List__c</referenceTo>
+    <relationshipLabel>Premises</relationshipLabel>
+    <relationshipName>Premises</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

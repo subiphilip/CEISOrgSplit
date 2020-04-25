@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Residential</fullName>
+    <active>true</active>
+    <description>Shows the fields relevant to residential rates.</description>
+    <label>Residential</label>
+    <picklistValues>
+        <picklist>Cancellation_Fee_Type__c</picklist>
+        <values>
+            <fullName>Fixed</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Flat Fee X Remaining Months</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Confirmation_Code_Status__c</picklist>
+        <values>
+            <fullName>Activated with pricing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Activated%2C not priced</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Expired</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending activation %28sent to the utility%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Unactivated %28not sent to the utility%29</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Volume_Type__c</picklist>
+        <values>
+            <fullName>Daily-Daily</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Monthly-Daily</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Monthly-Monthly</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

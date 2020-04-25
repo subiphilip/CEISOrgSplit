@@ -1,0 +1,180 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" controller="VariableRatesController">
+    
+    <apex:composition template="{!$Site.Template}">
+        <apex:define name="HeadTags">
+            <title>Month-to-Month Rates - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="description" content="View Month-to-Month rates from providers like Reliant Energy, Direct Energy, TXU, Green Mountain, and more.  See the price you'll pay when your contract expires" />
+        </apex:define>
+       
+        
+        <apex:define name="body">
+       <!-- tab framework -->
+       <div class="tab-pane container">
+       <!--<div class="container">-->
+           <div class ="tabbable tabs-left span12">
+           <h3>Current Month-to-Month Rates<br/>
+                            <small>Sample "roll-over" month-to-month rates currently offered in Texas (ERCOT)</small>
+                        </h3>
+           <div class="alert">
+                            <c:Content_Viewer content="Variable Rate Introduction"/>
+           </div>
+               
+           <h4>Utilities</h4>
+               <ul class="nav nav-tabs">
+                     <li class="active"><a href="#tab-cnp" data-toggle="tab">CenterPoint Energy</a></li>
+                      <li><a href="#tab-oncor" data-toggle="tab">Oncor</a></li>
+                      <li><a href="#tab-tnmp" data-toggle="tab">TNMP</a></li>
+                      <li><a href="#tab-aepc" data-toggle="tab">AEP Central</a></li>
+                      <li><a href="#tab-aepn" data-toggle="tab">AEP North</a></li>
+                      
+               </ul>
+            <!-- tab content -->
+            <div class="tab-content span8">
+   
+            <!-- CenterPoint Energy table -->
+                <div id="tab-cnp" class="tab-pane active">
+                      <h4><u>CenterPoint Energy (Houston)</u></h4>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th><b>Provider</b></th>
+                                    <th><b>Month-to-Month Rate</b></th>
+                                    <th><b>Last Update</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!REPs}" var="r">
+                                 <tr>
+                                        <th>{!r.Name}</th>
+                                        <th><apex:outputText value= "{!IF((r.Curent_CEHE__c>0),'{0,number,##.##}'&' ¢/kWh','N/A')}"> 
+                                        <apex:param value="{!r.Curent_CEHE__c}" /> 
+                                        </apex:outputText></th>
+                                        <th><apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                            <apex:param value="{!r.CEHE_Variable_Rate_Last_Updated__c}" /> 
+                                        </apex:outputText></th>
+                                  </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                </div>
+                
+                            <!-- Oncor table -->
+                <div id="tab-oncor" class="tab-pane">
+                      <h4><u>Oncor Electric Delivery</u></h4>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th><b>Provider</b></th>
+                                    <th><b>Month-to-Month Rate</b></th>
+                                    <th><b>Last Update</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!REPs}" var="r">
+                                    <tr>
+                                        <th>{!r.Name}</th>
+                                        <th><apex:outputText value= "{!IF((r.Current_Oncor_Variable_Rate_cents__c>0),'{0,number,##.##}'&' ¢/kWh','N/A')}"> 
+                                        <apex:param value="{!r.Current_Oncor_Variable_Rate_cents__c}" /> 
+                                        </apex:outputText></th>
+                                        <th><apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                            <apex:param value="{!r.Oncor_Variable_Rate_Last_Updated__c}" /> 
+                                        </apex:outputText></th>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                </div>
+                    <!-- TNMP table -->
+                <div id="tab-tnmp" class="tab-pane">
+                      <h4><u>TNMP (Texas-New Mexico Power)</u></h4>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th><b>Provider</b></th>
+                                    <th><b>Month-to-Month Rate</b></th>
+                                    <th><b>Last Update</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!REPs}" var="r">
+                                    <tr>
+                                        <th>{!r.Name}</th>
+                                        <th><apex:outputText value= "{!IF((r.Current_TNMP_Variable_Rate_cents__c>0),'{0,number,##.##}'&' ¢/kWh','N/A')}"> 
+                                        <apex:param value="{!r.Current_TNMP_Variable_Rate_cents__c}" /> 
+                                        </apex:outputText></th>
+                                        <th><apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                            <apex:param value="{!r.TNMP_Variable_Rate_Last_Updated__c}" /> 
+                                        </apex:outputText></th>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                </div>
+                <!-- AEPC table -->
+                <div id="tab-aepc" class="tab-pane">
+                      <h4><u>AEP Central (American Electric Power)</u></h4>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th><b>Provider</b></th>
+                                    <th><b>Month-to-Month Rate</b></th>
+                                    <th><b>Last Update</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!REPs}" var="r">
+                                    <tr>
+                                        <th>{!r.Name}</th>
+                                        <th><apex:outputText value= "{!IF((r.Current_AEPC_Variable_Rate_cents__c>0),'{0,number,##.##}'&' ¢/kWh','N/A')}"> 
+                                        <apex:param value="{!r.Current_AEPC_Variable_Rate_cents__c}" /> 
+                                        </apex:outputText></th>
+                                        <th><apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                            <apex:param value="{!r.AEPC_Variable_Rate_Last_Updated__c}" /> 
+                                        </apex:outputText></th>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                </div>
+                <!-- AEPN table -->
+                <div id="tab-aepn" class="tab-pane">
+                      <h4><u>AEP North (American Electric Power)</u></h4>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th><b>Provider</b></th>
+                                    <th><b>Month-to-Month Rate</b></th>
+                                    <th><b>Last Update</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!REPs}" var="r">
+                                    <tr>
+                                        <th>{!r.Name}</th>
+                                        <th><apex:outputText value= "{!IF((r.Current_AEPN_Variable_Rate_cents__c>0),'{0,number,##.##}'&' ¢/kWh','N/A')}"> 
+                                        <apex:param value="{!r.Current_AEPN_Variable_Rate_cents__c}" /> 
+                                        </apex:outputText></th>
+                                        <th><apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                            <apex:param value="{!r.AEPN_Variable_Rate_Last_Updated__c}" /> 
+                                        </apex:outputText></th>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                </div>
+                          <h6><small class="muted">Month-to-Month rates obtained from providers' websites on the indicated date.  Month-to-Month rates can change often.</small></h6>
+                    <div class="alert alert-success">
+                            <h4>Don't want to pay these prices?</h4><br/>
+                            <a href="{!$Page.ShopPlans}" class="btn btn-primary">Shop Plans</a> to see our best fixed rates.
+                    </div>
+              </div>
+
+
+                        
+                    </div>
+                </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+</apex:page>

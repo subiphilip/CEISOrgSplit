@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Email_Alert_Header_Text__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(TEXT(Status__c), 
+  &quot;Assigned&quot;, &quot;A new technology project has been assigned to you.&quot; &amp; BR() &amp; &quot;Please begin work on this project and document project status changes in Salesforce.&quot;, 
+  &quot;Completed&quot;, &quot;A technology project has been completed.&quot; &amp; BR() &amp; &quot;The associated case #&quot; &amp; Technology_Case__r.Name &amp; &quot; has been closed.&quot;,
+  &quot;&quot;)</formula>
+    <label>Email Alert Header Text</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

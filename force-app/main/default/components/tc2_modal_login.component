@@ -1,0 +1,150 @@
+<apex:component >
+  
+  <app-modal-login inline-template='true' xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+    <div id="app-modal-login" class="modal">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+              <div id="app-compare-limit-modal-inside" class="modal-card-body has-text-centered">
+                  <button v-on:click="closeModal" class="delete is-large" aria-label="close"></button>
+                  <div class="modal-card-body-inner">
+                       <section>
+                          <form  v-on:submit="validateBeforeSubmit"  method="post">  
+                                     
+                            <div class=" ">
+                              <div class="">
+                                <div class="">
+                                  <div class="columns">
+                                    <div class="column form-column" style="margin-bottom: 4.5em;">
+
+                                      <div class="field is-horizontal">
+                                        <div class="field-body">
+                                          <div class="field">
+                                            <p v-if="errors.length">
+                                              <b>Please correct the following error(s):</b>
+                                              <ul>
+                                                <li v-for="error in errors">{{ error }}</li>
+                                              </ul>
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class="field is-horizontal">
+                                        <div class="field-body">
+                                          <div class="field">
+                                            <h1 class="is-size-4 has-text-weight-semibold">Looks like you may already have a TrueCost account</h1>
+                                            <p> Sign in to continue</p>
+                                          </div>
+                                        </div>
+                                      </div>
+
+
+                                      <div class="field is-horizontal">
+                                        <div class="field-body">
+                                          <div class="field">
+                                            <p class="control is-expanded">
+                                              <label class="form-label" for="email">Email Address</label>
+                                              <input v-validate="'required|email'"  class="input borderless" type="email" name="email" v-model="email" required="required"/>
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="field is-horizontal">
+                                        <div class="field-body">
+                                          <div class="field">
+                                            <p class="control is-expanded">
+                                              <label class="form-label" for="phone">Password</label>
+                                              <input id="password" class="input borderless" type="password" name="password" v-model="password" required="required"/>
+                                            </p>
+                                            <a href="{!$Page.Account_Forgot_Password}" class="btn btn-default btn-block">Forgot Password?</a>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class="has-text-centered ">
+                                      <input class="button is-primary is-rounded fixed-size" type="submit" value="Sign In"/>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </section>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </app-modal-login>
+
+  <script>
+  Vue.component('app-modal-login', {
+      data: function () { 
+          return {
+            errors: [],
+            password: '',
+            email: TC.app.account.email
+          }
+      },
+      mounted: function() {
+
+        var vm = this;
+        TC.app.appSubscribe.$on('modalLogin', function(arg) {
+            vm.showModal();
+            
+        });
+            
+      },
+      methods:{
+        onSelectSignIn: function() {
+             
+            let vm = this;                  
+            ControllerForMobileMain.RemoteLogin(this.email,this.password, window.location.href, function(result2, event){ 
+                if (result2!='login error'){
+                    TC.app.account.updatePremise = false;
+                    var decoded = result2.replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '');               
+                    window.location.href=decoded;
+                    
+                } else{
+                    TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'createprofile'});
+                    vm.errors.push("Your email and password were not correct.")
+                }
+                
+            });
+        },
+        validateBeforeSubmit: function(e) {
+          e.preventDefault();
+          if (!this.email) {
+            this.errors.push('Email required.');
+          } else {
+            this.errors = [];
+          }
+          
+          if(this.errors.length <= 0){
+              this.onSelectSignIn();
+          }
+          
+        },
+        showModal: function(){
+            TweenMax.to('#app-modal-login', .24, {opacity:1, display:'block'});
+            TweenMax.fromTo('.modal-background', .5, {opacity:0}, {opacity:.8})
+            TweenMax.fromTo('.modal-card', .7, {y:-100, opacity:0, scale:1.3}, {y: 100, opacity:1, scale: 1, ease:Bounce.easeOut});
+        },
+        closeModal: function() {
+            TweenMax.fromTo('.modal-card', .24, {opacity:1}, {opacity:0, scale: 1.1, ease:Bounce.easeOut});
+            TweenMax.to('.modal-background', .24, {opacity:0})
+            TweenMax.to('#app-modal-login', .24, {opacity:0, display:'none'});
+        },
+        submit: function() {
+          this.closeModal();
+        }        
+      },
+      watch: { 
+          
+      },
+      
+      props: []
+    });
+    </script>
+</apex:component>

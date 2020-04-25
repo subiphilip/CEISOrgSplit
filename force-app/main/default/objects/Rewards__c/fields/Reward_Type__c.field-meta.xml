@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reward_Type__c</fullName>
+    <description>What kind of reward option is this? If this is a reward program, select &quot;Reward Program.&quot;</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What kind of reward option is this? If this is a reward program, select &quot;Reward Program.&quot;</inlineHelpText>
+    <label>Type</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Airline Miles</fullName>
+                <default>false</default>
+                <label>Airline Miles</label>
+            </value>
+            <value>
+                <fullName>Bill Credit</fullName>
+                <default>false</default>
+                <label>Bill Credit</label>
+            </value>
+            <value>
+                <fullName>Cash Back (% of bill)</fullName>
+                <default>false</default>
+                <label>Cash Back (% of bill)</label>
+            </value>
+            <value>
+                <fullName>Cash Back (flat $ amount)</fullName>
+                <default>false</default>
+                <label>Cash Back (flat $ amount)</label>
+            </value>
+            <value>
+                <fullName>Charitable Donation</fullName>
+                <default>false</default>
+                <label>Charitable Donation</label>
+            </value>
+            <value>
+                <fullName>Credit Card Points</fullName>
+                <default>false</default>
+                <label>Credit Card Points</label>
+            </value>
+            <value>
+                <fullName>Electronics/Home Devices</fullName>
+                <default>false</default>
+                <label>Electronics/Home Devices</label>
+            </value>
+            <value>
+                <fullName>Home Protection</fullName>
+                <default>false</default>
+                <label>Home Protection</label>
+            </value>
+            <value>
+                <fullName>Hotel Points</fullName>
+                <default>false</default>
+                <label>Hotel Points</label>
+            </value>
+            <value>
+                <fullName>Retail Items</fullName>
+                <default>false</default>
+                <label>Retail Items</label>
+            </value>
+            <value>
+                <fullName>Reward Program</fullName>
+                <default>false</default>
+                <label>Reward Program</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

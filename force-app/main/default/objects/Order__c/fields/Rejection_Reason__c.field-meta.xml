@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rejection_Reason__c</fullName>
+    <description>This field captures why the REP rejected a customer.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This field captures why the REP rejected a customer.</inlineHelpText>
+    <label>Rejection Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Admin Rejection</fullName>
+                <default>false</default>
+                <label>Admin Rejection</label>
+            </value>
+            <value>
+                <fullName>Credit quality</fullName>
+                <default>false</default>
+                <label>Credit quality</label>
+            </value>
+            <value>
+                <fullName>Customer Rescinded</fullName>
+                <default>false</default>
+                <label>Customer Rescinded</label>
+            </value>
+            <value>
+                <fullName>Deposit Unpaid</fullName>
+                <default>false</default>
+                <label>Deposit Unpaid</label>
+            </value>
+            <value>
+                <fullName>Inaccurate address</fullName>
+                <default>false</default>
+                <label>Inaccurate address</label>
+            </value>
+            <value>
+                <fullName>Inaccurate ESID</fullName>
+                <default>false</default>
+                <label>Inaccurate ESID</label>
+            </value>
+            <value>
+                <fullName>Other (enter comments)</fullName>
+                <default>false</default>
+                <label>Other (enter comments)</label>
+            </value>
+            <value>
+                <fullName>Permit Problem</fullName>
+                <default>false</default>
+                <label>Permit Problem</label>
+            </value>
+            <value>
+                <fullName>Prior payment history</fullName>
+                <default>false</default>
+                <label>Prior payment history</label>
+            </value>
+            <value>
+                <fullName>Should have been a move</fullName>
+                <default>false</default>
+                <label>Should have been a move</label>
+            </value>
+            <value>
+                <fullName>Switch Hold</fullName>
+                <default>false</default>
+                <label>Switch Hold</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

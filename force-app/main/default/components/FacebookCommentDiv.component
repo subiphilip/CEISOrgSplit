@@ -1,0 +1,7 @@
+<apex:component selfClosing="true">
+
+<div class="blog-comment-holder">
+  <div class="fb-comments" data-href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c+$CurrentPage.Name}" data-num-posts="10" ></div>
+</div>
+
+</apex:component>

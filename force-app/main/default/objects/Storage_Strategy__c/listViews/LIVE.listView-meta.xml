@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LIVE</fullName>
+    <columns>NAME</columns>
+    <columns>January__c</columns>
+    <columns>February__c</columns>
+    <columns>March__c</columns>
+    <columns>April__c</columns>
+    <columns>May__c</columns>
+    <columns>June__c</columns>
+    <columns>July__c</columns>
+    <columns>August__c</columns>
+    <columns>September__c</columns>
+    <columns>October__c</columns>
+    <columns>November__c</columns>
+    <columns>December__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Live_ID__c</field>
+        <operation>startsWith</operation>
+        <value>LIVE</value>
+    </filters>
+    <label>LIVE</label>
+</ListView>

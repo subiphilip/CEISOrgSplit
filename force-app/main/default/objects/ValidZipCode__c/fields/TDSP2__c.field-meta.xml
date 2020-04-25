@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TDSP2__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>TDSP Lookup 2</label>
+    <referenceTo>TDSP__c</referenceTo>
+    <relationshipLabel>Zip Codes (TDSP 2)</relationshipLabel>
+    <relationshipName>Zip_Codes2</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

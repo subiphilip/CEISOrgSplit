@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invoice_Template__c</fullName>
+    <externalId>false</externalId>
+    <label>Invoice Template</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CR Single Invoice</fullName>
+                <default>false</default>
+                <label>CR Single Invoice</label>
+            </value>
+            <value>
+                <fullName>CR Summary Invoice</fullName>
+                <default>false</default>
+                <label>CR Summary Invoice</label>
+            </value>
+            <value>
+                <fullName>SMIT Daily Contract Details</fullName>
+                <default>false</default>
+                <label>SMIT Daily Contract Details</label>
+            </value>
+            <value>
+                <fullName>SMIT Daily Contract Tax Details</fullName>
+                <default>false</default>
+                <label>SMIT Daily Contract Tax Details</label>
+            </value>
+            <value>
+                <fullName>SMIT FOM Baseload Tax Details</fullName>
+                <default>false</default>
+                <label>SMIT FOM Baseload Tax Details</label>
+            </value>
+            <value>
+                <fullName>SMIT Only</fullName>
+                <default>false</default>
+                <label>SMIT Only</label>
+            </value>
+            <value>
+                <fullName>SMIT and Savings Only B</fullName>
+                <default>false</default>
+                <label>SMIT and Savings Only B</label>
+            </value>
+            <value>
+                <fullName>CEIP Transport Single</fullName>
+                <default>false</default>
+                <label>CEIP Transport Single</label>
+            </value>
+            <value>
+                <fullName>CEIP Wholesale Single</fullName>
+                <default>false</default>
+                <label>CEIP Wholesale Single</label>
+            </value>
+            <value>
+                <fullName>CEIP CR Single Invoice</fullName>
+                <default>false</default>
+                <label>CEIP CR Single Invoice</label>
+            </value>
+            <value>
+                <fullName>CEIP Transport Summary</fullName>
+                <default>false</default>
+                <label>CEIP Transport Summary</label>
+            </value>
+            <value>
+                <fullName>CEIP Wholesale Summary</fullName>
+                <default>false</default>
+                <label>CEIP Wholesale Summary</label>
+            </value>
+            <value>
+                <fullName>CEIP CR Summary Invoice</fullName>
+                <default>false</default>
+                <label>CEIP CR Summary Invoice</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

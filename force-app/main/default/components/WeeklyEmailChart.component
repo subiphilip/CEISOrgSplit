@@ -1,0 +1,86 @@
+<apex:component controller="WeeklyTCEmailController" access="global">
+	<apex:attribute name="APA" type="String" access="global" description="The salesforce id of the APA that the data will be for" assignTo="{!APAid}"/>
+
+	<apex:outputPanel styleClass="callout" layout="block">
+		Here's your usage summary for dates 
+		<apex:outputText value=" {0,date,MM'/'dd'/'yyyy}">
+			<apex:param value="{!startdate}"/>
+		</apex:outputText> to 
+		<apex:outputText value=" {0,date,MM'/'dd'/'yyyy}">
+			<apex:param value="{!enddate}"/>
+		</apex:outputText>		
+	</apex:outputPanel>
+
+	<apex:outputPanel >
+            <apex:image styleClass="google-image-chart" 
+            url="http://chart.apis.google.com/chart?chbh=a&chxl=0:|Mon|Tue|Wed|Thu|Fri|Sat|Sun|2:|kWh&chxt=x,y,y&chxp=2,{!weekmax/2}&chs=600x300&cht=bvs&chds=a&chd=t:{!days}&chg=0,0,0,0&chls=1.75&chma=|0,5&chtt=Electric Usage for {!startdate} to {!enddate}&chm=N** kWh,000000,0,-1,13" 
+            width="600" height="300" />
+    </apex:outputPanel>
+
+    <apex:outputPanel styleClass="callout" layout="block">
+    	Detail Links: 
+    	<a href="#Monday">Monday</a> |
+    	<a href="#Tuesday">Tuesday</a> | 
+    	<a href="#Wednesday">Wednesday</a> |
+    	<a href="#Thursday">Thursday</a> |
+    	<a href="#Friday">Friday</a> |
+    	<a href="#Saturday">Saturday</a> |
+    	<a href="#Sunday">Sunday</a>
+    </apex:outputPanel>
+
+    <apex:outputPanel >
+    	<a name="Monday"/>
+            <apex:image styleClass="google-image-chart" 
+            url="http://chart.apis.google.com/chart?chf=c,ls,0,EFEFEF83,0.1667,E0E0E083,0.1667&chxl=0:|midnight|4am|8am|noon|4pm|8pm|midnight|2:|kWh&chxt=x,y,y&chxp=2,{!Last7[6].Max_for_the_day__c/2}&chs=600x300&cht=lc&chds=a&chd=t:{!Last7[6].Intervals__c}&chg=16.67,25,0,0&chls=1.75&chma=|0,5&chtt=Electric+Usage+for+{!Last7[6].Day_of_Week__c}+{!Last7[6].Date__c}" 
+            width="600" height="300" />
+    </apex:outputPanel>
+	<hr/>
+    <apex:outputPanel >
+    	<a name="Tuesday"/>
+    	<apex:image styleClass="google-image-chart" 
+            url="http://chart.apis.google.com/chart?chf=c,ls,0,EFEFEF83,0.1667,E0E0E083,0.1667&chxl=0:|midnight|4am|8am|noon|4pm|8pm|midnight|2:|kWh&chxt=x,y,y&chxp=2,{!Last7[5].Max_for_the_day__c/2}&chs=600x300&cht=lc&chds=a&chd=t:{!Last7[5].Intervals__c}&chg=16.67,25,0,0&chls=1.75&chma=|0,5&chtt=Electric+Usage+for+{!Last7[5].Day_of_Week__c}+{!Last7[5].Date__c}" 
+            width="600" height="300" />
+    </apex:outputPanel>
+	<hr/>
+
+    <apex:outputPanel >
+    	<a name="Wednesday"/>
+    	<apex:image styleClass="google-image-chart" 
+            url="http://chart.apis.google.com/chart?chf=c,ls,0,EFEFEF83,0.1667,E0E0E083,0.1667&chxl=0:|midnight|4am|8am|noon|4pm|8pm|midnight|2:|kWh&chxt=x,y,y&chxp=2,{!Last7[4].Max_for_the_day__c/2}&chs=600x300&cht=lc&chds=a&chd=t:{!Last7[4].Intervals__c}&chg=16.67,25,0,0&chls=1.75&chma=|0,5&chtt=Electric+Usage+for+{!Last7[4].Day_of_Week__c}+{!Last7[4].Date__c}" 
+            width="600" height="300" />
+    </apex:outputPanel>
+	<hr/>
+
+    <apex:outputPanel >
+    	<a name="Thursday"/>
+    	<apex:image styleClass="google-image-chart" 
+            url="http://chart.apis.google.com/chart?chf=c,ls,0,EFEFEF83,0.1667,E0E0E083,0.1667&chxl=0:|midnight|4am|8am|noon|4pm|8pm|midnight|2:|kWh&chxt=x,y,y&chxp=2,{!Last7[3].Max_for_the_day__c/2}&chs=600x300&cht=lc&chds=a&chd=t:{!Last7[3].Intervals__c}&chg=16.67,25,0,0&chls=1.75&chma=|0,5&chtt=Electric+Usage+for+{!Last7[3].Day_of_Week__c}+{!Last7[3].Date__c}" 
+            width="600" height="300" />
+    </apex:outputPanel>
+	<hr/>
+
+    <apex:outputPanel >
+    	<a name="Friday"/>
+    	<apex:image styleClass="google-image-chart" 
+            url="http://chart.apis.google.com/chart?chf=c,ls,0,EFEFEF83,0.1667,E0E0E083,0.1667&chxl=0:|midnight|4am|8am|noon|4pm|8pm|midnight|2:|kWh&chxt=x,y,y&chxp=2,{!Last7[2].Max_for_the_day__c/2}&chs=600x300&cht=lc&chds=a&chd=t:{!Last7[2].Intervals__c}&chg=16.67,25,0,0&chls=1.75&chma=|0,5&chtt=Electric+Usage+for+{!Last7[2].Day_of_Week__c}+{!Last7[2].Date__c}" 
+            width="600" height="300" />
+    </apex:outputPanel>
+	<hr/>
+
+    <apex:outputPanel >
+    	<a name="Saturday"/>
+    	<apex:image styleClass="google-image-chart" 
+            url="http://chart.apis.google.com/chart?chf=c,ls,0,EFEFEF83,0.1667,E0E0E083,0.1667&chxl=0:|midnight|4am|8am|noon|4pm|8pm|midnight|2:|kWh&chxt=x,y,y&chxp=2,{!Last7[1].Max_for_the_day__c/2}&chs=600x300&cht=lc&chds=a&chd=t:{!Last7[1].Intervals__c}&chg=16.67,25,0,0&chls=1.75&chma=|0,5&chtt=Electric+Usage+for+{!Last7[1].Day_of_Week__c}+{!Last7[1].Date__c}" 
+            width="600" height="300" />
+    </apex:outputPanel>
+	<hr/>
+
+    <apex:outputPanel >
+    	<a name="Sunday"/>
+    	<apex:image styleClass="google-image-chart" 
+            url="http://chart.apis.google.com/chart?chf=c,ls,0,EFEFEF83,0.1667,E0E0E083,0.1667&chxl=0:|midnight|4am|8am|noon|4pm|8pm|midnight|2:|kWh&chxt=x,y,y&chxp=2,{!Last7[0].Max_for_the_day__c/2}&chs=600x300&cht=lc&chds=a&chd=t:{!Last7[0].Intervals__c}&chg=16.67,25,0,0&chls=1.75&chma=|0,5&chtt=Electric+Usage+for+{!Last7[0].Day_of_Week__c}+{!Last7[0].Date__c}" 
+            width="600" height="300" />
+    </apex:outputPanel>
+
+
+</apex:component>

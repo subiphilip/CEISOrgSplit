@@ -1,0 +1,410 @@
+<apex:component >
+<apex:attribute name="routeTo" description="" type="string" required="true"/>
+
+<div xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+    <section>
+      <div id="appGoogleAddress">
+        <c:tc2_tdsp_lookup_modal_out_of_area />
+
+        <div id="map"></div>
+        <div class="container form singup-bottom-padding">
+             <div class="box is-form-no-padding" >
+                <div class="inner">
+                    <div class="columns">
+                        <div class="column form-column" style="margin-bottom: 4.5em;">
+
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <p class="control is-expanded">
+                                            <label class="form-label" for="street">Street</label>
+                                            <!-- <input id="street"
+                                                maxlength="20" pattern="[/[^A-Za-z0-9_ '-]/gi"
+                                             class="input borderless" type="text" name="street" v-model="street"  /> -->
+                                             <input class="input borderless" id="pac-input" v-on:focus="resetAddress()" v-model="street" type="text" placeholder=" " />
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <p class="control is-expanded">
+                                            <label class="form-label" for="unit">Unit</label>
+                                            <input id="unit"
+                                                maxlength="20" pattern="[/[^A-Za-z0-9_ '-]/gi"
+                                             class="input borderless" type="text" name="unit" v-model="unit"  />
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <p class="control is-expanded">
+                                            <label class="form-label" for="city">City</label>
+                                            <input id="city"
+                                                maxlength="20" pattern="[/[^A-Za-z0-9_ '-]/gi"
+                                             class="input borderless" type="text" name="city" v-model="city"  />
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <p class="control is-expanded">
+                                            <label class="form-label" for="State">State</label>
+                                            <input id="state"
+                                                maxlength="20" pattern="[/[^A-Za-z0-9_ '-]/gi"
+                                             class="input borderless" type="text" name="state" v-model="state"  />
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <p class="control is-expanded">
+                                            <label class="form-label" for="zip">Zip</label>
+                                            <input id="zip"
+                                                maxlength="20" pattern="[0-9,-]{5,32}"
+                                             class="input borderless" type="text" name="zip" v-model="zip"  />
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="has-text-centered">
+                <p><button class="button is-primary is-rounded fixed-size animate-gradient-bg" v-on:click="lookupESID()" v-bind:disabled="!hasAddress" >Enter My Service Address</button></p>
+
+                <!-- <a class="has-text-weight-semibold is-size-8" v-on:click="goBack()">Go Back</a> -->
+            </div>
+
+
+
+
+
+
+
+            <div class="row-list mt-large">
+                <div v-for="(premise,index) in premises" class="row-list-item" v-on:click="selectPremise(premise)"
+                v-if="premises && premises.length > 0 && index <= 300">
+                    <p>{{premise.street}}, {{premise.city}}, {{premise.state}} {{premise.zip}}</p>
+
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+  <script>
+
+    /*document.addEventListener('DOMNodeInserted', function(event){
+        var tar = $(event.target);
+        if(tar.hasClass('pac-item')){
+            tar.html(tar.html().replace(', USA', ''));
+        }
+    });*/
+    function initMap() {
+
+        let input = document.getElementById('pac-input'),
+            state = '',
+            city = '',
+            unit = '',
+            zip = '',
+            street = '',
+            i = 0,
+            autocomplete,
+            addressObj = {},
+            place;
+
+
+        autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.setFields( ['address_components', 'geometry']);
+        autocomplete.addListener('place_changed', function() {
+            place = autocomplete.getPlace();
+            addressObj = {};
+            i = 0;
+            if(place.hasOwnProperty('address_components')){
+              for (i; i < place.address_components.length; i++) {
+                const component = place.address_components[i];
+                if (component.types[0] === 'street_number') {
+                  addressObj.streetNum = component.long_name;
+                }
+                if (component.types[0] === 'route') {
+                  addressObj.streetName = component.long_name;
+                }
+                if (component.types[0] === 'locality' || component.types[0] === 'political') {
+                  addressObj.city = component.long_name;
+                }
+                if (component.types[0] === 'administrative_area_level_1') {
+                  addressObj.state = component.short_name;
+                }
+                if (component.types[0] === 'postal_code') {
+                  addressObj.zip = component.long_name;
+                }
+              }
+              addressObj.street = addressObj.streetNum + ' ' + addressObj.streetName;
+              addressObj.raw_address = input.value;
+            }
+            setTimeout(function(){ TC.fn.setup.toggleInput() }, TC.delay)
+            
+            TC.app.googleAddress.setPremise(addressObj);
+        });
+    }
+
+
+    (function ($) {
+        $(function () {
+        'use strict';
+           TC.app.googleAddress = new Vue({
+            el: '#appGoogleAddress',
+            data: {
+                reg: new RegExp("\#(.*?)\,"),
+                regNoComma: new RegExp("\#(.*?)\*"),
+                street: '',
+                streetName: '',
+                streetNum: '',
+                city: '',
+                state: '',
+                unit: '',
+                zip: '',
+                raw_address: '',
+                premises: [],
+                esid: '',
+                hasAddress: false,
+                isManual: false,
+                query: ''
+
+            },
+            methods: {
+                goBack: function() {
+                  window.history.back();
+                },
+                resetAddress: function(){
+                    TC.app.account.premise.street = '';
+                },
+                selectPremise: function(premise){
+                    this.setPremise(premise);
+                    TC.fn.navigateTo("{!routeTo}");
+                },
+                validateAddress: function(){
+                    if(
+                        this.state.length >= 2 &&
+                        this.city.length >= 2 &&
+                        this.street.length >= 3 &&
+                        this.zip.length >= 5
+                    ){
+                        this.hasAddress = true;
+                    } else {
+                        this.hasAddress = false;
+                    }
+                    console.log("valid address");
+                },
+                setPremise: function(premise){
+                    TC.app.account.premise.street = premise.street;
+                    TC.app.account.premise.city = premise.city;
+                    TC.app.account.premise.state = premise.state;
+                    TC.app.account.premise.zip = premise.zip;
+                    TC.app.account.premise.esid = premise.esid;
+                    TC.app.account.premise.unit = this.unit;
+                    TC.app.account.premise.premiseId = premise.premiseId;
+                    TC.app.account.premise.premiseResult = premise.premiseResult;
+                    this.isManual = true;
+                    this.initAddress()
+                },
+                initAddress: function(){
+
+                    if(TC.app.account.premise.street !== null ){
+                        if(TC.app.account.premise.street.hasOwnProperty('length')){
+                            if(TC.app.account.premise.street.length > 3) {
+                                this.isManual = true;
+                                this.raw_address = '';
+
+                                if(TC.app.account.premise.street !== "" && TC.app.account.premise.street !== null && TC.app.account.premise.street !== undefined && TC.app.account.premise.street !== "undefined"){
+                                    if(this.regNoComma.test(TC.app.account.premise.street)){
+                                        //this.unit = this.regNoComma.exec(TC.app.account.premise.street);
+                                        this.raw_address += TC.app.account.premise.street.split('#')[0];
+                                    } else {
+                                        this.raw_address += TC.app.account.premise.street + ', ';
+                                    }
+                                    this.street = TC.app.account.premise.street;
+
+                                }
+                                if(TC.app.account.premise.unit !== "" && TC.app.account.premise.unit !== null && TC.app.account.premise.unit !== "undefined" && TC.app.account.premise.unit !== undefined){
+                                    //this.raw_address += '#' + TC.app.account.premise.unit + ', ';
+                                    this.unit = TC.app.account.premise.unit;
+                                }
+                                if(TC.app.account.premise.city !== "" && TC.app.account.premise.city !== null && TC.app.account.premise.city !== "undefined" && TC.app.account.premise.city !== undefined){
+                                    this.raw_address += TC.app.account.premise.city + ', ';
+                                    this.city = TC.app.account.premise.city;
+
+                                }
+                                if(TC.app.account.premise.state !== "" && TC.app.account.premise.state !== null && TC.app.account.premise.state !== "undefined" && TC.app.account.premise.state !== undefined){
+                                    this.raw_address += TC.app.account.premise.state + ', ';
+                                    this.state = TC.app.account.premise.state;
+
+                                }
+                                if(TC.app.account.premise.zip !== "" && TC.app.account.premise.zip !== null && TC.app.account.premise.zip !== "undefined" && TC.app.account.premise.zip !== undefined){
+                                    this.raw_address += TC.app.account.premise.zip;
+                                    this.zip = TC.app.account.premise.zip;
+
+                                }
+                            }
+                        }
+                    }
+                    TC.fn.setup.toggleInput()
+                },
+                lookupESID: function(){
+                    if(this.hasAddress){
+                        if(TC.app.account.premise.street !== null ){
+                            if(TC.app.account.premise.street.hasOwnProperty('length')){
+
+                                if(this.reg.test(this.raw_address)){
+                                    this.unit = this.reg.exec(this.raw_address);
+                                    TC.app.account.premise.unit = this.unit[1];
+                                }
+                                if(TC.app.account.premise.street.length > 3) {
+                                    // this.raw_address = TC.app.account.premise.street + ', '+ TC.app.account.premise.city + ', '+ TC.app.account.premise.state;
+                                    this.initAddress();
+                                } else {
+                                    TC.app.account.premise.street = this.raw_address.split(',')[0];
+                                }
+                            }
+                        }
+                        if(TC.app.account.premise.zip == null ){
+                            TC.app.account.premise.zip = '';
+                        }
+
+                        if(this.unit !== "" && this.unit !== null && this.unit !== "undefined" && this.unit !== undefined){
+                            this.query = TC.app.account.premise.street += ' #'+this.unit;
+                        } else {
+                            this.query = TC.app.account.premise.street;
+                        }
+
+                        TC.app.appSubscribe.$emit('addLoaderQueue', {'id':'lookupESID','status':'Locating your address'});
+
+
+                        ControllerForMobileMain.sendPremise(this.query, TC.app.account.premise.zip, function(result,event){
+                            TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'lookupESID'});
+                            let esid = [];
+                            TC.app.googleAddress.premises = [];
+                            for (var x=0; x<result.length; x++){
+                                let item = {
+                                    'street': result[x].Electric_Service_Address__c,
+                                    'zip': result[x].Electric_Service_Address_Zip__c.substr(0,5),
+                                    'city': result[x].Electric_Service_Address_City__c,
+                                    'state': result[x].Electric_Service_Address_State2__c,
+                                    //'premiseType': result[x].POLR_Customer_Class__c,
+                                    'premiseType': result[x].Premise_Type__c,
+                                    'premiseId': result[x].Id,
+                                    'esid': result[x].ESID__c,
+                                    'premiseResult': result[x]
+                                }
+                                if(result.length > 1 && TC.app.googleAddress.regNoComma.test(result[x].Electric_Service_Address__c)){
+
+                                    var unit = TC.app.googleAddress.regNoComma.exec(result[x].Electric_Service_Address__c)[0]
+                                    unit = unit.split('#')[1];
+                                    if(TC.app.googleAddress.unit[1] == unit){
+                                        item['unit'] = unit;
+                                        esid = [];
+                                        esid.push(item);
+                                        break;
+                                    }
+
+                                } else {
+                                    esid.push(item);
+                                }
+
+                            }
+                            if(esid.length == 1){
+                                TC.app.googleAddress.setPremise(esid[0]);
+                                window.location.href = "{!routeTo}";
+                            } else if(esid.length > 1){
+                                TC.app.googleAddress.premises = esid;
+                            } else {
+                                TC.app.appSubscribe.$emit('tdspLookupOutOfArea', TC.app.account);
+                            }
+                            return result;
+                        });
+                    }
+                }
+            },
+            mounted: function() {
+                this.initAddress();
+                initMap();
+            },
+            watch: {
+                raw_address: {
+                  handler: function() {
+                    if(this.raw_address.length > 10){
+                        this.hasAddress = true;
+                    } else {
+                        this.hasAddress = false;
+                    }
+                    /*this.street = TC.app.account.premise.street;
+                    this.unit = TC.app.account.premise.unit;
+                    this.city = TC.app.account.premise.city;
+                    this.state = TC.app.account.premise.state;
+                    this.zip = TC.app.account.premise.zip;*/
+                  },
+                },
+                street: {
+                  handler: function() {
+                    TC.app.account.premise.street = this.street;
+                    this.validateAddress();
+                  },
+                },
+                city: {
+                  handler: function() {
+                    TC.app.account.premise.city = this.city;
+                    this.validateAddress();
+                  },
+                },
+                state: {
+                  handler: function() {
+                    TC.app.account.premise.state = this.state;
+                    this.validateAddress();
+                  },
+                },
+                zip: {
+                  handler: function() {
+                    TC.app.account.premise.zip = this.zip;
+                    this.validateAddress();
+
+                    if(this.zip.length >= 5){
+                        TC.app.account.zipSearchPlans = this.zip;
+                        TC.app.account.updateTDSP()
+                    }
+
+                  },
+                },
+                unit: {
+                  handler: function() {
+                    TC.app.account.premise.unit = this.unit;
+                    this.validateAddress();
+                  },
+                }
+            },
+        });
+      })
+    })(jQuery);
+  </script>
+  
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrbzgbXbxUlJAdFnjaA-C0NiG_zPyJc7Q&libraries=places&callback=initMap&region=usa"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhNbXA2BpKsc7tYUHswQcSIrJOeIBYJN4&libraries=places&callback=initMap&region=usa"></script>-->
+
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=QCj31qQipBlNNZsYHibiDjKjI0c=&libraries=places&callback=initMap&region=usa"></script> -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=QCj31qQipBlNNZsYHibiDjKjI0c=&libraries=places&callback=initMap&region=usa&client=gme-centerpointenergy"></script> -->
+  <!-- //maps.googleapis.com/maps/api/geocode/json?address= -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3&callback=initMap&client=gme-centerpointenergy&libraries=places&key=QCj31qQipBlNNZsYHibiDjKjI0c="></script> -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn0wEy-rvo_dAAhJTYqIsxnPM9wbIZHXE&libraries=places&callback=initMap&region=usa" ></script> -->
+
+</div>
+</apex:component>

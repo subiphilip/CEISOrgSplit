@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>STL_Bill_Groups</fullName>
+    <columns>NAME</columns>
+    <columns>Customer_Number__c</columns>
+    <columns>Billing_Group_Name__c</columns>
+    <columns>Account__c</columns>
+    <columns>Bill_Group_Batch__c</columns>
+    <columns>Invoice_Template__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CES_Office__c</field>
+        <operation>equals</operation>
+        <value>CES-St_Louis</value>
+    </filters>
+    <label>STL Bill Groups</label>
+    <language>en_US</language>
+    <sharedTo>
+        <allInternalUsers/>
+    </sharedTo>
+</ListView>

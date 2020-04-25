@@ -1,0 +1,72 @@
+<apex:component controller="ControllerForCustomerRewardsView">
+	<apex:attribute name="rateid" type="id" description="the id for the rate whose rewards you want the component to display" assignto="{!therateid}"  />
+<style type="text/css">
+.normal-reward {background-color:#F2F1BD; padding-top:5px; padding-bottom:5px; padding-left:5px;} 
+.normal-reward .reward-name{display:inline-block; font-weight: bold;  width:240px;}
+.normal-reward .reward-when{display:inline-block; font-weight: bold;	width:220px;}
+.normal-reward .reward-value{display:inline-block; font-weight: bold; margin-left:10px;}
+.normal-reward .reward-description{padding-left:20px;}
+
+.program-member {margin-top:5px;}
+.program-member .reward-name{display:inline-block; font-weight: normal;  width:220px; margin-left:25px;}
+.program-member .reward-when{display:inline-block; font-weight: normal;	width:220px;}
+.program-member .reward-value{display:inline-block; font-weight: normal; margin-left:10px;}
+.program-member .reward-description{padding-left:40px;} 
+</style>
+<!-- Begin Default Content REMOVE THIS -->
+	
+	<apex:outputpanel layout="block" rendered="{!theRewards.size > 0  }">
+		<apex:repeat var="r" value="{!theRewards}">
+			
+			<!-- for normal reward -->
+			<apex:outputpanel layout="block" styleClass="normal-reward" rendered="{!ISNULL(r.Reward_Program__c)}">
+				<apex:outputpanel layout="block">
+					<apex:outputpanel StyleClass="reward-name">
+						<apex:outputtext rendered="{!NOT(r.Choice__c)}" value="Included:" styleClass="included"/>
+						<apex:outputtext rendered="{!(r.Choice__c)}" value="Option:" styleClass="option"/>
+						{!r.name}
+					</apex:outputpanel>
+					<apex:outputpanel StyleClass="reward-when" >
+						<apex:outputtext value="Occurs in month {!round(r.Time_from_start_of_contract_in_months__c, 0)} of your contract" rendered="{!r.Time_from_start_of_contract_in_months__c > 0 && NOT(Isnull(r.Time_from_start_of_contract_in_months__c))}"></apex:outputtext>
+					
+						<apex:outputtext value="Occurs when your contract begins" rendered="{!r.Time_from_start_of_contract_in_months__c == 0 && NOT(Isnull(r.Time_from_start_of_contract_in_months__c))}"></apex:outputtext>
+					</apex:outputpanel>
+					<apex:outputpanel StyleClass="reward-value">
+						<apex:outputtext value="Value:  ${!round(r.Reward_Value__c, 0)}" rendered="{!r.Reward_Value__c >0  && NOT(Isnull(r.Reward_Value__c))}" ></apex:outputtext>
+					</apex:outputpanel>
+				</apex:outputpanel>
+				<apex:outputpanel layout="block" StyleClass="reward-description" rendered="{!ISNULL(r.Reward_Program__c)}">
+					<apex:outputtext value="{!r.Reward_Description__c}">
+						
+					</apex:outputtext>
+				</apex:outputpanel>
+			</apex:outputpanel>
+			<!-- for program member-->
+			<apex:outputpanel layout="block" styleClass="program-member" rendered="{!NOT(ISNULL(r.Reward_Program__c))}">
+				<apex:outputpanel layout="block">
+					<apex:outputpanel StyleClass="reward-name">
+						<apex:outputtext rendered="{!NOT(r.Choice__c)}" value="Included:" styleClass="included"/>
+						<apex:outputtext rendered="{!(r.Choice__c)}" value="Option:" styleClass="option"/>
+						{!r.name}
+					</apex:outputpanel>
+					<apex:outputpanel StyleClass="reward-when" >
+						<apex:outputtext value="Occurs in month {!round(r.Time_from_start_of_contract_in_months__c, 0)} of your contract" rendered="{!r.Time_from_start_of_contract_in_months__c > 0 && NOT(Isnull(r.Time_from_start_of_contract_in_months__c))}"></apex:outputtext>
+					
+						<apex:outputtext value="Occurs when your contract begins" rendered="{!r.Time_from_start_of_contract_in_months__c == 0 && NOT(Isnull(r.Time_from_start_of_contract_in_months__c))}"></apex:outputtext>
+					</apex:outputpanel>
+					<apex:outputpanel StyleClass="reward-value">
+						<apex:outputtext value="Value:  ${!round(r.Reward_Value__c, 0)}" rendered="{!r.Reward_Value__c >0  && NOT(Isnull(r.Reward_Value__c))}" ></apex:outputtext>
+					</apex:outputpanel>
+				</apex:outputpanel>
+				<apex:outputpanel layout="block" StyleClass="reward-description" rendered="{!NOT(ISNULL(r.Reward_Program__c))}">
+					<apex:outputtext value="{!r.Reward_Description__c}">
+						
+					</apex:outputtext>
+				</apex:outputpanel>				
+			</apex:outputpanel>
+		</apex:repeat>
+	</apex:outputpanel>
+	<apex:outputpanel layout="block" rendered="{!theRewards.size == 0  }">
+	This plan has no rewards
+	</apex:outputpanel>
+</apex:component>

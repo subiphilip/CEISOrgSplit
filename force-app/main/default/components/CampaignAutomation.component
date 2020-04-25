@@ -1,0 +1,20 @@
+<apex:component allowdml="true" controller="CampaignAutomationController">
+    
+    <apex:attribute name="email"  type="string" required="false" description="Email address of lead or contact"/>
+    <apex:attribute name="campaignId" type="string" required="true" description="Id of the campaign being managed.  Can be from URL parameter or hardcoded on page"/>
+    <apex:attribute name="status" type="string" required="false" default="responded" description="Status to set when this tag fires"/>
+    <apex:attribute name="canCreateCampMembers" type="boolean" required="false" default="false" description="This tag can add campaign members"/>
+    <apex:attribute name="leads" type="boolean" required="false" default="false" description="This tag can create leads"/>
+    <apex:attribute name="source" type="string" required="false" default="false" description="If you're creating leads, this is the lead source"/>
+
+    <script>
+    //public static void saveCampaignMember(string e, string cid, string cmstatus, boolean leads, boolean CampMember){
+    	CampaignAutomationController.saveCampaignMember(
+            '{!email}', '{!campaignId}', '{!status}', '{!leads}', '{!canCreateCampMembers}', '{!source}',
+            function(result,event){
+        		console.log(result);
+                console.log(event);
+        	}
+        );
+    </script>
+</apex:component>

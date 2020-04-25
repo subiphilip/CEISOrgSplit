@@ -1,0 +1,31 @@
+<apex:component controller="ControllerforContentItems"> 
+    <apex:attribute name="content" required="true" description="Pass the name of the content that you want the content viewer to display" 
+        type="string" assignto="{!whichcontent}"/>  
+    <apex:attribute name="Headline" required="false" description="Show the headline from the content item" 
+            type="boolean" default="false"/>
+    <apex:attribute name="Deck" required="false" description="Show the deck from the content item" 
+            type="boolean" default="false"/>
+    <apex:attribute name="Simple" required="false" description="Show the text only, basic text, no rich or formatting" 
+            type="boolean" default="false"/>
+    
+    <apex:outputText escape="false" value="{!mycontent.Definition__c}" rendered="{!and(!isnull(mycontent), Simple)}"></apex:outputText>
+    
+    <apex:outputpanel styleClass="content-component" layout="block" rendered="{!and(!isnull(mycontent), !Simple)}">       
+        <apex:outputPanel rendered="{!and(Headline, Deck)}">
+            <h2><apex:outputText value="{!mycontent.Title__c}"/>
+                <br/><small><apex:outputText value="{!mycontent.Deck__c}"/></small>
+            </h2>
+        </apex:outputPanel> 
+        <apex:outputPanel rendered="{!and(Headline, not(Deck))}">
+            <h2><apex:outputText value="{!mycontent.Title__c}"/></h2>
+        </apex:outputPanel>   
+        <apex:outputfield value="{!mycontent.Definition__c}"></apex:outputfield>    
+    </apex:outputpanel>
+    
+    <apex:outputPanel rendered="{!isnull(mycontent)}" layout="block">
+        <script type="text/javascript"> //This sends notifications when users try to view content that doesn't exist.
+            dataLayer.push({'event':'error', 'errorFunction':'ContentViewer', 'errorObject':{'errorCode':'Missing Content', 'errorMessage':'{!whichcontent}'}});
+        </script>
+    </apex:outputPanel>
+    
+</apex:component>

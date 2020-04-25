@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GC_Unactivated_With_Order_Send_to_SG</fullName>
+    <columns>NAME</columns>
+    <columns>Confirmation_Code__c</columns>
+    <columns>Confirmation_Code_Status__c</columns>
+    <columns>Confirmation_Code_Year__c</columns>
+    <columns>Division__c</columns>
+    <columns>Program__c</columns>
+    <columns>Plan__c</columns>
+    <columns>Fixed_Rate__c</columns>
+    <columns>Fixed_Rate_Percentage__c</columns>
+    <columns>Index_Adder__c</columns>
+    <columns>Index_Rate_Percentage__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Rate__c.Gas_Choice_Rate</value>
+    </filters>
+    <filters>
+        <field>Confirmation_Code_Status__c</field>
+        <operation>equals</operation>
+        <value>Unactivated with order</value>
+    </filters>
+    <label>GC - Unactivated With Order (Send to SG)</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,37 @@
+<apex:page Controller="CSW2Lead" showheader="false" action="{!setStart}">
+    <apex:pageBlock rendered="NOT({!$ObjectType.Lead.accessible})">
+        <p>Sorry, but you cannot see the data because you do not have access to the Lead object.</p>
+    </apex:pageBlock>
+    
+    <apex:PageBlock Title="Introduce the Customer to TrueCost">
+    <apex:outputlabel >Have you already selected an electric company?</apex:outputlabel><br/>
+    <apex:outputlabel >Did you know that CenterPoint Energy has a new, FREE online service called TrueCost that can help you compare electric providers?</apex:outputlabel>
+    </apex:PageBlock>
+    <br/>
+    <apex:outputlink value="{!$Page.GasUpsellContentDisplay}">Get more information about TrueCost</apex:outputlink>
+    <br/>
+    <br/>
+    <apex:PageBlock Title="Benefits"> 
+    <apex:outputlabel >Compare electric costs including all the extra fees and charges</apex:outputlabel><br/>
+    <apex:outputlabel >See the TrueCost of each plan in dollars based on the unique way you use electricity--not cost per kilowatt-hour for an average customer</apex:outputlabel><br/>
+    <apex:outputlabel >See ratings and review of each company from real customers</apex:outputlabel><br/>
+    <apex:outputlabel >See ratings and review of each company from real customers</apex:outputlabel><br/>
+    <apex:outputlabel >Get reminders before your contract expires</apex:outputlabel><br/>
+    </apex:PageBlock>
+        <apex:form >
+            <apex:pageBlock title="Enter Customer Information" rendered="{!$ObjectType.Lead.accessible}"> 
+                <apex:PageBlockSection columns="1">   
+                     <!-- <apex:outputLabel >Customer Email</apex:outputLabel> -->
+                     Always ask the customer's permssion to send them an email about TrueCost.  This lets them click a link instead of writing down the address.<apex:inputField value="{!l.email}"/>
+                     <!-- <apex:outputLabel >CSR Name</apex:outputLabel> -->
+                     If a customer isn't ready to try TrueCost because they're under a contract, they can request a reminder when their current electric contract will expire.  <br/><br/>If they don't know, it's OK for them guess, or leave it blank. <br/> <br/>Some customers may be on variable rate plans and don't have an expiration date<apex:inputField value="{!l.Current_Plan_Expiration__c}"/>
+                     Be sure to put your name here so you can get credit for introducing more customers to TrueCost.  To make record keeping easier, always enter your name in the same way.<!--apex:inputField value="{!l.CSR_Name__c}"/-->
+                </apex:PageBlockSection>
+                <apex:PageBlockSection columns="3">
+                     <apex:commandButton action="{!email}" value="Send Customer Email"/>
+                     <apex:commandButton action="{!call}" disabled="{!NOT($Setup.TrueCostSystemVariables__c.Sales_Phone_in_Header__c)}" value="I transfered call to Sales -- #90230"/>
+                     <apex:commandButton action="{!decline}" value="Customer Declined"/>
+                </apex:PageBlockSection> 
+             </apex:pageBlock>
+        </apex:form>
+</apex:page>

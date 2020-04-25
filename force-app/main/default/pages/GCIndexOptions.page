@@ -1,0 +1,87 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+    
+    <apex:composition template="{!$Site.Template}">
+    
+        <apex:define name="HeadTags">
+            <title>SourceGas Choice Rate Overview - 2014 Program Year</title>
+            <meta name="description" content=" " />
+        </apex:define>
+        
+        <apex:define name="body">
+             
+       <!-- tabs framework -->
+       <div class ="tab-pane">
+       <div class ="container">
+           <div class ="tabbable span12 centered-pills">
+               <ul class="nav nav-pills">
+                     <li class="active"><a href="#tab-fixed" data-toggle="tab">Fixed Rate Option</a></li>
+                      <li><a href="#tab-index" data-toggle="tab">Index Rate Option</a></li>
+                      <li><a href="#tab-blended" data-toggle="tab">Blended Rate Option</a></li>
+                      <li><a href="#tab-smartfixed" data-toggle="tab">Smart Fixed Rate Option</a></li>
+                      <li><a href="#tab-smartbill" data-toggle="tab">Smart Bill Rate Option</a></li>
+               </ul>
+           
+       <!-- tabs content -->
+       <div class="tab-content span8">
+           <div id="tab-fixed" class="tab-pane active">
+                      <h4><u>Fixed Rate Option</u></h4>
+                      <p>The “Fixed Rate Option” locks in the price of each unit of natural gas at a set rate each month over the contract term.  
+                      The utility charges will continue to fluctuate each month; however, you will have peace of mind knowing the exact price you 
+                      pay for each unit of gas. The only thing that will change is the total amount billed from CenterPoint Energy based on your 
+                      monthly consumption.</p>
+                      <strong>Who would benefit?</strong>
+                      <p>Consumers who prefer less volatility in their monthly natural gas bills may  benefit from the fixed rate option.  You have 
+                      peace of mind knowing that you will continue paying the agreed upon fixed price even if the market rises substantially.</p> <br></br> 
+                      <center><img src="{!URLFOR($Resource.GCFixedChart)}" class="hidden-phone"/></center>
+                   </div>
+           <div id="tab-index" class="tab-pane">
+                      <h4><u>Index Rate Option</u></h4>
+                      <p>The “Index Rate Option” locks in a set adder for each unit of natural gas based off a pre-selected index point each month 
+                      over the contract term.  Unlike a fixed rate option, the “Index Rate” allows you to float with the market to take advantage 
+                      of potentially low rates each month depending on market factors.  In addition, the utility charges will continue to fluctuate 
+                      each month.</p>
+                      <strong>Who would benefit?</strong>
+                      <p>Consumers who are willing to accept a little more risk in the market may benefit from the index rate option.  Over the past 
+                      few years, prices have been competitive in the marketplace and lower summer prices have been advantageous for consumers with 
+                      this rate option.</p> <br></br>
+                      <center><img src="{!URLFOR($Resource.GCIndexChart)}" class="hidden-phone"/></center>
+                   </div>
+           <div id="tab-blended" class="tab-pane">
+                      <h4><u>Blended Rate Option</u></h4>
+                      <p>The “Blended Rate Option” combines features from both the fixed rate and index rate options.  You will have the ability to 
+                      choose the percentage of your total natural gas consumption each month that will be priced at a fixed rate, and the percentage 
+                      that will be priced at an index rate.  Like the other options, your utility charges will continue to fluctuate each month.</p>
+                      <strong>Who would benefit?</strong>
+                      <p>Consumers who would prefer to diversify by having a portion at an index rate to take advantage of lower prices if the market 
+                      were to decline, and also have the security of fixed price certainty.</p> <br></br>
+                      <center><img src="{!URLFOR($Resource.GCBlendedChart)}" class="hidden-phone"/></center>
+                    </div>
+            <div id="tab-smartfixed" class="tab-pane">
+                      <h4><u>Smart Fixed Rate Option</u></h4>
+                      <p>Similar to the fixed rate option, the “Smart Fixed Rate” offers consumers peace of mind knowing that each unit of natural 
+                      gas will be charged at a set price over the contract term.</p>
+                      <p>However, this unique product also allows you to take advantage of low market prices each month. If the market rate falls 
+                      below the fixed rate set in your contract, 10% of your total usage would be at the lower market rate, while the other 90% will 
+                      be billed at your contract’s fixed rate.</p>
+                      <strong>Who would benefit?</strong>
+                      <p>Consumers who prefer a fixed rate and knowing what the price per unit of natural gas is – while at the same time wanting 
+                      to benefit from potentially lower market prices each month during the contract term.</p> <br></br>  
+                      <center><img src="{!URLFOR($Resource.GCSmartFixedChart)}" class="hidden-phone"/></center>
+                </div> 
+            <div id="tab-smartbill" class="tab-pane">
+                      <h4><u>Smart Bill Rate Option</u></h4>
+                      <p>The “Smart Bill Rate Option” provides even further certainty to residential and commercial customers.  Since this rate is 
+                      not based on consumption, every bill from your supplier during the contract term will be priced exactly the same.  Your bill 
+                      will not change regardless of how much gas you use, although the utility charges will continue to fluctuate each month.</p>
+                      <strong>Who would benefit?</strong>
+                      <p>Consumers who are most concerned about meeting a budget and want the most price certainty will appreciate knowing what the 
+                      bill amount will be month after month from the supplier. Your total charge is the same each month no matter how much natural 
+                      gas you use.</p> <br></br> 
+                      <center><img src="{!URLFOR($Resource.GCSmartBillChart)}" class="center-block hidden-phone"/></center>
+                </div> 
+           </div></div>          
+        </div></div>
+     
+     </apex:define>
+    </apex:composition>    
+</apex:page>

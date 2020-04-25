@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_DA_1</fullName>
+    <availability>online</availability>
+    <description>Creates a one-year delegation agreement PDF.</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>true</hasMenubar>
+    <hasScrollbars>true</hasScrollbars>
+    <hasToolbar>true</hasToolbar>
+    <isResizable>true</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>New 1-Year DA</masterLabel>
+    <openType>newWindow</openType>
+    <position>fullScreen</position>
+    <protected>false</protected>
+    <showsLocation>true</showsLocation>
+    <showsStatus>true</showsStatus>
+    <url>https://www.appextremes.com/apps/Conga/Composer.aspx
+?sessionId={!API.Session_ID}
+&amp;serverUrl={!API.Partner_Server_URL_80}
+&amp;id={!Premises__c.Id}
+&amp;DV0=1
+&amp;TemplateId=a14300000020zfH
+&amp;DS4=1
+&amp;FP0=1
+&amp;LG0=0
+&amp;LG4=1
+&amp;LG1=Delegation+Agreement
+&amp;LG2=7
+&amp;LG5={!$User.Id}
+&amp;LG6={!$User.Id}
+&amp;LG7=DA+Follow-up
+&amp;LGAttachOption=2
+&amp;LG3=1
+&amp;EmailRelatedToId={!Premises__c.Id}
+&amp;EmailAdditionalTo={!Premises__c.SG_Email__c}
+&amp;EmailFromId=00e30000001pUls
+&amp;OFN=DA+for+premise+{!Premises__c.Name}
+&amp;DocuSignVisible=1</url>
+</WebLink>

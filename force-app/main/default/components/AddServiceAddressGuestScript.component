@@ -1,0 +1,100 @@
+<apex:component >
+    <apex:attribute name="register" type="boolean" required="false" default="true" description="logic to select ESID, create APA"/>
+    
+    <script>
+    //stuff for Add Address
+    $j=jQuery.noConflict();
+    $j("#address_submit").click(function(){{!if(register, 'AddAddress', 'LookupOnly')}();});
+    
+    function LookupOnly(){
+     console.log('lookkup');
+       // $j("#address_submit").button('loading');
+        ControllerForMobileMain.sendPremise($j("#addressField").val(), $j("#zip").val(), function(result,event){
+            $j("#address_results > tbody").html("");
+            if (result.length==0){
+                $j("#address_results > tbody").html('<p class="text-error">No matching addresses were found.  Please try again.</p>');
+                $j("#address_results").show();
+               // $j("#address_submit").button('reset');
+            } else {
+                for (var x=0; x<result.length; x++){
+                    $j("#address_results > tbody").append('<tr>');
+                    $j("#address_results > tbody").append('<td></td><td>'+result[x].Electric_Service_Address__c+' ' +result[x].Electric_Service_Address_City__c+','+result[x].Electric_Service_Address_State2__c+'</td>');
+                    $j("#address_results > tbody").append('<td>'+result[x].Premise_Type__c+'</td><td>'+result[x].ESID__c+'</td>');
+                    $j("#address_results > tbody").append('</tr>');
+                }
+                $j("#address_results").find(".btn").click(function(){SelectAddress($j(this).attr('data-premiseid'));});
+                $j("#address_results").show();
+               // $j("#address_submit").button('reset');
+            }
+        });
+    }
+    
+    function AddAddress(){
+         console.log('addaddress');
+        $j("#address_submit").button('loading');
+        ControllerForMobileMain.checkZip($j("#zip").val(), function(result,event){
+            if (result=='Later'){
+                $j("#please_select, #address_results").hide();
+	            _gaq.push(['_trackEvent', 'Page Errors', 'Guest Checkout Address Results', 'Future Area']);
+                alert('TrueCost does not serve your zip code yet, but plans to in the future.');
+                $j("#address_submit").button('reset');
+                return false;
+            }
+            else if (result!='Now'){
+                $j("#please_select, #address_results").hide();
+	            _gaq.push(['_trackEvent', 'Page Errors', 'Guest Checkout Address Results', 'Out Of Area:'+$j("#zip").val()]);
+                alert('TrueCost does not serve your zip code.');
+                $j("#address_submit").button('reset');
+                return false;
+            }
+            ControllerForMobileMain.sendPremise($j("#addressField").val(), $j("#zip").val(), function(result,event){
+                $j("#address_results > tbody").html("");
+                if (result.length==0){
+                    _gaq.push(['_trackEvent', 'Page Errors', 'Guest Checkout Address Results', 'No Address Found:'+$j("#addressField").val()]);
+                    $j("#address_results > tbody").html('<p class="text-error">No matching addresses were found.  Please try again.</p>');
+                    $j("#address_results").show();
+                    $j("#address_submit").button('reset');
+                } else {
+                    _gaq.push(['_trackEvent', 'Guest Checkout Address Results', 'Registration', result.length+ ' Addresses Found for'+$j("#addressField").val()]);
+                    for (var x=0; x<result.length; x++){
+                        if (result[x].Premise_Type__c=='Residential'){
+                            $j("#hidden-premise").val(result[x].Id);
+                            $j("#address_results > tbody").append('<tr>');
+                            $j("#address_results > tbody").append('<td><a id="addresresult" data-premiseid="'+result[x].Id+'" href="#" class="btn btn-mini btn-warning">Select</a></td>');
+                            $j("#address_results > tbody").append('<td>'+result[x].Electric_Service_Address__c+' ' +result[x].Electric_Service_Address_City__c+','+result[x].Electric_Service_Address_State2__c+'</td>');
+                            $j("#address_results > tbody").append('<td>'+result[x].Premise_Type__c+'</td><td>'+result[x].ESID__c+'</td></tr>');
+                        }
+                    }
+                    $j("#address_results").find(".btn").click(function(){SelectAddress($j(this).attr('data-premiseid'));});
+                    $j("#address_results, #please_select").show();
+                    $j("#address_submit").button('reset');
+                }
+            });
+        });		
+    }
+    function SelectAddress (premiseid){
+         console.log('set address service');
+         EnrollRemote.HasOrderInProgress( premiseid, function(result, event){
+                console.log('in the order in progress check forpremise '+ premiseid);
+                console.log(result);
+                if (result){
+                    console.log('There is an order in progress for this premise');
+                    
+                        $j('#myModal').modal();
+   						
+                        return false;
+                   
+                     
+                }else{
+                console.log('in the select address function'+premiseid);
+                	setAddress(premiseid);
+                }
+            });
+
+                    
+
+        _gaq.push(['_trackPageview', '/goal/GuestAddressSelected/']);
+
+    }
+    </script>    
+</apex:component>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Step_1_Limit__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(text( Plan__r.Rate_Type__c ), 
+&quot;SmartCap&quot;, &quot;MAX&quot;, 
+&quot;Fixed&quot;, &quot;MAX&quot;,
+&quot;IndexNoSpread&quot;, &quot;MAX&quot;,
+&quot;Index&quot;, &quot;MAX&quot;, 
+&quot;SmartBlended&quot;, &quot;MAX&quot;, 
+&quot;SmartFixed&quot;, if(Fixed_Rate_Percentage__c=1, &#39;MAX&#39;, text(Fixed_Rate_Percentage__c)), 
+&quot;Blended&quot;, text(Fixed_Rate_Percentage__c),  
+&quot;&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Step 1 Limit</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

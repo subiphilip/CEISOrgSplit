@@ -1,0 +1,70 @@
+<apex:component Controller="ControllerForFeeDisplay"> 
+    <!-- 
+    <apex:attribute name="rateid" type="id" description="the id for the rate whose fees you want the component to display" assignto="{!therateid}"  />
+    
+    <ul class="ul-price-card fees">
+        
+        <apex:outputpanel rendered="{!AND(NOT(ISNULL(thefees.Usage_Discount_Amount__c)), thefees.Usage_Discount_Amount__c!=0)}" layout="none">
+            <li>Your TrueCost estimate includes this plan's&nbsp;<apex:outputfield value="{!thefees.Usage_Discount_Amount__c}"/> credit for any month that your usage is more than&nbsp;<apex:outputfield value="{!thefees.Minimum_Usage_Charge_Threshold3__c}"/> kilowatt-hours.</li>
+
+
+        <apex:outputpanel rendered="{!AND(NOT(ISNULL(thefees.Minimum_Usage_Charge__c)), thefees.Minimum_Usage_Charge__c!=0)}" layout="none">
+            <li>Your TrueCost estimate includes this plan's&nbsp;<apex:outputfield value="{!thefees.Minimum_Usage_Charge__c}"/> fee for any month that your usage is less than&nbsp;<apex:outputfield value="{!thefees.Minimum_Usage_Charge_Threshold_kWh__c}"/> kilowatt-hours.</li>
+        </apex:outputpanel>
+        <apex:outputpanel rendered="{!AND(NOT(ISNULL(thefees.Minimum_Usage_Charge2__c)), thefees.Minimum_Usage_Charge2__c!=0)}" layout="none">
+            <li>Your TrueCost estimate includes this plan's&nbsp;<apex:outputfield value="{!thefees.Minimum_Usage_Charge2__c}"/> fee for any month that your usage is less than&nbsp;<apex:outputfield value="{!thefees.Minimum_Usage_Charge_Threshold2__c}"/> but at least&nbsp;<apex:outputfield value="{!thefees.Minimum_Usage_Charge_Threshold_kWh__c}"/> kilowatt-hours.</li>
+        </apex:outputpanel>
+        <apex:outputpanel rendered="{!AND(NOT(ISNULL(thefees.Minimum_Usage_Charge3__c)), thefees.Minimum_Usage_Charge3__c!=0)}" layout="none">
+            <li>Your TrueCost estimate includes this plan's&nbsp;<apex:outputfield value="{!thefees.Minimum_Usage_Charge3__c}"/> fee for any month that your usage is less than&nbsp;<apex:outputfield value="{!thefees.Minimum_Usage_Charge_Threshold3__c}"/> but at least&nbsp;<apex:outputfield value="{!thefees.Minimum_Usage_Charge_Threshold2__c}"/> kilowatt-hours.</li>
+        </apex:outputpanel>
+        </apex:outputpanel>
+        <apex:outputPanel rendered="{!thefees.Cancellation_Fee_Type__c='Fixed'}">
+            <li>This plan has a&nbsp;<apex:outputfield value="{!thefees.Cancellation_Fee__c}"/> fee for early cancellation. </li>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!thefees.Cancellation_Fee_Type__c='Flat Fee X Remaining Months'}">
+            <li>This plan has a&nbsp;<apex:outputfield value="{!thefees.Cancellation_Fee__c}"/>  fee per remaining contract month for early cancellation. </li>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!thefees.Cancellation_Fee_Type__c='Calculated Estimate'}">
+            <li>This plan has the following cancellation fee:<apex:outputfield value="{!thefees.Cancellation_Fee_Description__c}"/> </li>        
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Same_Day_Move_In_Fee__c)), thefees.Same_Day_Move_In_Fee__c>0)}">
+            <li>Same Day Move-in: <apex:outputText value="{0, number, $###,###,###,###,###.00}"> <apex:param value="{!thefees.Same_Day_Move_In_Fee__c}"/></apex:outputText></li>
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Changed_Start_Date_Fee__c)), thefees.Changed_Start_Date_Fee__c>0)}">
+            <li>Changed Start Day: <apex:outputText value="{0, number, $###,###,###,###,###.00}" > <apex:param value="{!thefees.Changed_Start_Date_Fee__c}"/> </apex:outputText></li>
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Self_Selected_Switch_Fee__c)), thefees.Self_Selected_Switch_Fee__c>0)}">
+            <li>Self-selected Switch: <apex:outputText value="{0, number, $###,###,###,###,###.00}" > <apex:param value="{!thefees.Self_Selected_Switch_Fee__c}"/></apex:outputText></li>
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Disconnect_Fee__c)), thefees.Disconnect_Fee__c>0)}">
+            <li>Disconnect: <apex:outputText value="{0, number, $###,###,###,###,###.00}" > <apex:param value="{!thefees.Disconnect_Fee__c}"/> </apex:outputText></li>
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Reconnect_Fee__c)), thefees.Reconnect_Fee__c>0)}">
+            <li>Re-connect: <apex:outputText value="{0, number, $###,###,###,###,###.00}"> <apex:param value="{!thefees.Reconnect_Fee__c}"/> </apex:outputText></li>
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Third_Party_Payment_Fee__c)), thefees.Third_Party_Payment_Fee__c>0)}">
+            <li>3rd-party payment: <apex:outputText value="{0, number, $###,###,###,###,###.00}" > <apex:param value="{!thefees.Third_Party_Payment_Fee__c}"/> </apex:outputText></li>
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Reminder_Fee__c)), thefees.Reminder_Fee__c>0)}">
+            <li>Reminder: <apex:outputText value="{0, number, $###,###,###,###,###.00}" > <apex:param value="{!thefees.Reminder_Fee__c}"/> </apex:outputText></li>
+        </apex:outputPanel>   
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Insufficient_Funds_Cancelled_Checks__c)), thefees.Insufficient_Funds_Cancelled_Checks__c>0)}">
+            <li>Insufficient Funds: <apex:outputText value="{0, number, $###,###,###,###,###.00}" > <apex:param value="{!thefees.Insufficient_Funds_Cancelled_Checks__c}"/> </apex:outputText></li>
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Excessive_Payments_Fee__c)), thefees.Excessive_Payments_Fee__c>0)}">
+            <li>Excessive Payments: <apex:outputText value="{0, number, $###,###,###,###,###.00}" > <apex:param value="{!thefees.Excessive_Payments_Fee__c}"/> </apex:outputText></li>
+        </apex:outputPanel> 
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Paper_Bill_Request_Fee__c)), thefees.Paper_Bill_Request_Fee__c>0)}">
+            <li>Paper Bill Request: <apex:outputText value="{0, number, $###,###,###,###,###.00}" > <apex:param value="{!thefees.Paper_Bill_Request_Fee__c}"/> </apex:outputText> </li>
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Manual_Assistance_Fee__c)), thefees.Manual_Assistance_Fee__c>0)}">
+            <li>Manual Assistance: <apex:outputText value="{0, number, $###,###,###,###,###.00}" > <apex:param value="{!thefees.Manual_Assistance_Fee__c}"/> </apex:outputText></li>
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!and(not(isnull(thefees.Move_in_Fee__c)), thefees.Move_in_Fee__c>0)}">            
+            <li>Move-in with New Meter: <apex:outputText value="{0, number, $###,###,###,###,###.00}" > <apex:param value="{!thefees.Move_in_Fee__c}"/> </apex:outputText></li>
+        </apex:outputPanel>
+        <apex:outputPanel layout="block" styleClass="span4" rendered="{!not(isnull(thefees.Late_Payment_Fee__c))}">
+            <li>Late Payment: <span class="pull-right">{!thefees.Late_Payment_Fee__c}</span></li>
+        </apex:outputPanel>
+    </ul> -->
+</apex:component>

@@ -1,0 +1,12 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[{!Rate__c.LastModifiedBy} created a new rate or edited an existing one. &nbsp;<b>Please verify that all price fields and attached TDSP fees are accurate according to the EFL, and un-suspend the rate (if new)</b>:
+<br>
+<br>Plan: {!Rate__c.Plan__c}
+<br>
+Rate ID: {!Rate__c.Name}&nbsp;<div>TDSP: {!Rate__c.TDSP__c}&nbsp;</div><div>Rate EFL Link:&nbsp;{!Rate__c.Link_for_EFL__c}<br>
+<br>Click on this link to review the rate:
+<br>{!Rate__c.Link}</div>]]></td>
+</tr>
+</table>

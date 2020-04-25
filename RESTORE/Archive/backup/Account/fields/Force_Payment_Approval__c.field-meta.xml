@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Force_Payment_Approval__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Deal level for specific consultants in which they&#39;re paid regardless of the AR.</description>
+    <externalId>false</externalId>
+    <label>Force Payment Approval</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,34 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+    
+    <apex:composition template="{!$Site.Template}">
+        
+        <apex:define name="HeadTags">
+            <title>About CenterPoint Energy</title>
+            <meta name="description" content="Learn more about CenterPoint Energy and some of the people who support the Gas Choice programs. " />
+        </apex:define>       
+        
+        <apex:define name="body">                    
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <c:Content_Viewer content="GC About CenterPoint" headline="true" deck="true"/>
+                        <hr/>
+                    </div>
+                    
+                    <div class="span4 text-center">                            
+                        <img width="150" src="{!urlfor($resource.imgPeople, 'BobbyPhoto.jpg')}" alt="Bobby Dornbos" />                                           
+                        <h4>Bobby Dornbos, Rate Analyst</h4>                            
+                    </div>
+                    <div class="span4 text-center">                            
+                        <img width="150" height="210" src="{!urlfor($resource.imgPeople, 'NickPhoto.jpg')}" alt="Nick Petersen" />                                           
+                        <h4>Nick Petersen, Marketing Manager</h4>                            
+                    </div>
+                    <div class="span4 text-center">                            
+                        <img width="150" src="{!urlfor($resource.imgPeople, 'GastonPhoto.jpg')}" alt="Gaston Miranda" />                                           
+                        <h4>Gaston Miranda, SourceGas Choice Program Specialist</h4>                            
+                    </div>
+                </div>
+            </div>
+        </apex:define>       
+    </apex:composition>
+</apex:page>

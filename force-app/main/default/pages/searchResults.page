@@ -1,0 +1,62 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+    
+    <style type="text/css">
+    
+    </style>
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Search Results:{!$CurrentPage.Parameters.q} - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>
+        
+        <!--apex:define name="breadcrumbs">
+        <apex:outputpanel styleClass="breadcrumbs" layout="block">
+        <apex:outputlink value="{!$Page.homepage}">Home</apex:outputlink>
+        <apex:outputlink value="{!$Page.MeterData}" styleClass="last">Meter Data</apex:outputlink>
+    </apex:outputpanel>            
+    </apex:define-->
+        
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <form action="/searchResults">
+                            <div class="input-append">
+                                <input class="span7" type="text" placeholder="Search" name="q" value="{!$CurrentPage.Parameters.q}"/>
+                                <button type="submit" class="btn"><i class="icon-search"></i></button>
+                            </div>
+                        </form>   
+                        <div class="gcse-searchresults-only"/>   
+                    </div>
+                    <div class="span4">
+                        <div >
+                            <c:truecostrecentblogposts />
+                        </div>
+                        <hr/>
+                        <div>
+                            <c:ChartMiniNarrow />
+                        </div>
+                        <hr/>
+                        <div >
+                            <c:RandomPoll />
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+    <script>
+                        (function() {
+                            var cx = '012354520629500768344:p3o9r1372hc';
+                            var gcse = document.createElement('script');
+                            gcse.type = 'text/javascript';
+                            gcse.async = true;
+                            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                                '//www.google.com/cse/cse.js?cx=' + cx;
+                            var s = document.getElementsByTagName('script')[0];
+                            s.parentNode.insertBefore(gcse, s);
+                        })();
+                        </script>   
+</apex:page>

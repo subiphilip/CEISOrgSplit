@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_users_need_phone_numbers</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+Profile.Name = &quot;CES Standard User&quot;,
+ISBLANK( Phone )
+)</errorConditionFormula>
+    <errorDisplayField>Phone</errorDisplayField>
+    <errorMessage>CES sales users must have a primary phone number to display on market reports.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BundleMe__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Include this customer in TrueCost promotional emails for CenterPoint gas activities</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Include this customer in TrueCost promotional emails for CenterPoint gas activities</inlineHelpText>
+    <label>BundleMe</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

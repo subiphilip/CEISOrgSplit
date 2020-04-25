@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Quote_Base_Margin__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>For fixed quote line items: Weighted average of margin from quote contracts&#39; base contracts</inlineHelpText>
+    <label>Quote Base Margin</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

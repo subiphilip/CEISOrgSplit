@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_Phone_Orders__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Phone orders can be created for this plan by TrueCost agents.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Phone orders can be created for this plan by TrueCost agents.</inlineHelpText>
+    <label>Allow Phone Orders</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

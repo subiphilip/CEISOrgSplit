@@ -1,0 +1,60 @@
+<apex:page showheader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="false">
+    
+    <apex:composition template="Template_TC">
+        
+        <apex:define name="body"> 
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h2>Thank you for your interest in our webinar<br/>
+                            <small>We're looking forward to showing you around</small>
+                        </h2>
+                        <hr/>
+                        Our webinar is in progress.  You can join us at <a href="http://AttendThisEvent.com/?eventid=47011638">http://AttendThisEvent.com/?eventid=47011638
+</a>
+
+                        <hr/>
+                        <h4>Date: 10/30/2013</h4>
+                        <h4>Times: 12:30 p.m.</h4>
+                        <h4>Duration: 30 minutes</h4>
+                        <hr/>
+                        <h4>Topics</h4>
+                            <ul>
+                                <li >Understanding TrueCost</li>
+                                <li >How TrueCost helps consumers</li>
+                                <li >How can consumers save on their electric plans</li>
+                                <li >Current landscape for residential and small commercial electric pricing</li>
+                                <li >How to sign up and use TrueCost</li>
+                            </ul>
+                            <hr/>
+                        <h4>12:30 webinar 
+                            <a href="{!URLFOR($Resource.TCOct2013WebinarICal)}" class="btn btn-warning"><i class="icon-calendar icon-white"></i> Add to Outlook</a> 
+                            <a href="http://www.google.com/calendar/event?action=TEMPLATE&text=TrueCost%20101%20Webinar&dates=20131030T173000Z/20131030T180000Z&details=For%20more%20information%20and%20to%20register%2C%20please%20visit%20www.myTrueCost.com%2FOctober2013Webinar&location=http%3A%2F%2Fattendthisevent.com%2F%3Feventid%3D47011638&trp=true&sprop=TrueCost&sprop=name:www.myTrueCost.com" class="btn btn-primary"><i class="icon-calendar icon-white"></i> Add to Google calendar</a>
+                        </h4>
+                        
+                       
+                    </div>
+                    <div class="span4">
+                        <c:truecostrecentblogposts />
+                        <hr/>
+                        <c:ChartMiniNarrow />
+                        <hr/>
+                        <c:RandomPoll />
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+        </apex:define>       
+    </apex:composition>
+    <script>
+        $j=jQuery.noConflict();
+        $j("#signup_button").click(function(){
+            window.location.href = '{!$CurrentPage.url}'+'&ca_email='+$j("#ca_email").val();
+        });
+    </script>
+    
+            <c:CampaignAutomation campaignId="70130000000eGpc" status="Responded" leads="true" source="Oct 2013 Webinar"
+    canCreateCampMembers="true" email="{!$CurrentPage.Parameters.ca_email}" rendered="{!not(isblank($CurrentPage.Parameters.ca_email))}"/>
+    
+
+</apex:page>

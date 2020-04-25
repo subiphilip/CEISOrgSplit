@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Basis__c</fullName>
+    <description>How often does this fee occur, is it based on kWh usage (volumetric), or is it determined by the customer&#39;s actions (potential)?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How often does this fee occur, is it based on kWh usage (volumetric), or is it determined by the customer&#39;s actions (potential)?</inlineHelpText>
+    <label>Basis</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+                <label>Monthly</label>
+            </value>
+            <value>
+                <fullName>Daily</fullName>
+                <default>false</default>
+                <label>Daily</label>
+            </value>
+            <value>
+                <fullName>Volumetric</fullName>
+                <default>false</default>
+                <label>Volumetric</label>
+            </value>
+            <value>
+                <fullName>Potential</fullName>
+                <default>false</default>
+                <label>Potential</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

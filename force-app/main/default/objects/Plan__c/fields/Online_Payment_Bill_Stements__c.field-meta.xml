@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Online_Payment_Bill_Stements__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check this box if the plan requires customers to use online payment and billing.  Opt-out fees can be set at the Rate level if applicable to this plan.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check this box if the plan requires customers to use online payment and billing.  Opt-out fees can be set at the Rate level if applicable to this plan.</inlineHelpText>
+    <label>Online Payment &amp; Billing Required</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

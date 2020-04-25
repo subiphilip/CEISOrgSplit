@@ -1,0 +1,18 @@
+<apex:component access="global">
+	<apex:attribute name="acctid" type="String" description="the ID of the account that owns the daily usage that triggers the email"/>
+
+	<div class="well well-large">
+		<p>This email is an exclusive preview for people who've used TrueCost to retrieve their meter data.  Many users told us they'd like to receive their smart meter data as an email.</p>
+
+		<p>How about you?</p>
+
+			<ul>
+			<li>I'd like to get this <a href="http://www.mytruecost.com/weeklyemailpreview#/?acctid={!acctid}&selection=weekly">every week</a></li>
+			<li>I'd like the <a href="http://www.mytruecost.com/weeklyemailpreview#/?acctid={!acctid}&selection=daily">daily version</a></li>
+			<li>I'd like the <a href="http://www.mytruecost.com/weeklyemailpreview#/?acctid={!acctid}&selection=both">weekly <b>and</b> daily versions</a></li>
+			<li><a href="http://www.mytruecost.com/weeklyemailpreview#/?acctid={!acctid}&selection=none">No thanks</a>, I don't want to see my data in emails</li>			
+		</ul>
+	</div>
+
+
+</apex:component>

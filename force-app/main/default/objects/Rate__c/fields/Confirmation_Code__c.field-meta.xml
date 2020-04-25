@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Confirmation_Code__c</fullName>
+    <description>Confirmation code for this rate (Gas Choice Program).  Must be unique within the year</description>
+    <externalId>true</externalId>
+    <inlineHelpText>Confirmation code for this rate (Gas Choice Program).  Must be unique within the year</inlineHelpText>
+    <label>Confirmation Code</label>
+    <length>10</length>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

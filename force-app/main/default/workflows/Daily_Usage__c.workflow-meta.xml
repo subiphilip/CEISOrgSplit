@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Send_Daily_Usage_Email_Template</fullName>
+        <description>Send Daily Usage Email Template</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_s_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Usage_Data_Emails/Daily_Usage_Summary</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Weekly_Data_Email</fullName>
+        <description>Send Weekly Data Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_s_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Usage_Data_Emails/Weekly_Usage_Summary</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Save_email</fullName>
+        <description>saves account email onto the daily usage field</description>
+        <field>Customer_s_Email__c</field>
+        <formula>Account_Premise_Association__r.Account__r.Email__c</formula>
+        <name>Save email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_daily_usage_to_maximum_date</fullName>
+        <description>today minus 2 days</description>
+        <field>Date__c</field>
+        <formula>today()-2</formula>
+        <name>Set daily usage to maximum date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Don%27t allow forward dated usages</fullName>
+        <actions>
+            <name>Set_daily_usage_to_maximum_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>Date__c &gt; today()-2</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>New Daily Usage</fullName>
+        <actions>
+            <name>Send_Daily_Usage_Email_Template</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Save_email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Sends the customer the daily usage email template</description>
+        <formula>and(
+Account_Premise_Association__r.Account__r.Meter_Data_Email_Daily__c,
+today() - Date__c &lt; 4,
+today() - Date__c &gt; 1 
+ )</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>New Sunday Daily Usage</fullName>
+        <actions>
+            <name>Send_Weekly_Data_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Save_email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Sends the customer the weekly usage email template</description>
+        <formula>and(
+ Account_Premise_Association__r.Account__r.Meter_Data_Email_Weekly__c , 
+   Day_of_Week__c =&#39;Sunday&#39;,
+today() - Date__c &lt; 3,
+today() - Date__c &gt; 1
+ )</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

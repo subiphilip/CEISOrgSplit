@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Indexes</fullName>
+    <columns>Entegrate_Index_Key__c</columns>
+    <columns>Endur_Index_Id__c</columns>
+    <columns>Publication__c</columns>
+    <columns>NAME</columns>
+    <columns>Index_cost__c</columns>
+    <columns>Description__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>Current_Value__c</columns>
+    <columns>Frequency__c</columns>
+    <columns>Fuel_Percentage__c</columns>
+    <columns>Record_Type_Name__c</columns>
+    <columns>State__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All Indexes</label>
+    <sharedTo>
+        <allInternalUsers/>
+    </sharedTo>
+</ListView>

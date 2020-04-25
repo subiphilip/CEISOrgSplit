@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pool_Required_to_Process_Nipsco</fullName>
+    <active>true</active>
+    <description>if nipsco enrollment, pool id should be populated before process can be selected</description>
+    <errorConditionFormula>AND(
+  ISPICKVAL(File_Type__c, 
+  &#39;NIPSCO Choice&#39;), Process__c, 
+  ISBLANK(Pool_ID__c)
+)</errorConditionFormula>
+    <errorMessage>A Pool ID must be populated before a NIPSCO Enrollment/De-enrollment can be processed</errorMessage>
+</ValidationRule>

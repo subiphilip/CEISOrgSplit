@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proj_Annual_O_M_Benefit__c</fullName>
+    <description>The dollar value of the projected annual O&amp;M benefit from the initiative</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Currency value with no decimals</inlineHelpText>
+    <label>Proj. Annual O&amp;M Benefit</label>
+    <precision>16</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

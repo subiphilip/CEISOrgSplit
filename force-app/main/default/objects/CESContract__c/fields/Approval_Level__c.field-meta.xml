@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approval_Level__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Credit_Approval_Required__c, &#39;Credit&#39;, &#39;&#39;) + 
+IF(Sales_Director_Approval_Required__c, &#39;, Sales Director&#39;, &#39;&#39;) +
+IF(VP_Approval_Required__c, &#39;, VP&#39;, &#39;&#39;) +
+IF(CEO_President_Approval_Required__c, &#39;, President, and CEO&#39;, &#39;&#39;)</formula>
+    <label>Approval Level</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

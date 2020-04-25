@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>29.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Line 8 - Update previous Optimizely script from 307772693.js to 6127944940.js
+Line 6 - Commented out and replaced &lt;c:jQueryMinAsComponent /&gt;
+Line 21 - Commented out and replaced &lt;c:BootstrapCSSMin /&gt;
+Line 30 - Convertant &lt;c:ConvertantCodeManager /&gt; (REMOVED)
+Line 95 - Commented out and replaced &lt;c:jQueryUIAsComponent /&gt;
+Line 96 - Commented out and replaced &lt;c:jQueryCookieAsComponent /&gt;
+Line 97 - Commented out and replaced &lt;c:BootstrapMinJs /&gt;
+Line 101 - Commented out Live Agent deployment</description>
+    <label>TemplateTcNoNav</label>
+</ApexPage>

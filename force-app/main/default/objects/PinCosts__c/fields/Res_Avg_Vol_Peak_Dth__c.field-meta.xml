@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Res_Avg_Vol_Peak_Dth__c</fullName>
+    <description>How many Dth were used in the peak months (averaged) within this PIN</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How many Dth were used in the peak months (averaged) within this PIN</inlineHelpText>
+    <label>Res Avg Vol of peak 2 months (Dth)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

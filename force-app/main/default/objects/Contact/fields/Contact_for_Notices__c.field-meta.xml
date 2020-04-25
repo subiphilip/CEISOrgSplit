@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_for_Notices__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Notices contact on one or more CES Contracts.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Notices contact on one or more CES Contracts.</inlineHelpText>
+    <label>Contact for Notices</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

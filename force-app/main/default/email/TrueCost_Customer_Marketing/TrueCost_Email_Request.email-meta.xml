@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Sent when customers want to know more about TrueCost</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>TrueCost_Customer</letterhead>
+    <name>TrueCost Email Request</name>
+    <style>freeForm</style>
+    <subject>It&#39;s easy to pick an electric plan at myTrueCost.com</subject>
+    <textOnly>Thanks for contacting CenterPoint Energy with your interest in TrueCost.
+
+To get started, simply go to this link: http://www.mytruecost.com/?utm_source=salesforceworkflow&amp;utm_medium=email&amp;utm_content=TrueCost-Email-Request&amp;utm_campaign=cross-sell
+
+
+* Register
+ - Set up your account with an email and a password and your service address (where you want electricity).
+
+* Choose your calculation
+- Use real data if you have your meter number.  Otherwise, we can estimate your electricity usage based on similar homes.
+
+* Shop and compare
+- See estimated all-in prices on multiple providers ranked according to what matters to you.
+
+* Switch to a new plan
+- Fill out the enrollment form and we&#39;ll send your order to your selected electric company.
+
+It&#39;s that easy!  We&#39;ll let you know the status of your switch and send you a reminder when it&#39;s time to pick your next plan.</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

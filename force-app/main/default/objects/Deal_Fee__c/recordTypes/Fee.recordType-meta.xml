@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fee</fullName>
+    <active>true</active>
+    <label>Fee</label>
+    <picklistValues>
+        <picklist>Consultant_Pay_Type__c</picklist>
+        <values>
+            <fullName>Flat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Margin Percentage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Per Unit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Upfront Flat Fee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Volumetric</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Fee_Category__c</picklist>
+        <values>
+            <fullName>Adder</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commodity Price</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pass-Through Charges</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transport and Fuel</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Fee_Method__c</picklist>
+        <values>
+            <fullName>Flat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Per Unit</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Fee_Type_Number__c</picklist>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Fee_Volume_Type__c</picklist>
+        <values>
+            <fullName>Surrendered Storage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transport Demand</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Flex_Option__c</picklist>
+        <values>
+            <fullName>fix</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>float</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Interface_Flex_Option__c</picklist>
+        <values>
+            <fullName>choice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>fix</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>float</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>manual</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Invoice_Rollup_Category__c</picklist>
+        <values>
+            <fullName>Commodity Price</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commodity Price - Individual Fee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pass Thru</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transport</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

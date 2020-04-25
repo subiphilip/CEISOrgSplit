@@ -1,0 +1,8 @@
+<!-- 
+2/16/2012   Shane McLaughlin    limited zip codes displayed in registration selection to 5 digits--visualforce expression using LEFT()
+
+ -->
+
+<apex:page id="UpdateExtAddr" showHeader="false" title="UpdateAddress">
+    
+</apex:page>

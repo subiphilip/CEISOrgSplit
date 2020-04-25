@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DUNS__c</fullName>
+    <description>DUNS number is used to match premises (the ERCOT ESID tables contain these) to the TDSP.  There&#39;s a trigger that runs before premise update/insert</description>
+    <externalId>true</externalId>
+    <inlineHelpText>DUNS number is used to match premises (the ERCOT ESID tables contain these) to the TDSP.  There&#39;s a trigger that runs before premise update/insert.  These MUST match the number from ERCOT.</inlineHelpText>
+    <label>DUNS</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

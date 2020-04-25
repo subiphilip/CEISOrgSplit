@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mark_Paid</fullName>
+    <availability>online</availability>
+    <description>Mark this Billing Document as Paid.</description>
+    <displayType>button</displayType>
+    <linkType>javascript</linkType>
+    <masterLabel>Paid</masterLabel>
+    <openType>onClickJavaScript</openType>
+    <protected>false</protected>
+    <url>/* This code allows the javascript to access the API and push data into the Org.*/
+{!requireScript(&quot;/soap/ajax/10.0/connection.js&quot;)};
+sforce.connection.session = &quot;{!$Api.Session_ID}&quot;;
+
+function updateBilling_Documents__c( )
+{
+try
+{
+var Billing_Documents__c = new sforce.SObject(&quot;Billing_Documents__c&quot;);
+Billing_Documents__c.Id = &quot;{!Billing_Documents__c.Id}&quot;;
+Billing_Documents__c.Paid__c = &quot;TRUE&quot;;
+var result = sforce.connection.update([Billing_Documents__c]);
+if (result[0].getBoolean(&quot;success&quot;) == false ) {
+alert(result[0].errors.message);
+return;
+} 
+window.top.location.href=window.top.location.href;
+} 
+catch (e) {
+alert(e);
+}	
+}
+
+updateBilling_Documents__c( );</url>
+</WebLink>

@@ -1,0 +1,3 @@
+<design:component>
+	<design:attribute name="fileType" datasource="NIPSCO Choice" required="true" />
+</design:component>

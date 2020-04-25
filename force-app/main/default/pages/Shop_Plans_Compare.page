@@ -1,0 +1,251 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" cache="false">
+   <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+      <c:tc2_header title="TrueCost Electric Portal"
+         description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="COMPARE YOUR PLANS" />
+             
+    
+             <div id="appShopPlansCompare" class="container"> 
+                <!-- <app-modal-save-for-later /> -->
+
+                  <section>
+                    <div class="container">
+                        <div class="has-margin-3 has-text-centered" v-if="plans.length <= 0">
+                            <h2 class="is-size-4 has-text-weight-bold padding-sides">Please select a couple plans to compare</h2>
+                            <a href="{!$Page.Shop_Plans}" class="button is-info has-text-weight-semibold is-medium is-rounded fixed-size is-outlined animate-gradient-bg" style="margin-top: .5em;">  Shop Plans</a>
+                        </div>
+
+                        <!-- <div class="has-padding-3 has-text-centered" v-if="plans.length > 0">
+                            <h2 class="is-size-4 padding-sides">Save comparison for later to revisit these plans from your inbox.</h2>
+                            <button v-on:click="saveforlater()" class="button is-info has-text-weight-semibold is-medium is-rounded fixed-size is-outlined animate-gradient-bg" style="margin-top: .5em;">  Save For Later</button>
+                        </div> -->
+                        
+                        <table class="table is-compare" v-if="plans.length>=1">
+                            <thead>
+                                <tr>
+                                    <th class="shadow">
+                                    <a v-on:click="goBack()"><i class="fas fa-arrow-left"></i> Go Back</a><br/><br/>
+                                    PLAN DETAILS</th>
+                                    <td v-if="plans.length >= 1">
+                                        <div class="snackbar-item no-margin" v-bind:data-id="plans[0].id" v-on:click="setPlanById(plans[0])">
+                                            <img class="cursor" v-bind:src="plans[0].logo" v-bind:alt="plans[0].company"/>
+                                            <div class="is-divider-vertical"></div>
+                                            <div class="cursor snackbar-item-title"><p>{{plans[0].title}}</p></div>
+                                        </div>
+                                    </td>
+                                    <td v-if="plans.length >= 2">
+                                        <div class="snackbar-item no-margin" v-bind:data-id="plans[1].id" v-on:click="setPlanById(plans[1])">
+                                            <img class="cursor" v-bind:src="plans[1].logo" v-bind:alt="plans[1].company"/>
+                                            <div class="is-divider-vertical"></div>
+                                            <div class="cursor snackbar-item-title"><p>{{plans[1].title}}</p></div>
+                                        </div>
+                                    </td>
+                                    <td v-if="plans.length >= 3">
+                                        <div class="snackbar-item no-margin" v-bind:data-id="plans[2].id" v-on:click="setPlanById(plans[2])">
+                                            <img class="cursor" v-bind:src="plans[2].logo" v-bind:alt="plans[2].company" />
+                                            <div class="is-divider-vertical"></div>
+                                            <div class="cursor snackbar-item-title"><p>{{plans[2].title}}</p></div>
+                                        </div>
+                                    </td>
+                                    <td v-if="plans.length >= 4">
+                                        <div class="snackbar-item no-margin" v-bind:data-id="plans[3].id" v-on:click="setPlanById(plans[3])">
+                                            <img class="cursor" v-bind:src="plans[3].logo" v-bind:alt="plans[3].company"/>
+                                            <div class="is-divider-vertical"></div>
+                                            <div class="cursor snackbar-item-title"><p>{{plans[3].title}}</p></div>
+                                        </div>
+                                    </td>
+                                    <td v-if="plans.length < 4">
+                                        <div class="snackbar-item no-margin"  >
+                                            <a class=" button is-grey animate-gradient-bg" href="{!$Page.Shop_Plans}"><span> <i class="fas fa-plus-circle"></i> ADD ANOTHER PLAN</span></a>
+                                        </div>
+
+                                        </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="shadow">All-In Cost</th>
+                                    <td v-if="plans.length >= 1">${{plans[0].kwhTC}}¢ kWh</td>
+                                    <td v-if="plans.length >= 2">${{plans[1].kwhTC}}¢ kWh</td>
+                                    <td v-if="plans.length >= 3">${{plans[2].kwhTC}}¢ kWh</td>
+                                    <td v-if="plans.length >= 4">${{plans[3].kwhTC}}¢ kWh</td>
+                                    <td v-if="plans.length < 4" class="has-no-background"></td>
+                                </tr>
+                                <tr>
+                                    <th class="shadow">Average Bill Estimate</th>
+                                    <td v-if="plans.length >= 1">
+                                        <app-monthly-bill-compare inline-template='true' v-bind:myplansize='houseSize' v-bind:myplan='plans[0]'>
+                                            <span v-if="myplansize == 'small'">${{ myplan.costMonthlySmall }}/mo</span>
+                                            <span v-else-if="myplansize == 'medium'">${{ myplan.costMonthlyMedium }}/mo</span>
+                                            <span v-else-if="myplansize == 'large'">${{ myplan.costMonthlyLarge }}/mo</span>
+                                        </app-monthly-bill-compare>
+                                    </td>
+                                    <td v-if="plans.length >= 2">
+                                        <app-monthly-bill-compare inline-template='true' v-bind:myplansize='houseSize' v-bind:myplan='plans[1]'>
+                                            <span v-if="myplansize == 'small'">${{ myplan.costMonthlySmall }}/mo</span>
+                                            <span v-else-if="myplansize == 'medium'">${{ myplan.costMonthlyMedium }}/mo</span>
+                                            <span v-else-if="myplansize == 'large'">${{ myplan.costMonthlyLarge }}/mo</span>
+                                        </app-monthly-bill-compare>
+                                    </td>
+                                    <td v-if="plans.length >= 3">
+                                        <app-monthly-bill-compare inline-template='true' v-bind:myplansize='houseSize' v-bind:myplan='plans[2]'>
+                                            <span v-if="myplansize == 'small'">${{ myplan.costMonthlySmall }}/mo</span>
+                                            <span v-else-if="myplansize == 'medium'">${{ myplan.costMonthlyMedium }}/mo</span>
+                                            <span v-else-if="myplansize == 'large'">${{ myplan.costMonthlyLarge }}/mo</span>
+                                        </app-monthly-bill-compare>
+                                    </td>
+                                    <td v-if="plans.length >= 4">
+                                        <app-monthly-bill-compare inline-template='true' v-bind:myplansize='houseSize' v-bind:myplan='plans[3]'>
+                                            <span v-if="myplansize == 'small'">${{ myplan.costMonthlySmall }}/mo</span>
+                                            <span v-else-if="myplansize == 'medium'">${{ myplan.costMonthlyMedium }}/mo</span>
+                                            <span v-else-if="myplansize == 'large'">${{ myplan.costMonthlyLarge }}/mo</span>
+                                        </app-monthly-bill-compare>
+                                    </td>
+                                    <td v-if="plans.length < 4" class="has-no-background"></td>
+                                </tr>
+                                <tr>
+                                    <th class="shadow">Early Cancellation Fee</th>
+                                    <td v-if="plans.length >= 1">${{plans[0].feeCancellation}}</td>
+                                    <td v-if="plans.length >= 2">${{plans[1].feeCancellation}}</td>
+                                    <td v-if="plans.length >= 3">${{plans[2].feeCancellation}}</td>
+                                    <td v-if="plans.length >= 4">${{plans[3].feeCancellation}}</td>
+                                    <td v-if="plans.length < 4" class="has-no-background"></td>
+                                </tr>
+                                <tr>
+                                    <th class="shadow">Contract Type</th>
+                                    <td v-if="plans.length >= 1">{{plans[0].contract}}</td>
+                                    <td v-if="plans.length >= 2">{{plans[1].contract}}</td>
+                                    <td v-if="plans.length >= 3">{{plans[2].contract}}</td>
+                                    <td v-if="plans.length >= 4">{{plans[3].contract}}</td>
+                                    <td v-if="plans.length < 4" class="has-no-background"></td>
+                                </tr>
+                                <tr>
+                                    <th class="shadow">Rewards</th>
+                                    <td v-if="plans.length >= 1">{{plans[0].rewardsText}}</td>
+                                    <td v-if="plans.length >= 2">{{plans[1].rewardsText}}</td>
+                                    <td v-if="plans.length >= 3">{{plans[2].rewardsText}}</td>
+                                    <td v-if="plans.length >= 4">{{plans[3].rewardsText}}</td>
+                                    <td v-if="plans.length < 4" class="has-no-background"></td>
+                                </tr>
+                                <tr>
+                                    <th class="shadow">No Minimum Usage Charge</th>
+                                    <td v-if="plans.length >= 1">
+                                        <span v-show="plans[0].ratePlan.Minimum_Usage_Charge__c > 0">False</span>
+                                        <span v-show="plans[0].ratePlan.Minimum_Usage_Charge__c <=0 || plans[0].ratePlan.Minimum_Usage_Charge__c == undefined">True</span>
+                                    </td>
+                                    <td v-if="plans.length >= 2">
+                                        <span v-show="plans[1].ratePlan.Minimum_Usage_Charge__c > 0">False</span>
+                                        <span v-show="plans[1].ratePlan.Minimum_Usage_Charge__c <=0 || plans[1].ratePlan.Minimum_Usage_Charge__c == undefined">True</span>
+                                    </td>
+                                    <td v-if="plans.length >= 3">
+                                        <span v-show="plans[2].ratePlan.Minimum_Usage_Charge__c > 0">False</span>
+                                        <span v-show="plans[2].ratePlan.Minimum_Usage_Charge__c <=0 || plans[2].ratePlan.Minimum_Usage_Charge__c == undefined">True</span>
+                                    </td>
+                                    <td v-if="plans.length >= 4">
+                                        <span v-show="plans[3].ratePlan.Minimum_Usage_Charge__c > 0">False</span>
+                                        <span v-show="plans[3].ratePlan.Minimum_Usage_Charge__c <=0 || plans[3].ratePlan.Minimum_Usage_Charge__c == undefined">True</span>
+                                    </td>
+                                    <td v-if="plans.length < 4" class="has-no-background"></td>
+                                </tr>
+                                <tr>
+                                    <th class="shadow has-text-weight-bold has-text-primary"><a v-on:click="saveforlater()">
+                                    <i class="fas fa-save"></i> SAVE FOR LATER</a></th>
+                                    <td v-if="plans.length >= 1"><input class="button is-info is-rounded is-outlined animate-gradient-bg" type="submit" value="SIGN ME UP" v-on:click="selectPlan(plans[0])"/></td>
+                                    <td v-if="plans.length >= 2"><input class="button is-info is-rounded is-outlined animate-gradient-bg" type="submit" value="SIGN ME UP" v-on:click="selectPlan(plans[1])"/></td>
+                                    <td v-if="plans.length >= 3"><input class="button is-info is-rounded is-outlined animate-gradient-bg" type="submit" value="SIGN ME UP" v-on:click="selectPlan(plans[2])"/></td>
+                                    <td v-if="plans.length >= 4"><input class="button is-info is-rounded is-outlined animate-gradient-bg" type="submit" value="SIGN ME UP" v-on:click="selectPlan(plans[3])"/></td>
+                                    <td v-if="plans.length < 4" class="has-no-background"></td>
+                                </tr>
+                                <tr style="border-bottom:0;">
+                                    <th></th>
+                                    <td style="border-bottom:0;" v-if="plans.length >= 1" class="has-no-background"><a class="" v-on:click="removePlan(plans[0])">Remove</A></td>
+                                    <td style="border-bottom:0;" v-if="plans.length >= 2" class="has-no-background"><a class="" v-on:click="removePlan(plans[1])">Remove</A></td>
+                                    <td style="border-bottom:0;" v-if="plans.length >= 3" class="has-no-background"><a class="" v-on:click="removePlan(plans[2])">Remove</A></td>
+                                    <td style="border-bottom:0;" v-if="plans.length >= 4" class="has-no-background"><a class="" v-on:click="removePlan(plans[3])">Remove</A></td>
+                                    <td style="border-bottom:0;" v-if="plans.length < 4" class="has-no-background"></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        
+                    </div>
+                </section>
+
+
+                <c:tc2_modal_save_for_later ></c:tc2_modal_save_for_later>
+                
+                
+             </div>
+         </div>
+         
+        <c:tc2_footer />
+         <script>
+              
+            Vue.component('app-monthly-bill-compare', {
+                data: function () { 
+                    return {
+                        myplansize: 'medium',
+                        myplan: ''
+                    } 
+
+                },
+                mounted: function() { 
+                    
+                    this.myplansize = TC.app.appHomeProfile.houseSize;
+                },  
+                props: ['myplan', 'myplansize']
+              });
+
+            (function ($) {
+                $(function () {
+                'use strict';
+                 
+                 TC.app.appShopPlansCompare = new Vue({
+                    el: '#appShopPlansCompare',
+                    data: {
+                       plans: [],
+                       houseSize:(TC.app.appHomeProfile.houseSize == null || TC.app.appHomeProfile.houseSize == '') ? 'medium' : TC.app.appHomeProfile.houseSize
+
+                    },
+                    methods: { 
+                        selectPlan: function(plan){
+                            TC.app.account.plan = plan;
+                            TC.fn.navigateTo("{!$Page.Account_Moving}");    
+                        },
+                        saveforlater: function(){
+                            TC.app.appSubscribe.$emit('saveForLater', TC.app.account);
+                        },
+                        goBack: function(){
+                            window.history.back();
+                        },
+                        setPlanById: function(plan){
+                            sessionStorage.setItem('plan', JSON.stringify(plan));
+                            TC.fn.navigateTo("/Shop_Plans_Details?id="+plan.id)
+                        },
+                        removePlan: function(plan){
+                            TC.app.appPlansCompareBar.removePlan(plan)
+                        }
+         
+                    },
+                    mounted: function() { 
+                        //this.plans = TC.app.account.plansCompare;
+                        this.plans = TC.app.account.plansCompare.sort(function(a, b){
+                            if(a.price < b.price) return -1;
+                            if(a.price > b.price) return 1;
+                            return 0;
+                        })
+                        TC.app.appPlansCompareBar.hideSnackBar();
+
+                        //TC.fn.promptSaveNow();
+                    }
+                 });
+            
+              })
+            })(jQuery);
+         </script>
+      </body>
+   </html>
+</apex:page>

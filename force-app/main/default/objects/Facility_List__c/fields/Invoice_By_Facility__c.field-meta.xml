@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invoice_By_Facility__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Should each facility be invoiced separately?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Should each facility be invoiced separately?</inlineHelpText>
+    <label>Invoice By Facility</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Director__c</fullName>
+    <description>Who is this user&#39;s Director?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Who is this user&#39;s Director?</inlineHelpText>
+    <label>Director</label>
+    <relationshipName>DirectorUsers</relationshipName>
+    <restrictedAdminField>false</restrictedAdminField>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Hierarchy</type>
+</CustomField>

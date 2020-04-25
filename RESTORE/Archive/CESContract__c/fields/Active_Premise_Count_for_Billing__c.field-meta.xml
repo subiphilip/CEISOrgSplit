@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active_Premise_Count_for_Billing__c</fullName>
+    <description>number of active premises on the contract.  originally populated by contract request.  incrementally populated by a process run each month to verify the premise count for a given billing month.</description>
+    <externalId>false</externalId>
+    <label>Active Premise Count for Billing</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

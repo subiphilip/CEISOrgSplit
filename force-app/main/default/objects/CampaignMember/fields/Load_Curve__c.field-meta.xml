@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Load_Curve__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>load curve to use for pricing reports</description>
+    <externalId>false</externalId>
+    <inlineHelpText>load curve to use for pricing reports</inlineHelpText>
+    <label>Load Curve</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>1 OR 2 OR 3</booleanFilter>
+        <filterItems>
+            <field>Load_Curve__c.Name</field>
+            <operation>equals</operation>
+            <value>Illinois Heat Load</value>
+        </filterItems>
+        <filterItems>
+            <field>Load_Curve__c.Name</field>
+            <operation>equals</operation>
+            <value>Illinois Process Load</value>
+        </filterItems>
+        <filterItems>
+            <field>Load_Curve__c.Name</field>
+            <operation>equals</operation>
+            <value>Illinois Process/Heat</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Load_Curve__c</referenceTo>
+    <relationshipLabel>Campaign Members</relationshipLabel>
+    <relationshipName>Campaign_Members</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Facebook_OAuth_Link_Link__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>for linking existing user accounts</inlineHelpText>
+    <label>Facebook OAuth Link Link</label>
+    <length>255</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

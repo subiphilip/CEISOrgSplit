@@ -1,0 +1,50 @@
+<apex:component >
+
+  <app-modal-smart-meter-info inline-template='true' xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+    <div id="app-modal-smart-meter-info" class="modal">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+              <div id="app-compare-limit-modal-inside" class="modal-card-body has-text-centered">
+                  <button v-on:click="closeModal" class="delete is-large" aria-label="close"></button>
+                  <div class="modal-card-body-inner">
+                      <span class="icon is-large has-text-info">
+                      <i class="fas fa-tachometer-alt fa-2x"></i></span>
+                      <h1 class="is-size-4 has-text-weight-semibold">Find Your Meter Number</h1>
+                      <img style="max-width: 50%;" src="{!URLFOR($Resource.v2_tc_resources_images, 'smart-meter.jpg')}"/>
+                      <p>This picture shows where the eight-digit meter number is located on the meter face.</p>
+                      <p>The meter number can be found on your electric bill (i.e. Meter Number 12 345 678).</p>
+                      <p><strong>NOTE: Do not include leading letters in your smart meter number entry</strong></p>
+
+                      <a v-on:click="closeModal" class="button is-primary is-rounded fixed-size animate-gradient-bg filled">Continue</a>
+
+              </div>
+          </div>
+      </div>
+    </div>
+  </app-modal-smart-meter-info>
+   
+  <script>
+  Vue.component('app-modal-smart-meter-info', {
+    data: function () {  },
+    mounted: function() {
+    	var vm = this;
+        TC.app.appSubscribe.$on('smartMeterInfo', function(arg) {
+            vm.showModal();
+        });
+    },  
+    props: [],
+    methods:{
+        showModal: function(){
+            TweenMax.to('#app-modal-smart-meter-info', .24, {opacity:1, display:'block'});
+            TweenMax.fromTo('#app-modal-smart-meter-info .modal-background', .5, {opacity:0}, {opacity:.8})
+            TweenMax.fromTo('#app-modal-smart-meter-info .modal-card', .7, {y:-100, opacity:0, scale:1.3}, {y: 20, opacity:1, scale: 1, ease:Bounce.easeOut});
+        },
+        closeModal: function() {
+            TweenMax.fromTo('#app-modal-smart-meter-info .modal-card', .24, {opacity:1}, {opacity:0, scale: 1.1, ease:Bounce.easeOut});
+            TweenMax.to('#app-modal-smart-meter-info .modal-background', .24, {opacity:0})
+            TweenMax.to('#app-modal-smart-meter-info', .24, {opacity:0, display:'none'});
+        }
+    } 
+  });
+  </script>
+</apex:component>

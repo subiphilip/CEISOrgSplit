@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fuel_Gross_Up__c</fullName>
+    <defaultValue>4.24</defaultValue>
+    <description>What percentage of delivered gas goes to the utility for fuel</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What percentage of delivered gas goes to the utility for fuel</inlineHelpText>
+    <label>Fuel Gross-Up</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>8</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

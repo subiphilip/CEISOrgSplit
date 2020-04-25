@@ -1,0 +1,14 @@
+<apex:component layout="none">
+    <apex:outputpanel rendered="{!CONTAINS($CurrentPage.URL, 'http://www.mytruecost.com/')}">
+        <c:GoogleAnalyticsTrackingCodeScript />
+        <script>
+            _gaq.push(['_link', '{!SUBSTITUTE($CurrentPage.URL, 'http://www.mytruecost.com', 'https://centerpointenergy.secure.force.com')}'.replace("apex/", "")]);        
+        </script>
+    </apex:outputpanel>
+    <apex:outputPanel rendered="{!and($Site.CurrentSiteUrl!='http://www.mytruecost.com/', NOT(CONTAINS($CurrentPage.URL, 'https')))}">
+        <c:GoogleAnalyticsTrackingCodeScript />
+        <script>
+            _gaq.push(['_link', '{!SUBSTITUTE($CurrentPage.URL, 'http:', 'https:')}'.replace("apex/", "")]).replace('://centerpointenergy.force.com', '://centerpointenergy.secure.force.com');
+        </script>
+    </apex:outputPanel>
+</apex:component>

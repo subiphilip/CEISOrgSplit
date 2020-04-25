@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MDQ__c</fullName>
+    <description>If the load curve is to be used for storage, what is the mdq for the assumed usage?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If the load curve is to be used for storage, what is the mdq for the assumed usage?</inlineHelpText>
+    <label>MDQ</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

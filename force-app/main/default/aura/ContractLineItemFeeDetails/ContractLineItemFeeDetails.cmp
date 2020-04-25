@@ -1,0 +1,29 @@
+<aura:component 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" 
+                access="global">
+                <!-- controller="ContractLightningData" -->
+	<aura:attribute name="mydata" type="Object"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="gridExpandedRows" type="List" />
+
+    <aura:attribute name="recordId" type ="Id"/>
+    <aura:attribute name="scope" type ="String"/>
+    <aura:attribute Name="sysVars" type="CnISystemVariables__c"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div  class="slds-form-element slds-input slds-p-around_x-small " role="tabpanel" >
+    <div class="slds-text-heading_small slds-p-bottom_small">Line Item Fee Detail</div> 
+        <div class="slds-border_top">
+        <lightning:treeGrid
+            columns="{! v.mycolumns }"
+            data="{! v.mydata }"
+            expandedRows="{! v.gridExpandedRows }"
+            keyField="feeName"
+            aura:id="mytree"
+            hideCheckboxColumn="true"
+        />
+        </div>
+    </div>
+    
+</aura:component>

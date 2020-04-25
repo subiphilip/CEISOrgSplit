@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Payment_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Payment Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>25th of the month</fullName>
+                <default>false</default>
+                <label>25th of the month</label>
+            </value>
+            <value>
+                <fullName>27th of the month</fullName>
+                <default>false</default>
+                <label>27th of the month</label>
+            </value>
+            <value>
+                <fullName>28th of the month</fullName>
+                <default>false</default>
+                <label>28th of the month</label>
+            </value>
+            <value>
+                <fullName>Last day of the month</fullName>
+                <default>false</default>
+                <label>Last day of the month</label>
+            </value>
+            <value>
+                <fullName>1st day of two months</fullName>
+                <default>false</default>
+                <label>1st day of two months</label>
+            </value>
+            <value>
+                <fullName>3rd day of two months</fullName>
+                <default>false</default>
+                <label>3rd day of two months</label>
+            </value>
+            <value>
+                <fullName>5th day of two months</fullName>
+                <default>false</default>
+                <label>5th day of two months</label>
+            </value>
+            <value>
+                <fullName>8th day of two months</fullName>
+                <default>false</default>
+                <label>8th day of two months</label>
+            </value>
+            <value>
+                <fullName>10th day of two months</fullName>
+                <default>false</default>
+                <label>10th day of two months</label>
+            </value>
+            <value>
+                <fullName>11th day of two months</fullName>
+                <default>false</default>
+                <label>11th day of two months</label>
+            </value>
+            <value>
+                <fullName>LDM - Group A</fullName>
+                <default>false</default>
+                <label>LDM - Group A</label>
+            </value>
+            <value>
+                <fullName>LDM - Group B</fullName>
+                <default>false</default>
+                <label>LDM - Group B</label>
+            </value>
+            <value>
+                <fullName>LDM - Allocations</fullName>
+                <default>false</default>
+                <label>LDM - Allocations</label>
+            </value>
+            <value>
+                <fullName>LDM - Approvals Needed</fullName>
+                <default>false</default>
+                <label>LDM - Approvals Needed</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

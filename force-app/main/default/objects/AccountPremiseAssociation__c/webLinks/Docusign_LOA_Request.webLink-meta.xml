@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Docusign_LOA_Request</fullName>
+    <availability>online</availability>
+    <description>LOA requiring customer signature (Docusign).  Oncor only.</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>true</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>600</height>
+    <isResizable>true</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>Oncor LOA Request (Docusign)</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>https://composer.congamerge.com
+?sessionId={!API.Session_ID}
+&amp;serverUrl={!API.Partner_Server_URL_290}
+&amp;id={!AccountPremiseAssociation__c.Id}
+&amp;TemplateId=a1430000002uR9h
+&amp;EmailTemplateId=00X300000023J4p
+&amp;LG0=0
+&amp;LG1=LOA+Request
+&amp;LG3=1
+&amp;LG4=1
+&amp;LG5={!$User.Id}
+&amp;LG2=7
+&amp;LG6={!$User.Id}
+&amp;LG7=LOA+Follow-up   
+&amp;FP0=0
+&amp;LG1=LOA+Generated
+&amp;LGAttachOption=2
+&amp;EmailAdditionalTo={!AccountPremiseAssociation__c.Customer_Email__c}
+&amp;EmailRelatedToId={!AccountPremiseAssociation__c.Id}
+&amp;EmailFromId=0D230000000KznO
+&amp;OFN={!AccountPremiseAssociation__c.Account__c}+-+LOA
+&amp;DS4=1
+&amp;DS7=0
+&amp;Qmode=DocuSign
+&amp;DocuSignVisible=1
+&amp;DocuSignR1Id={!AccountPremiseAssociation__c.ContactID_Kludge__c}
+&amp;DocuSignR1Role=Signer+1 
+&amp;DocuSignR1Type=Signer 
+&amp;DocuSignR1RoutingOrder=1
+DocuSignRelatedAccountId={!AccountPremiseAssociation__c.AccountId__c}
+&amp;DocuSignSendReminders=1 
+&amp;DocuSignRemindIn=1 
+&amp;DocuSignRemindAgainIn=2
+&amp;DocuSignEmailSubject=TrueCost: Your Historical Electric Usage Request! 
+&amp;DocuSignEmailBody={!HTMLENCODE(&#39;Thanks for requesting your electric usage history on MyTrueCost.com! This is the last step in the process of letting us import your smart meter data. Please follow the simple instructions to digitally sign and confirm your Letter of Authorization so we may request the data from your Electric Transmission and Distribution Utility.&#39;)} 
+&amp;DocuSignCustomField1=dsfs__Custom_Field_1_Name__c 
+&amp;DocuSignCustomFieldValue1=%23%23SFAccount 
+&amp;DocuSignCustomField2=dsfs__Custom_Field_1_Value__c 
+&amp;DocuSignCustomFieldValue2={!AccountPremiseAssociation__c.AccountId__c}</url>
+</WebLink>

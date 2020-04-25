@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prorate_Volumes_By__c</fullName>
+    <description>How the volumes are prorated</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How the volumes are prorated</inlineHelpText>
+    <label>Prorate Volumes By</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Capacity Volume</fullName>
+                <default>false</default>
+                <label>Capacity Volume</label>
+            </value>
+            <value>
+                <fullName>Annual Volume</fullName>
+                <default>false</default>
+                <label>Annual Volume</label>
+            </value>
+            <value>
+                <fullName>Even Distribution</fullName>
+                <default>false</default>
+                <label>Even Distribution</label>
+            </value>
+            <value>
+                <fullName>Billing Volume</fullName>
+                <default>false</default>
+                <label>Billing Volume</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

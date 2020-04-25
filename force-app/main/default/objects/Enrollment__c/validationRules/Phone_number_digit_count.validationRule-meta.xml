@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Phone_number_digit_count</fullName>
+    <active>true</active>
+    <description>Enforces 10-digit phone numbers</description>
+    <errorConditionFormula>AND(
+NOT(REGEX(Phone__c, &quot;\\D*?(\\d\\D*?){10}&quot;)) ,
+Len(Phone__c)&gt;0
+)</errorConditionFormula>
+    <errorMessage>Enrollment03: Phone numbers should be in this format: (999) 999-9999</errorMessage>
+</ValidationRule>

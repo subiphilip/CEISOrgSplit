@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <cacheControl>Public</cacheControl>
+    <contentType>image/jpeg</contentType>
+    <description>Red person in center of crowd used for home page secondary box. 123h x 231w.</description>
+</StaticResource>

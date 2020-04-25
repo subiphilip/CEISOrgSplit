@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Control_number_starts_with_a_4_or_7</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND( 
+   Control__c != &#39;999999999&#39;,
+   NOT(BEGINS(Control__c , &quot;4&quot;)), 
+   NOT(BEGINS(Control__c , &quot;7&quot;)),
+   NOT(isblank(Control__c )),
+   NOT(ISPICKVAL(Order_Status__c , &#39;Success&#39;))
+    
+)</errorConditionFormula>
+    <errorDisplayField>Control__c</errorDisplayField>
+    <errorMessage>Order02: Control numbers must start with a 4 or a 7.</errorMessage>
+</ValidationRule>

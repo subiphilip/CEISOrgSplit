@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Variable_Plans</fullName>
+    <active>true</active>
+    <description>Not currently accepted on TrueCost</description>
+    <errorConditionFormula>AND(
+Record_Type_Name__c = &quot;Electric Plan&quot;,
+ Contract_Length__c &lt; 3,
+ Active__c = TRUE
+)</errorConditionFormula>
+    <errorMessage>Plan03: TrueCost does not currently offer variable plans, please enter a contract length of at least 3 months for this plan if you wish for it to be active on the shopping page.</errorMessage>
+</ValidationRule>

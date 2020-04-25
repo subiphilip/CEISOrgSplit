@@ -1,0 +1,23 @@
+<apex:component >
+<h3>{!$Label.Page_Title_Electrice_Price_Trends_Summary}</h3>
+<ul class="unstyled">
+	<li>
+		<a href="{!$Page.ElectricPriceTrendsSummary}?tdsp={!$CurrentPage.Parameters.tdsp}">Compare all indexes</a>
+	</li>
+	<li>
+		<a href="{!$Page.ElectricPriceIndex6Month}?tdsp={!$CurrentPage.Parameters.tdsp}">6-month plans</a>
+	</li>
+	<li>
+		<a href="{!$Page.ElectricPriceIndex12Month}?tdsp={!$CurrentPage.Parameters.tdsp}">One-year plans</a>
+	</li>
+	<li>
+		<a href="{!$Page.ElectricPriceIndex24Month}?tdsp={!$CurrentPage.Parameters.tdsp}">Two-year plans</a>
+	</li>
+	<li>
+		<a href="{!$Page.AboutTheIndex}?tdsp={!$CurrentPage.Parameters.tdsp}">About the index</a>
+	</li>
+	<li>
+		<a href="{!$Page.variablerates}">Variable Rates</a>
+	</li>
+</ul>
+</apex:component>

@@ -1,0 +1,56 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" cache="true" expires="43200">
+    
+   <html><!--<html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">-->
+      <c:tc2_header title="{!$Label.Page_Title_TDSP_Help} - {!$Label.Page_Title_Company_Name}"
+         description="" />
+      <style>
+        
+      </style>
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="Which TDSP are you in?" subHeadline="" />
+    
+             <div id="" class="container"> 
+                <div class="has-margin-3">
+                  <div class="columns content box has-margin-3">
+
+                  <div class="">
+                    <div style="padding:20px;">
+                      <h3><b>{!$Label.Page_Title_TDSP_Help}</b></h3>
+                      <p>{!$Label.Page_Subtitle_TDSP_Help}</p>
+                      <hr></hr>
+
+                      <h5>CenterPoint Energy Service Area</h5>
+                      <c:Content_Viewer content="CNP Cities" />
+                      <hr/>
+                      <h5>Oncor Service Area</h5>
+                      <c:Content_Viewer content="Oncor Cities" />
+                      <hr/>
+                      <h5>AEP North Service Area</h5>
+                      <c:Content_Viewer content="AEPN Cities" />
+                      <hr/>
+                      <h5>AEP Central Service Area</h5>
+                      <p style="text-align:left"><c:Content_Viewer content="AEPC Cities" /></p>
+                      <hr/>
+                      <h5>TNMP (Texas-New Mexico Power) Service Area</h5>
+                      <p style="text-align:left"><c:Content_Viewer content="TNMP Cities" /></p>
+                      <hr/>
+                      <h5>Sharyland Utilities Service Area</h5>
+                      <c:Content_Viewer content="Sharyland Cities" />
+                      <hr/>
+                      <c:Content_Viewer content="Non-competitive regions"/>                  
+
+                    </div>
+                  </div>
+                      
+                </div>
+               </div>
+
+             </div>
+         </div>    
+         
+        <c:tc2_footer />
+      </body>
+   </html>
+</apex:page>

@@ -1,0 +1,52 @@
+<apex:component >
+
+  <app-modal-logout inline-template='true' xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+    <div id="app-modal-logout" class="modal">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+              <div id="app-compare-limit-modal-inside" class="modal-card-body has-text-centered">
+                  <button v-on:click="closeModal" class="delete is-large" aria-label="close"></button>
+                  <div class="modal-card-body-inner">
+                      <span class="icon is-large has-text-info"> <i class="fas fa-sign-out-alt fa-2x"></i></span>
+                      <h1 class="is-size-4 has-text-weight-semibold">Logout</h1>
+                      <div id="iframeHolder"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </app-modal-logout>
+
+  <script>
+  
+  Vue.component('app-modal-logout', {
+    data: function () {  },
+    mounted: function() {
+    	var vm = this;
+      TC.app.appSubscribe.$on('logout', function(arg) {
+          vm.showModal();
+      });
+    },  
+    props: [],
+    methods:{
+        showModal: function(){
+            TweenMax.to('#app-modal-logout', .24, {opacity:1, display:'block'});
+            TweenMax.fromTo('#app-modal-logout .modal-background', .5, {opacity:0}, {opacity:.8})
+            TweenMax.fromTo('#app-modal-logout .modal-card', .7, {y:-100, opacity:0, scale:1.3}, {y: 20, opacity:1, scale: 1, ease:Bounce.easeOut});
+            this.logout()
+        },
+        closeModal: function() {
+            TweenMax.fromTo('#app-modal-logout .modal-card', .24, {opacity:1}, {opacity:0, scale: 1.1, ease:Bounce.easeOut});
+            TweenMax.to('#app-modal-logout .modal-background', .24, {opacity:0})
+            TweenMax.to('#app-modal-logout', .24, {opacity:0, display:'none'});
+        },
+        logout: function(){
+        	$('#iframeHolder').html('<iframe id="iframe" src="{!$Site.Prefix}/secur/logout.jsp" width="0" height="0"></iframe>');
+          sessionStorage.clear()
+        	setTimeout(function(){ 
+		      	window.parent.location="{!$Site.Prefix}/Home";
+		     }, 2000);
+        }
+    }
+  });
+  </script>
+</apex:component>

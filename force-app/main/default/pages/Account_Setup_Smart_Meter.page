@@ -1,0 +1,91 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" controller="ControllerForMobileMain">
+    
+ 
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org" xmlns:v-focus="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+    description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."
+  />
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+    
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"/>
+
+    <div id="wrapper">
+    
+        <c:tc2_navbar />
+        <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-2.jpg" headline="SETUP SMART METER" />
+        <!-- HEADER -->
+        <div id="appAccountSetupSmartMeter">
+
+            <c:tc2_account_smartmeter_access />
+            <app-account-smartmeter-access />
+            
+            <section>
+                <div class="container">
+                    <div class="has-margin-3 has-text-centered">
+                        <h2  class="is-size-4 has-text-weight-bold padding-sides">Setting up your smart meter!</h2>
+                    </div>
+                </div>
+            </section>
+
+            
+        </div>
+        
+        
+    </div>
+    
+    <c:Ngforce />
+
+    <style>
+        body footer.footer {
+            position: absolute;
+        }
+        body #wrapper{
+            padding-bottom:auto;
+        }
+    </style>
+
+    <c:tc2_footer />
+    <script>
+            (function($) {
+                $(function() {
+                    'use strict';
+
+                    TC.app.appAccountSetupSmartMeter = new Vue({
+                        el: '#appAccountSetupSmartMeter',
+                        data: {
+                            errors: [],
+                            smartMeter: TC.app.account.premise.smartMeter
+                        },
+                        mounted: function() {
+                            TC.app.appSubscribe.$emit('addLoaderQueue', {'id':'setupOrder','status':'Getting Smart Meter Data'});
+                            this.setupSmartMeter();
+
+                        },
+                        methods: {
+                            setupSmartMeter: function() {
+                                ControllerForMobileMain.getMeterData(TC.app.account.uid, this.smartMeter, function(result, event){ 
+                                    TC.app.appAccountSetupSmartMeter.grantMeterDataPermission();
+                                });
+                            },
+                            grantMeterDataPermission: function() {
+                                var accountObj = {
+                                    Id:TC.app.account.accountId, 
+                                    Meter_Data_Email_Weekly__c:true,
+                                    Meter_Data_Email_Daily__c:false
+                                };
+                                TC.fn.updateLead();
+                                TC.app.appSubscribe.$emit('grantMeterDataPermission', accountObj);
+
+                            }
+                        }
+                    });
+
+                })
+
+            })(jQuery);
+        </script>
+    
+  </body>
+  </html>
+</apex:page>

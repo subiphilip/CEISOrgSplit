@@ -1,0 +1,48 @@
+<apex:component >
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script async="async" type="text/javascript">
+        google.load("visualization", "1", {packages:["corechart"]});
+        google.setOnLoadCallback(drawVisualization);
+        var data; var visualization;
+        
+    
+      
+        function drawVisualization() {
+          
+             var query = new google.visualization.Query(
+        //Insert your URL here if it's not the main page
+                 'https://docs.google.com/spreadsheet/ccc?key=0AstVZHCorfG7dEZrZFhfdGxydTU0Ylg1Z0NkYThXOUE&output=html');
+        //Edit your charts here!!
+                 query.setQuery('SELECT A,E,C,F WHERE A >= Z ORDER BY A');//6,12,24 MINI Combined Chart
+          query.send(handleQueryResponse);
+        }
+        
+        function handleQueryResponse(response) {
+          if (response.isError()) {
+            _gaq.push(['_trackEvent', 'Page Errors', 'Chart Query Error', '{!$Site.OriginalUrl}--{!$CurrentPage.url}--u:{!$User.id}--'+response.getMessage() + ' ' + response.getDetailedMessage()]); 
+              alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+            return;
+          }
+          
+          data = response.getDataTable();
+          visualization = new google.visualization.LineChart(document.getElementById('visualization'));  //rename the div tag if you need multiple charts on the page
+        //options
+          visualization.draw(data, {
+              //width:225, height:200, 
+              legend: 'none', colors:['#FE9601', '#000000', '#006894'], lineWidth:2, chartArea:{width:"77%", height:"70%"},                            vAxis:{gridlineColor:'#006894', textStyle:{color: '#006894'}, baselineColor:'#006894', format:'$###'},                           hAxis:{gridlineColor:'#ffffff', textStyle:{color: '#ffffff'}, baselineColor:'#ffffff', format:'MMM y'}, interpolateNulls:true});
+          window.onresize = function(event) {
+             visualization.draw(data, {
+                    //width:225, height:200, 
+                    legend: 'none', colors:['#FE9601', '#000000', '#006894'], lineWidth:2, chartArea:{width:"77%", height:"70%"},                            vAxis:{gridlineColor:'#006894', textStyle:{color: '#006894'}, baselineColor:'#006894', format:'$###'},                           hAxis:{gridlineColor:'#ffffff', textStyle:{color: '#ffffff'}, baselineColor:'#ffffff', format:'MMM y'}, interpolateNulls:true
+                  }
+              );
+            }
+        }
+
+    </script>
+    
+    <h3>Electric Price Trends</h3>
+    <p>Track the latest price trends and market conditions.</p> 
+        <div id="visualization" class="narrow_price_chart"></div>
+        <a class="btn btn-warning" href="{!$Page.ElectricPriceTrendsSummary}">Learn More</a>
+</apex:component>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Billing_Type__c</fullName>
+    <description>Nicor, NShore, PGLC billing volume designation</description>
+    <externalId>false</externalId>
+    <label>Billing Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Deliveries</fullName>
+                <default>false</default>
+                <label>Deliveries</label>
+            </value>
+            <value>
+                <fullName>Usage</fullName>
+                <default>false</default>
+                <label>Usage</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Index_Rate__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This index can be used as an index rate</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This index can be used as an index rate</inlineHelpText>
+    <label>Index Rate</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

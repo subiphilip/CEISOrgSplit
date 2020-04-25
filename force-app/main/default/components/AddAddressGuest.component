@@ -1,0 +1,53 @@
+<apex:component controller="ControllerForMobileMain" allowdml="true"> 
+    <style type="text/css">
+        #please_select,#address_results {display:none;}
+        
+    </style>
+      
+    <div class="well well-large">
+        <div class="row">
+            <form action="javascript:void(0);">
+                <div class="control-group span4">
+                    <label class="control-label" for="addressField">Address</label>
+                    <div class="controls">
+                        <input name="Address" id="addressField" placeholder="123 Any Street" value="" type="text" required="required" autofocus="autofocus"/>
+                    </div>
+                </div>
+                <div class="control-group span4" >
+                    <label class="control-label" for="zip">Zip</label>
+                    <div class="controls">
+                        <div class="input-append">
+                            <input class="input-medium" name="Zip" id="zip" placeholder="77002" value="" type="text" required="required" pattern="\d{5}"  title="5 digits, no dash or Zip+4"/>
+                            <button id="address_submit" name="address_submit" class="btn btn-primary" data-loading-text="Searching...">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>    
+    
+    <div id="please_select">
+        <h4>Please select your address</h4>
+        <p>By clicking <b>Select</b>, I accept the TrueCost <a href="{!$Page.TermsOfUse}" target="_blank">Terms of Use</a> and <a href="{!$Page.Privacy}" target="_blank">Privacy Policy</a></p>
+    </div>
+    <table class="table table-striped table-condensed" id="address_results">
+        <thead><tr><th></th><th>Address</th><th>Type</th><th>ESID</th></tr></thead>
+        <tbody></tbody>
+    </table>
+    <hr/>
+    <h4>Address Search Hints</h4>
+    <c:Content_Viewer content="Help for Address Matching"/>
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Alert!</h3>
+        </div>
+        <div class="modal-body">
+            <p>This premise has an order in progress.  Please check its status on your My Account page.  If you need to cancel your previous order, please contact TrueCost support.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    </div>        
+    
+</apex:component>

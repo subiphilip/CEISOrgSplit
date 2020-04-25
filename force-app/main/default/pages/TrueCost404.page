@@ -1,0 +1,44 @@
+<apex:page showHeader="false" title="{!$Label.site.file_not_found}" cache="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" applyHtmlTag="false">
+    
+   <html><!--<html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">-->
+      <c:tc2_header title="Page Not Found - {!$Label.Page_Title_Company_Name}"
+         description="" />
+      <meta name="robots" content="noindex"/>
+      <style>
+        
+      </style>
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="Page Not Found" subHeadline="Sorry, we couldn't find that page" />
+    
+             <div id="" class="container"> 
+                <div class="has-margin-3">
+                  <div class="columns content box has-margin-3">
+
+                  <div class="">
+                    <div style="padding:20px;">
+                      <h3><b>We're sorry, but we didn't find the page you wanted.</b></h3>
+                          <p>Try searching or go to TrueCost's <a href="{!$Page.Home}">home page</a>.</p>
+                          <p>If you came to this page from a link on the TrueCost site, please use your browser's back button to return to the TrueCost site. </p>
+                          <p>If you're coming to TrueCost from another site, their link may be broken or incorrect, or we may have moved the content elsewhere.</p>
+                      <!-- <c:Content_Viewer content="404 Messaging"/> -->             
+
+                    </div>
+                  </div>
+                      
+                </div>
+               </div>
+
+             </div>
+         </div>    
+         
+        <c:tc2_footer />
+      </body>
+   </html>
+   
+    <site:previewAsAdmin />
+    <script type="text/javascript">
+    dataLayer.push({'event':'error', 'errorFunction':'404', 'errorObject':{'errorType':'Page Errors'}});
+    </script>
+</apex:page>

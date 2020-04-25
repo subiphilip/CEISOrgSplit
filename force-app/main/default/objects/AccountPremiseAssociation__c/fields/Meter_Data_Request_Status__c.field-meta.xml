@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Meter_Data_Request_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Meter Data Request Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Not requested</fullName>
+                <default>false</default>
+                <label>Not requested</label>
+            </value>
+            <value>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+                <label>In Progress</label>
+            </value>
+            <value>
+                <fullName>Complete</fullName>
+                <default>false</default>
+                <label>Complete</label>
+            </value>
+            <value>
+                <fullName>Error-Incomplete Data</fullName>
+                <default>false</default>
+                <label>Error-Incomplete Data</label>
+            </value>
+            <value>
+                <fullName>Error-Invalid Service Address</fullName>
+                <default>false</default>
+                <label>Error-Invalid Service Address</label>
+            </value>
+            <value>
+                <fullName>Error-Invalid Meter/ESID Match</fullName>
+                <default>false</default>
+                <label>Error-Invalid Meter/ESID Match</label>
+            </value>
+            <value>
+                <fullName>Error-No REP of Record</fullName>
+                <default>false</default>
+                <label>Error-No REP of Record</label>
+            </value>
+            <value>
+                <fullName>Error</fullName>
+                <default>false</default>
+                <label>Error</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

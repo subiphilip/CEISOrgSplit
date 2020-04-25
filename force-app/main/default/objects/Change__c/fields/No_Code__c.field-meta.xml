@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Code__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Does this change require a change to code for the applicaiton?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Does this change require a change to code for the applicaiton?</inlineHelpText>
+    <label>No Code</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

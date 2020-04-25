@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_0_Payments</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+
+RecordType.Name = &quot;Electric Payment&quot;,
+
+OR( Total_Payment_for_supplier_payments__c = 0,  ISNULL(Total_Payment_for_supplier_payments__c)
+)
+)</errorConditionFormula>
+    <errorDisplayField>Active_Contract_Pricing__c</errorDisplayField>
+    <errorMessage>POS1: Electric payments must have a total value.</errorMessage>
+</ValidationRule>

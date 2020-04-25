@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TDSP_per_Month__c</fullName>
+    <description>Monthly TDSP fixed charges per customer, including AMS</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Monthly TDSP fixed charges per customer, including AMS</inlineHelpText>
+    <label>TDSP per Month</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

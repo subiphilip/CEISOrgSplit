@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Choice_Cases_Temporary_Lost</fullName>
+    <columns>NAME</columns>
+    <columns>Subject__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Account__c</columns>
+    <columns>Caller_Name__c</columns>
+    <columns>isEscalated__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Subject__c</field>
+        <operation>contains</operation>
+        <value>Temporary Enrollment Lost File</value>
+    </filters>
+    <label>Gas Choice Cases (Temporary Lost)</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+        <group>CustomerService</group>
+        <group>Customer_Service_Primary</group>
+        <group>REPservice</group>
+    </sharedTo>
+</ListView>

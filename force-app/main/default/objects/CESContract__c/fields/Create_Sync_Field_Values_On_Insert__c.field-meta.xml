@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Create_Sync_Field_Values_On_Insert__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>set this to true on inserted records to create user field values</description>
+    <externalId>false</externalId>
+    <label>Create Sync Field Values On Insert</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

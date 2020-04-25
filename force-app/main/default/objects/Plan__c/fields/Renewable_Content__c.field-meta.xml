@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Renewable_Content__c</fullName>
+    <description>What percent of the electricity comes from renewable sources?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What percent of the electricity comes from renewable sources?</inlineHelpText>
+    <label>Renewable Content (in %)</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

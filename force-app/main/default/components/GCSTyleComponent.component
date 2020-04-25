@@ -1,0 +1,441 @@
+<apex:component >
+
+	<style type="text/css">
+                
+        body{
+            overflow-x: hidden;
+        }
+        
+        h1, .hero-unit h1 {
+            font-size:31.5px;
+        }
+        .no-margin{
+            margin:0px;
+        }
+        h1 small {
+            font-size:17.5px;
+        }
+        
+        .phone-body{
+            min-height:680px;
+        }
+        
+        #mobile-brand {
+            display:none;
+        }
+        #welcome-login{margin-right:20px;}
+        #cnp_logo {
+                max-width:10em;
+                display:inline-block;
+            }
+            
+            #wordmark {
+                max-width:16em;
+                margin-left:14px;
+                display:inline-block;
+            }
+        
+        #header_bar {
+            width:100%;
+            margin: 5px 10px 7px 10px;
+        }
+        
+        .navbar-inner{
+            padding-left:0em;
+            padding-right:0.5em;
+        }
+        .navbar-brand{
+            font-size:14px;
+            
+        }
+        .navbar-form .input-append {
+            margin-bottom: 0px;
+        }
+
+        .blue-bold-block {
+            background-color:#22409A;
+            display: inline-block;
+            margin-top:5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 0px 5px 0px 5px;
+            box-shadow: 0px 0px 35px -5px #5a5a5a;
+            color:white;
+        }
+        .nav-form {
+            margin-bottom:5px;
+        }
+
+        
+        /* Customize the navbar links to be fill the entire space of the .navbar */
+        #main-nav, .navbarEven{
+            margin-bottom: 20px;
+            width:100%;
+        }
+        .navbar-inner{
+            -webkit-border-radius: 0px;
+            -moz-border-radius: 0px;
+            border-radius: 0px;
+            width:100%;
+        }
+        
+        
+        .navbarEven .navbar-inner {
+            padding: 0;
+        }
+        
+        .navbarEven .nav {
+            margin: 0;
+            display: table;
+            width: 100%;
+        }
+        
+        .navbarEven .nav li {
+            display: table-cell;
+            width: 1%;
+            float: none;
+        }
+        
+        .navbarEven .nav li a {
+            font-weight: bold;
+            text-align: center;
+            border-left: 1px solid rgba(255, 255, 255, .75);
+            border-right: 1px solid rgba(0, 0, 0, .1);
+        }
+        
+        .navbarEven .nav li:first-child a {
+            border-left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        
+        .navbarEven .nav li:last-child a {
+            border-right: 0;
+            border-radius: 0 3px 3px 0;
+        }
+        .navbar-form .input-append {
+            margin-right:10px;
+        }
+        
+        #menu_button {
+            color:#777777;
+            padding:4px;
+        }
+         /*~------------------------homepage-------------------------*/
+        /*#myCarousel > .carousel-inner{
+            height:300px;
+        }*/
+        
+        .item > img {
+            width:100%;
+            height:auto;
+        }
+        .carousel-indicators {
+            bottom: 0px;
+            top:auto;
+        }
+        
+        .btn.btn-scaled {
+            width:73px;
+        }
+        
+        .img-business{
+            min-height:234px;
+            background-image: url(/resource/graphicCafeOwners);
+            background-size: cover;
+            background-position: 0px -36px;
+            background-repeat:no-repeat;
+        }
+        
+        #data_image{
+            min-height:175px;
+        }
+        
+        #data_image_background {
+            min-height:234px;
+            background-image: url(/resource/MeterDataExample);
+            background-size: cover;
+            background-repeat:no-repeat;
+        }
+        
+        #plan_details_backround{
+            min-height:234px;
+            background-image: url(/resource/PlanDetailsPromoView);
+            background-repeat:no-repeat;
+            background-position: 15px top;
+        }   
+        
+        
+        #big_video_image img{
+            min-height:175px;
+        }
+        
+        .carousel-indicators li{
+            background-color: #ccc;
+        }
+        .carousel-indicators .active{
+            background-color: #0097DA;
+        }
+        
+        .rep-mini-logo {
+            display:inline-block;
+            height:auto;
+            width:15%;
+            margin:3px 3px 3px 3px;
+        }
+        
+        .home-actions-block{
+            display: inline-block;
+            margin: 5px;
+            border: 1px solid #ccc;
+            padding: 25px 25px 45px 25px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 35px -5px #5a5a5a;
+        }
+        
+        .home-actions-block > .home-action-button-holder{
+            margin-left:10px; margin-right:10px;
+        }
+        
+        .text-box-overlay{
+            box-shadow: 0px 0px 70px 20px #FFFFFF;
+            background-color: #FFFFFF;
+        }
+        
+        /*~------------------------login-------------------------*/
+        .login_box{
+            width:30em;
+            margin-right:auto;
+            margin-left:auto;
+        }
+         /*~------------------------google charts-------------------------*/
+        .maingooglechart-with-space{
+            margin-top:1em;
+            height:30em;
+            width:100%;
+        }
+        .narrow_price_chart{
+            width:100%;
+        }
+        .hero-unit {
+            padding: 1.5em;
+        }
+        .date-controls {
+            width:45%;
+            display:inline-block;
+        }
+         /*~------------------------videos-------------------------*/
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 30px; height: 0; overflow: hidden;
+        }
+        
+        .video-container iframe,
+        .video-container object,
+        .video-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+         /*~------------------------promo banner-------------------------*/
+        
+        .index_promo_banner_container{
+            background-image: url(/resource/banner_trend);
+            margin-bottom: 20px;
+            background-size: cover;
+            padding: 13px 5px 23px 30px;
+            color:white;
+            background-position: 29px -78px;
+        }
+        
+         /*~------------------------footer-------------------------*/
+        .footer {
+        //text-align: center;
+        padding: 30px 0;
+        margin-top: 70px;
+        border: 1px solid #e5e5e5;
+        background-color: #f5f5f5;
+        line-height:12px;
+        width:100%;
+        }
+        
+        .footer .container {
+            padding:10px;
+        }
+        
+        .footer-links li {
+            display: inline;
+            padding: 0 2px;
+        }
+        .footer-links li:first-child {
+        padding-left: 0;
+        }
+        
+        .footer-sharing {margin-top:-6px;}
+        .footer-row-1 {margin-bottom:5px;}
+        
+        /* ~~~~~~~~~~~~ RATINGS ~~~~~~~~~~~~ */
+        .ratewrapper {
+        /*margin: 0 auto;*/
+        /*width: 130px;*/
+          height: 20px;
+        }
+        .rate,.rate b,.rate a {
+          width: 100px;
+          height: 20px;
+          overflow: hidden;
+          background: url('{!URLFOR($Resource.styles, 'img/ratingstar.gif')}');
+        }
+        .rate b {
+          float: left;
+          margin-bottom: -100%;
+          background-color: #FE9601;
+        }
+        .rate a {
+          float: right;
+          margin-left: -80px;
+          text-indent: -1000%;
+        }
+        .rate a:hover {
+          /*background-color: #0099DC;*/
+          background-color: transparent;
+        }
+        .rate-count {
+          clear: both;
+          margin-top: 1px;
+          font-size: 15px;
+          margin-left: 2px;
+          display:none;
+        }
+        /*~~~~~~~~~~~~Shopping~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+        .rate-arrow {
+            text-align: center;
+        }   
+        .no-padding {
+            padding: 0px;
+        }
+         /*~------------------------forms-------------------------*/
+        }
+        input[disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly] {
+            cursor: auto;
+            background-color: #eeeeee;
+
+        }
+        
+         /*~------------------------vf corrections-------------------------*/
+        .detailList {width:100%;}
+        .dataCol, .labelCol {width:20%;}
+        
+         /*~------------------------utilities-------------------------*/
+        .wrap-long{
+            word-wrap: break-word;
+            overflow: hidden;
+        }
+        .no-wrap {
+            white-space:nowrap;
+        }
+        
+        
+         /*~------------------------where the responsive navbar breaks-------------------------*/
+        @media all and (max-width: 980px) {
+        
+            #shop_top_nav .navbar-inner{
+                display:block;
+                width:auto;
+            } 
+            #restore_all{
+                display:none;
+            }
+            .miniStuff.close.pull-right{
+                margin-top:10px;
+            }
+            
+            .rep-mini-logo {
+            
+                width:18%;
+            }
+            #slide-box {
+                    background-image: linear-gradient(to bottom, rgb(243, 245, 247), rgb(255, 255, 255));
+                    background-repeat: repeat-x;
+                    border: 0px solid #d4d4d4;
+                    border-radius: 4px;
+                    //-webkit-box-shadow: 0 1px 4px; 
+                    padding:0em 1em 0em 1em;
+            }   
+            
+            .checkbox-list {
+                margin-right: auto;
+                margin-left: auto;
+                width: 200px;
+                line-height:25px;
+            }
+            
+              #mobile-brand{
+                display:inline;
+              }
+              .dropdown ul.dropdown-menu {
+                display: block;
+              }
+              
+                #header_bar {
+                    display:none;
+                }
+            
+              .navbar .brand{           
+                padding: 8px 0px 5px 10px;   
+                margin: 0px 0px 0px 0px;
+                }
+            
+            #mobile-brand.collapse{
+                padding: 0px;    
+            }
+            
+            #mobile-logo {
+                width:80px;
+                display: inline-block;
+            }   
+            #mobile-wordmark{
+                width:120px;
+                display: inline-block;
+            } 
+        }
+        /*not phones only*/
+        @media all and (min-width:769px){
+            .no-padding {
+                margin-right: 9px;
+                margin-left:9px;
+            }
+        }
+
+         /*~------------------------phone-------------------------*/
+        @media all and (max-width:768px){
+            
+            
+
+            body{
+                padding-left:0px;
+                padding-right:0px;
+            }
+        
+            .phone-body{
+                padding-left:10px;
+                padding-right:10px;
+            }
+        /*#usage_chart, #data_viewer_nav > .navbar-inner, {
+                margin-left: -20px;
+                margin-right: -20px;
+            }
+        
+            #main-nav > .navbar-inner {
+                margin-left: -20px;
+                margin-right: -20px;
+            }
+        */  
+        
+        }
+    </style>
+
+</apex:component>

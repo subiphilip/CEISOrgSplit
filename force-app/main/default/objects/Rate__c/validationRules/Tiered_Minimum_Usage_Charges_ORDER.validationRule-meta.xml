@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tiered_Minimum_Usage_Charges_ORDER</fullName>
+    <active>true</active>
+    <description>Threshold 1 &lt; threshold 2 &lt; threshold 3.</description>
+    <errorConditionFormula>OR( 
+Minimum_Usage_Charge_Threshold_kWh__c &gt; Minimum_Usage_Charge_Threshold2__c,
+Minimum_Usage_Charge_Threshold_kWh__c &gt; Minimum_Usage_Charge_Threshold3__c,
+Minimum_Usage_Charge_Threshold2__c &gt; Minimum_Usage_Charge_Threshold3__c
+
+)</errorConditionFormula>
+    <errorMessage>Rate16: If using tiered minimum usage charges, the &quot;Minimum Usage Threshold&quot; values must be in order.
+
+Threshold 1 &lt; Threshold 2 &lt; Threshold 3</errorMessage>
+</ValidationRule>

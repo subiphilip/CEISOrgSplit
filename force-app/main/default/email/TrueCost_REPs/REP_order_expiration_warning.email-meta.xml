@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Tell REPs that an order is about to expire</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>REP order expiration warning</name>
+    <style>none</style>
+    <subject>Your pending order will expire soon!</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

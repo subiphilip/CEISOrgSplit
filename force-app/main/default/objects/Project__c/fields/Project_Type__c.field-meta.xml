@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Project Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Bug/Fix</fullName>
+                <default>false</default>
+                <label>Bug/Fix</label>
+            </value>
+            <value>
+                <fullName>Data</fullName>
+                <default>false</default>
+                <label>Data</label>
+            </value>
+            <value>
+                <fullName>Endur - Phase 1</fullName>
+                <default>false</default>
+                <label>Endur - Phase 1</label>
+            </value>
+            <value>
+                <fullName>Enhancement</fullName>
+                <default>false</default>
+                <label>Enhancement</label>
+            </value>
+            <value>
+                <fullName>Issue</fullName>
+                <default>false</default>
+                <label>Issue</label>
+            </value>
+            <value>
+                <fullName>Lightning Readiness</fullName>
+                <default>false</default>
+                <label>Lightning Readiness</label>
+            </value>
+            <value>
+                <fullName>Maintenance</fullName>
+                <default>false</default>
+                <label>Maintenance</label>
+            </value>
+            <value>
+                <fullName>Milestone</fullName>
+                <default>false</default>
+                <label>Milestone</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Process</fullName>
+                <default>false</default>
+                <label>Process</label>
+            </value>
+            <value>
+                <fullName>Release</fullName>
+                <default>false</default>
+                <label>Release</label>
+            </value>
+            <value>
+                <fullName>Reporting</fullName>
+                <default>false</default>
+                <label>Reporting</label>
+            </value>
+            <value>
+                <fullName>Research</fullName>
+                <default>false</default>
+                <label>Research</label>
+            </value>
+            <value>
+                <fullName>SOW</fullName>
+                <default>false</default>
+                <label>SOW</label>
+            </value>
+            <value>
+                <fullName>TrueCost</fullName>
+                <default>false</default>
+                <label>TrueCost</label>
+            </value>
+            <value>
+                <fullName>User Administration</fullName>
+                <default>false</default>
+                <label>User Administration</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

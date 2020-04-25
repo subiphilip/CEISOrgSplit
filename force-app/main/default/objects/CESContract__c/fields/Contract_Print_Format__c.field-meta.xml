@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_Print_Format__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(Contract_Format__c
+  , &#39;Version 1&#39;, &#39;Version 3.2&#39;
+  , &#39;Version 3&#39;, &#39;Version 3.2&#39;
+  , &#39;Acquisition&#39;, &#39;Version 3.2&#39;
+  , &#39;Customer&#39;, &#39;Version 3.2&#39;
+  , &#39;Energon&#39;, &#39;Version 3.2&#39;
+  , &#39;Nordic&#39;, &#39;Version 3.2&#39; 
+  , Contract_Format__c
+)</formula>
+    <label>Contract Print Format</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

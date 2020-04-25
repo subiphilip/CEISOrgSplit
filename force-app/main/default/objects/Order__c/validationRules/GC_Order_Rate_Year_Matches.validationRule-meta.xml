@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GC_Order_Rate_Year_Matches</fullName>
+    <active>true</active>
+    <description>The rate id year must match the confirmation code year on the order</description>
+    <errorConditionFormula>and(
+   ISBLANK(REP_Profile__c) , RecordTypeId  = &#39;012300000018SzH&#39;,
+ left(Rate__r.Name,4)  !=  Confirmation_Code_Year__c 
+)</errorConditionFormula>
+    <errorDisplayField>Confirmation_Code_Year__c</errorDisplayField>
+    <errorMessage>Order05: The year in the rate id must match the confirmation code year on the order.</errorMessage>
+</ValidationRule>

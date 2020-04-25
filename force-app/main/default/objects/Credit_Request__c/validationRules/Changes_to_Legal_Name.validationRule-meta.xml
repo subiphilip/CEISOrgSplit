@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Changes_to_Legal_Name</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND( ISCHANGED( Account_Legal_Name__c ), ISBLANK( Credit_Notes__c ))</errorConditionFormula>
+    <errorDisplayField>Account_Legal_Name__c</errorDisplayField>
+    <errorMessage>Credit02: Please use the &quot;Credit Notes&quot; field to describe any changes made to the legal name.</errorMessage>
+</ValidationRule>

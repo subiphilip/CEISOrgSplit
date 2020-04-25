@@ -1,0 +1,19 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" title="REP Login" >
+   <apex:composition template="Template_TC">
+      <apex:define name="body">
+          <div class="container">
+                <div class="row">
+                    <div class="span4 offset4">
+                        <h1>REP Login<br/>
+                        </h1>
+                        <c:REPLogin />
+                    </div>
+                 
+                </div>
+            </div>
+         
+                                        
+        </apex:define>
+   </apex:composition>
+
+</apex:page>

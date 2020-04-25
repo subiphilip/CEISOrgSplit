@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unit_of_measure__c</fullName>
+    <description>Unit of measure for this usage.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Unit of measure for this usage.</inlineHelpText>
+    <label>Unit of measure</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Therms</fullName>
+                <default>true</default>
+                <label>Therms</label>
+            </value>
+            <value>
+                <fullName>kWh</fullName>
+                <default>false</default>
+                <label>kWh</label>
+            </value>
+            <value>
+                <fullName>Dth</fullName>
+                <default>false</default>
+                <label>Dth</label>
+            </value>
+            <value>
+                <fullName>HDD</fullName>
+                <default>false</default>
+                <label>HDD</label>
+            </value>
+            <value>
+                <fullName>CDD</fullName>
+                <default>false</default>
+                <label>CDD</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

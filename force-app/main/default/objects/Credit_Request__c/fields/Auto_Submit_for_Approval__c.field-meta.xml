@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Auto_Submit_for_Approval__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>If this box is checked, your request will be automatically locked and routed to the credit team for approval. If unchecked, you will have to manually submit the request after saving.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If this box is checked, your request will be automatically locked and routed to the credit team for approval. If unchecked, you will have to manually submit the request after saving.</inlineHelpText>
+    <label>Auto-Submit for Approval</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,154 @@
+<apex:page showheader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="false" controller="CampaignAutomationController">
+    
+    <apex:composition template="Template_CES">
+        <apex:define name="body"> 
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <div class="hidden-phone">
+                            <img style="width:30%" src="https://user-images.githubusercontent.com/6145314/39595854-40882378-4ed6-11e8-8ce1-a866824dd2d6.jpg" class="img-circle"></img>
+                            <img style="width:30%" src="https://user-images.githubusercontent.com/6145314/39595950-923749c4-4ed6-11e8-9c14-50a7d75e26d8.jpg" class="img-circle"></img>
+                            <img style="width:30%" src="https://user-images.githubusercontent.com/6145314/39596003-b8e093dc-4ed6-11e8-997d-d63b777208d2.jpg" class="img-circle"></img>
+                        </div>
+                        <br /><br />
+                        <h1>Join us at our annual customer outing!<br/></h1>
+                        <blockquote>
+                            <h4 class="muted text">Mid-Continent LDC Gas Forum - Chicago</h4>
+                        </blockquote>
+        
+                        <hr />
+        
+        
+                        <h4 style="color:#0099DC;">Monday, September 10, 2018</h4>
+                        <p>CenterPoint Energy Services cordially invites you to an evening amongst fellow LDC Gas Forum colleagues and friends.</p>
+                        <p>Please join us for a casual reception where you can network and socialize, and come and go as you please.</p> <p><b><i>But be sure to RSVP by September 7th!</i></b></p>
+                            <!--<b>
+                            <p style="color:#222222;font-size:small;">
+                                *Space is limited for June 27th optional activities.<br></br>
+                                There is no charge for any event, excluding personal travel and hotel expenses.
+                            </p>
+                           </b>-->
+        
+                        <hr />
+                        <h4 style="color:orange;">Date:</h4>
+                        <p>
+                            Monday, September 10, 2018<br></br>
+                        </p>
+        
+                        <h4 style="color:orange">Location:</h4>
+                        <p>
+                            <b>Siena Tavern</b><br></br>
+                            51 W Kinzie Street<br></br>
+                            Chicago, Illinois 60654
+                        </p>
+        
+                        <h4 style="color:orange">Time:</h4>
+                        <p>
+                            4:30 pm – 7:30 pm
+                        </p>
+        
+                        <hr />
+        
+        
+                    </div>
+                    <div class="span4">
+        
+                        <div id="register_form" class="well well-large">
+        
+                            <h4 class="muted text-center">Register Today!</h4><br />
+                            <form>
+                                <fieldset>
+        
+                                    <b>Registration for the CES Mid-Continent LDC Forum is now closed as of September 7th.<br></br><br></br>We look forward to seeing you in Chicago!</b> <!--<label><b>First Name</b></label>
+                                    <input id="fname" type="text" placeholder="First Name" class="input-block-level" required="required" />
+        
+                                    <label><b>Last Name</b></label>
+                                    <input id="lname" type="text" placeholder="Last Name" class="input-block-level" required="required" />
+        
+                                    <label><b>Company</b></label>
+                                    <input id="company" type="text" placeholder="Company" class="input-block-level" required="required" />
+        
+                                    <label><b>Email</b></label>
+                                    <input name="ca_email" id="ca_email" type="email" placeholder="email.address@domain.com" class="input-block-level" required="required" />
+                                    <br/><br/>
+                                    <label><b><u>Optional Activities</u></b></label>
+
+                                    <label id="optionOne"><b>September 10th - CES Customer Event</b></label>
+                                    <fieldset data-role="questionGroupOne">
+                                        <input type="radio" name="questionareaone" value="Yes" id="question_area" class="Checkbox" required="required"> Yes - Attending</input><br></br>
+                                        <input type="radio" name="questionareaone" value="No" id="question_area" class="Checkbox" required="required"> No - Not Attending</input><br></br>
+                                    </fieldset>-->     
+                                    <br/><br/> 
+
+                                    <!--<label id="optionTwo"><b>June 27th - Dinner at Vanderbilt Legends Clu</b></label>
+                                    <fieldset data-role="questionGroupTwo">
+                                        <input type="radio" name="questionareatwo" value="Yes" id="question_area" class="Checkbox" required="required"> Yes - Dinner</input><br></br>
+                                        <input type="radio" name="questionareatwo" value="No" id="question_area" class="Checkbox" required="required"> No - Dinner</input><br></br>
+                                    </fieldset>                                 
+                                    <br/><br/>
+
+                                    <label id="optionThree"><b>June 28th - Lunch at Embassy Suites Nashville South/Cool Springs</b></label>
+                                    <fieldset data-role="questionGroupThree">
+                                        <input type="radio" name="questionareathree" value="Yes" id="question_area" class="Checkbox" required="required"> Yes - Lunch</input><br></br>
+                                        <input type="radio" name="questionareathree" value="No" id="question_area" class="Checkbox" required="required"> No - Lunch</input><br></br>                       
+                                    </fieldset>
+                                    <br/><br/> 
+                                        
+                                    <!--<label><b>Questions/Comments</b></label>
+                                    <textarea id="question_area" rows="5" class="input-block-level" placeholder="Questions or comments regarding the event" required="required"></textarea>
+                                    <br/>-->
+                                    <!--<a href="" class="btn btn-warning btn-block" id="signup_button">Register</a>-->
+                                    <!--<input type="submit" id="signup_button" value="Register" class="btn btn-warning btn-block" />-->
+                                </fieldset>
+                            </form>
+                        </div>
+                        <div id="register_success" style="display:none" class="alert alert-block alert-success">
+                            <h4>You are now registered to attend the Mid-Continent LDC Gas Forum! <br /><br />Please add the event to your calendar on September 10th.</h4>
+                            <hr />
+                            <!--<p>
+                            <a href="{!URLFOR($Resource.CES2014AprilWebinar)}" class="btn btn-primary btn-block "><i class="icon-calendar icon-white"></i> Add to Outlook</a>
+                            </p>-->
+                            <!--<p>
+                            <a href="" target="_blank" class="btn btn-warning btn-block"><i class="icon-calendar icon-white"></i> Add to Google calendar</a>
+                            </p>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </apex:define>       
+    </apex:composition>
+    <script>
+        function CampaignMemberContainer(){
+            this.FirstName = null;
+            this.LastName = null;
+            this.Company = null;
+            this.Email = null;
+            //this.Questions = null;
+        }
+        $j=jQuery.noConflict();
+        $j("#register_form").submit(function(event){
+            event.preventDefault();
+                
+                var campaign = new CampaignMemberContainer();
+                campaign.FirstName = $j("#fname").val();
+                campaign.LastName = $j("#lname").val();
+                campaign.Company = $j("#company").val();
+                campaign.Email = $j("#ca_email").val();
+                //campaign.Questions = $j("#question_area").val();
+                campaign.Questions = [$j("#optionOne").text() + ":" + $j("input[name=questionareaone]:checked").val(), 
+                $j("#optionTwo").text() + ":" + $j("input[name=questionareatwo]:checked").val(), 
+                $j("#optionThree").text() + ":" + $j("input[name=questionareathree]:checked").val()];
+
+                CampaignAutomationController.saveCampaignMemberCustom(campaign,
+                                                                         function(result,event){
+                                                                             if (event.status) {
+                                                                                 $j("#register_form").hide();
+                                                                                 $j("#register_success").show();
+                                                                             }
+                                                                         }
+                                                                        );
+            //});
+        });
+    </script> 
+
+</apex:page>

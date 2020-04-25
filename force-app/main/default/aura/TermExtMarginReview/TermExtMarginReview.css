@@ -1,0 +1,15 @@
+.THIS {
+    background-color:white;
+}
+
+.THIS .slds-icon-utility-arrowup svg {
+  fill: green;
+}
+
+.THIS .slds-icon-utility-arrowdown svg {
+  fill: red;
+}
+
+.THIS .slds-icon-utility-dash svg {
+  fill: blue;
+}

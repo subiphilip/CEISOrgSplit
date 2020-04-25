@@ -1,0 +1,117 @@
+<apex:page showheader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="false">
+    
+    <apex:composition template="Template_CES">
+        
+        <apex:define name="body"> 
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h3>Contact Us<br/>
+                            
+                        </h3>
+                    
+                       <p> Questions/comments? Fill out the form below to contact CenterPoint Energy Services, Inc. </p>
+                        
+                        
+                        <hr/>
+                        <div class="alert alert-success aler-block" id="form_success" style="display:none">
+                                    <h4>Thank you for contacting us.</h4>
+                                </div>
+                                
+                                
+                                <form id="contact_form" class="well well-large">
+                                <fieldset>
+                                <h4>Customer Information</h4>
+                                <hr/>
+                                <label>Company Name</label>
+                                <input name="Company_Name__c" type="text" placeholder="Company Name" class="input-block-level" required="required"/>      
+                                
+                                <input name="Current_CES_Customer__c" type="checkbox"> I am a current CES customer </input>
+                               
+                                <br/><br/>                    
+                                <label>Name</label>
+                                <input name="Contact_Person__c" type="text" placeholder="Name" class="input-block-level" required="required"/>
+                                <input name="Origin__c" type="hidden" value="Web" />
+                                                                                     
+                                <label>Phone</label>
+                                <input name="Non_Account_Phone__c" type="tel" placeholder="Phone" class="input-block-level" required="required"/>
+                                
+                                <label>Email</label>
+                                <input name="Non_Account_Email__c" type="email" placeholder="email.address@domain.com" class="input-block-level" required="required"/>
+                                <br/><br/>
+                                <label><h4>Questions/Comments</h4></label>
+                                
+                                <textarea name="Description__c" rows="5" class="input-block-level" required="required" placeholder="Type your questions/comments here"></textarea>
+                                
+                                <br/>
+                                <input type="submit" value="Submit" class="btn btn-warning btn-block" />
+                                </fieldset>
+                                </form>
+                    </div>
+                </div>
+            </div>
+        </apex:define>       
+    </apex:composition>
+    <c:RemoteTK />
+    <script>
+        $j=jQuery.noConflict();
+        var client = new remotetk.Client();  
+              
+        //function(objtype, fields, callback, error)
+        $j("#contact_form").submit(function(event){
+            event.preventDefault();
+            console.log($j("#contact_form").serializeObject());
+            
+            client.create(
+              'TrueCost_Case__c', 
+              $j("#contact_form").serializeObject(), 
+              function(result, event){
+                  $j("#contact_form").hide();
+                  $j("#form_success").show();
+                  
+              }, 
+              function(result, event){
+                  if (!event){
+                      console.log(result)
+                      }
+              }
+              );
+            
+        });
+        
+        /*!
+ * jQuery serializeObject - v0.2 - 1/20/2010
+ * http://benalman.com/projects/jquery-misc-plugins/
+ * 
+ * Copyright (c) 2010 "Cowboy" Ben Alman
+ * Dual licensed under the MIT and GPL licenses.
+ * http://benalman.com/about/license/
+ */
+
+// Whereas .serializeArray() serializes a form into an array, .serializeObject()
+// serializes a form into an (arguably more useful) object.
+
+(function($j,undefined){
+  '$j:nomunge'; // Used by YUI compressor.
+  
+  $j.fn.serializeObject = function(){
+    var obj = {};
+    
+    $j.each( this.serializeArray(), function(i,o){
+      var n = o.name,
+        v = o.value;
+        if (v==="on") v=true;
+        
+        obj[n] = obj[n] === undefined ? v
+          : $j.isArray( obj[n] ) ? obj[n].concat( v )
+          : [ obj[n], v ];
+    });
+    
+    return obj;
+  };
+  
+})(jQuery);
+    </script>
+    
+       
+</apex:page>

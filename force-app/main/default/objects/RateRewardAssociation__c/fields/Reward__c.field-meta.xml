@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reward__c</fullName>
+    <description>The reward that is linked to the rate.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The reward that is linked to the rate.</inlineHelpText>
+    <label>Reward</label>
+    <referenceTo>Rewards__c</referenceTo>
+    <relationshipName>RateRewardAssociations</relationshipName>
+    <relationshipOrder>1</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

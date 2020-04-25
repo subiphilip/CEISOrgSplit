@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Order_Confirmed_Verification_Code__c</fullName>
+    <description>System verification number from whoever received the order.  Ex REP API transaction # or a SourceGas Verification Number</description>
+    <externalId>false</externalId>
+    <inlineHelpText>System verification number from whoever received the order.  Ex REP API transaction # or a SourceGas Verification Number</inlineHelpText>
+    <label>Order Confirmed Verification Code</label>
+    <length>30</length>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

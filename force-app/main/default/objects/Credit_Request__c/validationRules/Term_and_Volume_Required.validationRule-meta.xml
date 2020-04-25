@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Term_and_Volume_Required</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR( ISBLANK( Term_Volume__c), ISBLANK (Estimated_Term_months__c ))</errorConditionFormula>
+    <errorMessage>Credit03: BOTH annual volume and estimated term must be populated for proper approval.</errorMessage>
+</ValidationRule>

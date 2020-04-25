@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fuel_Rate__c</fullName>
+    <externalId>false</externalId>
+    <label>Fuel Rate</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Atmos KS / Market Fuel</fullName>
+                <default>false</default>
+                <label>Atmos KS / Market Fuel</label>
+            </value>
+            <value>
+                <fullName>BHE / Market Fuel</fullName>
+                <default>false</default>
+                <label>BHE / Market Fuel</label>
+            </value>
+            <value>
+                <fullName>BHE / NNG Fuel</fullName>
+                <default>false</default>
+                <label>BHE / NNG Fuel</label>
+            </value>
+            <value>
+                <fullName>BHE / Production Fuel</fullName>
+                <default>false</default>
+                <label>BHE / Production Fuel</label>
+            </value>
+            <value>
+                <fullName>BHE / Tyson Fuel</fullName>
+                <default>false</default>
+                <label>BHE / Tyson Fuel</label>
+            </value>
+            <value>
+                <fullName>KGS K System / Production Fuel</fullName>
+                <default>false</default>
+                <label>KGS K System / Production Fuel</label>
+            </value>
+            <value>
+                <fullName>KGS K System / Market Fuel</fullName>
+                <default>false</default>
+                <label>KGS K System / Market Fuel</label>
+            </value>
+            <value>
+                <fullName>KGS T System / No Fuel</fullName>
+                <default>false</default>
+                <label>KGS T System / No Fuel</label>
+            </value>
+            <value>
+                <fullName>PSCO Fuel</fullName>
+                <default>false</default>
+                <label>PSCO Fuel</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

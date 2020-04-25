@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Move_out_ESID__c</fullName>
+    <description>Which ESID is the customer moving from?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Which ESID is the customer moving from?</inlineHelpText>
+    <label>Move out ESID</label>
+    <length>100</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

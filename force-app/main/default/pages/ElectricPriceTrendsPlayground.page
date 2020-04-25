@@ -1,0 +1,55 @@
+<apex:page showHeader="false" sidebar="false" cache="true" applyBodyTag="false" expires="43200" docType="html-5.0" standardStylesheets="false"> 
+    
+    <apex:composition template="Template_TC">
+        
+    <apex:define name="HeadTags">
+        <title>{!$CurrentPage.Parameters.tdsp} {!$Label.Page_Title_Electrice_Price_Trends_Summary} - {!$Label.Page_Title_Company_Name}</title>
+        <apex:outputtext value="{!$Label.MetaTags_Electric_Price_Trends_Summary}" escape="false"></apex:outputtext>
+    </apex:define>
+    
+    <!--apex:define name="breadcrumbs">
+            <ul Class="breadcrumb">
+                <li><a href="{!$Page.homepage}">Home</a></li><span class="divider"> ></span>
+                <li Class="active">{!$Label.Page_Title_Electric_Companies}</li>
+            </ul>
+        </apex:define-->
+        
+        <apex:define name="body">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+              
+                    
+                        <!-- REQUIRED: INSERT PAGE TITLE -->                               
+                        <div class="pull-right"> 
+                            <c:ShareThisSmall URL="{!left($Site.CurrentSiteUrl, len($Site.CurrentSiteURL)-1)}{!URLFOR($Page.ElectricPriceTrendsPlayground)}"/>
+                        </div>
+                    <h1>{!$Label.Page_Title_Electrice_Price_Trends_Summary}<br/>
+
+                    </h1>                        
+                        
+                        <c:StatewideChart3M rendered="{!OR($CurrentPage.Parameters.plan='3', $CurrentPage.Parameters.plan='')}" />
+                        <c:Chart9M rendered="{!$CurrentPage.Parameters.plan='6'}" />
+                        <c:StatewideChart12M rendered="{!$CurrentPage.Parameters.plan='12'}" /> 
+                        <c:StatewideChart24M rendered="{!$CurrentPage.Parameters.plan='24'}" /> 
+                        <c:GreenChart rendered="{!$CurrentPage.Parameters.plan='green'}" /> 
+                        <c:ChartVariable rendered="{!$CurrentPage.Parameters.plan='variable'}" /> 
+                        <c:ChartCombined2Year rendered="{!$CurrentPage.Parameters.plan='2year'}" />
+                        <c:ChartCombined3Year rendered="{!$CurrentPage.Parameters.plan='3year'}" />
+                        <div class="maingooglechart-with-space" id="visualization" />                                            
+                        
+                </div>
+                
+                <div class="span4">
+                    <div>
+                        <c:IndexPlaygroundPickerSidebar />
+                    </div>
+                    <hr/>                   
+                </div>
+            </div>
+        </div>
+        </apex:define>       
+        
+        
+    </apex:composition>
+</apex:page>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Non_Account_Email__c</fullName>
+    <description>If the review was submitted by someone who is not a registered customer, this is the user&#39;s email address.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If the review was submitted by someone who is not a registered customer, this is the user&#39;s email address.</inlineHelpText>
+    <label>Non-Account Email</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Email</type>
+    <unique>false</unique>
+</CustomField>

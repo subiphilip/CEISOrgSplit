@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Show_only_Published_content__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>All content displayed must have published = true.  This can be used to allow temporary content, previews in QA, and other tricks. 
+
+This must not change in production once the site is live.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>All content displayed must have published = true.  This can be used to allow temporary content, previews in QA, and other tricks. 
+
+This must not change in production once the site is live.</inlineHelpText>
+    <label>Show only Published content</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

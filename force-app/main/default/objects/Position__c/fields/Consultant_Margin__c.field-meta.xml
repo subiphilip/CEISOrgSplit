@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consultant_Margin__c</fullName>
+    <description>What is the consultant expected to make off of this deal?</description>
+    <externalId>false</externalId>
+    <formula>if(
+ not(isblank(CES_Contract__r.Consultant_Unit_Margin__c)),
+ CES_Contract__r.Consultant_Unit_Margin__c,
+ if (
+    not(isblank(CES_Contract__r.Consultant_Margin_Pctg__c)),
+    (DT_Estimated_Margin__c * (CES_Contract__r.Consultant_Margin_Pctg__c/100)),
+    0
+ )
+)</formula>
+    <inlineHelpText>What is the consultant expected to make off of this deal?</inlineHelpText>
+    <label>Consultant Margin</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

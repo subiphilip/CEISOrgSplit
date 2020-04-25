@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ignore_Insert_Sync_Setup__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>true will ignore the &#39;pending sync&#39; process that occurs upon insert</description>
+    <externalId>false</externalId>
+    <inlineHelpText>true will ignore the &#39;pending sync&#39; process that occurs upon insert</inlineHelpText>
+    <label>Ignore Insert Sync Setup</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

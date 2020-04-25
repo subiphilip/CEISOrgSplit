@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Under_Adder_GreaterThan_2</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR( 
+Under_Adder__c &lt; -1, 
+Under_Adder__c &gt; 2 
+)</errorConditionFormula>
+    <errorDisplayField>Under_Adder__c</errorDisplayField>
+    <errorMessage>CESC14: Under Adder must be between ($1.00) and $2.00 per MMBtu</errorMessage>
+</ValidationRule>

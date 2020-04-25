@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gross_Receipts_Tax__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Is the gross receipts tax included in the default energy rate?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Is the gross receipts tax included in the default energy rate?</inlineHelpText>
+    <label>Gross Receipts Tax</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

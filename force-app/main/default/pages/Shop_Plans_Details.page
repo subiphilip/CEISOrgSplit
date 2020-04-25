@@ -1,0 +1,388 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" controller="ControllerForPlanDetails">
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="{!DetailPlan.plan__r.name} by {!DetailPlan.plan__r.REP_profile__r.name} - {!$Label.Page_Title_Company_Name}"
+                description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."
+  />
+
+              <style>
+                table tr:nth-child(even) { }
+                .sfdc_richtext, table td {
+                  text-align: left;
+                }
+              </style>
+              
+              
+
+              <body class="has-background-grey-light has-navbar-fixed-top">
+
+                <div id="wrapper">
+                    <c:tc2_navbar />
+
+                      <div id="appPlanDetails">
+                        <section id="hero" class="hero is-info is-small">
+                          <div class="hero-body is-detail-page">
+                            <div class="container-planbox">
+                              <p><a href="{!$Page.Shop_Plans}"><span class="icon is-small"> <i class="fas fa-angle-left" aria-hidden="true"></i> </span>Back to Electric Plans</a></p>
+                            </div>
+                            
+                            <div v-bind:data-id="plan.id" id="ball" style="display:none">
+                                    <div class="snackbar-item" >
+                                      <img v-bind:src="plan.logo" v-bind:alt="plan.company" /> 
+                                      <div class="is-divider-vertical"></div> 
+                                      <div class="snackbar-item-title"><p v-html="plan.title"></p></div>
+                                    </div>
+                                </div>
+                                
+                            <div class="container-planbox">
+                              <div class="box has-text-centered is-square" style=''>
+                                 
+                                <div>
+                                  <!-- <img v-bind:src="plan.logo"  v-bind:alt="plan.company"/> -->
+                                  <img src="{!DetailPlan.plan__r.REP_profile__r.logo_url__c}" />
+                                </div>
+                                <div class="has-stars">
+                                  <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= .5, 'icon-icon-star-full': plan.starScore >= 1, 'icon-icon-star-outline': plan.starScore < .5}" class=" is-size-5 is-size-6-mobile"></i>
+                                  <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= 1.5, 'icon-icon-star-full': plan.starScore >= 2, 'icon-icon-star-outline': plan.starScore < 1.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                  <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= 2.5, 'icon-icon-star-full': plan.starScore >= 3, 'icon-icon-star-outline': plan.starScore < 2.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                  <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= 3.5, 'icon-icon-star-full': plan.starScore >= 4, 'icon-icon-star-outline': plan.starScore < 3.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                  <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= 4.5, 'icon-icon-star-full': plan.starScore >= 5, 'icon-icon-star-outline': plan.starScore < 4.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                </div>
+
+                                
+
+                                <div>
+                                  <p><a v-bind:href="reviewURL">{!DetailPlan.plan__r.REP_profile__r.total_reviews__c} Reviews</a></p>
+                                
+                                </div>
+                              </div>
+                            </div>
+                            <div class="container details level has-no-spacing">
+                              <div class="level-left">
+                                <div class="level-item">
+                                  <h1 class="is-subtitle is-size-3">{!DetailPlan.plan__r.name}</h1>
+                                </div>
+                              </div>
+                              <!-- <div class="level-right">
+                                <div class="level-item">
+                                  <label for="compare">
+                                    <input id="compare" type="checkbox" v-on:click="comparePlan(plan, 1)" v-model="plan.compare" v-bind:data-id="plan.id"/> Compare this plan
+                                  </label>
+                                </div>
+                              </div> -->
+                            </div>
+                          </div>
+                        </section>
+                
+                
+                        <section id="header" class="has-background-white border-bottom">
+                          <div class="container details">
+                            <div class="has-spacing column-padding-mobile">
+                              <p>{!DetailPlan.plan__r.Plan_Description__c}</p>
+                            </div>
+                            <div class="columns has-spacing">
+                              <div class="column column-mobile">
+                                <p class="is-card-header is-size-7-mobile">YOUR ALL-IN COST</p>
+                                <p class="is-size-3 is-size-4-mobile" style="font-weight: 200px;">
+                                <!-- {{plan.kwhTC}} -->
+                                {!text(round(TileStuff.PricekWh*100, 1))}¢ kWh</p>
+                              </div>
+                              <div class="column column-mobile">
+                                <p class="is-card-header is-size-7-mobile">AVERAGE BILL</p>
+                                <!--<p class="is-size-3 is-size-4-mobile">${{plan.costMonthly}}</p>-->
+                                <app-monthly-bill v-bind:myplan='plan' v-bind:myplansize='houseSize' />
+                              </div>
+                              <div class="column column-mobile">
+                                <!--
+                                <p class="is-card-header is-size-7-mobile">EST. ANNUAL SAVINGS</p>
+                                <p class="is-size-3 is-size-4-mobile">$0.00/mo</p>
+                                -->
+                              </div>
+                              <div class="column is-desktop"></div>
+                            </div>
+                            <div class="columns" style="align-items: center;">
+                              <div class="column column-mobile">
+                                <a class="button is-gradient fixed-size is-rounded animate-gradient-bg" href="{!$Page.Account_Moving}"><span>SIGN ME UP</span></a>
+                              </div>
+                              <!-- <div class="column column-mobile">
+                                <a href="#">
+                                  <span><i class="icon-icon-eye is-size-6"></i></span>
+                                  <span>Watch This Plan</span>
+                                </a>
+                              </div> -->
+                              <div class="column column-mobile">
+                                  <label for="compare" class="checkbox has-text-weight-semibold">
+                                    <!-- <input id="compare" type="checkbox" v-on:click="comparePlan(plan, 1)" v-model="plan.compare" v-bind:data-id="plan.id"/> --> 
+                                      <input id="compare" type="checkbox" v-on:change="comparePlan(plan, 1, $event)" v-model="plan.compare" v-bind:data-id="plan.id"/>
+                                    Compare this plan
+                                  </label>
+                              </div>
+                              
+                              <div class="column is-desktop"></div>
+                              <div class="column is-desktop"></div>
+                            </div>
+                            <br/>
+                            <div class="hero-foot">
+                              <nav class="tabs is-medium">
+                                <ul>
+                                  <li class="tablinks is-active" v-on:click="TC.fn.openPlanDetailsTab(event, 'overview')">
+                                    <a>Overview</a>
+                                  </li>
+                                  <!-- <li class="tablinks" v-on:click="TC.fn.openPlanDetailsTab(event, 'pricetrends')">
+                                    <a>Price Trends</a>
+                                  </li> -->
+                                  <li class="tablinks" v-on:click="TC.fn.openPlanDetailsTab(event, 'company')">
+                                    <a>Company</a>
+                                  </li>
+                                </ul>
+                              </nav>
+                            </div>
+                          </div>
+                        </section>
+                      </div>
+                
+                      <section class="has-background-grey-light">
+                        <!-- OVERVIEW -->
+                        <div id="overview" class="tabcontent container details singup-bottom-padding" style="display: block">
+                          <div class="box is-details">
+                            <apex:form >
+                            <div class="columns">
+                              <div class="column detail-column is-half">
+                                <p class="is-card-header">SHOW ME THE TRUECOST</p>
+                                
+                                <!-- Your TrueCost estimate includes this plan's $4.69 fee for any month that your usage is less than 999 kilowatt-hours. -->
+                                <div class="select" aria-haspopup="true" aria-controls="dropdown-menu">
+                                  <label class="visuallyhidden" for="month">Month</label>
+                                  <apex:selectList value="{!selectedMonth}" size="1" id="dropdown" style="
+                                    padding: 0em;
+                                    border-color: transparent;
+                                    border-width: 0px;
+                                    border-bottom: 2px solid #7a7a7a;
+                                    border-radius: 0px;
+                                    background: inherit;
+                                    justify-content: space-between;
+                                    min-width:150px;
+                                 ">
+                                    <apex:selectOptions value="{!monthNames}" />
+                                    <apex:actionSupport event="onchange" rerender="sampleBill"/>
+                                  </apex:selectList>
+                                </div>
+                                <apex:outputpanel layout="block" id="sampleBill" styleClass="sampleBill">
+                      <apex:panelGrid columns="2" styleClass="cost-table" cellpadding="3" columnClasses="text,text-right" width="100%">
+                        <apex:outputText value="Energy Charge" />
+                        <apex:outputtext value="${0, number, ###,###,###,##0.00}"> <apex:param value="{!EstimateForSelectedMonth.Energy_Charge__c}" />
+                      </apex:outputtext>
+                        
+                        <apex:outputText value="Base Customer Charge" rendered="{!EstimateForSelectedMonth.Customer_Charge__c>0}" />
+                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.Customer_Charge__c>0}">
+                            <apex:param value="{!EstimateForSelectedMonth.Customer_Charge__c}" />
+                        </apex:outputtext>
+                        
+                        <apex:outputText value="{!if(EstimateForSelectedMonth.Minimum_Usage_Charge__c>0, 'Minimum Usage Charge', 'Usage Credit')}" rendered="{!EstimateForSelectedMonth.Minimum_Usage_Charge__c!=0}" />
+                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.Minimum_Usage_Charge__c<>0}">
+                            <apex:param value="{!EstimateForSelectedMonth.Minimum_Usage_Charge__c}" />
+                        </apex:outputtext>
+                        
+                        <apex:outputText value="TDSP Delivery Charge" rendered="{!EstimateForSelectedMonth.TDSP_per_kWh__c>0}" />
+                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.TDSP_per_kWh__c>0}">
+                            <apex:param value="{!EstimateForSelectedMonth.TDSP_per_kWh__c}" />
+                        </apex:outputtext>
+                        
+                        <apex:outputText value="TDSP Monthly Charges" rendered="{!EstimateForSelectedMonth.TDSP_per_Month__c>0}" />
+                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.TDSP_per_Month__c>0}">
+                            <apex:param value="{!EstimateForSelectedMonth.TDSP_per_Month__c}" />
+                        </apex:outputtext>
+                        
+                        <apex:outputText value="PUC Fees" rendered="{!EstimateForSelectedMonth.PUCA__c>0}" />
+                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.PUCA__c>0}">
+                            <apex:param value="{!EstimateForSelectedMonth.PUCA__c}" />
+                        </apex:outputtext>
+                        
+                        <apex:outputText value="Gross Receipts Tax" rendered="{!EstimateForSelectedMonth.MGRT__c>0}" />
+                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.MGRT__c>0}">
+                            <apex:param value="{!EstimateForSelectedMonth.MGRT__c}" />
+                        </apex:outputtext>
+                        
+                        <apex:outputText value="Local Sales Tax" rendered="{!EstimateForSelectedMonth.Local_Sales_Tax__c>0}" />
+                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.Local_Sales_Tax__c>0}">
+                            <apex:param value="{!EstimateForSelectedMonth.Local_Sales_Tax__c}" />
+                        </apex:outputtext>
+                        
+                        <apex:outputText value="Total" style="font-weight: bold;" />
+                        <apex:outputtext value="${0, number, ###,###,###,##0.00}" style="font-weight: bold;">
+                            <apex:param value="{!EstimateForSelectedMonth.Total__c}"/>
+                        </apex:outputtext>
+
+                      </apex:panelGrid>                 
+                    </apex:outputpanel>          
+                  </div>
+                  
+                  <div class="is-divider-vertical no-margin"></div>
+                  <div class="column detail-column is-half">
+                    <!-- <p class="is-size-5 has-text-weight-semibold has-text-centered">Estimated Monthly Savings</p>
+                    <br/>
+                    <div class="column has-text-centered ">
+                      <p class="is-card-header is-size-7-mobile">PEAK TIME SAVINGS</p>
+                      <p class="is-size-3 is-size-4-mobile">$112.20</p>
+                    </div>
+                    <br/>
+                    <div class="column has-text-centered">
+                      <p class="is-card-header is-size-7-mobile">EST. MONTHLY SAVINGS</p>
+                      <p class="is-size-3 is-size-4-mobile">$32.49 kWh</p>
+                    </div> -->
+                    
+                    <c:Estimated_Cost_Chart cost="{!detailscostlist}"/>
+                    <p>Prices shown are for a typical user in the {!detailplan.tdsp__r.name} service area.  Register for a custom quote based on your usage.</p>
+                  </div>
+                  
+                </div>
+                </apex:form>
+                <div class="is-divider no-margin"></div>
+                <div class="columns" style="">
+                  <div class="column detail-column ">
+                    <p class="is-size-5 has-text-weight-semibold">Disclosures</p>
+                    <c:EFLYRACTOSComponent rate="{!DetailPlan}" page="Details" />
+                    <br/>
+
+                    <p class="is-size-5 has-text-weight-semibold">Rewards</p>
+                    <p class="is-size-6"><c:CustomerRewardsView rateid="{!DetailPlan.id}"/></p>
+                    <br/>
+                    <p class="is-size-5 has-text-weight-semibold">Potential Fees and Charges</p>
+                    <p class="is-size-6">
+                      <c:FeeDisplay rateid="{!DetailPlan.id}"/>
+                    </p>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- PRICE TRENDS -->
+            <div id="pricetrends" class="tabcontent container details singup-bottom-padding">
+              <div class="box is-details">
+                <div class="columns">
+                  <div class="column detail-column">
+                    <p>
+                      <span class="is-size-5">Estimated savings for <a>JUN</a> through <a>SEP</a> are [UNKNOWN]</span>
+                      <span class="is-size-7 has-text-weight-semibold float-right"><a>CLEAR ALL</a></span>
+                    </p>
+                  </div>
+                </div>
+                <div class="is-divider"></div>
+                <div class="columns">
+                  <div class="column detail-column">
+                    <p>Graph</p>
+
+                  </div>
+                </div>
+              </div>
+              <div class="has-text-centered">
+                <p>Get the most accurate information by creating an account and comparing plans to your actual usage.</p>
+                <p>TrueCost has the ability to show you actual savings based on your current lifestyle.</p>
+                <a class="button is-outlined is-info fixed-size is-rounded" href="{!$Page.Account_Create}"><span>CREATE AN ACCOUNT</span></a>
+              </div>
+            </div>
+            <!-- COMPANY -->
+            <div id="company" class="tabcontent container details singup-bottom-padding">
+              <div class="box is-details">
+                <div class="columns">
+                  <div class="column detail-column">
+                    <p class="is-size-5 has-text-weight-semibold">
+                    <apex:outputfield value="{!DetailPlan.plan__r.REP_profile__r.About_Us__c}" style="text-align:left; "></apex:outputfield>
+                    </p>
+                    <p class="is-size-6">{!DetailPlan.plan__r.REP_profile__r.name}</p>
+                    <br/>
+                    <p class="has-text-weight-semibold"><a target="_parent" v-bind:href="reviewURL">Check out verified reviews</a></p>
+
+                  </div>
+                </div>
+              </div>
+              <!-- <div id='appPlanReviews' class="box is-details">
+                <div class="columns">
+                  <div class="column detail-column">
+                    <div>
+                      <p class="is-size-5 has-text-weight-semibold">Customer Reviews</p>
+                      <br/>
+                    </div>
+                    <div>
+                      <p class="is-size-6 has-text-weight-semibold">{{ Review Title }}</p>
+                      <p class="is-size-6"><i>Submitted by {{ name }} on {{ date }}</i></p>
+                      <p class="is-size-6">{{ review content }}</p>
+                      <br/>
+                      <div class="is-divider"></div>
+                      <br/>
+                    </div>
+                    <div class="has-text-centered">
+                      <p class="is-size-7 has-text-weight-semibold"><a href="/ReadReviews?id={!DetailPlan}">VIEW ALL {{plan.countReviews}} REVIEWS</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </section>
+    </div>
+
+    <c:tc2_footer />
+
+    <script>
+      (function ($) {
+        $(function () {
+          'use strict';
+
+          TC.app.appPlanDetails = new Vue({
+            el: '#appPlanDetails',
+            data: { 
+                plan: {},
+                houseSize:(TC.app.appHomeProfile.houseSize == null || TC.app.appHomeProfile.houseSize == '') ? 'medium' : TC.app.appHomeProfile.houseSize,
+                reviewURL: '/Shop_Plans_Review?id=' + TC.app.account.plan.repId
+            },
+            methods: {
+                
+                comparePlan: function(plan, index, $event){
+                    plan.compare = $event.target.checked
+                    if(plan.compare) {
+                        TC.app.appPlansCompareBar.addPlan(plan, index);
+                    } else {
+                        TC.app.appPlansCompareBar.removePlan(plan, index);
+                    }
+                    
+                }
+            },
+            mounted: function() { 
+                this.plan = TC.app.account.plan;
+                //TC.fn.animateUI();
+
+            },
+            watch: { }
+          });
+
+          TC.app.company = new Vue({
+            el: '#company',
+            data: { 
+                plan: {},
+                reviewURL: '/Shop_Plans_Review?id=' + TC.app.account.plan.repId,
+            },
+            methods: { },
+            mounted: function() { 
+                debugger;
+                const urlParams = new URLSearchParams(window.location.search);
+                const myParam = urlParams.get('id');
+
+                this.plan = TC.app.account.plan;
+                if(!TC.app.account.plan.hasOwnProperty('id')){
+                    this.plan = JSON.parse(sessionStorage.getItem('plans')).find(function(item){  if(item.id == myParam){ return item } });
+                }
+                this.plan.costMonthlyMedium = ({!text(round(TileStuff.Price, 0))} / 12).toFixed(2);
+                //TC.fn.animateUI();
+
+            },
+            watch: { }
+          });
+
+        })
+      })(jQuery);
+    </script>
+
+
+  </body>
+  </html>
+</apex:page>

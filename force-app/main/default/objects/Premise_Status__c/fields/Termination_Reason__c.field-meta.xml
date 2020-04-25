@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Termination_Reason__c</fullName>
+    <externalId>false</externalId>
+    <label>Termination Reason</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bankruptcy</fullName>
+                <default>false</default>
+                <label>Bankruptcy</label>
+            </value>
+            <value>
+                <fullName>Competitor</fullName>
+                <default>false</default>
+                <label>Competitor</label>
+            </value>
+            <value>
+                <fullName>Credit</fullName>
+                <default>false</default>
+                <label>Credit</label>
+            </value>
+            <value>
+                <fullName>Location Closing</fullName>
+                <default>false</default>
+                <label>Location Closing</label>
+            </value>
+            <value>
+                <fullName>New Owner</fullName>
+                <default>false</default>
+                <label>New Owner</label>
+            </value>
+            <value>
+                <fullName>New Owner - Retained</fullName>
+                <default>false</default>
+                <label>New Owner - Retained</label>
+            </value>
+            <value>
+                <fullName>Not Qualified for Transport</fullName>
+                <default>false</default>
+                <label>Not Qualified for Transport</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Utility/Pipeline Tariff Change</fullName>
+                <default>false</default>
+                <label>Utility/Pipeline Tariff Change</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

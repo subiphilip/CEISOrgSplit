@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Margin_Rollup__c</fullName>
+    <externalId>false</externalId>
+    <label>CES Unit Margin</label>
+    <summarizedField>Line_Item_Fee__c.Cost__c</summarizedField>
+    <summaryFilterItems>
+        <field>Line_Item_Fee__c.Cost_Group_Direct__c</field>
+        <operation>equals</operation>
+        <value>04 - Margin</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Line_Item_Fee__c.Include_in_Cost_Rollup_Direct__c</field>
+        <operation>equals</operation>
+        <value>True</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Line_Item_Fee__c.Fee_Volume_Type_Direct__c</field>
+        <operation>equals</operation>
+        <value/>
+    </summaryFilterItems>
+    <summaryForeignKey>Line_Item_Fee__c.Line_Item__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

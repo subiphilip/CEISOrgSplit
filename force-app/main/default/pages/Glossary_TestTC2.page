@@ -1,0 +1,145 @@
+<apex:page showHeader="false" sidebar="false" Controller="SupportLinks" cache="true" applyBodyTag="false" docType="html-5.0" standardStylesheets="false">
+   <html><!--<html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">-->
+      <c:tc2_header title="{!$Label.Page_Title_Glossary} - {!$Label.Page_Title_Company_Name}"
+         description="Definitions for the types of charges on your electric bill" />
+      <style>
+        
+      </style>
+
+    <!--SHOW AND HIDE SCRIPT-->
+    <apex:includeScript value="{!$Resource.showhide_js}"/>
+
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="Glossary of TrueCost Terms" subHeadline="Understanding the language of electric plans" />
+    
+             <div id="" class="container"> 
+                <div class="has-margin-3">
+                  <div class="columns content box has-margin-3">
+
+                  <div class="">
+                    <div style="padding:20px;">
+                      <!-- CENTERPOINT ENERGY HOUSTON ELECTRIC CEHE -->
+                      <c:Content_Viewer content="Glossary Intro"/>
+                      <hr></hr>
+
+                      <h4>Advanced Metering Charge (AMS)</h4>
+                      <p>A Transmission and Distribution Utility (TDU) surcharge assessed on your electric bill as a way to recover costs for Advanced Metering 
+                      Systems, sometimes referred to as smart meters. This amount is in addition to a standard metering charge, but it may be bundled in a single 
+                      line with all other TDU charges on your bill. If itemized separately, this surcharge may appear as "AMS," "Advanced Meter," or combined 
+                      with the “Energy Efficiency Cost Recovery Factor” (EEC).</p>
+                      <hr></hr>
+
+                      <h4>Average Payment Plan/Average Billing</h4>
+                      <p>An agreement between a Retail Electric Provider (REP) and a customer that allows customers to pay approximately the same amount each 
+                      month for electricity, with the balance reconciled periodically to account for over or under payments. All REPs are required by the Public 
+                      Utility Commission of Texas (PUCT) to offer average payment plans.</p>
+                      <hr></hr>
+
+                      <h4>Base Charge</h4>
+                      <p>Also referred as the Minimum Usage Charge, Customer Charge, or Monthly Service Fee, the "Base Charge" is a fee assessed by your Retail 
+                      Electric Provider (REP) when your monthly electricity usage falls short of a minimum kWh requirement.  Per-billing-cycle usage requirements 
+                      are stated in Electricity Facts Labels (EFLs) for all electric plans. </p>
+                      <br></br>
+                      <p><b>Note:</b> When labeled as the Monthly Service Fee, Customer Charge, or Base Charge, this fee may be charged regardless of monthly 
+                      usage.  Also, do NOT confuse this with the Energy Charge on an EFL, which can often be called the "Base Energy Charge."</p>
+                      <hr></hr>
+                      
+                      <h4>Bill Payment Assistance Program</h4>
+                      <p>A low-income assistance program that helps pay the electricity bills of individuals in need. It is often supported by voluntary customer 
+                      contributions.</p>
+                      <hr></hr>
+                      
+                      <h4>Competitive Retailer</h4>
+                      <p>A Retail Electric Provider (REP) that is certified by the Public Utility Commission of Texas (PUCT) to sell electricity to end-use 
+                      customers. They typically compete for your business by offering competitive prices, renewable energy options, customer service benefits 
+                      or other incentives.</p>
+                      <hr></hr>
+                      
+                      <h4>Contract End Date</h4>
+                      <p>The date when a contract period or term is complete.</p>
+                      <hr></hr>
+                      
+                      <h4>Customer Charge</h4>
+                      <p>Also referred as the Minimum Usage Charge, Base Charge, or Monthly Service Fee, the "Customer Charge" is a fee assessed by your Retail 
+                      Electric Provider (REP) when your monthly electricity usage falls short of a minimum kWh requirement. Per-billing-cycle usage requirements 
+                      are stated in Electricity Facts Labels (EFLs) for all electric plans. </p>
+                      <br></br>
+                      <p><b>Note:</b> When labeled as the Monthly Service Fee, Customer Charge, or Base Charge, <u>this fee may be charged regardless of monthly 
+                      usage.</u></p>
+                      <hr></hr>
+                      
+                      <h4>Early Termination Fee</h4>
+                      <p>A fee charged to a customer by a Retail Electric Provider (REP) if the contracted rate plan is terminated by the customer prior to its 
+                      ending date.</p>
+                      <hr></hr>
+                      
+                      <h4>Electric Company</h4>
+                      <p>A Retail Electric Provider (REP) that is certified by the Public Utility Commission of Texas (PUCT) to sell electricity to end-use 
+                      customers. They typically compete for your business by offering competitive prices, renewable energy options, customer service benefits or 
+                      other incentives.</p>
+                      <br></br>
+                      <p>(May also be called: Competitive Retailer)</p>
+                      <hr></hr>
+                      
+                      <h4>Electric Reliability Council of Texas (ERCOT)</h4>
+                      <p>The non-profit corporation that administers and maintains the reliability of Texas’ electric power grid. When you select a new Retail 
+                      Electric Provider (REP), ERCOT will send you a postcard to confirm your switch.</p>
+                      <hr></hr>
+                      
+                      <h4>Electric Service Identifier (ESID)</h4>
+                      <p>A unique identifier assigned to each point of electricity delivery (for example, a residential address) that is used in the registration 
+                      and settlement system managed by the Electric Reliability Council of Texas (ERCOT) or another independent organization.  You can find this 
+                      number on your electric bill.</p>
+                      <hr></hr>
+
+                      <h4>Electricity Facts Label (EFL)</h4>
+                      <p>An information sheet required by the Public Utility Commission of Texas (PUCT) that provides consumers with standard information about 
+                      a specific electric plan. It contains the Retail Electric Provider’s (REPs) company information, contract terms, price, additional fees 
+                      and renewable energy percentage as it pertains to the plan being selected.  The EFL will commonly show how the energy charge and customer 
+                      charge factor into the plan’s overall price, and ultimately, monthly energy costs.</p>
+                      <hr></hr>
+
+                      <h4>Energy Charge</h4>
+                      <p>The portion of a monthly electric bill based on the total consumption of power used multiplied by the cost per kilowatt hour (kWh) 
+                      during a billing period.</p>
+                      <hr></hr>
+
+                      <h4>Energy Efficiency Cost Recovery Factor</h4>
+                      <p>A surcharge assessed to recover costs associated with energy efficiency programs that have been approved by the Public Utility 
+                      Commission of Texas (PUCT). This amount is charged in addition to the standard TDU fee, but it may be bundled into a single line with 
+                      all other Transmission and Distribution Utility (TDU) charges on the bill. If itemized separately, this surcharge may show up as "EEC," 
+                      "Energy Efficiency," or even combined with the Advanced Metering System (AMS) charge.</p>
+                      <hr></hr>
+                      
+                      <h4>Fixed-Rate Plan</h4>
+                      <p>A retail electric plan with a predetermined contract length of greater than one-month in length and a price that remains the same 
+                      throughout its term (exceptions are listed in the plan’s Terms of Service).</p>
+                      <hr></hr>
+                      
+                      <h4>Generation</h4>
+                      <p>Term referring to the production of electricity. In Texas, electricity is produced by a number of methods including natural gas, coal, 
+                      nuclear power, wind, water and solar sources.</p>
+                      <hr></hr>
+                      
+                      <h4>Green Energy</h4>
+                      <p>Electricity that is made from renewable, "environmentally friendly" fuel resources, such as wind, water, biomass or solar. Information 
+                      about a Retail Electric Provider's (REP) generation sources can be found on any electric plans’ Electricity Facts Label.</p>
+                      <br></br>
+                      <p>(May also be called: Renewable Energy)</p>
+                      <hr></hr>                      
+                      
+                    </div>
+                  </div>
+                      
+                </div>
+               </div>
+
+             </div>
+         </div>    
+         
+        <c:tc2_footer />
+      </body>
+   </html>
+</apex:page>

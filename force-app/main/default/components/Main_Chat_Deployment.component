@@ -1,0 +1,20 @@
+<apex:component >
+    
+        <script type='text/javascript' src='https://c.la1-c2-phx.salesforceliveagent.com/content/g/js/45.0/deployment.js'></script>
+        <script type='text/javascript'>
+            liveagent.setName('{!$User.FirstName} {!$User.LastName}');
+            
+            liveagent.addCustomDetail('Contact E-mail/Username', '{!$User.Username}').map('Account', 'Email__c', false, true, true);
+            liveagent.addCustomDetail('Case Origin', 'Chat').map('TrueCost_Case__c', 'Origin__c', true, false);
+
+            
+            
+            liveagent.init('https://d.la1-c2-phx.salesforceliveagent.com/chat', '5723000000000K5', '00D30000000pOSg');
+        </script>
+        <script type="text/javascript">
+                                if (!window._laq) { window._laq = []; }
+                                window._laq.push(function(){liveagent.showWhenOnline('5733000000000Um', document.getElementById('liveagent_button_online_5733000000000Um'));
+                                liveagent.showWhenOffline('5733000000000Um', document.getElementById('liveagent_button_offline_5733000000000Um'));
+                                });
+                            </script>
+</apex:component>

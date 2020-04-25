@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Create_CNP_TX_Transport_Ex_A</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Create CNP TX Transport Ex A</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>/a20/e?
+&amp;CF00N3000000B80ng_lkid={!CESContract__c.AccountId__c}
+&amp;CF00N3000000B80ng={!CESContract__c.Account__c}
+&amp;CF00N3000000B80nh={!CESContract__c.Name}
+&amp;CF00N3000000B80nh_lkid={!CESContract__c.Id}
+&amp;CF00N3000000B80nj={!CESContract__c.Contact_for_Notices__c}
+&amp;CF00N3000000B80nj_lkid={!CESContract__c.Contact_for_NoticesId__c}
+&amp;CF00N3000000B80nl={!CESContract__c.Pipeline_Lookup__c}
+&amp;CF00N3000000B80nl_lkid={!CESContract__c.Pipeline_LookupId__c}
+&amp;00N3000000B817w={!CESContract__c.Account__c}%20Transport%20Exhibit
+&amp;cancelURL=/{!CESContract__c.Id}</url>
+</WebLink>

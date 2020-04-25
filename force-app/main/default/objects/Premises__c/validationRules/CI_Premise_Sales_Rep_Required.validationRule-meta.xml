@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CI_Premise_Sales_Rep_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+  CONTAINS(Record_Type_Name__c,&#39;C&amp;I&#39;),
+  ISBLANK(Sales_Rep__c))</errorConditionFormula>
+    <errorDisplayField>Sales_Rep__c</errorDisplayField>
+    <errorMessage>Premise13: C&amp;I premise requires a Sales Rep</errorMessage>
+</ValidationRule>

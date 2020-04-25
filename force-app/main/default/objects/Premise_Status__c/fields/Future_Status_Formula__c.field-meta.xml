@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Future_Status_Formula__c</fullName>
+    <externalId>false</externalId>
+    <formula>&quot;Going &quot; &amp; TEXT(Status__c) &amp; &quot; on &quot; &amp; TEXT(MONTH(Status_Date__c)) &amp; &quot;-&quot; &amp; TEXT(DAY(Status_Date__c)) &amp; &quot;-&quot; &amp; TEXT(YEAR(Status_Date__c))</formula>
+    <label>Future Status Formula</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

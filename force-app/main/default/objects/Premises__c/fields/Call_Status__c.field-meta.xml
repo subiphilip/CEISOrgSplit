@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Call_Status__c</fullName>
+    <description>Can agents call this Gas Choice customer?</description>
+    <externalId>false</externalId>
+    <formula>IF( 
+OR(Balloted__c = TRUE, SG_Do_Not_Call__c = TRUE)
+, IMAGE(&quot;/resource/Do_Not_Call&quot;,&quot;red&quot;),IMAGE(&quot;/resource/Call_Us&quot;,&quot;green&quot;))</formula>
+    <inlineHelpText>Can agents call this Gas Choice customer?</inlineHelpText>
+    <label>Call Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

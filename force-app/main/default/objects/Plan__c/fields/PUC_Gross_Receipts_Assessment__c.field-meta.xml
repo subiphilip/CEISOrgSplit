@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PUC_Gross_Receipts_Assessment__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>A fee assessed to recover the statutory fee for administering the Public Utility Regulatory Act.  The PUCA is currently set at .1667% of a customer’s total energy charge for a given billing cycle (including all TDU/TDSP fees), before sales tax. Checking this adds tax to plan details.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>A fee assessed to recover the statutory fee for administering the Public Utility Regulatory Act.  Currently set at .1667% of a customer’s energy charge for a given billing cycle (including all TDU/TDSP fees), before sales tax. Check box to add to plan.</inlineHelpText>
+    <label>Add PUC Gross Receipts Assessment</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

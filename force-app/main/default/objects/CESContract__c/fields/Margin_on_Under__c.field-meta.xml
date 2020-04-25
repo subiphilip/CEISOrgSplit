@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Margin_on_Under__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>enter negative value for margin gain for CES.  enter positive value for margin loss to CES</inlineHelpText>
+    <label>Margin on Under (MMBtu)</label>
+    <precision>6</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

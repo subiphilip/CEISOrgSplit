@@ -1,0 +1,53 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+    <apex:stylesheet value="{!URLFOR($Resource.Jquery, 'css/ui-lightness/jquery-ui-1.8.16.custom.css')}"/>
+    
+    <apex:composition template="Template_TC">    
+        <apex:define name="HeadTags">
+            <c:ForceSSLScript />
+            <title>TrueCost Portal Allows Customers To Switch Electricity Providers --{!$Label.Page_Title_Company_Name}</title>
+            <!-- <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/{!$CurrentPage.Name}"/> -->
+            <meta name="description" content="Want to switch energy providers? Log on to the TrueCost electric portal to compare the electric plans offered by various energy providers & switch plans with ease." />
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <apex:outputPanel layout="none" rendered="{!(ISPICKVAL($User.UserType,'Guest'))}">
+                        <div class="span3">
+                            <h4>Register</h4>
+                            <div class="well">
+                                <c:RemoteReg showphone="false" showpromo="false"/>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    <div class="{!if((ISPICKVAL($User.UserType,'Guest')), 'span7', 'span10')}">
+                        
+                        <h2 class="text-info">CenterPoint Energy doesn't sell electric plans. TrueCost just makes it easier to find the right one for the way you use electricity.</h2>
+                        <c:homepageREPs />
+                        <div class="clearfix"/>
+                        
+                        
+                        <p class="lead">Read candid reviews about the electric providers found on TrueCost written by the people who know them best – their actual customers!</p>
+                        
+                        
+                        <ul> 
+                            <li><strong class="text-info">Shop </strong>using your home's or business' past electric use</li>
+                            <li><strong class="text-info">Compare </strong>over 50 plans from trusted electric companies</li>
+                            <li><strong class="text-info">Switch </strong>to your preferred plan or well remind you when its time to renew</li>
+                            
+                        </ul>
+                        <a href="{!$Page.ShopPlans}" class="btn btn-primary ">Compare Now!</a>
+                        
+                    </div>
+                    <div class="span2">
+                        <c:SliderPortlet />
+                    </div>
+                </div>
+            </div>
+            
+        </apex:define>               
+        
+    </apex:composition>
+    <c:RemoteRegScript />
+    <c:sliderPortletScript />
+</apex:page>

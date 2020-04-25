@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delete_Me__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>this user field value&#39;s source value was deleted so process the deletion with informatica</description>
+    <externalId>false</externalId>
+    <inlineHelpText>this user field value&#39;s source value was deleted so process the deletion with informatica</inlineHelpText>
+    <label>Delete Me</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

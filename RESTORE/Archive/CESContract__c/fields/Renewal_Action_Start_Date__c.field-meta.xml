@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Renewal_Action_Start_Date__c</fullName>
+    <description>The date on which action should begin on autorenewal contracts, including a 30 day lead before the notice expiration date.</description>
+    <externalId>false</externalId>
+    <formula>Current_End_Date__c -  Renewal_Notice_Days__c - 30</formula>
+    <label>Renewal Action Start Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

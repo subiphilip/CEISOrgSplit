@@ -1,0 +1,62 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" >
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+    description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."
+  />
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+
+    <div id="wrapper">
+        <c:tc2_navbar />
+        <c:tc2_hero_inner bgImage="hero-1.jpg" headline="We found your address" />
+        <c:tc2_esid_lookup_complete showEsid="true" />
+        <!-- HEADER -->
+        <section id="appESIDComplete">
+            <div class="container">
+                <div class="has-margin-3 has-text-centered">
+                    <h2 class="is-size-4 has-text-weight-bold padding-sides">Here is a sample of {{premiseType}} plans in your area…</h2>
+                </div>
+            </div>
+        </section>
+
+        <c:tc2_plans_shop maxPlans="3" routeTo="{!$Page.Account_Moving}"/>
+
+    </div>
+
+    <script>
+    (function ($) {
+        $(function () {
+        'use strict';
+
+         TC.app.appESIDComplete = new Vue({
+            el: '#appESIDComplete',
+            data: {
+                premiseType: 'residential',
+                isCommercial: false
+            },
+            methods: {
+                goBack: function(){
+                    window.history.back();
+                }
+            },
+            mounted: function() {
+
+                if(TC.app.account.premise.premiseResult.Premise_Type__c == 'Small Non-Residential'){
+                  this.isCommercial = true;
+                  this.premiseType = 'small business';
+                  TC.app.account.planPremiseType = 'Commercial';
+                }
+
+            },
+            watch: {},
+        });
+
+      })
+    })(jQuery);
+</script>
+
+
+    <c:tc2_footer />
+  </body>
+  </html>
+</apex:page>

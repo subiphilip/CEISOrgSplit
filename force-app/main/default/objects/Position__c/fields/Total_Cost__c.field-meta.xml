@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Cost__c</fullName>
+    <externalId>false</externalId>
+    <formula>if ( 
+  and(NYMEX_lock__c , Basis_Lock__c ), 
+  (DT_Basis__c + DT_Basis_Physical__c + DT_NYMEX__c + Adder__c), 
+
+  if ( 
+    Basis_Lock__c, 
+    (DT_Basis__c + DT_Basis_Physical__c + Adder__c), 
+    Adder__c 
+  ) 
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>basis + nymex + adder</inlineHelpText>
+    <label>Total Cost</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

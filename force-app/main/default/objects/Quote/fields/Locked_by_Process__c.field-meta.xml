@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Locked_by_Process__c</fullName>
+    <externalId>false</externalId>
+    <label>Locked by Process</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Execution</fullName>
+                <default>false</default>
+                <label>Execution</label>
+            </value>
+            <value>
+                <fullName>PricingRequest</fullName>
+                <default>false</default>
+                <label>PricingRequest</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

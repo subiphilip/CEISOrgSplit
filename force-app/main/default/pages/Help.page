@@ -1,0 +1,143 @@
+<apex:page showHeader="false" sidebar="false" controller="SupportLinks" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="true" expires="43200" >
+   <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+      <c:tc2_header title="{!$Label.Page_Title_FAQ} - {!$Label.Page_Title_Company_Name}"
+         description="Get answers to frequently asked questions about electric rates, electric providers, electric choice, switching plans, TrueCost, and CenterPoint Energy" />
+      <style>
+        .faq-item {
+            text-align: left;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background:#ffffff;
+            padding:40px 20px;
+            margin-bottom:20px;
+            color: #474747;
+        }
+        .fas {
+            float: left;
+            margin-right: 10px;
+            font-size: .8em;
+            top: 5px;
+            position: relative;
+        }
+        .faq-q {
+            
+        }
+        .faq-a {
+            display:none;
+            margin-top:20px;
+            margin-left: 15px;
+        }
+        .sfdc_richtext {
+            text-align: left;
+        }
+      </style>
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="Frequently Asked Questions" />
+             
+            <!--  <section class="has-background-white">
+                 <div class="container">
+                     <div class="has-padding-3 has-text-centered">
+                         <h2 class="is-size-4 padding-sides">Our TrueCost representatives are knowledgeable about the electric industry and are a reliable source for energy information and efficiency advice for consumers.</h2>
+                     </div>
+                 </div>
+             </section> -->
+    
+             <div id="appHelp" class="container"> 
+                <div class="level">
+                  <!-- <div class="level-left">
+                    <section class="faq" >
+                    	<h3 class="has-margin-3 is-size-4">{!$Label.Page_Title_FAQ}</h3>
+                    </section>
+                  </div> -->
+
+                  <div class="level-right" >
+                        <div class="level-item">
+                            <div class="dropdown is-hoverable is-large">
+                                <div class="dropdown-trigger">
+                                    <button class="button is-medium borderless-dropdown" aria-haspopup="true" aria-controls="dropdown-menu">
+                                        <span v-if="!category">Select FAQ Category</span>
+                                        <span v-if="category">{!$CurrentPage.parameters.cat}</span>
+                                        <span class="icon is-small"> <i class="fas fa-angle-down" aria-hidden="true"></i> </span>
+                                    </button>
+                                </div>
+                                <div class="dropdown-menu is-medium" id="dropdown-menu" role="menu">
+                                    <div class="dropdown-content is-medium">
+                                        Choose a subject: <c:tc2_faq_category_component />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                  </div>
+                </div>
+
+                <div v-if="!category">
+                  <apex:repeat var="faq1" value="{!topfaq}">
+                      <article class="faq-item">
+                          <i class="fas fa-chevron-right"></i>
+                      <div class="faq-q cursor" v-on:click="toggleFAQ('{!faq1.id}');">
+                        <p>{!faq1.Question__c}</p>
+                      </div>
+                      <div id="{!faq1.id}" class="faq-a">
+                        <apex:outputfield value="{!faq1.Answer__c}"/>
+                      </div>
+                    </article>
+                  </apex:repeat>
+                </div>
+                
+                <div v-if="category">
+                  <apex:repeat var="faq1" value="{!responselist}">
+                      <article class="faq-item">
+                          <i class="fas fa-chevron-right"></i>
+                          <div class="faq-q cursor" v-on:click="toggleFAQ('{!faq1.id}');">
+                              <p>{!faq1.Question__c}</p>
+                          </div>
+                          <div id="{!faq1.id}" class="faq-a">
+                              <apex:outputfield value="{!faq1.Answer__c}"/>
+                          </div>
+                      </article>
+                  </apex:repeat>
+                </div>
+
+             </div>
+         </div>
+         
+        <c:tc2_footer />
+         <script>
+            (function ($) {
+                $(function () {
+                'use strict';
+                 
+                 TC.app.appHelp = new Vue({
+                    el: '#appHelp',
+                    data: {
+                       plans: [],
+                       sortBy: '',
+                       category: "{!$CurrentPage.parameters.cat}"
+                    },
+                    methods: { 
+                        toggleFAQ: function(id) {
+                            
+                            $("#"+id).toggle();
+                        },
+                        changeCategory: function(cat){
+                          
+                          var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?cat=' + cat;
+                          //window.history.pushState({path:newurl},'',newurl);
+                          window.location.href = newurl;
+                        }
+                    },
+                    mounted: function() {
+                    },
+                    watch: { 
+                    }
+                 });
+            
+              })
+            })(jQuery);
+         </script>
+      </body>
+   </html>
+</apex:page>

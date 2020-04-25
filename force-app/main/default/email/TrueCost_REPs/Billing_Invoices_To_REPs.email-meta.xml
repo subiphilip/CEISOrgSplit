@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>TrueCost_Customer</letterhead>
+    <name>Billing-Invoices To REPs</name>
+    <style>freeForm</style>
+    <subject>TrueCost - Invoice and Support</subject>
+    <textOnly>Please see attached for this month&#39;s TrueCost invoice and support.
+
+Feel free to contact me directly with any questions or comments.
+
+The TrueCost team appreciates your business.
+
+Thanks for your time,
+
+Bobby Dornbos
+TrueCost REP Support
+713-207-2076
+robert.dornbos@centerpointenergy.com</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

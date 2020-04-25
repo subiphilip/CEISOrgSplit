@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Contract_Length_Changed_for_Existing_Plan</fullName>
+        <ccEmails>subi.philip@gmail.com</ccEmails>
+        <description>Contract Length Changed for Existing Plan</description>
+        <protected>false</protected>
+        <recipients>
+            <field>LastModifiedById</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Plan_Contract_Length_Changed</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_REP_regarding_Plan_End_Date</fullName>
+        <description>Email REP regarding Plan End Date</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <recipient>troy.donovan1@centerpointenergy.com.cnp2</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Plan_End_Date_Reminder</template>
+    </alerts>
+    <alerts>
+        <fullName>REP_New_Plan_Entry_Change</fullName>
+        <description>REP New Plan Entry/Change</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>troy.donovan1@centerpointenergy.com.cnp2</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Internal_Messages/New_Plan_Created_Changed_INTERNAL</template>
+    </alerts>
+    <rules>
+        <fullName>New Plan Created%2FChanged</fullName>
+        <actions>
+            <name>REP_New_Plan_Entry_Change</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>An Admin is notified when a new plan is created or an existing plan is changed.</description>
+        <formula>AND(OR( ISNEW() , ISCHANGED( Active__c ), ISCHANGED(  Contract_Length__c ), ISCHANGED(  Renewable_Content__c  ), ISCHANGED(  Plan_Start_Date__c ), ISCHANGED(   Plan_End_Date__c  ), ISCHANGED(  Suspended__c ), ISCHANGED( Plan_Description__c  ) ),  REP_Profile__r.Name &lt;&gt; &quot;CenterPoint Energy Services&quot;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Plan Contract Length Changed</fullName>
+        <actions>
+            <name>Contract_Length_Changed_for_Existing_Plan</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( NOT(ISNEW()), ISCHANGED(Contract_Length__c ), Record_Type_Name__c = &quot;Electric Plan&quot;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Resi Plan past end date</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Plan__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Plan__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Plan</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Plan__c.Rate_Class_del__c</field>
+            <operation>equals</operation>
+            <value>Residential</value>
+        </criteriaItems>
+        <description>A plan has reached it&#39;s end date for availability, and the REP must refresh it or it will stay deactivated.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Email_REP_regarding_Plan_End_Date</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Plan__c.Plan_End_Date__c</offsetFromField>
+            <timeLength>-3</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Email_REP_regarding_Plan_End_Date</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Plan__c.Plan_End_Date__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+</Workflow>

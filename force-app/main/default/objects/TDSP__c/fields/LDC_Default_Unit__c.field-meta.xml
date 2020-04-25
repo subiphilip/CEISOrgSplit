@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LDC_Default_Unit__c</fullName>
+    <externalId>false</externalId>
+    <label>LDC Default Unit</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>MMBtu</fullName>
+                <default>false</default>
+                <label>MMBtu</label>
+            </value>
+            <value>
+                <fullName>Therm</fullName>
+                <default>false</default>
+                <label>Therm</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

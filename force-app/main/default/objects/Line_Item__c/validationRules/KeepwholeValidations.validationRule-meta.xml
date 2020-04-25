@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>KeepwholeValidations</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(Record_Type_Name__c = &#39;Contract Line Item&#39; 
+,
+OR 	(
+
+AND(
+OR(isblank(text(Keepwhole_Over_Calc_Type__c))=false,isblank(text(Keepwhole_Over_Tolerance__c))=false,isblank(text(Keepwhole_Over_Adder__c))=false,isblank(text(Keepwhole_Under_Adder__c))=false) 
+
+, 
+
+OR (
+OR(isblank(text(Keepwhole_Over_Calc_Type__c))=true,isblank(text(Keepwhole_Over_Tolerance__c))=true),AND(isblank(text(Keepwhole_Over_Adder__c))=true,isblank(text(Keepwhole_Under_Adder__c))=true)
+) 
+)
+
+,
+	
+AND(
+OR(isblank(text(Keepwhole_Cashout_Over_Calc_Type__c))=false,isblank(text(Keepwhole_Cashout_Over_Tolerance__c))=false,isblank(text(Keepwhole_Cashout_Over_Adder__c))=false,isblank(text(Keepwhole_Cashout_Under_Adder__c))=false)
+
+, 
+
+OR (
+OR(isblank(text(Keepwhole_Cashout_Over_Calc_Type__c))=true,isblank(text(Keepwhole_Cashout_Over_Tolerance__c))=true), AND(isblank(text(Keepwhole_Cashout_Over_Adder__c))=true,isblank(text(Keepwhole_Under_Adder__c))=true)
+
+)
+)
+ 
+,
+	
+AND(
+OR(isblank(text(Keepwhole_OFO_Over_Calc_Type__c))=false,isblank(text(Keepwhole_OFO_Over_Tolerance__c))=false,isblank(text(Keepwhole_OFO_Over_Adder__c))=false)
+
+, 
+
+OR(isblank(text(Keepwhole_OFO_Over_Calc_Type__c))=true,isblank(text(Keepwhole_OFO_Over_Tolerance__c))=true,isblank(text(Keepwhole_OFO_Over_Adder__c))=true)
+)
+
+
+	)
+)</errorConditionFormula>
+    <errorMessage>Keepwhole information is incomplete. To configure a keepwhole, please include the calculation type, the tolerance percentage, and applicable adders.</errorMessage>
+</ValidationRule>

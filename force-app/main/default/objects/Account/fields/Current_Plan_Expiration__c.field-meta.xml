@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Plan_Expiration__c</fullName>
+    <description>The expiration date of a customer&#39;s non-CES-enrolled plan.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The expiration date of a customer&#39;s non-CES-enrolled plan.</inlineHelpText>
+    <label>Current Electric Contract Expiration</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

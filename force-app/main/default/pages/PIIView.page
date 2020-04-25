@@ -1,0 +1,78 @@
+<apex:page controller="PIIViewController" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false">
+    
+    <head>
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"/>
+        <apex:includeScript value="{!URLFOR($Resource.Bootstrap, 'js/bootstrap.min.js')}" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="{!URLFOR($Resource.bootstrap, 'css/bootstrap.min.css')}" rel="stylesheet" media="screen"/>
+    </head>
+    
+    <body>
+        
+        <div class="modal hide fade" id="SSNModal">
+            <div class="modal-header">
+                <h3>SSN</h3>
+            </div>
+            <div class="modal-body">
+                <p id="ssn"></p>
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-primary" onclick="window.history.back()">Close</a>
+            </div>
+        </div>
+        
+        <div class="modal hide fade" id="CCModal">
+            <div class="modal-header">
+                <h3>Payment Card Details</h3>
+            </div>
+            <div class="modal-body">
+                <p id="cardtype">Card Type: </p>
+                <p id="card_number">Card Number: </p>
+                <p id="digits">Security Code: </p>
+                <p id="Address">Address: </p>
+                <p id="City">City: </p>
+                <p id="State">State: </p>
+                <p id="Month">Expiration Month: </p>
+                <p id="Year">Expiration Year: </p>
+                <p id="Name">Name on Card: </p>
+            </div>
+            <div class="modal-footer">
+                <a href="" onclick="window.history.back()" class="btn btn-primary">Close</a>
+            </div>
+        </div>
+        
+        <script>
+        $j=jQuery.noConflict();
+        PIIViewController.getRemoteREPOrder(
+            '{!$CurrentPage.Parameters.id}','{!$CurrentPage.Parameters.flavor}',
+            function(result,event){
+                if (event.status){
+                    if ({!$CurrentPage.Parameters.flavor='ssn'}){
+                    	$j("#ssn").text(result.SSN__c);
+                        $j("#SSNModal").modal('toggle');
+                    }
+                    if ({!$CurrentPage.Parameters.flavor='cc'}){
+                        $j("#cardtype").append(result.Payment_Card_Type__c);
+                        $j("#card_number").append(result.Payment_Card_Number__c);
+                        $j("#digits").append(result.Payment_Card_3_digit_code__c);
+                        $j("#Address").append(result.Payment_Card_Address_Line_1__c);
+                        $j("#City").append(result.Payment_Card_Address_City__c);
+                        $j("#State").append(result.Payment_Card_Address_State__c);
+                    	$j("#Month").append(result.Payment_Card_Month__c);
+                        $j("#Year").append(result.Payment_Card_Year__c);
+                        $j("#Name").append(result.Name_as_it_appears_on_Payment_Card__c);
+                        $j("#CCModal").modal('toggle');
+                    }
+                }                                
+                else {
+                    
+                }
+            }
+        );
+        </script>
+    </body>
+    
+    
+    
+</apex:page>

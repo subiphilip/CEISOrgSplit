@@ -1,0 +1,47 @@
+<apex:page Controller="ControllerForZipCodeSearch" showheader="false" sidebar="false">
+
+    <apex:composition template="Template_TC">
+    
+    <apex:define name="body">
+    <apex:outputpanel styleClass="maintitle">Get a bigger paycheck and save your customers money!</apex:outputpanel>
+    <apex:outputpanel styleClass="sub-title">Promote TrueCost to people who are moving in</apex:outputpanel>
+    <apex:outputPanel styleClass="main-left">
+
+        <apex:pageBlock title="Check the Customer's Zip Code for Eligibility" > Is this customer calling to set up or transfer gas service?  Check their new address to see if they're eligible for TrueCost!
+            <apex:form >
+                <apex:outputLabel >Zip Code</apex:outputLabel>
+                <apex:inputText value="{!searchText}" onkeypress="return noenter(event);"/>
+                <apex:commandButton action="{!search}" value="Check" rerender="result"/>
+                <apex:actionFunction name="doSearchAF" action="{!search}" rerender="result"/>
+             </apex:form>
+        </apex:pageBlock>
+        <apex:outputPanel id="result">
+        <apex:pageBlock rendered="{!OR(ISNULL(result),result.size=0)}">
+            <apex:outputText >TrueCost does not serve that zip code</apex:outputText>
+        </apex:pageBlock>
+        
+        <apex:pageBlock rendered="{!and(result.size>0, NOT($Setup.TrueCostSystemVariables__c.Sales_Phone_in_Header__c))}" title="This customer can use TrueCost, but not via phone!">
+            <apex:form >TrueCost doesn't have call center availability right now.  Please offer the customer our email, but do not transfer to TrueCost. &nbsp; <apex:commandLink action="{!navigate}" value=" Click here when you offer TrueCost to customer" id="Navigate"/></apex:form>
+        </apex:pageBlock>
+        
+        <apex:pageBlock rendered="{!and(result.size>0, $Setup.TrueCostSystemVariables__c.Sales_Phone_in_Header__c)}" title="This customer can use TrueCost!">
+            <apex:form >TrueCost is ready for more customers. &nbsp;  <apex:commandLink action="{!navigate}" value=" Click here when you offer TrueCost to customer" id="Navigate"/></apex:form>
+        </apex:pageBlock>
+        </apex:outputPanel>
+        </apex:outputPanel>
+           
+       </apex:define> 
+    </apex:composition>
+    
+    <script type='text/javascript'>
+        function noenter(ev)  {
+            if (window.event && window.event.keyCode == 13 || ev.which == 13) {
+                doSearchAF();
+                return false;
+             } else {
+                return true;
+             }
+     }
+    </script>
+
+</apex:page>

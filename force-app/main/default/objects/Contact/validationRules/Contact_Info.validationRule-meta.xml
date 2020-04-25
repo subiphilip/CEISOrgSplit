@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_Info</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+IsPersonAccount = FALSE,
+ISNEW(),
+OR(
+Account.RecordTypeId = &#39;01230000000njET&#39;,
+Account.RecordTypeId = &#39;012300000018b9t&#39;,
+Account.RecordTypeId = &#39;012300000018cVk&#39;
+),
+OR(
+ISBLANK(FirstName),
+AND(
+ISBLANK(Phone),
+ISBLANK(MobilePhone), 
+ISBLANK(Fax), 
+ISBLANK(Email)
+)
+)
+)</errorConditionFormula>
+    <errorMessage>Contact02: Contacts require first AND last name, then either phone, fax, or email to be saved.</errorMessage>
+</ValidationRule>

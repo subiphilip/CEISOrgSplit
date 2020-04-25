@@ -1,0 +1,601 @@
+<apex:component controller="ShopRemote" >
+<div xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+
+      <apex:attribute name="maxPlans" description="" type="int" required="false"/>
+      <apex:variable var="v_maxPlans" value="{!IF(NOT(ISNULL(maxPlans)), maxPlans, 10)}" />
+      <apex:attribute name="routeTo" description="" type="string" required="true"/>
+
+<section>
+  <div id="appPlansShop">
+    <div class="container rateboxes" v-if="plansTotal > 0">
+      <nav class="level results-level" style='display:none'>
+        <div class="level-left">
+          <div class="level-item">
+            <p v-if="!hasNoPlans" class="subtitle is-5">We found <strong>{{plans.length}} electric plans</strong> for zip codes</p>
+          </div>
+          <div class="level-item">
+            <p class="subtitle is-6 has-text-info"><a href="#">Change Zip Code</a></p>
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+            <div class="dropdown is-hoverable is-large">
+              <div class="dropdown-trigger">
+                <button class="button is-medium borderless-dropdown" aria-haspopup="true" aria-controls="dropdown-menu">
+                  <span>Recommended Plans</span>
+                  <span class="icon is-small"> <i class="fas fa-angle-down" aria-hidden="true"></i> </span>
+                </button>
+              </div>
+              <div class="dropdown-menu is-medium" id="dropdown-menu" role="menu">
+                <div class="dropdown-content is-medium">
+                  <a href="#" class="dropdown-item">Recommended Plans</a>
+                  <a class="dropdown-item">Other dropdown item</a>
+                  <a href="#" class="dropdown-item is-active">Recommended Plans</a>
+                  <a href="#" class="dropdown-item">Other dropdown item</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div v-show="!hasNoPlans" v-for="(plan,index) in paginatedData" class="list-plans">
+        <div v-bind:data-id="plan.id" id="ball" style="display:none;">
+            <div class="snackbar-item">
+              <img v-bind:src="plan.logo" v-bind:alt="plan.company" />
+              <div class="is-divider-vertical"></div>
+              <div class="snackbar-item-title"><p>{{plan.title}}</p></div>
+            </div>
+        </div>
+        <div class="rate-box view-details">
+          <div class="columns">
+            <div class="column mt-smaller left-logo-box is-one-fifth">
+              <span class="inline logo "><img class="inline logo-image" v-bind:src="plan.logo" v-bind:alt="plan.company"/></span>
+              <span class="inline logo-stars">
+                    <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= .5, 'icon-icon-star-full': plan.starScore >= 1, 'icon-icon-star-outline': plan.starScore < .5}" class=" is-size-5 is-size-6-mobile"></i>
+                    <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= 1.5, 'icon-icon-star-full': plan.starScore >= 2, 'icon-icon-star-outline': plan.starScore < 1.5}" class=" is-size-5 is-size-6-mobile"></i>
+                    <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= 2.5, 'icon-icon-star-full': plan.starScore >= 3, 'icon-icon-star-outline': plan.starScore < 2.5}" class=" is-size-5 is-size-6-mobile"></i>
+                    <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= 3.5, 'icon-icon-star-full': plan.starScore >= 4, 'icon-icon-star-outline': plan.starScore < 3.5}" class=" is-size-5 is-size-6-mobile"></i>
+                    <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= 4.5, 'icon-icon-star-full': plan.starScore >= 5, 'icon-icon-star-outline': plan.starScore < 4.5}" class=" is-size-5 is-size-6-mobile"></i>
+                </span>
+              <div class="is-desktop">
+                <a v-bind:href="'/Shop_Plans_Review?id='+plan.repId">{{plan.countReviews}} Reviews</a>
+              </div>
+            </div>
+            <div class="is-divider-vertical"></div>
+            <div class="column mt-small">
+              <p class="is-size-5 has-text-weight-semibold is-size-6-mobile"><p v-html="plan.title"></p></p>
+              <div class="price-card-details hidden-mobile">
+                <ul class="ul-price-card">
+                  <li>{{plan.contract}}</li>
+                  <li v-if='plan.billpay'>Online Bill Pay</li>
+                  <li v-if='plan.green'>{{plan.green}}% Green <span class="icon-leaf " style="font-size: 1em;"></span></li>
+                </ul>
+              </div>
+              <div class="hidden-mobile">
+                <label class="checkbox has-text-weight-semibold">
+                  <input type="checkbox" v-on:change="comparePlan(plan, index, $event)" v-model="plan.compare" v-bind:data-id="plan.id"/>
+                  <span>Compare this plan</span>
+                </label>
+              </div>
+            </div>
+            <div class="is-divider-vertical"></div>
+            <div class="column mt-small is-small-no-flex left-item" style="display: inline-block;">
+              <p class="is-card-header is-size-7-mobile">ALL-IN COST</p>
+              <p class="is-size-3 is-size-4-mobile">{{plan.kwhTC}}¢ kWh</p>
+              <p class="hidden-mobile">(Includes fees &amp; taxes)</p>
+              <div class="dropdown hidden-mobile">
+                <button class="button details is-white has-text-weight-semibold" v-bind:data-id="plan.id" v-on:click="TC.fn.openTab(event, 'details', plan.id)" >
+                  <span>See Details</span>
+                  <span class="icon is-small animate-arrow"> <i class="fas fa-angle-down" aria-hidden="true"></i> </span>
+                </button>
+              </div>
+            </div>
+            <div class="column mt-small is-small-no-flex is-mobile right-item">
+              <p class="is-card-header is-size-7-mobile">AVERAGE BILL</p>
+              <app-monthly-bill v-bind:myplan='plan' v-bind:myplansize='houseSize'/>
+            </div>
+            <div class="is-divider-vertical"></div>
+            <div class="column mt-small is-small-no-flex  has-text-centered">
+              <div class="is-desktop">
+                <p class="is-card-header">AVERAGE BILL</p>
+                <app-monthly-bill v-bind:myplan='plan' v-bind:myplansize='houseSize' />
+              </div>
+              <a class="button fixed-size is-info is-large is-rounded is-outlined animate-gradient-bg" v-on:click="selectPlan(plan)">SIGN ME UP</a>
+
+               <div class="dropdown is-mobile">
+                <button class="button details is-white has-text-weight-semibold" v-bind:data-id="plan.id" v-on:click="TC.fn.openTab(event, 'details', plan.id)" >
+                  <span>See Details</span>
+                  <span class="icon is-small animate-arrow"> <i class="fas fa-angle-down" aria-hidden="true"></i> </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="details" v-bind:data-id="plan.id" class="tabcontent  is-details" style="overflow:hidden;">
+            <c:tc2_plans_shop_snapshot />
+            <!-- <app-plans-shop-snapshot ref="appPlansShopSnapshot" v-bind:myplan='plan' /> -->
+            <!-- <c:tc2_plans_shop_details_graph />
+            <c:tc2_plans_shop_details_rewards /> -->
+        </div>
+      </div>
+
+    </div>
+
+    <div v-show="!hasNoPlans" >
+      <div class="is-vertical-center mt-large" v-if="maxPlans > 9">
+          <a v-on:click="prevPage" v-if="pageNumber > 0" class="button is-gradient fixed-size is-rounded animate-gradient-bg"><span>Previous</span></a>
+          <a v-on:click="nextPage" v-if="pageNumber < pageCount" class="button is-gradient fixed-size is-rounded animate-gradient-bg"><span>Next</span></a>
+
+      </div>
+
+      <div class="is-vertical-center mt-large" v-if="maxPlans < 10">
+          <a  class=" button is-gradient fixed-size is-rounded animate-gradient-bg" href="{!$Page.Shop_Plans}"><span>Shop All Plans</span></a>
+      </div>
+
+      <div v-if="pageCount > 1">
+        <div v-if="maxPlans > 9" class="is-vertical-center mt-large">
+            <p>Page {{pageNumberPlusOne}} of {{pageMax}} </p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+    <div class='spacer' style='height:10px' />
+
+    <script>
+    (function ($) {
+        $(function () {
+        'use strict';
+
+         TC.fn.setup.Rates = function() {
+            var pause = 1;
+            TweenMax.from("#appShopPlans .rate-boxes", 0.3, { opacity: "0", y: 10 });
+            TC.dom.rates = $(".rate-box");
+            TC.dom.rates.each(function(index, element) {
+              TweenMax.fromTo([element, element], .3, {opacity:0, y: -150, scaleY:.1}, {opacity:1, y: 0, scaleY:1, delay:index * .04});
+            })
+         };
+
+
+
+         TC.app.PlansShop = new Vue({
+            el: '#appPlansShop',
+            components: {
+              appPlansShopSnapshot: appPlansShopSnapshot
+            },
+            data: {
+                hasShowCalculator: false,
+                plans: [],
+                plansFiltered: [],
+                plansTotal: 0,
+                pageMax:0,
+                planDetailsSnapshot:'',
+                zip: (TC.app.account.premise.zip == null || TC.app.account.premise.zip == '') ? TC.app.account.zipDefault : TC.app.account.premise.zip,
+                maxPlans: '{!v_maxPlans}',
+                pageNumber: (location.search.split('page=')[1] !== undefined) ? location.search.split('page=')[1] : 0,
+                pageNumberPlusOne: 1,
+                size: {!v_maxPlans},
+                paginatedData: [],
+                start:0,
+                end:10,
+                pageCount:0,
+                companies:[],
+                features:[],
+                contracts:[],
+                isFilterOn: false,
+                hasNoPlans: false,
+                houseSize:(TC.app.appHomeProfile.houseSize == null || TC.app.appHomeProfile.houseSize == '') ? 'medium' : TC.app.appHomeProfile.houseSize,
+                isCommercial: false,
+                isLoggedIn: false
+            },
+            methods: {
+                nextPage: function() {
+                  this.pageNumber++;
+                  this.pageNumberPlusOne = parseInt(this.pageNumber)+1;
+                  this.updatePage();
+                },
+                prevPage: function() {
+                  this.pageNumber--;
+                  this.pageNumberPlusOne = parseInt(this.pageNumber)+1;
+                   this.updatePage();
+                },
+                updateComponentData: function() {
+                  console.log('updateComponentData', this.$refs)
+
+                  this.$refs.plan = this.plan;
+                },
+                updatePage: function(){
+                  TC.fn.closeAllTabs();
+                  this.start = parseInt(this.pageNumber) * this.size;
+                  this.end = this.start + this.size;
+                  this.paginatedData = this.plans.slice(this.start, this.end);
+                  this.pageNumberPlusOne = parseInt(this.pageNumber)+1;
+                  var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?page=' + this.pageNumber;
+                  window.history.pushState({path:newurl},'',newurl);
+
+                  if(this.isFilterOn){
+                    TC.app.appShopPlans.setPlansTotal(TC.app.account.plansFiltered.length);
+                  } else {
+                    TC.app.appShopPlans.setPlansTotal(TC.app.account.plans.length);
+                  }
+
+                  window.scrollTo(0,0);
+                  setTimeout(function(){
+                    if(parseInt($($('.list-plans .rate-box')[$('.list-plans .rate-box').length -1]).css('opacity')) == 0){
+                      TC.fn.setup.Rates();
+                    }
+                  }, TC.delay)
+                },
+                selectPlan: function(plan){
+                    TC.app.account.plan = plan;
+                    if(plan.hasLinkOff){
+                      TC.app.appSubscribe.$emit('linkOff', TC.app.account);
+
+                    } else {
+                      TC.fn.navigateTo("{!routeTo}");
+                    }
+
+                },
+
+                filterPlans: function(event, _filterBy){
+                    var vm = this;
+
+
+                    var validateExists = TC.app.account.shopFilters[event.filterby].filter(
+                        function(filter) {
+
+                            if(filter.title.toLowerCase() == event.target.dataset.id.toLowerCase()){
+                                return filter
+                            }
+                    });
+
+                    if(validateExists.length > 0){
+                        TC.app.account.shopFilters[event.filterby] = TC.app.account.shopFilters[event.filterby].filter(
+                            function(filter) {
+                            if(filter.title.toLowerCase() !== event.target.dataset.id.toLowerCase()){
+                                return filter
+                            }
+                        })
+                    } else {
+                        if(event.filterby == 'companies'){ TC.app.account.shopFilters.companies.push(_filterBy); }
+                        if(event.filterby == 'contracts'){TC.app.account.shopFilters.contracts.push(_filterBy); }
+                        if(event.filterby == 'features'){TC.app.account.shopFilters.features.push({title: _filterBy}); }
+                    }
+                    this.companies = TC.app.account.shopFilters.companies;
+                    this.features = TC.app.account.shopFilters.features;
+                    this.contracts = TC.app.account.shopFilters.contracts;
+
+                    TC.app.account.plansFiltered = [];
+                    this.isFilterOn = false;
+                    var tempPlans = [];
+
+                    if(this.companies.length > 0 || this.features.length > 0 || this.contracts.length > 0) {
+                          this.isFilterOn = true;
+                    }
+
+                    TC.app.account.plans.filter( function(plan) {
+                      var flag = false;
+
+                      vm.contracts.filter( function(item) { if(plan.contract == item.title){ flag = true;} })
+                      vm.companies.filter( function(item) { if(plan.company == item.title){ flag = true;}  })
+                      vm.features.filter( function(item) {
+
+                        if(item.title == 'rewards'){
+                            if(plan.rewardOffered){
+                              flag = true;
+                            }
+                        }
+                        if(item.title == 'green'){
+                            if(plan.green > 0){
+                              flag = true;
+                            }
+                        }
+                        if(item.title == 'billpay'){
+                            if(plan.billpay){
+                              flag = true;
+                            }
+                        }
+                        if(item.title == 'minusagecharge'){
+                            if(plan.ratePlan.Minimum_Usage_Charge__c <= 0 || plan.ratePlan.Minimum_Usage_Charge__c == undefined){
+                              flag = true;
+                            }
+                        }
+
+
+                      })
+
+                      if(flag) { TC.app.account.plansFiltered.push(plan) }
+
+                    });
+
+                    if(this.isFilterOn){
+                        tempPlans = TC.app.account.plansFiltered
+
+                        if(this.contracts.length > 0){
+
+                            tempPlans = tempPlans.filter( function(plan) {
+                                for(var k = 0; k < vm.contracts.length; k++){
+                                    if(plan.contract == vm.contracts[k].title){
+                                        return plan;
+                                    }
+                                }
+                            })
+                            TC.app.account.plansFiltered = tempPlans;
+                        }
+                        if(this.companies.length > 0){
+                            tempPlans = tempPlans.filter( function(plan) {
+                                for(var k = 0; k < vm.companies.length; k++){
+                                    if(plan.company == vm.companies[k].title){
+                                        return plan;
+                                    }
+                                }
+                            })
+                            TC.app.account.plansFiltered = tempPlans;
+                        }
+                        if(this.features.length > 0){
+                            tempPlans = tempPlans.filter( function(plan) {
+                                for(var l = 0; l < vm.features.length; l++){
+                                    if(vm.features[l].title == 'rewards'){
+                                      if(plan.rewardOffered){
+                                        return plan;
+                                      }
+                                    }
+                                    if(vm.features[l].title == 'green'){
+                                      if(plan.green){
+                                        return plan;
+                                      }
+                                    }
+                                    if(vm.features[l].title == 'billpay'){
+                                      if(plan.billpay){
+                                        return plan;
+                                      }
+                                    }
+                                    if(vm.features[l].title == 'minusagecharge'){
+                                      if(plan.ratePlan.Minimum_Usage_Charge__c <= 0 || plan.ratePlan.Minimum_Usage_Charge__c == undefined){
+                                        return plan;
+                                      }
+                                    }
+
+                                }
+                            })
+                            TC.app.account.plansFiltered = tempPlans;
+                        }
+
+                    }
+
+
+                    if(!this.isFilterOn) {
+                        this.plans = TC.app.account.plans;
+                    } else {
+                        this.plans = TC.app.account.plansFiltered;
+                    }
+
+                    this.showShopPlans();
+                    this.pageNumber = 0;
+                    this.pageNumberPlusOne = parseInt(this.pageNumber)+1;
+                    this.updatePage();
+                },
+                comparePlan: function(plan, index, $event){
+                    plan.compare = $event.target.checked
+                    if(plan.compare) {
+                        TC.app.appPlansCompareBar.addPlan(plan, index);
+                    } else {
+                        TC.app.appPlansCompareBar.removePlan(plan, index);
+                    }
+
+                },
+                showShopPlans: function(){
+
+                  this.start = parseInt(this.pageNumber) * this.size;
+                  this.pageNumberPlusOne = parseInt(this.pageNumber)+1;
+                  this.end = this.start + this.size;
+                  this.paginatedData = this.plans.slice(this.start, this.end);
+
+                  let l = this.plans.length, s = this.size;
+                  this.pageCount = Math.floor(l / s);
+                  this.pageMax = this.pageCount + 1;
+
+                  if(TC.app.appShopPlans !== undefined){
+                      TC.app.appShopPlans.setPlansTotal(TC.app.account.plans.length);
+                  }
+
+                  this.plansTotal = this.plans.length;
+
+                  setTimeout(function(){
+
+                    TC.fn.setup.Rates();
+                    if(TC.app.appShopPlans !== undefined){
+                      TC.app.appShopPlans.setupFilters();
+                    }
+                    TC.app.PlansShop.checkRateCalculatorModal();
+                    //TC.fn.animateUI
+                  }, TC.delay)
+                },
+                updateSelectedFilters: function() {
+                    var vm = this;
+                    if(typeof this.companies == 'array'){
+                      this.companies.filter( function(item) { $('.tabcontent [data-id="'+item.title+'"]').addClass('is-filter, is-active')})
+                    }
+                    if(typeof this.features == 'array'){
+                      this.features.filter( function(item) {   $('.tabcontent [data-id="'+item.title+'"]').addClass('is-filter, is-active') })
+                    }
+                    if(typeof this.contracts == 'array'){
+                      this.contracts.filter( function(item) {  $('.tabcontent [data-id="'+item.title+'"]').addClass('is-filter, is-active') })
+                    }
+                },
+                loadShopPlans: function(){
+                  // user id // Rate class // Zip
+                  this.isLoggedIn = {!NOT(ISPICKVAL($User.UserType,'Guest'))};
+                  var vm = this;
+                  if(this.zip !== ''){
+                    TC.app.appSubscribe.$emit('addLoaderQueue', {'id':'setupShopPlans','status':'Loading plans'});
+
+                    if(TC.app.account.page == 'Shop_Plans_Commercial'){
+                      TC.app.account.planPremiseType = 'Commercial';
+                    } else if(TC.app.account.page == 'Shop_Plans'){
+                      TC.app.account.planPremiseType = 'Residential';
+
+                    }
+                    this.zip = parseInt(this.zip);
+                    let userId = '{!$User.Id}';
+                    if(TC.app.account.accountId !== null){
+                      //userId = TC.app.account.accountId;
+                      userId = TC.app.account.uid;
+                    }
+                    ShopRemote.ShopRemote(userId,TC.app.account.planPremiseType, this.zip, function(result, event){
+                      TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'setupShopPlans'});
+                      if(event.statusCode > 300){
+                        TC.app.appSubscribe.$emit('hasNoPlansAlert', event);
+                        TC.app.PlansShop.hasNoPlans = true;
+                        if(TC.app.appShopPlans !== undefined) {
+                          TC.app.appShopPlans.setPlansTotal(0);
+                          TC.app.appShopPlans.zip = vm.zip;
+                        }
+
+                      } else {
+                        vm.setupShopPlans(result)
+                      }
+                    });
+                  } else {
+                    TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'setupShopPlans'});
+                  }
+                },
+                checkRateCalculatorModal: function(){
+                    var rateCalculator = "{!$CurrentPage.parameters.calculate}";
+                    if(rateCalculator !== '' && !this.hasShowCalculator){
+                      TC.app.appSubscribe.$emit('rateCalculator', TC.app.account);
+                      this.hasShowCalculator = true;
+                    }
+                },
+                setupShopPlans: function(result){
+
+                  TC.app.account.plans = [];
+                  TC.app.PlansShop.plans = [];
+                  TC.app.account.zipSearchPlans = TC.app.PlansShop.zip
+
+                  if(result == null){
+                    TC.app.PlansShop.hasNoPlans = true;
+                    TC.app.account.plans = [];
+                    TC.app.PlansShop.plans = [];
+                    TC.app.appShopPlans.setPlansTotal(0);
+                    TC.app.appShopPlans.zip = this.zip;
+                  } else {
+                    TC.app.PlansShop.hasNoPlans = false;
+                    for (var i=0; i<result.length; i++) {
+
+                          if(result[i] !== undefined) {
+
+                              var p = {
+                                "title": result[i].rateplan.Plan__r.Name,
+                                "id": result[i].rateplan.Id,
+                                "monthlyBaseCharge": result[i].rateplan.Monthly_Base_Charge__c,
+                                "company": result[i].rateplan.Plan__r.REP_Profile__r.Name,
+                                "repId": result[i].rateplan.Plan__r.REP_Profile__r.Id,
+                                "logo": '/'+result[i].rateplan.Plan__r.REP_Profile__r.Logo_URL__c + '?' +moment.now(),
+                                "countReviews": result[i].rateplan.Plan__r.REP_Profile__r.total_reviews__c,
+                                "contract": result[i].rateplan.Plan__r.Contract_Length__c + " Month Contract",
+                                "kwh": result[i].rateplan.Advertised_Rate__c,
+                                "kwhTC": parseFloat((result[i].pricekWh * 100).toFixed(1)),
+                                "kwh1000": result[i].rateplan.X1000_kWh_rate__c,
+                                "feeCancellation": result[i].rateplan.Cancellation_Fee__c,
+                                "rewardOffered": (result[i].rewardsText != null) ? true : false,
+                                "costMonthly": (result[i].price / 12).toFixed(2),
+                                "green": (result[i].rateplan.Plan__r.Green_ranking__c >= 100) ? 100 : 0,
+                                "hasLinkOff": (result[i].rateplan.Plan__r.Link_Off__c !== undefined) ? true : false,
+                                "linkOff": (result[i].rateplan.Plan__r.Link_Off__c !== undefined) ? result[i].rateplan.Plan__r.Link_Off__c: null,
+                                "price": result[i].price, // per year
+                                "costMonthlySmall": ((result[i].price / 2) / 12).toFixed(2),
+                                "costMonthlyLarge": ((result[i].price * 2) / 12).toFixed(2),
+                                "costMonthlyMedium": ((result[i].price) / 12).toFixed(2),
+                                "priceScore":result[i].price_score,
+                                "starScore": result[i].rateplan.Plan__r.REP_Profile__r.Star_Rating_Avg__c,
+                                "totalScore": result[i].total_score,
+                                "yearScore": result[i].year_score,
+                                "ratePlan": result[i].rateplan,
+                                "billpay": result[i].rateplan.Plan__r.Online_Payment_Bill_Stements__c,
+                                "description": result[i].rateplan.Plan__r.Plan_Description__c,
+                                "compare": false,
+                                "pathToPlanDetailsSnapshot": "/Shop_Plans_Detail_Snapshot?id=" + result[i].rateplan.Id,
+                                "pathToPlanDetails": "/Shop_Plans_Details?id=" + result[i].rateplan.Id,
+                                "rewardsText": (result[i].rewardsText != null) ? result[i].rewardsText : "No rewards offered"
+
+                              };
+                              TC.app.account.plans.push(p);
+                              TC.app.PlansShop.plans.push(p);
+                          }
+                    }
+
+
+                    TC.app.PlansShop.plans = TC.app.PlansShop.plans.sort(function(a, b){
+                        if(a.price < b.price) return -1;
+                        if(a.price > b.price) return 1;
+                        return 0;
+                    })
+                    TC.app.PlansShop.houseSize = TC.app.appHomeProfile.houseSize;
+                    TC.app.PlansShop.showShopPlans();
+
+                  }
+
+                  TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'setupShopPlans'});
+                }
+
+            },
+            mounted: function() {
+
+                if(TC.app.appShopPlans !== undefined){
+                  this.plansTotal = TC.app.appShopPlans.plansTotal;
+                } else {
+                  //this.plansTotal = 1;
+                }
+                if(TC.app.account.planPremiseType == 'Commercial'){
+                  this.isCommercial = true;
+                }
+
+                this.companies = TC.app.account.shopFilters.companies;
+                this.features = TC.app.account.shopFilters.features;
+                this.contracts = TC.app.account.shopFilters.contracts;
+                this.zip = sessionStorage.getItem('zip');
+                this.updateSelectedFilters();
+                /*
+                if(TC.app.account.plans !== null && !this.isCommercial){
+
+                    if(this.companies.length <= 0 && this.features.length <= 0 && this.contracts.length <= 0) {
+                        if(TC.app.account.plans.length > 0 && (TC.app.account.zipSearchPlans == this.zip)) {
+                          this.plans = TC.app.account.plans;
+                          this.showShopPlans();
+                        } else {
+                          this.loadShopPlans();
+                        }
+                    } else {
+                        this.plans = TC.app.account.plansFiltered;
+                        this.showShopPlans();
+                    }
+
+
+                } else {
+                    this.loadShopPlans();
+                }
+                if(this.isCommercial){
+                  this.loadShopPlans();
+                }
+                */
+                this.loadShopPlans();
+                TC.app.appSubscribe.$on('updateTDSP', function(arg) {
+                   TC.app.PlansShop.loadShopPlans();
+                });
+
+
+            }
+        });
+
+      })
+    })(jQuery);
+</script>
+
+
+</div>
+</apex:component>

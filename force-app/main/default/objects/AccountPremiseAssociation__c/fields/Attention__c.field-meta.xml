@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Attention__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This APA has received an async error and must be reviewed.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This APA has received an async error and must be reviewed.</inlineHelpText>
+    <label>Attention</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

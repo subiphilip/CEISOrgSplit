@@ -1,0 +1,11 @@
+<apex:component controller="ControllerforReadReviews">
+	
+	<h3>TrueCost Reviews</h3>
+	<div class="well well-large">
+		<a href="{!$Page.ReadReviews}?id={!RandomReview.REP_Profile__r.Id}"><strong>{!RandomReview.REP_Profile__r.name}</strong></a>: 
+		{!RandomReview.Review__c}
+		<div class="text-right muted">--{!RandomReview.author__r.firstname}</div>
+	</div>
+	<a href="{!$Page.ReadReviews}" class="btn btn-warning">Read more reviews</a>
+
+</apex:component>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ConfidenceResolved__c</fullName>
+    <description>How would you rate your level of confidence that your issue has been resolved?
+[On a scale of 1 to 5 with 1 indicating that you are not at all confident and 5 indicating completely confident]</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How would you rate your level of confidence that your issue has been resolved?
+[On a scale of 1 to 5 with 1 indicating that you are not at all confident and 5 indicating completely confident]</inlineHelpText>
+    <label>ConfidenceResolved?</label>
+    <precision>1</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Utility_Zone__c</fullName>
+    <externalId>false</externalId>
+    <label>Utility Zone</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Casper</fullName>
+                <default>false</default>
+                <label>Casper</label>
+            </value>
+            <value>
+                <fullName>Torrington</fullName>
+                <default>false</default>
+                <label>Torrington</label>
+            </value>
+            <value>
+                <fullName>Gillette</fullName>
+                <default>false</default>
+                <label>Gillette</label>
+            </value>
+            <value>
+                <fullName>Central</fullName>
+                <default>false</default>
+                <label>Central</label>
+            </value>
+            <value>
+                <fullName>Western</fullName>
+                <default>false</default>
+                <label>Western</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

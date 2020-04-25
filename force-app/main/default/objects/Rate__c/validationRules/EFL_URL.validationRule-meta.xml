@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EFL_URL</fullName>
+    <active>true</active>
+    <description>Please include http:// or https://</description>
+    <errorConditionFormula>Not(BEGINS( Link_for_EFL__c , &quot;http&quot;))</errorConditionFormula>
+    <errorDisplayField>Link_for_EFL__c</errorDisplayField>
+    <errorMessage>Rate04: EFL url link must include &quot;http://&quot; or &quot;https://&quot; before the www.</errorMessage>
+</ValidationRule>

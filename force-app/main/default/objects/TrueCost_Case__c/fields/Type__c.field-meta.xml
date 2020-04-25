@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>What general category of case is this?</inlineHelpText>
+    <label>Type</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Problem</fullName>
+                <default>false</default>
+                <label>Problem</label>
+            </value>
+            <value>
+                <fullName>Feature Request</fullName>
+                <default>false</default>
+                <label>Feature Request</label>
+            </value>
+            <value>
+                <fullName>Question</fullName>
+                <default>false</default>
+                <label>Question</label>
+            </value>
+            <value>
+                <fullName>Testing</fullName>
+                <default>false</default>
+                <label>Testing</label>
+            </value>
+            <value>
+                <fullName>Complaint</fullName>
+                <default>false</default>
+                <label>Complaint</label>
+            </value>
+            <value>
+                <fullName>Comments/Feedback</fullName>
+                <default>false</default>
+                <label>Comments/Feedback</label>
+            </value>
+            <value>
+                <fullName>Out of Office Reply</fullName>
+                <default>false</default>
+                <label>Out of Office Reply</label>
+            </value>
+            <value>
+                <fullName>Outside of Service Territory (TNMP)</fullName>
+                <default>false</default>
+                <label>Outside of Service Territory (TNMP)</label>
+            </value>
+            <value>
+                <fullName>Password Related</fullName>
+                <default>false</default>
+                <label>Password Related</label>
+            </value>
+            <value>
+                <fullName>Address Matching</fullName>
+                <default>false</default>
+                <label>Address Matching</label>
+            </value>
+            <value>
+                <fullName>Not Actionable (No Survey)</fullName>
+                <default>false</default>
+                <label>Not Actionable (No Survey)</label>
+            </value>
+            <value>
+                <fullName>Sales</fullName>
+                <default>false</default>
+                <label>Sales</label>
+            </value>
+            <value>
+                <fullName>Outside of Service Territory (Entergy)</fullName>
+                <default>false</default>
+                <label>Outside of Service Territory (Entergy)</label>
+            </value>
+            <value>
+                <fullName>Outside of Service Territory (AEP)</fullName>
+                <default>false</default>
+                <label>Outside of Service Territory (AEP)</label>
+            </value>
+            <value>
+                <fullName>Outside of Service Territory (Oncor)</fullName>
+                <default>false</default>
+                <label>Outside of Service Territory (Oncor)</label>
+            </value>
+            <value>
+                <fullName>Clawback</fullName>
+                <default>false</default>
+                <label>Clawback</label>
+            </value>
+            <value>
+                <fullName>Inadvertent Switch</fullName>
+                <default>false</default>
+                <label>Inadvertent Switch</label>
+            </value>
+            <value>
+                <fullName>Cancellation</fullName>
+                <default>false</default>
+                <label>Cancellation</label>
+            </value>
+            <value>
+                <fullName>TrueCost Invoice</fullName>
+                <default>false</default>
+                <label>TrueCost Invoice</label>
+            </value>
+            <value>
+                <fullName>Order API Error</fullName>
+                <default>false</default>
+                <label>Order API Error</label>
+            </value>
+            <value>
+                <fullName>Gas Choice File</fullName>
+                <default>false</default>
+                <label>Gas Choice File</label>
+            </value>
+            <value>
+                <fullName>Utility</fullName>
+                <default>false</default>
+                <label>Utility</label>
+            </value>
+            <value>
+                <fullName>API Error</fullName>
+                <default>false</default>
+                <label>API Error</label>
+            </value>
+            <value>
+                <fullName>Data</fullName>
+                <default>false</default>
+                <label>Data</label>
+            </value>
+            <value>
+                <fullName>Reporting</fullName>
+                <default>false</default>
+                <label>Reporting</label>
+            </value>
+            <value>
+                <fullName>Enhancement</fullName>
+                <default>false</default>
+                <label>Enhancement</label>
+            </value>
+            <value>
+                <fullName>Bug/Fix</fullName>
+                <default>false</default>
+                <label>Bug/Fix</label>
+            </value>
+            <value>
+                <fullName>CMS/CCOM Request</fullName>
+                <default>false</default>
+                <label>CMS/CCOM Request</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

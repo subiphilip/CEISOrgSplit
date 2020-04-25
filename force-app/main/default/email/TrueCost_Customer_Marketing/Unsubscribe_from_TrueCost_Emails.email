@@ -1,0 +1,14 @@
+The following user has requested to be removed from TrueCost marketing email distribution.  Please update the user accordingly.
+
+Name: {!CampaignMember.FirstName} {!CampaignMember.LastName}
+
+Email: {!CampaignMember.Email}
+
+Request: {!CampaignMember.Campaign}
+
+
+Thanks,
+TrueCost Support
+
+
+***FOR INTERNAL USE ONLY***

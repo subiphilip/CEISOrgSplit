@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rate_Code__c</fullName>
+    <description>The 3 digit rate code to determine TDSP tariff assignment.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The 3 digit rate code to determine TDSP tariff assignment.</inlineHelpText>
+    <label>Rate Code</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

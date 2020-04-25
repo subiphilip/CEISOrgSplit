@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sync_Batch__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Sync Batch</label>
+    <referenceTo>Sync_Batch__c</referenceTo>
+    <relationshipLabel>Account Credit Approvals</relationshipLabel>
+    <relationshipName>Account_Credit_Approvals</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

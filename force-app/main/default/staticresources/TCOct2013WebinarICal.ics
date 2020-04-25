@@ -1,0 +1,11 @@
+BEGIN:VCALENDAR
+VERSION:1.0
+BEGIN:VEVENT
+DTSTART:20131030T123000
+DTEND:20131030T130000
+LOCATION:http://attendthisevent.com/?eventid=47011638
+DESCRIPTION:For more information and to register, please visit www.myTrueCost.com/October2013Webinar
+SUMMARY:TrueCost 101 Webinar
+PRIORITY:3
+END:VEVENT
+END:VCALENDAR

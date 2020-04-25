@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Request_Started_Timestamp__c</fullName>
+    <description>Shows when the most recent monthly usage summary request began</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Shows when the most recent monthly usage summary request began</inlineHelpText>
+    <label>Request Started Timestamp</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

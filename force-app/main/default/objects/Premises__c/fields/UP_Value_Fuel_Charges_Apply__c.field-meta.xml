@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UP_Value_Fuel_Charges_Apply__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( Fuel_Charges_Apply__c 
+  , &#39;Yes&#39;
+  , &#39;No&#39;
+)</formula>
+    <label>UP Value - Fuel Charges Apply</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

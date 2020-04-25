@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Publication_2__c</fullName>
+    <externalId>false</externalId>
+    <label>Publication 2</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>IF</fullName>
+                <default>false</default>
+                <label>IF</label>
+            </value>
+            <value>
+                <fullName>GD</fullName>
+                <default>false</default>
+                <label>GD</label>
+            </value>
+            <value>
+                <fullName>NGI</fullName>
+                <default>false</default>
+                <label>NGI</label>
+            </value>
+            <value>
+                <fullName>GSPL</fullName>
+                <default>false</default>
+                <label>GSPL</label>
+            </value>
+            <value>
+                <fullName>NYMEX</fullName>
+                <default>false</default>
+                <label>NYMEX</label>
+            </value>
+            <value>
+                <fullName>CGPR</fullName>
+                <default>false</default>
+                <label>CGPR</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

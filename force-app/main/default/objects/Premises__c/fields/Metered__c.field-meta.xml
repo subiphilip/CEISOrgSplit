@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Metered__c</fullName>
+    <description>The derivation of the PROFILETYPE of the PROFILECODE. If the PROFILETYPE is = NM, the data would show N for not metered. If the PROFILETYPE is &lt;&gt; NM, the data would show Y for metered</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Is the premise metered, Y or N?</inlineHelpText>
+    <label>Metered?</label>
+    <length>1</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

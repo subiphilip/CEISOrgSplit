@@ -1,0 +1,98 @@
+<apex:page showHeader="false" sidebar="false" Controller="ControllerForMobileMain" applyBodyTag="false" docType="html-5.0" standardStylesheets="false">
+    
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>{!$Label.Page_Title_Contact_Us} - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>     
+        
+        
+        <!--apex:define name="breadcrumbs">
+        <apex:outputpanel styleClass="breadcrumbs" layout="block">
+        <apex:outputlink value="{!$Page.homepage}" rendered="{!OR(NOT($Setup.TrueCostSystemVariables__c.Private_Beta__c), NOT(ISPICKVAL($User.UserType,'Guest') ))}">Home</apex:outputlink>
+        <apex:outputlink value="{!$Page.BetaHomePage}" rendered="{!AND($Setup.TrueCostSystemVariables__c.Private_Beta__c, ISPICKVAL($User.UserType,'Guest')  )}">Home</apex:outputlink>
+        <apex:outputlink value="{!$Page.FAQ}" rendered="{!OR(NOT($Setup.TrueCostSystemVariables__c.Private_Beta__c), NOT(ISPICKVAL($User.UserType,'Guest') ))}">Support</apex:outputlink>
+        <apex:outputlink value="{!$Page.contactus}" styleClass="last">{!$Label.Page_Title_Contact_Us}</apex:outputlink>
+    </apex:outputpanel>            
+    </apex:define-->
+        
+        <apex:define name="body">        
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <h2>
+                            {!$Label.Page_Title_Contact_Us}<br/>
+                            <small>We want to hear from you</small>
+                        </h2>
+                    </div>
+                    <div class="span6">
+                        
+                        <form>
+                            <fieldset>
+                                <label>Your Name</label>
+                                <input type="text" placeholder="Your Name" id="name" class="span6"/>
+                                
+                                <label class="checkbox">
+                                    <input type="checkbox" id="checkbox"/> Please contact me (provide either email or phone below)
+                                </label>
+                                
+                                <label>Email</label>
+                                <input type="email" placeholder="something@somewhere.com" id="email" class="span6"/>
+                                
+                                <label>Phone</label>
+                                <input type="tel" placeholder="713-555-5555" id="phone" class="span6"/>
+                                
+                                <label>Description</label>
+                                <textarea rows="4" id="description" class="span6" placeholder="Comments, Suggestions, Issues"></textarea>
+                                
+                                <a Class="btn btn-primary" id="contact_us_submit">
+                                    Submit
+                                </a>
+                            </fieldset>
+                            
+                        </form>
+                        <div class="alert alert-block" style="display:none">
+                            <p>Our TrueCost support team will begin looking at your request.  Thanks for using TrueCost to shop for electricity</p>
+                        </div>
+                        
+                    </div>
+                    <div class="span6">                   
+                        <c:Content_Viewer content="Contact Us Information"/>
+                    </div>
+                </div>
+            </div>
+            
+        </apex:define>       
+        
+    </apex:composition>
+    <script>
+    $j=jQuery.noConflict();
+    $j("#contact_us_submit").click(function(){SubmitContactForm();});
+    
+    function SubmitContactForm(){
+        console.log('in the function.  agent' + navigator.userAgent);
+        
+        //validations
+        
+        ControllerForMobileMain.CreateRemoteCase(
+            '{!$User.id}', 
+            $j("#name").val(), 
+            $j("#email").val(), 
+            $j("#phone").val(), 
+            $j("#description").val(), 
+            $j("#checkbox").val(),
+            navigator.userAgent,
+            
+            function(result,event){
+                console.log('sent the form');
+                console.log(result);
+                if (event){
+                    $j("form").hide();
+                    $j(".alert").show();
+                    
+                } else alert(event);	
+            });
+    }
+    
+    </script>
+</apex:page>

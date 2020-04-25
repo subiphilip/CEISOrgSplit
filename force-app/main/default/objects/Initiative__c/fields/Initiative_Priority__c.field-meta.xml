@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Initiative_Priority__c</fullName>
+    <description>For internal team use to determine if initiative should  be escalated into the 45-day vetting period to find quick wins financially.</description>
+    <externalId>false</externalId>
+    <label>Initiative Priority</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>High Potential</fullName>
+                <default>false</default>
+                <label>High Potential</label>
+            </value>
+            <value>
+                <fullName>Long Term</fullName>
+                <default>false</default>
+                <label>Long Term</label>
+            </value>
+            <value>
+                <fullName>Vetted - Savings Only</fullName>
+                <default>false</default>
+                <label>Vetted - Savings Only</label>
+            </value>
+            <value>
+                <fullName>Vetted - Process Only</fullName>
+                <default>false</default>
+                <label>Vetted - Process Only</label>
+            </value>
+            <value>
+                <fullName>Vetted - No Opportunity</fullName>
+                <default>false</default>
+                <label>Vetted - No Opportunity</label>
+            </value>
+            <value>
+                <fullName>Vetted - Process and Savings</fullName>
+                <default>false</default>
+                <label>Vetted - Process and Savings</label>
+            </value>
+            <value>
+                <fullName>Vetted - Already in Plan</fullName>
+                <default>false</default>
+                <label>Vetted - Already in Plan</label>
+            </value>
+            <value>
+                <fullName>Currently Out of Scope</fullName>
+                <default>false</default>
+                <label>Currently Out of Scope</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,199 @@
+<apex:page showHeader="false" sidebar="false" Controller="RecentBlogPostsController" cache="true" applyBodyTag="false" expires="3600" docType="html-5.0" standardStylesheets="false">
+    
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>{!$Label.Page_Title_Blog} - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="description" content="{!$Label.Blog_Meta_Description}"/>
+            <c:ShareThisScript />
+            <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/truecostblog"/>
+            
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span8">
+                        <h2>
+                            News &amp; Insights
+                        </h2>
+                        <div class="well well-large">
+                            <c:Content_Viewer content="Blog Welcome"/>
+                        </div>
+                        
+                        <apex:repeat var="post" value="{!myposts}">
+                            <div id="blog-post">
+                                <h4>
+                                    <a href="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}">{!post.Title__c}</a><br/>
+                                    <small>{!post.Deck__c}</small>
+                                </h4>
+                                <br/>
+                                <!--Posted by <b>{!post.Author__c}</b> 
+                                <apex:outputtext value="{0, date,' on 'MM'/'dd'/'yyyy' at 'h:mm a}"><apex:param value="{!post.Publish_Date__c}"/></apex:outputtext>-->
+                                <div class="pull-right">
+                                    <c:ShareThisSmall URL="{!left($Site.CurrentSiteUrl, len($Site.CurrentSiteURL)-1)}{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}"/>  
+                                </div>
+                                <div class="summary">
+                                    <apex:outputfield value="{!post.Above_the_Fold__c}" />
+                                </div>
+                                <apex:outputlink styleClass="btn btn-primary pull-right" value="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}">Read more</apex:outputlink>
+                                <apex:outputlink styleClass="btn pull-right visible-desktop" value="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}#comments" rendered="{!$Setup.TrueCostSystemVariables__c.Show_Facebook_Comments__c}">Add comment</apex:outputlink>
+                            </div>
+                            <div class="clearfix"/>
+                            <hr/>
+                        </apex:repeat>    
+                        
+                        
+                        <apex:outputpanel id="block2">
+                            
+                            <apex:outputpanel rendered="{!showblocks>1}">
+                                <apex:repeat var="post" value="{!myposts}" >
+                                    <div id="blog-post">
+                                        <h4>
+                                            <a href="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}">{!post.Title__c}</a><br/>
+                                            <small>{!post.Deck__c}</small>
+                                        </h4>
+                                        <br/>
+                                        Posted by <b>{!post.Author__c}</b> 
+                                        <apex:outputtext value="{0, date,' on 'MM'/'dd'/'yyyy' at 'h:mm a}"><apex:param value="{!post.Publish_Date__c}"/></apex:outputtext>
+                                        <div class="pull-right">
+                                            <c:ShareThisSmall URL="{!left($Site.CurrentSiteUrl, len($Site.CurrentSiteURL)-1)}{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}"/>  
+                                        </div>
+                                        <div class="summary">
+                                            <apex:outputfield value="{!post.Above_the_Fold__c}" />
+                                        </div>
+                                        <apex:outputlink styleClass="btn btn-primary pull-right" value="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}">Read more</apex:outputlink>
+                                        <apex:outputlink styleClass="btn pull-right visible-desktop" value="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}#comments" rendered="{!$Setup.TrueCostSystemVariables__c.Show_Facebook_Comments__c}">Add comment</apex:outputlink>
+                                    </div>
+                                    <div class="clearfix"/>
+                                    <hr/>
+                                </apex:repeat>
+                            </apex:outputpanel>                 
+                        </apex:outputpanel>
+                        
+                        <apex:outputpanel id="block3">
+                            <apex:outputpanel rendered="{!showblocks>2}" >
+                                <apex:repeat var="post" value="{!myposts}" >
+                                    <div id="blog-post">
+                                        <h4>
+                                            <a href="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}">{!post.Title__c}</a><br/>
+                                            <small>{!post.Deck__c}</small>
+                                        </h4>
+                                        <br/>
+                                        Posted by <b>{!post.Author__c}</b> 
+                                        <apex:outputtext value="{0, date,' on 'MM'/'dd'/'yyyy' at 'h:mm a}"><apex:param value="{!post.Publish_Date__c}"/></apex:outputtext>
+                                        <div class="pull-right">
+                                            <c:ShareThisSmall URL="{!left($Site.CurrentSiteUrl, len($Site.CurrentSiteURL)-1)}{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}"/>  
+                                        </div>
+                                        <div class="summary">
+                                            <apex:outputfield value="{!post.Above_the_Fold__c}" />
+                                        </div>
+                                        <apex:outputlink styleClass="btn btn-primary pull-right" value="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}">Read more</apex:outputlink>
+                                        <apex:outputlink styleClass="btn pull-right visible-desktop" value="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}#comments" rendered="{!$Setup.TrueCostSystemVariables__c.Show_Facebook_Comments__c}">Add comment</apex:outputlink>
+                                    </div>
+                                    <div class="clearfix"/>
+                                    <hr/>
+                                </apex:repeat>
+                            </apex:outputpanel>                 
+                        </apex:outputpanel>
+                        
+                        <apex:outputpanel id="block4">
+                            <apex:outputpanel rendered="{!showblocks>3}">
+                                <apex:repeat var="post" value="{!myposts}" >
+                                    <div id="blog-post">
+                                        <h4>
+                                            <a href="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}">{!post.Title__c}</a><br/>
+                                            <small>{!post.Deck__c}</small>
+                                        </h4>
+                                        <br/>
+                                        Posted by <b>{!post.Author__c}</b> 
+                                        <apex:outputtext value="{0, date,' on 'MM'/'dd'/'yyyy' at 'h:mm a}"><apex:param value="{!post.Publish_Date__c}"/></apex:outputtext>
+                                        <div class="pull-right">
+                                            <c:ShareThisSmall URL="{!left($Site.CurrentSiteUrl, len($Site.CurrentSiteURL)-1)}{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}"/>  
+                                        </div>
+                                        <div class="summary">
+                                            <apex:outputfield value="{!post.Above_the_Fold__c}" />
+                                        </div>
+                                        <apex:outputlink styleClass="btn btn-primary pull-right" value="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}">Read more</apex:outputlink>
+                                        <apex:outputlink styleClass="btn pull-right visible-desktop" value="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}#comments" rendered="{!$Setup.TrueCostSystemVariables__c.Show_Facebook_Comments__c}">Add comment</apex:outputlink>
+                                    </div>
+                                    <div class="clearfix"/>
+                                    <hr/>
+                                </apex:repeat>
+                            </apex:outputpanel>                     
+                        </apex:outputpanel>
+                        
+                        <apex:outputpanel id="block5">
+                            <apex:outputpanel rendered="{!showblocks>4}">
+                                <apex:repeat var="post" value="{!myposts}" >
+                                    <div id="blog-post">
+                                        <h4>
+                                            <a href="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}">{!post.Title__c}</a><br/>
+                                            <small>{!post.Deck__c}</small>
+                                        </h4>
+                                        <br/>
+                                        Posted by <b>{!post.Author__c}</b> 
+                                        <apex:outputtext value="{0, date,' on 'MM'/'dd'/'yyyy' at 'h:mm a}"><apex:param value="{!post.Publish_Date__c}"/></apex:outputtext>
+                                        <div class="pull-right">
+                                            <c:ShareThisSmall URL="{!left($Site.CurrentSiteUrl, len($Site.CurrentSiteURL)-1)}{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}"/>  
+                                        </div>
+                                        <div class="summary">
+                                            <apex:outputfield value="{!post.Above_the_Fold__c}" />
+                                        </div>
+                                        <apex:outputlink styleClass="btn btn-primary pull-right" value="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}">Read more</apex:outputlink>
+                                        <apex:outputlink styleClass="btn pull-right visible-desktop" value="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}#comments" rendered="{!$Setup.TrueCostSystemVariables__c.Show_Facebook_Comments__c}">Add comment</apex:outputlink>
+                                    </div>
+                                    <div class="clearfix"/>
+                                    <hr/>
+                                </apex:repeat>
+                            </apex:outputpanel>                
+                        </apex:outputpanel>
+                        
+                        <apex:outputpanel layout="none" id="more-button">
+                            <apex:form >
+                                <apex:commandlink action="{!ViewMore}" value="More"
+                                rerender="block2, block3, block4, block5, more-button"
+                                styleClass="btn btn-primary btn-large"
+                                rendered="{!showBlocks*10<totalBlogCount && showblocks==1}"> 
+                                    
+                                </apex:commandlink>
+                                <apex:commandlink action="{!ViewMore}" value="More"
+                                rerender="block3, block4, block5, more-button"
+                                styleClass="btn btn-primary btn-large"
+                                rendered="{!showBlocks*10<totalBlogCount && showblocks==2}"> 
+                                    
+                                </apex:commandlink>
+                                <apex:commandlink action="{!ViewMore}" value="More"
+                                rerender="block4, block5, more-button"
+                                styleClass="btn btn-primary btn-large"
+                                rendered="{!showBlocks*10<totalBlogCount && showblocks==3}"> 
+                                    
+                                </apex:commandlink>
+                                <apex:commandlink action="{!ViewMore}" value="More"
+                                rerender="block5, more-button"
+                                styleClass="btn btn-primary btn-large"
+                                rendered="{!showBlocks*10<totalBlogCount && showblocks==4}"> 
+                                    
+                                </apex:commandlink>
+                            </apex:form>
+                        </apex:outputpanel>  
+                    </div>
+                    <div class="span4">                        
+                        <div>
+                            <c:ChartMiniNarrow />
+                        </div>
+                        <hr/>
+                        <div >
+                            <c:RandomPoll />
+                        </div> 
+                        <hr/>
+                        <div >
+                            <c:RandomReview />
+                        </div> 
+                        
+                    </div>
+                </div>
+            </div>
+        </apex:define> 
+    </apex:composition>
+</apex:page>

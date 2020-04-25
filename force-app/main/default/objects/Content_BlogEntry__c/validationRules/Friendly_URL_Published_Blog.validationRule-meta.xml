@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Friendly_URL_Published_Blog</fullName>
+    <active>true</active>
+    <description>Prevents blogs that have already published from having their friendly URL changed</description>
+    <errorConditionFormula>AND(ISCHANGED(Friendly_URL__c), PRIORVALUE(Published__c) = TRUE)</errorConditionFormula>
+    <errorDisplayField>Friendly_URL__c</errorDisplayField>
+    <errorMessage>Blog01: Published blogs cannot have their friendly URL changed</errorMessage>
+</ValidationRule>

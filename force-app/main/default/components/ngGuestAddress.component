@@ -1,0 +1,45 @@
+<apex:component layout="none">
+    
+    <form class="well well-large" ng-submit="AddressSearch()" name="addressForm">
+                                <div class="row">
+                                    <div class="control-group span4">
+                                        <label class="control-label" for="addressField">Address</label>
+                                        <!--div class="controls"-->
+                                            <input ng-model="search.Address" placeholder="123 Any Street" type="text" ng-required="true" autofocus="autofocus" />
+                                        <!--/div-->
+                                    </div>
+                                    <div class="control-group span4" >
+                                        <label class="control-label" for="zip">Zip</label>
+                                        <!--div class="controls"-->
+                                            <div class="input-append">
+                                                <input ng-model="search.Zip" placeholder="77002" type="text" ng-required="true" />
+                                                <button class="btn btn-primary" type="submit">Search</button>
+                                            </div>
+                                        <!--/div-->
+                                    </div>
+                                    
+                                </div>
+                            </form>
+                         
+
+                            <div ng-show="matches.length">
+                                <h4>Please select your address</h4>
+                                <table class="table table-striped table-condensed">
+                                    <thead><tr><th></th><th>Address</th><th>Type</th><th>ESID</th></tr></thead>
+                                    <tbody>
+                                        <tr ng-repeat="match in matches" ng-show="match.Premise_Type__c==='Residential'">
+                                            <td><a href="" class="btn btn-small" ng-click="selectAddress($index)">Select</a></td>
+                                            <td>{{match.Electric_Service_Address__c}} {{match.Electric_Service_Address_City__c}} {{match.Electric_Service_Address_Zip__c}}</td>
+                                            <td>{{match.Premise_Type__c}}</td>
+                                            <td>{{match.ESID__c}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <hr/>
+                                <h5>To sign up for a <b>commercial address</b>, please create your profile and import your usage data first.</h5>
+                                <a class="btn btn-primary" href="{!$Page.Register}">Create Profile</a>
+                            </div>
+                            <!--c:Content_Viewer content="Help for Address Matching"/-->
+      
+</apex:component>

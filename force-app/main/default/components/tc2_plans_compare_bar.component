@@ -1,0 +1,144 @@
+<apex:component >
+
+<section xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <div id="appPlansCompareBar">
+    <!-- <app-compare-limit-modal /> -->
+    <!-- <c:tc2_limit_compare_modal /> -->
+    <div id="snackbar">
+        <div id="snackbar-holder">
+            <div class="snackbar-item-first">
+                <p>Compare Your Electric Plans</p>
+            </div>
+            <div class="snackbar-item"  v-for="(plan,index) in plans" v-bind:data-id="plan.id" >
+                <div class="snackbar-item-remove" v-on:click="removePlan(plan, index)"><i class="far fa-times-circle"></i></div>
+                <img class="cursor" v-on:click="setPlanById(plan)" v-bind:src="plan.logo" v-bind:alt="plan.company"/>
+                <div class="is-divider-vertical"></div>
+                <div v-on:click="setPlanById(plan)" class="cursor snackbar-item-title"><p v-html="plan.title"></p></div>
+            </div>
+            
+            <div class="snackbar-button">
+                <a href="/Shop_Plans_Compare" class="button fixed-size is-info is-large is-rounded animate-gradient-bg is-white"><span>Compare</span></a>
+            </div>
+        </div>
+    </div>
+    
+  </div>
+</section>
+
+ 
+    <script>
+    (function ($) {
+        $(function () {
+        'use strict';
+
+         TC.app.appPlansCompareBar = new Vue({
+            el: '#appPlansCompareBar',
+            data: {
+                plans: TC.app.account.plansCompare,
+                plansTotal: 0,
+                plan: {},
+                maxPlans: 5,
+                show: true,
+                planDetailsPath: '',
+            },
+            methods: {
+                selectPlan: function(plan){
+                    TC.app.account.plansCompare.push(plan);
+                },
+                hideSnackBar: function(){
+                    //TweenMax.to("#snackbar", .3, {scale:.99, opacity:0});
+                    TweenMax.to('#snackbar', .24, {height:0, display:'none', delay:.4, ease:Bounce.easeOut});
+                    
+                },
+                showSnackBar: function(){
+                    if(TC.app.appMenu.page.indexOf('Get') < 0){
+                        TweenMax.to('#snackbar', .24, {height:'auto', display:'block', opacity:1, ease:Bounce.easeOut});
+                    }
+                    if(TC.app.appMenu.page.indexOf('Get_Started_Smart_Meter') >= 0){
+                        TweenMax.to('#snackbar', .24, {height:'auto', display:'block', opacity:1, ease:Bounce.easeOut});
+                    }
+
+                },
+                setPlanById: function(plan){
+                    sessionStorage.setItem('plan', JSON.stringify(plan));
+                    TC.fn.navigateTo("/Shop_Plans_Details?id="+plan.id)
+                },
+                addPlan: function(plan, index){
+                    
+                    if(TC.app.account.plansCompare.length <= 3){
+                         let ball = "#ball[data-id='"+plan.id+"']";
+                        TweenMax.from($(ball).parent(), 1, {scale:1.03, ease:Elastic.easeOut});
+                        $(ball).parent().css('z-index',100);
+                        TweenLite.set(ball, {x:0, y:0, opacity:1, display:'block', boxShadow:"0px 0px 20px 0px rgba(0,0,0,.5)"});
+                        setTimeout(function(){ TC.app.appPlansCompareBar.pushPlanToArray(plan) }, TC.delay)
+                        var tl = new TimelineLite();
+                        tl.to(ball, .5, { y:-50, boxShadow:"-50px 200px 20px 0px rgba(0,0,0,.1)"})
+                        .to(ball, 1.25, {y:window.innerHeight + 100, boxShadow:"0px 0px 20px 0px rgba(0,0,0,.5)", ease:Bounce.easeOut})
+                        .to(ball, 1.5, {x:"+=350"}, "-=1.75")
+                        .to(ball, 0, {opacity:0, onComplete:function(){ $(ball).parent().css('z-index',0) }})
+                    
+                        _.find(TC.app.account.plans, function (obj) { return obj.id === plan.id; }).compare = true;   
+                    } else {
+                        TC.app.appSubscribe.$emit('comparePlanLimit', TC.app.account.plansCompare);
+                        var planComareOff = _.find(TC.app.account.plans, function (obj) { return obj.id === plan.id; });
+                        if(planComareOff !== undefined){
+                            planComareOff.compare = false;
+                        }
+                        $(".checkbox [data-id='"+plan.id+"']").prop('checked', false)
+                    }
+                },
+                pushPlanToArray: function(plan){
+                    TC.app.account.plansCompare.push(plan);
+                    TweenMax.from("#snackbar-holder", 1, {scale:.99, ease:Elastic.easeOut});
+                },
+                removePlan: function(plan, index){
+                    
+                    let ball = "#ball[data-id='"+plan.id+"']";
+                    TweenMax.to(ball, 0, {opacity:0, x:0, y:0, display:'none'});
+                    TweenMax.from("#snackbar-holder", 1, {scale:.99, ease:Elastic.easeOut});
+                    
+
+                    //TC.app.account.plansCompare.splice( TC.app.account.plansCompare.findIndex( function(item){ (item.id === plan.id) }) , 1)
+                    TC.app.account.plansCompare.splice( _.findIndex(TC.app.account.plansCompare, function (item) { return item.id == plan.id; }) , 1)
+                    
+                    var planComareOff = _.find(TC.app.account.plans, function (obj) { return obj.id === plan.id; });
+                    if(planComareOff !== undefined){
+                        planComareOff.compare = false;
+                        $(".checkbox[data-id='"+plan.id+"']").prop('checked', false)
+                    }
+                    
+                }
+            },  
+            mounted: function() {
+                if(this.plans !== null){
+                    if(this.plans.length > 0) {
+                        this.showSnackBar();                   
+                        
+                    } else {
+                        this.hideSnackBar();
+                    }
+                } else {
+                    this.hideSnackBar();
+                }
+                
+                
+            },
+            watch: {
+                plans: {
+                    handler: function(){
+                        
+                        if(this.plans.length ==1){
+                            this.showSnackBar();
+                        } else if(this.plans.length <=0) {
+                            this.hideSnackBar();
+                        }
+                    }
+                }
+            },
+        });
+        
+      })
+    })(jQuery);
+</script>
+
+</apex:component>

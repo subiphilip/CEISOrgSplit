@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Must_have_either_EIN_or_SSN</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (    ISBLANK (SSN__c),  ISBLANK( Taxpayer_ID_EIN__c ),  $Profile.Name !=&quot;TrueCost Profile&quot;    )</errorConditionFormula>
+    <errorMessage>Enrollment06: An SSN or an EIN is required to place an order</errorMessage>
+</ValidationRule>

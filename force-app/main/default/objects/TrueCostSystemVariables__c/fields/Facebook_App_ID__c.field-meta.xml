@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Facebook_App_ID__c</fullName>
+    <description>App ID of the facebook app that can moderate comments (merges moderation with CNP CorpComm&#39;s moderation of other FB pages)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>App ID of the facebook app that can moderate comments (merges moderation with CNP CorpComm&#39;s moderation of other FB pages)</inlineHelpText>
+    <label>Facebook App ID</label>
+    <length>30</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

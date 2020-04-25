@@ -1,0 +1,231 @@
+<apex:component controller="ControllerForMobileMain">
+    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+    <script type='text/javascript' src='{!URLFOR($Resource.MomentJS)}'/>
+    <script>
+            $j=jQuery.noConflict();
+            
+            //google chart stuff    
+              google.load("visualization", "1", {packages:["corechart"]});
+              google.setOnLoadCallback(drawChart);
+              var days ;               var hours ;               var intervals ;               
+              var options;              var chart;
+              var daterange;              var unit;
+              var filteredView;              var formatter_dateonly;              var formatter_datewithtime;
+              var formatter_usage0; var formatter_usage2;
+              var TotalRowCount; var Multiplier;
+              
+        function getInitialData(){  
+            createChart();
+            ControllerForMobileMain.pullRawDailies(
+                '{!$User.Id}', 
+                function(result, event)            
+                        {if (event.status && result.length!=0){ 
+                            TotalRowCount=result.length;        
+                            for (var i=0; i<result.length; i++){
+                                var d = moment(result[i].Date__c);
+                                d = d.add('m', d.zone());
+                                days.addRow([d.toDate(), result[i].Total_for_the_day__c]);
+                            }
+                            formatter_dateonly.format(days, 0);
+                            formatter_usage0.format(days, 1);
+                            $j("#end_datetime").val(moment(days.getColumnRange(0)["max"]).format("YYYY-MM-DD")   );
+                            $j("#start_datetime").val( moment(days.getValue((days.getNumberOfRows()-31), 0)).format("YYYY-MM-DD")      );
+                            filteredView = new google.visualization.DataView(days);                            
+                            filteredView.setRows(filteredView.getFilteredRows([{column: 0, minValue: moment($j("#start_datetime").val()).toDate(), maxValue: moment($j("#end_datetime").val()).add('d', 1).toDate()}])); 
+                            chart.draw(filteredView, options);
+                            changeDates();
+                            for (var i=0; i<result.length; i++){
+                                var d = moment(result[i].Date__c);
+                                var UsageDate=d.add('m', d.zone()).toDate();
+                                    var hourTotal=0;
+                                    UsageDate.setHours(0, 0, 0, 0);
+                                    var intervalSplit=result[i].Intervals__c.split(",");
+                                    for (var j=0; j<intervalSplit.length; j++){
+                                        intervals.addRow([UsageDate, parseFloat(intervalSplit[j])]);
+                                        hourTotal=hourTotal+ parseFloat(intervalSplit[j]);
+                                        //if the minutes are :45, then create put the hour total on the hours array;
+                                        if (UsageDate.getMinutes()==45){                                            
+                                            hours.addRow([new Date(UsageDate.getTime() + -45*60000), hourTotal]);
+                                            hourTotal=0;
+                                        }
+                                        UsageDate = new Date(UsageDate.getTime()+ 15*60000);
+                                    }   
+                            }
+                            formatter_datewithtime.format(hours, 0);
+                            formatter_datewithtime.format(intervals, 0);
+                            formatter_usage2.format(hours, 1);
+                            formatter_usage2.format(intervals, 1);
+                        }   
+                         else {
+                            alert('No data was available');
+                        }
+                    });
+
+    }
+     
+        function changeXaxis(){
+            var ChartHeight = $j(window).height()*0.65;
+            //var ChartWidth = $j(window).width();
+            if ($j("#data-unit").val()==='day' && (moment($j("#end_datetime").val())-moment($j("#start_datetime").val()))/(1000*60*60*24)>5){
+                options = {
+                        vAxis: {minValue: 0, title:'kWh'},       legend: {position: 'none'},         animation: {easing: 'linear', duration:100}, 
+                        height: ChartHeight,  
+                    //width: ChartWidth,
+                        chartArea: {left:"10%", top:"3%", height:"90%", width:"86%"},
+                        hAxis: {format: 'M/d'}
+                    };
+            } else {
+                    options = {
+                        vAxis: {minValue: 0, title:'kWh'},       legend: {position: 'left'},          animation: {easing: 'linear', duration:100}, 
+                        height: ChartHeight,  
+                        //width: ChartWidth,
+                        chartArea: {left:"10%", top:"3%", height:"90%", width:"86%"},
+                        hAxis: {format: 'M/d ha'}
+                    };
+            }
+
+        }
+
+
+        function changeDates(){
+            
+            switch($j("#data-unit").val())  {
+                case 'day':
+                    filteredView = new google.visualization.DataView(days);
+                    Multiplier=1;
+                                     break;
+                case 'hour':
+                    filteredView = new google.visualization.DataView(hours);
+                    Multiplier=24;
+                                        break;
+                case '15':
+                    filteredView = new google.visualization.DataView(intervals);
+                    Multiplier=96;
+                                        break;
+            }
+            filteredView.setRows(filteredView.getFilteredRows([{column: 0, minValue: moment($j("#start_datetime").val()).toDate(), maxValue: moment($j("#end_datetime").val()).add('d', 1).toDate()}])); 
+            changeXaxis();
+            chart.draw(filteredView, options);
+        }
+
+      function createChart(){  //does all the initial creation        
+        
+        days = new google.visualization.DataTable();
+        hours = new google.visualization.DataTable();
+        intervals = new google.visualization.DataTable();
+        formatter_dateonly = new google.visualization.DateFormat({pattern: "M/d/yy"});
+        formatter_datewithtime = new google.visualization.DateFormat({pattern: "M/d/yy' 'K:mma"});
+        formatter_usage0 = new google.visualization.NumberFormat({fractionDigits:0});
+        formatter_usage2 = new google.visualization.NumberFormat({fractionDigits:2});
+        days.addColumn('datetime', 'Time');        days.addColumn('number', 'kWh');
+        hours.addColumn('datetime', 'Time');        hours.addColumn('number', 'kWh');
+        intervals.addColumn('datetime', 'Time');        intervals.addColumn('number', 'kWh');
+        changeXaxis();
+      }      
+        
+      function drawChart() {
+        createChart();
+        chart = new google.visualization.AreaChart(document.getElementById('usage_chart'));     
+        getInitialData();       
+      }
+
+    /*
+$j("#usage_chart").swipeleft(function() {
+    rowCount=filteredView.getNumberOfRows();
+    var newStartIndex = filteredView.getTableRowIndex(0)+rowCount; 
+    var newEndIndex = filteredView.getTableRowIndex(rowCount-1)+rowCount;       
+    setDates(newStartIndex, Math.min(newEndIndex, (TotalRowCount-1)*Multiplier ));
+    changeDates();
+});
+
+$j("#usage_chart").swiperight(function() {
+    var newEndIndex = filteredView.getTableRowIndex(0);
+    var newStartIndex = filteredView.getTableRowIndex(0)-filteredView.getNumberOfRows();
+    setDates(Math.max(0, newStartIndex), newEndIndex);
+    changeDates();
+});
+*/
+
+$j("#data-unit").change(function(event){changeDates();});   
+$j("#start_datetime").change(function(event){changeDates();});
+$j("#end_datetime").change(function(event){changeDates();});
+
+$j("#usage_chart_back").click(function(e){
+    var newEndIndex = filteredView.getTableRowIndex(0);
+    var newStartIndex = filteredView.getTableRowIndex(0)-filteredView.getNumberOfRows();
+    setDates(Math.max(0, newStartIndex), newEndIndex);
+    changeDates();
+});
+
+$j("#usage_chart_forward").click(function(e){
+    rowCount=filteredView.getNumberOfRows();
+    var newStartIndex = filteredView.getTableRowIndex(0)+rowCount; 
+    var newEndIndex = filteredView.getTableRowIndex(rowCount-1)+rowCount;       
+    setDates(newStartIndex, Math.min(newEndIndex, (TotalRowCount-1)*Multiplier ));
+    changeDates();
+});
+
+
+$j("#usage_chart_out").click(function(e){
+    rowCount=filteredView.getNumberOfRows();
+    var newStartIndex = filteredView.getTableRowIndex(0)- Math.round(rowCount/4);
+    var newEndIndex = filteredView.getTableRowIndex(rowCount-1) + Math.round(rowCount/4);
+    
+    setDates(newStartIndex, newEndIndex);
+    changeDates();
+});
+$j("#usage_chart_in").click(function(e){
+    rowCount=filteredView.getNumberOfRows();
+    var newStartIndex = filteredView.getTableRowIndex(0)+ Math.round(rowCount/4);
+    var newEndIndex = filteredView.getTableRowIndex(rowCount-1) - Math.round(rowCount/4);
+    if (newEndIndex <= newStartIndex) {
+        newStartIndex=newStartIndex-1*Multiplier;
+    }
+    if (newStartIndex < 0){
+        newStartIndex=newStartIndex+1;
+        newEndIndex=newEndIndex+(1*Multiplier) ;
+    }
+    setDates(newStartIndex, newEndIndex);
+    changeDates();
+});
+
+function setDates(startIndex, endIndex){
+    if (startIndex < endIndex){
+        try{
+            switch($j("#data-unit").val())  {
+                        case 'day':
+                            $j("#start_datetime").val(moment(days.getValue(startIndex,0)).format("YYYY-MM-DD"));
+                            $j("#end_datetime").val(moment(days.getValue(endIndex,0)).format("YYYY-MM-DD"));
+                            changeXaxis();
+                            break;
+                        case 'hour':
+                            $j("#start_datetime").val(moment(hours.getValue(startIndex,0)).format("YYYY-MM-DD"));
+                            $j("#end_datetime").val(moment(hours.getValue(endIndex,0)).format("YYYY-MM-DD"));
+                            changeXaxis();
+                            break;
+                        case '15':
+                            $j("#start_datetime").val(moment(intervals.getValue(startIndex,0)).format("YYYY-MM-DD"));
+                            $j("#end_datetime").val(formatDateforHTML5(intervals.getValue(endIndex,0)).format("YYYY-MM-DD"));
+                            changeXaxis();
+                            break;
+                    }
+        }
+        catch(err) {
+            //alert ('That request could not complete because it is out of the data range');
+        }
+    }
+    else{
+        endIndex=startIndex+1;
+        if (endIndex > TotalRowCount*Multiplier){
+            endIndex=endIndex-1*Multiplier;
+            startIndex=startIndex-1*Multiplier;
+            }
+    }
+}
+
+
+        window.onresize=function(){changeXaxis(); changeDates();}
+            
+        
+      </script>
+</apex:component>

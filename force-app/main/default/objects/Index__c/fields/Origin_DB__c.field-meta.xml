@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Origin_DB__c</fullName>
+    <description>Which Safari database did this start out in?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Which Safari database did this start out in?</inlineHelpText>
+    <label>Origin DB</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CEIP</fullName>
+                <default>false</default>
+                <label>CEIP</label>
+            </value>
+            <value>
+                <fullName>HOU</fullName>
+                <default>false</default>
+                <label>HOU</label>
+            </value>
+            <value>
+                <fullName>LIVE</fullName>
+                <default>false</default>
+                <label>LIVE</label>
+            </value>
+            <value>
+                <fullName>MPLS</fullName>
+                <default>false</default>
+                <label>MPLS</label>
+            </value>
+            <value>
+                <fullName>STL</fullName>
+                <default>false</default>
+                <label>STL</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

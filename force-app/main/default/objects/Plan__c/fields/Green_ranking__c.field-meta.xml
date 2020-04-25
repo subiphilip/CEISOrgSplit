@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Green_ranking__c</fullName>
+    <description>How does this plan rank amongst other plans with regards to renewable content.  A higher percentage denotes a higher amount of renewable content vs. other plans.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How does this plan rank amongst other plans with regards to renewable content.  A higher percentage denotes a higher amount of renewable content vs. other plans.</inlineHelpText>
+    <label>Green ranking</label>
+    <precision>5</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_TrueCost_REPs</fullName>
+    <columns>NAME</columns>
+    <columns>Mailing_Street_Address__c</columns>
+    <columns>Mailing_City__c</columns>
+    <columns>Mailing_State__c</columns>
+    <columns>Mailing_Zip__c</columns>
+    <columns>Customer_Service_Phone_Number__c</columns>
+    <columns>REP_Account__c</columns>
+    <columns>Uses_API_for_Orders__c</columns>
+    <columns>Active__c</columns>
+    <columns>Allow_credit_card_for_autopay__c</columns>
+    <columns>Curent_CEHE__c</columns>
+    <columns>CEHE_Variable_Rate_Last_Updated__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>notContain</operation>
+        <value>*CNP,CenterPoint,Bogus,Falsus,Fakergy,Constellation,Seminole,SGES,Vista</value>
+    </filters>
+    <filters>
+        <field>OWNER.LAST_NAME</field>
+        <operation>notEqual</operation>
+        <value>dornbos,mccann,pham</value>
+    </filters>
+    <label>All TrueCost REPs</label>
+    <language>en_US</language>
+</ListView>

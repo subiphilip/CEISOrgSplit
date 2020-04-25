@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>REP_Profile__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Which REP is this billing document associated with?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Which REP is this billing document associated with?</inlineHelpText>
+    <label>REP Profile</label>
+    <referenceTo>REP_Profile__c</referenceTo>
+    <relationshipLabel>Billing Documents</relationshipLabel>
+    <relationshipName>Billing_Documents</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

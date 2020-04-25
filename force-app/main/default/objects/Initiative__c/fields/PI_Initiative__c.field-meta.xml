@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PI_Initiative__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check if the Initiative is part of the Process Improvement process</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check if part of Process Improvement</inlineHelpText>
+    <label>PI Initiative</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

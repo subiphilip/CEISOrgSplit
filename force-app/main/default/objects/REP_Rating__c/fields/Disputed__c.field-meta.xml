@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Disputed__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates that current customer rating is being disputed by REP</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check here if the current customer rating is being disputed</inlineHelpText>
+    <label>Disputed</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Plan_End_Date</fullName>
+    <active>true</active>
+    <description>Must be later than the start date.</description>
+    <errorConditionFormula>Plan_Start_Date__c &gt; Plan_End_Date__c</errorConditionFormula>
+    <errorDisplayField>Plan_End_Date__c</errorDisplayField>
+    <errorMessage>Plan01: Plan End Date must be after the Plan Start Date.</errorMessage>
+</ValidationRule>

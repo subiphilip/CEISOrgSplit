@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Commodity Price</fullName>
+        <default>false</default>
+        <label>Commodity Price</label>
+    </customValue>
+    <customValue>
+        <fullName>Adder</fullName>
+        <default>false</default>
+        <label>Adder</label>
+    </customValue>
+    <customValue>
+        <fullName>Pass-Through Charges</fullName>
+        <default>false</default>
+        <label>Pass-Through Charges</label>
+    </customValue>
+    <customValue>
+        <fullName>Transport and Fuel</fullName>
+        <default>false</default>
+        <label>Transport and Fuel</label>
+    </customValue>
+    <customValue>
+        <fullName>Price</fullName>
+        <default>false</default>
+        <label>Price</label>
+    </customValue>
+    <customValue>
+        <fullName>Admin Fee</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Admin Fee</label>
+    </customValue>
+    <customValue>
+        <fullName>NYMEX</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>NYMEX</label>
+    </customValue>
+    <customValue>
+        <fullName>FinBasis</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>FinBasis</label>
+    </customValue>
+    <customValue>
+        <fullName>PhyPrem</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>PhyPrem</label>
+    </customValue>
+    <customValue>
+        <fullName>Consultant Fee</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Consultant Fee</label>
+    </customValue>
+    <masterLabel>Fee Category</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>27.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Line 333 Added 2029 as option for Payment Card Years
+Line 107 added ng-class=&quot;{error: form1.dba.$invalid}&quot; for DBA name
+Line 96 Removed 
+Please enter either SSN, EIN, or DUNS.  Add your Business Name (DBA) if you use one.&quot;
+
+Lines 525-556 OpinionLab
+Line 15 Optimizely Script
+
+&lt;apex:stylesheet value=&quot;{!URLFOR($Resource.OpinionLab, &#39;onlineopinionV5/oo_style.css&#39;)}&quot;/&gt;
+
+&lt;apex:includeScript value=&quot;{!URLFOR($Resource.OpinionLab, &#39;onlineopinionV5/oo_engine.min.js&#39;)}&quot;/&gt;
+&lt;apex:includeScript value=&quot;{!URLFOR($Resource.OpinionLab, &#39;onlineopinionV5/oo_conf_inline_tab.js&#39;)}&quot;/&gt;
+&lt;apex:includeScript value=&quot;{!URLFOR($Resource.OpinionLab, &#39;onlineopinionV5/oo_engine.js&#39;)}&quot;/&gt;
+&lt;apex:includeScript value=&quot;{!URLFOR($Resource.OpinionLab, &#39;onlineopinionV5/oo_style.js&#39;)}&quot;/&gt;
+
+&lt;apex:includeScript value=&quot;{!URLFOR($Resource.OpinionLab, &#39;onlineopinionV5/oo_conf_exit_enroll.js&#39;)}&quot;/&gt;
+
+&lt;a href=&quot;#&quot; onClick=&quot;OOo.oo_launch(event, &#39;oo_feedback&#39;)&quot;&gt;&lt;img src=&quot;onlineopinionV5/oo_icon.gif&quot; border=&quot;0&quot; title=&quot;Feedback&quot; /&gt; Feedback&lt;/a&gt;
+
+&lt;apex:includeScript value=&quot;{!URLFOR($Resource.OpinionLab, &#39;onlineopinionV5/oo_conf_inline.js&#39;)}&quot;/&gt;</description>
+    <label>EnrollRemote</label>
+</ApexPage>

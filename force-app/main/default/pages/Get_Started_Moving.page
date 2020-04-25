@@ -1,0 +1,82 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" >
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+      description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+        <div id="wrapper">
+            <c:tc2_navbar />
+            <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-2.jpg" headline="Let's Get Started!" />
+            <div id="appAccountMoving">
+                <app-tdsp-lookup-modal />
+            <section>
+                    <div class="container">
+                        <div class="has-margin-3 has-text-centered">
+                            <h2 class="is-size-4 has-text-weight-bold padding-sides">Are you moving or switching?</h2>
+                        </div>
+                    </div>
+            </section>
+            
+            <section>
+                    <div class="container detail  singup-bottom-padding">
+                        
+                        <div class="columns " style="max-width: 800px; margin: auto;">
+                            
+                            <div class="column move box has-text-centered">
+                                <p><i class="icon-icon-map" style="font-size: 6rem;"></i></p>
+                                <br/>
+                                <p class="is-size-5">I am moving<br/> to a new address</p>
+                                <br/>
+                                <p><a class="button is-outlined is-primary is-rounded fixed-size animate-gradient-bg" v-on:click="onSelect('moveIn')">SELECT</a></p>
+                            </div>
+                            <div class="column move box has-text-centered">
+                                <p><i class="icon-icon-switch" style="font-size: 6rem;"></i></p>
+                                <br/>
+                                <p class="is-size-5">I am switching plans<br/> at my current address</p>
+                                <br/>
+                                <p><a class="button is-outlined is-primary is-rounded fixed-size animate-gradient-bg" v-on:click="onSelect('transfer')">SELECT</a></p>
+                            </div>
+                        </div>
+                        
+                    </div>
+            </section>
+            </div>
+        </div>
+        <c:tc2_footer />
+    <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+             
+             TC.app.accountMoving = new Vue({
+                el: '#appAccountMoving',
+                data: {
+                    zip: TC.app.account.premise.zip,
+                    tdsp: TC.app.account.tdsp
+                },
+                methods: { 
+                    onSelect: function(str) {
+                        TC.app.account.serviceType = 'moveIn';
+                        if(str == 'transfer'){
+                            TC.app.account.serviceType = 'transfer';
+                        }
+                        TC.fn.navigateTo("{!$Page.Get_Started}");
+                    }
+                },  
+                mounted: function() {
+                    console.log('TDSP ', TC.app.account.tdsp);
+                     if(this.tdsp == null) {
+                        TC.app.appSubscribe.$emit('tdspLookup', null);
+                      }
+                      dataLayer.push({'path': 'get-started', 'event': 'pathStart' });
+                },
+                watch: { },
+             });
+    
+          })
+        })(jQuery);
+    </script>
+
+  </body>
+  </html>
+</apex:page>

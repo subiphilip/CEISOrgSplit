@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Additional_Info_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(  Additional_Information_Needed__c =TRUE,  ISBLANK(Credit_Notes__c ))</errorConditionFormula>
+    <errorDisplayField>Credit_Notes__c</errorDisplayField>
+    <errorMessage>Credit01: Please describe what additional information should be included.</errorMessage>
+</ValidationRule>

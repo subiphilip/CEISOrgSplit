@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pick_a_Physical_Basis</fullName>
+    <active>true</active>
+    <errorConditionFormula>and(isnull(Physical_Premium_to_Index_Constant__c),   isnull(Physical_Premium_to_Index__c))</errorConditionFormula>
+    <errorDisplayField>Physical_Premium_to_Index_Constant__c</errorDisplayField>
+    <errorMessage>PricingScenario01: You have to pick a physical premium to the index (either strip or constant)</errorMessage>
+</ValidationRule>

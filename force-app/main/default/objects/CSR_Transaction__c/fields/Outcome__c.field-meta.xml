@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Outcome__c</fullName>
+    <description>How did the interaction end?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How did the interaction end?</inlineHelpText>
+    <label>Outcome</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Email</fullName>
+                <default>false</default>
+                <label>Email</label>
+            </value>
+            <value>
+                <fullName>Phone Transfer</fullName>
+                <default>false</default>
+                <label>Phone Transfer</label>
+            </value>
+            <value>
+                <fullName>Decline</fullName>
+                <default>false</default>
+                <label>Decline</label>
+            </value>
+            <value>
+                <fullName>Invalid Zip Code</fullName>
+                <default>false</default>
+                <label>Invalid Zip Code</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

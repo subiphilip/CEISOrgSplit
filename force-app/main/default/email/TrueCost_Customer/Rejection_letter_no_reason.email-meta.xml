@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Tells customers that their switch order was rejected by the REP</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>TrueCost_Customer</letterhead>
+    <name>Rejection letter--no reason</name>
+    <style>freeForm</style>
+    <subject>Update on your electric plan order with myTrueCost.com</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

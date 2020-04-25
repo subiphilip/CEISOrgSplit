@@ -1,0 +1,368 @@
+<apex:page showheader="false" sidebar="false" controller="ShopRemote" standardStylesheets="false" applyBodyTag="false" docType="html-5.0">
+    <apex:stylesheet value="{!URLFOR($Resource.Jquery, 'css/ui-lightness/jquery-ui-1.8.16.custom.css')}"/>    
+    
+    
+        <!-- trucost optimize -->
+        <!-- Page-hiding snippet (recommended)  -->
+        <style>.async-hide { opacity: 0 !important} </style>
+        <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+        h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+        (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+        })(window,document.documentElement,'async-hide','dataLayer',4000,
+        {'GTM-WDPHQM3':true});</script>
+        
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        
+          ga('create', 'UA-22823219-1', 'auto', {allowLinker: true});
+          ga('require', 'GTM-WDPHQM3');
+          
+        </script>
+        <!-- trucost optimize -->
+    
+    <apex:composition template="Template_TC">       
+        <apex:define name="HeadTags">
+            <title>Compare Electric Plans - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="description" Content="Compare electric rates from leading Houston-area providers and sign up for a new plan." />
+            <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/shopplans"/>
+            <style type="text/css">
+            #zipChange, .zipChange, #Calc_No_Premise_Commercial, #non_com_guest_reg_inducement, #com_guest_reg_inducement, #Calc_No_Premise, #Calc_Default_Load, #Calc_Actual_Data, #Calc_Estimated_Data, #Calc_Load_Profile, .lev-4, .lev-3, .lev-2, .lev-1, .lev-0, #other_meter_data_error, #service_address_error, #meter_number_error, .status-block, .timeout_message, #slider_controls, .from-homepage {display:none;}
+
+            .not-from-homepage {display:none;}
+
+            </style>
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container-fluid">
+                <div class="row-fluid">      
+                    <div class="collapse in" id="slider_controls">
+                        <a id="top_of_slide_box"/>
+                        <div class="navbarEven" id="shop_top_nav">
+                            <div class="navbar-inner" >
+                                <ul class="nav">
+                                    <li><a class="mini_nav_link" href="javascript:;" id="slider_toggle" data-toggle="collapse" data-parent="#shop_top_nav" data-target="#slider_area">Sorting</a></li>
+                                    <li><a class="mini_nav_link" href="javascript:;" id="contract_toggle" data-toggle="collapse" data-parent="#shop_top_nav" data-target="#contract_area">Contracts</a></li>
+                                    <li><a class="mini_nav_link" href="javascript:;" id="company_toggle" data-toggle="collapse" data-parent="#shop_top_nav" data-target="#company_area">Companies</a></li>
+                                    
+                                </ul>
+                            </div>
+                            
+                            <div id="slide-box">  
+                                
+                                <h4 class="visible-desktop">Options</h4>
+                                
+                                <div class="collapse in" id="slider_area">
+                                    <a class="miniStuff close pull-right" href="javascript:;">&times;</a>
+                                    <div class="clearfix miniStuff"/>
+                                    <div class="pull-right text-right notes">
+                                        <small>More Important</small>
+                                    </div>
+                                    <div class="pull-left text-left notes">
+                                        <small>Less Important</small>
+                                    </div>
+                                    <div class="clearfix"/>
+                                    <div Class="controls"> 
+                                        <strong>
+                                            <div class="slider-with-label">
+                                                <p class="text-center">Low Price</p>
+                                                <div id="price_weight_slider" class="jq_slider"/>
+                                            </div>
+                                            <div class="slider-with-label">
+                                                <p class="text-center">Green Friendly</p>
+                                                <div id="green_weight_slider" class="jq_slider"/>
+                                            </div>
+                                            <div class="slider-with-label">
+                                                <p class="text-center">Customer Satisfaction</p>
+                                                <div id="star_weight_slider" class="jq_slider"/>   
+                                            </div>
+                                            <div class="slider-with-label">
+                                                <p class="text-center">Years in Business</p>
+                                                <div id="year_weight_slider" class="jq_slider"/>
+                                            </div>
+                                        </strong>
+                                        <hr/>
+                                    </div>
+                                </div>
+                                
+                                <div class="collapse in" id="contract_area">
+                                    <a class="miniStuff close pull-right" href="javascript:;" id="close_all">&times;</a>
+                                    <center><h5 >Months</h5></center>
+                                    
+                                    <div Class="checkbox-list" id="checkboxlist">
+                                        <div class="checkbox-holder">
+                                            <input id="less_than_6" type="checkbox" class="contract_checkbox"/>Less than 6 <small class="muted"><span class="contract-count badge badge-inverse pull-right" id="less_than_six_count">0</span></small>
+                                        </div>     
+                                        <div class="checkbox-holder">
+                                            <input id="from_6_to_11" type="checkbox" class="contract_checkbox"/>6 to 11 <small class="muted"><span class="contract-count badge badge-inverse pull-right" id="from_6_to_11_count">0</span></small>
+                                        </div>
+                                        <div class="checkbox-holder">
+                                            <input id="exactly_12" type="checkbox" class="contract_checkbox"/>Exactly 12 <small class="muted"><span class="contract-count badge badge-inverse pull-right" id="exactly_12_count">0</span></small>
+                                        </div> 
+                                        <div class="checkbox-holder">
+                                            <input id="more_than_12" type="checkbox" class="contract_checkbox"/>More than 12 <small class="muted"><span class="contract-count badge badge-inverse pull-right" id="more_than_12_count">0</span></small>
+                                        </div>                                                          
+                                    </div>
+                                    
+                                    <hr/>
+                                    
+                                    <div class="checkbox-holder">
+                                        <input id="online_billing_autopay" type="checkbox" class="contract_checkbox" />I'll use online billing with automatic payment via credit/debit card
+                                    </div> 
+                                    <hr/>
+                                </div>
+                                
+                                
+                                <div class="collapse in" id="company_area">
+                                    <a class="miniStuff close pull-right" href="javascript:;" id="close_all">&times;</a>
+                                    <center><h5>Company</h5></center>
+                                    
+                                    <div Class="checkbox-list" id="REPlist"> 
+                                    </div>
+                                    <div Class="checkbox-list"> 
+                                     <a href="{!$Page.OtherREPs}" target="blank">Other Companies</a>   
+                                    </div>
+                                    
+                                    <hr/>
+                                </div>
+                                <a href="" Class="btn btn-default btn-small btn-block" id="restore_all">Restore all plans</a>
+                                <a href="" Class="btn btn-default btn-small btn-block" id="unselect_all">Unselect all REPs</a>
+                                <hr class="visible-desktop"/>
+                            </div><!--slide-box-->
+                        </div><!-- navbar even-->
+                    </div>
+                    
+                    <!-- RESULTS SUMMARY -->
+                    <div class="span10 well" id="ResultsSummary">
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <h4>
+                                    <apex:form rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}">Results for <c:ChangeAPA /></apex:form>
+                                    <!-- CMO 08-24-2016
+                                        <apex:outputpanel layout="none" rendered="{!(ISPICKVAL($User.UserType,'Guest'))}">Your Plan Results</apex:outputpanel>-->
+                                    <span class="from-homepage">
+                                        <apex:outputpanel layout="none" rendered="{!(ISPICKVAL($User.UserType,'Guest'))}">Your Electricity Plan Results</apex:outputpanel>
+                                    </span>
+                                    <span class="not-from-homepage">
+                                        <apex:outputpanel layout="none" ><span class="Result_Size"></span> Results for Your Address and Preferences</apex:outputpanel>
+                                    </span>
+                                </h4>
+                            </div>
+                            
+                            <!------------Meter Data Status---------------------->
+                            <div id="complete" Class="status-block span6 pull-right" > 
+                                
+                                <!-- No Premise -->
+                                <div class="status lev-0 alert alert-info">
+                                    <a href="{!$Page.AddAddressAfterRegistration}">Add a service address </a> to get custom quotes on available electric plans. 
+                                </div>  
+                                
+                                <!-- GRANT DATA PERMISSION -->
+                                
+                                <!--
+                                <div Class="status lev-1 alert alert-info">
+                                    Upgrade to our most precise estimate based on how <b>YOU</b> use electricity. Let TrueCost import your meter data for FREE.
+                                    <a href="{!$Page.Calculation_Choice}?mode=MeterData" class="btn btn-warning btn-mini pull-right">Get Started</a> 
+                                </div>
+                                -->
+                                
+                                <!-- DATA LOADING rendered="{!or(meterdatastatus=='Pending',meterdatastatus=='TimeOut')}"--> 
+                                
+                                <div Class="status lev-2 alert alert-info">
+                                    <div class="loading_message">TrueCost is currently loading your electric usage data for <b><span class="Street_Address"></span></b>.</div>
+                                    <div class="timeout_message">Your meter data is taking longer than normal to load.  We will continue working on it--please check back in a minute.</div>
+                                </div>
+                                
+                                <div Class="alert alert-error status lev-3" >
+                                    <div id="meter_number_error">
+                                        Your meter number did not match the one expected by your utility.      <br/><br/>                              
+                                        <a href="{!$Page.Calculation_Choice}?mode=MeterData">Try again</a>
+                                        or&nbsp;<apex:outputlink value="{!$Page.contactus}">contact us</apex:outputlink> for help.
+                                    </div>
+                                    <div id="service_address_error">
+                                        Your service address was rejected.  <br/><br/>
+                                        <apex:outputlink value="{!$Page.AddAddressAfterRegistration}">Try another one</apex:outputlink>
+                                        or&nbsp;<apex:outputlink value="{!$Page.contactus}">contact us</apex:outputlink> for help.
+                                    </div >
+                                    <div id="other_meter_data_error">An error occurred while attempting to load your electric usage data for <b><span class="Street_Address"></span></b>.</div>
+                                </div>
+                                
+                                <!-- DATA LOADED rendered="{!meterdatastatus=='Complete'}"-->
+                                <div class="status lev-4 alert alert-success">Your electric usage data for <b><span class="Street_Address"></span></b> has been loaded.  
+                                    &nbsp;<a href="{!$Page.myaccount}">View</a>
+                                </div>                                    
+                            </div>
+                        </div>
+                        
+                        <div class="row-fluid">
+                            <div class="">
+
+                                <!-- cmo 0824-2016 -->
+
+                                
+                                <p class="from-homepage">Congratulations! There are <b><span class="Result_Size"></span> <span class="Result_Rate_Class"></span> electric rate plans</b> matching your plan preferences for zip code <b><span class="Search_Zip"></span></b>. <a href="{!$Page.ChangeZip}" class="zipChange">Change Your Zip</a> to update results based on another location.</p>
+                                
+                                <div class="not-from-homepage">
+                                    <apex:outputpanel layout="none" rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}" >
+                                    <p>There are <b><span class="Result_Size"></span> <span class="Result_Rate_Class"></span> electric rate plans</b> matching your plan preferences for <b><span class="Search_Zip"></span></b>.</p>
+                                    </apex:outputpanel>
+                                </div>
+
+                                
+                                <div class="not-from-homepage">
+                                    <apex:outputpanel layout="none" rendered="{!(ISPICKVAL($User.UserType,'Guest'))}">
+                                    <div>We’re currently showing <span class="Result_Rate_Class"></span> electric plans for <strong><span class="Search_Zip"></span></strong>. <a href="{!$Page.ChangeZip}" class="zipChange">Change Your Zip</a> to update results based on another location.</div>
+                                    <div style="color: #999;">Prices are based on a <b class='price-size'>Medium</b> usage profile 
+                                    <span class='price-sqft'>(homes between 1,500 and 3,000 sqft.)</span></div>
+                                    </apex:outputpanel>
+                                </div>
+
+
+                                    
+                                <!--
+                                <span class="warning" style="color: #999;">
+                                    Prices are based on a Medium usage profile (homes between 1,500 and 3,000 sqft).
+                                </span>
+                                -->
+
+                                <!-- LOAD PROFILE -->
+                                <div id="Calc_Load_Profile" style="color: #999;">
+                                    Prices are based on the <b><span id="Load_Profile_Size"></span></b> usage profile <span id="Profile_Desc"></span>
+                                        <!--
+                                        <a href="{!$Page.Calculation_Choice}?mode=Profile">Change Profile</a> |
+                                        <a href="{!$Page.Calculation_Choice}?mode=Estimate">Estimate Usage</a>
+                                        -->
+                                </div>
+                       
+                                <div id="Calc_No_Premise_Commercial">
+                                    <span class="text-error">Import your usage data to see <b>better</b> rates for businesses</span>
+                                </div>
+                                
+                                <!-- CMO 08-24-2016 - pulled copy out of list
+                                    <li>There are <b><span id="Result_Size"></span> <span id="Result_Rate_Class"></span> electric rate plans</b> matching your plan preferences for zip code <b><span id="Search_Zip"></span></b>.  <a href="{!$Page.ChangeZip}" id="zipChange">Change Zip</a></li>-->
+                                <!-- EXPLAIN CALCULATION DISPLAY 
+                                 DEFAULT LOAD -->
+
+                                <!-- CMO 08-24-2016
+                                <span id="Calc_No_Premise">
+                                    <li>Prices are calculated based on typical (standard) usage.</li>
+                                </span>-->
+                                
+                                <!--
+                                <div id="Calc_Default_Load">
+                                    Prices are calculated based on typical (standard) usage.
+                                    <a href="{!$Page.Calculation_Choice}?mode=Estimate">Estimate Usage</a> | 
+                                    <a href="{!$Page.Calculation_Choice}?mode=MeterData">Import Data</a>
+                                </div>
+                                -->
+                                <div id="Calc_Default_Load">
+                                    <div style="color: #999;">Prices are based on a <b>Medium</b> usage profile (homes between 1,500 and 3,000 sqft.)</div>
+                                </div>
+                                
+                                <!-- ACTUAL DATA -->        
+                                <div id="Calc_Actual_Data">
+                                    Prices are calculated based on historical usage at <b><span class="Street_Address"></span></b>.
+                                </div>
+                                
+                                <!-- ESTIMATED DATA -->
+                                <div id="Calc_Estimated_Data">
+                                    Prices are based on your entered home size.          
+                                    <a href="{!$Page.ConfirmEstimatedUsage}">Adjust estimate</a>
+                                </div>
+                            
+
+                                <div class="from-homepage">
+                                    <p>Step 1) Sort - Find the best plan for you</p>
+                                    <p>Step 2) Select - Review the details and the total costs. No hidden fees!</p>
+                                    <p>Step 3) Enroll or Register - Even if you are not ready to switch, you can register and come back when your current plan expires</p>
+                                    <p><strong>Easy to shop. Easy to switch. Easy to save.</strong></p>
+                                </div>
+
+                                <!-- end CMO -->
+                                <br/>
+                            </div>
+                        </div> 
+
+                        <div class="row-fluid">
+                            <div class=""> 
+                                
+                                <apex:outputpanel layout="none" rendered="{!(ISPICKVAL($User.UserType,'Guest'))}">
+                                    <span class=''>
+                                        <div class="pull-left" id="non_com_guest_reg_inducement" style='height: 40px;'> 
+                                            <a class="btn btn-small btn-primary" href="/RegisterSec">Create Profile</a>
+                                            <span class="warning">Create a profile to see prices based on your usage and unlock plans just for you</span>
+                                        </div><br/>
+                                    </span>
+                                </apex:outputpanel>
+                                                                
+                                <apex:outputpanel layout="none" rendered="{!(ISPICKVAL($User.UserType,'Guest'))}" >
+                                    
+                                    <div id="improveMyEstimateBtn" class="pull-left not-from-homepage" style='clear:both'> 
+                                        <button class="btn btn-small btn-primary" data-toggle="modal" data-target="#improveEstimateCost">Improve My Estimate</button>
+                                    </div>
+                                </apex:outputpanel>
+                                <div Class="pull-right text-right">
+                                    Sort by: 
+                                    <a href="" id="sort_by_rating_link" class="btn btn-small btn-primary">Rating</a>
+                                    <a href="" id="sort_by_price_link" class="btn btn-small btn-warning">Price</a>
+                                </div>
+                            </div>                                                  
+                        </div>
+                    </div>
+
+                        
+                    <div class="span10">   
+                        <div class="row-fluid">   
+                            <!-- BEGIN RESULTS DISPLAY -->                      
+                            <div Class="shopping-main" id="shoppingresults">                            
+                                <div id="tiles" Class="shopping-tile-container well-no-pad">      
+                                    <!-- RESULT TILES -->
+                                    <div class="shopping-result-tiles"> 
+                                        <div class="alert alert-info alert-block">
+                                            <strong>TrueCost is searching plans and doing a lot of math.</strong>  We'll have shopping results for you in a moment.
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>           
+                            <!-- END RESULTS DISPLAY-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </apex:define>
+    </apex:composition>
+    <div class="modal hide" id="score_details_modal">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Scoring Summary</h3>
+        </div>
+        <div class="modal-body">
+            <c:ScoreDetailsLight />
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-primary" data-dismiss="modal">Close</a>
+        </div>
+    </div>
+       <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Alert!</h3>
+          </div>
+          <div class="modal-body">
+            <p>This premise has an order in progress.  Please check its status on your My Account page.  If you need to cancel your previous order, please contact TrueCost support.</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+           
+          </div>
+    </div>
+    <c:ShopPlansClickthrough />
+    <script src="{!URLFOR($Resource.jQueryUIPunch)}"/>
+    <c:ShopElectricRatesJS />
+    <c:FacebookCustomAudiencePixel />
+    <c:ImproveMyEstimateScript />
+</apex:page>

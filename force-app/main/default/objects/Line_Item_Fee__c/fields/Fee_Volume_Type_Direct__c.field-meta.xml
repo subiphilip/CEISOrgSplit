@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fee_Volume_Type_Direct__c</fullName>
+    <description>copied to line item fee from the fee.  used for rollup summary purposes on line item</description>
+    <externalId>false</externalId>
+    <inlineHelpText>copied to line item fee from the fee.  used for rollup summary purposes on line item</inlineHelpText>
+    <label>Fee Volume Type</label>
+    <length>30</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

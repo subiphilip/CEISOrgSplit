@@ -1,0 +1,30 @@
+<apex:page StandardController="Rate__c" extensions="FeeList">
+    <apex:form >
+    
+        
+            <apex:datatable value="{!Fees}" var="f" width="100%">
+                <apex:column HeaderValue="Fee Name" >
+                    {!f.name}
+                </apex:column>
+                <apex:column HeaderValue="Value ($)">
+                    {!f.Value__c}
+                </apex:column>
+                <apex:column HeaderValue="Basis">
+                    {!f.Basis__c}
+                </apex:column>
+                <apex:column HeaderValue="Click to Add Fee">
+                    <apex:commandlink action="{!AddFee}" value="Add as additional charge">
+                        <apex:param name="SelectedFee" value="{!f.id}" assignTo="{!SelectedFee}"/>  
+                    </apex:commandlink>
+                </apex:column>
+            </apex:datatable>
+            
+    </apex:form>
+    
+    <apex:outputPanel rendered="{!refreshPage}"> <!-- ugly hack to make the parent page that contains this page refresh -->
+       <script>
+          window.top.location=window.top.location.pathname;
+          //window.top.location='/{!Rate__c.id}';
+       </script>
+    </apex:outputPanel>
+</apex:page>

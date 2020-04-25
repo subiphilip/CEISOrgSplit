@@ -1,0 +1,123 @@
+<apex:page docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" controller="ControllerForMobileMain" cache="true" expires="86400">
+<!-- <apex:page showHeader="false" sidebar="false" cache="true" applyBodyTag="false" expires="86400" docType="html-5.0" standardStylesheets="false">  -->    
+    <apex:composition template="Template_TC">
+        
+        <apex:define name="HeadTags">
+            <title>True kWh Calculator <!-- {!$Label.Page_Title_About_TrueCost} --> - {!$Label.Page_Title_Company_Name}</title>
+            <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}"/>
+            <meta name="description" content="" />
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span2">
+                        <img src="https://cloud.githubusercontent.com/assets/6145314/18730134/51c22a12-801a-11e6-89c6-c57e4a1b9ed4.png" style="margin-top: 14px;" alt="Kilowatt Usage Price Calculator" />
+                    </div>
+                    <div class="span6">
+                        <h1 class="text-info" style="font-size:18px;line-height: 26px;">Finally! Electricity pricing personalized for you.</h1>
+                        <div class="thin-divider" style="display: block; border-bottom: solid 1px #e4e4e4; margin: 0px auto 20px; width: 100%;"></div>
+                        <p>TrueCost uses your meter data to do the math and shows you the total cost for every plan you like. It reveals unexpected fees, taxes and even available discounts before you buy.</p>
+                        <p>See for yourself how TrueCost is the better way to shop.</p>
+                        <ol>
+                            <li>Start by using our calculator to discover the true kWh price you're currently paying.</li>
+                            <li>Remember that price and <strong>START SHOPPPING</strong>.</li>
+                            <li>Be careful not to switch before your contract ends. <a href="https://centerpointenergy.secure.force.com/news/2013/10/9/know-your-expiration-date" target="_blank">Know your contract expiration date</a></li>
+                        </ol>
+                        <br />
+                        <div class="well">
+                            <h3 class="text-info" style="font-size: 13px; line-height: 36px; margin-top: 0px;"><span style="border-bottom: 1px solid #e4e4e4;margin: 0 auto 10px;padding-bottom: 8px;">What's the <i>true</i> kWh price you're currently paying?</span><br />
+                            <small>Use this calculator and a recent bill to do the math.</small></h3>
+                            <div style="text-align: center; padding: 0 36px;">
+                            <form class="calcForm" onsubmit="return false" oninput="doCalculation()">
+                                <div class="form-group">
+                                    <label for="bill"><strong>1. Enter the total dollar amount of your electric bill last month</strong></label>
+                                    <input type="number" min="1" id="bill" name="bill" value="0" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="kwh"><strong>2. Divide by the number of kilowatt hours (kWh) you used last month</strong></label>
+                                    <input type="number" min="10" id="kwh" value="10" name="kwh" />
+                                </div>
+                                <h3 style="color: #449d44; margin-bottom:0px;"><output name="amount" id="amount" for="bill kwh" class="totalAmt">0</output> &cent; per kWh</h3>
+                                <p>This is your <em>true</em> per kWh price.</p>
+                            </form>
+                            <script>
+                                function doCalculation() {
+
+                                    var billAmt = parseFloat(document.getElementById("bill").value || 0);
+                                    var kwhAmt = parseFloat(document.getElementById("kwh").value || 0);
+
+                                    if(billAmt > 0){
+                                        if(kwhAmt > 0){
+                                            document.getElementById("amount").innerHTML = ((billAmt) / (kwhAmt)*100).toFixed(2);
+                                        }else{
+                                            document.getElementById("amount").innerHTML = "?";}
+                                        }else{
+                                            document.getElementById("amount").innerHTML = "?";
+                                        }
+                                }
+                            </script>
+                            </div>                      
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <h4>Ready to see electric plans?</h4>
+                            <div class="form-block">
+                                <form action="javascript:void(0);" id="zip_code_form" class="form-inline">
+                                    <input class="" maxlength="5" name="zip_code" id="zip_code" placeholder="Enter Your Zip Code" value="" type="text" required="required" pattern="[0-9]{5}" title="5-digit Zip Code"/>
+                                    <button class="btn btn-primary" id="zip_submit" name="zip_submit" type="submit"><span>Shop</span></button>
+                                </form>
+                            </div>
+                            <div class="thin-divider" style="display: block; border-bottom: solid 1px #e4e4e4; margin: 15px auto 20px; width: 100%;"></div>
+                            <h4>Already have an account? <a class="btn btn-success" href="https://centerpointenergy.secure.force.com/SiteLogin?starturl=/homepage&amp;_ga=1.242041089.2088913038.1473960190">Login</a></h4>
+                    </div>
+                    <!--// end cmo //-->
+                </div>
+            </div>
+        </apex:define>       
+        
+        
+    </apex:composition>
+    <script>
+        $j=jQuery.noConflict();
+    
+        $j("#zip_submit").click(function() {
+            //is the form valid?
+            if (!hasFormValidation()) {
+                zipCodeCheckSubmission();
+            }
+            else {
+                console.log('hasFormValidation was true');
+                if (!$j("#zip_code_form")[0].checkValidity()) {
+                    console.log('validation failed');
+                    //return false;
+                }
+                else {
+                    console.log('validation passed');
+                    zipCodeCheckSubmission();
+                }
+            }
+            
+        });
+    
+        function zipCodeCheckSubmission(){
+            ControllerForMobileMain.checkZip($j("#zip_code").val(), function(result, event){
+                if (result=='Now' || result=='Maybe'){
+                    $j.cookie("apex__ShopZip", $j("#zip_code").val(), { expires: 720 });
+                    window.location="{!$Page.shopplans}"; 
+                } else if (result=='Later'){
+                    alert('TrueCost does not serve your zip code yet, but plans to in the future.');
+                } else if (result=='No'){
+                    alert('TrueCost does not serve your zip code.');
+                }
+            });
+        }
+        function hasFormValidation() {
+            
+            var i = document.createElement('input');
+            console.log('check was: '+typeof i.validity === 'object');
+            return typeof i.validity === 'object';
+            
+        };
+    </script>
+</apex:page>

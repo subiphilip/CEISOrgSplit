@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Order_Rejection_Timestamp__c</fullName>
+    <description>When the order status changed to rejected</description>
+    <externalId>false</externalId>
+    <inlineHelpText>When the order status changed to rejected</inlineHelpText>
+    <label>Rejection Timestamp</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

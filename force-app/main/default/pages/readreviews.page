@@ -1,0 +1,199 @@
+<apex:page controller="ControllerforReadReviews" showHeader="false" sidebar="false" cache="true" applyBodyTag="false" expires="86400" docType="html-5.0" standardStylesheets="false">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <apex:outputpanel rendered="{!NOT(isnull($CurrentPage.Parameters.id))}">
+                <title>{!rep.name} Reviews provided by myTrueCost.com</title>
+                <meta name="description" Content="Read reviews of {!rep.name} from real customers who signed up for {!rep.name} plans on myTrueCost.com" />
+                <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/electric-companies/{!rep.friendly_url__c}"/>
+            </apex:outputpanel>
+            <apex:outputpanel rendered="{!(isnull($CurrentPage.Parameters.id))}">
+                <title>Electric Company Reviews provided by myTrueCost.com</title>
+                <meta name="description" Content="Read reviews of leading electric companies from real customers who signed up for plans on myTrueCost.com" />
+                <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/readreviews"/>
+            </apex:outputpanel>
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span8">
+                        <h2>
+                            <apex:outputpanel layout="none" rendered="{!NOT(isnull($CurrentPage.Parameters.id))}">{!rep.name} Customer Reviews</apex:outputpanel>
+                            <apex:outputpanel layout="none" rendered="{!(isnull($CurrentPage.Parameters.id))}">Recent Customer Reviews</apex:outputpanel>
+                            <br/>
+                            <small>                Check out what 
+                                <apex:outputpanel layout="none" rendered="{!NOT(isnull($CurrentPage.Parameters.id))}"> {!rep.name}</apex:outputpanel>
+                            customers are saying            </small> 
+                        </h2>
+                        
+                        <div class="alert alert-info">
+                            These ratings and reviews are provided by <a href="/news/2014/3/9/electric-company-reviews-you-can-use">TrueCost customers</a>.  They do not necessarily reflect the opinions of CenterPoint Energy/TrueCost.
+                        </div>
+                        <apex:outputpanel styleclass="row-fluid" layout="block" rendered="{!and(RepPlanCount>0, NOT(isnull($CurrentPage.Parameters.id)))}">
+                            <div class="span2">
+                                <apex:image styleClass="REPlogo" url="/{!rep.Logo_URL__c}" rendered="{!rep.Logo_URL__c!=''}" width="150px" height="75px"/>
+                            </div>
+                            <div class="span5">
+                                <h4>Compare {!RepPlanCount} {!rep.name} rates! <br/><span>Discover your true cost based on your usage.</span></h4>   
+                                <a href="{!$Page.ShopPlans}?repid={!rep.id}" class="btn btn-warning"> Compare {!rep.name} rates now</a> 
+                                <apex:outputpanel rendered="{!ISPICKVAL($User.UserType,'Guest')}">
+                                    <a href="{!$Page.Register}" class="btn btn-primary"> Register Now</a>
+                                </apex:outputpanel>
+                            </div>
+                        </apex:outputpanel>
+                            
+                        <div class="clearfix"/>
+                        <hr/>
+                        
+                        <apex:outputPanel styleclass="mainleft" layout="block">
+                            <apex:outputpanel rendered="{!ratings.size=0}">
+                                <a href="{!$page.Rating}" class="btn btn-warning">Write One</a> There are currently no reviews available. 
+                            </apex:outputpanel>             
+                            
+                            <!--version for schema.org that puts all reviews inside the REP itemscope-->
+                            <apex:outputPanel rendered="{!NOT(isnull($CurrentPage.Parameters.id))}" >
+                                <span itemscope="itemscope" itemtype="http://schema.org/Product">
+                                    <meta itemprop="name" content="{!rep.name}"/>
+
+                                    <span itemprop="aggregateRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating">
+                                        <meta itemprop="ratingValue" content="{!rep.Star_Rating_Avg__c}"/>
+                                        <meta itemprop="reviewCount" content="{!rep.total_reviews__c}"/>
+                                        <meta content="1" itemprop="worstRating" />
+                                        <meta content="5" itemprop="bestRating" />
+                                    </span>
+                                    <apex:repeat value="{!ratings}" var="item">
+                                        <span itemscope="itemscope" itemtype="http://schema.org/Review">                      
+                                            <meta content="{!item.REP}" itemprop="itemReviewed"/>
+                                            <div class="row-fluid">                            
+                                                <div class="span8">                         
+                                                    <apex:outputpanel layout="none" rendered="{!(isnull($CurrentPage.Parameters.id))}">
+                                                        <h4>Electric Company: <a href="{!$Page.readreviews}?id={!item.repid}"><small>{!item.REP}</small></a></h4>
+                                                    </apex:outputpanel>
+                                                    <div>
+                                                        <h4>Plan Name: <small>{!item.plan}<apex:outputtext value="Plan not specified" rendered="{!(isnull(item.plan))}"/></small></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <span class="span2">
+                                                    <c:Star_Rating_static starrating="{!item.rating}" aggregate="false" link="false"></c:Star_Rating_static>                                
+                                                </span>
+                                                <span class="span6">
+                                                    <p>Submitted on {!item.whenmade} by <span itemprop="author">{!item.firstname}</span></p>
+                                                </span>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <apex:outputpanel layout="block" styleClass="span8" rendered="{!(item.review!='')}" >
+                                                    Comments:
+                                                    <span itemprop="reviewBody">
+                                                        {!item.review}
+                                                    </span>
+                                                </apex:outputpanel>   
+                                            </div>
+                                            <div class="row-fluid">
+                                                <br/>
+                                                <apex:outputpanel layout="block" styleClass="span7 offset1" rendered="{!(item.sitecomments!='')}" >
+                                                        <p class="muted">Additional Comments from TrueCost:</p>  
+                                                        <p class="text-info"><apex:outputtext value="{!item.sitecomments}" escape="false"/></p>
+                                                </apex:outputpanel>   
+                                            </div>
+                                        </span>
+                                        <hr/>
+                                    </apex:repeat>
+                                </span> 
+                            </apex:outputPanel>
+                            
+
+                            <!--if there's no REP-->
+
+                            <apex:repeat value="{!ratings}" var="item" rendered="{!isnull($CurrentPage.Parameters.id)}">
+                                <span itemscope="itemscope" itemtype="http://schema.org/Review">                      
+                                    <meta content="{!item.REP}" itemprop="itemReviewed"/>
+                                    <div class="row-fluid">                            
+                                        <div class="span8">                         
+                                            <apex:outputpanel layout="none" rendered="{!(isnull($CurrentPage.Parameters.id))}">
+                                                <h4>Electric Company: <a href="{!$Page.readreviews}?id={!item.repid}"><small>{!item.REP}</small></a></h4>
+                                            </apex:outputpanel>
+                                            <div>
+                                                <h4>Plan Name: <small>{!item.plan}<apex:outputtext value="Plan not specified" rendered="{!(isnull(item.plan))}"/></small></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <span class="span2">
+                                            <c:Star_Rating_static starrating="{!item.rating}" aggregate="false" link="false"></c:Star_Rating_static>                                
+                                        </span>
+                                        <span class="span6">
+                                            <p>Submitted on {!item.whenmade} by <span itemprop="author">{!item.firstname}</span></p>
+                                        </span>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <apex:outputpanel layout="block" styleClass="span8" rendered="{!(item.review!='')}" >
+                                            Comments:
+                                            <span itemprop="reviewBody">
+                                                {!item.review}
+                                            </span>
+                                        </apex:outputpanel>   
+                                    </div>
+                                    <div class="row-fluid">
+                                        <br/>
+                                        <apex:outputpanel layout="block" styleClass="span7 offset1" rendered="{!(item.sitecomments!='')}" >
+                                                <p class="muted">Additional Comments from TrueCost:</p>  
+                                                <p class="text-info"><apex:outputtext value="{!item.sitecomments}" escape="false"/></p>
+                                        </apex:outputpanel>   
+                                    </div>
+                                </span>
+                                <hr/>
+                            </apex:repeat>
+
+                            <apex:outputPanel rendered="{!NOT(isnull($CurrentPage.Parameters.id))}">
+                                <c:BlogView PostID="{!rep.Snapshot_ID__c}" rendered="{!NOT(isnull(rep.Snapshot_ID__c))}"/>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                    </div>
+                    <!--right rail for the generic review page-->
+                    <apex:outputpanel layout="block" styleClass="span4" rendered="{!isnull($CurrentPage.Parameters.id)}">
+                            
+                            <div class="well well-large">
+                                <h3>Reviews  by Company</h3>
+                                <apex:repeat value="{!replist}" var="r">
+                                    <apex:outputPanel rendered="{!not(isnull(r.total_reviews__c))}">
+                                        <a href="/electric-companies/{!r.Friendly_URL__c}">
+                                            <h5>{!r.Name} ({!round(r.total_reviews__c, 0)})</h5>
+                                        </a>
+                                    </apex:outputPanel>
+                                </apex:repeat>
+                            </div> 
+                    </apex:outputpanel>
+                    <!--right rail for the company-specific review page-->
+                    <apex:outputpanel layout="block" styleClass="span4" rendered="{!NOT(isnull($CurrentPage.Parameters.id))}">
+                        <div class="alert alert-success">
+                            <h3>Rate {!rep.name}</h3>
+                            <a href="{!$Page.Rating}" class="btn btn-block btn-warning">Tell us what you think</a>
+                        </div>
+                        <h3>About This Company</h3>
+                        <span itemscope="itemscope" itemtype="http://schema.org/Corporation">
+                            <apex:image height="75" width="150" url="/{!rep.Logo_URL__c}" rendered="{!not(isblank(rep.Logo_URL__c))}"/>
+                            <h6>Average Rating</h6>
+                            <c:Star_Rating_static starrating="{!rep.Star_Rating_Avg__c}" 
+                            REPid="{!rep.id}" 
+                            reviewCount="{!rep.total_reviews__c}" aggregate="true" link="false"/>
+
+                            
+                            <apex:outputPanel rendered="{!LEN(rep.About_Us__c)>0}">
+                                <span itemprop="description">
+                                    <apex:outputfield value="{!rep.About_Us__c}"></apex:outputfield>
+                                </span>
+                                <p class="pull-right"><small>Source: <span itemprop="name">{!rep.name}</span></small></p>
+                            </apex:outputPanel>
+                            
+                        </span>
+                    </apex:outputpanel>
+                    
+                </div>
+            </div>
+            
+        </apex:define>
+    </apex:composition>
+</apex:page>

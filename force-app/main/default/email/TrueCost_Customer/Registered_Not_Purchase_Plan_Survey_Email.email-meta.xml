@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Survey Email Sent to those whom registered and not signed up for a plan</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>TrueCost_Customer</letterhead>
+    <name>Registered/Not Purchase Plan Survey Email</name>
+    <style>freeForm</style>
+    <subject>CenterPoint Energy TrueCost values your feedback</subject>
+    <textOnly>Dear {!Contact.FirstName}:
+
+Thank you for your recent interest in myTrueCost.com, the electric plan shopping website from CenterPoint Energy that lets you compare and enroll in a new electric plan using personal preferences and your home’s past electric usage.
+
+TrueCost is a new product, and the TrueCost team is anxious to get consumer feedback about the site’s features and functionality so we can improve it to better meet your needs. We invite you to rate your experience with the site. The survey will take approximately five (5) minutes to complete and your responses will remain confidential.
+
+
+SURVEY LINK:
+http://mytruecost.registered-without-purchase.sgizmo.com/s3/
+
+We look forward to hearing from you soon. If you have questions about TrueCost, please contact our Customer Service team at TrueCost@CenterPointEnergy.com or at 713-207-7399.
+
+Sincerely,
+
+TrueCost Customer Service
+
+
+CenterPoint Energy Services, Inc. , which manages TrueCost, is an affiliate of, but not the same legal entity as, CenterPoint Energy Resources Corp. or CenterPoint Energy Houston Electric, LLC, nor is CenterPoint Energy Services, Inc. regulated by the Railroad Commission of Texas or the Public Utility Commission of Texas. You do not have to buy products or services from CenterPoint Energy Services, Inc. in order to continue to receive quality regulated services from CenterPoint Energy Resources Corp. or CenterPoint Energy Houston Electric. For questions regarding TrueCost, please email TrueCost@CenterPointEnergy.com.
+
+Update Account:
+https://centerpointenergy.secure.force.com/myaccount?utm_source=salesforceworkflow&amp;utm_medium=email&amp;utm_term=update-account&amp;utm_content=registered-purchased-plan-email&amp;utm_campaign=voc
+
+Unsubscribe from TrueCost:
+http://www.mytruecost.com/addmetocampaign?campaign=70130000000didh&amp;lead=needemail&amp;utm_source=salesforceworkflow&amp;utm_medium=email&amp;utm_term=unsubscribe-from-truecost&amp;utm_content=registered-purchased-plan-email&amp;utm_campaign=voc
+
+Unsubscribe from All Emails:
+http://www.mytruecost.com/addmetocampaign?campaign=70130000000dzgR&amp;lead=needemail&amp;utm_source=salesforceworkflow&amp;utm_medium=email&amp;utm_term=unsubscribe-from-all-emails&amp;utm_content=registered-no_purchase-email&amp;utm_campaign=voc</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

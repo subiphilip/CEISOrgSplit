@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Create_Contract_Rollover_Batch</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Create Contract Rollover Batch</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>/a2H/e?CF00NQ00000016ZV7_lkid={!Account.Id}&amp;CF00NQ00000016ZV7={!Account.Name}</url>
+</WebLink>

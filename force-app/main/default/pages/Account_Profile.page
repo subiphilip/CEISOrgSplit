@@ -1,0 +1,549 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" Controller="MyAccount">
+   <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+      <c:tc2_header title="{!$Label.Page_Title_My_Account} - {!$Label.Page_Title_Company_Name}" description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+      <body class="has-background-grey-light has-navbar-fixed-top">
+
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+
+        <style>
+          p {
+            line-height: 175%;
+          }
+          .home-profile p {
+            line-height: 125%;
+          }
+          .alert {
+            display: block;
+          }
+          .content {
+            padding:50px;
+          }
+          .columns:last-child {
+            margin-top:50px;
+            margin-bottom:50px;
+          }
+          .content .column{
+
+          }
+          .column.is-three-quarters {
+            padding-right:40px;
+          }
+          .content .column.is-two-quarters {
+            padding-left:10px;
+            padding-right:50px;
+          }
+          table td {
+            text-align: left;
+          }
+          .content p:not(:last-child){
+            margin-bottom:0 !important;
+          }
+          .level.option-tabs {
+              background-color: #ffffff;
+              border-top: none;
+              margin-bottom: 0;
+          }
+          .level.option-tabs .level-item {
+            padding: 2em 0em;
+            border-left: none;
+            border-bottom: none;
+          }
+          .columns:last-child {
+            margin-bottom:0;
+            margin-top:0;
+          }
+          .box.is-result-no-padding {
+              box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.4);
+          }
+          .container.rateboxes {
+              max-width: 100%;
+              width: 100%;
+              padding-left: 30px;
+          }
+          .spacer{
+            height:40px;
+          }
+          .btn-edit {
+            position: absolute;
+            right:20px;
+            top:20px;
+          }
+          .checkbox{
+            display: block;
+          }
+          table td, table th {
+            text-align: left;
+          }
+        </style>
+
+        <div id="wrapper">
+          <c:tc2_navbar />
+          <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="My Account" />
+
+            <!-- <div class="container form">
+             <div class="box is-result-no-padding">
+                 <div class="inner has-text-centered">
+                     <div class="spaced">
+                         <p class="icon is-large has-text-info "> <i class="fas fa-home fa-2x"></i> </p>
+                         <h2 class="has-text-centered is-active" >Service you are currently viewing</h2>
+                         <div style="margin-top: .5em;">
+                            <p class="is-size-5">
+                             <apex:form ><c:tc2_change_apa_component /></apex:form>
+                            </p>
+                         </div>
+                     </div>
+
+                 </div>
+             </div>
+            </div>
+ -->
+
+
+        <div  class="container">
+
+          <div id="appAccountProfile">
+
+            <div class="container ">
+               <div class="box is-result-no-padding" style="max-width:100%; ">
+                   <div class="inner ">
+                      <div  class="container rateboxes home-profile" >
+                        <nav  class="level option-tabs columns is-multiline is-mobile is-gapless">
+                          <div class="level-item column is-one-fifth" style=" border-right: 1px solid #eee;">
+                              <div class="column " style="padding: 1em; background-color:transparent;">
+                                  <span v-bind:class="homeSizeClass" style="float: left; font-size: 42px; margin-right: 10px; height: 55px;"/>
+                                  <p class="is-card-header" v-if="!isCommercial"><strong>MY HOME</strong></p>
+                                  <p class="is-card-header" v-if="isCommercial"><strong>MY BUSINESS</strong></p>
+                                  <p class="is-size-6">{{ TC.app.account.premise.street }}</p>
+                                  <p  class="is-size-7"><a href="{!$Page.Account_Profile_Home_Edit}">Edit Profile</a></p>
+                              </div>
+                          </div>
+
+                          <div  class="level-item column is-one-fifth" >
+                              <div class="column " style="padding: 1em;">
+                                  <p class="is-card-header">SMART METER </p>
+                                  <p class="is-size-5">{{smartMeterStatus}}</p>
+                                  <p v-if="meterDataPermission" class="is-size-6"><a href="{!$Page.Get_Started_Smart_Meter}">Edit Smart Meter</a></p>
+                              </div>
+                          </div>
+
+                          <div  class="level-item column is-one-fifth">
+                              <div class="column " style="padding: 1em;">
+                                  <p class="is-card-header">SQUARE FOOTAGE </p>
+                                  <p class="is-size-4">{{TC.app.appHomeProfile.houseSqft}} SQFT</p>
+                              </div>
+                          </div>
+
+                          <div  class="level-item column is-one-seventh">
+                              <div class="column " style="padding: 1em;">
+                                  <p class="is-card-header">YEAR BUILT</p>
+                                  <p class="is-size-4">{{TC.app.appHomeProfile.yearbuilt}}</p>
+                              </div>
+                          </div>
+                          <div  class="level-item column is-one-seventh">
+                              <div class="column " style="padding: 1em;">
+                                  <p class="is-card-header">HEATING </p>
+                                  <p class="is-size-4">{{TC.app.appHomeProfile.heatingsystem}}</p>
+                              </div>
+                          </div>
+                          <div  class="level-item column is-one-seventh">
+                              <div class="column " style="padding: 1em;">
+                                  <p class="is-card-header">POOL</p>
+                                  <p class="is-size-4">{{TC.app.appHomeProfile.pool}}</p>
+                              </div>
+                          </div>
+                          <div  class="level-item column is-one-seventh">
+                              <div class="column " style="padding: 1em;">
+                                  <p class="is-card-header">OCCUPANTS</p>
+                                  <p class="is-size-4">{{TC.app.appHomeProfile.occupants}}</p>
+                              </div>
+                          </div>
+                        </nav>
+                      </div>
+                   </div>
+               </div>
+            </div>
+
+            <div class="spacer" />
+            <div class="container ">
+                <div class="box is-result-no-padding" style="max-width:100%; ">
+                 <div class="inner relative">
+                    <div id="" class="container rateboxes" style="    padding: 2em 3em;">
+
+                      <div class="columns">
+                        <div class="column is-one-third">
+                          <h4 class="is-card-header"><strong>MY ACCOUNT</strong></h4>
+                          <p>{{account.firstName}} {{account.lastName}}</p>
+                          <p>{{account.email}}</p>
+                          <p>{{account.phone}}</p>
+                          <p>{{account.premise.street}}</p>
+                          <p>{{account.premise.city}}, {{account.premise.state}} {{account.premise.zip}}</p>
+
+                          <!-- <apex:outputPanel layout="none" rendered="{!not(isnull(theaccount.Address__c))}">
+                             <h4 class="is-card-header">Mailing Address</h4>
+                             <p>{!theaccount.Address__c}</p>
+                             <p>{!theaccount.City__c}, {!theaccount.State__c}  {!theaccount.Zip__c}</p>
+                             <p>{!theaccount.email__c}</p>
+                             <p>{!theaccount.Phone__c}</p>
+                          </apex:outputPanel> -->
+
+
+
+                        </div>
+                        <div class="column is-one-third">
+                          <h4 class="is-card-header"><strong>&nbsp;</strong></h4>
+
+                          <a href="{!$Page.Account_Profile_Edit}" >Edit Account</a><br/>
+                          <a href="{!$Page.Account_Password_Edit}" class="">Change Password</a><br/>
+
+                        </div>
+
+                        <div class="column is-one-third">
+                          <h4 class="is-card-header">PREFERENCES</h4>
+                          <c:EmailPreferences />
+                          <!-- <apex:outputPanel layout="none" rendered="{!NOT(ISNULL(orderinprogress.InitialDateofService__c))}">
+                            <h4 class="is-card-header"><strong>ORDER IN PROGRESS</strong></h4>
+                            <apex:outputPanel rendered="{!showOrderinProgress}" layout="none">
+                              <p>Confirmation {!orderinprogress.Name} </p>
+                              <p>{!orderinprogress.REP_Profile__r.name} </p>
+                              <p>{!orderinprogress.plan__r.name} </p>
+                              <p>{!round(orderinprogress.Contract_Length__c, 0)} months</p>
+                              <p>{!orderinprogress.Order_Status__c}</p>
+                              <p>
+                                 Effective Date:
+                                 <apex:outputText value="{0,date, M'/'dd'/'yyyy}">
+                                    <apex:param value="{!orderinprogress.InitialDateofService__c}" />
+                                 </apex:outputText>
+                              </p>
+                            </apex:outputPanel>
+                          </apex:outputPanel> -->
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+          </div>
+
+          <div class="spacer" />
+          <div class="container ">
+                <div class="box is-result-no-padding" style="max-width:100%; ">
+                 <div class="inner relative">
+                    <div id="" class="container rateboxes" style="    padding: 2em 3em;">
+                      <h4 class="is-card-header"><strong>SERVICE</strong></h4>
+                      <apex:form ><c:tc2_account_manage_apa /> </apex:form>
+                      <br/>
+                      <a href="{!$Page.Account_Add_Service}"><strong><i class="fas fa-plus-circle"></i> NEW SERVICE ADDRESS</strong></a><br/>
+                    </div>
+                  </div>
+                </div>
+          </div>
+
+          <div class="spacer" />
+          <div class="container ">
+              <div class="box is-result-no-padding" style="max-width:100%; ">
+               <div class="inner relative">
+                  <div id="" class="container rateboxes" style="    padding: 2em 3em;">
+                    <h4 class="is-card-header"><strong>USAGE DATA</strong></h4>
+                      <apex:outputpanel layout="none" rendered="{!NOT(Isnull(thePremise))}">
+                        <apex:form ><c:tc2_change_apa_component /></apex:form>
+                        <br/>
+
+                       <apex:outputpanel layout="none" rendered="{!AND(MeterDataPermission, dataRequestStatus='Complete')}">
+                          View daily, hourly, and 15-minute readings with our
+                          <apex:outputlink value="{!$Page.IntervalDataExplorer}"> advanced viewer</apex:outputlink>
+                          <div id="chart_div" class="usage-chart" style="height: 240px; border: 1px solid #EDEDED;"></div>
+                          <c:Content_Viewer content="My Account Data Explanation" />
+                       </apex:outputpanel>
+                       <apex:outputpanel rendered="{!not(MeterDataPermission)}" layout="none">
+                          <div class="alert alert-info">
+                             <h5>Usage data not requested</h5>
+                             <p>In this space, TrueCost shows your annual electricity consumption and can provide comparison to show whether you use more or less than average customers</p>
+                             <p>Your data also provides you the most accurate pricing possible for electric plans, and may entitle you to special plans not available to the public.</p>
+                             <!-- <apex:form >
+                                <apex:commandlink action="{!grantMeterDataPermission}"  value="Load My Data" styleClass="btn btn-warning" />
+                             </apex:form> -->
+                             <br/>
+                             <a href="{!$Page.Get_Started_Smart_Meter}"><strong><i class="fas fa-plus-circle"></i> Load My Data</strong></a>
+                          </div>
+                       </apex:outputpanel>
+                       <apex:outputPanel styleclass="alert alert-block" rendered="{!AND(MeterDataPermission, Contains(dataRequestStatus,'Error'))}">
+                          <apex:form >
+                             There was an error loading your meter data.  Please &nbsp;
+                             <a href="{!$Page.Get_Started_Smart_Meter}">re-enter your meter number.</a>
+                             <!-- <apex:commandlink action="{!grantMeterDataPermission}">re-enter your meter number </apex:commandlink>. -->
+                          </apex:form>
+                       </apex:outputPanel>
+                       <apex:pageMessage rendered="{!AND(MeterDataPermission, Contains(dataRequestStatus,'Error'))}" severity="error" strength="3" summary="There was an error importing your usage data." ></apex:pageMessage>
+                       <!-- <apex:outputPanel styleclass="alert alert-block" rendered="{!AND(MeterDataPermission, dataRequestStatus='Pending')}">
+                          Your meter data is being imported. Please check back again soon.
+                       </apex:outputPanel> -->
+                      <!--  <apex:outputpanel layout="none" rendered="{!AND(MeterDataPermission, dataRequestStatus='Complete')}">
+                          <h4>Meter Data Sharing</h4>
+                          <c:Content_Viewer content="Meter Data Sharing Explanation"/>
+                          <apex:form styleclass="alert alert-info alert-block">
+                             <apex:outputpanel id="meterDataPublicStatus">
+                                <apex:pageMessage escape="false" summary="{!if(ShareMeterData, '<h4>Your meter data is shared.</h4>', '<h1>Your meter data is currently private.</h1>')}" severity="info" strength="1" >
+                                   <apex:outputpanel layout="block" rendered="{!ShareMeterData}">
+                                      Others can view your data by visiting
+                                      <a href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/publicdataviewer?pid={!thepremise.id}" target="_blank"> this link  </a>.
+                                   </apex:outputpanel>
+                                   <br/><br/>
+                                   <apex:actionregion >
+                                      <apex:outputpanel layout="block" rendered="{!ShareMeterData}">
+                                         <input type="radio" name="meterDataPublic" value="true" checked="checked"  >Share My Usage</input>
+                                         <input type="radio" name="meterDataPrivate" value="false">Stop Sharing My Usage
+                                         <apex:actionsupport event="onclick" action="{!MakeDataPrivate}" rerender="meterDataPublicStatus"/>
+                                         </input>
+                                      </apex:outputpanel>
+                                      <apex:outputpanel layout="block" rendered="{!not(ShareMeterData)}">
+                                         <input type="radio" name="meterDataPublic" value="true"   >Share My Usage
+                                         <apex:actionsupport event="onclick" action="{!MakeDataPublic}" rerender="meterDataPublicStatus"/>
+                                         </input>
+                                         <input type="radio" name="meterDataPrivate" value="false" checked="checked" >Keep my data private</input>
+                                      </apex:outputpanel>
+                                   </apex:actionregion>
+                                </apex:pageMessage>
+                             </apex:outputpanel>
+                          </apex:form>
+                       </apex:outputpanel> -->
+
+                    </apex:outputpanel>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+
+
+
+          <apex:outputPanel layout="none" rendered="{!NOT(ISNULL(orderinprogress.InitialDateofService__c))}">
+          <div class="spacer" />
+          <div class="container ">
+              <div class="box is-result-no-padding" style="max-width:100%; ">
+               <div class="inner relative">
+                  <div id="" class="container rateboxes" style="padding: 2em 3em;">
+                    <h4 class="is-card-header"><strong>ORDER HISTORY</strong></h4>
+                        <apex:outputPanel rendered="{!showOrderinProgress}" layout="none">
+                          <div class="columns">
+                            <div class="column is-one-seventh is-card-header">Confirmation</div>
+                            <div class="column is-one-sixth is-card-header">Energy Provider</div>
+                            <div class="column is-one-sixth is-card-header">Plan</div>
+                            <div class="column is-one-sixth is-card-header">Contract</div>
+                            <div class="column is-one-seventh is-card-header">Effective Date</div>
+                            <div class="column is-one-fifth is-card-header">Status</div>
+
+                          </div>
+                          <div class="columns">
+                            <div class="column is-one-seventh">{!orderinprogress.Name}</div>
+                            <div class="column is-one-sixth">{!orderinprogress.REP_Profile__r.name}</div>
+                            <div class="column is-one-sixth">{!orderinprogress.plan__r.name}</div>
+                            <div class="column is-one-sixth">{!round(orderinprogress.Contract_Length__c, 0)} months</div>
+                            <div class="column is-one-seventh"><apex:outputText value="{0,date, M'/'dd'/'yyyy}"> <apex:param value="{!orderinprogress.InitialDateofService__c}" /> </apex:outputText> </div>
+                            <div class="column is-one-fifth">{!orderinprogress.Order_Status__c}</div>
+                          </div>
+
+                        </apex:outputPanel>
+
+                  </div>
+                </div>
+              </div>
+          </div>
+          </apex:outputPanel>
+
+
+
+          <apex:outputPanel styleClass="sidebarright" rendered="{!!isnull(currentplan)}" layout="none">
+            <div class="spacer" />
+            <div class="container ">
+                <div class="box is-result-no-padding" style="max-width:100%; ">
+                 <div class="inner relative">
+                    <div id="" class="container rateboxes" style="    padding: 2em 3em;">
+                      <h4 class="is-card-header"><strong>CURRENT PLAN</strong></h4>
+
+                            <p>Confirmation Number: {!currentPlan.name}</p>
+                            <p>Electric Company: {!currentPlan.REP_Profile__r.name}</p>
+                            <p>Plan: {!currentPlan.plan__r.name}</p>
+                            <p>Contract Length: {!round(currentPlan.Contract_Length__c, 0)} months</p>
+                            <p>
+                               Expires:
+                               <apex:outputText value="{0,date, M'/'dd'/'yyyy}">
+                                  <apex:param value="{!currentPlan.Plan_Expiration__c}" />
+                               </apex:outputText>
+                            </p>
+                            <apex:form >
+                               <apex:outputpanel rendered="{!NOT(isnull(currentplanstars))}" layout="none">
+                                  <p>Your Rating:</p>
+                                  <c:Star_Rating_static starrating="{!currentplanstars}"/>
+                                  <apex:commandlink action="{!rateyourrepEdit}" value="Edit your Rating" styleClass="btn btn-small btn-default"/>
+                               </apex:outputpanel>
+                               <apex:outputpanel rendered="{!isnull(currentplanstars)}">
+                                  <apex:commandlink action="{!rateyourrep}" value="Rate this Company" styleClass="btn btn-small btn-default"/>
+                               </apex:outputpanel>
+                            </apex:form>
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </apex:outputPanel>
+
+          <apex:outputPanel styleClass="sidebarright" layout="none" rendered="{!and(not(isnull(PreviousPlans)), PreviousPlans.size > 0)}">
+            <div class="spacer" />
+            <div class="container ">
+                <div class="box is-result-no-padding" style="max-width:100%; ">
+                 <div class="inner relative">
+                    <div id="" class="container rateboxes" style="    padding: 2em 3em;">
+                      <h4 class="is-card-header"><strong>ORDER HISTORY</strong></h4>
+                        <dl>
+                           <apex:repeat value="{!PreviousPlans}" var="op">
+                              <dt>Electric Company: {!op.REP_Profile__r.name}</dt>
+                              <dd>
+                                 <p>Plan: {!op.plan__r.name}</p>
+                                 <p>Contract Length: {!round(op.Contract_Length__c, 0)} months</p>
+                                 <p>
+                                    Order Date:
+                                    <apex:outputText value="{0,date, M'/'dd'/'yyyy}">
+                                       <apex:param value="{!op.createddate}" />
+                                    </apex:outputText>
+                                 </p>
+                              </dd>
+                           </apex:repeat>
+                        </dl>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </apex:outputPanel>
+
+          <apex:outputpanel rendered="{!AND(MeterDataPermission, dataRequestStatus='Complete', NOT(Isnull(thePremise)))}">
+                   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+                   <script type="text/javascript">
+                      google.load("visualization", "1", {packages:["corechart"]});
+                      google.setOnLoadCallback(drawChart);
+
+                      var currentHeight;
+                      var currentWidth;
+
+                      window.onresize= function () {
+                      var windowHeight = $j(window).height();
+                      var windowWidth = $j(window).width();
+
+                      if (currentHeight == undefined || currentHeight != windowHeight || currentWidth == undefined || currentWidth != windowWidth) {
+
+                        drawChart();
+
+                      currentHeight = windowHeight;
+                      currentWidth = windowWidth;
+                      }
+                      };
+                      function drawChart() {
+
+                      var data = new google.visualization.DataTable();
+                      data.addColumn('string', 'Month');
+                      data.addColumn('number', 'Your Usage');
+                      data.addColumn('number', 'Average Usage of Others');
+
+                      data.addRows([
+                          ['Jan', {!jan}, {!AverageUsage[0].usage__c}],
+                          ['Feb', {!feb}, {!AverageUsage[1].usage__c}],
+                          ['Mar', {!mar}, {!AverageUsage[2].usage__c}],
+                          ['Apr', {!apr}, {!AverageUsage[3].usage__c}],
+                          ['May', {!may}, {!AverageUsage[4].usage__c}],
+                          ['Jun', {!jun}, {!AverageUsage[5].usage__c}],
+                          ['Jul', {!jul}, {!AverageUsage[6].usage__c}],
+                          ['Aug', {!aug}, {!AverageUsage[7].usage__c}],
+                          ['Sep', {!sep}, {!AverageUsage[8].usage__c}],
+                          ['Oct', {!oct}, {!AverageUsage[9].usage__c}],
+                          ['Nov', {!nov}, {!AverageUsage[10].usage__c}],
+                          ['Dec', {!dec}, {!AverageUsage[11].usage__c}]
+                      ]);
+
+                      var options = {
+                          //width: 600, height: 240,
+                          colors: ['#fe9601', '#e3e3e3'], legend:{position:'bottom'}, vAxis: {minValue: 0}
+                      };
+
+                      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                      chart.draw(data, options);
+
+                      }
+                   </script>
+          </apex:outputpanel>
+        </div>
+
+
+
+      </div>
+
+      <c:tc2_footer />
+      <script>
+          (function ($) {
+              $(function () {
+              'use strict';
+
+               TC.fn.getApa();
+               TC.app.appAccountProfile = new Vue({
+                  el: '#appAccountProfile',
+                  data: {
+                    homeSizeClass: 'icon-icon-house-medium',
+                    smartMeterStatus: '',
+                    meterDataPermission: false,
+                    account: TC.app.account,
+                    isCommercial: false
+                  },
+                  methods: {
+                    onNewCommercialAddress: function() {
+                      TC.app.account.planPremiseType = "Commercial";
+                      TC.fn.navigateTo('{!$Page.Account_Add_Service}')
+                    },
+                    houseSqftUpdate: function(){
+                      this.smartMeterStatus = (TC.app.account.smartMeter !== undefined) ? TC.app.account.smartMeter.dataRequestStatus : 'Pending';
+                      if(this.houseSqft < 1500){
+                          TC.app.appHomeProfile.houseSize = 'small';
+                          this.homeSizeClass = "icon-icon-house-small";
+                      } else if(this.houseSqft > 3000) {
+                          TC.app.appHomeProfile.houseSize = 'large';
+                          this.homeSizeClass = "icon-icon-house-large";
+                      } else {
+                          TC.app.appHomeProfile.houseSize = 'medium';
+                          this.homeSizeClass = "icon-icon-house-medium"
+                      }
+                      if(TC.app.PlansShop !== undefined){
+                          if(TC.app.PlansShop.plans.length > 0){
+                              this.sortLowHigh();
+                          }
+                      }
+
+                  }
+                  },
+                  mounted: function() {
+                    this.houseSqftUpdate();
+                    if(TC.app.account.planPremiseType == 'Commercial'){
+                      this.isCommercial = true;
+                      this.homeSizeClass = "icon-icon-house-large";
+                    } else {
+                      this.isCommercial = false;
+                    }
+                    TC.app.appPlansCompareBar.hideSnackBar();
+                    // redirect
+                    if("{!MeterDataPermission}" == "true" || "{!MeterDataPermission}" == true){
+                      this.meterDataPermission = true;
+                    }
+
+                    var redirect = "{!$CurrentPage.parameters.redirect}";
+                    if(redirect !== ''){
+                      TC.fn.navigateTo(redirect);
+                      sessionStorage.removeItem('plans');
+                    }
+                  }
+               });
+
+            })
+          })(jQuery);
+      </script>
+    </body>
+  </html>
+</apex:page>

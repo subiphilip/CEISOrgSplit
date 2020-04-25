@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tiered_Minimum_Usage_Charges_LOGIC</fullName>
+    <active>true</active>
+    <description>You can&#39;t have a 2nd or 3rd charge without the 1st.</description>
+    <errorConditionFormula>OR( 
+AND(ISBLANK(Minimum_Usage_Charge__c),
+OR(NOT(ISBLANK(Minimum_Usage_Charge2__c)),NOT(ISBLANK(Minimum_Usage_Charge3__c)))
+),
+AND(ISBLANK(Minimum_Usage_Charge_Threshold_kWh__c),
+OR(NOT(ISBLANK(Minimum_Usage_Charge_Threshold2__c)),NOT(ISBLANK(Minimum_Usage_Charge_Threshold3__c)))
+),
+AND(ISBLANK(Minimum_Usage_Charge2__c), NOT(ISBLANK(Minimum_Usage_Charge_Threshold3__c)))
+)</errorConditionFormula>
+    <errorMessage>Rate15: If using tiered minimum usage charges, the basic &quot;Minimum Usage Charge/Threshold&quot; fields must be populated before the 2nd AND 3rd tiers (if needed).</errorMessage>
+</ValidationRule>

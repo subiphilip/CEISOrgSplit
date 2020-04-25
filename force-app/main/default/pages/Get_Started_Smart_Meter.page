@@ -1,0 +1,477 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" controller="ControllerForMobileMain" cache="false">
+
+
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org" xmlns:v-focus="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+    description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."
+  />
+
+  <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"/>
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+
+    <div id="wrapper">
+
+        <c:tc2_navbar />
+        <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-2.jpg" headline="SMART CHOICE" />
+        <c:tc2_esid_lookup_complete />
+        <!-- HEADER -->
+        <div id="appSmartMeter">
+            <c:tc2_modal_smart_meter_info />
+            <!-- <app-modal-smart-meter-info /> -->
+            <c:tc2_account_smartmeter_access />
+            <app-account-smartmeter-access />
+            <section>
+                <div class="container">
+                    <div class="has-margin-3 has-text-centered">
+                        <h2 v-show="tdsp =='true' || tdsp == true" class="is-size-4 has-text-weight-bold padding-sides">Looks like we can read your smart meter</h2>
+                        <h2 v-show="tdsp =='false' || tdsp ==false" class="is-size-4 has-text-weight-bold padding-sides">We found your address, but it looks like we cannot read your smart meter.<br/> Here are some plans in your area.</h2>
+                    </div>
+                </div>
+            </section>
+
+            <section v-if="tdsp =='true' || tdsp == true">
+                    <form v-if="TC.app.account.guest" v-on:submit="validateBeforeSubmit" method="post">
+
+                        <div class="container form ">
+                            <div class="box is-form-no-padding">
+                                <div class="inner">
+                                    <div class="columns">
+
+                                        <div class="column form-column" style="margin-bottom: 4.5em;">
+                                        <!-- <p v-if="errors.length">
+                                            <b>Please correct the following error(s):</b>
+                                            <ul>
+                                                <li v-for="error in errors">{{ error }}</li>
+                                            </ul>
+                                        </p> -->
+
+                                        <p>
+
+                                        In order to protect your smart meter data we will need to create an account.</p>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="firstName">First Name</label>
+                                                            <input id="firstName" class="input borderless" type="text" name="firstName" v-model="firstName"  maxlength="50" required="required" />
+                                                            <span v-show="validateFirstName" class="help is-danger">First name is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="lastName">Last Name</label>
+                                                            <input id="lastName" class="input borderless" type="text" name="lastName" v-model="lastName" required="required" maxlength="50" />
+                                                            <span v-show="validateLastName" class="help is-danger">First name is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="email">Email</label>
+                                                            <input id="email" class="input borderless" type="text" name="email" v-model="email" required="required" maxlength="50" />
+                                                            <span v-show="emailExists" class="help is-danger">Email already exists</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field" style="position: relative;">
+                                                        <p class="control is-expanded has-icons-right tooltip is-tooltip-multiline is-tooltip-right" data-tooltip="Click to locate your smart meter number">
+                                                           <label class="form-label" for="smartMeter">Smart Meter Number</label>
+                                                                        <input id="smartMeter" class="input borderless" type="text" name="smartMeter" maxlength="15"
+                                                                        v-mask="'############'" v-model="smartMeter" required="required" />
+                                                                        <span v-show="validateSmartMeterAuthorize" class="help is-danger">Smart Meter is required</span>
+                                                        </p>
+                                                        <span style="position: absolute; top: 5px; right: 10px;" v-on:click="onSmartMeterInfo()" class="icon is-small is-right"> <i class="icon-icon-info is-size-6"></i> </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="password">Password</label>
+                                                            <input id="password" class="input borderless" type="password" name="password" v-model="password" required="required"
+                                                            minlength="8" pattern="^(?!.*password)(?=.*[0-9])(?=.*[a-z]).{8,}$"
+                                                            title="At least 8 characters, at least one number, and at least one letter or symbol, and don't use the word password"/>
+                                                            <span v-show="validatePassword" class="help is-danger">Password is required</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field">
+                                                        <p class="control is-expanded">
+                                                            <label class="form-label" for="password">Password Confirm</label>
+                                                            <input id="passwordConfirm" class="input borderless" type="password" name="passwordConfirm"
+                                                            v-model="passwordConfirm" required="required"  minlength="8" />
+                                                            <span v-show="validatePasswordMatch" class="help is-danger">Password must match</span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            <article class="media padding-sides">
+                                                <figure class="media-left">
+                                                    <div class="checkbox">
+                                                        <span><input v-model="smartMeterAuthorize" name="smartMeterAuthorize" id="smartMeterAuthorize" type="checkbox" required="required" /></span>
+                                                    </div>
+                                                </figure>
+                                                <div class="media-content">
+                                                    <label for="smartMeterAuthorize"> I certify that I am authorized to view usage data for this address. I allow TrueCost to access the meter data for my address.</label>
+                                                </div>
+                                            </article>
+
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div>
+
+                                <div class="has-text-centered ">
+                                    <br/>
+                                    <input class="button is-primary is-rounded fixed-size animate-gradient-bg" type="submit" value="CREATE MY ACCOUNT" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form v-if="!TC.app.account.guest" v-on:submit="validateOnlySmartMeterBeforeSubmit" method="post">
+                        <div class="container form singup-bottom-padding">
+                            <div class="box is-form-no-padding">
+                                <div class="inner">
+                                    <div class="columns">
+                                        <div class="column form-column" style="margin-bottom: 4.5em;">
+                                        <p>In order to protect your information we will need to create an account so we can pull your smart meter data.</p>
+                                            <div class="field is-horizontal">
+                                                <div class="field-body">
+                                                    <div class="field" style="position: relative;">
+                                                        <p class="control is-expanded has-icons-right tooltip is-tooltip-multiline is-tooltip-right" data-tooltip="Click to locate your smart meter number">
+                                                            <label class="form-label" for="smartMeterOnly">Smart Meter Number</label>
+                                                            <input id="smartMeterOnly" class="input borderless" type="text" name="smartMeterOnly" maxlength="15" v-mask="'############'" v-model="smartMeterOnly" required="required" />
+                                                            <span v-show="validateSmartMeterOnly" class="help is-danger">Smart Meter is required</span>
+                                                        </p>
+                                                        <span style="position: absolute; top: 5px; right: 10px;" v-on:click="onSmartMeterInfo()" class="icon is-small is-right"> <i class="icon-icon-info is-size-6"></i> </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <article class="media padding-sides">
+                                                <figure class="media-left">
+                                                    <div class="checkbox">
+                                                        <span><input v-model="smartMeterOnlyAuthorize" name="smartMeterOnlyAuthorize" id="smartMeterOnlyAuthorize" type="checkbox" required="required" /></span>
+                                                    </div>
+                                                </figure>
+                                                <div class="media-content">
+                                                    <label for="smartMeterOnlyAuthorize"> I certify that I am authorized to view usage data for this address. I allow TrueCost to access the meter data for my address.</label>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="has-text-centered "><br/>
+                                    <input class="button is-primary is-rounded fixed-size animate-gradient-bg" type="submit" value="ADD SMART METER" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+            </section>
+
+            <c:tc2_modal_login />
+            <app-modal-login />
+
+
+        </div>
+
+        <section id="shop_plans_component">
+            <!-- <c:tc2_plans_shop maxPlans="3" routeTo="{!$Page.Shop_Plans}"/> -->
+            <c:tc2_plans_shop maxPlans="3" routeTo="{!$Page.Account_Moving}"/>
+        </section>
+
+
+    </div>
+
+    <c:Ngforce />
+    <c:tc2_footer />
+    <script>
+            (function($) {
+                $(function() {
+                    'use strict';
+
+                    TC.app.appSmartMeter = new Vue({
+                        el: '#appSmartMeter',
+                        data: {
+                            errors: [],
+                            email: TC.app.account.email,
+                            firstName: TC.app.account.firstName,
+                            lastName: TC.app.account.lastName,
+                            password: '',
+                            passwordConfirm: '',
+                            smartMeter: '',
+                            tdsp: TC.app.account.tdsp,
+                            emailExists: false,
+                            validateFirstName: false,
+                            validateLastName: false,
+                            validateEmail: false,
+                            validatePassword: false,
+                            validatePasswordMatch: false,
+                            validateSmartMeter: false,
+                            validateTerms: false,
+                            validateSmartMeterAuthorize: false,
+                            smartMeterAuthorize: false,
+
+                            smartMeterOnlyAuthorize: false,
+                            smartMeterOnly: TC.app.account.premise.smartMeter,
+                            validateSmartMeterOnly: false,
+                            premiseType:'',
+                            isResidential: true
+                        },
+                        methods: {
+                             onSmartMeterInfo: function(){
+                                TC.app.appSubscribe.$emit('smartMeterInfo', TC.app.account);
+                             },
+                             validateOnlySmartMeterBeforeSubmit: function(e){
+                                e.preventDefault();
+
+                                this.errors = [];
+                                this.validateSmartMeterOnly = false;
+                                this.validateSmartMeterOnlyAuthorize = false;
+                                if(this.smartMeterOnly == ""){
+                                    this.validateSmartMeterOnly = true;
+                                    this.errors.push('smartMeter');
+                                }
+                                if(this.smartMeterOnlyAuthorize == ""){
+                                    this.validateSmartMeterOnlyAuthorize = true;
+                                    this.errors.push('smartMeterAuthorize');
+                                }
+                                 if(this.errors.length <= 0){
+                                    // this.setupSmartMeter();
+                                    TC.fn.navigateTo("{!$Page.Account_Setup_Smart_Meter}");
+                                 } else {
+                                 }
+                             },
+                             validateBeforeSubmit: function(e){
+                                e.preventDefault();
+
+                                this.errors = [];
+                                this.validateFirstName = false;
+                                this.validateLastName = false;
+                                this.validateEmail = false;
+                                this.validatePassword = false;
+                                this.validatePasswordMatch = false;
+                                this.validateSmartMeter = false;
+                                this.validateSmartMeterAuthorize = false;
+                                if(this.firstName == ""){
+                                    this.validateFirstName = true;
+                                    this.errors.push('firstName');
+                                }
+                                if(this.lastName == ""){
+                                    this.validateLastName = true;
+                                    this.errors.push('lastName');
+                                }
+                                if(this.email == ""){
+                                    this.validateEmail = true;
+                                    this.errors.push('email');
+                                }
+                                if(this.emailExists){
+                                    this.emailExists = true;
+                                    this.errors.push('emailExists');
+                                }
+                                if(this.password == ""){
+                                    this.validatePassword = true;
+                                    this.errors.push('password');
+                                }
+                                if(this.password !== this.passwordConfirm) {
+                                    this.validatePasswordMatch = true;
+                                    this.errors.push('passwordmatch');
+                                }
+                                if(this.smartMeter == ""){
+                                    this.validateSmartMeter = true;
+                                    this.errors.push('smartMeter');
+                                }
+                                if(this.smartMeterAuthorize == ""){
+                                    this.validateSmartMeterAuthorize = true;
+                                    this.errors.push('smartMeterAuthorize');
+                                }
+
+
+                                 if(this.errors.length <= 0){
+                                    this.register();
+                                 } else {
+                                 }
+
+                             },
+                             checkExistingEmail: function(_email) {
+                                 this.emailExists = false;
+                                 let vm = this;
+                                 ControllerForMobileMain.CheckExistingEmail(_email, function(result,event){ // GAC
+                                     if(result !== 'Success'){
+                                         vm.emailExists = true;
+                                     } else {
+                                         vm.emailExists = false;
+                                     }
+                                 });
+                             },
+                             register: function(){
+                                 TC.fn.createLead('get-started-best');
+                                 var vm = this;
+                                 TC.app.appSubscribe.$emit('addLoaderQueue', {'id':'register','status':'Registering your account'});
+                                 ControllerForMobileMain.RegisterTC2(this.firstName,this.lastName,this.email,this.password, null, null, function(result,event){ // GAC
+
+                                    if(result == "That email address has already been used.") {
+                                        TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'setupShopPlans'});
+                                        vm.errors.push('email')
+                                        vm.emailExists = true;
+                                        if(TC.app.account.guest){
+                                            TC.app.appSubscribe.$emit('modalLogin', TC.app.account);
+                                        }
+                                    } else {
+                                        var res = result.replace(/quot;/g, '"');
+                                        res = res.replace(/&/g, '');
+                                        res = JSON.parse(res);
+                                         if (res.status == "success" && event.status) {
+                                            TC.app.account.uid = res.user;
+                                            TC.app.appSmartMeter.createAccount();
+                                         }
+                                    }
+
+
+                                 });
+                            },
+                            createAccount: function(){
+                                ControllerForMobileMain.RemoteCreateTC2(TC.app.account.uid, TC.app.account.premise.premiseId, function(result, event){
+                                    var res = result.replace(/quot;/g, '"');
+                                    res = res.replace(/&/g, '');
+                                    res = JSON.parse(res);
+                                    if (res.status == "success" && event.status) {
+                                        TC.app.account.accountId = res.account;
+                                        //TC.app.appSmartMeter.setupSmartMeter();
+                                        //TC.app.appSmartMeter.setupSmartMeter();
+                                        TC.app.appSmartMeter.remoteLogin();
+                                     }
+                                });
+                            },
+
+                            remoteLogin: function() {
+                                ControllerForMobileMain.RemoteLogin(this.email,this.password, '{!$Page.Account_Setup_Smart_Meter}', function(result2, event){
+                                    if (result2!='login error'){
+
+                                        var decoded = result2.replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '');
+                                        window.location.href=decoded;
+
+                                    } else{
+                                        TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'createprofile'});
+                                        TC.app.appSmartMeter.errors.push("Your email and password were not correct.")
+                                    }
+
+                                });
+                            }
+
+                        },
+                        mounted: function() {
+                            //Inputmask().mask(document.querySelectorAll("input"));
+                            if(this.email != '') {
+                                this.checkExistingEmail(this.email);
+                            }
+                            if(this.tdsp == true || this.tdsp == 'true'){
+                                $("#shop_plans_component").hide();
+                            }
+                            this.smartMeter = TC.app.account.premise.smartMeter;
+
+                            this.premiseType = (sessionStorage.getItem('premiseResult') !== null) ? JSON.parse(sessionStorage.getItem('premiseResult')).Premise_Type__c : '';
+                            if(this.premiseType.toLowerCase() == 'residential'){
+                                this.premiseType = 'residential'
+                                this.isResidential = true;
+                                TC.app.account.premise.premiseResult.Premise_Type__c = "Residential";
+                            } else {
+                                this.isResidential = false;
+                                this.tdsp = false;
+                                 $("#shop_plans_component").show();
+                            }
+
+                        },
+                        watch: {
+                            email: {
+                                handler: function() {
+                                    this.checkExistingEmail(this.email)
+                                    TC.app.account.email = this.email;
+                                }
+                            },
+                            firstName: {
+                                handler: function() {
+
+                                    TC.app.account.firstName = this.firstName;
+                                }
+                            },
+                            lastName: {
+                                handler: function() {
+                                    TC.app.account.lastName = this.lastName;
+                                }
+                            },
+                            password: {
+                                handler: function() {
+                                }
+                            },
+                            passwordConfirm: {
+                                handler: function() {
+                                }
+                            },
+                            smartMeter: {
+                                handler: function() {
+                                    console.log(this.smartMeter);
+                                    TC.app.account.premise.smartMeter = this.smartMeter;
+                                }
+                            },
+                            smartMeterOnly: {
+                                handler: function() {
+                                    console.log(this.smartMeterOnly);
+                                    TC.app.account.premise.smartMeter = this.smartMeterOnly;
+                                }
+                            },
+                            smartMeterAuthorize: {
+                                handler: function() {
+                                    console.log(smartMeterAuthorize);
+                                    TC.app.account.premise.smartMeterAuthorize = this.smartMeterAuthorize;
+                                }
+                            },
+                            smartMeterOnlyAuthorize: {
+                                handler: function() {
+                                    TC.app.account.premise.smartMeterAuthorize = this.smartMeterOnlyAuthorize;
+                                }
+                            },
+                        },
+                    });
+
+                })
+
+
+
+            })(jQuery);
+        </script>
+
+  </body>
+  </html>
+</apex:page>

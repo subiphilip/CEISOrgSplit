@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StationName__c</fullName>
+    <description>The long name to identify a substation used in the ERCOT Network Model.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The long name to identify a substation used in the ERCOT Network Model.</inlineHelpText>
+    <label>Station Name</label>
+    <length>50</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

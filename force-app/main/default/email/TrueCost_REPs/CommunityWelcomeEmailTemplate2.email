@@ -1,0 +1,12 @@
+Hi {!Receiving_User.FirstName}, 
+
+Welcome to the {!Community_Name} Community! To get started, go to {!Community_Url} and follow the link to "Forgot your password?"
+
+Please use your email when entering your user name, unless otherwise instructed.
+
+Thank you,
+
+Troy Donovan,
+Manager of Market Development
+CenterPoint Energy TrueCost
+713.207.7485

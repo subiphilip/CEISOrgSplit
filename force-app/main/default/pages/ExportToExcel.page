@@ -1,0 +1,86 @@
+<apex:page cache="true" contentType="application/vnd.ms-excel#EventData.xls" controller="ExportToExcel" language="english">
+<apex:pageBlock >
+        <apex:pageBlockTable value="{!ordersx}" var="ev">
+            <apex:facet name="header">
+            <apex:outputPanel >
+            <table><tr><td align="left">
+            <strong>Overview</strong> <br/>
+        
+            <br /><br />
+            </td></tr> 
+            </table>
+            </apex:outputPanel>
+            </apex:facet>
+       
+                <!--apex:column value="{!ev.Account__c}"-->
+                <apex:column value="{!ev.Authorized_Representative__c}"/>
+                <!--apex:column value="{!ev.Bill_Doc_Credited__c}"/-->
+                <!--apex:column value="{!ev.Clawback_Date__c}"/-->
+                <!--apex:column value="{!ev.Clawback_Value__c}"/-->
+                <apex:column value="{!ev.exportCommision__c}"/>
+                <!--apex:column value="{!ev.ConnectionReceivedId}"/-->
+                <apex:column value="{!ev.Contract_Length__c}"/>
+                <!--apex:column value="{!ev.Credit_Memo__c}"/-->
+                <apex:column value="{!ev.exportCritCare__c}"/>
+                <!--apex:column value="{!ev.Customer_Acceptance_of_Plan_Terms__c}"/-->
+                <apex:column value="{!ev.Customer_Date_of_Birth__c}"/>
+                <apex:column value="{!ev.Customer_Email__c}"/>
+                <apex:column value="{!ev.Customer_IP_Address__c}"/>
+                <apex:column value="{!ev.Customer_Phone_Number__c}"/>
+                <!--apex:column value="{!ev.Customer_Service_Email_For_Order__c}"/-->
+                <!--apex:column value="{!ev.Customer_Service_Phone_Number_For_Order__c}"/-->
+                <!--apex:column value="{!ev.Date_of_Birth_Day__c}"/-->
+                <!--apex:column value="{!ev.Date_of_Birth_Year__c}"/-->
+                <!--apex:column value="{!ev.Date_of_Birth__c}"/-->
+                <!--apex:column value="{!ev.Deposit_Info__c}"/-->
+                <!--apex:column value="{!ev.Drivers_License_Number__c}"/-->
+                <!--apex:column value="{!ev.Drivers_License_State__c}"/-->
+                <!--apex:column value="{!ev.EFL_URL_For_Order__c}"/-->
+                <apex:column value="{!ev.Email_Address__c}"/>
+                <apex:column value="{!ev.Enrollment_Type__c}"/>
+                <apex:column value="{!ev.ESIID_Number__c}"/>
+                <apex:column value="{!ev.Exported_Confirmation_Date__c}"/>
+                <!--apex:column value="{!ev.Failure_Reason__c}"/-->
+                <apex:column value="{!ev.First_Name__c}"/>
+                <!--apex:column value="{!ev.Free_Order__c}"/-->
+                <apex:column value="{!ev.InitialDateofService__c}"/>
+                <apex:column value="{!ev.Last_4_SSN_of_Authorized__c}"/>
+                <apex:column value="{!ev.Last_Name__c}"/>
+                <apex:column value="{!ev.Mailing_City__c}"/>
+                <apex:column value="{!ev.Mailing_State__c}"/>
+                <apex:column value="{!ev.Mailing_Street_Address__c}"/>
+                <apex:column value="{!ev.Mailing_Zip_Code__c}"/>
+                <!--apex:column value="{!ev.Moveout_REP_Email__c}"/-->
+                <!--apex:column value="{!ev.Move_Out_Date__c}"/-->
+                <!--apex:column value="{!ev.Move_out_ESID__c}"/-->
+                <!--apex:column value="{!ev.Move_out_REP__c}"/-->
+                <!--apex:column value="{!ev.Name_as_it_appears_on_Payment_Card__c}"/-->
+                <!--apex:column value="{!ev.Order_Bill_Doc__c}"/-->
+                <apex:column value="{!ev.Order_Confirmed_Date__c}"/>
+                <apex:column value="{!ev.Order_Expiration_Date__c}"/>
+                <!--apex:column value="{!ev.Order_Failure_Comments__c}"/-->
+                <!--apex:column value="{!ev.Order_Rejection_Comments__c}"/-->
+                <!--apex:column value="{!ev.Order_Status_TS__c}"/-->
+                <apex:column value="{!ev.Order_Status__c}"/>
+                <!--apex:column value="{!ev.Parent_Account__c}"/-->                
+                <apex:column value="{!ev.Phone_of_Authorized__c}"/>
+                <apex:column value="{!ev.Plan_Expiration__c}"/>
+                <apex:column value="{!ev.Plan_ID__c}"/>
+                <!--apex:column value="{!ev.PMVI_Flag__c}"/-->
+                <apex:column value="{!ev.Rate__c}"/>
+                <!--apex:column value="{!ev.Rejection_Reason__c}"/-->
+                <!--apex:column value="{!ev.Replacement_Order__c}"/-->
+                <!--apex:column value="{!ev.REP_email__c}"/-->
+                <apex:column value="{!ev.REP_Profile__c}"/>
+                <apex:column value="{!ev.Service_Address__c}"/>
+                <apex:column value="{!ev.Service_City__c}"/>
+                <apex:column value="{!ev.Service_State__c}"/>
+                <apex:column value="{!ev.Service_Zip__c}"/>
+                <!--apex:column value="{!ev.Shortpay__c}"/-->
+                <apex:column value="{!ev.export__c}"/>
+                <apex:column value="{!ev.Tax_Id__c}"/>
+              
+           
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

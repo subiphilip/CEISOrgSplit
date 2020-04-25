@@ -1,0 +1,12 @@
+<apex:component >
+  <h3>Select Your Service Area</h3>
+  <ul class="unstyled">
+      <li><a href="{!$Page.ElectricPriceTrendsSummary}?tdsp=CenterPoint" >CenterPoint Energy Service Area</a></li>
+      <li><a href="{!$Page.ElectricPriceTrendsSummary}?tdsp=Oncor" >Oncor Service Area</a> </li>
+      <li><a href="{!$Page.ElectricPriceTrendsSummary}?tdsp=TNMP" >TNMP Service Area</a></li>
+      <li><a href="{!$Page.ElectricPriceTrendsSummary}?tdsp=AEPN" >AEP North Service Area</a></li>
+      <li><a href="{!$Page.ElectricPriceTrendsSummary}?tdsp=AEPC" >AEP Central Service Area</a></li>
+      <li><a href="{!$Page.ElectricPriceTrendsSummary}?tdsp=Sharyland" >Sharyland Service Area</a></li>
+      <li><a href="{!$Page.TDSPHelp}" >What's my service area?</a></li>
+  </ul>
+</apex:component>

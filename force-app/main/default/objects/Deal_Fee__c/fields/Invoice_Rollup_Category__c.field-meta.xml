@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invoice_Rollup_Category__c</fullName>
+    <externalId>false</externalId>
+    <label>Invoice Rollup Category</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Commodity Price</fullName>
+                <default>false</default>
+                <label>Commodity Price</label>
+            </value>
+            <value>
+                <fullName>Commodity Price - Individual Fee</fullName>
+                <default>false</default>
+                <label>Commodity Price - Individual Fee</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Pass Thru</fullName>
+                <default>false</default>
+                <label>Pass Thru</label>
+            </value>
+            <value>
+                <fullName>Transport</fullName>
+                <default>false</default>
+                <label>Transport</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

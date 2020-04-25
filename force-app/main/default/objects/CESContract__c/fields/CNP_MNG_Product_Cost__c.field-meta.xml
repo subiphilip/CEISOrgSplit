@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CNP_MNG_Product_Cost__c</fullName>
+    <description>default cost for product.  populated from custom setting at the time of creation so contract is not affected by future changes to custom setting</description>
+    <externalId>false</externalId>
+    <label>CNP MNG Product Cost</label>
+    <precision>9</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

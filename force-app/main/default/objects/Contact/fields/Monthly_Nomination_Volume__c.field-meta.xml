@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Monthly_Nomination_Volume__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>For CEIP customers who receive emails for their nominations</inlineHelpText>
+    <label>Monthly Nomination Volume</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

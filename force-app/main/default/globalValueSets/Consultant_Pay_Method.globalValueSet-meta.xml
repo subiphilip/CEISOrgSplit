@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Per Unit</fullName>
+        <default>false</default>
+        <label>Per Unit</label>
+    </customValue>
+    <customValue>
+        <fullName>Flat</fullName>
+        <default>false</default>
+        <label>Flat</label>
+    </customValue>
+    <customValue>
+        <fullName>Margin Percentage</fullName>
+        <default>false</default>
+        <label>Margin Percentage</label>
+    </customValue>
+    <customValue>
+        <fullName>Volumetric</fullName>
+        <default>false</default>
+        <label>Volumetric</label>
+    </customValue>
+    <customValue>
+        <fullName>Upfront Flat Fee</fullName>
+        <default>false</default>
+        <label>Upfront Flat Fee</label>
+    </customValue>
+    <masterLabel>Consultant Pay Method</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

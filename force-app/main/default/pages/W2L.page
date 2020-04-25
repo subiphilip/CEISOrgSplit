@@ -1,0 +1,20 @@
+<apex:page showHeader="false" sidebar="false" controller="W2L" >
+    <style type="text/css">
+        .wide-form-field { width: 80%; }
+    </style>
+    <apex:composition template="Template_TC">
+        
+        <apex:define name="body">                   
+            <apex:outputpanel styleClass="maintitle" layout="block">
+               <apex:outputText value="Learn more about TrueCost" />
+            </apex:outputpanel>
+            
+            <apex:outputpanel styleClass="sub-title" layout="block">
+               <apex:outputText value="Become a smarter power shopper" />
+            </apex:outputpanel>
+            
+            <c:W2L LeadSource="Kiosk" WebSource="Lobby Days"/>
+        </apex:define>
+        
+    </apex:composition>
+</apex:page>

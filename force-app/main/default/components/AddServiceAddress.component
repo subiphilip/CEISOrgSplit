@@ -1,0 +1,66 @@
+<apex:component controller="ControllerForMobileMain" allowdml="true"> 
+    <style type="text/css">
+    	#please_select,#address_results {display:none;}
+    </style>
+    
+		<!--c:Blurry BackColor="#efefef" borderColor="#efefef" borderSize="3" 
+                            height="50px" width="180px" Message=""
+                            messageStyle="color:darkred;font-size:10pt;font-family:arial;font-weight:bold;"
+                            ImageUrl="{!$Resource.ajaxLoader}" /-->
+    
+    
+        <div class="well well-large">
+        	<div class="row">
+                <form action="javascript:void(0);">
+                    <div class="control-group span4">
+                        <label class="control-label" for="addressField">Address</label>
+                        <div class="controls">
+                            <input name="Address" id="addressField" placeholder="123 Any Street" value="" type="text" required="required" autofocus="autofocus"/>
+                        </div>
+                    </div>
+                    <div class="control-group span4" >
+                        <label class="control-label" for="zip">Zip</label>
+                        <div class="controls">
+                            <div class="input-append">
+                                <input name="Zip" id="zip" placeholder="77002" value="" type="text" required="required" pattern="[0-9]*"  max="5" min="5" />
+                              	<button id="address_submit" name="address_submit" class="btn btn-primary" data-loading-text="Searching...">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>    
+    
+            <h4 id="please_select">Please select your address</h4>
+        	<table class="table table-striped table-condensed" id="address_results">
+                <thead><tr><th id="select_button"></th><th>Address</th><th>Type</th><th>ESID</th></tr></thead>
+                <tbody></tbody>
+			</table>
+        	<c:Content_Viewer content="Help for Address Matching"/>
+                   
+    <!--apex:outputpanel layout="block">
+    <apex:outputText value="If you have your ESID, we can use it to find your service address"/><br/><br/>
+    
+    <apex:outputpanel style="margin-top:15px; clear:both;">    
+    
+    <apex:outputlabel value="ESID" for="ESID"/>                 
+    <apex:inputtext value="{!searchESID}" id="ESID" size="22" maxlength="22"/>      
+    <span class="action-button">
+    <apex:commandlink action="{!AddressSearch}" Value="Search by ESID" styleclass="action-button" rerender="theaddresssection" onclick="_gaq.push(['_trackPageview', '/Register/SearchByESID']);" ></apex:commandlink>            
+</span>
+</apex:outputpanel>
+    
+</apex:outputpanel>
+    <apex:outputpanel style="margin-top:15px;" layout="block">
+    <c:Content_Viewer content="Help for Address Matching"/>
+</apex:outputpanel>
+    <apex:outputpanel layout="block" style="clear:both; margin-top:15px;">
+    <apex:outputText value="Please make sure your address is correct.  If you need help, please call us at {!$Label.Customer_Support_Phone_Number}">                
+</apex:outputText>
+    <apex:outputText value=" or email ">                
+</apex:outputText> <apex:outputlink value="mailto:support@mytruecost.com"> support@mytruecost.com</apex:outputlink>
+</apex:outputpanel>   
+    
+    -->
+	
+</apex:component>

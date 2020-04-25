@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Safari_STL_Sync_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Safari STL Sync Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pending Sync</fullName>
+                <default>false</default>
+                <label>Pending Sync</label>
+            </value>
+            <value>
+                <fullName>Sync in Progress</fullName>
+                <default>false</default>
+                <label>Sync in Progress</label>
+            </value>
+            <value>
+                <fullName>Sync Complete</fullName>
+                <default>false</default>
+                <label>Sync Complete</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

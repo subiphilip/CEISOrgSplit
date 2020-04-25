@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cost_Group__c</fullName>
+    <description>what cost component does this fee roll up to?  Other = pass through</description>
+    <externalId>false</externalId>
+    <inlineHelpText>what cost component does this fee roll up to?  Other = pass through</inlineHelpText>
+    <label>Cost Group</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Cost_Category</valueSetName>
+    </valueSet>
+</CustomField>

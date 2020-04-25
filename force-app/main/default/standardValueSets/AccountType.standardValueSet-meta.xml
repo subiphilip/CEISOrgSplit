@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Residential Customer</fullName>
+        <default>true</default>
+        <label>Residential Customer</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Commercial Customer</fullName>
+        <default>false</default>
+        <label>Commercial Customer</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Electric Supplier</fullName>
+        <default>false</default>
+        <label>Electric Supplier</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Partner</fullName>
+        <default>false</default>
+        <label>Partner</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Reseller</fullName>
+        <default>false</default>
+        <label>Reseller</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Paid Consultant</fullName>
+        <default>false</default>
+        <label>Paid Consultant</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Non-Paid Consultant</fullName>
+        <default>false</default>
+        <label>Non-Paid Consultant</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Property Manager</fullName>
+        <default>false</default>
+        <label>Property Manager</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Producer</fullName>
+        <default>false</default>
+        <label>Producer</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Royalty Owner</fullName>
+        <default>false</default>
+        <label>Royalty Owner</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Wholesale</fullName>
+        <default>false</default>
+        <label>Wholesale</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Commercial Customer &amp; Paid Consultant</fullName>
+        <default>false</default>
+        <label>Commercial Customer &amp; Paid Consultant</label>
+    </standardValue>
+</StandardValueSet>

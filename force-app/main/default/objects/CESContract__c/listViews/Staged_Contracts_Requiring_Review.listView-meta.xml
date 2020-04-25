@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Staged_Contracts_Requiring_Review</fullName>
+    <booleanFilter>1 OR 2</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>Active__c</columns>
+    <columns>Product_Subtype_Lookup__c</columns>
+    <columns>Start_Date_New__c</columns>
+    <columns>End_Date__c</columns>
+    <columns>Opportunity__c</columns>
+    <columns>Existing_Base_Agreement__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Opportunity__c</field>
+        <operation>equals</operation>
+        <value>Safari Import Staging N/A Opty</value>
+    </filters>
+    <filters>
+        <field>Existing_Base_Agreement__c</field>
+        <operation>equals</operation>
+        <value>656126</value>
+    </filters>
+    <label>Staged Contracts Requiring Review</label>
+    <language>en_US</language>
+</ListView>

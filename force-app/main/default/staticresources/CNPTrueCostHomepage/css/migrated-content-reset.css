@@ -1,0 +1,185 @@
+.container:before,
+.container:after,
+.container-fluid:before,
+.container-fluid:after,
+.row:before,
+.row:after {
+  content: " ";
+  display: table;
+}
+.container:after,
+.container-fluid:after,
+.row:after {
+  clear: both;
+}
+/**
+ * Resets the visual treatment for elements containing the following class names
+ * in the migrated content section of the site.
+ */
+#cnp-body #mig_con .506162100-02102007,
+#cnp-body #mig_con .active-group,
+#cnp-body #mig_con .Apple-converted-space,
+#cnp-body #mig_con .arrow,
+#cnp-body #mig_con .arrow.cnp-vcm-ch,
+#cnp-body #mig_con .black,
+#cnp-body #mig_con .body,
+#cnp-body #mig_con .bookmark,
+#cnp-body #mig_con .bullet-arrow,
+#cnp-body #mig_con .bullet-blue,
+#cnp-body #mig_con .bullet-checkmark,
+#cnp-body #mig_con .bullet-orange,
+#cnp-body #mig_con .button-large,
+#cnp-body #mig_con .button-medium,
+#cnp-body #mig_con .button-small,
+#cnp-body #mig_con .c,
+#cnp-body #mig_con .callout-blue,
+#cnp-body #mig_con .callout-orange,
+#cnp-body #mig_con .captiontable2,
+#cnp-body #mig_con .centeralign,
+#cnp-body #mig_con .chart,
+#cnp-body #mig_con .chart.TD,
+#cnp-body #mig_con .chart-heading,
+#cnp-body #mig_con .clear,
+#cnp-body #mig_con .cnp-vcm-ch,
+#cnp-body #mig_con .cnp-vcm-ci,
+#cnp-body #mig_con .cnp-vcm-fw,
+#cnp-body #mig_con .column2,
+#cnp-body #mig_con .construction-zone-faq-container,
+#cnp-body #mig_con .construction-zone-faq-set,
+#cnp-body #mig_con .contentbody,
+#cnp-body #mig_con .date,
+#cnp-body #mig_con .dhtmlgoodies_answer,
+#cnp-body #mig_con .dhtmlgoodies_answer_content,
+#cnp-body #mig_con .dhtmlgoodies_question,
+#cnp-body #mig_con .divider,
+#cnp-body #mig_con .dividerTwenty,
+#cnp-body #mig_con .drop,
+#cnp-body #mig_con .fade,
+#cnp-body #mig_con .footer,
+#cnp-body #mig_con .footnote,
+#cnp-body #mig_con .form,
+#cnp-body #mig_con .form.TD,
+#cnp-body #mig_con .form-field-input,
+#cnp-body #mig_con .form-field-name,
+#cnp-body #mig_con .formsWrap,
+#cnp-body #mig_con .group,
+#cnp-body #mig_con .hasDatepicker,
+#cnp-body #mig_con .header,
+#cnp-body #mig_con .heading,
+#cnp-body #mig_con .heading-1,
+#cnp-body #mig_con .Heading-1,
+#cnp-body #mig_con .heading-2,
+#cnp-body #mig_con .heading-3,
+#cnp-body #mig_con .hide,
+#cnp-body #mig_con .image,
+#cnp-body #mig_con .image-center,
+#cnp-body #mig_con .image-left,
+#cnp-body #mig_con .image-left-no-border,
+#cnp-body #mig_con .image-right,
+#cnp-body #mig_con .image-right-no-border,
+#cnp-body #mig_con .infoA,
+#cnp-body #mig_con .large,
+#cnp-body #mig_con .lead,
+#cnp-body #mig_con .list-item,
+#cnp-body #mig_con .medium,
+#cnp-body #mig_con .MsoBodyTextIndent,
+#cnp-body #mig_con .MsoListParagraphCxSpFirst,
+#cnp-body #mig_con .MsoNormal,
+#cnp-body #mig_con .MsoNormalTable,
+#cnp-body #mig_con .MsoPlainText,
+#cnp-body #mig_con .news-list,
+#cnp-body #mig_con .next,
+#cnp-body #mig_con .noindent,
+#cnp-body #mig_con .Notes,
+#cnp-body #mig_con .orange,
+#cnp-body #mig_con .page-controls,
+#cnp-body #mig_con .previous,
+#cnp-body #mig_con .promo-body-blue.A,
+#cnp-body #mig_con .red,
+#cnp-body #mig_con .Section1,
+#cnp-body #mig_con .separator,
+#cnp-body #mig_con .small,
+#cnp-body #mig_con .spelle,
+#cnp-body #mig_con .SpellE,
+#cnp-body #mig_con .style1,
+#cnp-body #mig_con .style2,
+#cnp-body #mig_con .subbusiness,
+#cnp-body #mig_con .submit,
+#cnp-body #mig_con .subresidential,
+#cnp-body #mig_con .text,
+#cnp-body #mig_con .title,
+#cnp-body #mig_con .titlelink,
+#cnp-body #mig_con .watch-title,
+#cnp-body #mig_con .yt-uix-expander-head,
+#cnp-body #mig_con .white_content,
+#cnp-body #mig_con .WordSection1 {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #000;
+  font-size: 100%;
+  line-height: 1.4;
+  font-weight: normal;
+  vertical-align: baseline;
+}
+#cnp-body #mig_con img,
+#cnp-body #mig_con table {
+  width: 100%;
+  height: auto;
+}
+#cnp-body #mig_con img {
+  max-width: 100%;
+}
+#cnp-body #mig_con table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+#cnp-body #mig_con .title {
+  font-size: 24px;
+  line-height: 26px;
+  font-weight: bold;
+  color: #373737;
+  background-color: transparent;
+}
+@media screen and (min-width: 1200px) {
+  #cnp-body #mig_con .title {
+    font-size: 30px;
+    line-height: 32px;
+  }
+}
+#cnp-body #mig_con .title.inverted,
+#cnp-body #mig_con .title.inverted-color {
+  color: #fff;
+  background-color: #373737;
+}
+@media screen and (min-width: 768px) {
+  #cnp-body #mig_con .title {
+    font-size: 30px;
+    line-height: 32px;
+  }
+}
+#cnp-body #mig_con .subtitle {
+  font-size: 22px;
+  line-height: 24px;
+  font-weight: lighter;
+  color: #373737;
+  background-color: transparent;
+}
+@media screen and (min-width: 1200px) {
+  #cnp-body #mig_con .subtitle {
+    font-size: 28px;
+    line-height: 30px;
+  }
+}
+#cnp-body #mig_con .subtitle.inverted,
+#cnp-body #mig_con .subtitle.inverted-color {
+  color: #fff;
+  background-color: #373737;
+}
+@media screen and (min-width: 768px) {
+  #cnp-body #mig_con .subtitle {
+    font-size: 28px;
+    line-height: 30px;
+  }
+}

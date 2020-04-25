@@ -1,0 +1,66 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" controller="controllerForZipCodes">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Electric Plans for {!HTMLENCODE($CurrentPage.Parameters.Zip)} - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="description" Content="Compare electric rates for zip code {!HTMLENCODE($CurrentPage.Parameters.Zip)} and sign up online.  TrueCost makes switching easy." />
+            
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h1>Electric Rate Information for {!HTMLENCODE($CurrentPage.Parameters.Zip)} </h1>
+                        <div class="alert">
+                            <p class="lead">Electric transmission and distribution utility (TDU/TDSP) for {!HTMLENCODE($CurrentPage.Parameters.Zip)}:</p>
+                            <ul class="lead">
+                                <apex:repeat value="{!tdsplist}" var="x" rendered="{!tdsplist.size>0}"><li>{!x }</li> </apex:repeat>
+                                <apex:outputText rendered="{!tdsplist.size=0}"><li>Not served by TrueCost</li></apex:outputText>
+                            </ul>
+                        </div>
+                        <div id="cities_section" class="alert alert-info">
+                            <p class="lead">{!HTMLENCODE($CurrentPage.Parameters.Zip)} includes addresses located in the the following cities: </p>
+                            <ul class="lead">
+                                <apex:repeat value="{!citylist}" rendered="{!citylist.size>0}" var="x"><li>{!x}</li> </apex:repeat>
+                                <apex:outputText rendered="{!tdsplist.size=0}"><li>Not served by TrueCost</li></apex:outputText>
+                            </ul>
+                        </div>
+                        <div id="action_section" class="well well-large">
+                            <p class="lead">
+                                <a href="{!$Page.Register}" class="btn btn-primary pull-right">Register</a>
+                                Register a location in {!HTMLENCODE($CurrentPage.Parameters.Zip)} for quotes based on your usage                           
+                            </p>
+                            <p class="lead">
+                                <a href="{!$Page.ShopPlans}" class="btn btn-warning pull-right">View Plans</a>
+                                View electric rates for a typical user in {!HTMLENCODE($CurrentPage.Parameters.Zip)}
+                            </p>
+                        </div>
+                        <iframe sandbox="allow-same-origin allow-top-navigation allow-scripts" width="100%" height="500px" src="//maps.google.com/maps?q={!HTMLENCODE($CurrentPage.Parameters.Zip)}&z=10&output=embed&iwloc=near"></iframe>
+                    </div>
+                    <div class="span4">
+                        <c:ChartMiniNarrow />
+                        <hr/>
+                        
+                        <c:truecostrecentblogposts PostLimit="5"/>
+                        <a class="btn btn-warning" href="{!$Page.truecostblog}">More</a>
+                        <hr/>
+                        
+                        <c:RandomPoll />    
+                    </div>
+                </div>
+            </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+   <script>
+    $j=jQuery.noConflict();
+    
+    $j(document).ready(function(){
+        $j.cookie("apex__ShopZip", "{!left(HTMLENCODE($CurrentPage.Parameters.Zip), 5)}", { expires: 720 });
+    });
+        
+   
+    </script>
+</apex:page>

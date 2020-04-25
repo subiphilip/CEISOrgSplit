@@ -1,0 +1,80 @@
+<apex:page showHeader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" Controller="ControllerForCreateRating">
+    
+    <apex:composition template="Template_TC">
+        
+        <!--apex:define name="breadcrumbs">
+        <apex:outputpanel styleClass="breadcrumbs" layout="block">
+        <apex:outputlink value="{!$Page.homepage}">Home</apex:outputlink>
+        <apex:outputlink value="{!$Page.myaccount}">My Account</apex:outputlink>
+        <apex:outputlink value="{!$Page.createrating}" styleClass="last">Rate your Electric Company</apex:outputlink>
+    </apex:outputpanel>            
+    </apex:define-->
+        
+        <apex:define name="body">  
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h3>Review {!currentplan.REP_Profile__r.name}<br/><small>Your rating helps other customers make smarter choices</small></h3>  
+                        <div class="row">
+                        <apex:form >
+                            <apex:pageMessages />
+                            <div class="span1">Rating</div>
+                            <apex:outputpanel id="starholder" style="height:60px;" styleclass="span7" layout="block">
+                                <div class="rate" id="stars">
+                                    <apex:outputpanel id="starsb">
+                                        <b style="width: {!(newrating.rating__c/5)*100}%"></b> 
+                                    </apex:outputpanel>
+                                    <apex:commandlink action="{!its5}" title="Great" rerender="starsb">
+                                        Rate 1/5			      		
+                                    </apex:commandlink>
+                                    <apex:commandlink action="{!its4}" title="Good" rerender="starsb">
+                                        Rate 2/5
+                                    </apex:commandlink>
+                                    <apex:commandlink action="{!its3}" title="OK" rerender="starsb">
+                                        Rate 3/5
+                                    </apex:commandlink>
+                                    <apex:commandlink action="{!its2}" title="Poor" rerender="starsb">
+                                        Rate 4/5
+                                    </apex:commandlink>
+                                    <apex:commandlink action="{!its1}" title="Very bad" rerender="starsb">
+                                        Rate 5/5
+                                    </apex:commandlink>
+                                </div> 
+                            </apex:outputpanel>
+                            
+                            <div class="span1">Review</div>
+                            <div class="span7">
+                                <apex:inputfield value="{!newrating.Review__c}" style="width:550px;"/>
+                            </div>
+                            <div class="span1">
+                            	Contact
+                            </div>
+                            <div class="span7">
+                                <label class="checkbox">
+                                	<apex:inputfield value="{!newrating.Wants_Contact__c}" label="" /> It's ok for the electric company to contact me about my comments.
+                                </label>
+                            </div>
+                            
+                            <div class="span1"></div>
+                            <div class="span7">
+                                <apex:outputlink styleClass="btn btn-default" value="{!$Page.myaccount}">Back</apex:outputlink>
+                                <apex:commandlink styleClass="btn btn-primary" value="Submit" action="{!saverating}"/>
+                            </div>
+                        </apex:form>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <h4>Recent {!currentplan.REP_Profile__r.name} Reviews</h4>
+                        <apex:repeat value="{!RecentReviews}" var="rr">
+                            <p><c:Star_Rating_static starrating="{!rr.Rating__c}"/></p>
+                            <p>{!rr.Review__c}</p>
+                            <hr/>
+                        </apex:repeat>
+                    </div>
+                </div>
+            </div>
+            
+        </apex:define>       
+        
+    </apex:composition>
+</apex:page>

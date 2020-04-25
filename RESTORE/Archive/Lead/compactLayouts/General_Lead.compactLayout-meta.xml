@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>General_Lead</fullName>
+    <fields>OwnerId</fields>
+    <fields>Name</fields>
+    <fields>Title</fields>
+    <fields>Company</fields>
+    <fields>Status</fields>
+    <fields>Phone</fields>
+    <fields>LeadSource</fields>
+    <fields>Address</fields>
+    <label>General Lead</label>
+</CompactLayout>

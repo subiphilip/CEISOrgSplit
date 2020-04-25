@@ -1,0 +1,23 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" cache="true" expires="43200">
+  <apex:composition template="Template_TC">
+     <apex:define name="HeadTags">
+        <title>Traffic Overload - {!$Label.Page_Title_Company_Name}</title>
+     </apex:define>          
+    <apex:define name="body">
+        <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <h3>TrueCost's popularity has exceeded our wildest expectations<br/>
+                            <small>We've exceeded our daily bandwidth limits!</small>
+                        </h3>
+                        <div class="alert alert-block alert-error">
+                            <p>The public pages are too busy right now for additional traffic.  However, registered users can still access them by logging in (top right corner).</p>
+                             <p>Our apologies for the inconvenience.  We'll be back up soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+    </apex:define> 
+  </apex:composition>
+</apex:page>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Meter_Number</fullName>
+    <active>true</active>
+    <description>Validates that meter number contains 8 digits</description>
+    <errorConditionFormula>AND(
+NOT(ISBlank(Meter_Number__c)),
+OR(
+   NOT(ISNUMBER( Meter_Number__c)),
+   LEN(Meter_Number__c)&lt;&gt;8 
+)
+,  TDSP_Lookup__r.Name = &quot;CenterPoint Energy&quot; )</errorConditionFormula>
+    <errorDisplayField>Meter_Number__c</errorDisplayField>
+    <errorMessage>Premise02: Your meter number (see picture on the right) should have 8 digits.  If there&#39;s a letter at the beginning, you can leave that off.</errorMessage>
+</ValidationRule>

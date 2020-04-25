@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Corporate_Division</fullName>
+    <columns>NAME</columns>
+    <columns>Description__c</columns>
+    <columns>Initiative_Name__c</columns>
+    <columns>Phase_of_Initiative__c</columns>
+    <columns>CNP_Division__c</columns>
+    <columns>Executive_Contact__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>OWNER.LAST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CNP_Division__c</field>
+        <operation>equals</operation>
+        <value>Corporate Division</value>
+    </filters>
+    <label>Corporate Division</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Continuous_Improvement</group>
+    </sharedTo>
+</ListView>

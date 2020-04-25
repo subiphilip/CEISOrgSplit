@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Renewal_Fields_Only_On_Autorenew</fullName>
+    <active>true</active>
+    <description>Validate that renewal term/notice days are only populated if Autorenew = true</description>
+    <errorConditionFormula>AND(Auto_renew__c = false, OR(ISBLANK(Renewal_Term__c) = false, ISBLANK(Renewal_Notice_Days__c) = false))</errorConditionFormula>
+    <errorMessage>Renewal Notice Days and Renewal Term should only be populated for Auto Renew quotes.</errorMessage>
+</ValidationRule>

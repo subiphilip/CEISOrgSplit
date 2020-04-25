@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Credit_Card</fullName>
+    <active>true</active>
+    <description>If a REP allows credit card for auto pay, then at least one of the credit card options must be selected on the REP profile.</description>
+    <errorConditionFormula>AND( 
+Allow_credit_card_for_autopay__c = TRUE, 
+IF(Accept_Visa__c, 1 , 0) + 
+IF(Accept_MasterCard__c, 1 , 0) + 
+IF(Accept_Discover__c,1,0) + 
+IF(Accept_American_Express__c, 1 , 0) &lt; 1)</errorConditionFormula>
+    <errorDisplayField>Allow_credit_card_for_autopay__c</errorDisplayField>
+    <errorMessage>If you allow credit card for auto pay, you must select at least one of the credit card options.</errorMessage>
+</ValidationRule>

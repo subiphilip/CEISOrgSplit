@@ -1,0 +1,540 @@
+<apex:component layout="none">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+
+    <apex:includeScript value="{!URLFOR($Resource.MomentJS)}"/>
+
+
+<script>
+
+    myModule.service('utilities', function(){
+        this.round = function (value, decimals) {
+           return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+        }
+    });
+
+    myModule.service('promiseErrors', function(){
+        this.handle= function(error, functionname){
+            console.log('error in function ' + functionname);
+            console.log(error);
+            dataLayer.push({'errorFunction':functionname, 'errorObject':error});
+            dataLayer.push({'event':'error'});
+        }           
+    });
+
+    myModule.service('paramService', function(){
+        var vals = {
+            param:null,
+            visible:false
+        }
+
+        this.setParam = function(newParam){
+            vals.param = newParam;
+        }
+
+        this.setVisible = function(onoff){
+            vals.visible = onoff;
+        }
+
+        this.get = function(){
+            return vals;
+        }
+
+    });
+
+    myModule.service('sharingService', function($rootScope, $window){
+        var vals = {
+            param:null,
+            visible:false
+        }
+
+        $window.rootScopes = $window.rootScopes || [];
+        $window.rootScopes.push($rootScope);
+
+        if (!!$window.sharedService){
+            return $window.sharedService;
+        }
+
+        $window.sharedService = {
+            setParam: function(newParam){
+                vals.param = newParam;
+                angular.forEach($window.rootScopes, function(scope){
+                    if (!scope.$$phase){
+                        console.log('param apply');
+                        scope.$apply();
+                    }
+                });
+            },
+            setVisible: function(onoff){
+                vals.visible = onoff;
+                angular.forEach($window.rootScopes, function(scope){
+                    if (!scope.$$phase){
+                        console.log('visible apply');
+                        scope.$apply();
+                    }
+                });
+            },
+            getParam: function(){
+                return vals.param;
+            },
+            getVisible: function(){
+                return vals.visible;
+            }
+        }
+
+        return $window.sharedService;
+    });
+
+
+    //everything in here returns a jsDate.  If you need a moment.js object, do it in your code.
+    myModule.service('dateCalc', function(){
+        this.getPromptMonthFromDate= function(someDate){
+            return getPromptMonthPrivate(someDate);
+        }
+
+        this.buildFOMs = function(someDate, quantityLimit){
+            var startDate = moment(someDate).add('months', 1).startOf('month').toDate();
+            var FOMs = [];
+            for (var x=0; x<quantityLimit; x++){
+                FOMs.push({"actual":startDate, "formatted":moment(startDate).format("MMM YYYY")});
+                startDate = moment(startDate).add('months', 1).toDate();
+            }
+            //console.log(FOMs);
+            return FOMs;
+        }
+
+        this.timeZoneShift = function (d){
+            return moment(d).add('minutes', moment(d).zone()).toDate();
+        }
+
+        this.getPromptWinter = function(d){
+            if (getPromptMonthPrivate(d).month()<=10){ //not winter yet [0 = Jan]
+                return getPromptMonthPrivate(d).startOf('year').month('Nov').toDate();
+            } else { //already started winter, skip to the next one!
+                return getPromptMonthPrivate(d).startOf('year').add('years' , 1).month('Nov').toDate();
+            }
+        }
+
+        this.getPromptSummer = function(d){
+            if (getPromptMonthPrivate(d).month()<=3){ //not summer yet [3 = Apr]
+                return getPromptMonthPrivate(d).startOf('year').month('Apr').toDate();
+            } else { //already started summer, skip to the next one!
+                return getPromptMonthPrivate(d).startOf('year').add('years' , 1).month('Apr').toDate();
+            }
+        }
+
+        //give it the last trading day, or just assume next month if null
+        function getPromptMonthPrivate(inputDate) {
+            var d = inputDate;
+            if (!angular.isDefined(d)){
+                d = new Date();
+            }
+            return moment(d).add('months', 1).startOf('month');
+        }
+
+    });
+
+    //returns a promise, for an object containg {date, price}
+    myModule.service('getIndex', function (vfr, dateCalc){
+        
+        this.getRange = function (indexName, startDate, endDate, padding){
+            return doQuery(indexName, startDate, endDate, padding);
+        }
+
+        this.getAll= function(indexName, padding){
+            var startDate = moment('01-01-2000', "MM-DD-YYYY").toDate();
+            var endDate = moment('01-01-2200', "MM-DD-YYYY").toDate();
+            return doQuery(indexName, startDate, endDate, padding);
+        }
+
+        this.getForward = function(indexName, padding){
+            var startDate = moment().add('months', 1).startOf('month').toDate();
+            var endDate = moment('01-01-2200', "MM-DD-YYYY").toDate();
+            return doQuery(indexName, startDate, endDate, padding);
+        }
+
+        this.getForwardPlusNumber = function(indexName, numberOfMonths, padding){
+            var startDate = moment().add('months', 1).startOf('month').toDate();
+            var endDate = moment(startDate).add('months', numberOfMonths).toDate();
+            return doQuery(indexName, startDate, endDate, padding);
+        }
+
+        this.getNYMEXPadding = function(){
+            return paddingQuery(true);
+        }
+        
+        this.getNYMEXExpiration = function(){
+            return vfr.query("select id, Prompt_Month_Last_Trading_Day__c from index__c where Entegrate_Index_Key__c = 'NYMEX MASTER'")
+            .then(
+                function(response){
+                    return moment(response.records[0].Prompt_Month_Last_Trading_Day__c).toDate();
+                }
+            )
+        }   
+            
+        function paddingQuery(padding){
+            if (padding){
+                return vfr.query("select id, Index_cost__c from index__c where Entegrate_Index_Key__c = 'NYMEX MASTER'")
+                .then(
+                    function(response){
+                        return response.records[0].Index_cost__c-0.02;
+                    }
+                );
+            } else {
+                return 0;
+            }
+            
+        }
+
+        function doQuery(indexName, startDate, endDate, padding){
+            var query;
+            //special exceptions
+            if (indexName.toLowerCase()==='NYMEX'.toLowerCase()){
+                query = "select Id, Delivery_Date__c, Price__c, Index__r.Index_cost__c from Index_Future__c where Index__r.Entegrate_Index_Key__c = 'NYMEX MASTER' and Delivery_Date__c>="+moment(startDate).format('YYYY-MM-DD')+" and Delivery_Date__c<="+moment(endDate).format('YYYY-MM-DD');               
+            }
+            //generic query by name (be very carefuly because names can change.  Try to avoid hard-coding them, except maybe NYMEX!);
+            else {
+                query = "select Id, Delivery_Date__c, Price__c, Index__r.Index_cost__c from Index_Future__c where Index__r.Name = '"+indexName+"' and Delivery_Date__c>="+moment(startDate).format('YYYY-MM-DD')+" and Delivery_Date__c<="+moment(endDate).format('YYYY-MM-DD');
+            }
+            return vfr.query(query)
+                .then(
+                    function (response){
+                        if (response.records){
+                            //console.log(response);                        
+                            output = {};
+                            for (var x=0; x<response.records.length; x++){
+                                output[response.records[x].Delivery_Date__c]=response.records[x].Price__c;
+                                if (padding){
+                                    //console.log('adding padding');
+                                    output[response.records[x].Delivery_Date__c] += response.records[x].Index__r.Index_cost__c;
+                                }
+                                output[response.records[x].Delivery_Date__c] = +output[response.records[x].Delivery_Date__c].toFixed(4);
+                            }
+                            return output;
+                        }                   
+                    }               
+                );
+        }
+
+        function doHistoricalNYMEX(startDate, endDate, earliestDateOfHistory, padding){
+            var paddingAmount=0;
+            return paddingQuery(padding)
+            .then(
+                function (response){
+                    paddingAmount=response;
+
+                    var query;
+                    query = "select Value__c, Delivery_Date__c, As_of_date__c, Index_Parent__r.Name from Index_Future_Tracking__c where Delivery_Date__c>="+moment(startDate).format('YYYY-MM-DD')+" and Index_Parent__r.Entegrate_Index_Key__c='NYMEX MASTER' and Delivery_Date__c <= "+moment(endDate).format('YYYY-MM-DD')+" and As_of_date__c >= "+moment(earliestDateOfHistory).format('YYYY-MM-DD')+" order by As_of_date__c DESC, Delivery_Date__c ASC";
+                    //console.log(query);
+
+                    return vfr.query(query);
+                }
+            ).then(
+                function (response){
+                    var output = [];
+                    //console.log(response);
+                    //console.log(response);
+                    angular.forEach(response.records, function(ift, key){
+                         ift.Value__c = ift.Value__c + paddingAmount;   
+                         output.push(ift);                  
+                    });
+                    return output;
+                }
+            );          
+        }
+        
+        function doHistoricalNYMEXWithEnd(startDate, endDate, earliestDateOfHistory, lastestDateOfHistory, padding){
+            var paddingAmount=0;
+            return paddingQuery(padding)
+            .then(
+                function (response){
+                    paddingAmount=response;
+
+                    var query;
+                    query = "select Value__c, Delivery_Date__c, As_of_date__c, Index_Parent__r.Name from Index_Future_Tracking__c where Delivery_Date__c>="+moment(startDate).format('YYYY-MM-DD')+" and Index_Parent__r.Entegrate_Index_Key__c='NYMEX MASTER' and Delivery_Date__c <= "+moment(endDate).format('YYYY-MM-DD')+" and As_of_date__c >= "+moment(earliestDateOfHistory).format('YYYY-MM-DD')+"and As_of_date__c <= "+moment(lastestDateOfHistory).format('YYYY-MM-DD')+" order by As_of_date__c DESC, Delivery_Date__c ASC";
+                    //console.log(query);
+
+                    return vfr.query(query);
+                }
+            ).then(
+                function (response){
+                    var output = [];
+                    //console.log(response);
+                    //console.log(response);
+                    angular.forEach(response.records, function(ift, key){
+                         ift.Value__c = ift.Value__c + paddingAmount;   
+                         output.push(ift);                  
+                    });
+                    return output;
+                }
+            );          
+        }
+
+        this.getRangeHistorical = function (startDate, endDate, earliestDate, padding){         
+            return doHistoricalNYMEX(startDate, endDate, earliestDate, padding);
+        }
+        
+        this.getRangeHistoricalWithEnd = function (startDate, endDate, earliestDate, endAsOfDate, padding){
+            return doHistoricalNYMEXWithEnd(startDate, endDate, earliestDate, endAsOfDate, padding);
+        }
+
+        this.getForwardPlusNumber = function (numberOfMonths, earliestDate, padding){
+            var startDate = moment().add('months', 1).startOf('month').toDate();
+            var endDate = moment(startDate).add('months', numberOfMonths).toDate();
+            return doHistoricalNYMEX(startDate, endDate, earliestDate, padding);
+        }
+
+        //given a data object in futureDate.AsOfDate.Value form (like what the above methods return) bring back a filtered version by date ranges.
+        this.historicalParser = function (superSet, futureStart, futureEnd, historicalStart, historicalEnd){
+            //defaults
+            if (angular.isUndefined(futureStart)) futureStart = dateCalc.getPromptMonthFromDate().toDate(); //first of next month
+            if (angular.isUndefined(futureEnd)) futureEnd = moment(dateCalc.getPromptMonthFromDate()).add('months', 12).toDate(); //next 12 months
+            if (angular.isUndefined(historicalStart)) historicalStart = moment().subtract('days', 30).toDate(); //30 days ago
+            if (angular.isUndefined(historicalEnd)) historicalEnd = moment().add('days', 30).toDate();  //up to the present
+        
+            var output = _.chain(superSet)
+                .filter(function(ift){return moment(ift.Delivery_Date__c).toDate().getTime()>= futureStart.getTime()})
+                .filter(function(ift){return moment(ift.Delivery_Date__c).toDate().getTime()<= futureEnd.getTime()})
+                .filter(function(ift){return moment(ift.As_of_date__c).toDate().getTime()>= historicalStart.getTime()})
+                .filter(function(ift){return moment(ift.As_of_date__c).toDate().getTime()<= historicalEnd.getTime()});
+
+            // console.log('filtered output:');
+            // console.log(output.value());
+            return output.value();
+        }
+
+    });
+
+    
+    myModule.service('CampaignMemberService', function(vfr){
+        this.queryCM = function(campaignId, contactId){
+            var output;
+
+            return vfr.query("Select id, Margin_Dth__c, PageTemplate__c, Basis__c, Load_Curve__c, ContactId, Sales_Rep_Name__c, Sales_Rep_Phone__c, Sales_Rep_Email__c from CampaignMember where CampaignId='"+campaignId+"' and ContactId='"+contactId+"'")
+            .then(
+                function(cm){
+                    //console.log(cm);
+                    if (cm.records.length){
+                        output = cm.records[0];
+                        output.Sales_Rep_Phone__c = output.Sales_Rep_Phone__c.replace('(', '').replace(')','').replace(' ','').replace('-', '').replace('.', '').replace('.', '').replace('-', '').replace(' ', '');
+                        output.Sales_Rep_Phone__c = '('+output.Sales_Rep_Phone__c.substring(0,3)+') '+output.Sales_Rep_Phone__c.substring(3,6)+'-'+output.Sales_Rep_Phone__c.substring(6,10);
+                        return vfr.query("select id, firstname, lastname from contact where id='"+output.ContactId+"'");                        
+                    }   
+                })
+            .then(function(con){
+                //console.log(con);
+                output.contact=con.records[0];
+                return output;
+            })      
+        }
+    });
+
+    myModule.service('WeightedAvg', function(){
+
+        //input: array of objects (positions, for example)
+        //fields to sum ['Volume__c, Weatherized_Usage__c']
+        //fields to WeightedAvg ['DT_NYMEX__c, Customer_Price__c']
+        //grouByFieldName: "Conract_Month__c"
+
+        //returns an array of objects
+        this.grouped = function(input, fieldsToSum, fieldsToWeightedAvg, weightFieldName, groupByFieldName){
+            //get the options for my grouped fields
+            var output = [];
+            var groups = _.pluck(input, groupByFieldName);
+            var groups = _.uniq(groups);
+            //console.log(input);
+            //console.log('groups of ' + groupByFieldName);
+            //console.log(groups);
+
+
+            angular.forEach(groups, function(group){
+                //console.log('doing group ' + group);
+                /*console.log(_.filter(input, function(record){
+                    return record[groupByFieldName]===group;
+                }));*/
+                //for that group, get its weighted average:
+                var groupAvg = overallAverage(
+                    _.filter(input, function(record){
+                        return record[groupByFieldName]===group;
+                    }),//all the records matching the group we're iterating on
+                    fieldsToSum,
+                    fieldsToWeightedAvg,
+                    weightFieldName
+                );
+                //console.log(groupAvg);
+                groupAvg[groupByFieldName] = group;
+                output.push(groupAvg);
+            });
+
+            return output;
+        }
+
+        this.overall = function(input, fieldsToSum, fieldsToWeightedAvg, weightFieldName){
+            return overallAverage(input, fieldsToSum, fieldsToWeightedAvg, weightFieldName);
+        }
+
+        this.simpleAverage = function (input, fieldToAverage){
+            var fieldTotal = 0;
+            angular.forEach(input, function(record, key){
+                fieldTotal += record[fieldToAverage];
+            });
+            return fieldTotal/(input.length) || 0;
+        }
+        //private functions
+        function overallAverage(input, fieldsToSum, fieldsToWeightedAvg, weightFieldName){
+
+            var output = buildEmptyObject(input[0], fieldsToSum, fieldsToWeightedAvg);
+            
+            var totalWeightCounter = _.reduce( _.pluck( input, weightFieldName), accumulate );  
+        
+            //console.log('totalWeight is ' + totalWeightCounter);
+            //console.log(output);
+
+            angular.forEach(input, function(record, recordkey){
+                //controlling field is the weight field:
+                //totalWeightCounter += record[weightFieldName];
+
+                angular.forEach(record, function(value, key){                   
+                    if (_.contains(fieldsToSum, key)){
+                        //if it's in the fieldsToSum list, sum it into its appropriate field
+                        output[key]+=value;
+                    } else if (_.contains(fieldsToWeightedAvg, key)) { 
+                        if (angular.isDefined(weightFieldName)){
+                            if (angular.isDefined(value)){
+                                output[key] += value * record[weightFieldName]/totalWeightCounter;
+                            } //otherwise it's zero and we don't have to add anything
+                        } else {
+                            output[key] += value * 1/input.length;
+                            //it's something that should be accumulated as a weighted average
+                        }
+                        
+                    }
+                });
+            });
+            //console.log('overall WeightedAvg');
+            //console.log(output);
+            return output;
+        }
+
+        
+        function accumulate( sum, num ) {
+            return sum + num;    
+        }
+
+        function buildEmptyObject(representativeRecord, fieldsToSum, fieldsToWeightedAvg){
+            var construct = {};
+
+            angular.forEach(representativeRecord, function(value, key){
+                if (_.contains(fieldsToSum, key) || _.contains(fieldsToWeightedAvg, key)){
+                    construct[key] = 0;
+                }
+            });
+
+            return construct;
+        }
+
+
+
+
+    });
+
+    myModule.service('WeatherService', function(vfr){
+                
+        //creates an array of date, decimal (1.2 is 120%)
+        this.getWeatherMapForStation = function(weatherStationId){
+            return MapByStationID(weatherStationId);
+        }
+
+
+        function MapByStationID(weatherStationId){
+            //get all the weather, including the norms
+            return vfr.query("select id, Year__c, April__c, isNorm__c, Estimated__c, August__c, December__c,  February__c, January__c, July__c,  June__c, March__c,May__c,November__c, October__c, September__c from annual_usage__c where premise__c ='"+weatherStationId+"'")
+            .then(
+                function(response){
+                    var norm = _.filter(response.records, {"isNorm__c": true})[0];
+                    var actuals = _.filter(response.records, {"isNorm__c": false});
+
+                    var output = [];
+
+                    /*console.log('norm is');
+                    console.log(norm);
+                    console.log('actuals are');
+                    console.log(actuals);*/
+
+                    //loop through the actuals
+                    angular.forEach(actuals, function(actual, key){
+                        for (var x=1; x<12; x++){
+                            var localDate = moment(x+"-01-"+actual.Year__c, "M-DD-YYYY");
+                            var monthName = moment(localDate).format('MMMM')+'__c';
+
+                            output.push({
+                                "date": localDate.toDate(),
+                                "weatherFactor": actual[monthName]/norm[monthName] || 1
+                            });
+                        }
+                    });
+                    return output;
+                },
+                function(error){
+                    promiseErrors.handle(error, 'normsQuery');
+                }
+            ); 
+
+        }
+        
+
+        this.getWeatherMapForUtility = function (utilityId){    
+            var utilityInfo;        
+            //get the utility's location
+            return vfr.query("select id, location__c, Weather_Normalize_April__c,Weather_Normalize_August__c,Weather_Normalize_December__c, Weather_Normalize_February__c,Weather_Normalize_January__c, Weather_Normalize_July__c, Weather_Normalize_June__c, Weather_Normalize_March__c, Weather_Normalize_May__c, Weather_Normalize_November__c, Weather_Normalize_October__c,Weather_Normalize_September__c from TDSP__c where id ='"+utilityId+"'")
+                .then(
+                    function(tdsp){
+                        utilityInfo = tdsp.records[0]; //save the utility for future use on which months to normalize!
+                        console.log(utilityInfo);
+                        var clat = tdsp.records[0].Location__c.latitude;
+                        var clong = tdsp.records[0].Location__c.longitude;
+                        var query = "select Id from Premises__c where recordtypeid = '012300000018ZfR' order by distance(location__c, geolocation("+clat+", "+clong+"), 'mi') ASC limit 1";
+                        console.log(query);
+                        return  vfr.query(query);
+                    }                   
+                ).then(
+                    function(ws){
+                        //get the weather map now that we know which station we're working with
+                        return MapByStationID(ws.records[0].Id);
+                    }
+                ).then(
+                    function(weatherMap){
+                        //loop through the weather map, set anything that's not supposed to be normalized equal to 1
+                        angular.forEach(weatherMap, function(weatherMonth, key){
+                            var monthField = "Weather_Normalize_"+moment(weatherMonth.date).format('MMMM')+'__c';
+                            if (!utilityInfo[monthField]){
+                                //if it's not supposed to normalize
+                                weatherMonth.weatherFactor = 1;
+                            }
+                        });
+                        return weatherMap;
+                    }
+                )
+        }
+
+        this.getWeatherMapByPremise = function (lat, long){
+
+        };
+
+        this.normalize =function (usage, normStrip){
+            //think about what months to normalize, based on the premise's utility fields!
+        }
+
+        function getBaseload (usage){
+
+        }
+
+        function findStation(lat, long){
+
+        }
+
+        
+
+    });
+
+</script>
+</apex:component>

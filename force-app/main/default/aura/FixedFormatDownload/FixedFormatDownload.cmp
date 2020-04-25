@@ -1,0 +1,11 @@
+<aura:component >
+    <!--controller="EnrollmentLightningData"-->
+	<aura:attribute name="mydata" type="Object"/><aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="dataType" type="String" default="ExportData"/>
+    <aura:attribute name="fileType" type="String"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="exportComplete" type="boolean" />
+    
+    <aura:method name="handleExport" action="{!c.doInit}"/>
+    
+</aura:component>

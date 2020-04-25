@@ -1,0 +1,83 @@
+<apex:component >
+    <script type="text/javascript">
+    $j=jQuery.noConflict();
+    $j("#register_submit").click(function(){
+
+        if (!hasFormValidation()) {
+            Register();
+        }
+        else {
+            if (!$j("#regform")[0].checkValidity()) {
+                }
+        	else {
+                Register();
+            }
+        }
+    });
+    //if(!('checkValidity' in this)){
+    function Register(){
+        $j("#register_submit").button('loading');
+        //validations
+        var promo=$j("#promo").val();
+        if (promo===undefined) promo="";
+        if ($j("#password").val()!=$j("#password2").val()){	
+            alert('Your password must match');	
+            $j("#register_submit").button('reset');
+        }
+        else if ($j("#password").val().length<8){	
+            alert('Your password must be at least 8 characters');	
+            $j("#register_submit").button('reset');
+        }
+
+        else if (stringsContainEachOther($j("#password").val(), $j("#email").val())){
+            alert("Your password can't be part of your username, and vice versa");   
+            $j("#register_submit").button('reset');
+        }
+
+        else{
+            //console.log($j("#first_name").val() +', '+ $j("#last_name").val()+', '+ $j("#email").val()+', '+ $j("#password").val()+', '+  $j("#promo").val());
+            ControllerForMobileMain.RegisterWithGA(
+                $j("#first_name").val(),$j("#last_name").val(),$j("#email").val(),$j("#password").val(), promo, GAC,
+                //$j("#first_name").val(),$j("#last_name").val(),$j("#email").val(),$j("#password").val(), promo,
+                function(result,event){
+                    if (result=='Success'  && event.status){
+                        ControllerForMobileMain.RemoteLogin($j("#email").val(),$j("#password").val(), '/AddAddressAfterRegistration', function(result2, event2){
+                            if (event.status){
+                                dataLayer.push({'event':'success', 'successMessage':'Successful Registration'});                                                        
+                                var decoded = result2.replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '');                                    
+                                window.location.href=decoded;
+                            } else{
+                                dataLayer.push({'event':'error', 'errorFunction':'Register', 'errorObject':{'errorMessage':result, 'errorCode':event}});
+                                $j("#register_submit").button('reset');
+                                alert(event);
+                            }
+                        });                                
+                    } else {
+                        dataLayer.push({'event':'error', 'errorFunction':'Register', 'errorObject':{'errorMessage':result, 'errorCode':event}});
+                        alert(result);
+                        $j("#register_submit").button('reset');
+                    }
+                });
+        }
+    }
+    
+    function hasFormValidation() {
+        
+        var i = document.createElement('input');
+  		return typeof i.validity === 'object';
+        
+    };
+
+    function stringsContainEachOther(string1, string2){
+        if (string1.toLowerCase().indexOf(string2.toLowerCase())!==-1) {
+            return true;
+        }
+        if (string2.toLowerCase().indexOf(string1.toLowerCase())!==-1){
+            return true;
+        }
+        return false;
+    }
+
+    </script> 
+    <c:GACookieGrabber />
+</apex:component>

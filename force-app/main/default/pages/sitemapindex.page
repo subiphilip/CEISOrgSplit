@@ -1,0 +1,36 @@
+<apex:page contentType="text/xml" cache="false">
+    <sitemapindex xmlns="http://www.google.com/schemas/sitemap/0.84">
+        <sitemap>
+            <loc>http://www.mytruecost.com/xmlsitemap</loc>
+            <lastmod>
+                <apex:outputText value="{0,date,yyyy'-'MM'-'dd}">
+                    <apex:param value="{!NOW()}" /> 
+                </apex:outputText>
+            </lastmod>
+        </sitemap>
+        <sitemap>
+            <loc>http://www.mytruecost.com/xmlsitemapblog</loc>
+            <apex:outputText value="{0,date,yyyy'-'MM'-'dd}">
+                <apex:param value="{!NOW()}" /> 
+            </apex:outputText>
+        </sitemap>
+        <sitemap>
+            <loc>http://www.mytruecost.com/xmlsitemapzipcodes</loc>
+            <apex:outputText value="{0,date,yyyy'-'MM'-'dd}">
+                <apex:param value="{!NOW()}" /> 
+            </apex:outputText>
+        </sitemap>
+        <sitemap>
+            <loc>http://www.mytruecost.com/xmlsitemapfaqcontent</loc>
+            <apex:outputText value="{0,date,yyyy'-'MM'-'dd}">
+                <apex:param value="{!NOW()}" /> 
+            </apex:outputText>
+        </sitemap>
+        <sitemap>
+            <loc>http://www.mytruecost.com/xmlsitemaprepsandreviews</loc>
+            <apex:outputText value="{0,date,yyyy'-'MM'-'dd}">
+                <apex:param value="{!NOW()}" /> 
+            </apex:outputText>
+        </sitemap>
+    </sitemapindex>
+</apex:page>

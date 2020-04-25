@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RUC_Nodal_Fees__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Are the ERCOT Reliability Unit Commitment (RUC) passed through in this rate?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Are the ERCOT Reliability Unit Commitment (RUC) passed through in this rate?</inlineHelpText>
+    <label>RUC Included?</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

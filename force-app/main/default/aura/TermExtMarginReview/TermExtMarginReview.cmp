@@ -1,0 +1,47 @@
+<aura:component 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global" >
+                <!-- controller="ContractRenewalBatchData" -->
+    <ltng:require scripts="{!join(',' , $Resource.underscore, $Resource.MomentJS)}" />
+    
+    <aura:attribute name ="myData" type = "Term_Extension__c" />
+    <aura:attribute name = "preInit" type = "Boolean" default = "true"/>
+    <aura:attribute name="recordId" type="Id" />
+    
+    <aura:attribute name = "myColumns" type = "List"/>
+    <!-- not used<aura:attribute name = "termExtensions" type = "Term_Extension__c[]"/> -->
+    <aura:attribute name = "selectedRows" type = "Term_Extension__c[]"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    
+    
+    
+    <div>
+        <div class="slds-tabs--default__content" >
+            <aura:if isTrue="{!v.preInit}">
+                <aura:set attribute="else">
+                    <aura:if isTrue="{!v.myData.length == 0}">Nothing to see here: this term extension does not require margin approval.
+                        <aura:set attribute="else">
+                            <div style="height: 290px;">
+                                <lightning:datatable 
+                                                     data="{! v.myData }" 
+                                                     columns="{! v.myColumns }" 
+                                                     keyField="Id"
+                                                     hideCheckboxColumn="true"
+                                                     onrowselection="{! c.getSelectedName }"
+                                                     onrowaction="{! c.handleRowAction }"
+                                                     showRowNumberColumn="false"
+                                                     />
+                            </div>   
+                        </aura:set>
+                    </aura:if>
+                    
+                </aura:set>
+            </aura:if>   
+            
+            
+        </div>
+    </div>                                 
+    
+</aura:component>

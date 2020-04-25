@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Balloted__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>For gas choice program, this customer has already made a selection for the current year and may not be marketed to</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For gas choice program, this customer has already made a selection for the current year and may not be marketed to</inlineHelpText>
+    <label>Balloted</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

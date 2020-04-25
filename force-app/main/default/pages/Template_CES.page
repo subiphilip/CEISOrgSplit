@@ -1,0 +1,106 @@
+<apex:page docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" id="template_tc" applyBodyTag="false">
+    
+    
+
+    <head>
+        <script type="text/javascript"> if (!window.console) console = {log: function() {}}; </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"/>
+
+            <!--script src="https://cdn.optimizely.com/js/307772693.js"/-->
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="{!URLFOR($Resource.bootstrap, 'css/bootstrap.min.css')}" rel="stylesheet" media="screen"/>
+        <c:GoogleAnalyticsTrackingCodeScript />  
+        
+        <apex:insert name="HeadTags" />
+        
+        
+    </head>
+    <c:BootstrapCustom />
+    <body>
+        <div class="">
+            <div class="row" id="header_bar">
+                
+                <div class="">
+                    <span class="logo" itemscope="itemscope" itemtype="http://schema.org/Organization">
+                        <meta itemprop="name" content="CenterPoint Energy" />
+                        <meta itemprop="email" content="truecost@centerpointenergy.com" />
+                        <meta itemprop="foundingDate" content="1866" />
+                        <a href="http://www.centerpointenergy.com" target="_blank" itemprop="url">
+                            <div id="cnp_logo">
+                                <img src="{!$Resource.CNPlogoTransparent}" title="CenterPoint Energy" alt="CenterPoint Energy logo" itemprop="logo"/>
+                            </div>
+                        </a>
+                    </span>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="navbar" id="main-nav">
+                <div class="navbar-inner">
+                    <div class="">
+                        <a class="brand" id="mobile-brand" href="{!$Page.HomePage}">
+                            <div id="mobile-logo">
+                                <img src="{!$Resource.CNPlogoTransparent}"  />
+                            </div>
+                            <small><small><small>CenterPoint Energy Services</small></small></small>
+                        </a>
+                        
+                        <a class="btn btn-navbar pull-right" data-toggle="collapse" data-target=".nav-collapse" id="menu_button">
+                            Menu
+                        </a>
+                        
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                                
+                                <li><a href="{!$Page.CESWebinar}">Home</a></li>   
+                                <!--<li><a href="{!$Page.AgendaSpeakers}">Agenda and Speakers</a></li>-->  
+                                <li><a href="{!$Page.AboutUs}">About Us</a></li> 
+                                <li><a href="{!$Page.ContactCES}">Contact Us</a></li> 
+                                
+                               </ul>
+                        </div><!--/.nav-collapse -->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <apex:insert name="breadcrumbs" /> 
+        </div>
+        
+        <div class="phone-body">
+            <apex:insert name="body" />
+        </div>
+        
+        <div class="footer">
+            <div class="container">
+                <div class="row footer-row-1">
+                    
+                    <ul class="footer-links span6 text-center">
+                        <li><a href="{!$Page.CNPPrivacyPolicy}" >Privacy&nbsp;Policy</a></li>
+                        <li class="muted">|</li>
+                        <li><a href="{!$Page.CNPTermsOfUse}" >Terms&nbsp;of&nbsp;Use</a></li>
+                        <li class="muted">|</li>
+                        <li><a href="{!$Page.ContactCES}" >Contact&nbsp;Us</a></li>
+                    </ul>
+                    <div class="span6 text-center muted">
+                        <apex:insert name="footer-additional" />
+                        <p>&copy; {!$Label.copyright}</p>
+                    </div>
+                  
+                </div>
+               
+            </div>
+        </div>
+     
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script src="{!URLFOR($Resource.jqueryCookie)}"/>
+        <script src="{!URLFOR($Resource.bootstrap, 'js/bootstrap.min.js')}" />
+            
+            
+                        </body>
+                        </apex:page>

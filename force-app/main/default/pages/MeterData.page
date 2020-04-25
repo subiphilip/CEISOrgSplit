@@ -1,0 +1,32 @@
+<apex:page showHeader="false" sidebar="false" cache="true" applyBodyTag="false" expires="43200" docType="html-5.0" standardStylesheets="false"> 
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Meter Data - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>
+        
+         <!--apex:define name="breadcrumbs">
+         <ul Class="breadcrumb">
+        <li><a href="{!$Page.homepage}">Home</a></li><span class="divider"> ></span>
+        <li Class="active">{!$Label.Page_Title_Meter_Data}</li>
+    </ul>       
+    </apex:define-->
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <c:Content_Viewer content="To register and set up your meter" headline="true" deck="true"/> 
+                        <div id="callout">
+                            <c:Content_Viewer content="Meter Data Content" headline="true" deck="true"/>
+                        </div>
+                    </div>
+                    <div class="span4">
+                    <div>
+                    <c:Content_Viewer content="How to view your meter data" headline="true" deck="true"/> 
+                    </div>
+                </div>
+            </div>
+        </div></apex:define>
+    </apex:composition>
+</apex:page>

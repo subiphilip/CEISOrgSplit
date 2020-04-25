@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dist_Fixed_Monthly_5000_or_less__c</fullName>
+    <description>Monthly fixed charge for usage 5000 therms/year or less</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Monthly fixed charge for usage 5000 therms/year or less</inlineHelpText>
+    <label>Dist Fixed Monthly (5000 or less)</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

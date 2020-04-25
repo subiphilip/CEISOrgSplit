@@ -1,0 +1,65 @@
+<!-- 
+2/16/2012   Shane McLaughlin    limited zip codes displayed in registration selection to 5 digits--visualforce expression using LEFT()
+3/1/2012    Shane McLaughlin    Converted error messages (zipcode and small Comm) to managed content
+Added rendered statements to allow agent to Register Customers
+3/14/2012   Barry Glasco        Changed Register Page to RegisterSec.page for https redirect                                
+-->
+
+<apex:page id="Registration" showHeader="false" controller="ControllerForMobileMain" title="Register" docType="html-5.0" sidebar="false" standardStylesheets="false" applyBodyTag="false">
+    
+    <apex:composition template="Template_TC">       
+        <apex:define name="HeadTags">
+            <title>Register (Secure)- {!$Label.Page_Title_Company_Name}</title>
+            <meta name="description" Content="Create an account on TrueCost to view plans based on your personal electric usage patterns.  You can also use your account to view your Smart Meter data." />
+        </apex:define>
+        
+        <apex:define name="body" >
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h1>Create a TrueCost Profile!</h1>     
+                        <hr/>
+                        <h4>Option 1: Create a TrueCost username and password</h4>
+                        <div class="well well-large">
+                            
+                            <c:RemoteReg showphone="false" showpromo="false"/>
+                        </div>
+                             <hr/>
+                        <h4>Option 2: Use Facebook to create your account</h4>
+                        <div class="well well-large">        
+                            <a class="btn btn-primary btn-block" href="{!$Setup.AuthSettings__c.Facebook_oAuth_link__c}?site={!urlencode($Setup.AuthSettings__c.TrueCost_Secure_URL__c)}&startURL={!urlencode($Setup.AuthSettings__c.TrueCost_Post_registration_start_page__c)}">Use my Facebook account</a>
+                            <br/> <span class="muted">By clicking <b>Use my Facebook acount</b>, I accept the TrueCost <a href="{!$Page.TermsofUse}" target="_blank">Terms of Use</a> and <a href="{!$Page.Privacy}" target="_blank">Privacy Policy</a>.</span>
+                        </div>
+                        
+                    </div>
+                    <div class="span4">
+                        <h3>Why Create a Profile?</h3>
+                        <c:Content_Viewer content="Why Register"/>
+                       <div class="alert alert-success" style="align:right">
+                            <c:Content_Viewer content="Testimonial for Registration Page"/>
+                        </div>
+                    </div>
+                    
+                   
+                        
+                    <div class="span12" style="vertical-align:middle">
+                        <a href="https://seal.verisign.com/splash?form_file=fdf/splash.fdf&amp;dn=WWW.salesforce.COM&amp;lang=en" tabindex="-1" onclick="return v_mDown();">
+                            <img 
+                            name="seal" border="true" src="{!URLFOR($Resource.imgTrueCost, 'verisign.png')}" 
+                            oncontextmenu="return false;" alt="Click to Verify - This site has chosen a VeriSign SSL Certificate to improve Web site security"/>
+                            
+                        </a>
+                        <div style="display:inline-block">
+                        This site uses Secure Sockets (SSL) encryption for all customer data and has been authenticated by Verisign.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </apex:define>
+        
+        
+    </apex:composition>
+    <c:RemoteRegScript />
+</apex:page>

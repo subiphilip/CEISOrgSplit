@@ -1,0 +1,58 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+    <apex:stylesheet value="{!URLFOR($Resource.Jquery, 'css/ui-lightness/jquery-ui-1.8.16.custom.css')}"/>
+    
+    <apex:composition template="Template_TC">    
+        <apex:define name="HeadTags">
+        <c:ForceSSLScript />
+            <title>Shop. Compare. Switch.  And save over 20% -- {!$Label.Page_Title_Company_Name}</title>
+            <!-- <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/{!$CurrentPage.Name}"/> -->
+            <meta name="description" content="People who use myTrueCost.com to purchase new electric plans report saving, on average, more than 20% on their rate." />
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <apex:outputPanel layout="none" rendered="{!(ISPICKVAL($User.UserType,'Guest'))}">
+                        <div class="span3 pull-right">
+                            <!--h4>Register</h4-->
+                            <div class="well">
+                                <c:RemoteReg showphone="false" showpromo="false"/>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    <div class="span2 hidden-phone">
+                        <c:SliderPortlet />
+                    </div>
+                    <div class="{!if((ISPICKVAL($User.UserType,'Guest')), 'span7', 'span10')}">
+                        <h2>Shop. Compare. Switch.</h2>
+                        
+                        <p class="lead">People who use TrueCost® to purchase new plans report saving 20%,* on average, on their electric rate.</p>
+                        <div class="pull-right">
+                            <h1 class="text-info " style="font-size:100px; margin:35px;"><strong>20%</strong></h1>
+                        </div>
+                        <div>
+                            <p><strong class="text-info">SAVE TIME </strong>Compare more than 50 plans from electric companies side-by-side</p>
+                            <p><strong class="text-info">UNDERSTAND YOUR COST </strong>Let us do the math to help you understand the true cost of electric plans</p>
+                            <p><strong class="text-info">SWITCH NOW </strong>Or we'll remind you when it's time to renew</p>
+                        </div>
+                        <div class="clearfix"/>
+                        <hr/>
+                        
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
+        </apex:define>               
+        <apex:define name="footer-additional">
+            <small>
+                <small>
+                    <p><c:Content_Viewer content="Testimonial Savings Disclaimer" simple="true"/></p><br/>
+                </small>
+            </small>
+        </apex:define>
+    </apex:composition>
+    <c:RemoteRegScript />
+    <c:sliderPortletScript />
+</apex:page>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Public_Picture_URL__c</fullName>
+    <description>shows on the TrueCost people page.  Link this to a static resource (similar to REP logos)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>shows on the TrueCost people page.  Link this to a static resource (similar to REP logos)</inlineHelpText>
+    <label>Public Picture URL</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Url</type>
+</CustomField>

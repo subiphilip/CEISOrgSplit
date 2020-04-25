@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Percentage_Value__c</fullName>
+    <description>What percentage cash-back is offered by this reward?  Only required for % Cash Back reward type.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What percentage cash-back is offered by this reward?  Only required for % Cash Back reward type.</inlineHelpText>
+    <label>% Value</label>
+    <precision>5</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

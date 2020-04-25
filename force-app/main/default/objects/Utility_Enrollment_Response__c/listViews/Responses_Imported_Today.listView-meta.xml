@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Responses_Imported_Today</fullName>
+    <columns>NAME</columns>
+    <columns>Utility__c</columns>
+    <columns>Premise__c</columns>
+    <columns>Type__c</columns>
+    <columns>Status_Code__c</columns>
+    <columns>Pool_ID__c</columns>
+    <columns>Effective_Date__c</columns>
+    <columns>File_Name__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>equals</operation>
+        <value>TODAY</value>
+    </filters>
+    <label>Responses Imported Today</label>
+</ListView>

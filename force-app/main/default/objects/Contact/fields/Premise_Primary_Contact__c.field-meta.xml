@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Premise_Primary_Contact__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Primary contact on one or more premises.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Primary contact on one or more premises.</inlineHelpText>
+    <label>Premise Primary Contact</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

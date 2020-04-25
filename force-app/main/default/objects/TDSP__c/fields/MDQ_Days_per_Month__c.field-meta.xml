@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MDQ_Days_per_Month__c</fullName>
+    <description>For a premise&#39;s (or load curve&#39;s) MDQ, how many days per month can you use that capacity</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For a premise&#39;s (or load curve&#39;s) MDQ, how many days per month can you use that capacity</inlineHelpText>
+    <label>MDQ Days per Month</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

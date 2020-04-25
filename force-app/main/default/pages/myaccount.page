@@ -1,0 +1,323 @@
+<apex:page showHeader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" Controller="MyAccount">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>{!$Label.Page_Title_My_Account} - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>
+        
+        <!--apex:define name="breadcrumbs">
+        <apex:outputpanel styleClass="breadcrumbs" layout="block">
+        <apex:outputlink value="{!$Page.homepage}">Home</apex:outputlink>
+        <apex:outputlink value="{!$Page.myaccount}" styleClass="last">{!$Label.Page_Title_My_Account}</apex:outputlink>
+    </apex:outputpanel>            
+    </apex:define-->
+        
+        <apex:define name="body">  
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h1>My Account <br/><small>Check your order history, view usage data, and update contact information.</small></h1>
+                        <apex:outputpanel layout="none" rendered="{!NOT(Isnull(thePremise))}">
+                            <apex:form >
+                                <div class="well">
+                                    You are currently viewing account usage and plan data for:
+                                    <c:ChangeAPA />                
+                                </div>
+                            </apex:form>
+                            
+                            <h4>Usage Data<br/><small>Monthly Usage for {!thepremise.Electric_Service_Address__c}</small></h4>
+                            <br/>
+                            <apex:outputpanel layout="none" rendered="{!AND(MeterDataPermission, dataRequestStatus='Complete')}">
+                                View daily, hourly, and 15-minute readings with our <apex:outputlink value="{!$Page.IntervalDataExplorer}"> advanced viewer</apex:outputlink>
+                                <div id="chart_div" class="usage-chart" style="height: 240px; border: 1px solid #EDEDED;"></div>
+                                <c:Content_Viewer content="My Account Data Explanation" />
+                            </apex:outputpanel>
+                            
+                            <!--if you need to grant data permission-->
+                            <apex:outputpanel rendered="{!not(MeterDataPermission)}" layout="none">                    
+                                <div class="alert alert-info">
+                                    <h5>Usage data not requested</h5>
+                                    <p>In this space, TrueCost shows your annual electricity consumption and can provide comparison to show whether you use more or less than average customers</p>
+                                    <p>Your data also provides you the most accurate pricing possible for electric plans, and may entitle you to special plans not available to the public.</p>
+                                    <apex:form >
+                                        <apex:commandlink action="{!grantMeterDataPermission}"  value="Load My Data" styleClass="btn btn-warning" />
+                                    </apex:form>
+                                </div>
+                            </apex:outputpanel> 
+                            
+                            <!--for data that's not going to load because of errors -->
+                            <apex:outputPanel styleclass="alert alert-block" rendered="{!AND(MeterDataPermission, Contains(dataRequestStatus,'Error'))}">
+                                <apex:form >
+                                    There was an error loading your meter data.  Please &nbsp;<apex:commandlink action="{!grantMeterDataPermission}">re-enter your meter number </apex:commandlink>.
+                                </apex:form>
+                            </apex:outputPanel>
+                            
+                            <apex:pageMessage rendered="{!AND(MeterDataPermission, Contains(dataRequestStatus,'Error'))}" severity="error" strength="3" summary="There was an error importing your usage data." >
+                                
+                            </apex:pageMessage>
+                            
+                            <!--for data that's being loaded -->
+                            <apex:outputPanel styleclass="alert alert-block" rendered="{!AND(MeterDataPermission, dataRequestStatus='Pending')}">
+                                Your meter data is being imported. Please check back again soon.
+                            </apex:outputPanel>
+                            
+                            <hr/>
+                            
+                            <apex:outputpanel layout="none" rendered="{!AND(MeterDataPermission, dataRequestStatus='Complete')}">
+                                <h4>Meter Data Sharing</h4>
+                                
+                                <c:Content_Viewer content="Meter Data Sharing Explanation"/>
+                                
+                                <apex:form styleclass="alert alert-info alert-block">
+                                    <apex:outputpanel id="meterDataPublicStatus">
+                                        <apex:pageMessage escape="false" summary="{!if(ShareMeterData, '<h4>Your meter data is shared.</h4>', '<h1>Your meter data is currently private.</h1>')}" severity="info" strength="1" >
+                                            
+                                            <apex:outputpanel layout="block" rendered="{!ShareMeterData}">
+                                                Others can view your data by visiting
+                                                <a href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/publicdataviewer?pid={!thepremise.id}" target="_blank">
+                                                    this link
+                                                </a>.
+                                            </apex:outputpanel><br/><br/>
+                                            
+                                            <apex:actionregion >
+                                                <apex:outputpanel layout="block" rendered="{!ShareMeterData}">
+                                                    <input type="radio" name="meterDataPublic" value="true" checked="checked"  >Share My Usage</input>
+                                                <input type="radio" name="meterDataPrivate" value="false">Stop Sharing My Usage
+                                                <apex:actionsupport event="onclick" action="{!MakeDataPrivate}" rerender="meterDataPublicStatus"/>
+                                            </input>
+                                        </apex:outputpanel>
+                                        
+                                        <apex:outputpanel layout="block" rendered="{!not(ShareMeterData)}">
+                                            <input type="radio" name="meterDataPublic" value="true"   >Share My Usage
+                                            <apex:actionsupport event="onclick" action="{!MakeDataPublic}" rerender="meterDataPublicStatus"/>
+                                        </input>
+                                        <input type="radio" name="meterDataPrivate" value="false" checked="checked" >Keep my data private</input>
+                                </apex:outputpanel>
+                            </apex:actionregion>
+                        </apex:pageMessage>
+                    </apex:outputpanel>
+                </apex:form>
+            </apex:outputpanel>
+            
+            <apex:outputpanel layout="block" rendered="{!thepremise.Premise_Type__c = 'Residential'}"> 
+                <h4>Home Profile</h4>
+                
+                <apex:outputpanel layout="block" rendered="{!(isnull(thepremise.Year_Built__c))||(isnull(thepremise.Square_Feet__c))||(isnull(thepremise.Heating_System__c))||(isnull(thepremise.Occupants__c))}" >                  
+                    Your home profile is <span style="font-weight: bold; color: red;">incomplete</span>. Click the edit button below to add or update data about your home.
+                </apex:outputpanel>
+                
+                <apex:outputpanel layout="block" rendered="{!NOT(isnull(thepremise.Year_Built__c))&&NOT(isnull(thepremise.Square_Feet__c))&&NOT(isnull(thepremise.Heating_System__c))&&NOT(isnull(thepremise.Occupants__c))}" >                  
+                    Your home profile is <span style="font-weight: bold; color: green;">complete</span>. Click the edit button below to update any data which may have changed.
+                </apex:outputpanel>
+                
+                <div>
+                    <div class="pull-left hidden-phone">                          
+                        <apex:image id="homeprofileimage" url="{!URLFOR($Resource.home_profile_image)}" />
+                    </div>
+                    <div class="pull-left">                            
+                        <apex:panelGrid columns="2" id="HomeProfileData" cellpadding="2" width="250">
+                            <apex:outputText value="Square Feet:" style="font-weight: bold;" />
+                            <apex:outputText value="{!round(thepremise.Square_Feet__c, 0)}" rendered="{!NOT(isnull(thepremise.Square_Feet__c))}" />
+                            <apex:outputText value="-" rendered="{!(isnull(thepremise.Square_Feet__c))}" style="font-style: italic" />
+                            
+                            <apex:outputText value="Year Built:" style="font-weight: bold;" />
+                            <apex:outputText value="{!thepremise.Year_Built__c}" rendered="{!NOT(isnull(thepremise.Year_Built__c))}" />
+                            <apex:outputText value="-" rendered="{!(isnull(thepremise.Year_Built__c))}" style="font-style: italic" />
+                            
+                            <apex:outputText value="Occupants:" style="font-weight: bold;" />
+                            <apex:outputText value="{!round(thepremise.Occupants__c, 0)}" rendered="{!NOT(isnull(thepremise.Occupants__c))}" />
+                            <apex:outputText value="-" rendered="{!(isnull(thepremise.Occupants__c))}" style="font-style: italic" />
+                            
+                            <apex:outputText value="Heating System:" style="font-weight: bold;" />
+                            <apex:outputText value="{!thepremise.Heating_System__c}" rendered="{!NOT(isnull(thepremise.Heating_System__c))}" />
+                            <apex:outputText value="-" rendered="{!(isnull(thepremise.Heating_System__c))}" style="font-style: italic" />
+                            
+                            <apex:outputText value="Pool:" style="font-weight: bold;" />
+                            <apex:outputText value="{!if(thepremise.Pool__c, 'Yes', 'No')}" />
+                        </apex:panelGrid>  
+                        <a href="{!$Page.Calculation_Choice}?mode=Estimate&update=true" class="btn btn-default btn-small">Edit Home Profile</a>
+                        <br/>
+                    </div> 
+                    
+                </div>
+                <div class="clearfix"/>
+                <hr/>
+            </apex:outputpanel>
+            
+            
+        </apex:outputpanel>
+        <apex:form >
+            <c:ManageAPAs />
+        </apex:form>
+        <hr/>
+    </div>
+    
+    
+    <div class="span4">
+        <h4>Email Preferences</h4>
+        <c:EmailPreferences />
+        <hr/>
+        
+        <h4>Account Information</h4>
+        <p>Email: {!theaccount.email__c}</p>
+        <p>Phone: {!theaccount.Phone__c}</p>
+        <apex:outputPanel layout="none" rendered="{!not(isnull(theaccount.Address__c))}">
+            <p>Mailing Address: {!theaccount.Address__c}</p>
+            <p>{!theaccount.City__c}, {!theaccount.State__c}  {!theaccount.Zip__c}</p>
+        </apex:outputPanel>
+        <a href="{!$Page.UpdateAccount}" class="btn btn-small btn-default">Update</a>
+        <a href="{!$Page.ChangePassword}" class="btn btn-small btn-default">Change Password</a>
+        <hr/>
+        
+        
+        <apex:outputPanel rendered="{!showOrderinProgress}" layout="none">
+            <h4>Orders in Progress</h4>
+            
+            <p>Confirmation Number: {!orderinprogress.Name} </p>
+            <p>Electric Company: {!orderinprogress.REP_Profile__r.name} </p>
+            <p>Plan: {!orderinprogress.plan__r.name} </p>
+            <p>Contract Length: {!round(orderinprogress.Contract_Length__c, 0)} months</p>
+            <p>Order Status: {!orderinprogress.Order_Status__c}</p>
+            <apex:outputPanel layout="none" rendered="{!NOT(ISNULL(orderinprogress.InitialDateofService__c))}">
+                <p>Effective Date: <apex:outputText value="{0,date, M'/'dd'/'yyyy}"><apex:param value="{!orderinprogress.InitialDateofService__c}" /></apex:outputText></p>
+            </apex:outputPanel>
+            <hr/>
+        </apex:outputPanel>
+        
+        <apex:outputPanel rendered="{!AND(isnull(currentplan), NOT(showOrderinProgress))}" layout="none">
+            <h4>Get Reminded</h4>
+            <apex:form >
+                <c:Reminder_for_Registered_Users />
+            </apex:form>    
+            <hr/>
+        </apex:outputPanel>
+        
+        
+        
+        <apex:outputPanel styleClass="sidebarright" rendered="{!!isnull(currentplan)}" layout="none">
+            <h4>Current Plan</h4>
+            <p>Confirmation Number: {!currentPlan.name}</p>
+            <p>Electric Company: {!currentPlan.REP_Profile__r.name}</p>
+            <p>Plan: {!currentPlan.plan__r.name}</p>
+            <p>Contract Length: {!round(currentPlan.Contract_Length__c, 0)} months</p>
+            <p>Expires: <apex:outputText value="{0,date, M'/'dd'/'yyyy}"><apex:param value="{!currentPlan.Plan_Expiration__c}" /></apex:outputText></p>
+            <apex:form >
+                <apex:outputpanel rendered="{!NOT(isnull(currentplanstars))}" layout="none">
+                    <p>Your Rating:</p> 
+                        <c:Star_Rating_static starrating="{!currentplanstars}"/> 
+                    <apex:commandlink action="{!rateyourrepEdit}" value="Edit your Rating" styleClass="btn btn-small btn-default"/>
+                </apex:outputpanel>
+                <apex:outputpanel rendered="{!isnull(currentplanstars)}">
+                    <apex:commandlink action="{!rateyourrep}" value="Rate this Company" styleClass="btn btn-small btn-default"/>
+                </apex:outputpanel>
+            </apex:form>
+            <hr/>
+        </apex:outputPanel>
+        <apex:outputPanel styleClass="sidebarright" layout="none" rendered="{!and(isnull(currentplan), or(isnull(AnonReviews), AnonReviews.size = 0))}">
+            <h4>Rate Your Provider</h4>
+            <p>TrueCost users can provide ratings and reviews for plans they order through TrueCost.</p>
+            <p>To review a non-TrueCost plan/company, you'll need to upload an electric bill from that company to verify your review.</p>                
+            <apex:form >
+                <apex:outputlink styleClass="btn btn-small btn-default" value="{!$Page.Rating}">Submit Rating</apex:outputlink>
+            </apex:form>
+            <hr/>
+        </apex:outputPanel>
+        <apex:outputPanel styleClass="sidebarright" layout="none" rendered="{!and(isnull(currentplan), not(isnull(AnonReviews)), AnonReviews.size > 0)}">
+            <h4>Your Ratings</h4>
+            <apex:repeat value="{!AnonReviews}" var="r">
+                <p>Provider: {!r.REP_without_Order__c}</p>
+                <c:Star_Rating_static starrating="{!r.Rating__c}"/> 
+                <hr/>
+            </apex:repeat>
+            
+        </apex:outputPanel>
+        
+        <apex:outputPanel styleClass="sidebarright" layout="none" rendered="{!and(not(isnull(PreviousPlans)), PreviousPlans.size > 0)}">
+            <h4>Order History</h4>
+            <dl>
+            <apex:repeat value="{!PreviousPlans}" var="op">
+                <dt>Electric Company: {!op.REP_Profile__r.name}</dt>
+                <dd>
+                    <p>Plan: {!op.plan__r.name}</p>
+                    <p>Contract Length: {!round(op.Contract_Length__c, 0)} months</p>
+                    <p>Order Date: <apex:outputText value="{0,date, M'/'dd'/'yyyy}"><apex:param value="{!op.createddate}" /></apex:outputText></p>  
+                </dd>
+            </apex:repeat>   
+            </dl>
+        </apex:outputPanel>   
+    </div>
+    
+    
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</apex:define>       
+
+</apex:composition>
+
+
+<apex:outputpanel rendered="{!AND(MeterDataPermission, dataRequestStatus='Complete', NOT(Isnull(thePremise)))}">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    
+    var currentHeight;
+      var currentWidth;
+
+      window.onresize= function () {
+       var windowHeight = $j(window).height();
+       var windowWidth = $j(window).width();
+
+       if (currentHeight == undefined || currentHeight != windowHeight || currentWidth == undefined || currentWidth != windowWidth) {
+
+          drawChart();
+
+        currentHeight = windowHeight;
+        currentWidth = windowWidth;
+        }
+      };
+    function drawChart() {
+        
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Month');
+        data.addColumn('number', 'Your Usage');
+        data.addColumn('number', 'Average Usage of Others');
+        
+        data.addRows([
+            ['Jan', {!jan}, {!AverageUsage[0].usage__c}],
+            ['Feb', {!feb}, {!AverageUsage[1].usage__c}],
+            ['Mar', {!mar}, {!AverageUsage[2].usage__c}],
+            ['Apr', {!apr}, {!AverageUsage[3].usage__c}],
+            ['May', {!may}, {!AverageUsage[4].usage__c}],
+            ['Jun', {!jun}, {!AverageUsage[5].usage__c}],
+            ['Jul', {!jul}, {!AverageUsage[6].usage__c}],
+            ['Aug', {!aug}, {!AverageUsage[7].usage__c}],
+            ['Sep', {!sep}, {!AverageUsage[8].usage__c}],
+            ['Oct', {!oct}, {!AverageUsage[9].usage__c}],
+            ['Nov', {!nov}, {!AverageUsage[10].usage__c}],
+            ['Dec', {!dec}, {!AverageUsage[11].usage__c}]          
+        ]);
+        
+        var options = {
+            //width: 600, height: 240,
+            colors: ['#fe9601', '#e3e3e3'], legend:{position:'bottom'}, vAxis: {minValue: 0}        
+        };
+        
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+        
+    }      
+    </script>
+</apex:outputpanel>
+</apex:page>

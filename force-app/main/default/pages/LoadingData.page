@@ -1,0 +1,111 @@
+<apex:page showHeader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" controller="ControllerForMobileMain">
+    <style type="text/css">
+    	#meter_number_error {display:none;}
+        #no_rep {display:none;}
+        #incorrect_address {display:none;}
+        #timeout {display:none;}
+    </style>
+    
+    <apex:composition template="Template_TC">
+		<apex:define name="body">	
+            <div class="container">
+            	<div class="row">
+                	<div class="span8">
+                        <h3>TrueCost is importing your data from your electric utility</h3>
+                        <div id="meter_number_error" class="alert alert-error alert-block">
+                            <h5>The meter number that you entered did not match what your utility expected for that address</h5>
+                            <a href="{!$Page.Calculation_Choice}?mode=MeterData" class="btn btn-primary">Re-enter meter number</a>
+                            <a href="{!$Page.Calculation_Choice}?mode=Estimate" class="btn btn-default">Estimate Usage</a>
+                            <a href="{!$Page.Calculation_Choice}?mode=Profile" class="btn btn-default">Select a Profile</a>
+                        </div>
+                        <div id="no_rep" class="alert alert-error alert-block">
+                            <h5>The address that you selected is not active with the utility</h5>
+                            <a href="{!$Page.AddAddressAfterRegistration}" class="btn btn-primary">Select Different Address</a>
+                            <a href="{!$Page.Calculation_Choice}?mode=Estimate" class="btn btn-default">Estimate Usage</a>
+                            <a href="{!$Page.Calculation_Choice}?mode=Profile" class="btn btn-default">Select a Profile</a>
+                            <p></p>
+                        </div>
+                        <div id="incorrect_address" class="alert alert-error alert-block">
+                            <h5>The service address that you selected didn't match the utility's records</h5>
+                            <a href="{!$Page.AddAddressAfterRegistration}" class="btn btn-primary">Select Different Address</a>
+                            <a href="{!$Page.Calculation_Choice}?mode=Estimate" class="btn btn-default">Estimate Usage</a>
+                            <a href="{!$Page.Calculation_Choice}?mode=Profile" class="btn btn-default">Select a Profile</a>
+                            <p></p>
+                        </div>
+                        <div id="timeout" class="alert alert-block">
+                            <h5>The import is taking longer than usual</h5>
+                            <a href="{!$Page.Calculation_Choice}?mode=Estimate" class="btn btn-primary">Estimate Usage</a>
+                            <a href="{!$Page.Calculation_Choice}?mode=Profile" class="btn btn-warning">Select a Profile</a>
+                            <p></p>
+                        </div>
+                        <div class="well well-large" >
+                        	<c:Content_Viewer content="Callout for Data Loading Page"/>
+                        </div>
+                    </div>
+                    
+                    <div class="span4">
+                    	<h4>Import Status</h4>
+                        <p>The import typically takes less than 30 seconds.</p>
+                        <p>If an error occurs, we'll let you know.</p>
+                        <p>When your data loads, we'll show you the offers based on your actual usage.</p>
+                        <div class="progress progress-warning progress-striped active">
+                            <div class="bar" style="width: 5%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</apex:define>
+        
+        
+	</apex:composition>
+    
+    <script>
+        	//stuff for Data Waiting
+            $j=jQuery.noConflict();
+            var Poller;
+            var Pollerstarttime;
+
+			$j( document).ready(function(event){
+                Pollerstarttime = new Date();
+                Poller=setInterval(function(){CheckStatus()},5000);		
+            });
+	
+            function CheckStatus(){
+                //console.log('checking status');
+                var RightNow = new Date();
+                
+                //console.log('width before is ' + $j(".bar").width() + ' but I want to set it to ' +  (RightNow - Pollerstarttime)/600+"%");
+                
+                $j(".bar").width((RightNow - Pollerstarttime)/600+"%");
+                //console.log('width after is ' + $j(".bar").width());
+                ControllerForMobileMain.CheckDataStatusRemoteDetails('{!$User.id}', function(result, event){
+                    if(event.status){
+                        if (result=='Complete'){   
+                            clearInterval(Poller);
+                            dataLayer.push({'event':'success', 'successType':'MeterDataTrackingStatus', 'successMessage':'Data Received'});
+                            window.location="{!$Page.ShopPlans}"
+                        } 
+                        if (result=='Error-Invalid Service Address'){   
+                            clearInterval(Poller);
+                            dataLayer.push({'event':'logging', 'logType':'MeterDataTrackingStatus', 'logMessage':'Invalid Service Address'});
+                            $j( "#meter_number_error").show();
+                        }
+                        if (result=='Error-Invalid Meter/ESID Match'){   
+                            clearInterval(Poller);
+                            dataLayer.push({'event':'logging', 'logType':'MeterDataTrackingStatus', 'logMessage':'Invalid Meter/ESID Match'});
+                            $j( "#incorrect_address").show();
+                        }
+                    }
+                });
+        
+                var RightNow = new Date();
+                if (RightNow - Pollerstarttime > 1000*60) {
+                        clearInterval(Poller);
+                        dataLayer.push({'event':'logging', 'logType':'MeterDataTrackingStatus', 'logMessage':'Request Timed Out'});                      
+                    	$j( ".progress").hide();
+                        $j( "#timeout").show();
+                }		
+            }
+        </script>
+    
+</apex:page>

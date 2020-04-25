@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Batch_Info__c</fullName>
+    <externalId>false</externalId>
+    <formula>Batch__r.Name &amp; &quot;--&quot; &amp; TEXT(MONTH(Batch__r.Accounting_Period__c)) &amp; &quot;/&quot; &amp; TEXT(YEAR(Batch__r.Accounting_Period__c)) &amp; &quot;--&quot; &amp; Batch__r.RecordType.Name &amp; &quot;--&quot; &amp; TEXT(Batch__r.Batch_Status__c)</formula>
+    <label>Batch Info</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,6 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<font face="arial" size="3">Hi&nbsp;{!TrueCost_Case__c.OwnerFirstName},</font><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><br></div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">A Gas Choice file just came in as a case. &nbsp;Please process the file and then close the case. &nbsp;If you aren't sure what to do with this file or if there is an error, Chatter one the Admins about it.</div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><br></div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">Thanks!</div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><br></div><div><font face="arial">Link: {!TrueCost_Case__c.Link}</font></div><div><font face="arial">Sent From:&nbsp;{!TrueCost_Case__c.Caller_Name__c}</font></div><div><font face="arial">Owner:&nbsp;{!TrueCost_Case__c.OwnerFullName}</font></div><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">Description:&nbsp;{!TrueCost_Case__c.Description__c}</div>]]></td>
+</tr>
+</table>

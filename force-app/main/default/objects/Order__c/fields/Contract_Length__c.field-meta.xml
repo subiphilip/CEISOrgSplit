@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_Length__c</fullName>
+    <description>How long is the contract (in months)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>12 for a 12 month contract, 0 for a month to month contract</inlineHelpText>
+    <label>Contract Length</label>
+    <precision>2</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

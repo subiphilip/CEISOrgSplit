@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Won_Electric_Opportunity_Locking</fullName>
+    <active>false</active>
+    <description>lock opportunity volume for closed electric opportunities</description>
+    <errorConditionFormula>AND(
+  RecordTypeId = &#39;012300000019OR8&#39;,
+  OR( 
+    ISCHANGED(Amount), 
+    ISCHANGED(CloseDate), 
+    ISCHANGED(Unit_Margin__c),
+    ISCHANGED(Term_Volume__c),
+    ISCHANGED(REP_Profile__c),
+
+    ISCHANGED(AccountId),
+    ISCHANGED(RecordTypeId),
+    ISCHANGED(Type),
+    ISCHANGED(LDC2__c),
+    ISCHANGED(Consultant_Margin__c),
+    ISCHANGED(Term__c),
+    ISCHANGED(IsClosed) 
+  ),
+
+  $Profile.Name &lt;&gt; &quot;System Administrator&quot;,
+  AND(PRIORVALUE(IsClosed))  
+)</errorConditionFormula>
+    <errorMessage>Oppt14: You can&#39;t change margin or volume information on a closed/won electric opportunities.  If there&#39;s bad data on the opportunity, please ask an administrator to make the change for you.</errorMessage>
+</ValidationRule>

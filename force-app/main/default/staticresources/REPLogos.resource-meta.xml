@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <cacheControl>Public</cacheControl>
+    <contentType>application/x-zip-compressed</contentType>
+    <description>file of all the REP logos on TrueCost updated 7/9/19 for Pulse Power&#39;s new logo. Updated 11/12/2019 for Chariot Energy&#39;s logo</description>
+</StaticResource>

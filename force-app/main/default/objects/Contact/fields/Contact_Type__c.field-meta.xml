@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_Type__c</fullName>
+    <description>What type of contact is this?  Select all that apply.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What type of contact is this?  Select all that apply.</inlineHelpText>
+    <label>Contact Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Customer Primary</fullName>
+                <default>false</default>
+                <label>Customer Primary</label>
+            </value>
+            <value>
+                <fullName>Customer Secondary</fullName>
+                <default>false</default>
+                <label>Customer Secondary</label>
+            </value>
+            <value>
+                <fullName>Contract</fullName>
+                <default>false</default>
+                <label>Contract</label>
+            </value>
+            <value>
+                <fullName>Confirmations</fullName>
+                <default>false</default>
+                <label>Confirmations</label>
+            </value>
+            <value>
+                <fullName>Credit</fullName>
+                <default>false</default>
+                <label>Credit</label>
+            </value>
+            <value>
+                <fullName>Billing Primary</fullName>
+                <default>false</default>
+                <label>Billing Primary</label>
+            </value>
+            <value>
+                <fullName>Billing Secondary</fullName>
+                <default>false</default>
+                <label>Billing Secondary</label>
+            </value>
+            <value>
+                <fullName>Premise Primary</fullName>
+                <default>false</default>
+                <label>Premise Primary</label>
+            </value>
+            <value>
+                <fullName>Billing-Contract</fullName>
+                <default>false</default>
+                <label>Billing-Contract</label>
+            </value>
+            <value>
+                <fullName>Notices</fullName>
+                <default>false</default>
+                <label>Notices</label>
+            </value>
+            <value>
+                <fullName>Consultant Payment</fullName>
+                <default>false</default>
+                <label>Consultant Payment</label>
+            </value>
+            <value>
+                <fullName>Consultant Fee Exhibit</fullName>
+                <default>false</default>
+                <label>Consultant Fee Exhibit</label>
+            </value>
+            <value>
+                <fullName>Pipeline Operations</fullName>
+                <default>false</default>
+                <label>Pipeline Operations</label>
+            </value>
+            <value>
+                <fullName>Phone Line Issue</fullName>
+                <default>false</default>
+                <label>Phone Line Issue</label>
+            </value>
+            <value>
+                <fullName>FOM Confirmation</fullName>
+                <default>false</default>
+                <label>FOM Confirmation</label>
+            </value>
+            <value>
+                <fullName>Premise Curtailment</fullName>
+                <default>false</default>
+                <label>Premise Curtailment</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>7</visibleLines>
+</CustomField>

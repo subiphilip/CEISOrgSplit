@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CI_Gas_CES_Office_Required</fullName>
+    <active>false</active>
+    <description>CES Office is required for C&amp;I Gas</description>
+    <errorConditionFormula>AND(
+  CONTAINS(RecordType.Name,&#39;C&amp;I Premise Gas&#39;),
+  ISBLANK(CES_Office__c)  
+)</errorConditionFormula>
+    <errorDisplayField>CES_Office__c</errorDisplayField>
+    <errorMessage>Premise15:  CES Office is required for CI Gas premises</errorMessage>
+</ValidationRule>

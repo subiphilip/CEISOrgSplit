@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Commercial_Avg_Peak_Month__c</fullName>
+    <description>Volume, in Dth, of the peak month&#39;s usage for Commercial customers in this PIN</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Volume, in Dth, of the peak month&#39;s usage for Commercial customers in this PIN</inlineHelpText>
+    <label>Commercial Avg Peak Month</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TopScript__c</fullName>
+    <description>For youTube embeds, please use 640x360.  ex: &lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;http://www.youtube.com/embed/vmQyEoNep2g&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For youTube embeds, please use 640x360.  ex: &lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;http://www.youtube.com/embed/vmQyEoNep2g&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;</inlineHelpText>
+    <label>TopScript</label>
+    <length>32768</length>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

@@ -1,0 +1,235 @@
+<apex:page showHeader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="true" expires="43200" Controller="ControllerForMobileMain">
+   <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+      <c:tc2_header title="{!$Label.Page_Title_Contact_Us} - {!$Label.Page_Title_Company_Name}"
+         description="Get answers to frequently asked questions about electric rates, electric providers, electric choice, switching plans, TrueCost, and CenterPoint Energy" />
+      <style>
+        
+      </style>
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="Edit Home Profile" subHeadline="" />
+
+            <div class="container form">
+             <div class="box is-result-no-padding">
+                 <div class="inner has-text-centered">
+                     <div class="spaced">
+                         <p class="icon is-large has-text-info "> <i class="fas fa-home fa-2x"></i> </p>
+                         <h2 class="has-text-centered is-active" >Service you are currently viewing</h2>
+                         <div style="margin-top: .5em;">
+                            <p class="is-size-5">
+                             <apex:form ><c:tc2_change_apa_component /></apex:form>
+                            </p>
+                         </div>
+                     </div>
+                     
+                 </div>
+             </div>
+            </div>
+
+
+
+
+             <div  id="appAccountProfileHomeEdit"> 
+              <section>
+                <form v-on:submit="validateBeforeSubmit" method="post">
+                  <div class="container form ">
+                      <div class="box is-form-no-padding">
+                        <div class="inner">
+                          <div class="columns">
+                            <div class="column form-column" style="margin-bottom: 4.5em;">
+                              <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div style="margin-top: .5em;">
+                                          <p class="is-size-5">
+                                          {{TC.app.account.premise.street}}&nbsp;
+                                          {{TC.app.account.premise.city}}</p>
+                                       </div>
+                                    </div>
+                                </div>
+                              </div>
+
+                              <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <p class="control is-expanded">
+                                            <label class="form-label" for="houseSqft">Square Feet</label>
+                                            <input v-model="houseSqft" name="houseSqft" v-mask="'######'" type="text" required="required"  class="input borderless"/>
+                                             <span  v-show="validateHouseSqft" class="help is-danger">Sqft is required</span>
+                                        </p>
+                                    </div>
+                                </div>
+                              </div>
+
+                              <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <p class="control is-expanded">
+                                            <label class="form-label" for="yearBuilt">Year Built</label>
+                                            <input v-model="yearBuilt" name="yearBuilt" v-mask="'####'" type="test" required="required" class="input borderless"/>
+                                             <span  v-show="validateYearBuilt" class="help is-danger">Year built is required</span>
+                                        </p>
+                                    </div>
+                                </div>
+                              </div>
+
+                              <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <p class="control is-expanded">
+                                            <label class="form-label" for="occupants">Occupants</label>
+                                            <input v-model="occupants" name="occupants" v-mask="'##'" type="text" required="required" class="input borderless"/>
+                                             <span  v-show="validateOccupants" class="help is-danger">Occupants is required</span>
+                                        </p>
+                                    </div>
+                                </div>
+                              </div>
+
+                              <div class="field is-horizontal">
+                                <div class="field-body">
+                                    <div class="field">
+                                        <p class="control is-expanded has-icons-right">
+                                            <label class="form-label" for="heatingsystem">Heating System</label>
+
+                                            <div class="select" id="heatingsystem" style="margin-top:30px !important;">
+                                                <select v-model="heatingsystem">
+                                                  <option v-bind:value="{type: ''}">Select System</option>
+                                                  <option v-bind:value="{type: 'Gas'}">Gas</option>
+                                                  <option v-bind:value="{type: 'Electric'}">Electric</option>
+                                                  <option v-bind:value="{type: 'Other'}">Other</option>
+                                              </select>
+                                            </div>
+                                        </p>
+                                        
+                                    </div>
+                                </div>
+                              </div>
+
+                              <div class="field is-horizontal">
+                                  <div class="field-label is-normal align-left">
+                                      <label for="pool">Do You Have A Pool?</label>
+                                  </div>
+                                  <div class="field has-addons">
+                                      <div class="control" id="pool">
+                                          <label class="radio">
+                                              <input type="radio" name="pool" v-bind:value="true" v-model="pool" required="required" /> Yes
+                                          </label>
+                                          <label class="radio">
+                                              <input type="radio" name="pool" v-bind:value="false" v-model="pool" required="required" /> No
+                                          </label>
+                                      </div>
+                                  </div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div>
+                      <div class="has-text-centered ">
+                          <input class="button is-primary is-rounded fixed-size animate-gradient-bg" type="submit" value="SAVE" />
+                      </div>
+                  </div>
+                </form>
+              </section>
+             </div>
+         </div>
+        <c:tc2_footer />
+         <script>
+            (function ($) {
+                $(function () {
+                'use strict';
+                 
+                 
+
+                 TC.app.appAccountProfileHomeEdit = new Vue({
+                    el: '#appAccountProfileHomeEdit',
+                    data: { 
+                        houseSqft: TC.app.appHomeProfile.houseSqft,
+                        yearBuilt: TC.app.appHomeProfile.yearbuilt,
+                        occupants: TC.app.appHomeProfile.occupants,
+                        //heating: TC.app.appHomeProfile.heatingsystem,
+                        heatingsystem: { type: '' },
+                        pool: TC.app.appHomeProfile.pool,
+                        validateHouseSqft: false,
+                        validateYearBuilt: false,
+                        validateOccupants: false,
+                    },
+                    methods: { 
+                      updateApa: function(){
+                        this.houseSqft = TC.app.appHomeProfile.houseSqft;
+                        this.yearBuilt = TC.app.appHomeProfile.yearbuilt;
+                        this.occupants = TC.app.appHomeProfile.occupants;
+                        this.pool = TC.app.appHomeProfile.pool;
+
+                        this.heatingsystem.type = (TC.app.appHomeProfile.heatingsystem == null) ? '' : TC.app.appHomeProfile.heatingsystem;
+                      },
+                      validateBeforeSubmit: function(e) {
+                        e.preventDefault();
+                        ControllerForMobileMain.SetPremiseStuff(
+                        '{!$User.Id}', 
+                        this.houseSqft, 
+                        this.yearBuilt, 
+                        this.occupants, 
+                        this.heatingsystem.type, 
+                        this.pool,
+                        true,
+                        
+                        function(result,event){
+                            if (event){
+                                TC.fn.getApa();
+                                TC.app.appAccountProfileHomeEdit.updateApa();
+                                TC.fn.navigateTo('{!$Page.Account_Profile}');
+                            } else {
+                            }    
+                        });
+                      }
+                    },
+                    mounted: function() { 
+                        
+                    },
+                    watch: {
+                      houseSqft: {
+                          handler: function() {
+                              TC.app.appHomeProfile.houseSqft = this.houseSqft;
+                          }
+                      },
+                      yearBuilt: {
+                          handler: function() {
+                              TC.app.appHomeProfile.yearBuilt = this.yearBuilt;
+                          }
+                      },
+                      occupants: {
+                          handler: function() {
+                              TC.app.appHomeProfile.occupants = this.occupants;
+                          }
+                      },
+                      heatingsystem: {
+                          handler: function() {
+                              TC.app.appHomeProfile.heatingsystem = this.heatingsystem;
+                          }
+                      },
+                      pool: {
+                          handler: function() {
+                              TC.app.appHomeProfile.pool = this.pool;
+                          }
+                      },
+
+                    },
+                 });
+            
+              })
+
+              TC.fn.getApa();
+              setTimeout(function(){
+                TC.app.appAccountProfileHomeEdit.updateApa();
+              }, 1000)
+              
+
+            })(jQuery);
+         </script>
+      </body>
+   </html>
+</apex:page>

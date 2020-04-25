@@ -1,0 +1,12 @@
+<apex:component controller="ControllerForMobileMain">
+    <apex:attribute name="SpanSize" type="integer" required="false" default="2" description="span size for the REP logos"/>
+    <apex:attribute name="Quantity" type="integer" required="false" default="18" description="How many REPs can we bring back?"/>
+    <div class="text-center">
+        <apex:repeat value="{!REPs}" var="r" rows="{!Quantity}">
+            <!--Page with review details for each REP-->
+            <apex:outputPanel styleclass="rep-mini-logo" layout="inline" >
+                <a href="{!$Page.readreviews}?id={!r.id}"><img src="/{!r.Logo_URL__c}" alt="{!r.name}"/></a>
+            </apex:outputPanel>
+        </apex:repeat>
+    </div>
+</apex:component>

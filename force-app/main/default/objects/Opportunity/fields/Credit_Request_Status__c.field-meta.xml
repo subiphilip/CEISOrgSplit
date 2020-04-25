@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Credit_Request_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Credit Request Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New/Pending Submission</fullName>
+                <default>false</default>
+                <label>New/Pending Submission</label>
+            </value>
+            <value>
+                <fullName>Request Submitted/Credit Review</fullName>
+                <default>false</default>
+                <label>Request Submitted/Credit Review</label>
+            </value>
+            <value>
+                <fullName>Additional Information Required</fullName>
+                <default>false</default>
+                <label>Additional Information Required</label>
+            </value>
+            <value>
+                <fullName>Credit Decision - Limit Approved</fullName>
+                <default>false</default>
+                <label>Credit Decision - Limit Approved</label>
+            </value>
+            <value>
+                <fullName>Credit Decision - Limit Rejected</fullName>
+                <default>false</default>
+                <label>Credit Decision - Limit Rejected</label>
+            </value>
+            <value>
+                <fullName>Expired</fullName>
+                <default>false</default>
+                <label>Expired</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

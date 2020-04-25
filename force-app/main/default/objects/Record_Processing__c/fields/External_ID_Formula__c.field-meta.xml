@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>External_ID_Formula__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( FIND(&#39;-&#39;, External_ID__c ) = 0
+  , NULL
+  , MID( External_ID__c , FIND(&#39;-&#39;, External_ID__c ) + 1, LEN( External_ID__c ) - FIND(&#39;-&#39;, External_ID__c ) + 1) 
+)</formula>
+    <label>External ID Formula</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

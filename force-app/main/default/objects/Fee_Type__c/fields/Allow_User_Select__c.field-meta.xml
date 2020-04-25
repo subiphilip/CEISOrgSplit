@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_User_Select__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Can a user select this fee for a quote or contract?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Can a user select this fee for a quote or contract?</inlineHelpText>
+    <label>Allow User Select</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

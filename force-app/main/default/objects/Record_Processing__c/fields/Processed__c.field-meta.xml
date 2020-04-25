@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Processed__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Informatica review task ran and no errors were found</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Informatica review task ran and no errors were found</inlineHelpText>
+    <label>Processed</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

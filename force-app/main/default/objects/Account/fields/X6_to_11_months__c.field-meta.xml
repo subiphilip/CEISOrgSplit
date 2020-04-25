@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X6_to_11_months__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Electric plans with term lengths from 6 to 11 months.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Electric plans with term lengths from 6 to 11 months.</inlineHelpText>
+    <label>6 to 11 months</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

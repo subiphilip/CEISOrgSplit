@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Request_Utility_SubType__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF (
+  AND(
+    OR( Utility__r.Utility_Code__c == &#39;Nicor&#39;,
+     Utility__r.Utility_Code__c == &#39;PGLC&#39;,
+     Utility__r.Utility_Code__c == &#39;NShore&#39;
+     ),
+    OR( Pricing__r.Name == &#39;Index Fixed Volume&#39;,
+     Pricing__r.Name == &#39;Index Full Req&#39;
+     )
+  ), &#39;Nicor, PGLC, NShore&#39;
+,
+  IF (
+    AND( Utility__r.Utility_Code__c == &#39;NIPSCO-Choice&#39;,
+      OR ( Pricing__r.Name == &#39;Index Fixed Volume&#39;,
+       Pricing__r.Name == &#39;Index Full Req&#39;,
+       Pricing__r.Name == &#39;Market Price&#39;
+       )
+    ), &#39;NIPSCO-Choice&#39;, &#39;&#39;
+  )
+)</formula>
+    <label>Request Utility SubType</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

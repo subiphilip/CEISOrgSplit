@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Upstream_Transport__c</fullName>
+    <externalId>false</externalId>
+    <label>Upstream Transport</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Applicable upstream pipeline transportation fees</fullName>
+                <default>false</default>
+                <label>Applicable upstream pipeline transportation fees</label>
+            </value>
+            <value>
+                <fullName>Applicable upstream pipeline transportation fees plus fuel</fullName>
+                <default>false</default>
+                <label>Applicable upstream pipeline transportation fees plus fuel</label>
+            </value>
+            <value>
+                <fullName>Enter Specific Charges</fullName>
+                <default>false</default>
+                <label>Enter Specific Charges</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

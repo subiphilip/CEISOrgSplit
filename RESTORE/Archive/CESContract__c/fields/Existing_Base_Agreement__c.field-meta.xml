@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Existing_Base_Agreement__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Existing Base Agreement</label>
+    <lookupFilter>
+        <active>false</active>
+        <filterItems>
+            <field>$Source.Account__c</field>
+            <operation>equals</operation>
+            <valueField>CESContract__c.Account__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>CESContract__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Version 3 Enabling Agreement, NAESB 2002 Enabling Agreement, Version 2 Enabling Agreement, NAESB 2006 Enabling Agreement, Version 3.2 Enabling Agreement</value>
+        </filterItems>
+        <infoMessage>Filtered for Contract Account Agreements. Remove filter to search for Parent Account Agreements</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>CESContract__c</referenceTo>
+    <relationshipLabel>CES Contracts</relationshipLabel>
+    <relationshipName>CES_Contracts</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

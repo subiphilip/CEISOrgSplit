@@ -1,0 +1,185 @@
+<apex:component controller="ControllerForMobileMain">
+
+<script>
+
+	var myModule = angular.module('calcchoice', ['ngForce'] );
+
+	function CalcChoiceCtrl($scope, GetAPA, vfr){
+        $scope.data={mn:'', updateonly:false, size:"Medium"};
+        $scope.enteredMonths={};
+        for(var i=0; i < 12; i++) {
+            $scope.enteredMonths[i]=500;
+        }
+
+		
+		console.log('{!$CurrentPage.Parameters.mode}');
+		switch('{!$CurrentPage.Parameters.mode}') //handle URL parameters that dictate view
+		{
+		case 'MeterData':
+		  $scope.data.mode='data';
+		  break;
+		case 'Estimate':
+		  $scope.data.mode='estimate';		  	
+		  if ('{!$CurrentPage.Parameters.update}'=='true') 
+		  	$scope.data.updateonly=true;
+		  break;
+		case 'Profile':
+		  $scope.data.mode='profile';
+		  break;
+		default:
+		  $scope.data.mode='none';
+		}		
+
+		GetAPA('{!$User.Id}').then(
+            function(result){
+                if (result!=null){                    
+                    $scope.APA = result; 
+                    if ($scope.APA.Premise__r.Premise_Type__c!='Residential') $scope.data.mode='data'; //all commercial requires data
+                    if (!angular.isDefined($scope.APA.Premise__r.Heating_System__c)) $scope.APA.Premise__r.Heating_System__c="Gas";
+                    if (!angular.isDefined($scope.APA.Premise__r.Pool__c)) $scope.APA.Premise__r.Pool__c=false;
+                    $scope.Account = {
+                        Id:$scope.APA.Account__r.Id, 
+                        Meter_Data_Email_Weekly__c:true,
+                        Meter_Data_Email_Daily__c:false
+                    };
+                    if ($scope.APA.Premise__r.TDSP_Lookup__r.Name==='CenterPoint Energy Houston Electric'){
+                        $scope.data.MeterNumberRegex = /^(5|6|8|9)\d{7}$/;
+                    } else {
+                        $scope.data.MeterNumberRegex = /^\d{8}$/;
+                    }
+                    
+                   
+                } else{
+                    dataLayer.push({'event':'error', 'errorFunction':'GetAPA', 'errorObject':{'errorCode':'APA Query Error', 'errorMessage':'No APA returned'}});
+                }
+            }, function(error){
+                dataLayer.push({'event':'error', 'errorFunction':'GetRate', 'errorObject':error});
+            }
+        );
+
+		$scope.setMeterNumber= function(){getMeterData()}
+        $scope.setPremiseInfo= function(){doEstimatedData()}
+        $scope.setProfile=function(size){setPremiseSize(size)}
+        $scope.saveEntered=function(){PrepMonths()}
+        
+
+        function getMeterData(){
+            //$j("#submit_meter_number").button('loading');
+            ControllerForMobileMain.getMeterData('{!$User.id}', $scope.data.mn, function(result, event){
+                dataLayer.push({'event':'log', 'logType': 'Meter Data Tracking', 'logMethod':'getMeterData', 'logMessage':'Data Requested by {!$User.Id}'});
+                if(event.status){
+                    if (result==='Success'){ //set the usage data email preferences
+                        console.log($scope.Account);
+                        vfr.update('Account', $scope.Account.Id, $scope.Account).then(
+                            function(result){
+                                window.location="{!$Page.LoadingData}";
+                            }
+                        );                        
+                    } else {
+                        //$j("#submit_meter_number").button('reset');
+                        alert(result);
+                        dataLayer.push({'event':'error', 'errorFunction':'getMeterData', 'errorObject':{'errorCode':'Page Errors', 'errorMessage':result}});
+                    }
+                }
+            }); 
+        }
+
+        function doEstimatedData(){
+        	console.log('parameters are ' + '{!$User.id}' + ', '+ $scope.APA.Premise__r.Square_Feet__c+ ', '+ $scope.APA.Premise__r.Year_Built__c + ', '+		        	$scope.APA.Premise__r.Occupants__c + ', '+ $scope.APA.Premise__r.Heating_System__c + ', '+ $scope.APA.Premise__r.Pool__c+ ', '+
+		            !$scope.data.updateonly )
+		        ControllerForMobileMain.SetPremiseStuff('{!$User.id}', $scope.APA.Premise__r.Square_Feet__c, $scope.APA.Premise__r.Year_Built__c, 
+		        	$scope.APA.Premise__r.Occupants__c, $scope.APA.Premise__r.Heating_System__c, $scope.APA.Premise__r.Pool__c,
+		            !$scope.data.updateonly, function(result, event){
+		            	if ($scope.data.updateonly){
+			            	if(event.status){
+                            	window.location="{!$Page.MyAccount}";
+                        	} else alert(result);
+			            } else {
+			            	console.log(result);
+			                if(result==='Success'){
+			                    dataLayer.push({'event':'log', 'logType': 'Meter Data Tracking', 'logMethod':'doEstimatedData', 'logMessage':'Data Estimated by {!$User.Id}'});
+			                    window.location="{!$Page.ShopPlans}";
+			                } else {
+			                    alert(result);
+			                    //$j("#submit_estimate").button('reset');
+                                dataLayer.push({'event':'error', 'errorFunction':'doEstimatedData', 'errorObject':{'errorCode':'Remoting Error', 'errorMessage':'Estimated Data Failed'}});
+			                }
+			            }
+		            }); 
+		    }
+
+	    function setPremiseSize(size){
+    		ControllerForMobileMain.setPremiseSize('{!$User.id}', size, function(result, event){
+        		if(event.status){
+		            if (result='Success'){	
+                    dataLayer.push({'event':'log', 'logType': 'Meter Data Tracking', 'logMethod':'setPremiseSize', 'logMessage':'Profile selected by {!$User.Id}'});	
+		                window.location="{!$Page.ShopPlans}";
+		            } else {
+                        alert(result);
+                        dataLayer.push({'event':'error', 'errorFunction':'setPremiseSize', 'errorObject':{'errorCode':'Remoting Error', 'errorMessage':'Select Profile Failed'}});
+                    }
+		        }
+		    }); 		
+	    }	
+
+        function PrepMonths(){
+            dataLayer.push({'event':'log', 'logType': 'Meter Data Tracking', 'logMethod':'PrepMonths', 'logMessage':'Data entered by {!$User.Id}'});
+
+            var preppedMonths = {};      
+            for (var i = 0; i<12; i++){
+                preppedMonths[i] = {'Month_Number__c':i+1, 'Estimated__c':true, 'Premise__c':$scope.APA.Premise__r.Id, 'APA__c':$scope.APA.Id, 'Usage__c':$scope.enteredMonths[i]};
+                
+            }
+            console.log(preppedMonths);
+            
+            vfr.bulkCreate('Monthly_Usage__c', preppedMonths).then(
+                function(result){
+                    console.log('monthlyusages created, starting APA update');
+                    var APA = {}; APA.Meter_Data_Estimated__c=true;
+                    return vfr.update('AccountPremiseAssociation__c', $scope.APA.Id, APA);
+                }                
+            ).then(
+                function(APA){
+                    console.log('APA updated');
+                    window.location="{!$Page.ShopPlans}";
+                },
+                function(error){
+                    dataLayer.push({'event':'error', 'errorFunction':'PrepMonths', 'errorObject':error});
+                    console.log(error);
+                    alert('Your data did not save.  Please check that all numbers are entered, and try again.')
+                } 
+            );
+        }  
+    
+
+
+    } //end of app controller main body
+
+	myModule.factory('GetAPA', ['$q', '$rootScope', function($q, $rootScope) {
+        
+        return function(userid) {
+            var deferred = $q.defer();
+            
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.ControllerForMobileMain.getAPAsafe}',
+                userid,
+                function(result, event) {
+                    $rootScope.$apply(function() {
+                        if (event.status) {
+                            deferred.resolve(result);
+                        } else {
+                            deferred.reject(event);
+                        }
+                    })
+                        },
+                { buffer: true, escape: true, timeout: 30000 }
+            );
+            
+            return deferred.promise;
+        }
+            
+            }]);
+
+</script>
+<c:Ngforce />
+</apex:component>

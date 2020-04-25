@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Choice_Rate_Conf_Code_and_Rate_Id</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+Record_Type_Name__c = &quot;Gas Choice Rate&quot;, 
+ LEFT(Confirmation_Code__c , 5)&lt;&gt; RIGHT(Name ,5))</errorConditionFormula>
+    <errorMessage>Rate13: The Confirmation Code must match the Rate Id (last 5 digits).</errorMessage>
+</ValidationRule>

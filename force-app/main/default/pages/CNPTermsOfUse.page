@@ -1,0 +1,66 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" cache="false">
+    
+    <apex:composition template="{!$Site.Template}">
+        <apex:define name="HeadTags">
+            <title>Terms of Use - CenterPoint Energy</title>
+            <meta name="description" content="Terms of Use for CenterPoint Energy" />
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <h1>Terms of Use<br/>
+                            <small>Legal Notices</small>
+                        </h1>
+                        
+						<h4>Copyright and Use of Information</h4>
+
+						<p>Property rights embodied therein are the property of CenterPoint Energy Inc. ("CenterPoint Energy") or its information providers. Unless otherwise stated herein, none of the materials on this Web site may be copied, reproduced, modified, distributed, sold, broadcast, stored or otherwise used without the express permission of CenterPoint Energy or the original copyright holder. You may display and print materials available on this Web site solely for your personal, non-commercial use, provided that you do not modify the materials and that you retain all copyright and other proprietary notices contained in the materials. Unauthorized use of materials contained on this site is expressly prohibited by law and may result in severe civil and criminal penalties.</p>
+						<p>The materials specified above do not include the design and layout of the Web site. Elements of this Web site are protected by trade dress and other laws and may not be copied or imitated, in whole or in part. No logo, graphic, sound or image from this Web site may be copied or retransmitted unless expressly permitted by CenterPoint Energy.</p>
+						<p>CenterPoint Energy or its suppliers may provide software for download on the Web site. Use of software provided on the Web site is protected by copyright law and governed by the terms of the end user license agreement that accompanies such software. You may not install or use any software that contains an end user license agreement unless you first agree to the terms of the end user license agreement.</p>
+
+						<h4>Liability Restrictions</h4>
+
+						<p>While CenterPoint Energy makes reasonable efforts to insure that all material on this Web site is correct, accuracy cannot be guaranteed. CenterPoint Energy makes no representations or warranties as to the accuracy or completeness of the information contained in this Web site, results obtained from the use of this Web site, or interruptions in the availability of this Web site.</p>
+
+						<p>THE INFORMATION PROVIDED ON THIS WEB SITE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT OF INTELLECTUAL PROPERTY RIGHTS. EVEN IF CenterPoint Energy HAS BEEN ADVISED AS TO THE POSSIBILITY OF SUCH DAMAGES, CenterPoint Energy AND/OR ITS SUPPLIERS DISCLAIM ALL RESPONSIBILITY FOR DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR OTHER DAMAGES (INCLUDING BUT NOT LIMITED TO DAMAGES FOR LOST BUSINESS, LOST PROFITS, OR LOST DATA) ARISING FROM OR BECAUSE OF INACCURACIES OR OMISSIONS IN THE INFORMATION CONTAINED ON THIS WEB SITE, OR IN ANY WEB SITE LINKED TO OR FROM THIS WEB SITE. CenterPoint Energy AND/OR ITS SUPPLIERS FURTHER DISCLAIM ANY LIABILITY ARISING FROM THE USE OF ANY MATERIALS ON THIS WEB SITE, INCLUDING ANY DAMAGE TO YOUR COMPUTER OR OTHER PROPERTY OR LOSS OF DATA ARISING FROM ANY USE OF THE MATERIALS OR THIS WEB SITE. Some states may not allow this exclusion or limitation of liability, so the above limitation or exclusion may not apply to you.</p>
+
+						<h4>Trademarks</h4>
+
+						<p>The trademarks, service marks, and logos (collectively, "Trademarks") used and displayed on this Web site are registered and unregistered marks of CenterPoint Energy and others. Nothing on this Web site should be construed as granting, by implication, estoppel, or otherwise, any license or right to use any Trademark. CenterPoint Energy aggressively enforces its intellectual property rights to the fullest extent of the law. CenterPoint Energy's Trademarks may not be used in any way, including in advertising or publicity pertaining to distribution of materials on this Web site without our prior, written permission.</p>
+
+						<h4>Third Party Links</h4>
+
+						<p>This Web site contains links to other Web sites. CenterPoint Energy is not responsible for the content of such Web sites including any changes or updates that are made to the linked Web sites or the accuracy or completeness of the information provided on those Web sites. CenterPoint Energy provides the links as a convenience to you, and the existence of the links on this Web site does not imply that CenterPoint Energy approves of or is affiliated with the linked organization or company, or its products or services, or that the linked organization or company approves of or is affiliated with CenterPoint Energy.</p>
+
+
+						<h4>Notice: Acceptance of Terms of Use</h4>
+
+						<p>CenterPoint Energy maintains this Web site to provide you with information about CenterPoint Energy and its services. By using this Web site, you agree that you have read, understood, and agree to be bound by these Terms and Conditions of Use and Privacy Policy (collectively, the "Terms"). If you do not agree to the Terms, do not use the Web site.</p>
+
+						<h4>Modifications</h4>
+
+						<p>CenterPoint Energy reserves the right to modify the information contained on this Web site or these Terms at any time without notice. You are responsible for reviewing these Terms on this Web site. Accessing this Web site after any changes to these Terms have been posted thereon will constitute your acceptance of all such changes. Unless specifically stated otherwise, any new features, products or services added to the Web site shall be subject to these Terms. Some new products or features may require your acceptance of new or additional terms before use.</p>
+
+
+						<h4>Submitted Information</h4>
+
+						<p>Any information, including but not limited to remarks, suggestions, ideas, graphics or other submissions, communicated to CenterPoint Energy by you through this Web site, including but not limited to intellectual property related thereto, will be treated as non-confidential and non-proprietary and CenterPoint Energy may, without compensation, copy, incorporate, distribute or otherwise use such communications for any commercial or non-commercial purpose. CenterPoint Energy is under no obligation to post or use any submission you may provide, and CenterPoint Energy may remove any submission at any time in its sole discretion. Notwithstanding the foregoing, all personal data provided to CenterPoint Energy will be handled in accordance with our Privacy Statement. You are prohibited from posting or transmitting to or from this Web site any unlawful, libelous, defamatory, obscene, scandalous, inflammatory, pornographic or profane material.</p>
+
+						<h4>General</h4>
+
+						<p>These Terms shall be governed in all respects in accordance with the laws of the State of Texas without regard to the conflict or choice of law rules thereof. The courts sitting in the state of Texas, federal and state shall have exclusive jurisdiction over any dispute arising hereunder. You agree that no joint venture, partnership, employment, or agency relationship exists between you and CenterPoint Energy as a result of this agreement or use of the Web site. If any part of this agreement is determined to be invalid or unenforceable pursuant to applicable law including without limitation the warranty disclaimers and liability limitations set forth above, then the invalid or unenforceable provision shall be deemed superseded by a valid, enforceable provision that most closely matches the intent of the original provision and the remainder of the agreement shall remain in effect. A printed version of this agreement and of any notice given in electronic form shall be admissible in judicial or administrative proceedings based on or relating to this agreement, to the same extent and subject to the same conditions as other business documents and records originally generated and maintained in printed form.</p>
+
+						<h5>(Rev. 11/30/2000)</h5>
+
+                    </div>
+                    
+
+                </div>
+            </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+</apex:page>

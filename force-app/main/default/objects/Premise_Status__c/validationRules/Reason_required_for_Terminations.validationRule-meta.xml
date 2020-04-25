@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_required_for_Terminations</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(ISNEW(),
+    ISPICKVAL(Status__c, &#39;Terminated&#39;),
+    ISBLANK(TEXT(Termination_Reason__c))
+)</errorConditionFormula>
+    <errorDisplayField>Termination_Reason__c</errorDisplayField>
+    <errorMessage>PremiseStatus01: Termination status requires a reason</errorMessage>
+</ValidationRule>

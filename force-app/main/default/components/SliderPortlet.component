@@ -1,0 +1,46 @@
+<apex:component controller="ShopRemote" allowDML="true">
+    <apex:stylesheet value="{!URLFOR($Resource.Jquery, 'css/ui-lightness/jquery-ui-1.8.16.custom.css')}"/>
+
+    <div id="slide-box">               
+        <h4>Options</h4> 
+        <div class="pull-right text-right notes">
+            <small>More Important</small>
+        </div>
+        <div class="pull-left text-left notes">
+            <small>Less Important</small>
+        </div>
+        <div class="clearfix"/>
+        
+        <div Class="controls"> <strong>
+            <div class="slider-with-label">
+                <p class="text-center">Low Price</p>
+                <div id="price_weight_slider" class="jq_slider"/>
+            </div>
+            <div class="slider-with-label">
+                <p class="text-center">Green Friendly</p>
+                <div id="green_weight_slider" class="jq_slider"/>
+            </div>
+            <div class="slider-with-label">
+                <p class="text-center">Customer Satisfaction</p>
+                <div id="star_weight_slider" class="jq_slider"/>   
+            </div>
+            <div class="slider-with-label">
+                <p class="text-center">Years in Business</p>
+                <div id="year_weight_slider" class="jq_slider"/>
+            </div>
+            <hr/>
+            
+            <form>
+                <center>
+                    <fieldset>
+                        <h5>Zip Code</h5>
+                        <input class="input-block-level" name="zip" id="search_zip" placeholder="77002" value="" type="text" pattern="[0-9]*" />
+                    </fieldset>
+                    
+                    <a href="" Class="btn btn-warning" id="search_plans_submit">Search</a>
+                </center>
+            </form>
+            </strong>
+        </div>
+    </div><!--slide-box-->
+</apex:component>

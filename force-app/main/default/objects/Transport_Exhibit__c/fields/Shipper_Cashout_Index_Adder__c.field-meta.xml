@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Shipper_Cashout_Index_Adder__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE( TEXT( Pipeline_Region__c )
+  , &#39;Houston&#39;, 2.55
+  , &#39;Beaumont&#39;, 2.85
+  , &#39;Conroe&#39;, 1.20
+  , &#39;Texas Coast&#39;, 2.15
+  , &#39;South Texas&#39;, 1.30
+  , &#39;East Texas&#39;, 1.30
+  , &#39;Tyler&#39;, 0.8
+  , null)</formula>
+    <label>Shipper Cashout Index Adder</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

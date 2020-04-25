@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Projects_not_complete</fullName>
+    <columns>Project_Environment__c</columns>
+    <columns>Project_Type__c</columns>
+    <columns>NAME</columns>
+    <columns>Overview__c</columns>
+    <columns>Requested_By__c</columns>
+    <columns>Assigned_to_User__c</columns>
+    <columns>Status__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Completed,Cancelled</value>
+    </filters>
+    <filters>
+        <field>Project_Type__c</field>
+        <operation>notEqual</operation>
+        <value>Issue,SOW</value>
+    </filters>
+    <label>Projects not complete</label>
+    <language>en_US</language>
+</ListView>

@@ -1,0 +1,43 @@
+<apex:component controller="ControllerForBlogPost">
+    <apex:attribute name="PostID" type="id" required="true" description="The salesforce ID of the blog you want to display via this component" assignTo="{!SpecifiedPostID}" />
+    <style type="text/css">
+        .blog-script-area {margin-top:5px; margin-bottom: 5px;}
+    </style>
+    
+    <apex:outputPanel id="blog-post" layout="block" rendered="{!not(isnull(SpecifiedPost.Author__c))}">  
+        <meta itemprop="datePublished" content="{!SpecifiedPost.Publish_Date__c}"/>                         
+        Posted by <b>{!SpecifiedPost.Author__c}</b> 
+        <apex:outputPanel rendered="{!SpecifiedPost.Author__c == 'Shane McLaughlin'}">
+            <a href="https://plus.google.com/101366762310634532199?rel=author" rel="author" itemprop="author">+</a>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!SpecifiedPost.Author__c == 'Bobby Dornbos'}">
+            <a href="https://plus.google.com/101271406270641647443?rel=author" rel="author" itemprop="author">+</a>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!SpecifiedPost.Author__c == 'Troy Donovan'}">
+            <a href="https://plus.google.com/107918347742921029517?rel=author" rel="author" itemprop="author">+</a>
+        </apex:outputPanel>                            
+        <apex:outputtext value="{0, date,' on 'MM'/'dd'/'yyyy' at 'h:mm a}"><apex:param value="{!SpecifiedPost.Publish_Date__c}"/></apex:outputtext>
+        <div class="pull-right"><c:ShareThisSmall /></div>
+        <apex:image alt="in our spotlight" value="{!$Resource.spotlight}" rendered="{!contains(SpecifiedPost.Title__c, 'Spotlight')}" style="margin-top:5px; margin-bottom:5px;" width="100%"/>
+        <hr/>
+        <div class="summary" itemprop="blogPost">
+            <apex:outputpanel layout="block" styleclass="blog-script-area " rendered="{!not(isnull(SpecifiedPost.TopScript__c))}">
+                <center>
+                    <apex:outputtext escape="false" value="{!SpecifiedPost.TopScript__c}" />
+                </center>
+            </apex:outputpanel>
+            
+            <apex:outputtext escape="false" value="{!SpecifiedPost.Body__c}" />
+            
+            <apex:outputpanel layout="block" styleclass="blog-script-area " rendered="{!not(isnull(SpecifiedPost.BottomScript__c))}">
+                <center>
+                    <apex:outputtext escape="false" value="{!SpecifiedPost.BottomScript__c}" />
+                </center>                           </apex:outputpanel>                        
+        </div>
+        <hr/>
+        <div>
+            <a name="comments"></a>                                
+            <c:FacebookCommentDiv rendered="{!$Setup.TrueCostSystemVariables__c.Show_Facebook_Comments__c}"/>
+        </div>   
+    </apex:outputPanel>
+</apex:component>

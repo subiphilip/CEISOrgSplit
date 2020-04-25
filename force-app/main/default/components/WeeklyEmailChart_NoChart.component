@@ -1,0 +1,15 @@
+<apex:component controller="WeeklyTCEmailController" access="global">
+    <apex:attribute name="APA" type="String" access="global" description="The salesforce id of the APA that the data will be for" assignTo="{!APAid}"/>
+
+    <apex:outputPanel styleClass="callout" layout="block">
+        Here's your usage summary for dates 
+        <apex:outputText value=" {0,date,MM'/'dd'/'yyyy}">
+            <apex:param value="{!startdate}"/>
+        </apex:outputText> to 
+        <apex:outputText value=" {0,date,MM'/'dd'/'yyyy}">
+            <apex:param value="{!enddate}"/>
+        </apex:outputText>      
+    </apex:outputPanel>
+    
+
+</apex:component>

@@ -1,0 +1,46 @@
+<apex:component >
+    <apex:attribute name="styled" required="false" description="apply default TrueCost CSS to the component" type="boolean" default="true" />
+    <apex:attribute name="URL" required="False" Description="You can specify the URL--if unspecified, it will default to current page" type="string" ></apex:attribute>    
+    
+    <apex:outputpanel styleclass="sharethis_small" rendered="{!and(ISNULL(URL), styled)}">
+    	<span class='st_facebook' st_url="{!$CurrentPage.URL}" displayText=''></span>
+        <span class='st_twitter' st_url="{!$CurrentPage.URL}" displayText=''></span>
+        <!--  span class="st_plusone" st_url="{!$CurrentPage.URL}" st_title=""></span-->
+        <span class='st_linkedin' st_url="{!$CurrentPage.URL}" displayText=''></span>
+        <span class='st_email' st_url="{!$CurrentPage.URL}" displayText=''></span>
+        <span class='st_sharethis' st_url="{!$CurrentPage.URL}" displayText=''></span>
+    </apex:outputpanel>
+    
+    <apex:outputpanel styleclass="sharethis_small" rendered="{!and(NOT(ISNULL(URL)), styled)}">
+        Share 
+        <span class='st_facebook' st_url="{!URL}" displayText=''></span> <!-- small hack to remove the double // -->
+        <span class='st_twitter' st_url="{!URL}" displayText=''></span>
+        <!--  span class="st_plusone" st_url="{!URL}" st_title=""></span-->
+        <span class='st_linkedin' st_url="{!URL}" displayText=''></span>
+        <span class='st_email' st_url="{!URL}" displayText=''></span>
+        <span class='st_sharethis' st_url="{!URL}" displayText=''></span> 
+        
+    </apex:outputpanel>
+    
+    <apex:outputpanel rendered="{!and(ISNULL(URL), not(styled))}">
+    	<span class='st_facebook' st_url="{!$CurrentPage.URL}" displayText=''></span>
+        <span class='st_twitter' st_url="{!$CurrentPage.URL}" displayText=''></span>
+        <!--  span class="st_plusone" st_url="{!$CurrentPage.URL}" st_title=""></span-->
+        <span class='st_linkedin' st_url="{!$CurrentPage.URL}" displayText=''></span>
+        <span class='st_email' st_url="{!$CurrentPage.URL}" displayText=''></span>
+        <span class='st_sharethis' st_url="{!$CurrentPage.URL}" displayText=''></span>
+    </apex:outputpanel>
+    
+    <apex:outputpanel rendered="{!and(NOT(ISNULL(URL)), not(styled))}">        
+        <span class='st_facebook' st_url="{!URL}" displayText=''></span> <!-- small hack to remove the double // -->
+        <span class='st_twitter' st_url="{!URL}" displayText=''></span>
+        <!--  span class="st_plusone" st_url="{!URL}" st_title=""></span-->
+        <span class='st_linkedin' st_url="{!URL}" displayText=''></span>
+        <span class='st_email' st_url="{!URL}" displayText=''></span>
+        <span class='st_sharethis' st_url="{!URL}" displayText=''></span> 
+        
+    </apex:outputpanel>
+    
+    <!--<br/><br/> -->
+    
+</apex:component>

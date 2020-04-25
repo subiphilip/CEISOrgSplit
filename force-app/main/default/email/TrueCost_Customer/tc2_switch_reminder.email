@@ -1,0 +1,7 @@
+<messaging:emailTemplate subject="Your Switch Reminder" recipientType="Lead" relatedToType="Lead">
+
+    <messaging:htmlEmailBody >    
+        <c:tc2_email_send_switch_reminder myRecipient="{!recipient}" myRelatedTo="{!relatedTo}"/>
+    </messaging:htmlEmailBody>
+    
+</messaging:emailTemplate>

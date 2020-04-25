@@ -1,0 +1,307 @@
+<apex:component >
+
+  <style>
+   #navMenu .navbar-center .dropdown .button{
+     padding-top:0;
+     font-size: 14.4px;
+     color: #ffffff;
+
+     font-family: "Proxima Nova", sans-serif;
+     text-transform: capitalize;
+     font-weight: 600;
+   }
+   #navMenu .navbar-center .dropdown .navbar-item {
+     padding: 0.15rem 0.5rem;
+   }
+   #navMenu .navbar-center .dropdown {
+     border-left:none;
+     padding-left: 0px;
+   }
+   #navMenu .navbar-center .dropdown .dropdown-content .dropdown-item {
+     padding-left:15px;
+   }
+   #navMenu .navbar-center .dropdown .dropdown-content {
+       border-radius: 5px;
+       background-color: #eeeeee;
+   }
+
+   #navMenu .navbar-center .dropdown .dropdown-content:after {
+     content: "";
+     position: absolute;
+     right: 100px;
+     top: -6px;
+     width: 0;
+     height: 0;
+     border-style: solid;
+     border-width: 0 10px 10px 10px;
+     border-color: transparent transparent #eeeeee transparent;
+     z-index: 9998;
+  }
+
+  </style>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TK52ZJ2"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <div id="appMenu" xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org" >
+
+  <c:tc2_modal_logout />
+  <app-modal-logout />
+
+  <c:tc2_modal_loader />
+  <app-modal-loader />
+
+  <section id="navbar">
+    <div class="container">
+      <nav class="navbar is-fixed-top desktop">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <img id="cnplogo" class="" src="{!URLFOR($Resource.v2_tc_resources_images, 'CenterPoint_Energy_logo.svg')}" alt="CenterPoint Energy"/>
+            <a class="icon-logo-tc-white" aria-label="True Cost" alt="True Cost" href="{!$Page.Home}"></a>
+
+          </div>
+          <a role="button" class="navbar-burger" data-target="navMenu" title="menu" aria-label="menu"
+             aria-expanded="false">
+            <span aria-hidden="true "></span>
+            <span aria-hidden="true "></span>
+            <span aria-hidden="true "></span>
+            <span class="visuallyhidden">Menu</span>
+          </a>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+
+          <div v-if="!isProgress" class="navbar-center links has-text-weight-semibold">
+            <ul class="navbar-center links">
+              <li class="is-desktop">
+                <span v-if="!TC.settings.showSmallBusiness">
+                  <a v-bind:class="{'is-active': page == 'Shop_Plans'}" class="navbar-item" href="{!$Page.Shop_Plans}">Shop Plans<span class="bar"></span></a>
+                </span>
+
+                <span v-if="TC.settings.showSmallBusiness">
+                  <div class="dropdown is-hoverable is-large">
+                    <div class="dropdown-trigger navbar-item">
+                      <button class="button is-medium borderless-dropdown navbar-item" aria-haspopup="true" aria-controls="dropdown-menu">
+                        <span>Shop Plans</span>
+                        <span class="icon is-small">
+                          <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                      </button>
+                    </div>
+                    <div class="dropdown-menu is-medium" id="dropdown-menu" role="menu">
+                      <div class="dropdown-content is-medium">
+                        <a v-bind:class="{'is-active': page == 'Shop_Plans'}" href="{!$Page.Shop_Plans}" class="dropdown-item">Residential</a>
+                        <a v-bind:class="{'is-active': page == 'Shop_Plans_Commercial'}" href="{!$Page.Shop_Plans_Commercial}" class="dropdown-item">Small Business</a>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+
+              </li>
+
+              <li class="is-mobile">
+                <a v-bind:class="{'is-active': page == 'Shop_Plans'}" class="navbar-item" href="{!$Page.Shop_Plans}">Shop Plans<span class="bar"></span></a>
+              </li>
+              <li class="is-mobile" v-if="TC.settings.showSmallBusiness">
+                <a v-bind:class="{'is-active': page == 'Shop_Plans_Commercial'}" class="navbar-item" href="{!$Page.Shop_Plans_Commercial}">Shop Small Business Plans<span class="bar"></span></a>
+              </li>
+              <li>
+                <a v-bind:class="{'is-active': page == 'Home#rate-calculator'}" class="navbar-item" href="{!$Page.Home}#rate-calculator">Rates<span class="bar"></span></a>
+              </li>
+              <li>
+                <a v-bind:class="{'is-active': page == 'About_True_Cost'}" class="navbar-item" href="{!$Page.About_True_Cost}">About TrueCost<span class="bar"></span></a>
+              </li>
+              <li>
+                <a v-bind:class="{'is-active': page == 'Help'}" class="navbar-item" href="{!$Page.Help}">Help Center<span class="bar"></span></a>
+              </li>
+
+            </ul>
+          </div>
+          <div v-if="isProgress" class="navbar-center step-outer has-text-weight-semibold">
+              <ul class="steps is-small">
+                  <!-- <span class="step-marker"><span class="icon"><i class="fa fa-check"></i></span> </span> -->
+                      <li class="step-item" v-bind:class="{ 'is-active': step==1, 'is-completed': step>1 }">
+                          <span v-if="step == 1" class="step-marker">1</span>
+                          <span v-if="step > 1" class="step-marker"><span class="icon"><i class="fa fa-check"></i></span> </span>
+                      </li>
+                      <li class="step-item" v-bind:class="{ 'is-active': step==2, 'is-completed': step>2 }">
+                          <span v-if="step <=2" class="step-marker">2</span>
+                          <span v-if="step > 2" class="step-marker"><span class="icon"><i class="fa fa-check"></i></span> </span>
+                      </li>
+                      <li class="step-item" v-bind:class="{ 'is-active': step==3, 'is-completed': step>3 }">
+                          <span v-if="step <=3" class="step-marker">3</span>
+                          <span v-if="step > 3" class="step-marker"><span class="icon"><i class="fa fa-check"></i></span> </span>
+                      </li>
+                      <li class="step-item" v-bind:class="{ 'is-active': step==4, 'is-completed': step>4 }">
+                          <span v-if="step <=4" class="step-marker">4</span>
+                          <span v-if="step > 4" class="step-marker"><span class="icon"><i class="fa fa-check"></i></span> </span>
+                      </li>
+                      <li class="step-item" v-bind:class="{ 'is-active': step==5, 'is-completed': step>5 }">
+                          <span v-if="step <=5" class="step-marker">5</span>
+                          <span v-if="step > 5" class="step-marker"><span class="icon"><i class="fa fa-check"></i></span> </span>
+                      </li>
+
+              </ul>
+          </div>
+
+          <div class="navbar-end has-text-weight-semibold"  v-bind:class="{ 'is-LoggedIn': isLoggedIn }">
+                <div class="dropdown is-hoverable is-desktop"  v-if="isLoggedIn">
+                  <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4" >
+                      <a href="{!$Page.Account_Profile}"><i class="far fa-user-circle"></i>
+                      <span>{!$User.FirstName}'S ACCOUNT</span>
+                      </a>
+                      <span class="icon is-small">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                      </span>
+                    </button>
+                  </div>
+                  <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                    <div class="dropdown-content">
+                      <span v-if="hasPremise">
+                        <div class="dropdown-item">
+                          <i class="fas fa-location-arrow color-primary"></i> {{TC.app.account.premise.street}}<br/>
+                          {{TC.app.account.premise.city}}, {{TC.app.account.premise.state}}
+                          {{TC.app.account.premise.zip}}<br/>
+                        </div>
+                        <div class="dropdown-item">
+                          <i class="fas fa-home color-primary"></i> {{TC.app.appHomeProfile.houseSqft}} sqft
+                        </div>
+
+                        <div class="dropdown-item">
+                          <i class="fas fa-tachometer-alt color-primary"></i> Smart Meter {{smartMeterStatus}}
+                        </div>
+                      </span>
+                      <hr class="dropdown-divider"/>
+                      <div class="dropdown-item">
+                        <a href="{!$Page.Account_Profile}">View Profile</a>
+                      </div>
+                      <hr class="dropdown-divider"/>
+                      <div class="dropdown-item">
+                        <a class="" v-on:click="onLogout()">Logout</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a v-if="!isLoggedIn" class="navbar-item" href="{!$Page.Login}">Login</a>
+                <span v-if="!isLoggedIn && !isCommercial" class="navbar-item" >
+                   <a class="button is-gradient fixed-size is-rounded animate-gradient-bg" href="{!$Page.Get_Started_Moving}"><span>GET STARTED</span></a>
+                </span>
+
+          </div>
+        </div>
+      </nav>
+    </div>
+  </section>
+  </div>
+
+  <script>
+
+    TC.fn.setup.MobileMenu = function () {
+      var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+        if ($navbarBurgers.length > 0) {
+          $navbarBurgers.forEach(function ($el) {
+            $el.addEventListener('click', function () {
+              var target = $el.dataset.target;
+              var $target = document.getElementById(target);
+              $el.classList.toggle('is-active');
+              $target.classList.toggle('is-active');
+            });
+          });
+        }
+    };
+
+    TC.fn.setup.ScrollMagicNavbar = function () {
+      let tweenNavBarBG = TweenMax.to(".navbar", 0.3, {backgroundColor: "#ffffff", color: "#000000"})
+      let sceneNavbar = new ScrollMagic.Scene({triggerElement: "#trigger-navbar"})
+        .setTween(tweenNavBarBG)
+        .addTo(TC.scrollMagic.controller);
+      let tweenNavBarFontChange = TweenMax.to(".navbar.is-fixed-top .navbar-item, .navbar-lin, .icon-logo-tc-white", 0.3, {color: "#000000"})
+      let sceneNavBarFontChange = new ScrollMagic.Scene({triggerElement: "#trigger-navbar"})
+        .setTween(tweenNavBarFontChange)
+        .addTo(TC.scrollMagic.controller);
+      let images = [
+        TC.sf.resource.images + "CenterPoint_Energy_logo.svg",
+        TC.sf.resource.images + "CenterPoint_Energy_logo_black.svg"
+      ];
+      let obj = {curImg: 0};
+      let tweenNavbarLogo = TweenMax.to(obj, 0.3, {
+        curImg: images.length - 1,
+        roundProps: "curImg",
+        repeat: 0,
+        immediateRender: true,
+        ease: Linear.easeNone,
+        onUpdate: function () {
+          $("#cnplogo").attr("src", images[obj.curImg]);
+        }
+      });
+      let sceneNavbarLogo = new ScrollMagic.Scene({triggerElement: "#trigger-navbar"})
+        .setTween(tweenNavbarLogo)
+        .addTo(TC.scrollMagic.controller);
+    };
+
+    TC.app.appMenu = new Vue({
+      el: '#appMenu',
+      data: {
+          isProgress:false,
+          step: 0,
+          isLoggedIn: false,
+          page: 'home',
+          smartMeterStatus: "Pending",
+          hasPremise: true,
+          isCommercial: false
+      },
+      methods: {
+        onLogout: function(){
+          TC.app.appSubscribe.$emit('logout', TC.app);
+        }
+      },
+      mounted: function() {
+          this.isLoggedIn = {!NOT(ISPICKVAL($User.UserType,'Guest'))};
+
+          this.page = location.pathname.replace('/','');
+          if(this.isLoggedIn && !TC.app.account.isLoggedIn) {
+            TC.app.account.isLoggedIn = true;
+            TC.app.account.uid = "{!$User.Id}";
+            TC.fn.getApa()
+            if(TC.app.account.premise.street !== ''){
+              this.hasPremise = true;
+            }
+
+          }
+          if(this.page == 'Shop_Plans_Commercial'){
+            TC.app.account.planPremiseType = 'Commercial'
+            TC.app.account.planInterestType = 'Commercial'
+          }
+          if(this.page == 'Shop_Plans'){
+            TC.app.account.planPremiseType = 'Residential'
+            TC.app.account.planInterestType = 'Residential'
+          }
+          if(TC.app.account.planPremiseType == 'Commercial'){
+            this.isCommercial = true;
+          } else {
+            this.isCommercial = false;
+          }
+          setTimeout(function(){
+            TC.app.appMenu.smartMeterStatus = (TC.app.account.smartMeter !== undefined) ? TC.app.account.smartMeter.dataRequestStatus : 'Pending';
+          }, 900)
+      },
+      watch: {
+        isLoggedIn: {
+          handler: function() {
+          }
+        },
+      },
+    });
+
+    (function ($) {
+      $(function () {
+        'use strict';
+        TC.fn.setup.MobileMenu();
+        TC.fn.setup.ScrollMagicNavbar();
+      })
+    })(jQuery);
+
+  </script>
+
+</apex:component>

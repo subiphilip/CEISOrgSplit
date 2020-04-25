@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proj_Team_Recommendation_Date__c</fullName>
+    <description>Projected date for team recommendation to Executives</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Date will need to be populated once the checkbox is checked.</inlineHelpText>
+    <label>Proj. Team Recommendation Date</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Capacity_Review_Applies__c</fullName>
+    <externalId>false</externalId>
+    <formula>Supply_Pool__r.Capacity_Review_Applies__c</formula>
+    <label>Capacity Review Applies</label>
+    <type>Checkbox</type>
+</CustomField>

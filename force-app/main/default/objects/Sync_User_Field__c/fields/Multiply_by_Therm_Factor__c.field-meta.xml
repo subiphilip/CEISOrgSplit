@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Multiply_by_Therm_Factor__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>field should be multiplied by therm factor before value creation.  Therm factor is 1 for HOU and STL</description>
+    <externalId>false</externalId>
+    <inlineHelpText>field should be multiplied by therm factor before value creation.  Therm factor is 1 for HOU and STL</inlineHelpText>
+    <label>Multiply by Therm Factor</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

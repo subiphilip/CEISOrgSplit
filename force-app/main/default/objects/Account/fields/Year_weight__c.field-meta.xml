@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Year_weight__c</fullName>
+    <defaultValue>50</defaultValue>
+    <description>Weighting factor of the REP&#39;s years in service.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Weighting factor of the REP&#39;s years in service.</inlineHelpText>
+    <label>Year weight</label>
+    <precision>3</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reward_StartEnd_Date</fullName>
+    <active>true</active>
+    <description>Start Date &lt; End Date</description>
+    <errorConditionFormula>Reward_Start_Date__c  &gt;  Reward_End_Date__c</errorConditionFormula>
+    <errorMessage>Reward02: Reward end date must be after the reward start date.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>CNP_Letterhead</letterhead>
+    <name>CES Technology Request New</name>
+    <style>freeForm</style>
+    <subject>New CES Technology Request: {!TrueCost_Case__c.Subject__c}</subject>
+    <textOnly>A new technology case has been submitted.
+
+Please review and assign for work to begin or reject.
+
+Request Information:
+
+Type: {!TrueCost_Case__c.Type__c}
+Business Unit: {!TrueCost_Case__c.Business_Unit__c}
+System Environment: {!TrueCost_Case__c.System_Environment__c}
+
+Priority: {!TrueCost_Case__c.Priority__c}
+Requested By/On Behalf Of: {!TrueCost_Case__c.Requested_By__c}
+Target Completion Date: {!TrueCost_Case__c.Requested_Due_Date__c}
+
+Request Details:
+
+{!TrueCost_Case__c.Subject__c}
+
+{!TrueCost_Case__c.Description__c}
+
+Business Need and Solution Information:
+
+Business Purpose: {!TrueCost_Case__c.Business_Purpose__c}
+Current Workaround: {!TrueCost_Case__c.Current_Workaround__c}
+
+Existing Solutions: {!TrueCost_Case__c.Existing_Solutions__c}
+Is CES Standard Solution: {!TrueCost_Case__c.Is_CES_Standard_Solution__c}
+
+See the request in Salesforce.</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>43.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Line 3,6 - Added &lt;head&gt; tags
+Line 4 - Replaced Google Site Verification Tag
+Line 99 - Insert mediamath pixel (Huddled Masses)</description>
+    <label>TC2-Home</label>
+</ApexPage>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Terminated__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>if this record changed, is it due to a termination?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>if this record changed, is it due to a termination?</inlineHelpText>
+    <label>Terminated</label>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

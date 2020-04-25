@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Wholesale_Cost_Adjustment__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Used for miscellaneous adjustments to wholesale cost (for optimization of transport, storage, capacity, etc).</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Used for miscellaneous adjustments to wholesale cost (for optimization of transport, storage, capacity, etc).</inlineHelpText>
+    <label>Wholesale Cost Adjustment</label>
+    <referenceTo>Index__c</referenceTo>
+    <relationshipLabel>Wholesale Cost Adjustments</relationshipLabel>
+    <relationshipName>Wholesale_Cost_Adjustments</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

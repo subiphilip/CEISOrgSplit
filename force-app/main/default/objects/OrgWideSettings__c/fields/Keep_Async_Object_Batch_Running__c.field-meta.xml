@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Keep_Async_Object_Batch_Running__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Uncheck this box to pause the async jobs.  To restart them, check the box and then execute the startschedular method</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Uncheck this box to pause the async jobs.  To restart them, check the box and then execute the startschedular method</inlineHelpText>
+    <label>Keep Async Object Batch Running</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

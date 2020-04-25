@@ -1,0 +1,33 @@
+<apex:component >
+    <script>
+    var GAC= new GAContainer();    
+    var utmz = $j.cookie("__utmz");
+    try{
+        var GACookieValues = (function() {
+            var pairs = utmz.split('.').slice(4).join('.').split('|');
+            var ga = {};
+            for (var i = 0; i < pairs.length; i++) {
+                var temp = pairs[i].split('=');
+                ga[temp[0]] = temp[1];
+            }
+            return ga;
+        })();
+        
+        GAC.medium=GACookieValues.utmcmd;
+        if (GACookieValues.utmgclid != null) GAC.medium='cpc';
+        GAC.source=GACookieValues.utmcsr;
+        GAC.content=GACookieValues.utmcct;
+        GAC.campaign=GACookieValues.utmccn;
+        GAC.term=GACookieValues.utmctr;
+    } catch(err){}
+    
+    function GAContainer(){
+        this.medium=null;
+        this.source=null;
+        this.content=null;
+        this.term=null;
+        this.campaign=null;
+        
+    } 
+</script>
+</apex:component>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>SourceGas_Consolidated_Pin__c</columns>
+    <columns>Residential_Capacity_Cost_per_Dth__c</columns>
+    <columns>Per_Dth_Allocated_Cost__c</columns>
+    <columns>Total_Use__c</columns>
+    <columns>Total_demand_charge_for_Pin__c</columns>
+    <columns>Residential_Peak_Day__c</columns>
+    <columns>Commercial_Peak_Day__c</columns>
+    <columns>Industrial_Peak_Day_Capacity__c</columns>
+    <columns>Res_Avg_Peak_Month__c</columns>
+    <columns>Commercial_Avg_Peak_Month__c</columns>
+    <columns>Commercial_Peak_Month_Capacity_Cost_Dth__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

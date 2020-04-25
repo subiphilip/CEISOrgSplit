@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Legal_Review</fullName>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CorpComm_Editing__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Legal_Editing__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Final_Review__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>Legal Review</label>
+    <sharedTo>
+        <group>Content_Editing</group>
+    </sharedTo>
+</ListView>

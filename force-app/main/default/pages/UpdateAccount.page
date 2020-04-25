@@ -1,0 +1,144 @@
+<apex:page id="portalUserProfilePage" controller="ControllerForMobileMain" docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" title="{!$Label.site.my_profile_page}">
+    <apex:composition template="Template_TC">
+    <apex:define name="HeadTags">
+            <title>Update Account Information - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>
+        <!--apex:define name="breadcrumbs">
+           <apex:outputpanel styleClass="breadcrumbs" layout="block">
+                <apex:outputlink value="{!$Page.homepage}">Home</apex:outputlink>
+                <apex:outputlink value="{!$Page.Register}" styleClass="last">Register</apex:outputlink>
+            </apex:outputpanel>            
+        </apex:define-->
+  
+    <apex:define name="body" >
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <h1>Update your Information</h1>
+                    
+                    <div class="well well-large">
+                        <form action="javascript:void(0);">
+                            <div class="control-group">
+                                <label class="control-label" for="first_name">First</label>
+                                <div class="controls">
+                                    <input name="First Name" id="first_name" placeholder="First" value="" type="text" required="required" autofocus="autofocus"/>
+                                </div>
+                                
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="last_name">Last</label>
+                                <div class="controls">
+                                    <input name="Last Name" id="last_name" placeholder="Last" value="" type="text" required="required"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="email">Email</label>
+                                <div class="controls">
+                                    <input name="email" id="email" placeholder="email@somewhere.com" value="" type="email" required="required"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="phone">Phone</label>
+                                <div class="controls">
+                                    <input name="email" id="phone" placeholder="713 555-5555" value="" type="tel"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="address">Mailing Address</label>
+                                <div class="controls">
+                                    <input name="address" id="address" placeholder="123 South Street" value="" type="text"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="city">City</label>
+                                <div class="controls">
+                                    <input name="city" id="city" placeholder="Houston" value="" type="text"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="state">State</label>
+                                <div class="controls">
+                                    <input name="state" id="state" placeholder="Texas" value="" type="text" data-provide="typeahead" data-items="4" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="zip">Zip</label>
+                                <div class="controls">
+                                    <input name="zip" id="zip" placeholder="77002" value="" type="text" pattern="(\d{5}([\-]\d{4})?)"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <a href="{!$Page.MyAccount}" class="btn btn-default btn-large">Cancel</a>
+                                    <button id="update_submit" name="update_submit" class="btn btn-primary btn-large">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+     
+    </apex:define>
+  </apex:composition>
+    <script>
+    $j=jQuery.noConflict();
+    
+	$j('#state').typeahead({
+    	source: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"] 
+    });
+    
+    $j("#update_submit").click(function(){UpdateData();});
+    ReadData();
+    
+    function ReadData(){
+        console.log('in the ead function');
+        ControllerForMobileMain.getAddressDetails(
+            '{!$User.id}', 
+            function(result,event){
+                
+                console.log('sent the read request');
+                console.log(result);
+                
+                if (event){
+                    $j("#first_name").val(result.FirstName);
+                    $j("#last_name").val(result.LastName);
+                    $j("#email").val(result.PersonEmail);
+                    $j("#phone").val(result.Phone);
+                    $j("#address").val(result.PersonMailingStreet);
+                    $j("#city").val(result.PersonMailingCity);
+                    $j("#state").val(result.PersonMailingState); 
+                    $j("#zip").val(result.PersonMailingPostalCode);
+                } else{
+                    alert(event);
+                }
+                
+            });                                
+    }
+    
+    function UpdateData(){
+        console.log('in the update function');    
+        //putAddressDetails(string userid, string first,string last,string email,string phone,string street,string city,string state,string zip)
+        ControllerForMobileMain.putAddressDetails(
+            '{!$User.id}', $j("#first_name").val(),$j("#last_name").val(),$j("#email").val(),$j("#phone").val(), 
+            $j("#address").val(), $j("#city").val(), 
+            'TX', //$j("#state").val(), 
+            $j("#zip").val(),
+            function(result,event){
+                console.log('sent the update');
+                console.log(result);
+                if (result=='Success'){
+                    window.location = '{!$Page.MyAccount}';
+                } else{
+                    alert(event);
+                }
+                
+            });                                
+    }
+    	
+    
+    </script>
+</apex:page>

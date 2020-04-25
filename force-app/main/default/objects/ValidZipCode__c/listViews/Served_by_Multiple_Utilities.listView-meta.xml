@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Served_by_Multiple_Utilities</fullName>
+    <columns>NAME</columns>
+    <columns>TDSP__c</columns>
+    <columns>TDSP_Lookup__c</columns>
+    <columns>TDSP2__c</columns>
+    <columns>Served_by_TrueCost__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>TDSP2__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <label>Served by Multiple Utilities</label>
+    <language>en_US</language>
+</ListView>

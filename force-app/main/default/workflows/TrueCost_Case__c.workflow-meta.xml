@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_the_Customer_a_Survey</fullName>
+        <description>Email the Customer a Survey</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Non_Account_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Support_Workflow_Emails/CustomCaseClosed</template>
+    </alerts>
+    <alerts>
+        <fullName>Gas_Choice_File_Notification_to_Owner</fullName>
+        <description>Gas Choice File Notification to Owner</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Gas_Choice/Incoming_Gas_Choice_File</template>
+    </alerts>
+    <alerts>
+        <fullName>Refer_A_Friend_Send_Referral_Code</fullName>
+        <description>Refer A Friend - Send Referral Code</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Non_Account_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer_Marketing/Refer_A_Friend_Program</template>
+    </alerts>
+    <alerts>
+        <fullName>Update_Team_on_ESCALATED_TrueCost_Cases</fullName>
+        <description>Update Team on ESCALATED TrueCost Cases</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>sphilip@cies.com.cnp2</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Internal_Messages/Escalated_TC_CASE_INTERNAL</template>
+    </alerts>
+    <alerts>
+        <fullName>Update_Team_on_new_TrueCost_Cases</fullName>
+        <description>Update Team on new TrueCost Cases</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>sphilip@cies.com.cnp2</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Internal_Messages/New_TC_CASE_INTERNAL</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Assign_to_regular_queue</fullName>
+        <description>Move it to the Email/Web Cases Queue</description>
+        <field>OwnerId</field>
+        <lookupValue>EmailWebCases</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Assign to regular queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Close_TC_Case_from_Power_Express_survey</fullName>
+        <description>Sets TC Case status to Closed</description>
+        <field>Status__c</field>
+        <literalValue>Closed</literalValue>
+        <name>Close TC Case from Power Express survey</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Close_TrueCost_cases</fullName>
+        <description>Change Status to Closed</description>
+        <field>Status__c</field>
+        <literalValue>Closed</literalValue>
+        <name>Close TrueCost cases</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Consultant_Case_Queue_Assignment</fullName>
+        <description>puts it in the consultant cases queue</description>
+        <field>OwnerId</field>
+        <lookupValue>CES_Consultant_Cases</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Consultant Case Queue Assignment</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Escalate_the_Case</fullName>
+        <description>Moves the Case to the Escalated Queue</description>
+        <field>OwnerId</field>
+        <lookupValue>EscalatedTrueCostCases</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Escalate the Case</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Escalate_the_True_Cost_Case</fullName>
+        <field>isEscalated__c</field>
+        <literalValue>1</literalValue>
+        <name>Escalate the Case</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Escalated_false_Power_Express_survey</fullName>
+        <field>isEscalated__c</field>
+        <literalValue>0</literalValue>
+        <name>Escalated false Power Express survey</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Mark_the_Case_as_Escalated</fullName>
+        <description>Checks the &quot;escalated&quot; checkbox</description>
+        <field>isEscalated__c</field>
+        <literalValue>1</literalValue>
+        <name>Mark the Case as Escalated</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Not_Actionable_from_Power_Express_survey</fullName>
+        <description>Sets TC Case status from Power Express survey to Not Actionable (No Survey)</description>
+        <field>Type__c</field>
+        <literalValue>Not Actionable (No Survey)</literalValue>
+        <name>Not Actionable from Power Express survey</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Refer_A_Friend_Create_Referral_Code</fullName>
+        <field>Referral_Code__c</field>
+        <formula>(UPPER(LEFT(Non_Account_Email__c,3))) + (UPPER(RIGHT( Non_Account_Email__c,3))) + TEXT(15)</formula>
+        <name>Refer A Friend - Create Referral Code</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Gaston_as_Owner</fullName>
+        <field>OwnerId</field>
+        <lookupValue>sphilip@cies.com.cnp2</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Set Gaston as Owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Internal_Comment_Date</fullName>
+        <field>Internal_Comment_Date__c</field>
+        <formula>Now()</formula>
+        <name>Set Internal Comment Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Internal_Comment_User</fullName>
+        <field>Internal_Comment_User__c</field>
+        <formula>$User.Username</formula>
+        <name>Set Internal Comment User</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Reason_as_None</fullName>
+        <field>Reason__c</field>
+        <name>Set Reason as None</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Timestamp_for_Time_Closed</fullName>
+        <description>Timestamps the close time so we can measure case duration</description>
+        <field>Date_Time_Closed__c</field>
+        <formula>NOW()</formula>
+        <name>Set Timestamp for Time Closed</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Tracey_as_Owner</fullName>
+        <field>OwnerId</field>
+        <lookupValue>sphilip@cies.com.cnp2</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Set Tracey as Owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Type_as_Gas_Choice_File</fullName>
+        <field>Type__c</field>
+        <literalValue>Gas Choice File</literalValue>
+        <name>Set Type as Gas Choice File</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>TC_Case_Type_Chang_to_OOO_reply</fullName>
+        <description>TC Case type changed to &quot;Out of Office Reply&quot; if that is what started the case.</description>
+        <field>Type__c</field>
+        <literalValue>Out Of Office Reply</literalValue>
+        <name>TC Case Type Change to Out of Office Rep</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Wants_Contact</fullName>
+        <field>Wants_Contact__c</field>
+        <literalValue>1</literalValue>
+        <name>Wants Contact</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>timestamp_for_first_email_response</fullName>
+        <description>puts the time</description>
+        <field>First_email_response__c</field>
+        <formula>now()</formula>
+        <name>timestamp for first email response</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>Auto-Close TC Cases</fullName>
+        <actions>
+            <name>Close_TrueCost_cases</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>TC_Case_Type_Chang_to_OOO_reply</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2 OR 3 OR 4 OR 5 OR (6 AND 7)) AND 8 AND 9</booleanFilter>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Subject__c</field>
+            <operation>contains</operation>
+            <value>out of office</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Subject__c</field>
+            <operation>contains</operation>
+            <value>automatic reply</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Subject__c</field>
+            <operation>contains</operation>
+            <value>AutoReply</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Subject__c</field>
+            <operation>contains</operation>
+            <value>Auto-Reply</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Subject__c</field>
+            <operation>contains</operation>
+            <value>Auto Response</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Subject__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Description__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Origin__c</field>
+            <operation>equals</operation>
+            <value>Email</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>TrueCost Customer Case</value>
+        </criteriaItems>
+        <description>situations for a case to automatically close</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Auto-Close TC Cases from PE</fullName>
+        <actions>
+            <name>Close_TC_Case_from_Power_Express_survey</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Escalated_false_Power_Express_survey</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Not_Actionable_from_Power_Express_survey</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Non_Account_Email__c</field>
+            <operation>equals</operation>
+            <value>customerservice@power-express.com</value>
+        </criteriaItems>
+        <description>Closes TC Cases with surveys from Power Express</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>AutoClose Email cases after no action</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Origin__c</field>
+            <operation>equals</operation>
+            <value>Email,Web</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Waiting for Customer Response</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>TrueCost Customer Case</value>
+        </criteriaItems>
+        <description>When a case moves to &quot;waiting on customer&quot; status as an email, we&#39;ll assume it&#39;s closed after a period of time if customer takes no actions.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>AutoClose Email cases after no action %283 days%29</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Waiting for Customer Response</value>
+        </criteriaItems>
+        <description>When a case moves to &quot;waiting on customer&quot; status as an email, we&#39;ll assume it&#39;s closed after a period of time if customer takes no actions.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Close_TrueCost_cases</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Set_Timestamp_for_Time_Closed</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>TrueCost_Case__c.Date_Time_Closed__c</offsetFromField>
+            <timeLength>3</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>AutoClose Email cases after no action %283 days%29 v2</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Waiting for Customer Response</value>
+        </criteriaItems>
+        <description>When a case moves to &quot;waiting on customer&quot; status as an email, we&#39;ll assume it&#39;s closed after a period of time if customer takes no actions.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Close_TrueCost_cases</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Set_Timestamp_for_Time_Closed</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>3</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Case Closes</fullName>
+        <actions>
+            <name>Set_Timestamp_for_Time_Closed</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Closed,Completed</value>
+        </criteriaItems>
+        <description>When a case closes</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Consultant Case</fullName>
+        <actions>
+            <name>Consultant_Case_Queue_Assignment</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Consultant Case</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Escalated Case Alert</fullName>
+        <actions>
+            <name>Update_Team_on_ESCALATED_TrueCost_Cases</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Escalated</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>TrueCost Customer Case</value>
+        </criteriaItems>
+        <description>Email the core team so they can handle.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Gas Choice Annual Lost File - Gaston</fullName>
+        <actions>
+            <name>Gas_Choice_File_Notification_to_Owner</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Gaston_as_Owner</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_Reason_as_None</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_Type_as_Gas_Choice_File</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Non_Account_Email__c</field>
+            <operation>equals</operation>
+            <value>karen.mortimore@sourcegas.com,SHELLY.GALLOWAY@SOURCEGAS.COM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Subject__c</field>
+            <operation>contains</operation>
+            <value>annual,annuallost</value>
+        </criteriaItems>
+        <description>Notifies Gaston of annual lost files (for move-outs) coming in, so he can verify that we terminate any order.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Gas Choice Files - Tracey</fullName>
+        <actions>
+            <name>Gas_Choice_File_Notification_to_Owner</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Reason_as_None</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_Tracey_as_Owner</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_Type_as_Gas_Choice_File</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Non_Account_Email__c</field>
+            <operation>equals</operation>
+            <value>karen.mortimore@sourcegas.com,SHELLY.GALLOWAY@SOURCEGAS.COM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Subject__c</field>
+            <operation>contains</operation>
+            <value>temporary,temp,enrollment,ballot,balloted</value>
+        </criteriaItems>
+        <description>Notifies Tracey of balloted &amp; temp lost files coming in, so she can run them through informatica.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Internal Comments on Case</fullName>
+        <actions>
+            <name>Set_Internal_Comment_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_Internal_Comment_User</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>ISCHANGED( Internal_Comments__c )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>New TrueCost Case Created</fullName>
+        <actions>
+            <name>Update_Team_on_new_TrueCost_Cases</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Assign_to_regular_queue</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Description__c</field>
+            <operation>notContain</operation>
+            <value>LISTS.ERCOT.COM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Origin__c</field>
+            <operation>equals</operation>
+            <value>Email,Web</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>TrueCost Customer Case</value>
+        </criteriaItems>
+        <description>All the things that need to happen when a new TrueCost case comes in from email or web</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Refer A Friend - New TrueCost Case Created</fullName>
+        <actions>
+            <name>Refer_A_Friend_Send_Referral_Code</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Refer_A_Friend_Create_Referral_Code</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.TC_Refer_a_Friend_Program__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>TrueCost Customer Case</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Origin__c</field>
+            <operation>equals</operation>
+            <value>Web</value>
+        </criteriaItems>
+        <description>All the things that need to happen when a new TrueCost case comes in from email or web for the referral program</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send Case Customer Survey</fullName>
+        <actions>
+            <name>Email_the_Customer_a_Survey</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Type__c</field>
+            <operation>notEqual</operation>
+            <value>Out of Office Reply,Not Actionable (No Survey),Testing,Feature Request,Comments/Feedback</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Date_Time_Closed__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>TrueCost Customer Case</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Reason__c</field>
+            <operation>notEqual</operation>
+            <value>Gas/Electric phone/chat question,Cancelled order,Meter data reply,API Error,Account termination</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Type__c</field>
+            <operation>notContain</operation>
+            <value>Outside of Service Territory,Utility,Sales,Feature Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Subject__c</field>
+            <operation>notContain</operation>
+            <value>Meter data request</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Text-based escalation</fullName>
+        <actions>
+            <name>Escalate_the_True_Cost_Case</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND 3 AND 4</booleanFilter>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Subject__c</field>
+            <operation>contains</operation>
+            <value>cancel</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Description__c</field>
+            <operation>contains</operation>
+            <value>cancel</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Origin__c</field>
+            <operation>equals</operation>
+            <value>Email,Web</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>TrueCost Customer Case</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Timestamp the waiting on customer moment</fullName>
+        <actions>
+            <name>timestamp_for_first_email_response</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Escalated,Waiting for Customer Response</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TrueCost Case Stays Open Too Long</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Subject__c</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Description__c</field>
+            <operation>notContain</operation>
+            <value>RMS-SIGNOFF-REQUEST@LISTS.ERCOT.COM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>TrueCost Customer Case</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Escalate_the_Case</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Mark_the_Case_as_Escalated</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>TrueCost_Case__c.CreatedDate</offsetFromField>
+            <timeLength>24</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>TrueCost Case from Email</fullName>
+        <actions>
+            <name>Wants_Contact</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>TrueCost_Case__c.Origin__c</field>
+            <operation>equals</operation>
+            <value>Email</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>TrueCost_Case__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>TrueCost Customer Case</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

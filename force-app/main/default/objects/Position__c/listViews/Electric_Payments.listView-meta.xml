@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Electric_Payments</fullName>
+    <columns>NAME</columns>
+    <columns>REP_Profile__c</columns>
+    <columns>Premise__c</columns>
+    <columns>Facility_List__c</columns>
+    <columns>Bill_Period_From_Date__c</columns>
+    <columns>Bill_Period_To_Date__c</columns>
+    <columns>Billing_Period__c</columns>
+    <columns>Margin_for_supplier_payments__c</columns>
+    <columns>Usage_for_supplier_payments__c</columns>
+    <columns>Total_Payment_for_supplier_payments__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Position__c.Electric_Payment</value>
+    </filters>
+    <label>Electric Payments</label>
+    <language>en_US</language>
+</ListView>

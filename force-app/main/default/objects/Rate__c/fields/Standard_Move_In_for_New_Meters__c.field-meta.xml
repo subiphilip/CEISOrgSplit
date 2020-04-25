@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Standard_Move_In_for_New_Meters__c</fullName>
+    <description>Move-in fee if a new meter is installed</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Move-in fee if a new meter is installed</inlineHelpText>
+    <label>Standard Move-In for New Meters</label>
+    <precision>7</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

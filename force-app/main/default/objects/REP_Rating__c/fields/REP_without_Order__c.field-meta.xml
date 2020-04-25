@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>REP_without_Order__c</fullName>
+    <externalId>false</externalId>
+    <label>REP without Order</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Acacia Energy</fullName>
+                <default>false</default>
+                <label>Acacia Energy</label>
+            </value>
+            <value>
+                <fullName>Affordable Power</fullName>
+                <default>false</default>
+                <label>Affordable Power</label>
+            </value>
+            <value>
+                <fullName>Ambit</fullName>
+                <default>false</default>
+                <label>Ambit</label>
+            </value>
+            <value>
+                <fullName>Amigo</fullName>
+                <default>false</default>
+                <label>Amigo</label>
+            </value>
+            <value>
+                <fullName>Andeler</fullName>
+                <default>false</default>
+                <label>Andeler</label>
+            </value>
+            <value>
+                <fullName>APNA Energy</fullName>
+                <default>false</default>
+                <label>APNA Energy</label>
+            </value>
+            <value>
+                <fullName>Beyond Power</fullName>
+                <default>false</default>
+                <label>Beyond Power</label>
+            </value>
+            <value>
+                <fullName>Bounce</fullName>
+                <default>false</default>
+                <label>Bounce</label>
+            </value>
+            <value>
+                <fullName>Breeze Energy</fullName>
+                <default>false</default>
+                <label>Breeze Energy</label>
+            </value>
+            <value>
+                <fullName>Brilliant</fullName>
+                <default>false</default>
+                <label>Brilliant</label>
+            </value>
+            <value>
+                <fullName>Champion</fullName>
+                <default>false</default>
+                <label>Champion</label>
+            </value>
+            <value>
+                <fullName>Cirro</fullName>
+                <default>false</default>
+                <label>Cirro</label>
+            </value>
+            <value>
+                <fullName>Clearview Energy</fullName>
+                <default>false</default>
+                <label>Clearview Energy</label>
+            </value>
+            <value>
+                <fullName>Direct Energy</fullName>
+                <default>false</default>
+                <label>Direct Energy</label>
+            </value>
+            <value>
+                <fullName>Discount Power</fullName>
+                <default>false</default>
+                <label>Discount Power</label>
+            </value>
+            <value>
+                <fullName>Dynowatt</fullName>
+                <default>false</default>
+                <label>Dynowatt</label>
+            </value>
+            <value>
+                <fullName>Energy Plus</fullName>
+                <default>false</default>
+                <label>Energy Plus</label>
+            </value>
+            <value>
+                <fullName>Entrust</fullName>
+                <default>false</default>
+                <label>Entrust</label>
+            </value>
+            <value>
+                <fullName>Everything Energy</fullName>
+                <default>false</default>
+                <label>Everything Energy</label>
+            </value>
+            <value>
+                <fullName>First Choice Power</fullName>
+                <default>false</default>
+                <label>First Choice Power</label>
+            </value>
+            <value>
+                <fullName>Frontier Utilities</fullName>
+                <default>false</default>
+                <label>Frontier Utilities</label>
+            </value>
+            <value>
+                <fullName>Gexa</fullName>
+                <default>false</default>
+                <label>Gexa</label>
+            </value>
+            <value>
+                <fullName>Green Mountain</fullName>
+                <default>false</default>
+                <label>Green Mountain</label>
+            </value>
+            <value>
+                <fullName>Hino Electric</fullName>
+                <default>false</default>
+                <label>Hino Electric</label>
+            </value>
+            <value>
+                <fullName>IGS Energy</fullName>
+                <default>false</default>
+                <label>IGS Energy</label>
+            </value>
+            <value>
+                <fullName>Infinite</fullName>
+                <default>false</default>
+                <label>Infinite</label>
+            </value>
+            <value>
+                <fullName>Just Energy</fullName>
+                <default>false</default>
+                <label>Just Energy</label>
+            </value>
+            <value>
+                <fullName>Kona Energy</fullName>
+                <default>false</default>
+                <label>Kona Energy</label>
+            </value>
+            <value>
+                <fullName>Liberty</fullName>
+                <default>false</default>
+                <label>Liberty</label>
+            </value>
+            <value>
+                <fullName>Liberty Power</fullName>
+                <default>false</default>
+                <label>Liberty Power</label>
+            </value>
+            <value>
+                <fullName>Mega</fullName>
+                <default>false</default>
+                <label>Mega</label>
+            </value>
+            <value>
+                <fullName>Mission</fullName>
+                <default>false</default>
+                <label>Mission</label>
+            </value>
+            <value>
+                <fullName>Our Energy</fullName>
+                <default>false</default>
+                <label>Our Energy</label>
+            </value>
+            <value>
+                <fullName>Payless</fullName>
+                <default>false</default>
+                <label>Payless</label>
+            </value>
+            <value>
+                <fullName>Pennywise</fullName>
+                <default>false</default>
+                <label>Pennywise</label>
+            </value>
+            <value>
+                <fullName>Pioneer Energy</fullName>
+                <default>false</default>
+                <label>Pioneer Energy</label>
+            </value>
+            <value>
+                <fullName>Potentia</fullName>
+                <default>false</default>
+                <label>Potentia</label>
+            </value>
+            <value>
+                <fullName>Power Express</fullName>
+                <default>false</default>
+                <label>Power Express</label>
+            </value>
+            <value>
+                <fullName>Power House</fullName>
+                <default>false</default>
+                <label>Power House</label>
+            </value>
+            <value>
+                <fullName>Reliant</fullName>
+                <default>false</default>
+                <label>Reliant</label>
+            </value>
+            <value>
+                <fullName>Smart Prepaid</fullName>
+                <default>false</default>
+                <label>Smart Prepaid</label>
+            </value>
+            <value>
+                <fullName>Source Power &amp; Gas</fullName>
+                <default>false</default>
+                <label>Source Power &amp; Gas</label>
+            </value>
+            <value>
+                <fullName>Southwest Power &amp; Light</fullName>
+                <default>false</default>
+                <label>Southwest Power &amp; Light</label>
+            </value>
+            <value>
+                <fullName>Spark</fullName>
+                <default>false</default>
+                <label>Spark</label>
+            </value>
+            <value>
+                <fullName>StarTex</fullName>
+                <default>false</default>
+                <label>StarTex</label>
+            </value>
+            <value>
+                <fullName>Stream</fullName>
+                <default>false</default>
+                <label>Stream</label>
+            </value>
+            <value>
+                <fullName>Summer</fullName>
+                <default>false</default>
+                <label>Summer</label>
+            </value>
+            <value>
+                <fullName>Tara</fullName>
+                <default>false</default>
+                <label>Tara</label>
+            </value>
+            <value>
+                <fullName>Texas Power</fullName>
+                <default>false</default>
+                <label>Texas Power</label>
+            </value>
+            <value>
+                <fullName>Texpo</fullName>
+                <default>false</default>
+                <label>Texpo</label>
+            </value>
+            <value>
+                <fullName>TriEagle</fullName>
+                <default>false</default>
+                <label>TriEagle</label>
+            </value>
+            <value>
+                <fullName>TruSmart Energy</fullName>
+                <default>false</default>
+                <label>TruSmart Energy</label>
+            </value>
+            <value>
+                <fullName>TXU</fullName>
+                <default>false</default>
+                <label>TXU</label>
+            </value>
+            <value>
+                <fullName>V247 Power</fullName>
+                <default>false</default>
+                <label>V247 Power</label>
+            </value>
+            <value>
+                <fullName>Veteran</fullName>
+                <default>false</default>
+                <label>Veteran</label>
+            </value>
+            <value>
+                <fullName>YEP</fullName>
+                <default>false</default>
+                <label>YEP</label>
+            </value>
+            <value>
+                <fullName>Zip Energy</fullName>
+                <default>false</default>
+                <label>Zip Energy</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

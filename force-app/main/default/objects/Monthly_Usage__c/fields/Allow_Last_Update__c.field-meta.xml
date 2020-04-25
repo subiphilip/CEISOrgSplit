@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Allow_Last_Update__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>trigger will set this to true if an external update was made to this record.  validation rule is set up to check this field with other criteria for restricting record changes on invoiced usage.</description>
+    <externalId>false</externalId>
+    <label>Allow Last Update</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,352 @@
+<apex:component >
+<apex:includeScript value="{!URLFOR($Resource.MomentJS)}"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.compat.min.js"/>
+<script>
+
+var myModule = angular.module('IndexRateEntry', ['ngForce', 'ui.bootstrap', 'ngTable']);
+
+myModule.directive('fixedTableHeaders', ['$timeout', function($timeout) {
+	return {
+    	restrict: 'A',
+    	link: function(scope, element, attrs) {
+      		$timeout(function() {
+          		var container = element.parentsUntil(attrs.fixedTableHeaders);
+          		console.log(element);
+          		console.log(container);
+          		element.stickyTableHeaders({ scrollableArea: container, "fixedOffset": 0 });
+      		}, 0);
+    	}
+  	}
+}]);
+
+myModule.controller('IndexRateEntryCtrl', function($scope, $q, $location, $timeout, $anchorScroll, $window, vfr, ngTableParams){
+		$scope.data={savedisabled:false, loadComplete:false, showItems:false, showPrems:false, showProfileList:false, showProfile:false, viewTab:null, showPremiseEntry:false, showRefreshDiv:false, selectedApoState:"View"};
+
+		//$scope.data.objectID = '{!$CurrentPage.Parameters.id}';
+
+		$scope.data.userId = '{!$User.Id}';
+		$scope.data.userName = '{!$User.FirstName}' + ' ' + '{!$User.LastName}';
+
+		$scope.data.dateOptions = ["Monthly", "Daily"];
+		$scope.data.filterOptions = ["All Indexes", "Contract Indexes"];
+		// no longer query for tax rates until the eff date can be reviewed
+		//$scope.data.filterOptions = ["All Indexes", "Contract Indexes", "Tax Indexes"];
+		$scope.data.selectedDataOption = null;
+		$scope.data.selectedOption =null;
+		$scope.data.selectedValue=null;
+		$scope.data.currDate = new Date();
+		$scope.data.effDate = moment($scope.data.currDate).startOf('month').toDate();
+		$scope.main={};
+
+		function queryIndexRates(){
+    		$scope.main={};
+
+    		var whereClause = "";
+    		if ($scope.data.selectedOption == "Tax Indexes"){ whereClause = " and RecordType.Name = 'Tax'"; } 
+    		else { whereClause = " and RecordType.Name != 'Tax'"; }
+
+			return vfr.query("select id, Name, Active__c, RecordType.Name, Publication__c, Frequency__c, (select id, Name, Period__c, Effective_Date__c, Value__c from Index_Settlements__r where Effective_Date__c = "+$scope.data.effDate+" order by Effective_Date__c) from Index__c where Active__c = true"+whereClause+" order by Publication__c, Name").then(
+					function (response){
+						console.log(response);
+						$scope.main.indexes = response.records;
+
+						// get active contract positions for this month
+						return vfr.query("select id, name, Contract_Month__c, Contract_Pricing_Index__c, Contract_Pricing_Index__r.Name, Contract_Over_Index__c, Contract_Over_Index__r.Name, Contract_Under_Index__c, Contract_Under_Index__r.Name, Contract_APO__r.CESContract__r.Contract_Status__c, Contract_APO__r.CESContract__r.Active__c from Position__c where Contract_APO__r.CESContract__r.Contract_Status__c = 'Finalized' and Contract_APO__r.CESContract__r.Active__c = true and Contract_Month__c = "+$scope.data.effDate+" and RecordType.Name like '%Producer Services%'").then(
+		    					function (response){
+		    						console.log(response);
+		    						var allRates = [];
+		    						var priceRates = [];
+		    						var overRates = [];
+		    						var underRates = [];
+		    						var uniqueRates = [];
+		    						$scope.main.contractRates=[];
+
+		    						if ($scope.data.selectedOption == 'All Indexes' || $scope.data.selectedOption == 'Tax Indexes'){$scope.main.contractRates = $scope.main.indexes;}
+		    						else {
+
+			    						// get all indexes from all active contract positions
+			    						angular.forEach(response.records, function(cesc, key){
+										    if (angular.isDefined(cesc.Contract_Pricing_Index__c) && cesc.Contract_Pricing_Index__c != null){
+										    	priceRates.push(cesc.Contract_Pricing_Index__c)
+										    	allRates.push(cesc.Contract_Pricing_Index__c);
+										    }
+										    if (angular.isDefined(cesc.Contract_Over_Index__c) && cesc.Contract_Over_Index__c != null){
+										    	overRates.push(cesc.Contract_Over_Index__c);
+										    	allRates.push(cesc.Contract_Over_Index__c);
+										    }
+										    if (angular.isDefined(cesc.Contract_Under_Index__c) && cesc.Contract_Under_Index__c != null){
+										    	underRates.push(cesc.Contract_Under_Index__c);
+										    	allRates.push(cesc.Contract_Under_Index__c);
+										    }
+										});
+
+			    						// get unique set of indexes
+			    						uniqueRates = _.uniq(allRates);
+			    						console.log(uniqueRates);
+
+			    						// now go through all of the rates and see which ones are in the contract list
+			    						angular.forEach($scope.main.indexes, function(ix, key){
+										    var foundIndex; 
+										    //console.log(ix.Id);
+										    foundIndex = _.find(uniqueRates, function(o) {return o == ix.Id});
+										    if (angular.isDefined(foundIndex)){
+										    	if(angular.isDefined(_.find(priceRates, function(o) {return o == ix.Id}))){ix.pricingRate=true;}else{ix.pricingRate=false;}
+										    	if(angular.isDefined(_.find(overRates, function(o) {return o == ix.Id}))){ix.overRate=true;}else{ix.overRate=false;}
+										    	if(angular.isDefined(_.find(underRates, function(o) {return o == ix.Id}))){ix.underRate=true;}else{ix.underRate=false;}
+
+										    	$scope.main.contractRates.push(ix);
+										    }
+										});
+			    					}
+
+			    					// now add init records for rates that dont exist
+			    					angular.forEach($scope.main.contractRates, function(ix, key){
+									    if (angular.isUndefined(ix.Index_Settlements__r)){
+									    	var settle = {
+									    		"Effective_Date__c":$scope.data.effDate,
+									    		"Index__c":ix.Id,
+									    		"Value__c":""
+									    	};
+
+									    	var records = [];
+
+									    	records.push(settle);
+									    	ix.Index_Settlements__r = {};
+									    	ix.Index_Settlements__r.records = records;
+									    }
+									});
+									console.log($scope.main.contractRates);
+
+									//set index table parameters
+			    					$scope.tableParams = new ngTableParams({
+						                count:40
+						            }, {
+						              counts: [], // hide pager
+						                total: 40,//$scope.main.nomData.length, // length of data
+						                getData: function($defer, params) {
+						                    $defer.resolve($scope.main.contractRates);
+						                }
+						            });
+		    					},
+		    					function (error){
+		    						console.log('error getting contract rates');
+		    						console.log(error);
+		    					}
+		    				);
+					},
+					function (error){
+						console.log('error getting all rates');
+						console.log(error);
+					}
+				);
+    	}
+
+
+    	function queryDailyIndexForMonth(){
+    		$scope.main={};
+
+    		var endDate = moment($scope.data.effDate).endOf('month').format('YYYY-MM-DD');
+    		var days = moment(endDate).date();
+
+
+			return vfr.query("select id, Name, Active__c, RecordType.Name, Publication__c, Frequency__c, (select id, Name, Period__c, Effective_Date__c, Value__c from Index_Settlements__r where Effective_Date__c >= "+$scope.data.effDate+" and Effective_Date__c <= "+endDate+" order by Effective_Date__c) from Index__c where Active__c = true and id = '"+$scope.data.selectedDailyIndex.Id+"'").then(
+					function (response){
+						console.log(response);
+						$scope.main.indexes = response.records;
+						$scope.main.contractRates = response.records;
+
+						var stepDate = $scope.data.effDate;
+						var records = [];
+
+						if (angular.isUndefined($scope.main.contractRates[0].Index_Settlements__r)){
+							$scope.main.contractRates[0].Index_Settlements__r = {};
+
+							for (var i = 1, len = days; i <= len;i++){
+								var settle = {
+									"Effective_Date__c":stepDate,
+						    		"Index__c":$scope.main.contractRates[0].Id,
+						    		"Value__c":""
+								}
+								records.push(settle);
+
+								stepDate = moment(stepDate).add(1,'days').format('YYYY-MM-DD');
+							}
+
+							$scope.main.contractRates[0].Index_Settlements__r.records = records;
+						} else {
+							for (var i = 1, len = days; i <= len;i++){
+								var found = false;
+
+								angular.forEach($scope.main.contractRates[0].Index_Settlements__r.records, function(ix, key){
+								    if (ix.Effective_Date__c == stepDate){found = true;}
+								});
+
+								if (!found){
+									var settle = {
+										"Effective_Date__c":stepDate,
+							    		"Index__c":$scope.main.contractRates[0].Id,
+							    		"Value__c":""
+									}
+									$scope.main.contractRates[0].Index_Settlements__r.records.push(settle);
+								}
+
+								stepDate = moment(stepDate).add(1,'days').format('YYYY-MM-DD');
+							}
+
+							// sort the settlements since some could have been added out of place
+							$scope.main.contractRates[0].Index_Settlements__r.records = _.sortBy($scope.main.contractRates[0].Index_Settlements__r.records, ['Effective_Date__c']);
+						}
+
+						console.log($scope.main.contractRates);
+
+						//set index table parameters
+    					$scope.tableParams = new ngTableParams({
+			                count:40
+			            }, {
+			              counts: [], // hide pager
+			                total: 40,//$scope.main.nomData.length, // length of data
+			                getData: function($defer, params) {
+			                    $defer.resolve($scope.main.contractRates);
+			                }
+			            });
+
+						
+					},
+					function (error){
+						console.log('error getting daily rate');
+						console.log(error);
+					}
+				);
+    	}
+
+    	$scope.getIndexes = function(){
+    		$scope.data.savedisabled = true;
+    		queryIndexRates().then(
+    				function (response){
+    					$scope.data.indexHeader = $scope.data.selectedOption;
+    					$scope.data.showIndexData = true;
+    					$scope.data.showDailyIndexData = false;
+    					$scope.data.savedisabled = false;
+    				},
+    				function (error){
+    					console.log(error);
+    					$scope.data.savedisabled = false;
+    				}
+
+    			);
+    	}
+
+    	$scope.getDailyIndexForMonth = function(){
+    		$scope.data.savedisabled = true;
+    		queryDailyIndexForMonth().then(
+    				function (response){
+    					$scope.data.indexHeader = $scope.data.selectedDailyIndex.Name;
+    					$scope.data.showIndexData = false;
+    					$scope.data.showDailyIndexData = true;
+    					$scope.data.savedisabled = false;
+    				},
+    				function (error){
+    					console.log(error);
+    					$scope.data.savedisabled = false;
+    				}
+
+    			);
+    	}
+
+    	$scope.saveIndexRate = function(currPos){
+    		$scope.data.savedisabled=true;
+    		var obj = {
+    			"Value__c":$scope.main.contractRates[currPos].Index_Settlements__r.records[0].Value__c,
+    		}
+
+    		if (angular.isDefined($scope.main.contractRates[currPos].Index_Settlements__r.records[0].Id)){
+    			obj.Id=$scope.main.contractRates[currPos].Index_Settlements__r.records[0].Id;
+
+    			vfr.update("Index_Settlement__c",obj.Id,obj).then(
+    				function (response){
+    					console.log(response);
+    					$scope.data.savedisabled=false;
+    				},
+    				function (error){
+    					console.log('save error');
+    					console.log(error);
+    					$scope.data.savedisabled=false;
+    				}
+    			);
+    		} else {
+    			obj.Effective_Date__c = $scope.data.effDate;
+    			obj.Index__c = $scope.main.contractRates[currPos].Id;
+
+    			vfr.create("Index_Settlement__c",obj,obj).then(
+    				function (response){
+    					console.log(response);
+    					$scope.data.savedisabled=false;
+    				},
+    				function (error){
+    					console.log('save error');
+    					console.log(error);
+    					$scope.data.savedisabled=false;
+    				}
+    			);
+    		}
+    	}
+
+    	$scope.saveDailyIndexRate = function(currPos){
+    		$scope.data.savedisabled=true;
+    		var obj = {
+    			"Value__c":$scope.main.contractRates[0].Index_Settlements__r.records[currPos].Value__c,
+    		}
+
+    		if (angular.isDefined($scope.main.contractRates[0].Index_Settlements__r.records[currPos].Id)){
+    			obj.Id=$scope.main.contractRates[0].Index_Settlements__r.records[currPos].Id;
+
+    			vfr.update("Index_Settlement__c",obj.Id,obj).then(
+    				function (response){
+    					console.log(response);
+    					$scope.data.savedisabled=false;
+    				},
+    				function (error){
+    					console.log('save error');
+    					console.log(error);
+    					$scope.data.savedisabled=false;
+    				}
+    			);
+    		} else {
+    			obj.Effective_Date__c = $scope.main.contractRates[0].Index_Settlements__r.records[currPos].Effective_Date__c;
+    			obj.Index__c = $scope.main.contractRates[0].Id;
+
+    			vfr.create("Index_Settlement__c",obj,obj).then(
+    				function (response){
+    					console.log(response);
+    					$scope.data.savedisabled=false;
+    				},
+    				function (error){
+    					console.log('save error');
+    					console.log(error);
+    					$scope.data.savedisabled=false;
+    				}
+    			);
+    		}
+    	}
+
+    	$scope.queryAsyncDailyIndexRate = function (str){
+			return vfr.query("select Id, Name from Index__c where Active__c = true and (Frequency__c = 'Daily' OR Frequency__c = 'Day') and (Search_Code__c like '%"+str+"%' OR Name like '%"+str+"%') order by Name")
+			.then(
+				function(response){
+					
+					return response.records;					
+				}, function(error){
+					console.log('AsyncIndexRateError error');
+				}
+			);
+		}
+		    	
+	});
+
+</script>
+
+<c:Ngforce />
+<c:ngTableAsComponent />
+<c:jQueryMinAsComponent />
+<script src="{!URLFOR($Resource.bootstrap, 'js/bootstrap.min.js')}" />
+</apex:component>

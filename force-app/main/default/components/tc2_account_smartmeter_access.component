@@ -1,0 +1,77 @@
+<apex:component controller="ControllerForMobileMain">
+  <script>
+  Vue.component('app-account-smartmeter-access', {
+
+    data: function () { 
+    	return {
+    		premiseId: TC.app.account.premise.premiseId,
+        userId: '{!$User.Id}',
+        poller:0,
+        pollerstarttime: new Date(),
+        now: new Date(),
+        isSuccess: false
+    	} 
+    },
+    mounted: function() {
+        var vm = this;
+        TC.app.appSubscribe.$on('grantMeterDataPermission', function(arg) {
+            vm.grantMeterDataPermission(arg);
+        });
+    },
+    props: [],
+    methods: {
+      grantMeterDataPermission: function(arg) {
+        //MyAccount.grantMeterDataPermission();
+        TC.app.appSubscribe.$emit('addLoaderQueue', {'id':'grantMeterData','status':'Getting smart meter information'});
+        var vm = this;
+        this.poller = setInterval(function(){ vm.checkStatus()},5000); 
+      },
+      checkStatus: function(){
+        var vm = this;
+        ControllerForMobileMain.CheckDataStatusRemoteDetails('{!$User.Id}', function(result, event){
+          if(event.status){
+              if (result=='Complete'){  
+                  TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'setupShopPlans'});
+                  vm.isSuccess = true;
+                  clearInterval(vm.poller);
+                  TC.fn.getApa();
+                  TC.app.appSubscribe.$emit('grantMeterDataPermissionResponse', {'id':'remoteLogin'});
+              } 
+              if (result=='Error-Invalid Service Address'){  
+                  TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'setupShopPlans'});
+                  TC.app.appSubscribe.$emit('smartMeterError', TC.app.account);
+                  clearInterval(vm.poller);
+              }
+              if (result=='Error-Invalid Meter/ESID Match'){   
+                  TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'setupShopPlans'});
+                  TC.app.appSubscribe.$emit('smartMeterError', TC.app.account);
+                  clearInterval(vm.poller);
+              }
+          }
+        });
+        
+        vm.now = new Date();
+        if (vm.now - vm.pollerstarttime > 1000*60) {
+                TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'setupShopPlans'});
+                if(!vm.isSuccess){
+                  TC.app.appSubscribe.$emit('smartMeterError', TC.app.account);
+                } else {
+
+                }
+                clearInterval(vm.poller);
+        }
+      },
+      update: function() {
+        /*vfr.update('Account', TC.app.account.accountId, accountObj).then(
+            function(result){
+            }
+        );*/
+        /*Visualforce.remoting.Manager.invokeAction('ngForceController.updat', objtype, id, JSON.stringify(fields), function(result) {
+            handleResult(result, callback, error, true, deferred);
+        }*/
+      }
+    	
+    }
+  });
+  </script>
+</apex:component>

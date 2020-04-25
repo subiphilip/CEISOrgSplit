@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tiered_Minimum_Usage_Charges_BLANKS</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR( 
+AND(ISBLANK(Minimum_Usage_Charge2__c),NOT(ISBLANK(Minimum_Usage_Charge_Threshold2__c))), 
+AND(NOT(ISBLANK(Minimum_Usage_Charge2__c)),ISBLANK(Minimum_Usage_Charge_Threshold2__c)),
+AND(ISBLANK(Minimum_Usage_Charge3__c),NOT(ISBLANK(Minimum_Usage_Charge_Threshold3__c))), 
+AND(NOT(ISBLANK(Minimum_Usage_Charge3__c)),ISBLANK(Minimum_Usage_Charge_Threshold3__c))
+)</errorConditionFormula>
+    <errorMessage>Rate14: For any usage charge, a threshold must be entered, and vice versa.</errorMessage>
+</ValidationRule>

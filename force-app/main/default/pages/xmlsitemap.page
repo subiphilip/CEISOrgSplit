@@ -1,0 +1,389 @@
+<apex:page contentType="text/xml">
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Account_Forgot_Password</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Account_Find_Address</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Help</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Lookup_ESID</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/AboutTheIndex</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/TDSPHelp</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Shop_Plans_Compare</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Get_Started_Best</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/meterdata</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Get_Started_Better</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/tariffdisplay</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Account_Create</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Shop_Plans_Customized</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Account_Details</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Lookup_ESID_Complete</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/TDSPhelp</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Contact</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/HowTheIndexIsCalculated</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Account_Schedule</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Account_Register</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/TariffDisplay</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Account_Add_Service</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Account_Moving</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/TrueCostPeople</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Get_Started_Good</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Login</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Account_Find_Address_Confirm</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Account_Complete_Finalize</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/reminders</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Shop_Plans</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Get_Started_Smart_Meter</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Account_Add_Address_Confirm</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/sitemappublic</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Get_Started_Moving</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/About_True_Cost</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/CNPHoustonElectricServiceArea</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Shop_Plans_Rating</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/OtherREPs</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Home</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/Get_Started</loc>
+  </url>
+  <url>
+    <loc>https://centerpointenergy.secure.force.com/publicdataviewer?pid=a0N300000075PgDEAU</loc>
+  </url>
+<!--
+<url>
+  <loc>http://www.mytruecost.com/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/publicdataviewer?pid=a0N300000075PgDEAU</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/CNPHoustonElectricServiceArea</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/TariffDisplay</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/esidlookup</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/reminders</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/freedom_of_choice</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/Energy_Comparison</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/Centerpoint_Energy</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/meterdata</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/homepage</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/shopplans</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricCompanies</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceTrendsSummary</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/truecostblog</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/FAQ</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/sitemappublic</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/contactus</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/OtherREPs</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/AboutCenterPoint</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/AboutTrueCost</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/TrueCostPeople</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceTrendsSummary?tdsp=</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceTrendsSummary?tdsp=CenterPoint</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceTrendsSummary?tdsp=Oncor</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceTrendsSummary?tdsp=TNMP</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceTrendsSummary?tdsp=AEPN</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceTrendsSummary?tdsp=AEPC</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceTrendsSummary?tdsp=Sharyland</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/TDSPHelp</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex6Month?tdsp=</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex12Month?tdsp=</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex24Month?tdsp=</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/AboutTheIndex</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/electricpricetrendssummary</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex6Month?tdsp=CenterPoint</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex12Month?tdsp=CenterPoint</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex24Month?tdsp=CenterPoint</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/readreviews</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex6Month</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex12Month</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex24Month</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex6Month?tdsp=Oncor</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex12Month?tdsp=Oncor</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex24Month?tdsp=Oncor</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex6Month?tdsp=TNMP</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex12Month?tdsp=TNMP</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex24Month?tdsp=TNMP</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex6Month?tdsp=AEPN</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex12Month?tdsp=AEPN</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex24Month?tdsp=AEPN</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex6Month?tdsp=AEPC</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex12Month?tdsp=AEPC</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex24Month?tdsp=AEPC</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex6Month?tdsp=Sharyland</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex12Month?tdsp=Sharyland</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/ElectricPriceIndex24Month?tdsp=Sharyland</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/HowTheIndexIsCalculated</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/fees</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/Glossary</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/TDSPhelp</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/tariffdisplay</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://www.mytruecost.com/variablerates</loc>
+  <changefreq>weekly</changefreq>
+</url>
+-->
+</urlset>
+
+</apex:page>

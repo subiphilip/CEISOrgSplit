@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X_Displacement__c</fullName>
+    <defaultValue>-5</defaultValue>
+    <description>X displacement for the years in business gompers function.  It must be negative, and the original value was -5.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>X displacement for the years in business gompers function.  It must be negative, and the original value was -5.</inlineHelpText>
+    <label>X Displacement</label>
+    <precision>8</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

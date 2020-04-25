@@ -1,0 +1,294 @@
+<apex:page showheader="false" sidebar="false" controller="ControllerForPlanDetails" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" cache="false">
+    
+    <apex:composition template="Template_TC">
+        
+        <apex:define name="HeadTags">
+            <apex:outputPanel rendered="{!not(badid)}" layout="none">
+                <title>{!DetailPlan.plan__r.name} by {!DetailPlan.plan__r.REP_profile__r.name} - {!$Label.Page_Title_Company_Name}</title>
+                <meta name="description" content="{!DetailPlan.plan__r.Plan_Description__c}" />
+                <!-- <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/plandetails?id={!DetailPlan.id}&rep={!DetailPlan.plan__r.rep_profile__r.id}" /> -->
+            </apex:outputPanel>
+        </apex:define>
+        
+        
+        <apex:define name="body">
+            <!-- REQUIRED: INSERT PAGE TITLE --> 
+            <div class="container" itemscope="itemscope" itemtype="http://schema.org/Product">
+                <apex:outputpanel layout="block" styleclass="row" rendered="{!not(badID)}">
+                    <div class="span9">
+                        <h3><span itemprop="name">{!DetailPlan.plan__r.name}</span></h3>
+                        <apex:form >
+                            <apex:outputpanel styleClass="mainleft plan-details" layout="block" rendered="{!not(badID)}">           
+                                
+                                <div class="well well-large">
+                                    <div class="pull-right span2">
+                                    <a id="signup_button" href="{!$Setup.AuthSettings__c.TrueCost_Secure_URL__c}/EnrollRemote?id={!DetailPlan.id}&K={!text(round(TileStuff.PricekWh*100, 1))}&A={!text(round(TileStuff.Price, 0))}" class="btn btn-primary btn-block">Place Order</a>                              
+                                    <a href="{!$Page.shopplans}" class="btn btn-default btn-block">Continue Shopping</a>
+                                    </div>
+                                    <p><span itemprop="description">{!DetailPlan.plan__r.Plan_Description__c}</span></p>
+                                    <div class="clearfix"/>
+                                </div>              
+                                
+                                <div id="chartAndSampleBill">                   
+                                    <h5>
+                                        Estimated Bill
+                                    </h5>
+                                    
+                                    <div class="row">
+                                        <!-- BILL BY MONTH GRAPH -->
+                                        <div Class="span5 cost-graph pull-right">
+                                            <c:Estimated_Cost_Chart cost="{!detailscostlist}"/>
+                                        </div>
+                                        
+                                        <div class="span4">
+                                            <!-- MONTH SELECTOR -->
+                                            <div id="SampleBillMonth">
+                                                <apex:selectList value="{!selectedMonth}" size="1" id="dropdown" style="width:100%">
+                                                    <apex:selectOptions value="{!monthNames}" />
+                                                    <apex:actionSupport event="onchange" rerender="sampleBill"/>
+                                                </apex:selectList>
+                                            </div>
+                                            
+                                            <!-- BILL ESTIMATE BY MONTH TABLE -->                           
+                                            <div id="selectorWithSampleBill" >
+                                                
+                                                <!-- THE COST BREAKDOWN CHART -->
+                                                <apex:outputpanel layout="block" id="sampleBill" styleClass="sampleBill">
+                                                    
+                                                    <apex:panelGrid columns="2" styleClass="cost-table" cellpadding="3" columnClasses="text,text-right" width="100%">
+                                                        <apex:outputText value="Energy Charge" />
+                                                        <apex:outputtext value="${0, number, ###,###,###,##0.00}">
+                                                            <apex:param value="{!EstimateForSelectedMonth.Energy_Charge__c}" />
+                                                        </apex:outputtext>
+                                                        
+                                                        <apex:outputText value="Base Customer Charge" rendered="{!EstimateForSelectedMonth.Customer_Charge__c>0}" />
+                                                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.Customer_Charge__c>0}">
+                                                            <apex:param value="{!EstimateForSelectedMonth.Customer_Charge__c}" />
+                                                        </apex:outputtext>
+                                                        
+                                                        <apex:outputText value="{!if(EstimateForSelectedMonth.Minimum_Usage_Charge__c>0, 'Minimum Usage Charge', 'Usage Credit')}" rendered="{!EstimateForSelectedMonth.Minimum_Usage_Charge__c!=0}" />
+                                                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.Minimum_Usage_Charge__c<>0}">
+                                                            <apex:param value="{!EstimateForSelectedMonth.Minimum_Usage_Charge__c}" />
+                                                        </apex:outputtext>
+                                                        
+                                                        <apex:outputText value="TDSP Delivery Charge" rendered="{!EstimateForSelectedMonth.TDSP_per_kWh__c>0}" />
+                                                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.TDSP_per_kWh__c>0}">
+                                                            <apex:param value="{!EstimateForSelectedMonth.TDSP_per_kWh__c}" />
+                                                        </apex:outputtext>
+                                                        
+                                                        <apex:outputText value="TDSP Monthly Charges" rendered="{!EstimateForSelectedMonth.TDSP_per_Month__c>0}" />
+                                                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.TDSP_per_Month__c>0}">
+                                                            <apex:param value="{!EstimateForSelectedMonth.TDSP_per_Month__c}" />
+                                                        </apex:outputtext>
+                                                        
+                                                        <apex:outputText value="PUC Fees" rendered="{!EstimateForSelectedMonth.PUCA__c>0}" />
+                                                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.PUCA__c>0}">
+                                                            <apex:param value="{!EstimateForSelectedMonth.PUCA__c}" />
+                                                        </apex:outputtext>
+                                                        
+                                                        <apex:outputText value="Gross Receipts Tax" rendered="{!EstimateForSelectedMonth.MGRT__c>0}" />
+                                                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.MGRT__c>0}">
+                                                            <apex:param value="{!EstimateForSelectedMonth.MGRT__c}" />
+                                                        </apex:outputtext>
+                                                        
+                                                        <apex:outputText value="Local Sales Tax" rendered="{!EstimateForSelectedMonth.Local_Sales_Tax__c>0}" />
+                                                        <apex:outputtext value="{0, number, ###,###,###,##0.00}" rendered="{!EstimateForSelectedMonth.Local_Sales_Tax__c>0}">
+                                                            <apex:param value="{!EstimateForSelectedMonth.Local_Sales_Tax__c}" />
+                                                        </apex:outputtext>
+                                                        
+                                                        <apex:outputText value="Total" style="font-weight: bold;" />
+                                                        <apex:outputtext value="${0, number, ###,###,###,##0.00}" style="font-weight: bold;">
+                                                            <apex:param value="{!EstimateForSelectedMonth.Total__c}"/>
+                                                        </apex:outputtext>
+                                                    </apex:panelGrid>                                   
+                                                </apex:outputpanel>                                                           
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"/>
+                                        <apex:outputPanel rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}" styleClass="span9">
+                                            <apex:outputPanel rendered="{!HowCalculated='Real Data'}">
+                                                Prices shown are based on last 12 months' usage at <b>{!streetaddress}</b>. 
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!HowCalculated='Estimated Data'}">
+                                                Prices are based on estimated data for {!streetaddress}.&nbsp;
+                                                <apex:outputLink value="{!$Page.Calculation_Choice}?mode=MeterData" rendered="{!MeterDataStatus=='Not requested'}">
+                                                    Upgrade to pricing based on your usage.
+                                                </apex:outputLink>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!HowCalculated='Small'}">
+                                                Prices shown for the <b>Small</b> usage profile&nbsp;
+                                                <apex:outputPanel rendered="{!MeterDataStatus=='Not requested'}">.&nbsp;
+                                                    <apex:outputLink value="{!$Page.Calculation_Choice}?mode=profile" >
+                                                        Change profile 
+                                                    </apex:outputLink>
+                                                    &nbsp;or&nbsp;
+                                                    <apex:outputLink value="{!$Page.Calculation_Choice}" >
+                                                        upgrade to a custom quote.
+                                                    </apex:outputLink>
+                                                </apex:outputPanel>
+                                                <apex:outputText rendered="{!MeterDataStatus=='Pending'}">while we load usage data for <b>{!streetaddress}</b>.</apex:outputText>
+                                                <apex:outputText rendered="{!MeterDataStatus=='Error'}">because there was an error loading data for <b>{!streetaddress}</b>.</apex:outputText>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!HowCalculated='Medium'}">
+                                                Prices shown for the <b>Medium</b> usage profile&nbsp;  
+                                                <apex:outputPanel rendered="{!MeterDataStatus=='Not requested'}">.&nbsp;
+                                                    <a href="{!$Page.Calculation_Choice}?mode=profile" >
+                                                        Change profile 
+                                                    </a>
+                                                    &nbsp;or&nbsp;
+                                                    <a href="{!$Page.Calculation_Choice}" >
+                                                        upgrade to a custom quote.
+                                                    </a>
+                                                </apex:outputPanel>
+                                                <apex:outputText rendered="{!MeterDataStatus=='Pending'}">while we load usage data for <b>{!streetaddress}</b>.</apex:outputText>
+                                                <apex:outputText rendered="{!MeterDataStatus=='Error'}">because there was an error loading data for <b>{!streetaddress}</b>.</apex:outputText>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!HowCalculated='Large'}">
+                                                Prices shown for the <b>Large</b> usage profile  
+                                                <apex:outputPanel rendered="{!MeterDataStatus=='Not requested'}">.&nbsp;
+                                                    <a href="{!$Page.Calculation_Choice}?mode=profile" >
+                                                        Change profile 
+                                                    </a>
+                                                    &nbsp;or&nbsp;
+                                                    <a href="{!$Page.Calculation_Choice}" >
+                                                        upgrade to a custom quote.
+                                                    </a>
+                                                </apex:outputPanel>
+                                                <apex:outputText rendered="{!MeterDataStatus=='Pending'}">while we load usage data for <b>{!streetaddress}</b>.</apex:outputText>
+                                                <apex:outputText rendered="{!MeterDataStatus=='Error'}">because there was an error loading data for <b>{!streetaddress}</b>.</apex:outputText>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!or(HowCalculated='Default Load', HowCalculated='No Premise')}">
+                                                Prices shown are for a typical user in the <b>{!detailplan.tdsp__r.name}</b> service area.
+                                                <apex:outputPanel rendered="{!isnull(streetAddress)}">                                    
+                                                    <apex:outputLink value="{!$Page.AddAddressAfterRegistration}">Add a Service Address</apex:outputLink>&nbsp; for customized pricing. 
+                                                </apex:outputPanel>
+                                                <apex:outputPanel rendered="{!not(isnull(streetAddress))}">                                    
+                                                    <apex:outputPanel rendered="{!MeterDataStatus=='Not Requested'}">
+                                                        <a href="{!$Page.Calculation_Choice}?mode=profile" >
+                                                            Select a profile 
+                                                        </a>
+                                                        &nbsp;or&nbsp;
+                                                        <a href="{!$Page.Calculation_Choice}" >
+                                                            upgrade to a custom quote.
+                                                        </a>
+                                                    </apex:outputPanel>
+                                                    <apex:outputText rendered="{!MeterDataStatus=='Pending'}">while we load usage data for <b>{!streetaddress}</b>.</apex:outputText>
+                                                    <apex:outputText rendered="{!MeterDataStatus=='Error'}">because there was an error loading data for <b>{!streetaddress}</b>.</apex:outputText>
+                                                </apex:outputPanel>
+                                            </apex:outputPanel> 
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!ISPICKVAL($User.UserType,'Guest')}" styleClass="span9">
+                                            Prices shown are for a typical user in the <b>{!detailplan.tdsp__r.name}</b> service area.&nbsp;  
+                                            <a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.RegisterSec}">
+                                                Register
+                                            </a> 
+                                            for a custom quote based on your usage.
+                                        </apex:outputPanel>
+                                    </div>
+                                </div>
+                                
+                                <hr/>
+                                    <h5>
+                                        Rewards
+                                    </h5>
+                                        <c:CustomerRewardsView rateid="{!DetailPlan.id}"/>
+                                
+                                <hr/>
+                                <apex:outputPanel rendered="{!detailplan.plan__r.Rate_Class_del__c='Commercial'}">
+                                    <h5>Commercial-Specific Fees</h5>
+                                    <ul class="muted">
+                                        <apex:outputPanel rendered="{!detailplan.RUC_Nodal_Fees__c}">
+                                            <li><b>RUC</b> charges are included in the estimated energy charges above.</li>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!not(detailplan.RUC_Nodal_Fees__c)}">
+                                            <li><b>RUC</b> charges are <b>NOT</b> included in the estimated energy charges above.</li>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!detailplan.Basis_Charge_Included__c}">
+                                            <li><b>Nodal/Basis</b> (Congestion) charges are included in the estimated energy charges above.</li>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!not(detailplan.Basis_Charge_Included__c)}">
+                                            <li><b>Nodal/Basis</b> (Congestion) charges are <b>NOT</b> included in the estimated energy charges above.</li>
+                                        </apex:outputPanel>
+                                        
+                                        
+                                        
+                                        <apex:outputPanel rendered="{!and(not(isnull(detailplan.Bandwidth_Swing_Allowed__c)), detailplan.Bandwidth_Swing_Allowed__c>0)}">
+                                            <li>If your usage is above or below the anticipated usage by more than 
+                                                <b><apex:outputfield value=" {!detailplan.Bandwidth_Swing_Allowed__c}"/></b>, 
+                                                then {!detailplan.plan__r.REP_Profile__r.name} reserves the right to change your fixed price.</li>
+                                        </apex:outputPanel>
+                                    </ul>
+                                    <hr/>
+                                </apex:outputPanel>
+                                
+                                    <h5>
+                                        Potential Fees and Charges
+                                    </h5>
+                                    
+                                    <div>
+                                        <c:FeeDisplay rateid="{!DetailPlan.id}"/>
+                                    </div>
+                                <hr/>    
+                                <h5>
+                                        Disclosures
+                                    </h5>                   
+                                    <c:EFLYRACTOSComponent rate="{!DetailPlan}" page="Details" />                    
+                                <hr/>
+                            </apex:outputpanel>
+                            
+                        </apex:form>
+                    </div>
+                    <div class="span3" >
+                        <h3>Selected Plan</h3>
+                        <center>
+                                <c:SelectedPlanDisplay rate="{!TileStuff.rateplan}" kWhprice="{!text(round(TileStuff.PricekWh*100, 1))}" 
+                                HideAdvertised="True" AnnualPrice="{!text(round(TileStuff.Price, 0))}" />
+                            
+                        </center>
+                        <span itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+                            <meta content="{!text(round(TileStuff.Price/12, 0))}" itemprop="price"/>
+                        </span>
+                    </div>
+                    <hr/>
+                    <div Class="span3">
+                        <h3>About {!DetailPlan.plan__r.REP_profile__r.name}</h3>
+                        <span itemscope="itemscope" itemtype="http://schema.org/Corporation">
+                            <span itemprop="description">
+                                <apex:outputfield value="{!DetailPlan.plan__r.REP_profile__r.About_Us__c}"></apex:outputfield>
+                            </span>
+                            <p class="pull-right"><small>Source: <span itemprop="name">{!DetailPlan.plan__r.REP_profile__r.name}</span></small></p>
+                        </span>
+                    </div>
+                </apex:outputpanel>
+                <apex:outputpanel styleClass="row" layout="block" rendered="{!badID}">
+                    <h2>The plan you are looking for has been deleted or has moved.</h2>
+                    <a href="{!$Page.shopplans}" class="btn btn-primary btn-large">Back to the shopping page</a>
+                </apex:outputpanel>
+            </div>
+        </apex:define>      
+    </apex:composition>
+    <c:ShopPlansClickthrough />
+    <script type="text/javascript">
+        $j=jQuery.noConflict();
+        $j(document).ready(function () {
+            $j("[rel='tooltip']").tooltip();
+
+            if ('{!$User.Id}'!='00530000004bUq2AAE'){ //if we know it's not a guest
+            //first, set up all info from the APA                
+                ShopRemote.getAccountInfo('{!$User.Id}', function(result, event){
+                    if (event.status && result != null){
+                        //$j("#Search_Zip").text(result.Premise__r.Electric_Service_Address_Zip__c.substring(0,5));
+                        //$j("#Result_Rate_Class").text(result.Premise__r.Premise_Type__c);
+
+                        StoredAPA=result;
+                        ces.TrueCost.ShoppingZipModalExecute();                      
+                    } else{
+                        ces.TrueCost.ShoppingZipModalExecute();    
+                    }
+                }); 
+            } else {
+                ces.TrueCost.ShoppingZipModalExecute();
+            } 
+        });
+    </script>
+</apex:page>

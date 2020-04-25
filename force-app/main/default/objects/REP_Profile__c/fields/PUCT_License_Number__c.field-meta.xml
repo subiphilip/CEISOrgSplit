@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PUCT_License_Number__c</fullName>
+    <description>PUCT License Number</description>
+    <externalId>false</externalId>
+    <inlineHelpText>PUCT License Number (5 digits with no # sign)</inlineHelpText>
+    <label>PUCT License Number</label>
+    <length>5</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

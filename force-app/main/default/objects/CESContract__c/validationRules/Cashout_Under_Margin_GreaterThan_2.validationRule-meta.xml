@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cashout_Under_Margin_GreaterThan_2</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR( 
+Cashout_Under_Margin__c &lt; -2, 
+Cashout_Under_Margin__c &gt; 1 
+)</errorConditionFormula>
+    <errorDisplayField>Cashout_Under_Margin__c</errorDisplayField>
+    <errorMessage>CESC38: Cashout Under Margin must be between ($2.00) and $1.00 per MMBtu</errorMessage>
+</ValidationRule>

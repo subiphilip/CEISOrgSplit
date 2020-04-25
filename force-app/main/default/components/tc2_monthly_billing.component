@@ -1,0 +1,31 @@
+<apex:component >
+
+  
+  <script type="text/x-template" xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org" id="template-monthly-bill">
+    <p class="is-size-3" v-if="myplansize == 'small'">$ {{ myplan.costMonthlySmall }}/mo</p>
+    <p class="is-size-3" v-else-if="myplansize == 'medium'">$ {{ myplan.costMonthlyMedium }}/mo</p>
+    <p class="is-size-3" v-else-if="myplansize == 'large'">$ {{ myplan.costMonthlyLarge }}/mo</p>
+  </script>
+
+  <script>
+  Vue.component('app-monthly-bill', {
+    data: function () { return this.myplansize; },
+    mounted: function() { 
+        this.myplansize = TC.app.appHomeProfile.houseSize;
+        var vm = this;
+        TC.app.appSubscribe.$on('homeSizeUpdated', function(arg) {
+         vm.myplansize = arg;
+         TC.app.PlansShop.houseSize = arg;
+         TC.app.PlansShop.showShopPlans();
+         TC.app.PlansShop.pageNumber = 0;
+         TC.app.PlansShop.updatePage();
+             
+        });
+    },  
+    props: ['myplan', 'myplansize'],
+    template: "#template-monthly-bill" 
+  });
+  </script>
+
+  
+</apex:component>

@@ -1,0 +1,52 @@
+<messaging:emailTemplate subject="Daily Usage Summary" recipientType="Contact" relatedToType="Daily_Usage__c" >
+
+<messaging:plainTextEmailBody >
+</messaging:plainTextEmailBody>
+
+<messaging:htmlEmailBody >
+    <c:Visualforce_email_stylesheet />
+    
+    <apex:image url="https://c.na1.content.force.com/servlet/servlet.ImageServer?id=01530000001w7m0&oid=00D30000000pOSg"/>
+    
+    <!--apex:outputpanel layout="block" styleClass="topnav" id="RegularTopNav">
+            <ul id="menubar">
+              <li class="first"><apex:outputlink value="{!$Page.homepage}">Home</apex:outputlink></li>   
+              <li><apex:outputlink value="{!$Page.shopplans}">Shop Plans</apex:outputlink></li>   
+              <li><apex:outputlink value="{!$Page.ElectricCompanies}">Electric Companies</apex:outputlink></li>
+              <li><apex:outputLink value="{!$Page.ElectricPriceTrendsSummary}">Electric Price Trends</apex:outputLink></li>
+              <li><apex:outputLink value="{!$Page.AboutTrueCost}">About TrueCost</apex:outputLink></li>
+              <li><apex:outputLink value="{!$Page.truecostblog}">News &amp; Insights</apex:outputLink></li>
+              <li><apex:outputLink value="{!$Page.FAQ}">Support</apex:outputLink></li>
+            </ul>    
+    </apex:outputpanel -->      
+    
+    
+    
+            <apex:outputPanel layout="block" styleClass="maintitle" >Daily Usage Summary</apex:outputPanel>
+            <apex:outputPanel styleClass="callout" layout="block">Your usage at {!relatedto.Account_Premise_Association__r.premise__r.Electric_Service_Address__c} was {!round(relatedto.Total_for_the_day__c, 1)} kWh on 
+                <apex:outputText value=" {0,date,MM'/'dd'/'yyyy}">
+                    <apex:param value="{!relatedTo.Date__c}"/>
+                </apex:outputText>.  
+                This chart shows how it looked throughout the day.    
+            </apex:outputPanel>
+            
+            <apex:outputPanel >
+                    <apex:image styleClass="google-image-chart" 
+                    url="http://chart.apis.google.com/chart?chf=c,ls,0,EFEFEF83,0.2,E0E0E083,0.2&chxl=0:|midnight|4am|8am|noon|4pm|8pm|midnight|2:|kWh&chxt=x,y,y&chxp=2,{!relatedTo.Max_for_the_day__c/2}&chs=600x300&cht=lc&chds=a&chd=t:{!relatedTo.Intervals__c}&chg=20,25,0,0&chls=1.75&chma=|0,5&chtt=Electric+Usage+for+{!relatedTo.Date__c}" 
+                    width="600" height="300" alt="Electric Usage for {!relatedTo.Date__c}" />
+            </apex:outputPanel>
+            
+            <apex:outputPanel layout="block" styleClass="basic-paragraph">
+                For interactive charts that show your usage history at various levels, please&nbsp; 
+                <Apex:outputLink value="http://www.mytruecost.com/intervaldataexplorer" >click here</Apex:outputLink>
+                (login required).
+            </apex:outputPanel>
+   <apex:outputPanel styleClass="Footer">
+       
+       <apex:image styleClass="footer-logo" url="https://c.na1.content.force.com/servlet/servlet.ImageServer?id=01530000001w7YU&oid=00D30000000pOSg"/>
+        <apex:outputPanel styleClass="footer-tagline">
+                   THE BETTER WAY TO SHOP FOR ELECTRIC PLANS 
+               </apex:outputPanel>
+    </apex:outputPanel>   
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

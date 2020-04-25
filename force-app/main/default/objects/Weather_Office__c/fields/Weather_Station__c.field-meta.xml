@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Weather_Station__c</fullName>
+    <externalId>false</externalId>
+    <label>Weather Station</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Premises__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Weather Station</value>
+        </filterItems>
+        <filterItems>
+            <field>Premises__c.Safari_Weather_Region_Name__c</field>
+            <operation>notEqual</operation>
+            <value/>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Premises__c</referenceTo>
+    <relationshipLabel>Weather Offices</relationshipLabel>
+    <relationshipName>Weather_Offices</relationshipName>
+    <relationshipOrder>1</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

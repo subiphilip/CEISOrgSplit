@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_DA_on_Order</fullName>
+    <availability>online</availability>
+    <description>creates a new Delegation Agreement for this order</description>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <hasMenubar>false</hasMenubar>
+    <hasScrollbars>true</hasScrollbars>
+    <hasToolbar>false</hasToolbar>
+    <height>600</height>
+    <isResizable>true</isResizable>
+    <linkType>url</linkType>
+    <masterLabel>New DA on Order</masterLabel>
+    <openType>newWindow</openType>
+    <position>none</position>
+    <protected>false</protected>
+    <showsLocation>false</showsLocation>
+    <showsStatus>false</showsStatus>
+    <url>https://www.appextremes.com/apps/Conga/Composer.aspx
+?sessionId={!API.Session_ID}
+&amp;serverUrl={!API.Partner_Server_URL_80}
+&amp;id={!Order__c.PremiseId__c}
+&amp;DV0={!round(Order__c.Contract_Length__c/12, 0)}
+&amp;TemplateId=a1430000002Ikit
+&amp;EmailTemplateId=00X30000001TRCK
+&amp;OFN=Delegation+Agreement+Account+{!Order__c.Account_Number__c}+{!Order__c.Confirmation_Code_Year__c}
+&amp;DS4=1
+&amp;DS7=7
+&amp;FP0=0
+&amp;LG0=0
+&amp;LG4=1
+&amp;LG1=Delegation+Agreement
+&amp;LG2=7
+&amp;LG5={!$User.Id}
+&amp;LG6={!$User.Id}
+&amp;LG7=DA+Follow-up
+&amp;LGAttachOption=2
+&amp;LG3=1
+&amp;EmailRelatedToId={!Order__c.Id}
+&amp;EmailAdditionalTo={!Order__c.Customer_Email__c}
+&amp;EmailFromId=00e30000001pUls
+&amp;DocuSignVisible=1
+&amp;DocuSignR1Id={!Order__c.ContactID_Kludge__c}
+&amp;DocuSignR1Role=Signer+1
+&amp;DocuSignR1Type=Signer
+&amp;DocuSignR1RoutingOrder=1
+&amp;DocuSignRelatedAccountId={!Order__c.Parent_Account__c}
+&amp;Qmode=7
+&amp;DocuSignSendReminders=1
+&amp;DocuSignRemindIn=1
+&amp;DocuSignRemindAgainIn=2
+&amp;DocuSignExpireIn=7
+&amp;DocuSignWarnIn=1
+&amp;DocuSignEmailSubject=Your Natural Gas Agreement
+&amp;DocuSignEmailBody={!HTMLENCODE(&#39;Thanks for selecting CenterPoint Energy.  Please follow the instructions to electronically sign the agreement.&#39;)}
+&amp;DocuSignCustomField1=dsfs__Custom_Field_1_Name__c
+&amp;DocuSignCustomFieldValue1=%23%23SFOrder
+&amp;DocuSignCustomField2=dsfs__Custom_Field_1_Value__c
+&amp;DocuSignCustomFieldValue2={!Order__c.Id}</url>
+</WebLink>

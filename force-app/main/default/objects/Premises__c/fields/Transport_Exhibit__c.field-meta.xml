@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Transport_Exhibit__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Transport Exhibit</label>
+    <lookupFilter>
+        <active>false</active>
+        <filterItems>
+            <field>$Source.Account__c</field>
+            <operation>equals</operation>
+            <valueField>Transport_Exhibit__c.Account__c</valueField>
+        </filterItems>
+        <filterItems>
+            <field>$Source.Facility_List__c</field>
+            <operation>equals</operation>
+            <valueField>Transport_Exhibit__c.CESContract__r.Facility_List__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Transport_Exhibit__c</referenceTo>
+    <relationshipLabel>Premises</relationshipLabel>
+    <relationshipName>Premises</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

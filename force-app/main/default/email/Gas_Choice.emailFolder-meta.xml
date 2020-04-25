@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accessType>Shared</accessType>
+    <name>Gas Choice</name>
+    <publicFolderAccess>ReadOnly</publicFolderAccess>
+    <sharedTo>
+        <group>Administrators_System</group>
+        <group>Content_Editing</group>
+        <group>CustomerService</group>
+        <group>Customer_Service_Primary</group>
+    </sharedTo>
+</EmailFolder>

@@ -1,0 +1,19 @@
+<apex:component id="topnav">
+
+	<div class="header2">
+		<!-- 
+		<div class="TopNav">
+			<apex:outputLink value="{!$Page.shopplans}"><span class="navlink">Shop Plans</span></apex:outputLink>
+			<apex:outputLink value="{!$Page.ElectricPriceTrendsSummary}"><span class="navlink">Electric Price Trends</span></apex:outputLink> 
+			<span class="navlink">About TrueCost</span>
+			<apex:outputLink value="{!$Page.FAQ}"><span class="navlink">Customer Support</span></apex:outputLink> 
+			<apex:outputLink value="{!$Page.truecostblog}"><span class="navlink">TrueCost Blog</span></apex:outputLink>
+		</div>
+		 -->
+		<apex:outputLink value="TrueCostHome">
+			<apex:image url="{!$Resource.TrueCostWordmark}" styleClass="wordmark"
+				alt="TrueCost Electric Portal" width="200" height="32"
+				title="TrueCost" />
+		</apex:outputLink>
+	</div>
+</apex:component>

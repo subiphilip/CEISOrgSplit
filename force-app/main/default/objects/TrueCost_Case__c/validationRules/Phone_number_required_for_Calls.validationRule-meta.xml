@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Phone_number_required_for_Calls</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(TEXT(Origin__c)  = &quot;Phone&quot;,    ISNULL(Non_Account_Phone__c) )</errorConditionFormula>
+    <errorDisplayField>Non_Account_Phone__c</errorDisplayField>
+    <errorMessage>TCCase01: TrueCost cases from Phone Calls must include a phone number for the customer</errorMessage>
+</ValidationRule>

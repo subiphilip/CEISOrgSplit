@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CES_C_I</fullName>
+    <active>true</active>
+    <businessProcess>CES C%26I</businessProcess>
+    <description>Selling natural gas to Commercial/Industrial customers</description>
+    <label>CES C&amp;I Gas</label>
+    <picklistValues>
+        <picklist>Burn_Level__c</picklist>
+        <values>
+            <fullName>%3E10%2FDay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%3E100%2FDay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%3E25%2FDay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%3E50%2FDay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%7E10%2FDay</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Business_Approval_Status__c</picklist>
+        <values>
+            <fullName>CEO Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Director Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manager Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Required</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Submitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VP Approved</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Business_Type__c</picklist>
+        <values>
+            <fullName>Demand Response</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Electric</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NGL</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CES_Competitor__c</picklist>
+        <values>
+            <fullName>AEP Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>AM Gas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ambit Illinois</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Ameren Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Amerimax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Anadarko</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Atmos Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>BP Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Border</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Champion</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Clearwater Enterprises</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Compass Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Comverge</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ConEd</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Conoco Phillips</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Constellation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Corn Belt Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Direct Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dominion Retail</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Energy Transfer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Exelon Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>First Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gateway Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Glacial Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hess</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hudson Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IGS Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Indiana Gas %26 Electric</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Integrys Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Johnson Controls</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Just Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laclede Energy Resources</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lakeshore Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Liberty Power</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Luminent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MX Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mc2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MidAmerican</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Multiut</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Natural Gas Processors%2C Inc%2E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nextera</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nicor Advanced Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nicor Enerchange</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nordic Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ONEOK Energy Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oklahoma Energy Source</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PPL Energy Plus</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ProLiance Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Realgy Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rhoads Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Santanna Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seminole</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shell</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Shipley</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>SourceGas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>South Jersey Energy Solutions</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Spark Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stand Energy Corporation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Suez</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tenaska</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tiger Natural Gas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Twin Eagle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tylex</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>UGI Energy Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>US Energy Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Utility</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vanguard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vectren Source</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Vista Energy Marketing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Washington Gas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Windy City Energy%2C Inc</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Credit_Request_Status__c</picklist>
+        <values>
+            <fullName>Additional Information Required</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Credit Decision - Limit Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Credit Decision - Limit Rejected</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Expired</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New%2FPending Submission</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request Submitted%2FCredit Review</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Credit_Type__c</picklist>
+        <values>
+            <fullName>Accelerated Payment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bad Debt Allowance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deposit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Discretionary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Escrow Agreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Guaranty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Insurance Coverage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Letter of Credit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Netout</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None Required</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Positive Credit Check</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prepay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Surety Bond</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>ForecastCategoryName</picklist>
+        <values>
+            <fullName>Best Case</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Omitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pipeline</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>LeadSource</picklist>
+        <values>
+            <fullName>Advertisement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Service</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Employee Referral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>External Referral</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Public Relations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seminar - Internal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seminar - Partner</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trade Show</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Web</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Word of mouth</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Lost_Reasoning__c</picklist>
+        <values>
+            <fullName>Agent Conflict</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Business Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Business Sold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CES Profile</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Competitor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Credit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Price</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Product</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Stayed with Utility</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Storage Valuation</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Paid_Consultant_1_Pay_Type__c</picklist>
+        <values>
+            <fullName>Flat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Margin Percentage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Per Unit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Upfront Flat Fee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Volumetric</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Paid_Consultant_2_Pay_Type__c</picklist>
+        <values>
+            <fullName>Flat</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Margin Percentage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Per Unit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Upfront Flat Fee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Volumetric</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Safari_Contract_Opty_Sync_Status__c</picklist>
+        <values>
+            <fullName>Sync Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sync in Progress</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Secondary_Credit_Type__c</picklist>
+        <values>
+            <fullName>Accelerated Payment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bad Debt Allowance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deposit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Discretionary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Escrow Agreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Guaranty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Insurance Coverage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Letter of Credit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Netout</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None Required</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Positive Credit Check</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prepay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Surety Bond</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Supplier__c</picklist>
+        <values>
+            <fullName>Champion Energy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ConEdison</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EnerNOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GDF Suez</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Liberty Power</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MC2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MidAmerican</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NextEra</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Nordic Energy</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Term_Approval_Status__c</picklist>
+        <values>
+            <fullName>Approval Rejected</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CEO %26 President Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Director Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Manager Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None Required</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VP Approved</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type</picklist>
+        <values>
+            <fullName>Existing Business</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Business</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

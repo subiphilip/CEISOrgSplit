@@ -1,0 +1,17 @@
+<apex:component Controller="EnrollRemoteController2"> 
+    
+    <div class="row" id="">
+        <div class="span4">
+         
+        <apex:outputPanel layout="block" styleClass="">
+            SSN*
+            <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.SSNQuestion}" >
+
+                <i class="icon-question-sign"/>
+                <span class="pull-right"></span>
+            </a>
+        </apex:outputpanel>
+    </div>
+   </div>
+
+</apex:component>

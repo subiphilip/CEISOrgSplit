@@ -1,0 +1,53 @@
+<apex:page controller="ControllerForAddMeToCampaign" showheader="false" sidebar="false" action="{!SaveCampaignMember}" applyBodyTag="false" docType="html-5.0" standardStylesheets="false">
+    <apex:composition template="Template_TC">
+        
+        <apex:define name="body"> 
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <apex:outputpanel layout="none" rendered="{!$CurrentPage.Parameters.lead!='needemail'}">
+                            <h2>Your request has been completed</h2>
+                        </apex:outputpanel>
+                        
+                        <apex:outputpanel layout="none" rendered="{!$CurrentPage.Parameters.lead='needemail'}">
+                            <h2>Please provide your email address to complete your request</h2>
+                        </apex:outputpanel>
+                        
+                        <apex:outputpanel layout="none">
+                            <h2><small>Thank you for your interest</small></h2>
+                        </apex:outputpanel>
+                        
+                        <apex:outputpanel styleClass="mainleft" layout="block" rendered="{!$CurrentPage.Parameters.lead!='needemail'}">
+                            <c:Content_Viewer content="{!CampaignName}" rendered="{!NOT(isnull(CampaignName))}"/>
+                            <c:Content_Viewer content="Generic Campaign Copy" rendered="{!(isnull(CampaignName))}"/>
+                        </apex:outputpanel>
+                        
+                        <apex:outputpanel styleClass="mainleft" layout="block" rendered="{!$CurrentPage.Parameters.lead='needemail'}">
+                            <apex:form >
+                                <apex:pageBlock >
+                                    <apex:outputLabel for="email" value="Email Address"></apex:outputLabel>
+                                    <apex:inputText value="{!emailToAdd}" id="email" size="60"/>                        
+                                </apex:pageBlock>
+                                <apex:outputPanel styleClass="button-container-bar center-buttons" layout="block">
+                                    <apex:outputPanel styleClass="action-button">
+                                        <apex:commandLink value="Submit" action="{!handleemail}" styleClass="btn btn-primary"/>
+                                    </apex:outputPanel>
+                                </apex:outputPanel>
+                            </apex:form>
+                        </apex:outputpanel>
+                    </div>
+                    <div class="span4">
+                        <c:truecostrecentblogposts />
+                        <hr/>
+                        <c:ChartMiniNarrow />
+                        <hr/>
+                        <c:RandomPoll />
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+        </apex:define>       
+        
+    </apex:composition>
+    
+</apex:page>

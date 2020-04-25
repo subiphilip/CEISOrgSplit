@@ -1,0 +1,29 @@
+<apex:component controller="ControllerForChangeAPA" allowDML="true">
+    <style>
+    	.select:not(.is-multiple):not(.is-loading)::after {
+    		right: 10px;
+    	}
+    	.select {
+    		max-width:260px;
+    	}
+	</style>
+    <div class="select" id="selectList">
+        <apex:selectList value="{!SelectedAPA}" multiselect="false" size="1" >
+            <apex:selectOptions value="{!APAOptionsNoManage}">            
+            </apex:selectOptions>
+            <apex:actionsupport event="onchange" action="{!Submit}"/>
+        </apex:selectList>
+    </div>
+    <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+             
+                $('#selectList select').children('option[value="New"]').hide();
+        
+            })
+        })(jQuery);
+    </script>
+        
+    
+</apex:component>

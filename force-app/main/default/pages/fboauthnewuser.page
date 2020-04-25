@@ -1,0 +1,35 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>TrueCost account not found - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <h1>TrueCost account not found<br/>
+                        </h1>
+                        <p class="lead">You're logged into facebook, but the email address that came back from facebook doesn't match an email address registered in TrueCost.</p>
+                        <hr/>
+                        <p>
+                            <a href="{!$Page.FBOauthlink}" class="btn btn-primary">Link Accounts</a> 
+                            If you have a TrueCost account already, you can log in with your existing credentials and then link your facebook account.
+                        </p>
+                        <hr/>
+                        <p>
+                            <a href="{!$Setup.AuthSettings__c.Facebook_oAuth_link__c}?site={!urlencode($Setup.AuthSettings__c.TrueCost_Secure_URL__c)}&startURL={!urlencode($Setup.AuthSettings__c.TrueCost_Post_registration_start_page__c)}" class="btn btn-warning">Create Profile</a> 
+                            If you don't have a TrueCost account, click here to get started.
+                            <br/>
+                            <small class="muted"><small>By clicking <b>Create Profile</b>, I accept the TrueCost <a href="{!$Page.TermsOfUse}" target="_blank">Terms of Use</a> and <a href="{!$Page.Privacy}" target="_blank">Privacy Policy</a></small></small>
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+</apex:page>

@@ -1,0 +1,171 @@
+<apex:component >
+  <script>
+
+    TC.fn.setup.Home = function () {
+      TweenMax.from(".hero-body", 1, {"opacity": 0});
+      TweenMax.fromTo(".has-bg-img", 1, {"scale":2, "opacity": 0}, { "opacity": 1});
+      TweenMax.to(".has-bg-img", 1.5, {"scale":1});
+      TweenMax.to("body", 1, {"display": 'block'});
+      /*TweenMax.to(".hero-body .title", 1, { "opacity": 1 });
+                    TweenMax.to(".hero-body .subtitle", 1, { "opacity": 1 });*/
+      TweenMax.from(".arrow-right", 1, {
+        opacity: 0,
+        x: -20,
+        ease: Bounce.easeOut,
+        delay: 1.4
+      });
+      TweenMax.from(".button.is-medium.is-info", .3, {
+        x: -10,
+        ease: Bounce.easeIn,
+        delay: 1.2
+      });
+      TweenMax.fromTo("#appZip", .3, {
+        opacity: 0,
+        y: 50
+      }, {
+        display: "block",
+        opacity: 1,
+        y: 0,
+        delay: 1.2
+      });
+      /*TweenMax.fromTo(".btn-small-business", .3, {
+        opacity: 0,
+        y: 50
+      }, {
+        display: "block",
+        opacity: 1,
+        y: 0,
+        delay: 1.2
+      });*/
+      TweenMax.fromTo("#cta-home-1", 0.3, {
+        opacity: 0
+      }, {
+        opacity: 1,
+        display: "block",
+        delay: 1
+      });
+      TweenMax.fromTo(".video", 0.3, {
+        opacity: 0
+      }, {
+        opacity: 1,
+        display: "block",
+        delay: 1
+      });
+      TweenMax.from("#cta-home-1 .column.column-left", 0.3, {
+        opacity: "0",
+        x: -100,
+        delay: 1.5
+      });
+      TweenMax.from("#cta-home-1 .column.column-right", 0.3, {
+        opacity: "0",
+        x: 100,
+        delay: 1.5
+      });
+
+      $('.field input').on('focus', function (e) {
+        $(e.currentTarget.parentElement).find('label').css('opacity', 0)
+      });
+      $('.field input').on('blur', function (e) {
+        if ($(e.currentTarget).val() <= 0) {
+          $(e.currentTarget.parentElement).find('label').css('opacity', 1)
+        }
+      });
+
+      if ($(".owl-carousel").length) {
+        $(".owl-carousel").owlCarousel({
+          items: 1,
+          smartSpeed: 450,
+          nav: false,
+          loop: true,
+          autoplay: false,
+          autoplayTimeout: 5000
+        });
+      }
+      TC.fn.setup.ScrollMagicHome();
+
+    };
+
+    TC.fn.setup.ScrollMagicHome = function () {
+      /*var tweenCTAHome2 = TweenMax.from(".savings-outer", 0.3, {
+                        opacity: "0",
+                        y: 20,
+                        top: "100px",
+                        onComplete: function() {}
+                    })
+                    var sceneCTAHome2 = new ScrollMagic.Scene({ triggerElement: "#trigger-cta-home-2" })
+                        .setTween(tweenCTAHome2)
+                        .addTo(TC.scrollMagic.controller);
+                */
+      var tweenVideoContainer = TweenMax.from(".video .is-over-right", 0.3, {
+        opacity: 0,
+        x: -100,
+        onComplete: function () {}
+      })
+      var sceneVideoContainer = new ScrollMagic.Scene({triggerElement: "#trigger-video-container"}).setTween(tweenVideoContainer).addTo(TC.scrollMagic.controller);
+
+      var tweenVideoContainerImage = TweenMax.from(".video .poster", 0.3, {
+        opacity: 0,
+        x: 100,
+        onComplete: function () {}
+      })
+
+      var tweenQuoteContainer = TweenMax.from("#quote", 0.3, {
+        opacity: 0,
+        x: 100,
+        onComplete: function () {}
+      })
+      var sceneQuoteContainer = new ScrollMagic.Scene({triggerElement: "#trigger-quote-container"}).setTween(tweenQuoteContainer).addTo(TC.scrollMagic.controller);
+
+      var rateContainer = TweenMax.fromTo("#appRateHome", 0.3, {
+        opacity: 0,
+        y: 100
+      }, {
+        opacity: 1,
+        y: 0,
+        onComplete: function () {}
+      })
+      var sceneRateContainer = new ScrollMagic.Scene({triggerElement: "#trigger-rate-container"}).setTween(rateContainer).addTo(TC.scrollMagic.controller);
+
+      var sceneVideoContainerImage = new ScrollMagic.Scene({triggerElement: "#trigger-video-container"}).setTween(tweenVideoContainerImage).addTo(TC.scrollMagic.controller);
+    };
+
+    TC.app.appZip = new Vue({
+      el: '#appZip',
+      data: {
+        zip: TC.app.account.premise.zip
+      },
+      methods: {
+        submitZip: function (e) {
+          TC.app.account.zipSearchPlans = this.zip;
+          TC.fn.navigateTo(TC.routes.shopPlans);
+          e.preventDefault();
+          sessionStorage.setItem('pathStart', 'search-by-zip-on-home');
+        },
+        submitZipCommerical: function (e) {
+          TC.app.account.zipSearchPlans = this.zip;
+          TC.fn.navigateTo('{!$Page.Shop_Plans_Commercial}');
+          e.preventDefault();
+          sessionStorage.setItem('pathStart', 'search-by-zip-on-home');
+        }
+      },
+      mounted: function () {},
+      watch: {
+        zip: {
+          handler: function () {
+            TC.app.account.premise.zip = this.zip;
+            TC.app.account.zipSearchPlans = this.zip;
+          }
+        }
+      }
+    });
+
+    (function ($) {
+      $(function () {
+        'use strict';
+
+        TC.fn.setup.Home();
+
+      })
+    })(jQuery);
+  </script>
+</apex:component>

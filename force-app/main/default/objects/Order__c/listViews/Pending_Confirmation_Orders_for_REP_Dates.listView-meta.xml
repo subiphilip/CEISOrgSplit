@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pending_Confirmation_Orders_for_REP_Dates</fullName>
+    <columns>NAME</columns>
+    <columns>Order_Status__c</columns>
+    <columns>Enrollment_Type__c</columns>
+    <columns>InitialDateofService__c</columns>
+    <columns>ESIID_Number__c</columns>
+    <columns>Premise_Order_Type__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>REP_Profile__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Order_Status__c</field>
+        <operation>equals</operation>
+        <value>Approved Pending Confirmation</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Order__c.Electric_Order</value>
+    </filters>
+    <filters>
+        <field>InitialDateofService__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <label>3a. Pending Conf Orders - DATE SPECIFIC</label>
+    <language>en_US</language>
+</ListView>

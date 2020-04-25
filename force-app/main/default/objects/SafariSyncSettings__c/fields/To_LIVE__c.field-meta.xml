@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>To_LIVE__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>salesforce to safari_live one way sync</description>
+    <externalId>false</externalId>
+    <inlineHelpText>salesforce to safari_live one way sync</inlineHelpText>
+    <label>To LIVE</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

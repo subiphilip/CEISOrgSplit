@@ -1,0 +1,2 @@
+<apex:component controller="ControllerForPlanDetails">
+</apex:component>

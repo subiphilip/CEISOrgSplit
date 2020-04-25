@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Trueup_Type__c</fullName>
+    <description>Used for safari contract true up type when there is a volume commitment.  Contract level only used for FOM contracts with multiple active premises.  account level = 1, contract level =2, blank = 0</description>
+    <externalId>false</externalId>
+    <label>Trueup Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Account Level</fullName>
+                <default>false</default>
+                <label>Account Level</label>
+            </value>
+            <value>
+                <fullName>Contract Level</fullName>
+                <default>false</default>
+                <label>Contract Level</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

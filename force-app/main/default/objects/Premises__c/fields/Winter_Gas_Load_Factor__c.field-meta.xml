@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Winter_Gas_Load_Factor__c</fullName>
+    <externalId>false</externalId>
+    <label>Winter Gas Load Factor</label>
+    <summarizedField>Annual_Usage__c.Winter_Gas_Load_Factor__c</summarizedField>
+    <summaryFilterItems>
+        <field>Annual_Usage__c.Year__c</field>
+        <operation>equals</operation>
+        <value>2012</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Annual_Usage__c.Ignore__c</field>
+        <operation>equals</operation>
+        <value>False</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Annual_Usage__c.Premise__c</summaryForeignKey>
+    <summaryOperation>max</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

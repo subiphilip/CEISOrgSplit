@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Actualized__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>has this deal been actualized (usage applied)?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>has this deal been actualized (usage applied)?</inlineHelpText>
+    <label>Actualized</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

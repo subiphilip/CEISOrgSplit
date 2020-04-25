@@ -1,0 +1,9 @@
+<apex:component controller="SupportLinks">
+    
+    <apex:attribute name="RecordType" description="Pulls all the FAQs for the named RecordType" required="false" default="TrueCost FAQ" type="string"  assignTo="{!FAQRecordType}"/>
+    <span xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+    <apex:repeat var="faqs" value="{!UniqueCategoriesList}">
+        <a v-bind:class="{'is-active': sortBy == 'lowHigh'}" v-on:click='changeCategory("{!faqs}")'  href="#" class="dropdown-item">{!faqs}</a>
+    </apex:repeat>
+    </span>
+</apex:component>

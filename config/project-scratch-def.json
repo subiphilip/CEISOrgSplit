@@ -1,0 +1,35 @@
+{
+  "orgName": "CES3",
+  "edition": "Developer",
+  "description": "Org With Person Accounts",
+  "features": [
+    "PersonAccounts",
+    "ContactsToMultipleAccounts",
+    "Division",
+    "AddCustomRelationships:30",
+    "Sites", 
+    "Communities",
+    "PartnerCommunity",
+    "ForceComPlatform",
+    "LiveAgent",
+    "EnablePRM"
+  ],
+  "settings": {
+    "chatterSettings": {
+        "enableChatter": true
+    },
+    "quoteSettings": {
+      "enableQuote" : true
+    },
+    "liveAgentSettings": {
+      "enableLiveAgent": true
+    },
+    "communitiesSettings": {
+      "enableNetworksEnabled": true
+    },
+    "accountSettings": {
+      "enableAccountTeams": true
+    }
+  }
+}
+

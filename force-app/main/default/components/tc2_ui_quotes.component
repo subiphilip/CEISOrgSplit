@@ -1,0 +1,64 @@
+<apex:component >
+  <span xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+    <div id="trigger-quote-container" class=""></div>
+    <section id="quote" class="owl-carousel owl-theme has-background-white ">
+      <div class="container quote-card item">
+        <div class="columns ">
+          <div class="quote-column column has-text-centered ">
+            <span class="icon is-large has-text-info ">
+              <span class="icon-icon-quotes"></span>
+            </span>
+            <div class="quote-block">
+              <p class="is-size-2 is-size-4-mobile has-text-weight-lightest ">I really like the fact that you can enter your meter number and your electric usage was automatically used to compare electric plans.</p>
+            </div>
+            <div></div>
+            <div>
+              <p class="is-size-5 ">
+                <b>Johnny</b>
+              </p>
+              <p class="is-size-6 ">Baytown, TX</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container quote-card item">
+        <div class="columns ">
+          <div class="quote-column column has-text-centered ">
+            <span class="icon is-large has-text-info ">
+              <span class="icon-icon-quotes"></span>
+            </span>
+            <div class="quote-blo===ck">
+              <p class="is-size-2 is-size-4-mobile has-text-weight-lightest ">Loading my actual smart meter data is a HUGE advantage in accurately comparing plans.</p>
+            </div>
+            <div></div>
+            <div>
+              <p class="is-size-5 ">
+                <b>Gordon</b>
+              </p>
+              <p class="is-size-6 ">Pearland, TX</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container quote-card item">
+        <div class="columns ">
+          <div class="quote-column column has-text-centered ">
+            <span class="icon is-large has-text-info ">
+              <span class="icon-icon-quotes"></span>
+            </span>
+            <div class="quote-blo===ck">
+              <p class="is-size-2 is-size-4-mobile has-text-weight-lightest ">If it weren't for the TrueCost website, I would not have switched providers and would be paying more for electricity.</p>
+            </div>
+            <div>
+              <p class="is-size-5 ">
+                <b>Timothy</b>
+              </p>
+              <p class="is-size-6 ">Spring, TX</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </span>
+</apex:component>

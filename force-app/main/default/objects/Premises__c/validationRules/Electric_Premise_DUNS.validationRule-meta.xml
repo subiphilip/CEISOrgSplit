@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Electric_Premise_DUNS</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( Record_Type_Name__c = &quot;Electric Premise&quot;, 
+ Premise_Type__c  &lt;&gt; &quot;Residential&quot;,
+ISNULL(DUNS__c )
+)</errorConditionFormula>
+    <errorDisplayField>DUNS__c</errorDisplayField>
+    <errorMessage>Premise04: DUNs is required.</errorMessage>
+</ValidationRule>

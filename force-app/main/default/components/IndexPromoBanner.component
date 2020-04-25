@@ -1,0 +1,16 @@
+<apex:component >
+    <!--<h4>When it comes to shopping,<br/>better information means better decisions</h4>
+    <div class="visible-phone clearfix">
+        <div class="alert">
+            <a href="{!$Page.ShopPlans}" class="btn btn-warning btn-mini">View Plans</a>
+            <a href="{!$Page.Register}" class="btn btn-primary btn-mini">Register Now</a>
+        </div>
+    </div>-->
+    <div class="well">
+        <h4>Customers who found their plan using <strong><i>my<span class="text-info">TrueCost</span>.com</i></strong> report saving an average of 20%* on their electric bill.</h4>
+        <h4>Let TrueCost show you how much you can save.</h4>
+        <a href="{!$Page.ShopPlans}" class="btn btn-warning">View Plans</a>
+        <a href="{!$Page.Register}" class="btn btn-primary">Create Profile</a>
+    </div>
+    
+</apex:component>

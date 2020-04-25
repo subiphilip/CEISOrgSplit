@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Choice_Premise_Cust_Number</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(  Record_Type_Name__c = &quot;Gas Choice Premise&quot;, 
+
+
+OR(
+ISNULL( SG_Customer_Number__c ), NOT(ISNUMBER(SG_Customer_Number__c))
+)
+)</errorConditionFormula>
+    <errorDisplayField>SG_Customer_Number__c</errorDisplayField>
+    <errorMessage>Premise11: Gas Choice premise requires a valid customer number, and it must be a number.</errorMessage>
+</ValidationRule>

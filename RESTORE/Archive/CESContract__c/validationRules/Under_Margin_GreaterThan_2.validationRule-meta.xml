@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Under_Margin_GreaterThan_2</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR( 
+Margin_on_Under__c &lt; -2, 
+Margin_on_Under__c &gt; 1 
+)</errorConditionFormula>
+    <errorDisplayField>Margin_on_Under__c</errorDisplayField>
+    <errorMessage>CESC15: Margin on Under must be between ($2.00) and $1.00 per MMBtu</errorMessage>
+</ValidationRule>

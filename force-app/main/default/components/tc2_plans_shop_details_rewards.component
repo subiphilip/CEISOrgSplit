@@ -1,0 +1,46 @@
+<apex:component Controller="ControllerForMobileMain"> 
+ 
+ <script>
+  Vue.component('app-plans-shop-details-rewards', {
+    data: function () { 
+        return {
+            rewards: this.rewards,
+            planId: this.rewards.id,
+            myrewards: []
+        }
+    },
+    mounted: function() {
+    	
+    },
+    methods: {
+        findReward: function(item, index){
+            if(item.id == vm.planId){
+                TC.app.account.plans[index]['rewards'] = [];
+            }
+        },
+        findRewardFirstItem: function(item, index){
+            if(item.id == vm.planId){
+                TC.app.account.plans[index]['rewards'] = res[0];
+            }
+        },
+        callRewards: function(){
+            var vm = this;
+            this.myrewards = [];
+            ControllerForMobileMain.getTheRewardsTC2(this.rewards.ratePlan.Id, function(result,event){
+                if(result !== undefined){
+                    var res = result.replace(/quot;/g, '"');
+                    res = res.replace(/&/g, '');
+                    res = JSON.parse(res);
+                    TC.app.account.plans[_.findIndex(TC.app.account.plans, function (item) { return item.id == vm.planId; })]['rewards'] = res[0];
+                } else {
+                    TC.app.account.plans[_.findIndex(TC.app.account.plans, function (item) { return item.id == vm.planId; })]['rewards'] = [];
+                }
+            });
+        }
+    }, 
+    props: ['rewards']
+    });
+</script>
+    
+    
+</apex:component>

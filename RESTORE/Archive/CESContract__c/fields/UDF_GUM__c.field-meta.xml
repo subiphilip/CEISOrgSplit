@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UDF_GUM__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISBLANK(Deal_Unit_Margin_Override__c) 
+  , Deal_Unit_Margin__c
+  , Deal_Unit_Margin_Override__c
+)</formula>
+    <label>UDF GUM</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

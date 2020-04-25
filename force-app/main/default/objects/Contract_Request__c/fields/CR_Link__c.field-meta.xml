@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CR_Link__c</fullName>
+    <externalId>false</externalId>
+    <formula>HYPERLINK(LEFT($Api.Partner_Server_URL_140, FIND(&quot;.com/&quot;,$Api.Partner_Server_URL_140)+3) + &#39;/apex/contractrequestpage?id=&#39; + Id + &#39;&amp;optyid=&#39; + Opportunity__c , &#39;Click to view Contract Request&#39;)</formula>
+    <label>CR Link</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

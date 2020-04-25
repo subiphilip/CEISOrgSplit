@@ -1,0 +1,119 @@
+<apex:page showHeader="false" sidebar="false" cache="true" applyBodyTag="false" expires="43200" docType="html-5.0" standardStylesheets="false"> 
+    
+    <apex:composition template="Template_TC">
+        
+        <apex:define name="HeadTags">
+            <title>{!$CurrentPage.Parameters.tdsp} {!$Label.Page_Title_Six_Month_Plans} - {!$Label.Page_Title_Company_Name}</title>
+            <apex:outputPanel layout="none" rendered="{!OR($CurrentPage.Parameters.tdsp='CenterPoint', $CurrentPage.Parameters.tdsp='')}">
+                <meta name="description" content="Average 6-month fixed price electric rates for CenterPoint Energy Houston Electric"  />
+            </apex:outputPanel> 
+            <apex:outputPanel layout="none" rendered="{!$CurrentPage.Parameters.tdsp='Oncor'}">
+                <meta name="description" content="Average 6-month fixed price electric rates for Oncor"  />
+            </apex:outputPanel> 
+            <apex:outputPanel layout="none" rendered="{!$CurrentPage.Parameters.tdsp='TNMP'}" >
+                <meta name="description" content="Average 6-month fixed price electric rates for Texas New Mexico Power"  />
+            </apex:outputPanel>
+            <apex:outputPanel layout="none" rendered="{!$CurrentPage.Parameters.tdsp='AEPC'}" >
+                <meta name="description" content="Average 6-month fixed price electric rates for AEP Central"  />
+            </apex:outputPanel>
+            <apex:outputPanel layout="none" rendered="{!$CurrentPage.Parameters.tdsp='AEPN'}" >
+                <meta name="description" content="Average 6-month fixed price electric rates for AEP North"  />
+            </apex:outputPanel>
+            <apex:outputPanel layout="none" rendered="{!$CurrentPage.Parameters.tdsp='Sharyland'}" >
+                <meta name="description" content="Average 6-month fixed price electric rates for Sharyland Utilities"  />
+            </apex:outputPanel>
+
+            <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/ElectricPriceIndex6Month"/>
+        </apex:define>
+        
+        <!--apex:define name="breadcrumbs">
+        <ul Class="breadcrumb">
+        <li><a href="{!$Page.homepage}">Home</a></li><span class="divider"> ></span>
+        <li Class="active">{!$Label.Page_Title_Electric_Companies}</li>
+    </ul>
+    </apex:define-->
+        
+        <apex:define name="body">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span8">
+                        <c:IndexPromoBanner />
+                        <!-- REQUIRED: INSERT PAGE TITLE -->                               
+                        <div class="pull-right"> 
+                            <c:ShareThisSmall URL="{!left($Site.CurrentSiteUrl, len($Site.CurrentSiteURL)-1)}{!URLFOR($Page.ElectricPriceIndex6Month)}"/>
+                        </div>
+                        <h1>{!$Label.Page_Title_Six_Month_Plans}<br/>
+                        <small>{!case($CurrentPage.Parameters.tdsp, 
+                            'CenterPoint', 'CenterPoint Energy Service Area',
+                            '', 'CenterPoint Energy Service Area',
+                            'Oncor', 'Oncor Service Area',
+                            'TNMP', 'TNMP Service Area',
+                            'AEPC', 'AEP Central Service Area',
+                            'AEPN', 'AEP North Service Area',
+                            'Sharyland', 'Sharyland Utilities Service Area',
+                            '')}</small>
+                    </h1>
+                        
+                        <c:Content_Viewer content="6 month top" rendered="{!OR($CurrentPage.Parameters.tdsp='CenterPoint', $CurrentPage.Parameters.tdsp='')}"/>   
+                        <c:Content_Viewer content="6 month top Oncor" rendered="{!$CurrentPage.Parameters.tdsp='Oncor'}"/> 
+                        <c:Content_Viewer content="6 month top TNMP" rendered="{!$CurrentPage.Parameters.tdsp='TNMP'}" />
+                        <c:Content_Viewer content="6 month top AEPC" rendered="{!$CurrentPage.Parameters.tdsp='AEPC'}" />
+                        <c:Content_Viewer content="6 month top AEPN" rendered="{!$CurrentPage.Parameters.tdsp='AEPN'}" />
+                        <c:Content_Viewer content="6 Month Top Sharyland" rendered="{!$CurrentPage.Parameters.tdsp='Sharyland'}" />
+                        
+                        <c:Chart6MCNP2Y rendered="{!OR($CurrentPage.Parameters.tdsp='CenterPoint', $CurrentPage.Parameters.tdsp='')}"/>
+                        <c:Chart6MDallas2Yr rendered="{!$CurrentPage.Parameters.tdsp='Oncor'}" />
+                        <c:Chart6MTNMP2Yr rendered="{!$CurrentPage.Parameters.tdsp='TNMP'}" /> 
+                        <c:Chart6MAEPC2Yr rendered="{!$CurrentPage.Parameters.tdsp='AEPC'}" />
+                        <c:Chart6MAEPN2Yr rendered="{!$CurrentPage.Parameters.tdsp='AEPN'}" />
+                        <c:Chart6MSharyland2yr rendered="{!$CurrentPage.Parameters.tdsp='Sharyland'}" />                
+                        <div class="maingooglechart-with-space" id="visualization" />
+                        
+                        <c:Content_Viewer content="Index Disclaimer"/>    
+                        
+                        <br/>
+
+                        <span class="pull-right muted">--Bobby Dornbos<a href="https://plus.google.com/101271406270641647443?rel=author" rel="author" itemprop="author">+</a></span>
+                        <span class="clearfix"/>
+
+                        <hr/>
+                        
+                        <c:Content_Viewer content="CNP Cities" rendered="{!OR($CurrentPage.Parameters.tdsp='CenterPoint', $CurrentPage.Parameters.tdsp='')}" />
+                        <c:Content_Viewer content="Oncor Cities" rendered="{!$CurrentPage.Parameters.tdsp='Oncor'}" />
+                        <c:Content_Viewer content="AEPN Cities" rendered="{!$CurrentPage.Parameters.tdsp='AEPN'}" />
+                        <c:Content_Viewer content="AEPC Cities" rendered="{!$CurrentPage.Parameters.tdsp='AEPC'}" />
+                        <c:Content_Viewer content="TNMP Cities" rendered="{!$CurrentPage.Parameters.tdsp='TNMP'}" />
+                        <c:Content_Viewer content="Sharyland Cities" rendered="{!$CurrentPage.Parameters.tdsp='Sharyland'}" />
+                        
+                    </div>
+                    
+                    <div class="span4">
+                        <div>
+                            <c:IndexRegionPickerSidebar />
+                        </div>
+                        <hr/>
+                        <div>
+                            <c:electricpricetrendslinks />
+                        </div>
+                        <hr/>
+                        <div >
+                            <c:truecostrecentblogposts />
+                        </div>
+                        <hr/>
+                        <div >
+                            <c:RandomPoll />
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </apex:define>       
+        <apex:define name="footer-additional">
+            <small>
+                <small>
+                    <p><c:Content_Viewer content="Savings Disclaimer" simple="true"/></p><br/>
+                </small>
+            </small>
+        </apex:define>
+        
+    </apex:composition>
+</apex:page>

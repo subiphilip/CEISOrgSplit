@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Basis_Option__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Which trading contract (eg option, swap, etc) this position is for</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Which trading contract (eg future, swap, etc) this position is for</inlineHelpText>
+    <label>Basis/Option Physical</label>
+    <referenceTo>Index__c</referenceTo>
+    <relationshipLabel>Positions</relationshipLabel>
+    <relationshipName>Positions</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

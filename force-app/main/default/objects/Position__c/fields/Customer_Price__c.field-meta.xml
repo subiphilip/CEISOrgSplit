@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Price__c</fullName>
+    <description>Price to the customer for fixed price or sales adder for index price</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Price to the customer for fixed price or sales adder for index price</inlineHelpText>
+    <label>Customer Price</label>
+    <precision>9</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

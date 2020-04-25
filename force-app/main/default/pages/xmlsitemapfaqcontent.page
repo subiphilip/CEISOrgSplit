@@ -1,0 +1,35 @@
+<apex:page contentType="text/xml" controller="ControllerForMobileMain">
+    <urlset xmlns="http://www.google.com/schemas/sitemap/0.84"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.google.com/schemas/sitemap/0.84
+    http://www.google.com/schemas/sitemap/0.84/sitemap.xsd">
+        <apex:repeat value="{!AllFAQ}" var="x">
+            
+                <url>
+                    <loc>http://www.mytruecost.com/singlefaq?id={!x.id}</loc>
+                    <lastmod>
+                        <apex:outputText value="{0,date,yyyy-MM-dd}">
+                            <apex:param value="{!x.lastmodifieddate}" />
+                        </apex:outputText> 
+                    </lastmod>
+                    <changefreq>monthly</changefreq>
+                    <priority>1.00</priority>
+                </url>
+         
+        </apex:repeat>
+        <apex:repeat value="{!AllFeeTerms}" var="x">
+            
+                <url>
+                    <loc>http://www.mytruecost.com/singlecontentitem?id={!x.id}</loc>
+                    <lastmod>
+                        <apex:outputText value="{0,date,yyyy-MM-dd}">
+                            <apex:param value="{!x.lastmodifieddate}" />
+                        </apex:outputText> 
+                    </lastmod>
+                    <changefreq>monthly</changefreq>
+                    <priority>1.00</priority>
+                </url>
+         
+        </apex:repeat>
+    </urlset>
+</apex:page>

@@ -1,0 +1,38 @@
+<apex:page showHeader="false" sidebar="false" cache="true" applyBodyTag="false" expires="43200" docType="html-5.0" standardStylesheets="false"> 
+
+    
+    <apex:composition template="Template_TC">
+        
+        <apex:define name="HeadTags">
+            <title>{!$Label.Page_Title_About_TrueCost} - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span8">
+                        <div class="pull-right"> 
+                            <c:ShareThisSmall URL="{!left($Site.CurrentSiteUrl, len($Site.CurrentSiteURL)-1)}{!URLFOR($Page.AboutTrueCost)}"/>
+                        </div>
+                        <c:Content_Viewer content="About Us" headline="true" deck="true"/>
+                    </div>
+                    <div class="span4">
+                        <div>
+                            <c:truecostrecentblogposts />
+                        </div>
+                        <hr/>
+                        <div >
+                            <c:electricpricetrendslinks />
+                        </div>
+                        <hr/>
+                        <div >
+                            <c:RandomPoll />
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </apex:define>       
+        
+        
+    </apex:composition>
+</apex:page>

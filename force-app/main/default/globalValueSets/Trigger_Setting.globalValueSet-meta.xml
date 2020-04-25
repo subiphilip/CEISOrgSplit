@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Restricted</fullName>
+        <default>false</default>
+        <label>Restricted</label>
+    </customValue>
+    <customValue>
+        <fullName>Allowed</fullName>
+        <default>false</default>
+        <label>Allowed</label>
+    </customValue>
+    <customValue>
+        <fullName>Required</fullName>
+        <default>false</default>
+        <label>Required</label>
+    </customValue>
+    <masterLabel>Trigger Setting</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

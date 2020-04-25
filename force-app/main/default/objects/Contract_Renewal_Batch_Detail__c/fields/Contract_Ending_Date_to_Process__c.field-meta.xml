@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract_Ending_Date_to_Process__c</fullName>
+    <externalId>false</externalId>
+    <formula>Contract_Renewal_Batch__r.Contract_Ending_Date_to_Process__c</formula>
+    <label>Contract Ending Date to Process</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

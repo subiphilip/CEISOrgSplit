@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_Volume_Changes_After_Credit_Approval</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ $User.ProfileId  &lt;&gt; &quot;00e30000001q2Pk&quot;, 
+ $User.ProfileId  &lt;&gt; &quot;00e30000001gLF2&quot;,
+ NOT(CONTAINS($UserRole.Name, &quot;credit&quot;)),
+ISPICKVAL(Credit_Request_Status__c,&quot;Credit Decision - Limit Approved&quot;),
+ISCHANGED(Peak_Monthly_Volume__c )
+)</errorConditionFormula>
+    <errorDisplayField>Peak_Monthly_Volume__c</errorDisplayField>
+    <errorMessage>Oppt16: Peak monthly volume cannot be modified after credit limit has been approved. Please contact your Credit Analyst.</errorMessage>
+</ValidationRule>

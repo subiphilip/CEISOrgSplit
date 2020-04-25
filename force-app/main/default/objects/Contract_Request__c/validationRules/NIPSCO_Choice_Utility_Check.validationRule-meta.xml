@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NIPSCO_Choice_Utility_Check</fullName>
+    <active>true</active>
+    <description>make sure NIPSCO-Choice is selected if CES Office is Illinois</description>
+    <errorConditionFormula>AND(
+  CES_Office__r.Customer_Number__c == &#39;LIVE&#39;,
+   Utility__r.Name == &#39;NIPSCO&#39;
+)</errorConditionFormula>
+    <errorDisplayField>Utility__c</errorDisplayField>
+    <errorMessage>ContractReq01: NIPSCO-Choice must be selected instead of NIPSCO</errorMessage>
+</ValidationRule>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Is this a customer we are currently doing business with?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Is this a customer we are currently doing business with?</inlineHelpText>
+    <label>Active Account?</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

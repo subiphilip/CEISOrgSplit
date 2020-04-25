@@ -1,0 +1,27 @@
+<apex:component >
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+     google.load("visualization", "1", {packages:["corechart"]});
+     google.setOnLoadCallback(drawVisualization);
+    function drawVisualization() {
+         var query = new google.visualization.Query(
+//Insert your URL here if it's not the main page
+         'https://docs.google.com/a/mytruecost.com/spreadsheet/pub?hl=en_US&hl=en_US&key=0AoqLPzxzDUy2dE1hdzJhejl5TVdCSmhxZ2ZSZlM3Vnc&output=html');
+//Edit your charts here!!
+         query.setQuery('SELECT A,Q,R,S WHERE A >= Z ORDER BY A');//6,12,24 Combined Green Chart
+  query.send(handleQueryResponse);
+}
+
+function handleQueryResponse(response) {
+  if (response.isError()) {
+    alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+    return;
+  }
+  
+  var data = response.getDataTable();
+  var visualization = new google.visualization.LineChart(document.getElementById('visualization'));  //rename the div tag if you need multiple charts on the page
+//options
+  visualization.draw(data, {title:'CenterPoint Energy Electric Price Index (6M, 1Y and 2Y Green Premium)', titlePosition: 'out' , titleTextStyle: {color: '#004F00', fontSize:'15'} , legend: 'bottom', width: 665, height: 415, colors:['#33FF33', '#008000', '#004F00'], lineWidth:3, chartArea:{width:"80%", height:"80%"},                            vAxis:{gridlineColor:'#006894', textStyle:{color: '#006894'}, baselineColor:'#006894', format:'$###'},                           hAxis:{gridlineColor:'#ffffff', textStyle:{color: '#006894'}, baselineColor:'#ffffff', format:'MMM y'}, interpolateNulls:true});
+}
+    </script>
+</apex:component>

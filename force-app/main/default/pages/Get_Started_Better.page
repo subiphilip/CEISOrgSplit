@@ -1,0 +1,208 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" >
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+      description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+    
+    <div id="wrapper">
+        <c:tc2_navbar />
+        <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-2.jpg" headline="BETTER ESTIMATES FOR YOU"  />
+            <div id="appGetStartedBetter">
+                
+                <section><div class="container">
+                        <div class="has-margin-3 has-text-centered">
+                            <h2 class="is-size-4 has-text-weight-bold padding-sides">Tell us more about your home.<br/> We'll estimate your usage using households similar to yours.</h2>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="container form singup-bottom-padding">
+                        <div class="box is-form-no-padding">
+                            <form id="appHomeProfile" v-on:submit="validateBeforeSubmit" method="post">
+                                <div class="columns">
+                                    <div class="column form-column">
+                                        <div class="field is-horizontal">
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <p class="control is-expanded">
+                                                        <label class="form-label" for="houseSqft">Square Footage</label>
+                                                        <input class="input borderless" id="houseSqft" v-model="houseSqft" type="text" title="Square Footage" required="required" minlength="3" max="10" v-mask="'######'" />
+                                                    </p>
+                                                </div>
+                                                <div class="field form-vertical">
+                                                    <p class="control is-expanded">
+                                                        <label class="form-label" for="yearbuilt">Year Built</label>
+                                                        <input class="input borderless" v-mask="'####'" minlength="4" maxlength="4" id="yearbuilt" v-model="yearbuilt" type="text" title="Year Built" required="required" />
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field is-horizontal is-grouped">
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control">
+                                                        <div class="select is-fullwidth" >
+                                                            <label class="visuallyhidden" for="heatingsystem">Heating System</label>
+                                                            <select id="heatingsystem" placeholder="Heating System" v-model="heatingsystem" class="borderless-dropdown" required="required">
+                                                                <option v-bind:value="{type: ''}">Heating System</option>
+                                                                <option v-bind:value="{type: 'gas'}">Gas</option>
+                                                                <option v-bind:value="{type: 'electric'}">Electric</option>
+                                                                <option v-bind:value="{type: 'other'}">Other</option>
+                                                            </select>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal align-left">
+                                                <label for="pool">Do You Have A Pool?</label>
+                                            </div>
+                                            <div class="field has-addons">
+                                                <div class="control" id="pool">
+                                                    <label class="radio">
+                                                        <input type="radio" name="pool" v-bind:value="true" v-model="pool" required="required" /> Yes
+                                                    </label>
+                                                    <label class="radio">
+                                                        <input type="radio" name="pool" v-bind:value="false" value="false" v-model="pool" required="required" /> No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal align-left">
+                                                <label for="occupants">How Many Occupants?</label>
+                                            </div>
+                                            <div class="field has-addons">
+                                                <p class="control" style="margin-top: auto;">
+                                                    <a role="button" v-on:click="if (occupants > 0) occupants--" style="font-size: .5em;" data-quantity="minus" data-field="quantity">
+                                                        <span class="icon-icon-btn-minus"></span>
+                                                        <span class="visuallyhidden">minus</span>
+                                                    </a>
+                                                </p>
+                                                <p class="control">
+                                                    <input class="input borderless occupants" name="quantity" value="1" v-model="occupants" id="occupants" required="required" 
+                                                    v-mask="'###'" minlength="1" maxlength="2" />
+                                                </p>
+                                                <p class="control" style="margin-top: auto;">
+                                                    <a role="button" v-on:click="occupants++" style="font-size: .5em;" data-quantity="plus" data-field="quantity">
+                                                        <span class="icon-icon-btn-plus"></span>
+                                                        <span class="visuallyhidden">plus</span>
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="is-divider"></div>
+                                <div class="has-text-centered column form-column">
+                                    <input class="button is-primary is-rounded fixed-size" type="submit" value="SHOP AVAILABLE PLANS" />
+                                    <br/>
+                                    <a v-if="isBest" href="{!$Page.Get_Started_Best}">I changed my mind, show me the BEST!</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+                
+            </div>
+    </div>
+    <c:tc2_footer />
+    
+    <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+             
+             TC.app.appGetStartedBetter = new Vue({
+                el: '#appGetStartedBetter',
+                data: {
+                    houseSize: '',
+                    houseSqft: '',
+                    yearbuilt: '',
+                    heatingsystem: { type: '' },
+                    pool: false,
+                    occupants: 1,
+                    errors: [],
+                    email: TC.app.account.email,
+                    tdsp: '',
+                    serviceType: '',
+                    isGood: true,
+                    isBetter: true,
+                    isBest: true
+                },
+                methods: { 
+                    onSelectConfirm: function() {
+                    },
+                    validateBeforeSubmit: function(e) {
+                      
+                      if (!this.email) {
+                        this.errors.push('Email required.');
+                      }
+                      
+                      if(this.errors.length <= 0){
+                          this.onSelectConfirm();
+                      }
+                        
+                      e.preventDefault();
+                      TC.fn.navigateTo("{!$Page.Shop_Plans}");
+                    }
+                },  
+                mounted: function() { 
+                    sessionStorage.setItem('getStartedType','better');
+                    this.houseSize = TC.app.appHomeProfile.houseSize
+                    this.houseSqft = TC.app.appHomeProfile.houseSqft
+                    this.yearbuilt = TC.app.appHomeProfile.yearbuilt
+                    this.pool = TC.app.appHomeProfile.pool
+                    this.occupants = (TC.app.appHomeProfile.occupants == null) ? 1 : TC.app.appHomeProfile.occupants;
+                    this.heatingsystem.type = (TC.app.appHomeProfile.heatingsystem == null) ? '' : TC.app.appHomeProfile.heatingsystem;
+                    this.tdsp = TC.app.account.tdsp;
+                    this.serviceType = TC.app.account.serviceType;
+                    if(this.serviceType == "moveIn" || this.tdsp == 'false') {
+                        this.isBest = false;
+                    }
+                },
+                watch: { 
+                    houseSize: {
+                        handler: function() {
+                            TC.app.appHomeProfile.houseSize = this.houseSize;
+                        }
+                    },
+                    
+                    yearbuilt: {
+                        handler: function() {
+                            TC.app.appHomeProfile.yearbuilt = parseInt(this.yearbuilt);
+                        }
+                    },
+                    heatingsystem: {
+                        handler: function() {
+                            TC.app.appHomeProfile.heatingsystem = this.heatingsystem.type;
+                        }
+                    },
+                    pool: {
+                        handler: function() {
+                            TC.app.appHomeProfile.pool = this.pool;
+                        }
+                    },
+                    occupants: {
+                        handler: function() {
+                            TC.app.appHomeProfile.occupants = this.occupants;
+                        }
+                    },
+                    houseSqft: {
+                      handler: function() {
+                        sessionStorage.setItem('houseSqft', parseInt(this.houseSqft));
+                      },
+                    },
+                },
+             });
+    
+          })
+        })(jQuery);
+    </script>
+
+  </body>
+  </html>
+</apex:page>

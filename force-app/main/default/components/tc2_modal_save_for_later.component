@@ -1,0 +1,124 @@
+<apex:component >
+  <app-modal-save-for-later inline-template='true' xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+      <div  class="app-save-for-later">
+      <div id="app-save-for-later-modal" class="modal">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+              <div id="app-save-for-later-modal-inside" class="modal-card-body has-text-centered">
+                  <button v-on:click="closeModal" class="delete is-large" aria-label="close"></button>
+                  <div class="modal-card-body-inner">
+                      <span class="icon is-large has-text-info"><i class="fas fa-save fa-2x"></i></span>
+                      <h1 class="is-size-4 has-text-weight-semibold">Save For Later?</h1>
+                      <p>We'll send you an email with a shopping link, so you can pick up where you left off and finish what you started.</p>
+
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <div class="field">
+                                    <p class="control is-expanded">
+                                        <label class="form-label" for="email">Email Address</label>
+                                        <input class="input borderless" v-model="email" id="email" type="email" required="required" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button v-on:click="saveForLater" class="button is-info is-rounded fixed-size" v-bind:disabled="isDisabled">Save For Later</button>
+                        <a v-on:click="closeModal" class="is-block">No thanks</a>
+
+                    </div>
+              </div>
+          </div>
+      </div>
+
+      
+        <div class="btn-fixed-side">
+          <button class="button is-info is-large is-rounded animate-gradient-bg" style="padding: 10px 17px; box-shadow: none; margin:0; " 
+          v-on:click="showModal" v-on:mouseover="showText($event)" v-on:mouseout="hideText($event)">
+            <span class="icon is-large has-text-info"><i class="fas fa-save fa-2x" style="color:white;"></i></span>
+            <span class='txt'>Save For Later</span>
+          </button>
+        </div>
+      </div>
+
+      
+
+  </app-modal-save-for-later>
+
+  <script>
+  Vue.component('app-modal-save-for-later', {
+    data: function () { 
+        return {
+          isDisabled: true,
+          validateEmail: false,
+          email: TC.app.account.email,
+          isSaveForLater: TC.app.account.isSaveForLater
+        }
+    },
+    watch: { 
+      email: { 
+        handler: function() {
+          var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if(!this.validateEmail){
+              if(!re.test(String(this.email).toLowerCase())){
+                  this.isDisabled = true;
+              } else {
+                this.isDisabled = false;
+              }
+          }
+        } 
+      } 
+    },
+    mounted: function() { 
+    	var vm = this;
+        TC.app.appSubscribe.$on('saveForLater', function(arg) {
+            vm.showModal();
+        });
+        this.animateBtnSideShow();
+        TC.fn.promptSaveNow();
+        if(this.email != null){
+          this.isDisabled = false;
+        }
+    },  
+    props: [],
+    methods:{
+        animateBtnSideShow: function(){
+          this.hideText();
+          TweenMax.fromTo('.app-save-for-later .btn-fixed-side', .6, {x:130}, {x:-10, display:'block', delay:3, ease:Bounce.easeOut});
+        },
+        animateBtnSideHide: function(){
+          TweenMax.fromTo('.app-save-for-later .btn-fixed-side', .4, {x:0}, {x:130, display:'none', delay:.4, ease:Bounce.easeOut});
+        },
+        showText: function(event) {
+          if(event != undefined){ event.stopPropagation() }
+          TweenMax.to('.app-save-for-later .btn-fixed-side button', .1, {width:200});
+          TweenMax.to('.app-save-for-later .btn-fixed-side .txt', .3, { opacity:1, x:0});
+          TweenMax.to('.app-save-for-later .btn-fixed-side button .icon', .6, { x:-10});
+
+        },
+        hideText: function(event) {
+          if(event != undefined){ event.stopPropagation() }
+          TweenMax.to('.app-save-for-later .btn-fixed-side button', .24, { width:50});
+          TweenMax.to('.app-save-for-later .btn-fixed-side button .icon', .24, { x:60});
+          TweenMax.to('.app-save-for-later .btn-fixed-side .txt', .2, {opacity:0, x:200});
+        },
+        showModal: function() {
+          TweenMax.to('#app-save-for-later-modal', .24, {opacity:1, display:'block'});
+          TweenMax.fromTo('#app-save-for-later-modal .modal-background', .5, {opacity:0}, {opacity:.8})
+          TweenMax.fromTo('#app-save-for-later-modal .modal-card', .7, {y:-100, opacity:0, scale:1.3}, {y: 200, opacity:1, scale: 1, ease:Bounce.easeOut});
+        },
+        closeModal: function() {
+          TweenMax.fromTo('#app-save-for-later-modal .modal-card', .24, {opacity:1}, {opacity:0, scale: 1.1, ease:Bounce.easeOut});
+          TweenMax.to('#app-save-for-later-modal .modal-background', .24, {opacity:0})
+          TweenMax.to('#app-save-for-later-modal', .24, {opacity:0, display:'none'});
+          TC.app.account.isSaveForLater = true;
+        },
+        saveForLater: function(e){
+          TC.app.account.email = this.email;
+          TC.app.account.isSaveForLater = true;
+          TC.fn.createLead("save-for-later");
+          this.closeModal();
+        }
+    }
+  });
+  </script>
+</apex:component>

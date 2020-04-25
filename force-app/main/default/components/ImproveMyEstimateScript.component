@@ -1,0 +1,403 @@
+<apex:component controller="ControllerForMobileMain">
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"/>
+<style type="text/css">
+
+    .new-modal {
+        text-align: center;
+    }
+    .modal-header {
+        border-bottom: none;
+    }
+    .survey-options {
+        /* margin-bottom: 30px; */
+        border-bottom: 1px;
+        font-weight: bold;
+    }
+    ul.questions {
+        list-style-type: none;
+        text-align: right;
+        margin: 0;
+    }
+    ul.questions li {
+        width: 375px;
+        margin: 0 auto 20px;
+    }
+    ul.questions li:last-of-type {
+        margin-bottom: 0;
+    }
+    .icon-info-sign {
+        color: #006dcc;
+    }
+    .embiggen {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    .pre-form-p {
+        margin-bottom: 20px;
+    }
+    input[type="text"].s-field,
+    select.s-field {
+        width: 50px;
+        margin-bottom: 0;
+        text-align: center;
+        margin-left: 10px;
+    }
+    select.s-field {
+        width: 64px;
+    }
+    input[type="text"].s-field-long {
+        width: 120px;
+        margin-bottom: 0;
+    }
+    .btn.prof {
+        width: 300px;
+        margin-bottom: 20px;
+    }
+</style>
+<div id="improveEstimateCost" class="modal hide fade" data-backdrop="false" ng-app="improveMyEstimate" ng-controller="ImproveMyEstimateCtrl">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Let's Estimate Your Cost</h3>
+    </div>
+    
+    <div class="modal-body"> 
+        <div class="new-modal">
+            <div class="survey-options">
+                <ul id="estimateTabs" class="nav nav-tabs">
+                    <!--<li class="active"><a href="#meterdata" data-toggle="tab">Meter Data</a></li>-->
+                    <!--<li id="estimateUsageTab" class="active"><a href="#estimateusage" data-toggle="tab">Estimate My Usage</a></li>-->
+                    <li id="usageProfileTab" class="active"><a href="#selectprofile" data-toggle="tab">Select A Usage Profile</a></li>
+                </ul>
+            </div>
+            <div class="tab-content">
+            <!--
+                <div class="tab-pane active" id="meterdata">
+                    <h4>Use your meter to determine your rate</h4>
+                    <p class="pre-form-p">With your meter number, TrueCost can import your smart meter data. This lets you compare the electric costs of various plans based on your usage over the last 12 months.</p>
+                    <p class="embiggen">Enter your meter number:<i class="icon-info-sign"></i> <input type="text" class="s-field-long " id="id-01a" name="name-01a" placeholder="87654321"></input></p>
+                    <p>Electric Service Identifier (ESID):<i class="icon-info-sign"></i> <span style="color:#ccc;">1008901023813488370103</span></p>
+
+                </div>
+            -->
+                <div class="tab-pane" id="estimateusage">
+                    <h4>Let's create your usage profile</h4>
+                    <p class="pre-form-p">Answer five quick questions about your home and TrueCost will display prices based on homes with similar values</p>
+                    <form>
+                        <ul class="questions">
+                            <li>How many square feet is your home? <input ng-model="APA.Premise__r.Square_Feet__c" type="text" class="s-field"  id="id-021" name="name-01" placeholder="2200"></input> </li>
+                            <li>What year was your house built? <input ng-model="APA.Premise__r.Year_Built__c" type="text" class="s-field"  id="id-02" name="name-02" placeholder="1990"></input></li>
+                            <li>How many people live in your house? <input ng-model="APA.Premise__r.Occupants__c" type="text" class="s-field"  id="id-03" name="name-03" placeholder="4"></input></li>
+                            <li>Is your heating gas or electric? <select ng-model="APA.Premise__r.Heating_System__c" class="s-field" >
+                                <option>Gas</option>
+                                <option>Electric</option>
+                            </select></li>
+                            <li>Do you have a pool? <select ng-model="APA.Premise__r.Pool__c" class="s-field" >
+                                <option>No</option>
+                                <option>Yes</option>
+                            </select></li>
+                        </ul>
+                    </form>
+                </div>
+                <div class="tab-pane active" id="selectprofile">
+                    <h4>Pick a standard home profile</h4>
+                    <p class="pre-form-p">Select from three standard usage profiles and TrueCost will display prices based on the usage amount for that profile</p>
+                    <button ng-click="data.size = 'Small'" ng-class="{'active': data.size == 'Small'}" class="btn btn-info prof" type="button">Small: 1,500 SQFT or less</button><br/>
+                    <button ng-click="data.size = 'Medium'" ng-class="{'active': data.size == 'Medium'}" class="btn btn-info prof" type="button">Medium: 1,500 SQFT - 3,000 SQFT</button><br/>
+                    <button ng-click="data.size = 'Large'" ng-class="{'active': data.size == 'Large'}" class="btn btn-info prof" type="button">Large: More than 3,000 SQFT</button>
+                    <p>OR</p>
+                    <p>Enter the custom square foot of your home. <input ng-model="APA.Premise__r.Square_Feet__c" type="text" class="s-field"  id="id-022" name="name-022" placeholder=""></input> </p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+        <a ng-click="updatePlans()" href="#" class="btn btn-primary" data-dismiss="modal">Update Plans</a>
+    </div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script>
+
+    var improveMyEstimateModule = angular.module('improveMyEstimate', ['ngForce'] );
+
+    improveMyEstimateModule.controller("ImproveMyEstimateCtrl", function($scope, GetAPA, vfr){
+        $scope.data={mn:'', updateonly:false, size:"Medium"};
+        $scope.APA = {
+            Premise__r: {
+                Year_Built__c: "",
+                Pool__c: "No",
+                Square_Feet__c: "",
+                Occupants__c: 1,
+                Heating_System__c: "Gas"
+            }
+        };
+        
+        $scope.enteredMonths={};
+        for(var i=0; i < 12; i++) {
+            $scope.enteredMonths[i]=500;
+        }
+
+        
+        console.log('{!$CurrentPage.Parameters.mode}');
+        switch('{!$CurrentPage.Parameters.mode}') //handle URL parameters that dictate view
+        {
+        case 'MeterData':
+          $scope.data.mode='data';
+          break;
+        case 'Estimate':
+          $scope.data.mode='estimate';          
+          if ('{!$CurrentPage.Parameters.update}'=='true') 
+            $scope.data.updateonly=true;
+          break;
+        case 'Profile':
+          $scope.data.mode='profile';
+          break;
+        default:
+          $scope.data.mode='none';
+        }       
+
+        GetAPA('{!$User.Id}').then(
+            function(result){
+                if (result!=null){                    
+                    $scope.APA = result; 
+                    if ($scope.APA.Premise__r.Premise_Type__c!='Residential') $scope.data.mode='data'; //all commercial requires data
+                    if (!angular.isDefined($scope.APA.Premise__r.Heating_System__c)) $scope.APA.Premise__r.Heating_System__c="Gas";
+                    $scope.APA.Premise__r.Pool__c = !$scope.APA.Premise__r.Pool__c ? "No" : "Yes";
+                    $scope.APA.Premise__r.Square_Feet__c = $scope.APA.Premise__r.Square_Feet__c == 0 ? "" : $scope.APA.Premise__r.Square_Feet__c;
+                    $scope.APA.Premise__r.Year_Built__c = $scope.APA.Premise__r.Year_Built__c == "0000" ? "" : $scope.APA.Premise__r.Year_Built__c;
+                    $scope.data.size = $scope.APA.Customer_Selected_Profile__c;
+                    if (!angular.isDefined($scope.APA.Premise__r.Year_Built__c)) $scope.APA.Premise__r.Year_Built__c="";
+                    $scope.Account = {
+                        Id:$scope.APA.Account__r.Id, 
+                        Meter_Data_Email_Weekly__c:true,
+                        Meter_Data_Email_Daily__c:false
+                    };
+                    if ($scope.APA.Premise__r.TDSP_Lookup__r.Name==='CenterPoint Energy Houston Electric'){
+                        $scope.data.MeterNumberRegex = /^(5|6|8|9)\d{7}$/;
+                    } else {
+                        $scope.data.MeterNumberRegex = /^\d{8}$/;
+                    }
+                    
+                   
+                } else{
+                    dataLayer.push({'event':'error', 'errorFunction':'GetAPA', 'errorObject':{'errorCode':'APA Query Error', 'errorMessage':'No APA returned'}});
+                }
+            }, function(error){
+                dataLayer.push({'event':'error', 'errorFunction':'GetRate', 'errorObject':error});
+            }
+        );
+        
+
+        $scope.setMeterNumber= function(){getMeterData()}
+        $scope.setPremiseInfo= function(){doEstimatedData()}
+        $scope.setProfile=function(size){setPremiseSize(size)}
+        $scope.saveEntered=function(){PrepMonths()}
+        
+        $scope.updatePlans = function() {
+            var activeTab = $("ul#estimateTabs li.active")[0].id;
+            if (activeTab == "estimateUsageTab") {
+                doEstimatedData();
+            } else {
+                setPremiseSize($scope.data.size);
+            }
+        }
+        
+
+        function getMeterData(){
+            //$j("#submit_meter_number").button('loading');
+            ControllerForMobileMain.getMeterData('{!$User.Id}', $scope.data.mn, function(result, event){
+                dataLayer.push({'event':'log', 'logType': 'Meter Data Tracking', 'logMethod':'getMeterData', 'logMessage':'Data Requested by {!$User.Id}'});
+                if(event.status){
+                    if (result==='Success'){ //set the usage data email preferences
+                        console.log($scope.Account);
+                        vfr.update('Account', $scope.Account.Id, $scope.Account).then(
+                            function(result){
+                                window.location="{!$Page.LoadingData}";
+                            }
+                        );                        
+                    } else {
+                        //$j("#submit_meter_number").button('reset');
+                        alert(result);
+                        dataLayer.push({'event':'error', 'errorFunction':'getMeterData', 'errorObject':{'errorCode':'Page Errors', 'errorMessage':result}});
+                    }
+                }
+            }); 
+        }
+
+        function doEstimatedData(){
+            console.log('parameters are ' + '{!$User.Id}' + ', '+ $scope.APA.Premise__r.Square_Feet__c+ ', '+ $scope.APA.Premise__r.Year_Built__c + ', '+                   $scope.APA.Premise__r.Occupants__c + ', '+ $scope.APA.Premise__r.Heating_System__c + ', '+ $scope.APA.Premise__r.Pool__c+ ', '+
+                    !$scope.data.updateonly );
+            var hasPoolBool = $scope.APA.Premise__r.Pool__c == "Yes" ? true : false;
+            var occupantsVal = parseInt($scope.APA.Premise__r.Occupants__c);
+            var sqftVal = parseInt($scope.APA.Premise__r.Square_Feet__c) || 0;
+            var yearBuiltEmpty = $scope.APA.Premise__r.Year_Built__c == "" ? "0000" : $scope.APA.Premise__r.Year_Built__c; // doesn't allow empty strings, so add a dash if needed
+                ControllerForMobileMain.SetPremiseStuff('{!$User.Id}', sqftVal, yearBuiltEmpty, 
+                    occupantsVal, $scope.APA.Premise__r.Heating_System__c, hasPoolBool,
+                    !$scope.data.updateonly, function(result, event){
+                        if ($scope.data.updateonly){
+                            if(event.status){
+                                window.location="{!$Page.myaccount}";
+                            } else alert(result);
+                        } else {
+                            console.log(result);
+                            if(result==='Success'){
+                                dataLayer.push({'event':'log', 'logType': 'Meter Data Tracking', 'logMethod':'doEstimatedData', 'logMessage':'Data Estimated by {!$User.Id}'});
+                                window.location="{!$Page.shopplans}";
+                            } else {
+                                
+                                
+                                $j(".shopping-result").each(function(i){
+                            
+                                    var sqfoot = parseInt($scope.APA.Premise__r.Square_Feet__c);
+                                    var yearly = $j(this).data().price;
+                                    if(sqfoot <= 1500){
+                                        yearly = yearly / 2;
+                                        $j(".price-size").text('Small');
+                                        $j(".price-sqft").text('(homes less than 1,500 sqft).');
+                                    } else if(sqfoot > 3000){
+                                        yearly = yearly * 2;
+                                        $j(".price-size").text('Large');
+                                        $j(".price-sqft").text('(homes llarger than 3,000 sqft).');
+                                    } else {
+                                        $j(".price-size").text('Medium');
+                                        $j(".price-sqft").text('(homes between 1,500 and 3,000 sqft).');
+                                    }
+                                    var monthly = yearly / 12;
+                                    monthly = monthly.toFixed(2);
+                                    var qs = $j(this).find(".enroll-button").attr('href').substr(0, $j(this).find(".enroll-button").attr('href').indexOf('&A=') + 3) + yearly;
+                                    $j(this).find(".enroll-button").attr('href', qs);
+                                    $j(this).find("#Month_Price").text(monthly);
+
+                                });
+                                
+                                var divList =$j(".shopping-result");
+                                $j(".shopping-result-tiles").html(divList);
+                                
+                                
+                                //$j("#submit_estimate").button('reset');
+                                dataLayer.push({'event':'error', 'errorFunction':'doEstimatedData', 'errorObject':{'errorCode':'Remoting Error', 'errorMessage':'Estimated Data Failed'}});
+                            }
+                        }
+                    }); 
+            }
+
+        function setPremiseSize(size){
+            ControllerForMobileMain.setPremiseSize('{!$User.Id}', size, function(result, event){
+                if(event.status){
+                    if (result='Success'){  
+                        
+                        
+
+                        //dataLayer.push({'event':'log', 'logType': 'Meter Data Tracking', 'logMethod':'setPremiseSize', 'logMessage':'Profile selected by {!$User.Id}'});    
+                        //window.location="{!$Page.shopplans}";
+                        
+                        var customSize = parseInt($j('#id-022').val())
+                        if(!isNaN(customSize)){
+                            if(customSize <= 1500){
+                                size = 'Small'
+                            } else if(customSize > 3000){
+                                size = 'Large'
+                            } else {
+                                size = 'Medium'
+                            }
+                        }
+                        
+
+                        $j(".shopping-result").each(function(i){
+                            
+                            var yearly = $j(this).data().price;
+                            if(size == 'Small'){
+                                yearly = yearly / 2; 
+                                $j(".price-size").text('Small');
+                                $j(".price-sqft").text('(homes less than 1,500 sqft).');
+                            } else if(size == 'Large'){
+                                yearly = yearly * 2;
+                                $j(".price-size").text('Large');
+                                $j(".price-sqft").text('(homes llarger than 3,000 sqft).');
+                            } else {
+                                $j(".price-size").text('Medium');
+                                $j(".price-sqft").text('(homes between 1,500 and 3,000 sqft).');
+                            }
+                            var monthly = yearly / 12;
+                            monthly = monthly.toFixed(2);
+                            var qs = $j(this).find(".enroll-button").attr('href').substr(0, $j(this).find(".enroll-button").attr('href').indexOf('&A=') + 3) + yearly;
+                            $j(this).find(".enroll-button").attr('href', qs);
+                            $j(this).find("#Month_Price").text(monthly);
+
+                        });
+                        
+                        var divList =$j(".shopping-result");
+                        $j(".shopping-result-tiles").html(divList);
+
+
+                    } else {
+                        alert(result);
+                        dataLayer.push({'event':'error', 'errorFunction':'setPremiseSize', 'errorObject':{'errorCode':'Remoting Error', 'errorMessage':'Select Profile Failed'}});
+                    }
+                }
+            });         
+        }   
+
+        function PrepMonths(){
+            dataLayer.push({'event':'log', 'logType': 'Meter Data Tracking', 'logMethod':'PrepMonths', 'logMessage':'Data entered by {!$User.Id}'});
+
+            var preppedMonths = {};      
+            for (var i = 0; i<12; i++){
+                preppedMonths[i] = {'Month_Number__c':i+1, 'Estimated__c':true, 'Premise__c':$scope.APA.Premise__r.Id, 'APA__c':$scope.APA.Id, 'Usage__c':$scope.enteredMonths[i]};
+                
+            }
+            console.log(preppedMonths);
+            
+            vfr.bulkCreate('Monthly_Usage__c', preppedMonths).then(
+                function(result){
+                    console.log('monthlyusages created, starting APA update');
+                    var APA = {}; APA.Meter_Data_Estimated__c=true;
+                    return vfr.update('AccountPremiseAssociation__c', $scope.APA.Id, APA);
+                }                
+            ).then(
+                function(APA){
+                    console.log('APA updated');
+                    window.location="{!$Page.shopplans}";
+                },
+                function(error){
+                    dataLayer.push({'event':'error', 'errorFunction':'PrepMonths', 'errorObject':error});
+                    console.log(error);
+                    alert('Your data did not save.  Please check that all numbers are entered, and try again.')
+                } 
+            );
+        }  
+    
+
+
+    }); //end of app controller main body
+
+    improveMyEstimateModule.factory('GetAPA', ['$q', '$rootScope', function($q, $rootScope) {
+        
+        return function(userid) {
+            var deferred = $q.defer();
+            
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.ControllerForMobileMain.getAPAsafe}',
+                userid,
+                function(result, event) {
+                    $rootScope.$apply(function() {
+                        if (event.status) {
+                            deferred.resolve(result);
+                        } else {
+                            deferred.reject(event);
+                        }
+                    })
+                        },
+                { buffer: true, escape: true, timeout: 30000 }
+            );
+            
+            return deferred.promise;
+        }
+            
+            }]);
+
+</script>
+<c:Ngforce />
+</apex:component>

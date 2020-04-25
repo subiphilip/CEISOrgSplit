@@ -1,0 +1,35 @@
+<apex:page showHeader="false" applyBodyTag="false" applyHtmlTag="false" docType="html-5.0" standardStylesheets="false">
+<html lang="en">
+<head>
+  <meta charset="utf-8"></meta>
+  <title>TrueCost - Electric Portal</title>
+  <base href="/TrueCostMarketing"/>
+  <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/TrueCostMarketing"/>
+  
+  <script type="text/javascript">
+        window.CPE = {
+            assetPath: "{!URLFOR($Resource.TrueCost_Marketing, '/assets')}",
+            api: "https://cnpdigitalmove-qa.cloudhub.io/api"
+        };
+        
+  </script>
+  
+  <apex:stylesheet value="{!URLFOR($Resource.TrueCost_Marketing, 'styles.bundle.css')}"/>
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+</head>
+<body>
+  <app-root></app-root>
+  
+  
+  <apex:includeScript html-defer="defer" value="{!URLFOR($Resource.TrueCost_Marketing, 'inline.bundle.js')}"/>
+  <apex:includeScript html-defer="defer" value="{!URLFOR($Resource.TrueCost_Marketing, 'polyfills.bundle.js')}"/>
+<!--  <apex:includeScript html-defer="defer" value="{!URLFOR($Resource.TrueCost_Marketing, 'styles.bundle.js')}"/>-->
+<!--  <apex:includeScript html-defer="defer" value="{!URLFOR($Resource.TrueCost_Marketing, 'vendor.bundle.js')}"/>-->
+  <apex:includeScript html-defer="defer" value="{!URLFOR($Resource.TrueCost_Marketing, 'main.bundle.js')}"/>  
+ 
+
+</body>
+</html>
+</apex:page>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Positions_This_Week</fullName>
+    <booleanFilter>(1 or 2) and 3</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Premise__c</columns>
+    <columns>Volume__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Position__c.Gas_Position,Position__c.Gas_Index_Position,Position__c.Gas_Fixed_Position</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Position__c.Gas_Floating_Component_Position,Position__c.Gas_Converted_Component_Position</value>
+    </filters>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>equals</operation>
+        <value>THIS_WEEK</value>
+    </filters>
+    <label>Gas Positions This Week</label>
+    <language>en_US</language>
+</ListView>

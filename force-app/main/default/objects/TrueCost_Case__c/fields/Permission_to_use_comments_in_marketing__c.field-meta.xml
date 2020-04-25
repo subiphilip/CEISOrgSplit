@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Permission_to_use_comments_in_marketing__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>The customer has given us permission to use their comments</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The customer has given us permission to use their comments</inlineHelpText>
+    <label>Permission to use comments in marketing</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

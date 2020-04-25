@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Assigned_To__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>What user will complete this request?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What user will complete this request?</inlineHelpText>
+    <label>Assigned To</label>
+    <lookupFilter>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND (3 AND 4)</booleanFilter>
+        <errorMessage>Assigned user must be a project management or business technology user.</errorMessage>
+        <filterItems>
+            <field>User.Profile.Id</field>
+            <operation>equals</operation>
+            <value>00e30000001gLF2</value>
+        </filterItems>
+        <filterItems>
+            <field>User.Profile.Id</field>
+            <operation>equals</operation>
+            <value>00e300000028iY3</value>
+        </filterItems>
+        <filterItems>
+            <field>User.LastName</field>
+            <operation>notEqual</operation>
+            <value>Donovan</value>
+        </filterItems>
+        <filterItems>
+            <field>User.LastName</field>
+            <operation>notContain</operation>
+            <value>Admin</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>User</referenceTo>
+    <relationshipName>TC_Cases</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

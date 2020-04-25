@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Charge_Level__c</fullName>
+    <description>What level should the charge be applied?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What level should the charge be applied?</inlineHelpText>
+    <label>Charge Level</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Contract (Flat)</fullName>
+                <default>false</default>
+                <label>Contract (Flat)</label>
+            </value>
+            <value>
+                <fullName>Premise (Flat)</fullName>
+                <default>false</default>
+                <label>Premise (Flat)</label>
+            </value>
+            <value>
+                <fullName>Unit</fullName>
+                <default>false</default>
+                <label>Unit</label>
+            </value>
+            <value>
+                <fullName>Contract Unit</fullName>
+                <default>false</default>
+                <label>Contract Unit</label>
+            </value>
+            <value>
+                <fullName>Unit Loss</fullName>
+                <default>false</default>
+                <label>Unit Loss</label>
+            </value>
+            <value>
+                <fullName>Units Plus Loss</fullName>
+                <default>false</default>
+                <label>Units Plus Loss</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

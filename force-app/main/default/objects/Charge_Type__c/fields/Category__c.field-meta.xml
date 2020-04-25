@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Category__c</fullName>
+    <description>does this charge fit into a coded category?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>does this charge fit into a coded category?</inlineHelpText>
+    <label>Category</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CJUMP</fullName>
+                <default>false</default>
+                <label>CJUMP</label>
+            </value>
+            <value>
+                <fullName>Consultant</fullName>
+                <default>false</default>
+                <label>Consultant</label>
+            </value>
+            <value>
+                <fullName>Fuel Loss</fullName>
+                <default>false</default>
+                <label>Fuel Loss</label>
+            </value>
+            <value>
+                <fullName>IJUMP</fullName>
+                <default>false</default>
+                <label>IJUMP</label>
+            </value>
+            <value>
+                <fullName>NJUMP</fullName>
+                <default>false</default>
+                <label>NJUMP</label>
+            </value>
+            <value>
+                <fullName>KJUMP</fullName>
+                <default>false</default>
+                <label>KJUMP</label>
+            </value>
+            <value>
+                <fullName>MOPRC</fullName>
+                <default>false</default>
+                <label>MOPRC</label>
+            </value>
+            <value>
+                <fullName>Producer</fullName>
+                <default>false</default>
+                <label>Producer</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

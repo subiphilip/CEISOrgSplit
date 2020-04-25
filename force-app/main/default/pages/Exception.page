@@ -1,0 +1,26 @@
+<apex:page showHeader="false" title="{!$Label.site.error2}" cache="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false">
+    <apex:composition template="{!$Site.Template}">
+        <apex:define name="HeadTags">
+            <title>Error - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="robots" content="noindex"/>
+        </apex:define>
+        <apex:define name="body">
+            <center>
+                
+                <apex:param value="mailto:{!$Site.AdminEmailAddress}"/>
+                <apex:param value="{!$Label.site.email_us}"/>
+                <h2>You've found an error!</h2>
+                <h5>Thank you for finding it.  An alert has been sent to the people who can fix it.  </h5>
+                <h5>    If you've got a crucial issue (getting an order placed, etc) please contact us and we can help you with that.</h5>
+                
+                <apex:outputlink value="{!$Page.homepage}" styleclass="btn btn-primary">Home</apex:outputlink>
+                <apex:outputlink value="{!$Page.contactus}" styleclass="btn btn-default">Contact Us</apex:outputlink>
+                
+            </center>
+        </apex:define>
+        
+    </apex:composition>
+    <script type="text/javascript">
+    dataLayer.push({'event':'error', 'errorFunction':'ErrorPage: {!$Site.OriginalUrl}', 'errorObject':{'errorMessage':'{!$Site.ErrorMessage}', 'errorCode':'{!$Site.ErrorDescription}'}});
+    </script>
+</apex:page>

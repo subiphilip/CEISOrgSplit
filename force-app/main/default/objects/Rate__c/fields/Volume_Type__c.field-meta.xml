@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Volume_Type__c</fullName>
+    <description>How are contract details dated and how are volumes entered</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How are contract details dated and how are volumes entered (ex. Monthly-Daily = Monthly contract details with a Daily volume entered for each month)</inlineHelpText>
+    <label>Volume Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Daily-Daily</fullName>
+                <default>false</default>
+                <label>Daily-Daily</label>
+            </value>
+            <value>
+                <fullName>Monthly-Daily</fullName>
+                <default>false</default>
+                <label>Monthly-Daily</label>
+            </value>
+            <value>
+                <fullName>Monthly-Monthly</fullName>
+                <default>false</default>
+                <label>Monthly-Monthly</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

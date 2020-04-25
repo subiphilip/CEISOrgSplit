@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>greaterthan50KVA</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>Premise__c</columns>
+    <columns>X50KVA__c</columns>
+    <columns>Meter_Data_Request_Status__c</columns>
+    <columns>Premise_Record_Type__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>X50KVA__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>equals</operation>
+        <value>THIS_YEAR</value>
+    </filters>
+    <label>Sample &gt;50KVA Premises</label>
+    <language>en_US</language>
+</ListView>

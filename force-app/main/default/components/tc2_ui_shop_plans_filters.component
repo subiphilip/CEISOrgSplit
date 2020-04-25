@@ -1,0 +1,135 @@
+<apex:component >
+  <span xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+      <!-- HOME PROFILE -->
+      <section class="has-background-info alert is-active " v-if="plansTotal <= 0 && !isLoadingPlans">
+        <article class="media container nav-container has-text-white rateboxes" style="padding:.8em;">
+          <div class="media-content">
+            <p class="is-size-6 is-size-6-mobile has-text-weight-semibold has-text-centered">There are currently no plans found for
+              {{zip}}</p>
+          </div>
+        </article>
+      </section>
+
+      <div id="homeprofile" class="tabcontent container rateboxes">
+        <nav class="level house-tabs" v-if="TC.app.account.guest">
+          <div class="level-item column is-half has-text-centered" >
+            <p class="level-title" v-if="!isCommercial">TELL US THE SIZE OF YOUR HOME</p>
+            <p class="level-title" v-if="isCommercial">TELL US THE SIZE OF YOUR BUSINESS</p>
+            <p class="level-content">
+              <label for="sqft" v-if="!isCommercial">My home is</label>
+              <label for="sqft" v-if="isCommercial">My business is</label>
+              <input v-model="houseSqft" class="input borderless-inherit" id="sqft" type="text" style="max-width: 80px; text-align: center; "/>
+              <label for="sqft">SQFT</label>
+            </p>
+
+            <a class="is-white has-text-info has-text-weight-semibold animate-arrow" v-on:click="houseSqftUpdate">
+              <span>SHOW ME THE PLANS</span>
+              <span class="icon is-small ">
+                <i class="fas fa-arrow-right "></i>
+              </span>
+            </a>
+          </div>
+          <div class="is-divider-or">OR</div>
+          <div class="level-item column is-half has-text-centered">
+            <p class="level-title">GET THE BEST RESULTS</p>
+
+            <a class="is-white has-text-info has-text-weight-semibold animate-arrow" href="{!$Page.Get_Started_Best}">
+              <span>ENTER MY INFORMATION</span>
+              <span class="icon is-small ">
+                <i class="fas fa-arrow-right "></i>
+              </span>
+            </a>
+          </div>
+        </nav>
+
+        <nav v-if="!TC.app.account.guest" class="level option-tabs columns is-multiline is-mobile is-gapless">
+
+          <div class="level-item column is-one-fourth" style="flex-grow: 1.6; border: none; ">
+            <div class="column " style="padding: 1em; background-color:transparent;">
+              <span v-bind:class="homeSizeClass" style="float: left; font-size: 42px; margin-right: 10px; height: 67px;"/>
+              <p class="is-card-header" v-if="!isCommercial">MY HOME</p>
+              <p class="is-card-header" v-if="isCommercial">MY BUSINESS</p>
+              <p class="iis-size-2">{{ TC.app.account.premise.street }}</p>
+              <p class="is-size-7">
+                <a href="{!$Page.Account_Profile_Home_Edit}">Edit Profile</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="level-item column is-one-sixth">
+            <div class="column " style="padding: 1em;">
+              <p class="is-card-header">SMART METER
+              </p>
+              <p class="is-size-4">{{smartMeterStatus}}</p>
+              <p class="is-size-7">
+                <a href="{!$Page.Get_Started_Smart_Meter}">Edit Smart Meter</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="level-item column is-one-sixth">
+            <div class="column " style="padding: 1em;">
+              <p class="is-card-header">SQUARE FOOTAGE
+              </p>
+              <p class="is-size-4">{{TC.app.appHomeProfile.houseSqft}}
+                SQFT</p>
+            </div>
+          </div>
+
+          <div class="level-item column is-one-sixth">
+            <div class="column " style="padding: 1em;">
+              <p class="is-card-header">YEAR BUILT</p>
+              <p class="is-size-4">{{TC.app.appHomeProfile.yearbuilt}}</p>
+            </div>
+          </div>
+          <div class="level-item column is-one-sixth">
+            <div class="column " style="padding: 1em;">
+              <p class="is-card-header">HEATING
+              </p>
+              <p class="is-size-4">{{TC.app.appHomeProfile.heatingsystem}}</p>
+            </div>
+          </div>
+          <!-- <div class="level-item column is-one-sixth"> <div class="column " style="padding: 1em;"> <p class="is-card-header">POOL</p> <p class="is-size-4">{{TC.app.appHomeProfile.pool}}</p> </div> </div> <div class="level-item column is-one-sixth"> <div
+          class="column " style="padding: 1em;"> <p class="is-card-header">OCCUPANTS</p> <p class="is-size-4">{{TC.app.appHomeProfile.occupants}}</p> </div> </div> -->
+        </nav>
+
+      </div>
+      <!-- CONTRACT LENGTH -->
+      <div id="contractlength" class="tabcontent container option-tabs">
+        <nav class="level option-tabs columns is-multiline is-mobile is-gapless">
+          <div v-bind:data-id="contract.title" class="level-item column has-text-centered cursor is-one-third cursor animate-gradient-bg" v-on:click="filterContract(contract)" v-for="contract in contracts">
+            {{contract.title}}
+          </div>
+        </nav>
+      </div>
+
+      <!-- FEATURES -->
+      <div id="features" class="tabcontent container option-tabs">
+        <nav class="level option-tabs columns is-multiline is-mobile is-gapless">
+          <div data-id="billpay" class="level-item column has-text-centered cursor is-one-fourth cursor animate-gradient-bg" v-on:click="filterFeature('billpay')">
+            Online Bill Pay
+          </div>
+          <div data-id="rewards" class="level-item column has-text-centered cursor is-one-fourth cursor animate-gradient-bg" v-on:click="filterFeature('rewards')">
+            Rewards
+          </div>
+          <div data-id="green" class="level-item column has-text-centered cursor is-one-fourth cursor animate-gradient-bg" v-on:click="filterFeature('green')">
+            100% Green
+          </div>
+          <div data-id="minusagecharge" class="level-item column has-text-centered cursor is-one-fourth cursor animate-gradient-bg" v-on:click="filterFeature('minusagecharge')">
+            No Usage Charge
+          </div>
+
+        </nav>
+      </div>
+
+      <!-- PROVIDERS -->
+      <div id="providers" class="tabcontent container option-tabs">
+        <!-- <div class="is-divider no-margin" style="border-color: #f4f4f4;"></div> -->
+        <nav class="level option-tabs columns is-multiline is-mobile is-gapless ">
+          <div v-bind:data-id="company.title" class="level-item column has-text-centered cursor is-one-fifth cursor animate-gradient-bg" v-on:click="filterCompany(company)" v-for="company in companies">
+            <p v-html="company.title"></p>
+          </div>
+        </nav>
+      </div>
+  </span>
+</apex:component>

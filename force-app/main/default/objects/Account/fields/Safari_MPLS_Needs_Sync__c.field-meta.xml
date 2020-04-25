@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Safari_MPLS_Needs_Sync__c</fullName>
+    <externalId>false</externalId>
+    <formula>AND(
+  NOT(ISBLANK(MPLS_ID__c)),
+  OR(
+    CONTAINS(TEXT(Safari_MPLS_Sync_Status__c), &#39;Pending&#39;),
+    TEXT(Safari_MPLS_Sync_Status__c) == &#39;Sending SalesForce ID&#39;
+  )
+)</formula>
+    <label>Safari MPLS Needs Sync</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

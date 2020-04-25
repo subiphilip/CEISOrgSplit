@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SmartCap_Error_Tolerance__c</fullName>
+    <description>if the smartcap error is larger than this number ($/Dth) it&#39;ll rerun to try to improve</description>
+    <externalId>false</externalId>
+    <inlineHelpText>if the smartcap error is larger than this number ($/Dth) it&#39;ll rerun to try to improve</inlineHelpText>
+    <label>SmartCap Error Tolerance</label>
+    <precision>4</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Template a CNP admin gets when an order fails</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Order failure</name>
+    <style>none</style>
+    <subject>Order failure notification</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

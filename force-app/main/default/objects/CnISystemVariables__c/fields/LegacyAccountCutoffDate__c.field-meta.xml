@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LegacyAccountCutoffDate__c</fullName>
+    <description>date used to compare against account creation date to determine if the external id update is for a legacy account. used in account afterupdate trigger.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>date used to compare against account creation date to determine if the external id update is for a legacy account. used in account afterupdate trigger.</inlineHelpText>
+    <label>Legacy Account Cutoff Date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

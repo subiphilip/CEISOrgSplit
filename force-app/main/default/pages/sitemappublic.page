@@ -1,0 +1,132 @@
+<apex:page showHeader="false" sidebar="false" controller="ControllerForElectricCompanies" cache="true" applyBodyTag="false" expires="43200" docType="html-5.0" standardStylesheets="false">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>{!$Label.Page_Title_Sitemap} - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>       
+        
+        <!--apex:define name="breadcrumbs">
+            <apex:outputpanel styleClass="breadcrumbs" layout="block">
+                <apex:outputlink value="{!$Page.homepage}">Home</apex:outputlink>
+                <apex:outputlink value="{!$Page.sitemappublic}" styleClass="last">{!$Label.Page_Title_Sitemap}</apex:outputlink>
+            </apex:outputpanel>            
+        </apex:define-->
+        
+        <apex:define name="body">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <h1 class="span12">{!$Label.Page_Title_Sitemap}</h1>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <ul>
+                            <li><apex:outputlink value="{!$Page.Home}" ><h4>Home</h4></apex:outputlink></li>                    
+                            
+                            <li><apex:outputlink value="{!$Page.Shop_Plans}"><h4>Shop for Electric Plans</h4></apex:outputlink></li>
+                            <li><apex:outputlink value="{!$Page.Account_Register}"><h4>Register</h4></apex:outputlink></li>
+                            <li><apex:outputlink value="{!$Page.Account_Profile}"><h4>My Account</h4></apex:outputlink></li>
+                            <ul>
+                                <li><apex:outputlink value="{!$Page.ChangePassword}"><h5>Change Password</h5></apex:outputlink></li>
+                                <li><apex:outputlink value="{!$Page.UpdateAccount}"><h5>Update Contact Information</h5></apex:outputlink></li>
+                                <li><apex:outputlink value="{!$Page.AddAddressAfterRegistration}"><h5>Add Service Address</h5></apex:outputlink></li>
+                                <li><apex:outputlink value="{!$Page.IntervalDataExplorer}"><h5>View Your Meter Data</h5></apex:outputlink></li>
+                            </ul>
+                            <li><apex:outputlink value="{!$Page.ElectricCompanies}"><h4>{!$Label.Page_Title_Electric_Companies}</h4></apex:outputlink></li>
+                            <ul>
+                                <li><apex:outputlink value="{!$Page.readreviews}"><h5>Read Reviews</h5></apex:outputlink></li>
+                            </ul>
+                            
+                            <li><h4>About</h4></li>
+                            <ul>
+                                <li><apex:outputlink value="{!$Page.About_True_Cost}"><h5>{!$Label.Page_Title_About_TrueCost}</h5></apex:outputlink></li>
+                                <li><apex:outputlink value="{!$Page.AboutCenterPoint}"><h5>About CenterPoint Energy</h5></apex:outputlink></li>
+                                <li><apex:outputlink value="{!$Page.ElectricCompanies}"><h5>{!$Label.Page_Title_Electric_Companies}</h5></apex:outputlink></li>
+                                <li><apex:outputlink value="{!$Page.QuestionsAboutTrueCost}"><h5>Questions about TrueCost</h5></apex:outputlink></li>
+                                <li><apex:outputlink value="{!$Page.TrueCostPeople}"><h5>The TrueCost Team</h5></apex:outputlink></li>
+                            </ul>
+                            <li><apex:outputlink value="{!$Page.truecostblog}"><h4>{!$Label.Page_Title_Blog}</h4></apex:outputlink></li>
+                            <li><h4>Support</h4></li>               
+                            <ul>
+                                <li><apex:outputlink value="{!$Page.Help}"><h5>{!$Label.Page_Title_FAQ}</h5></apex:outputlink></li>
+                                <!--let have a list of categories dynamically generated-->
+                                <li><apex:outputlink value="{!$Page.fees}"><h5>{!$Label.Page_Title_Fees}</h5></apex:outputlink></li>
+                                <li><apex:outputlink value="{!$Page.Glossary}"><h5>{!$Label.Page_Title_Glossary}</h5></apex:outputlink></li>
+                                <li><apex:outputlink value="{!$Page.Contact}"><h5>{!$Label.Page_Title_Contact_Us}</h5></apex:outputlink></li>
+                            </ul>
+                            <li><apex:outputlink value="{!$Page.Privacy}"><h4>{!$Label.Page_Title_Privacy_Policy}</h4></apex:outputlink></li>
+                            <li><apex:outputlink value="{!$Page.TermsofUse}"><h4>{!$Label.Page_Title_Terms_of_Service}</h4></apex:outputlink></li>
+                        </ul>        
+                    </div>
+                    <div class="span4">
+                            <ul>
+                                <li><h4>Electric Company Reviews</h4></li>
+                                <ul>
+                                    <apex:repeat value="{!REPlist}" var="rep">
+                                        <li>
+                                            <a href="{!URLFOR($Page.readreviews+'?id='+rep.id)}">
+                                                <h5>{!rep.name}</h5>
+                                            </a>
+                                        </li>
+                                    </apex:repeat>
+                                </ul>
+                            </ul>
+                    </div>
+                    <div class="span4">
+                       <li><h4>Electric Price Trends</h4> </li>
+                        <ul>
+                            <ul>
+                                <li><h5>CenterPoint Energy Service Area</h5></li>
+                                <ul>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceTrendsSummary}"><h6>{!$Label.Page_Title_Electrice_Price_Trends_Summary}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex6Month}"><h6>{!$Label.Page_Title_Six_Month_Plans}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex12Month}"><h6>{!$Label.Page_Title_One_Year_Plans}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex24Month}"><h6>{!$Label.Page_Title_Two_Year_Plans}</h6></apex:outputlink></li>                            
+                                </ul>
+                                
+                                <li><h5>Oncor Service Area</h5></li>
+                                <ul>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceTrendsSummary}?tdsp=Oncor"><h6>{!$Label.Page_Title_Electrice_Price_Trends_Summary}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex6Month}?tdsp=Oncor"><h6>{!$Label.Page_Title_Six_Month_Plans}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex12Month}?tdsp=Oncor"><h6>{!$Label.Page_Title_One_Year_Plans}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex24Month}?tdsp=Oncor"><h6>{!$Label.Page_Title_Two_Year_Plans}</h6></apex:outputlink></li>                            
+                                </ul>
+                                <li><h5>TNMP Service Area</h5></li>
+                                <ul>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceTrendsSummary}?tdsp=TNMP"><h6>{!$Label.Page_Title_Electrice_Price_Trends_Summary}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex6Month}?tdsp=TNMP"><h6>{!$Label.Page_Title_Six_Month_Plans}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex12Month}?tdsp=TNMP"><h6>{!$Label.Page_Title_One_Year_Plans}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex24Month}?tdsp=TNMP"><h6>{!$Label.Page_Title_Two_Year_Plans}</h6></apex:outputlink></li>                            
+                                </ul>
+                                <li><h5>AEP North Service Area</h5></li>
+                                <ul>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceTrendsSummary}?tdsp=AEPN"><h6>{!$Label.Page_Title_Electrice_Price_Trends_Summary}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex6Month}?tdsp=AEPN"><h6>{!$Label.Page_Title_Six_Month_Plans}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex12Month}?tdsp=AEPN"><h6>{!$Label.Page_Title_One_Year_Plans}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex24Month}?tdsp=AEPN"><h6>{!$Label.Page_Title_Two_Year_Plans}</h6></apex:outputlink></li>                            
+                                </ul>
+                                <li><h5>AEP Central Service Area</h5></li>
+                                <ul>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceTrendsSummary}?tdsp=AEPC"><h6>{!$Label.Page_Title_Electrice_Price_Trends_Summary}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex6Month}?tdsp=AEPC"><h6>{!$Label.Page_Title_Six_Month_Plans}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex12Month}?tdsp=AEPC"><h6>{!$Label.Page_Title_One_Year_Plans}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex24Month}?tdsp=AEPC"><h6>{!$Label.Page_Title_Two_Year_Plans}</h6></apex:outputlink></li>                            
+                                </ul>
+                                <li><h5>Sharyland Service Area</h5></li>
+                                <ul>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceTrendsSummary}?tdsp=Sharyland"><h6>{!$Label.Page_Title_Electrice_Price_Trends_Summary}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex6Month}?tdsp=Sharyland"><h6>{!$Label.Page_Title_Six_Month_Plans}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex12Month}?tdsp=Sharyland"><h6>{!$Label.Page_Title_One_Year_Plans}</h6></apex:outputlink></li>
+                                    <li><apex:outputlink value="{!$Page.ElectricPriceIndex24Month}?tdsp=Sharyland"><h6>{!$Label.Page_Title_Two_Year_Plans}</h6></apex:outputlink></li>                            
+                                </ul>
+                                <li><apex:outputlink value="{!$Page.AboutTheIndex}"><h5>{!$Label.Page_Title_About_The_Index}</h5></apex:outputlink></li>
+                                <li><apex:outputlink value="{!$Page.HowTheIndexIsCalculated}"><h5>{!$Label.Page_Title_HowIsTheIndexCalculated}</h5></apex:outputlink></li>                        
+                            </ul>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </apex:define>       
+    </apex:composition>
+</apex:page>

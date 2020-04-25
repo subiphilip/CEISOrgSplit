@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Rates__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This index can be used for all rate types (index adder, over adder, under adder)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This index can be used for all rate types (index adder, over adder, under adder)</inlineHelpText>
+    <label>All Rates</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

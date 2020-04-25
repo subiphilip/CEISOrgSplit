@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Managed_Storage__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>CES can manage storage for customers behind this utility (like Nicor).  Checking this box adds the storage components to the fixed price quote process</description>
+    <externalId>false</externalId>
+    <inlineHelpText>CES can manage storage for customers behind this utility (like Nicor).  Checking this box adds the storage components to the fixed price quote process</inlineHelpText>
+    <label>Managed Storage</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

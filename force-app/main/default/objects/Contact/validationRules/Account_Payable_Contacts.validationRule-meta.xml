@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Payable_Contacts</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+
+ISNEW(),
+
+IsPersonAccount = FALSE, 
+
+OR( 
+Account.RecordTypeId = &#39;01230000000njET&#39;, 
+Account.RecordTypeId = &#39;012300000018b9t&#39;, 
+Account.RecordTypeId = &#39;012300000018cVk&#39; 
+), 
+
+OR(
+ CONTAINS(FirstName,&quot;account&quot;),
+ CONTAINS(FirstName,&quot;acct&quot;),
+ CONTAINS(FirstName,&quot;payable&quot;),
+ CONTAINS(LastName,&quot;account&quot;),
+ CONTAINS(LastName,&quot;acct&quot;),
+ CONTAINS(LastName,&quot;payable&quot;),
+ FirstName = &quot;AP&quot;,
+ LastName = &quot;AP&quot;
+ )
+)</errorConditionFormula>
+    <errorMessage>Contacts04: Accounts Payable contact information should only be captured at the bill group level when a contract is activated.</errorMessage>
+</ValidationRule>

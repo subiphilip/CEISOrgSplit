@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Private_Beta__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Switches the site to private beta.  Registration requires a cookie placed after a successful entry of the invitation code with a matching email address.  
+
+Unchecking this box allows self-registration by the general public and removes links to the private beta home page.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Switches the site to private beta.  Registration requires a cookie placed after a successful entry of the invitation code with a matching email address.</inlineHelpText>
+    <label>Private Beta</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

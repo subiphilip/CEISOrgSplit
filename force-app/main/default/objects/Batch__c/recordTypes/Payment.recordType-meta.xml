@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Payment</fullName>
+    <active>true</active>
+    <label>Payment</label>
+    <picklistValues>
+        <picklist>Batch_Status__c</picklist>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Posted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Batch_Type__c</picklist>
+        <values>
+            <fullName>Payment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reversal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Payment_Type__c</picklist>
+        <values>
+            <fullName>10th day of two months</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11th day of two months</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1st day of two months</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>25th of the month</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>27th of the month</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>28th of the month</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3rd day of two months</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5th day of two months</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8th day of two months</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LDM - Allocations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LDM - Approvals Needed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LDM - Group A</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LDM - Group B</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Last day of the month</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,341 @@
+<apex:page docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" controller="ControllerForMobileMain" >
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Home - {!$Label.Page_Title_Company_Name}</title>
+            <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}"/>
+            <meta name="description" content="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+        </apex:define>
+        
+        <apex:define name="body">
+        <style>
+        #main-nav, .navbarEven {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        #myCarousel > .carousel-inner {
+            height: 350px;
+        }
+        .carousel-indicators {
+            bottom: 15px;
+            top: auto;
+            margin: 0 auto;
+            right: 50%;
+        }
+        .carousel {
+            margin-bottom: 0;
+        }
+        .carousel-indicators li {
+            background-color: #fff;
+        }
+        .banner5bulbs {
+            background-image: url(/resource/1465517094000/banner5bulbs);
+            background-size: cover;
+            height: 100%;
+            background-position: 50% 50%;
+        }
+        .bannerHangingBulbs {
+            background-image: url(/resource/1465517621000/bannerHangingBulbs);
+            background-size: cover;
+            height: 100%;
+            background-position: 50% 50%;
+        }
+        .bannerOneBrightLightRenders {
+            background-image: url(/resource/1465512619000/bannerOneBrightLightRenders);
+            background-size: cover;
+            height: 100%;
+            background-position: 50% 50%;
+        }
+        .cta-block {
+            background-color: #fff;
+            -webkit-border-radius: 12px;
+            border-radius: 12px;
+            -webkit-box-shadow: 0 5px 10px 5px rgba(117,117,117,0.4);
+            box-shadow: 0 5px 10px 5px rgba(117,117,117,0.4);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            top: 50px;
+            
+            /* temporary - unless it works through all mobile devices */
+            height: 220px;
+            width: 560px;
+            padding: 10px 30px;
+            
+        }
+        .form-block {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 325px;
+        }
+        .custom-btn {
+            border-radius: 14px;
+            background: #0099dc url(/resource/1465521495000/custFormBtnBg) 74px center no-repeat;
+            border: 1px solid #0099dc;
+            color: #fff;
+            text-shadow: none;
+        }
+        .custom-btn:hover {
+            background: #6ec5eb url(/resource/1465521495000/custFormBtnBg) 74px center no-repeat;
+        }
+        .custom-btn span {
+            padding-right: 30px;
+        }
+        h1.fnt-27px {
+            font-size: 27px;
+        }
+        h1.text-info.fnt-20px {
+            font-size: 20px;
+            line-height: 28px;
+        }
+        .shorten-lead {line-height: 27px; margin-bottom: 10px;}
+
+        /* added to style carousel controls - CMO - Forthea - 08-04-2016 */
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            width: 40px;
+            height: 40px;
+            margin-top: -20px;
+            font-size: 60px;
+            font-weight: 100;
+            line-height: 30px;
+            color: #ffffff;
+            text-align: center;
+            /*background: #222222;*/
+            border: 3px solid #ffffff;
+            -webkit-border-radius: 23px;
+            -moz-border-radius: 23px;
+            border-radius: 23px;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+        }
+        .carousel-left-arrow {
+            background: url(https://centerpointenergy--qa--c.cs30.visual.force.com/resource/1470343330000/carLeftArrow) no-repeat 0 0;
+        }
+        .carousel-right-arrow {
+            background: url(https://centerpointenergy--qa--c.cs30.visual.force.com/resource/1470343330000/carRightArrow) no-repeat 0 0;
+        }
+        .carousel-inner>.carousel-left-arrow.active {
+            left: 15px;
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+        </style>
+            
+            <!--<div class="container hidden-phone">-->
+            <div class="hidden-phone">
+                <!--<div class="row carousel-row">-->
+                <div class="row-fluid carousel-row">
+                    <!--<div class="span8">-->
+                    <div class="span12">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel"  data-interval="5000">
+                            <!-- Carousel bullet controls -->
+                            <!-- hidden for testing arrow controls - cmo - forthea - 08-04-2016
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                            </ol>
+                            -->                               
+                            <!-- Carousel items -->
+                            <div class="carousel-inner">
+                                <!-- item -->
+                                <div class="active item banner5bulbs">
+                                    <div class="cta-block">
+                                        <h1 class="text-info">Enter your zip code to get started</h1>
+                                        <p class="lead">Shop and compare electric plans for free. <em>At myTrueCost.com</em>, you'll find the real cost of electric plans, so every fee sees the light of day.</p>
+                                        <div class="form-block">
+                                            <form action="javascript:void(0);" id="zip_code_form" class="form-inline">
+                                                <input class="" maxlength="5" name="zip_code" id="zip_code" placeholder="Enter Your Zip Code" value="" type="text" required="required" pattern="[0-9]{5}" title="5-digit Zip Code"/>
+                                                <button class="btn btn-default custom-btn" id="zip_submit" name="zip_submit" type="submit"><span>Search</span></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- item -->
+                                <div class="item bannerHangingBulbs">
+                                    <div class="cta-block">
+                                        <h1 class="text-info">Enter your zip code to get started</h1>
+                                        <p class="lead"><em>myTrueCost.com</em> reveals unexpected fees, taxes and even available discounts before you buy.</p>
+                                        <div class="form-block">
+                                            <form action="javascript:void(0);" id="zip_code_form" class="form-inline">
+                                                <input class="" maxlength="5" name="zip_code" id="zip_code" placeholder="Enter Your Zip Code" value="" type="text" required="required" pattern="[0-9]{5}" title="5-digit Zip Code"/>
+                                                <button class="btn btn-default custom-btn" id="zip_submit" name="zip_submit" type="submit"><span>Search</span></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- item -->
+                                <div class="item bannerOneBrightLightRenders">
+                                    <div class="cta-block">
+                                        <h1 class="text-info">Enter your zip code to get started</h1>
+                                        <p class="lead shorten-lead">Did you know electricity prices are based on a usage of exactly 1,000 or 2,000 kwh per month? Use <em>myTrueCost.com</em> to shop and compare your real cost for free.</p>
+                                        <div class="form-block">
+                                            <form action="javascript:void(0);" id="zip_code_form" class="form-inline">
+                                                <input class="" maxlength="5" name="zip_code" id="zip_code" placeholder="Enter Your Zip Code" value="" type="text" required="required" pattern="[0-9]{5}" title="5-digit Zip Code"/>
+                                                <button class="btn btn-default custom-btn" id="zip_submit" name="zip_submit" type="submit"><span>Search</span></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Carousel arrow controls -->
+                            <a class="left carousel-control carousel-left-arrow" href="#myCarousel" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control  carousel-right-arrow" href="#myCarousel" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!--<div class="span3 pull-right hidden-phone text-center home-actions-block">
+                        <h3>Start Saving</h3>
+                        <div class="home-action-button-holder">
+                            <apex:outputPanel rendered="{!ISPICKVAL($User.UserType,'Guest')}" layout="none">
+                                <a href="{!$Page.shopplans}?RateClass=Residential" class="btn btn-block btn-warning">Residential Plans</a>
+                                <a href="{!$Page.shopplans}?RateClass=Commercial" class="btn btn-block btn-warning ">Commercial Plans</a>
+                                <a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.RegisterSec}" class="btn btn-block btn-primary ">Create Profile</a>
+                                <a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.SiteLogin}?starturl=/{!$CurrentPage.Name}" class="btn btn-block btn-success ">Login</a>
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}" layout="none">
+                                <a href="{!$Page.shopplans}" class="btn btn-block btn-warning">Plans </a>
+                                <a href="{!$Page.IntervalDataExplorer}" class="btn btn-block btn-primary ">Meter Data</a>
+                                <a href="{!$Page.MyAccount}" class="btn btn-block btn-success">My Account</a>
+                            </apex:outputPanel>
+                        </div>
+                    </div>-->
+                </div>
+            </div> 
+            
+            <div class="container visible-phone">
+                <div class="row">
+                    <div class="span12">
+                        <h3>Save 20%* or more on your electricity cost</h3> 
+                        <p class="lead">Customers who found their plan using myTrueCost.com report saving an average of 20% on their electric bill.</p>
+                        
+                        <apex:outputPanel rendered="{!ISPICKVAL($User.UserType,'Guest')}">
+                            <a href="{!$Page.shopplans}" class="btn btn-warning visible-phone ">Plans</a>
+                            <a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.RegisterSec}" class="btn btn-primary visible-phone ">Create Profile</a>
+                            <a href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.SiteLogin}?starturl=/{!$CurrentPage.Name}" class="btn btn-success visible-phone ">Login</a>
+                        </apex:outputPanel>
+                        
+                        <apex:outputPanel rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}">
+                            <a href="{!$Page.shopplans}" class="btn btn-warning visible-phone ">Plans</a>
+                            <a href="{!$Page.IntervalDataExplorer}" class="btn btn-primary visible-phone ">Usage</a>
+                            <a href="{!$Page.MyAccount}" class="btn btn-success visible-phone ">Account</a>
+                        </apex:outputPanel>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hidden-phone">
+                    <c:repsStripNew />
+            </div>
+            
+            <div class="row-fluid">
+                <div class="span3">
+                    <c:ChartMiniNarrow2Yr />
+                    <hr class="visible-phone"/>
+                </div>
+                <div class="span3">
+                    <c:truecostrecentblogposts PostLimit="5"/>
+                    <a class="btn btn-warning" href="{!$Page.truecostblog}">More</a>
+                    <hr class="visible-phone"/>
+                </div>
+                <div class="span3">
+                    <c:RandomPoll /> 
+                    <hr class="visible-phone"/>
+                </div>
+                <div class="span3">
+                    <c:RandomReview />    
+                </div>
+            </div>
+
+        </apex:define>   
+        <apex:define name="footer-additional">
+            <small>
+                <small>
+                    <p><c:Content_Viewer content="Savings Disclaimer" simple="true"/></p><br/>
+                </small>
+            </small>
+        </apex:define>
+    </apex:composition>
+
+<script> 
+        var $buoop = {c:2}; 
+        function $buo_f(){ 
+        var e = document.createElement("script"); 
+        e.src = "//browser-update.org/update.min.js"; 
+        document.body.appendChild(e);
+        };
+        try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+        catch(e){window.attachEvent("onload", $buo_f)}
+</script> 
+<script>
+        $j=jQuery.noConflict();
+    
+        $j("#zip_submit").click(function() {
+            //is the form valid?
+            if (!hasFormValidation()) {
+                zipCodeCheckSubmission();
+            }
+            else {
+                console.log('hasFormValidation was true');
+                if (!$j("#zip_code_form")[0].checkValidity()) {
+                    console.log('validation failed');
+                    //return false;
+                }
+                else {
+                    console.log('validation passed');
+                    zipCodeCheckSubmission();
+                }
+            }
+            
+        });
+    
+        function zipCodeCheckSubmission(){
+            ControllerForMobileMain.checkZip($j("#zip_code").val(), function(result, event){
+                if (result=='Now' || result=='Maybe'){
+                    $j.cookie("apex__ShopZip", $j("#zip_code").val(), { expires: 720 });
+                    window.location="{!$Page.shopplans}"; 
+                } else if (result=='Later'){
+                    alert('TrueCost does not serve your zip code yet, but plans to in the future.');
+                } else if (result=='No'){
+                    alert('TrueCost does not serve your zip code.');
+                }
+            });
+        }
+        function hasFormValidation() {
+            
+            var i = document.createElement('input');
+            console.log('check was: '+typeof i.validity === 'object');
+            return typeof i.validity === 'object';
+            
+        };
+    </script>
+    <script type="text/javascript">
+    /* $(function () {
+        $('#myCarousel').carousel({
+            interval:2000,
+            pause: "hover"
+        });
+    });*/
+    $('#myCarousel').carousel();
+    </script>
+</apex:page>

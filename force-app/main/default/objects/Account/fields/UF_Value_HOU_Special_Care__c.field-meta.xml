@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UF_Value_HOU_Special_Care__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(HOU_Special_Care_Credit__c == true, &#39;Yes&#39;, &#39;No&#39;)</formula>
+    <label>UF Value - HOU Special Care</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

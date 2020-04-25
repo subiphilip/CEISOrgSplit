@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Lets admins know when a new rate has been submitted or edited</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>TrueCost_Customer</letterhead>
+    <name>TDSP Fee Creation/Change</name>
+    <style>freeForm</style>
+    <subject>TDSP Fee Created or Edited - NOTIFY REPS</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

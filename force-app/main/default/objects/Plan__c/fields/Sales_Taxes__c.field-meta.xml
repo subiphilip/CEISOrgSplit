@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Taxes__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Are local sales taxes included in the default rates? Check the box to add this to the plan details.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Are local sales taxes included in the default rates? Check the box to add this to the plan details.</inlineHelpText>
+    <label>Add Sales Taxes</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

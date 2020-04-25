@@ -1,0 +1,68 @@
+{
+    "bpId": "123456789",
+    "debtOwed": 10.23,
+    "currentBalance": 123.45,
+    "darStatus": false,
+    "dnpStatus": false,
+    "dnpDate": "2017-10-13 10:04:14.474",
+    "returnCheckHistory": false,
+    "firstName": null,
+    "lastName": null,
+    "email": null,
+    "ssn": null,
+    "guid": null,
+    "idNumber": null,
+    "idNumberState": null,
+    "phoneNumbers": [
+      {
+        "number": null,
+        "type": null,
+        "sms": null,
+        "primary": null
+      }
+    ],
+    "billing": {
+      "houseNumber": null,
+      "street": null,
+      "aptNumber": null,
+      "city": null,
+      "region": null,
+      "postalCode": null,
+      "zipPlus": null
+    },
+    "contracts": [
+      {
+        "contractId": "1234567",
+        "accountId": "1234567",
+        "premiseId": "1234567",
+        "installationId": null,
+        "utilityContractId": null,
+        "forceOut": false,
+        "forceDate": null,
+        "premise": {
+          "address": {
+            "houseNumber": null,
+            "street": null,
+            "aptNumber": null,
+            "city": null,
+            "region": null,
+            "postalCode": null,
+            "zipPlus": null
+          },
+          "dunningProc": null,
+          "companyCode": null,
+          "n1": false,
+          "depositReq": false,
+          "premiseType": "R",
+          "depositAmount": null,
+          "homeOwner": false
+        },
+        "hasDebt": false,
+        "darStatus": false,
+        "moveInDate": null,
+        "moveInStatus": null,
+        "moveOutStatus": null,
+        "serviceStatus": null
+      }
+    ]
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Show_About_TrueCost_in_private_beta__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check this box to make the About TrueCost section public during private beta</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check this box to make the About TrueCost section public during private beta</inlineHelpText>
+    <label>Show About TrueCost in private beta</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

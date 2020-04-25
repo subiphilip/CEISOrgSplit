@@ -1,0 +1,12 @@
+<apex:page contenttype="text/plain">
+User-Agent: *
+Disallow: 
+Disallow: /TermsofService
+Disallow: /fcra
+Disallow: /Privacy
+Disallow: /EnrollRemote*
+
+
+sitemap: http://www.mytruecost.com/sitemapindex
+
+</apex:page>

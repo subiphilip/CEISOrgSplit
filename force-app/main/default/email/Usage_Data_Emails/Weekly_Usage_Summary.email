@@ -1,0 +1,43 @@
+<messaging:emailTemplate subject="{!relatedto.Account_Premise_Association__r.premise__r.Electric_Service_Address__c} Weekly Usage Summary from myTrueCost.com" recipientType="Contact" relatedToType="Daily_Usage__c" >
+
+<messaging:plainTextEmailBody >
+</messaging:plainTextEmailBody>
+
+<messaging:htmlEmailBody >
+    <c:Visualforce_email_stylesheet />
+    
+    <apex:image url="https://c.na1.content.force.com/servlet/servlet.ImageServer?id=01530000001w7m0&oid=00D30000000pOSg"/>
+    
+    <!--apex:outputpanel layout="block" styleClass="topnav" id="RegularTopNav">
+            <ul id="menubar">
+              <li class="first"><apex:outputlink value="{!$Page.homepage}">Home</apex:outputlink></li>   
+              <li><apex:outputlink value="{!$Page.shopplans}">Shop Plans</apex:outputlink></li>   
+              <li><apex:outputlink value="{!$Page.ElectricCompanies}">Electric Companies</apex:outputlink></li>
+              <li><apex:outputLink value="{!$Page.ElectricPriceTrendsSummary}">Electric Price Trends</apex:outputLink></li>
+              <li><apex:outputLink value="{!$Page.AboutTrueCost}">About TrueCost</apex:outputLink></li>
+              <li><apex:outputLink value="{!$Page.truecostblog}">News &amp; Insights</apex:outputLink></li>
+              <li><apex:outputLink value="{!$Page.FAQ}">Support</apex:outputLink></li>
+            </ul>    
+    </apex:outputpanel -->      
+    
+    
+    
+            <apex:outputPanel layout="block" styleClass="maintitle" >Weekly Usage Summary: {!relatedto.Account_Premise_Association__r.premise__r.Electric_Service_Address__c}</apex:outputPanel>
+            <c:WeeklyEmailChart APA="{!relatedto.Account_Premise_Association__c}"/>
+            
+            
+            
+            <apex:outputPanel layout="block" styleClass="basic-paragraph">
+                For interactive charts that show your usage history at various levels, please<!--&nbsp;-->
+                <!--<Apex:outputLink value="http://www.mytruecost.com/intervaldataexplorer" >click here</Apex:outputLink>
+                (login required).-->log in to your TrueCost account and visit the My Account page. 
+            </apex:outputPanel>
+   <apex:outputPanel styleClass="Footer">
+       
+       <apex:image styleClass="footer-logo" url="https://c.na1.content.force.com/servlet/servlet.ImageServer?id=01530000001w7YU&oid=00D30000000pOSg"/>
+        <apex:outputPanel styleClass="footer-tagline">
+                   THE BETTER WAY TO SHOP FOR ELECTRIC PLANS 
+               </apex:outputPanel>
+    </apex:outputPanel>   
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

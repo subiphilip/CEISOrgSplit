@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Margin_Build_Inactivated__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(Status__c, &#39;Margin Build Completed with Errors&#39;), false, 
+IF(ISPICKVAL(Status__c, &#39;Detail Build Completed Successfully&#39;), false, true))</formula>
+    <label>Margin Build Inactivated</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

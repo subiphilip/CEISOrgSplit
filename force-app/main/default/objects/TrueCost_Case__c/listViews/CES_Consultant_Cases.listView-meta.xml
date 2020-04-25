@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CES_Consultant_Cases</fullName>
+    <columns>Account__c</columns>
+    <columns>Contact__c</columns>
+    <columns>Duration__c</columns>
+    <columns>Subject__c</columns>
+    <columns>Origin__c</columns>
+    <filterScope>Queue</filterScope>
+    <label>CES Consultant Cases</label>
+    <language>en_US</language>
+    <queue>CES_Consultant_Cases</queue>
+    <sharedTo>
+        <group>Administrators_System</group>
+        <role>Marketing</role>
+    </sharedTo>
+</ListView>

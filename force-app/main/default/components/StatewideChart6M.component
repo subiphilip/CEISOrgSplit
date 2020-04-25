@@ -1,0 +1,27 @@
+<apex:component >
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+     google.load("visualization", "1", {packages:["corechart"]});
+     google.setOnLoadCallback(drawVisualization);
+    function drawVisualization() {
+         var query = new google.visualization.Query(
+//Insert your URL here if it's not the main page
+         'https://docs.google.com/spreadsheet/ccc?key=0Am-dHTfusxjLdHNlenRJb3F6NXlDYWxsWVZXX1JfN0E#gid=0');
+//Edit your charts here!!
+         query.setQuery('SELECT A,H,I,J,K,L WHERE A >= AJ ORDER BY A');//statewide 6m chart
+  query.send(handleQueryResponse);
+}
+
+function handleQueryResponse(response) {
+  if (response.isError()) {
+    alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+    return;
+  }
+  
+  var data = response.getDataTable();
+  var visualization = new google.visualization.LineChart(document.getElementById('visualization'));  //rename the div tag if you need multiple charts on the page
+//options
+  visualization.draw(data, {title:'CenterPoint Energy Electric Price Index: Six-month fixed rate plans', titlePosition: 'out' , titleTextStyle: {color: '#000000', fontSize:'15'} , legend: 'bottom', width: 665, height: 415, colors:['#0498D9', '#860000', '#F8960E', '#EC643F', '#F3CF00'], lineWidth:3, chartArea:{width:"80%", height:"80%"},                            vAxis:{gridlineColor:'#006894', textStyle:{color: '#006894'}, baselineColor:'#006894', format:'$###'},                           hAxis:{gridlineColor:'#ffffff', textStyle:{color: '#006894'}, baselineColor:'#ffffff', format:'MMM y', showTextEvery:1}, interpolateNulls:true});
+}
+    </script>
+</apex:component>

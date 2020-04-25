@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pipeline__c</fullName>
+    <externalId>false</externalId>
+    <label>Pipeline</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>ANR PIPELINE CO</fullName>
+                <default>false</default>
+                <label>ANR PIPELINE CO</label>
+            </value>
+            <value>
+                <fullName>ATMOS PIPELINE - TEXAS / ATMOS ENER</fullName>
+                <default>false</default>
+                <label>ATMOS PIPELINE - TEXAS / ATMOS ENER</label>
+            </value>
+            <value>
+                <fullName>CENTERPOINT ENERGY RESOURCES CORP D</fullName>
+                <default>false</default>
+                <label>CENTERPOINT ENERGY RESOURCES CORP D</label>
+            </value>
+            <value>
+                <fullName>COLUMBIA GULF TRANSMISSION COMPANY</fullName>
+                <default>false</default>
+                <label>COLUMBIA GULF TRANSMISSION COMPANY</label>
+            </value>
+            <value>
+                <fullName>DUKE ENERGY FIELD SERVICES</fullName>
+                <default>false</default>
+                <label>DUKE ENERGY FIELD SERVICES</label>
+            </value>
+            <value>
+                <fullName>EL PASO NATURAL GAS COMPANY</fullName>
+                <default>false</default>
+                <label>EL PASO NATURAL GAS COMPANY</label>
+            </value>
+            <value>
+                <fullName>ENABLE GAS TRANSMISSION LLC</fullName>
+                <default>false</default>
+                <label>ENABLE GAS TRANSMISSION LLC</label>
+            </value>
+            <value>
+                <fullName>ENBRIDGE PIPELINE (EAST TEXAS) L.P.</fullName>
+                <default>false</default>
+                <label>ENBRIDGE PIPELINE (EAST TEXAS) L.P.</label>
+            </value>
+            <value>
+                <fullName>ENOGEX SERVICES CORPORATION</fullName>
+                <default>false</default>
+                <label>ENOGEX SERVICES CORPORATION</label>
+            </value>
+            <value>
+                <fullName>EPGT TEXAS PIPELINE LP</fullName>
+                <default>false</default>
+                <label>EPGT TEXAS PIPELINE LP</label>
+            </value>
+            <value>
+                <fullName>ETC FUEL</fullName>
+                <default>false</default>
+                <label>ETC FUEL</label>
+            </value>
+            <value>
+                <fullName>HAWK GATHERING SYSTEM</fullName>
+                <default>false</default>
+                <label>HAWK GATHERING SYSTEM</label>
+            </value>
+            <value>
+                <fullName>KN ENERGY</fullName>
+                <default>false</default>
+                <label>KN ENERGY</label>
+            </value>
+            <value>
+                <fullName>LOUISIANA INTRASTATE GAS CO LLC</fullName>
+                <default>false</default>
+                <label>LOUISIANA INTRASTATE GAS CO LLC</label>
+            </value>
+            <value>
+                <fullName>LOUISIANA RESOURCES COMPANY</fullName>
+                <default>false</default>
+                <label>LOUISIANA RESOURCES COMPANY</label>
+            </value>
+            <value>
+                <fullName>MISSISSIPPI RIVER TRANS CORP</fullName>
+                <default>false</default>
+                <label>MISSISSIPPI RIVER TRANS CORP</label>
+            </value>
+            <value>
+                <fullName>NATURAL GAS PIPELINE COMPANY</fullName>
+                <default>false</default>
+                <label>NATURAL GAS PIPELINE COMPANY</label>
+            </value>
+            <value>
+                <fullName>NONE</fullName>
+                <default>false</default>
+                <label>NONE</label>
+            </value>
+            <value>
+                <fullName>NORTHERN NATURAL GAS COMPANY</fullName>
+                <default>false</default>
+                <label>NORTHERN NATURAL GAS COMPANY</label>
+            </value>
+            <value>
+                <fullName>OKLAHOMA NATURAL GAS CO</fullName>
+                <default>false</default>
+                <label>OKLAHOMA NATURAL GAS CO</label>
+            </value>
+            <value>
+                <fullName>OKTEX PIPELINE</fullName>
+                <default>false</default>
+                <label>OKTEX PIPELINE</label>
+            </value>
+            <value>
+                <fullName>PANHANDLE EASTERN PIPELINE CO</fullName>
+                <default>false</default>
+                <label>PANHANDLE EASTERN PIPELINE CO</label>
+            </value>
+            <value>
+                <fullName>PHILLIPS GAS PIPELINE COMPANY</fullName>
+                <default>false</default>
+                <label>PHILLIPS GAS PIPELINE COMPANY</label>
+            </value>
+            <value>
+                <fullName>SOURCEGAS ARKANSAS INC</fullName>
+                <default>false</default>
+                <label>SOURCEGAS ARKANSAS INC</label>
+            </value>
+            <value>
+                <fullName>SOUTHERN NATURAL GAS PIPELINE</fullName>
+                <default>false</default>
+                <label>SOUTHERN NATURAL GAS PIPELINE</label>
+            </value>
+            <value>
+                <fullName>TENNESSEE GAS PIPELINE</fullName>
+                <default>false</default>
+                <label>TENNESSEE GAS PIPELINE</label>
+            </value>
+            <value>
+                <fullName>TEXAS EASTERN TRANSMISSION</fullName>
+                <default>false</default>
+                <label>TEXAS EASTERN TRANSMISSION</label>
+            </value>
+            <value>
+                <fullName>TEXAS GAS TRANSMISSION LLC</fullName>
+                <default>false</default>
+                <label>TEXAS GAS TRANSMISSION LLC</label>
+            </value>
+            <value>
+                <fullName>TRAILBLAZER PIPELINE</fullName>
+                <default>false</default>
+                <label>TRAILBLAZER PIPELINE</label>
+            </value>
+            <value>
+                <fullName>TRANSCONTINENTAL GAS PIPE LINE CORP</fullName>
+                <default>false</default>
+                <label>TRANSCONTINENTAL GAS PIPE LINE CORP</label>
+            </value>
+            <value>
+                <fullName>TRANSOK PIPE CO</fullName>
+                <default>false</default>
+                <label>TRANSOK PIPE CO</label>
+            </value>
+            <value>
+                <fullName>TRANSWESTERN P/L CO</fullName>
+                <default>false</default>
+                <label>TRANSWESTERN P/L CO</label>
+            </value>
+            <value>
+                <fullName>TRUNKLINE GAS PIPELINE</fullName>
+                <default>false</default>
+                <label>TRUNKLINE GAS PIPELINE</label>
+            </value>
+            <value>
+                <fullName>UNITED GAS PIPELINE CO</fullName>
+                <default>false</default>
+                <label>UNITED GAS PIPELINE CO</label>
+            </value>
+            <value>
+                <fullName>WILLIAMS GAS PIPELINES CENTRAL INC</fullName>
+                <default>false</default>
+                <label>WILLIAMS GAS PIPELINES CENTRAL INC</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

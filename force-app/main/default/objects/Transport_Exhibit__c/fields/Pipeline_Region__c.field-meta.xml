@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pipeline_Region__c</fullName>
+    <externalId>false</externalId>
+    <label>Pipeline Region</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Conroe</fullName>
+                <default>false</default>
+                <label>Conroe</label>
+            </value>
+            <value>
+                <fullName>Woodlands 1</fullName>
+                <default>false</default>
+                <label>Woodlands 1</label>
+            </value>
+            <value>
+                <fullName>Woodlands 2</fullName>
+                <default>false</default>
+                <label>Woodlands 2</label>
+            </value>
+            <value>
+                <fullName>Beaumont</fullName>
+                <default>false</default>
+                <label>Beaumont</label>
+            </value>
+            <value>
+                <fullName>South Texas</fullName>
+                <default>false</default>
+                <label>South Texas</label>
+            </value>
+            <value>
+                <fullName>Houston</fullName>
+                <default>false</default>
+                <label>Houston</label>
+            </value>
+            <value>
+                <fullName>Texas Coast</fullName>
+                <default>false</default>
+                <label>Texas Coast</label>
+            </value>
+            <value>
+                <fullName>ETC</fullName>
+                <default>false</default>
+                <label>ETC</label>
+            </value>
+            <value>
+                <fullName>Enterprise</fullName>
+                <default>false</default>
+                <label>Enterprise</label>
+            </value>
+            <value>
+                <fullName>GSPL - TX</fullName>
+                <default>false</default>
+                <label>GSPL - TX</label>
+            </value>
+            <value>
+                <fullName>Enbridge</fullName>
+                <default>false</default>
+                <label>Enbridge</label>
+            </value>
+            <value>
+                <fullName>Kinder - Tejas</fullName>
+                <default>false</default>
+                <label>Kinder - Tejas</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

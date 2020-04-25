@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Swing_Cost__c</fullName>
+    <description>swing cost per Dth</description>
+    <externalId>false</externalId>
+    <inlineHelpText>swing cost per Dth</inlineHelpText>
+    <label>Swing Cost</label>
+    <precision>6</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

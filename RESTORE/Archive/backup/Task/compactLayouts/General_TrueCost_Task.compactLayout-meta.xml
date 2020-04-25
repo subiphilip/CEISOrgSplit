@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>General_TrueCost_Task</fullName>
+    <fields>OwnerId</fields>
+    <fields>Subject</fields>
+    <fields>Type</fields>
+    <fields>ActivityDate</fields>
+    <fields>Priority</fields>
+    <fields>WhatId</fields>
+    <fields>Status</fields>
+    <label>General/TrueCost Task</label>
+</CompactLayout>

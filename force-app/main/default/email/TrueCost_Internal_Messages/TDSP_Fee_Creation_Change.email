@@ -1,0 +1,14 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<font face="arial" size="3">{!Fee__c.CreatedBy} created a new TDSP Fee or edited an existing one:
+</font><br>
+<br><font face="arial" size="3">Fee Name: {!Fee__c.Name}
+</font><br><font face="arial" size="3">
+Basis: {!Fee__c.Basis__c}
+</font><br><font face="arial" size="3">Value: {!Fee__c.Value__c}
+</font><br><font face="arial" size="3">TDSP: {!Fee__c.TDSP__c}&nbsp;</font><div style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><br></div><div style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><font color="#ff0000"><b>ALL REPS MUST BE NOTIFIED OF THIS CHANGE.&nbsp;</b></font></div><div style="font-family: arial; font-size: 12pt;"><font color="#ff0000"><b><br></b></font></div><div><font color="#ff0000"><b><font face="arial" size="3">EDITS MUST BE MADE TO VISUALFORCE PAGE "</font><font face="arial">TariffDisplay"</font><br></b></font>
+<br><font face="arial" size="3">Click on this link to review the rate:
+</font><br><font face="arial" size="3">{!Fee__c.Link}</font></div><div style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><br></div><div style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);"><br></div><div style="font-family: arial; font-size: 12pt; color: rgb(0, 0, 0);">***FOR INTERNAL USE ONLY***</div>]]></td>
+</tr>
+</table>

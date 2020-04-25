@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Online_E_pay__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Would you like to see plans that are online only (for billing and payment)?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Would you like to see plans that are online only (for billing and payment)?</inlineHelpText>
+    <label>Online/E-pay?</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

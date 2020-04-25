@@ -1,0 +1,107 @@
+<apex:page showHeader="false" sidebar="false" controller="ControllerForElectricCompanies" cache="true" applyBodyTag="false" expires="43200" docType="html-5.0" standardStylesheets="false">
+
+    <apex:composition template="Template_TC">
+    
+    <apex:define name="HeadTags">
+        <title>{!$Label.Page_Title_Electric_Companies} - {!$Label.Page_Title_Company_Name}</title>
+        <meta name="description" Content="What electric companies are on CenterPoint Energy TrueCost?  What companies do you think should join?  View descriptions and read reviews" />
+        <!-- <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/electriccompanies"/> -->
+
+    </apex:define>    
+        
+    <apex:define name="body">     
+        <div class="container-fluid">
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <h1>{!$Label.Page_Title_Electric_Companies}<br/>
+                <small>                {!$Label.Electric_Companies_Subhead}            </small>
+                </h1>
+                </div>
+                
+            </div>
+            <div class="row-fluid">
+                <c:CompaniesPageREPs />
+                <hr/>
+            </div>
+                   
+               
+            <apex:repeat var="rep" value="{!replist}">                                            
+                <div class="row-fluid">
+                    <a id="{!rep.id}"/>
+                    <span itemscope="itemscope" itemtype="http://schema.org/Corporation">
+                        <div class="span9">
+                            
+                            <h4>
+                                <apex:outputlink value="{!URLFOR($Page.readreviews+'?id='+rep.id)}"><span itemprop="name">{!rep.name}</span></apex:outputlink>
+                            </h4>
+                            <p class="retailer_stars">
+                                <apex:outputpanel layout="block" rendered="{!!isnull(rep.total_reviews__c)}">
+                                    <c:Star_Rating_static starrating="{!rep.Star_Rating_Avg__c}" reviewcount="{!rep.total_reviews__c}" repid="{!rep.id}" />
+                                </apex:outputpanel>                           
+                            </p>
+                            <div>
+                                <span itemprop="description">
+                                    <apex:outputText escape="false" value="{!rep.About_Us__c}" />
+                                </span>
+                            </div>                         
+                            <br/><br/>
+                            <span class="pull-right muted">Source: {!rep.name}</span>
+                            <ul class="inline">
+                                <li><a href="{!URLFOR($Page.readreviews+'?id='+rep.id)}">Learn more</a></li>
+                                <li>
+                                    <apex:outputlink value="{!URLFOR($Page.readreviews+'?id='+rep.id)}" rendered="{!!isnull(rep.total_reviews__c)}">Customer reviews ({!(round(rep.total_reviews__c, 0))})</apex:outputlink>
+                                    <apex:outputpanel rendered="{!isnull(rep.total_reviews__c)}">No reviews available</apex:outputpanel>
+                                </li>
+                                <li><b><a href="{!URLFOR($Page.shopplans+'?repid='+rep.id)}">View Plans</a></b></li>
+                            </ul> 
+                            
+                        </div>
+                        <div class="span3">                            
+                            <apex:outputpanel styleClass="logo" rendered="{!!isnull(rep.Logo_URL__c)}">
+                                <a href="{!URLFOR($Page.readreviews+'?id='+rep.id)}" >
+                                    <img height="75" width="150" src="{!URLFOR($Resource.REPLogos, substitute(rep.Logo_URL__c, 'resource/REPLogos/', ''))}" alt="{!rep.name}" itemprop="image"/>
+                                </a>               
+                            </apex:outputpanel>
+                        </div>
+                        
+                    </span>
+                </div>   
+                <hr/>
+            </apex:repeat>
+
+            <div class="row-fluid">
+                <h3>The following providers do not currently have plans available on TrueCost, but have reviews from confirmed customers</h3>
+                <p>If you'd like to see plans from any of these companies, or others not listed, <a href="{!$Page.OtherREPs}">let us know!</a></p>
+            </div>
+
+            <apex:repeat var="rep" value="{!InactiveReplist}">                                            
+                <div class="row-fluid">
+                    <a id="{!rep.id}"/>
+                    <span itemscope="itemscope" itemtype="http://schema.org/Corporation">                            
+                        <div class="span12">
+                            <h4>
+                                <apex:outputlink value="{!URLFOR($Page.readreviews+'?id='+rep.id)}"><span itemprop="name">{!rep.name}</span></apex:outputlink>
+                            </h4>
+                            <p class="retailer_stars">
+                                <apex:outputpanel layout="block" rendered="{!!isnull(rep.total_reviews__c)}">
+                                    <c:Star_Rating_static starrating="{!rep.Star_Rating_Avg__c}" reviewcount="{!rep.total_reviews__c}" repid="{!rep.id}" />
+                                </apex:outputpanel>                           
+                            </p>                                
+                            <ul class="inline">
+                                <li>
+                                    <apex:outputlink value="{!URLFOR($Page.readreviews+'?id='+rep.id)}" rendered="{!!isnull(rep.total_reviews__c)}">Customer reviews ({!(round(rep.total_reviews__c, 0))})</apex:outputlink>
+                                    <apex:outputpanel rendered="{!isnull(rep.total_reviews__c)}">No reviews available</apex:outputpanel>
+                                </li>
+                            </ul>                                 
+                        </div>
+                    </span>
+                </div>   
+                <hr/>
+            </apex:repeat>
+
+        </div>
+    </apex:define>       
+          
+</apex:composition>
+</apex:page>

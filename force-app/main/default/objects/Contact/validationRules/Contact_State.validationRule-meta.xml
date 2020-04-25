@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_State</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+
+IsPersonAccount = FALSE,
+
+OR(
+Account.RecordTypeId = &#39;01230000000njET&#39;,
+Account.RecordTypeId = &#39;012300000018b9t&#39;,
+Account.RecordTypeId = &#39;012300000018cVk&#39;
+),
+
+OR(
+
+AND(
+NOT(ISBLANK(MailingState)),
+OR(
+LEN(MailingState) &lt;&gt; 2,
+NOT(CONTAINS(&quot;AB:AL:AK:AZ:AR:CA:CO:CT:DE:DC:FL:GA:HI:ID:&quot; &amp; 
+&quot;IL:IN:IA:KS:KY:LA:ME:MD:MA:MI:MN:MS:MO:MT:NE:NV:NH:&quot; &amp; 
+&quot;NJ:NM:NY:NC:ND:OH:OK:ON:OR:PA:QC:RI:SC:SD:TN:TX:UT:VT:VA:&quot; &amp; 
+&quot;WA:WV:WI:WY:PR&quot;, MailingState))
+)),
+
+AND(
+NOT(ISBLANK(OtherState)),
+OR(
+LEN(OtherState) &lt;&gt; 2,
+NOT(CONTAINS(&quot;AB:AL:AK:AZ:AR:CA:CO:CT:DE:DC:FL:GA:HI:ID:&quot; &amp; 
+&quot;IL:IN:IA:KS:KY:LA:ME:MD:MA:MI:MN:MS:MO:MT:NE:NV:NH:&quot; &amp; 
+&quot;NJ:NM:NY:NC:ND:OH:OK:ON:OR:PA:QC:RI:SC:SD:TN:TX:UT:VT:VA:&quot; &amp; 
+&quot;WA:WV:WI:WY:PR&quot;, OtherState)) 
+))
+
+)
+
+)</errorConditionFormula>
+    <errorMessage>Contact03: Please use a two-letter capitalized abbreviation for any State field.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,93 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" >
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+    description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."
+  />
+  <body class="has-background-grey-light has-navbar-fixed-top">
+
+    <div id="wrapper">
+        <c:tc2_navbar />
+        <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-3.jpg" headline="VERIFY YOUR ADDRESS" />
+
+        <c:tc2_esid_lookup_complete />
+
+        <div id='appAccountFindAddressConfirm'>
+
+          <div v-if="isResidential || isCommercial">
+            <div class="has-text-centered" v-if="!routToShopPlansCommercial">
+              <p><a class="button is-primary is-rounded fixed-size animate-gradient-bg" href='{!$Page.Account_Schedule}'>Confirm My Service Address</a></p>
+            </div>
+            <div class="has-text-centered" v-if="routToShopPlansCommercial">
+              <p><a class="button is-primary is-rounded fixed-size animate-gradient-bg" href='{!$Page.Shop_Plans_Commercial}'>Shop Small Business Plans</a></p>
+            </div>
+          </div>
+
+          <div class="has-text-centered">
+              <a class="has-text-weight-semibold is-size-8" v-on:click="goBack()">Go Back</a>
+          </div>
+        </div>
+
+    </div>
+    <c:tc2_footer />
+    <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+
+             TC.app.appAccountFindAddressConfirm = new Vue({
+                el: '#appAccountFindAddressConfirm',
+                data: {
+                  premiseType:'',
+                  isResidential: false,
+                  isCommercial: false,
+                  planInterestType: TC.app.account.planInterestType,
+                  routToShopPlansCommercial: false
+                },
+                methods: {
+                  goBack: function() {
+                    window.history.back();
+                  }
+                },
+                mounted: function() {
+                    TC.app.appMenu.isProgress = true;
+                    TC.app.appMenu.step = 2;
+                    TC.app.appPlansCompareBar.hideSnackBar();
+                    this.premiseType = TC.app.account.premise.premiseResult.Premise_Type__c
+                    if(this.premiseType == 'Residential'){
+                      this.isResidential = true;
+                    }
+                    if(TC.app.account.planPremiseType == 'Commercial' && TC.settings.showSmallBusiness){
+                      this.isCommercial = true;
+                    }
+                    if(TC.settings.showSmallBusiness){
+                      if(TC.app.account.planPremiseType == 'Commercial' && TC.app.account.planInterestType !== 'Commercial'){
+                        this.routToShopPlansCommercial = true;
+                      }
+                    }
+                    
+
+                    dataLayer.push({
+                        'event': 'checkout',
+                        'ecommerce': {
+                          'checkout': {
+                            'actionField': { 'step': 3 },
+                            'products': [{
+                              'name': TC.app.account.plan.title,
+                              'brand': TC.app.account.plan.company,
+                              'variant': TC.app.account.plan.contract,
+                              'price': Math.min(TC.app.account.plan.ratePlan.Plan__r.Contract_Length__c * 5),
+                              'quantity': '1'
+                             }]
+                          }
+                        }
+                    });
+                },
+                watch: { },
+             });
+
+          })
+        })(jQuery);
+    </script>
+  </body>
+  </html>
+</apex:page>

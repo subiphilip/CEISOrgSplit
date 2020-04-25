@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CES_C_I_Gas</fullName>
+    <columns>NAME</columns>
+    <columns>Premise_Nickname__c</columns>
+    <columns>Account_Number__c</columns>
+    <columns>Electric_Service_Address__c</columns>
+    <columns>Electric_Service_Address_City__c</columns>
+    <columns>Electric_Service_Address_State2__c</columns>
+    <columns>TDSP_Lookup__c</columns>
+    <columns>Pipeline_Lookup__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Premises__c.Transport_Premise</value>
+    </filters>
+    <label>CES C&amp;I Gas</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+        <group>CES_Gulf_Coast_Sales</group>
+        <group>CES_Midcontinent_SE_Sales</group>
+        <group>CES_Midwest_Sales</group>
+        <group>CES_North_Central_Sales</group>
+        <group>CES_Sales_Teams</group>
+        <group>CES_Utility_Sales</group>
+        <group>CES_Wisconsin_Sales</group>
+    </sharedTo>
+</ListView>

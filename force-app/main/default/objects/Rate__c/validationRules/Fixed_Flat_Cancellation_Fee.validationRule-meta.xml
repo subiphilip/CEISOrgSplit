@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fixed_Flat_Cancellation_Fee</fullName>
+    <active>true</active>
+    <description>ust have a value for fixed/flat cancellation fees.</description>
+    <errorConditionFormula>AND(AND(OR(ISPICKVAL( Cancellation_Fee_Type__c  , &quot;Fixed&quot;),ISPICKVAL( Cancellation_Fee_Type__c  , &quot;Flat Fee X Remaining Months&quot;)), OR(ISNULL(  Cancellation_Fee__c ),ISBLANK(Cancellation_Fee__c))), Record_Type_Name__c != &quot;Gas Choice Rate&quot;, Record_Type_Name__c != &quot;CES C&amp;I SubProduct&quot;)</errorConditionFormula>
+    <errorDisplayField>Cancellation_Fee__c</errorDisplayField>
+    <errorMessage>Rate08: If the cancellation fee involves a fixed or flat fee, please enter a value here.</errorMessage>
+</ValidationRule>

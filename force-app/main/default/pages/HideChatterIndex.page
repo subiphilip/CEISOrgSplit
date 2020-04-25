@@ -1,0 +1,12 @@
+<apex:page StandardController="Index__c" >
+
+<script>
+window.onload = functionname(){
+var e = document.getElementById("showFeedLink");
+if(e.style.display == "none")
+        chatter.getFeed().toggle(); 
+}
+              
+</script>
+
+</apex:page>

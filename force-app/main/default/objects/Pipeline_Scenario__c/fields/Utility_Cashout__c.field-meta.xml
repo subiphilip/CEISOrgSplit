@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Utility_Cashout__c</fullName>
+    <externalId>false</externalId>
+    <label>Utility Cashout</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pass through at cost</fullName>
+                <default>false</default>
+                <label>Pass through at cost</label>
+            </value>
+            <value>
+                <fullName>Market</fullName>
+                <default>false</default>
+                <label>Market</label>
+            </value>
+            <value>
+                <fullName>Utility&#39;s published 0% imbalance level cashout rate</fullName>
+                <default>false</default>
+                <label>Utility&#39;s published 0% imbalance level cashout rate</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,32 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+    
+    <apex:composition template="{!$Site.Template}">
+        <apex:define name="HeadTags">
+            <title>Refer-a-Friend Terms and Conditions - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="description" content="TrueCost Refer-a-Friend Program Terms and Conditions" />
+        </apex:define>
+       
+        
+        <apex:define name="body">
+        <div class="tab-pane container">
+           <div class ="tabbable tabs-left span9">
+                   
+                        <div class="span9">
+                            <img src="{!URLFOR($Resource.ReferAFriendGraphicLanding)}" class="hidden-phone center" style="max-height: 880px; max-width: 880px;"/>
+                            <h4 style="background-color:#019bd4; color:white; padding:10px;">Get a gift card (of at least $5) for every electric plan sold on TrueCost that uses your referral code.</h4>
+                            <p class="lead">Refer-a-Friend runs April 27 – December 31, 2015</p>
+                            <p class="lead">TrueCost’s Refer-a-Friend Gift Card Celebration makes electric plan shopping a group activity. Your friends and family will appreciate 
+                            the ease, convenience and possible savings from a new plan. You’ll enjoy gift cards from a wide selection of restaurants and stores.</p>
+                            <p class="lead"><b>Get your referral number now and pass it around.</b></p>
+                            <p><img src="{!URLFOR($Resource.myTrueCostBlueBold)}" class="hidden-phone" style="max-height: 180px; max-width: 180px;"/></p>
+                        </div>
+           <center><h3>Terms and Conditions</h3></center>              
+           <c:Content_Viewer content="Refer A Friend T&C" headline="false" deck="true"/>
+                        
+                    </div>
+                </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+</apex:page>

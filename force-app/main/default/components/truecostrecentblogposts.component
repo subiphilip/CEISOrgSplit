@@ -1,0 +1,10 @@
+<apex:component controller="RecentBlogPostsController">
+    
+<apex:attribute name="PostLimit" type="integer" required="false" description="How many blog posts do you want returned?" assignTo="{!TheLimit}"></apex:attribute>
+    <h3>News &amp; Insights</h3>
+    <div>
+        <apex:repeat var="post" value="{!myposts}">
+            <h4><a href="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}">{!post.Title__c}</a><br/><small>{!post.Deck__c}</small></h4>
+        </apex:repeat>
+    </div>
+</apex:component>

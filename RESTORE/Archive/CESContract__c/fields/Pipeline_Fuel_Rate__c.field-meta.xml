@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pipeline_Fuel_Rate__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Pipeline Fuel Rate</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Index__c.Active__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <filterItems>
+            <field>Index__c.Fuel_Rate__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <filterItems>
+            <field>Index__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Pipeline Rate</value>
+        </filterItems>
+        <infoMessage>Please select an active Pipeline Fuel rate</infoMessage>
+        <isOptional>true</isOptional>
+    </lookupFilter>
+    <referenceTo>Index__c</referenceTo>
+    <relationshipLabel>CES Contracts (Pipeline Fuel Rate)</relationshipLabel>
+    <relationshipName>CES_ContractsKaLS</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

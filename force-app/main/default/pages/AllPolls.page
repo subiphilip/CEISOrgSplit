@@ -1,0 +1,40 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" controller="ControllerForRandomPoll">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>All Polls - {!$Label.Page_Title_Company_Name}</title>
+            <meta name="description" content="description" />
+        </apex:define>
+        
+        <apex:define name="body">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span8">
+                        <h1>Everyone has questions about electric choice<br/>
+                            <small>Sometimes we ask you!</small>
+                        </h1>
+                        <apex:repeat value="{!AllPolls}" var="p">
+                            <div id="{!p.id}" class="span6">
+                                <script type="text/javascript">
+                                {!p.Script__c} 
+                                </script>
+                            </div>
+                        </apex:repeat>
+                    </div>
+                    <div class="span4">
+                        <c:truecostrecentblogposts />
+                        <hr/>
+                        <c:ChartMiniNarrow />
+                        <hr/>
+                        <c:RandomReview />
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+    
+</apex:page>

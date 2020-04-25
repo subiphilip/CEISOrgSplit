@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GEM_DealHeader_ID__c</fullName>
+    <description>external DealHeader ID to CRES GEM system for Producer Services</description>
+    <externalId>false</externalId>
+    <inlineHelpText>external DealHeader ID to CRES GEM system for Producer Services</inlineHelpText>
+    <label>GEM DealHeader ID</label>
+    <length>50</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

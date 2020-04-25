@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Authorized_Signature_User_ID__c</fullName>
+    <description>field populated via approval process, which in turn updates the Authorized for Signature by field</description>
+    <externalId>false</externalId>
+    <inlineHelpText>field populated via approval process, which in turn updates the Authorized for Signature by field</inlineHelpText>
+    <label>Authorized Signature User ID</label>
+    <length>18</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

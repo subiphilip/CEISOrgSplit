@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bill_Doc_Credited__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Was credit given back to the REP for this order?  If so, which bill doc contained the credit?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Was credit given back to the REP for this order?  If so, which bill doc contained the credit?</inlineHelpText>
+    <label>Bill Doc Credited</label>
+    <referenceTo>Billing_Documents__c</referenceTo>
+    <relationshipLabel>Orders (Bill Doc Credited)</relationshipLabel>
+    <relationshipName>CreditedOrders</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Do_Not_Sync_Last_Update__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>set to true to not send last update to external systems.  This is flipped when update is due to external system update.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>set to true to not send last update to external systems.  This is flipped when update is due to external system update.</inlineHelpText>
+    <label>Do Not Sync Last Update</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

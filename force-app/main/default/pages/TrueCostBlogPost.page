@@ -1,0 +1,65 @@
+<apex:page showHeader="false" sidebar="false" Controller="ControllerForBlogPost" standardStylesheets="false" applyBodyTag="false" cache="true" expires="43200" docType="html-5.0" >
+    
+    <apex:composition template="Template_TC">
+    <apex:define name="HeadTags">
+        <title>{!Post.Title__c} - {!$label.Page_Title_Company_Name}</title>
+        <meta name="description" content="{!Post.Title__c}  {!Post.Deck__c} "/>
+        <meta property="fb:app_id" content="{!$Setup.TrueCostSystemVariables__c.Facebook_App_ID__c}"/>
+        <meta property="fb:admins" content="{!$Setup.TrueCostSystemVariables__c.Facebook_Moderator_ID__c}"/>
+        <!-- <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/news/{!post.friendly_url__c}"/> -->
+        <c:facebookCommentScript rendered="{!$Setup.TrueCostSystemVariables__c.Show_Facebook_Comments__c}" />
+        
+        
+    </apex:define>
+            
+        <!--apex:define name="breadcrumbs">
+            <apex:outputpanel styleClass="breadcrumbs" layout="block">
+                <apex:outputlink value="{!$Page.homepage}">Home</apex:outputlink>
+                <apex:outputlink value="{!$Page.truecostblog}">News &amp; Insights</apex:outputlink>
+                <apex:outputlink value="{!URLFOR($Page.TrueCostBlogPost+'?id='+post.id)}" styleClass="last">{!Post.Title__c}</apex:outputlink>
+            </apex:outputpanel>            
+        </apex:define-->
+        
+        <apex:define name="body">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span8" itemscope="itemscope" itemtype="http://schema.org/Blog">
+                        
+                        <h2>
+                            <span itemprop="name">{!Post.Title__c}</span>
+                            <br/>
+                            <small>{!Post.Deck__c}</small>
+                        </h2>   
+                        
+                        <c:BlogView PostID="{!$CurrentPage.Parameters.id}"/> 
+                    </div>
+                    <div class="span4">
+                        <div >
+                            <c:truecostrecentblogposts />
+                        </div>
+                        <hr/>
+                        <div>
+                            <c:ChartMiniNarrow />
+                        </div>
+                        <hr/>
+                        <div >
+                            <c:RandomPoll />
+                        </div> 
+                        
+                    </div>
+                </div>
+            </div>
+        </apex:define>       
+        
+        
+    </apex:composition>
+    <script>
+        $j=jQuery.noConflict();
+        //remove the default height/width selection
+        $j("img[src^='/servlet']").removeAttr("width").removeAttr("height");
+        $j("img[src^='/servlet']").click(function(e){
+                window.open($j(this).attr('src'));
+                return false;
+        });
+    </script>
+</apex:page>

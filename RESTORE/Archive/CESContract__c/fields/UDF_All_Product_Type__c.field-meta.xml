@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UDF_All_Product_Type__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE( Product_Subtype_Lookup__r.Name ,
+  &#39;Market Price&#39;, Product_Subtype_Lookup__r.Name,
+  &#39;Index Guaranteed Savings&#39;, &#39;GSavings&#39; ,
+  &#39;Index Guaranteed Supply&#39;, &#39;GSupply&#39;,
+  &#39;Index Guaranteed Value&#39;, &#39;GValue&#39;,
+  &#39;Index Guaranteed Value plus Supply&#39;, &#39;GSupply&#39;,
+  &#39;Index Enhanced Supply&#39;, &#39;ESupply&#39;,
+  &#39;Lock NYMEX&#39;, &#39;Fixed Price&#39;,
+  &#39;Lock Basis&#39;, &#39;Fixed Price&#39;,
+  &#39;Lock Price&#39;, &#39;Fixed Price&#39;,
+  &#39;Index&#39;
+)</formula>
+    <label>UDF All Product Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

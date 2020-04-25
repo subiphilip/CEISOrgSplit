@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Calculated_Cancellation_Fee</fullName>
+    <active>true</active>
+    <description>If cancellation fee is calculated, must have a description.</description>
+    <errorConditionFormula>AND(
+AND(ISPICKVAL( Cancellation_Fee_Type__c  , &quot;Calculated Estimate&quot;), OR(ISNULL( Cancellation_Fee_Description__c ),(ISBLANK(Cancellation_Fee_Description__c)))), 
+ Record_Type_Name__c != &quot;Gas Choice Plan&quot;)</errorConditionFormula>
+    <errorDisplayField>Cancellation_Fee_Description__c</errorDisplayField>
+    <errorMessage>Rate07: If the cancellation fee is a &quot;Calculated Estimate,&quot; please describe the calculation here.</errorMessage>
+</ValidationRule>

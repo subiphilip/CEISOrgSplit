@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Confidential__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>If this initiative is sensitive or confidential, ensure that it is checked by the CI team in order to hide it to everyone except the Initiative Owner, Reporter or VP</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check if the Initiative is confidential or sensitive.</inlineHelpText>
+    <label>Confidential?</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

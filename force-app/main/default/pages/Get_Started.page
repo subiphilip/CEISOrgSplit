@@ -1,0 +1,178 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" >
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+      description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+
+  <body class=" has-navbar-fixed-top">
+    <div id="wrapper">
+        <c:tc2_navbar />
+        <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-2.jpg" headline="LET'S GET STARTED!" />
+        <div id="appGetStarted">
+            
+            <section class="has-background-white">
+                <div class="container priceboxes  singup-bottom-padding" style="margin-top: -110px;">
+                    <div class="pricing-table is-comparative columns">
+                        <div class="column pricing-plan good">
+                            <div class="has-text-centered">
+                                <h2 class="is-card-title">GOOD</h2>
+                                <h3 class="is-card-subtitle">Use typical home sizes in your area to compare electric plans</h3>
+                            </div>
+                            <div class="is-divider-wrapper">
+                                <div class="is-divider"></div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    <ul class="check">
+                                        <li>Basic estimate… View all-in cost for the home size selected</li>
+                                        <li>Compare plans side by side on TrueCost</li>
+                                        <li>Access shopping features (express enrollment, save your progress, switch reminders)</li>
+                                        <li>All free for you to use!</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="plan-footer">
+                                <a class="button is-rounded is-info is-outlined animate-gradient-bg" href="{!$Page.Get_Started_Good}">SELECT HOME PROFILE</a>
+                            </div>
+                        </div>
+                        <div v-if="isBest == true" class="column pricing-plan best" v-bind:class="{'is-active': isBest }">
+                            <div class="tab has-background-info"  >
+                                <div class="has-text-centered has-text-white has-text-weight-semibold">
+                                    <p class="is-size-7">RECOMMENDED</p>
+                                </div>
+                            </div>
+                            <div class="has-text-centered">
+                                <h2 class="is-card-title">BEST</h2>
+                                <h3 class="is-card-subtitle">Unlock the power of TrueCost - Compare plans based on your past electric usage (NOTE: Available to you once you’ve established a usage history at your new address)</h3>
+                            </div>
+                            <div class="is-divider-wrapper">
+                                <div class="is-divider"></div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    <ul class="check">
+                                        <li>Get the most accurate estimate… View all-in cost based on your past electric usage</li>
+                                        <li>Compare plans side by side on TrueCost</li>
+                                        <li>Access shopping features (express enrollment, save your progress, switch reminders)</li>
+                                        <li>Access your electric usage history</li>
+                                        <li>Subscribe to weekly usage emails </li>
+                                        <li>All free for you to use!</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="plan-footer">
+                                <div v-if="isBest"><a  class="button is-rounded animate-gradient-bg is-primary" href="{!$Page.Get_Started_Best}">ENTER MY SMART METER</a></div>
+                                <div v-if="!isBest"><a  class="button is-rounded animate-gradient-bg">Currently Unavailable</a></div>
+                            </div>
+                        </div>
+                        <div class="column pricing-plan better" v-bind:class="{'is-active': !isBest }">
+                            <div class="tab has-background-info" v-if="!isBest" >
+                                <div class="has-text-centered has-text-white has-text-weight-semibold">
+                                    <p class="is-size-7">RECOMMENDED</p>
+                                </div>
+                            </div>
+                            <div class="has-text-centered" >
+                                <h2 class="is-card-title">BETTER</h2>
+                                <h3 class="is-card-subtitle">Answer five easy questions to estimate your electric usage and compare plans</h3>
+                            </div>
+                            <div class="is-divider-wrapper">
+                                <div class="is-divider"></div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    <ul class="check">
+                                        <li>Improve your estimate… View all-in cost for homes like yours</li>
+                                        <li>Compare plans side by side on TrueCost</li>
+                                        <li>Access shopping features (express enrollment, save your progress, switch reminders)</li>
+                                        <li>All free for you to use!</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="plan-footer">
+                                <a class="button is-rounded is-info is-outlined animate-gradient-bg" href="{!$Page.Get_Started_Better}" >CUSTOMIZE MY HOME PROFILE</a>
+                            </div>
+                        </div>
+                        <div v-if="isBest == false" class="column pricing-plan best has-background-white-ter ">
+                            <div class="has-text-centered" >
+                                <h2 class="is-card-title">BEST</h2>
+                                <h3 class="is-card-subtitle">Unlock the power of TrueCost - Compare plans based on your past electric usage (NOTE: Available to you once you’ve established a usage history at your new address)</h3>
+                            </div>
+                            <div class="is-divider-wrapper">
+                                <div class="is-divider"></div>
+                            </div>
+                            <div class="columns">
+                                <div class="column has-background-white-ter ">
+                                    <ul class="check">
+                                        <li>Get the most accurate estimate… View all-in cost based on your past electric usage</li>
+                                        <li>Compare plans side by side on TrueCost</li>
+                                        <li>Access shopping features (express enrollment, save your progress, switch reminders)</li>
+                                        <li>Access your electric usage history</li>
+                                        <li>Subscribe to weekly usage emails </li>
+                                        <li>All free for you to use!</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="plan-footer">
+                                <div v-if="isBest == 'false'"><a  class="button is-rounded animate-gradient-bg" href="{!$Page.Get_Started_Best}">GIVE ME THE BEST DEALS</a></div>
+                                <div v-if="!isBest"><a  class="button is-rounded ">Currently Unavailable</a></div>
+                                <div v-if="!isBest"><p>(NOTE: Available to you once you’ve established a usage history at your new address)</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <p class="has-text-centered">This reflects plans offered through the TrueCost site by our electric company partners</p>
+
+            </section>
+
+        </div>
+    </div>
+    <c:tc2_footer />
+    
+    <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+             
+             TC.app.appGetStarted = new Vue({
+                el: '#appGetStarted',
+                data: {
+                    errors: [],
+                    tdsp: '',
+                    serviceType: '',
+                    isGood: true,
+                    isBetter: true,
+                    isBest: true
+                },
+                methods: { 
+                    onSelectConfirm: function() {
+                    },
+                    validateBeforeSubmit: function(e) {
+                      
+                      if (!this.email) {
+                        this.errors.push('Email required.');
+                      }
+                      
+                      if(this.errors.length <= 0){
+                          this.onSelectConfirm();
+                      }
+                
+                      e.preventDefault();
+                    }
+                },  
+                mounted: function() { 
+                    sessionStorage.setItem('pathStart','get-started');
+                    this.tdsp = TC.app.account.tdsp;
+                    this.serviceType = TC.app.account.serviceType;
+                    if(this.serviceType == "moveIn" || this.tdsp == 'false') {
+                        this.isBest = false;
+                    }
+                },
+                watch: {},
+             });
+    
+          })
+        })(jQuery);
+    </script>
+
+  </body>
+  </html>
+</apex:page>

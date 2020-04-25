@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Required_Volume_Method__c</fullName>
+    <externalId>false</externalId>
+    <label>Required Volume Method</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Weather Normalized</fullName>
+                <default>false</default>
+                <label>Weather Normalized</label>
+            </value>
+            <value>
+                <fullName>Historical Average</fullName>
+                <default>false</default>
+                <label>Historical Average</label>
+            </value>
+            <value>
+                <fullName>Last 12 Months Actuals</fullName>
+                <default>false</default>
+                <label>Last 12 Months Actuals</label>
+            </value>
+            <value>
+                <fullName>Load Curve</fullName>
+                <default>false</default>
+                <label>Load Curve</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

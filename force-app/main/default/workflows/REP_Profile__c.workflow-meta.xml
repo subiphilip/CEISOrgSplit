@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>REP_Name_Change</fullName>
+        <description>REP Name Change</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>sphilip@cies.com.cnp2</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Internal_Messages/REP_Name_Change_INTERNAL</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Update_AEPC_last_updated_date</fullName>
+        <field>AEPC_Variable_Rate_Last_Updated__c</field>
+        <formula>today()</formula>
+        <name>Update AEPC last updated date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_AEPN_last_updated_date</fullName>
+        <field>AEPN_Variable_Rate_Last_Updated__c</field>
+        <formula>TODAY()</formula>
+        <name>Update AEPN last updated date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_CEHE_last_updated_date</fullName>
+        <field>CEHE_Variable_Rate_Last_Updated__c</field>
+        <formula>TODAY()</formula>
+        <name>Update CEHE last updated date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Oncor_last_updated_date</fullName>
+        <field>Oncor_Variable_Rate_Last_Updated__c</field>
+        <formula>today()</formula>
+        <name>Update Oncor last updated date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_TNMP_last_updated_date</fullName>
+        <field>TNMP_Variable_Rate_Last_Updated__c</field>
+        <formula>today()</formula>
+        <name>Update TNMP last updated date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>Current AEPC Variable Rate Updated</fullName>
+        <actions>
+            <name>Update_AEPC_last_updated_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>sets the last updated date.</description>
+        <formula>ISCHANGED( Current_AEPC_Variable_Rate_cents__c  )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Current AEPN Variable Rate Updated</fullName>
+        <actions>
+            <name>Update_AEPN_last_updated_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>sets the last updated date.</description>
+        <formula>ISCHANGED( Current_AEPN_Variable_Rate_cents__c  )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Current CEHE Variable Rate Updated</fullName>
+        <actions>
+            <name>Update_CEHE_last_updated_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>sets the last updated date.</description>
+        <formula>ISCHANGED(Curent_CEHE__c )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Current Oncor Variable Rate Updated</fullName>
+        <actions>
+            <name>Update_Oncor_last_updated_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>sets the last updated date.</description>
+        <formula>ISCHANGED( Current_Oncor_Variable_Rate_cents__c  )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Current TNMP Variable Rate Updated</fullName>
+        <actions>
+            <name>Update_TNMP_last_updated_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>sets the last updated date.</description>
+        <formula>ISCHANGED( Current_TNMP_Variable_Rate_cents__c  )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>REP Profile name change</fullName>
+        <actions>
+            <name>REP_Name_Change</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(ISCHANGED(Name),  Active__c = TRUE, Name  &lt;&gt; &quot;CenterPoint Energy Services&quot; )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

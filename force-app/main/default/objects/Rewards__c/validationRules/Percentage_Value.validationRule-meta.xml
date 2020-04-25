@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Percentage_Value</fullName>
+    <active>true</active>
+    <description>If Cash Back (% of bill) is selected as reward type, a % Value is required.</description>
+    <errorConditionFormula>AND( ISPICKVAL(Reward_Type__c , &quot;Cash Back (% of bill)&quot;), OR( ISNULL( Percentage_Value__c ) , Percentage_Value__c = 0))</errorConditionFormula>
+    <errorDisplayField>Percentage_Value__c</errorDisplayField>
+    <errorMessage>Reward01: If reward is Cash Back (% of Bill), a % Value must be entered.</errorMessage>
+</ValidationRule>

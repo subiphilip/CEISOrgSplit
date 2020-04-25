@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Under_Index_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+ISBLANK(Under_Index_Name__c), 
+OR( 
+NOT(ISBLANK( Under_Adder__c )), 
+NOT(ISBLANK(Margin_on_Under__c)) 
+) 
+)</errorConditionFormula>
+    <errorDisplayField>Under_Index_Name__c</errorDisplayField>
+    <errorMessage>CESC31: Under Index is required if Adder of Margin are populated</errorMessage>
+</ValidationRule>

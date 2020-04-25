@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Utility_Properties</fullName>
+    <columns>NAME</columns>
+    <columns>Property_Type__c</columns>
+    <columns>Data_Type__c</columns>
+    <columns>Safari_Data_Type__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Safari_Type__c</field>
+        <operation>equals</operation>
+        <value>Utility Property</value>
+    </filters>
+    <label>Utility Properties</label>
+    <language>en_US</language>
+</ListView>

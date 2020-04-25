@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Plan__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Which plan is being estimated</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Which plan is being estimated</inlineHelpText>
+    <label>Plan</label>
+    <referenceTo>Plan__c</referenceTo>
+    <relationshipLabel>Plan Estimates</relationshipLabel>
+    <relationshipName>Plan_Estimates</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Install_Date__c</fullName>
+    <description>date project will be installed on production (i.e. safari IT)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>date project will be installed on production (i.e. safari IT)</inlineHelpText>
+    <label>IT Install Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

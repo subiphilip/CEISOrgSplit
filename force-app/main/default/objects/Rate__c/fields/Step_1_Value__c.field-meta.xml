@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Step_1_Value__c</fullName>
+    <description>Rate per therm for the first tranche of usage</description>
+    <externalId>false</externalId>
+    <formula>CASE(text( Plan__r.Rate_Type__c ), 
+&quot;SmartCap&quot;, min(Index_reference__r.Current_Value__c/10 + Index_Adder__c, Fixed_Rate__c ), 
+&quot;Index&quot;, Index_reference__r.Current_Value__c/10 + Index_Adder__c, 
+&quot;IndexNoSpread&quot;, Index_reference__r.Current_Value__c/10 + Index_Adder__c, 
+&quot;SmartBlended&quot;, if(AND(month(today())&gt;5, month(today())&lt;11), Index_Adder__c+Index_reference__r.Current_Value__c/10, Fixed_Rate__c), 
+&quot;SmartFixed&quot;, Fixed_Rate__c, 
+&quot;Fixed&quot;, Fixed_Rate__c, 
+&quot;Blended&quot;, Fixed_Rate__c, null 
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Rate per therm for the first tranche of usage</inlineHelpText>
+    <label>Step 1 Value</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

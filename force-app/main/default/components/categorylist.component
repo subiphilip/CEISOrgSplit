@@ -1,0 +1,18 @@
+<apex:component controller="SupportLinks">
+    <apex:attribute name="RecordType" description="Pulls all the FAQs for the named RecordType" required="false" default="TrueCost FAQ" type="string"  assignTo="{!FAQRecordType}"/>
+
+    <h3>View by Category</h3>
+    
+    <ul class="unstyled">
+        <li><a href="{!$CurrentPage.Name}">Most Common</a></li>
+    
+		<apex:repeat var="faqs" value="{!UniqueCategoriesList}">
+            <li>
+                <a href="{!$CurrentPage.Name}?cat={!faqs}">
+                    {!faqs}
+                </a>
+            </li>
+		</apex:repeat>
+    </ul>
+	
+</apex:component>

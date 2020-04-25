@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Energy_rate_less_than_1_cent</fullName>
+    <active>true</active>
+    <description>If a REP enters a base rate &lt; 1 cent, it is safe to assume that they have mistaken the field format for $ as opposed to cents (number format).</description>
+    <errorConditionFormula>AND(
+OR(Energy_Base_Rate_cents__c &lt;1.00, X500_kWh_rate_cents__c &lt;1.00, X1000_kWh_rate__c&lt;1.00, X2000_kWh_rate_cents__c &lt;1.00),
+Record_Type_Name__c != &quot;Gas Choice Plan&quot;)</errorConditionFormula>
+    <errorMessage>Rate03: All rates should be entered in cents.  For example, a 5 and a half cent rate should be entered as 5.5.  This includes Energy Base Rate, and 500/1000/2000 kWh Rates.</errorMessage>
+</ValidationRule>

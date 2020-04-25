@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Physical_Premium_to_Index_Constant__c</fullName>
+    <defaultValue>0</defaultValue>
+    <description>What physical premium is added to the financial basis for a basis only or citygate deal?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What physical premium ($/Dth) is added to the financial basis for a basis only or citygate deal? If the number changes, use the Strip lookup field instead of this single number</inlineHelpText>
+    <label>Physical Premium to Index (Constant)</label>
+    <precision>7</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

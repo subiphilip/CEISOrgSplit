@@ -1,0 +1,9 @@
+<apex:component >
+    <apex:attribute name="REP" type="string" required="true" description="Name of Rep"   />
+    <apex:attribute name="Plan" type="string" required="true" description="Name of Plan"   />
+    
+    <a href="https://www.facebook.com/dialog/feed?app_id={!$Setup.TrueCostSystemVariables__c.Facebook_App_ID__c}&link={!urlencode('http://www.mytruecost.com/shopplans')}&picture={!urlencode('http://www.mytruecost.com/resource/CNP_logo')}&name={!urlencode($Label.Facebook_Headline)}&caption={!urlencode($Label.Facebook_Subhead)}&description={!urlencode('I just signed up for '& Plan &' from '& REP &' using myTrueCost.com')}
+    &redirect_uri={!urlencode('http://www.mytruecost.com')}" target="_blank">
+        <apex:componentBody />
+    </a>
+</apex:component>

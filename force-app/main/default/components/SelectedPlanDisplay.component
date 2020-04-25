@@ -1,0 +1,139 @@
+<apex:component >
+
+	<apex:attribute name="Rate" description="Which plan do you want the component to render?" type="Rate__c" required="true" />
+	<apex:attribute name="kWhPrice" description="Estimated Annual Cost per kWh" type="string" required="true" />
+	<apex:attribute name="AnnualPrice" description="Estimated Annual Cost" type="string" required="true" />
+	<apex:attribute name="HideAdvertised" description="Prevents the advertised rate from showing" type="boolean" required="false" default="false"/>	
+	<apex:attribute name="ShowContact" description="Prevents the advertised rate from showing" type="boolean" required="false" default="false"/>	
+    
+	<apex:outputpanel styleClass="sidebar-selected-plan" layout="block">
+		<!-- <div><apex:outputText value="Plan Name: {!Rate.plan__r.name}"></apex:outputText></div>
+		<div><apex:outputText value="Price for an average customer*:"></apex:outputText></div>
+		<div><apex:outputText value="{!Rate.X1000_kWh_rate__c} cents per kilowatt-hour"></apex:outputText></div>
+	
+		<div><apex:outputText value="Contract Length: {!Rate.plan__r.Contract_Length__c} months"></apex:outputText></div>
+		<div><apex:outputText value="Green Energy: {!Rate.plan__r.Renewable_Content__c}%"></apex:outputText></div>
+		
+		<apex:image styleClass="REPlogo" height="75" width="150" url="{!Rate.plan__r.REP_profile__r.Logo_URL__c}" />
+		-->
+		
+		<div class="shopping-result">
+			<div class="plan-name" style="height: auto;">
+       			<!-- IF PLAN NAME IS GREATER 38 CHAR TRIM AND ADD ' ...' -->					                		
+			    <apex:outputText value="{!IF((LEN(Rate.plan__r.name)>38), LEFT(Rate.plan__r.name,34)&' ...', Rate.plan__r.name)}" />
+			</div>
+			
+			<!-- INSERT RETAILER LOGO -->						                	
+			<apex:image height="60" width="120" styleClass="REPlogo" url="{!Rate.plan__r.REP_profile__r.Logo_URL__c}" title="{!Rate.plan__r.REP_profile__r.Name}" alt="{!Rate.plan__r.REP_profile__r.Name}" rendered="{!Rate.plan__r.REP_profile__r.Logo_URL__c!=null}"  />
+			
+			<!-- IF NO LOGO, INSERT RETAILER NAME -->
+			<apex:outputpanel layout="block" styleClass="REPlogo REPname" rendered="{!Rate.plan__r.REP_profile__r.Logo_URL__c==''}">
+			    <apex:outputText value="{!Rate.plan__r.REP_profile__r.Name}" />
+			</apex:outputpanel>
+			
+			<!-- SHOW RETAILER RATING -->
+			<c:Star_Rating_static starRating="{!Rate.plan__r.REP_profile__r.Star_Rating_Avg__c}"
+										reviewCount="{!Rate.plan__r.REP_profile__r.total_reviews__c}"
+										REPid="{!Rate.plan__r.REP_profile__r.ID}" />				
+			  			                 
+			<!-- SHOW ADVERTISED PRICE PER kWh -->
+			<apex:outputpanel styleClass="tile-row" layout="block" style="margin-top: 4px;" rendered="{!not(HideAdvertised)}">
+				<span class="price-type"><apex:outputText value="Advertised Price"></apex:outputText></span><br />
+				<apex:outputtext value="{!Rate.X1000_kWh_rate__c}"/><span class="smaller dollar">&cent;</span> / kWh 
+				<a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Advertised_kWh_explanation}" >
+                    <apex:image value="{!$Resource.QuestionMark}" styleClass="question-mark" height="12px" width="12px"/>
+                </a>
+            </apex:outputpanel>
+			
+			<div class="tc-price-block">
+				<!-- SHOW PRICES BY MONTH, YEAR, & kWh (if enabled) -->						                	
+				<!-- SHOW PRICE PER MONTH -->			                		
+                <div class="tile-row plan-price">
+                    <apex:outputpanel styleClass="price-type" rendered="{!not(HideAdvertised)}">
+                        <apex:outputText value="TrueCost Calculation"></apex:outputText><br />
+                    </apex:outputpanel>
+                    
+                    <span class="smaller dollar">$</span>
+                    <apex:outputtext value="{0, number, ###,###,###,##0.00}">
+                        <apex:param value="{!value(AnnualPrice)/12}"/>
+                    </apex:outputtext> <span class="smaller">/ month</span>
+                    <a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Monthly_Cost_Explanation}"  >
+                        
+                        <apex:image value="{!$Resource.QuestionMark}" styleClass="question-mark" height="12px" width="12px"/>
+                    </a>
+                </div>
+				
+				<!-- SHOW PRICE PER YEAR -->			                		
+				<div class="tile-row">
+				    $<apex:outputtext value="{!round(value(AnnualPrice), 0)}"/> / year
+					<a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Yearly_Cost_Explanation}"  >
+                    <apex:image value="{!$Resource.QuestionMark}" styleClass="question-mark"  height="12px" width="12px" rendered="{!(Rate.plan__r.Contract_Length__c < 12)}"/>
+                    </a>
+                </div>
+				
+				<!-- SHOW PRICE PER kWh -->
+				<apex:outputpanel styleClass="tile-row" layout="block">
+					<apex:outputtext value="{!round(value(kWhPrice), 1)}"/><span class="smaller dollar">&cent;</span> / kWh 
+					<a href="" rel="tooltip" data-toggle="tooltip" title="{!$Label.Cents_per_kWh_explanation}"  >
+                    <apex:image value="{!$Resource.QuestionMark}" styleClass="question-mark"  height="12px" width="12px"/>
+                    </a>
+                </apex:outputpanel>
+			</div>
+			 
+			<!-- SHOW CONTRACT LENGTH -->			                		
+			<div class="tile-row" style="{!IF(not(HideAdvertised),'border-top: 1px dotted #fff;','')}">
+			    <apex:outputField value="{!Rate.plan__r.Contract_Length__c}"/> Months
+			</div>
+			
+			<!-- SHOW RENEWABLE -->			                		
+			<div class="tile-row">
+			    <apex:outputField value="{!Rate.plan__r.Renewable_Content__c}"/> Green
+			</div>
+			
+			<!-- SHOW FEES 		                		
+			<div class="tile-row">
+			    <apex:outputField value="{!Rate.Cancellation_Fee__c}"/> Cancellation
+			</div>  -->	
+			
+			<!-- SHOW REWARDS -->			                		
+			<div class="tile-row" style="border-top: 0px;">
+				<!-- INDICATE NO REWARDS OFFERER ON THIS PLAN -->
+				<apex:outputText value="No rewards offered" rendered="false" styleClass="none"/>
+			</div>               
+       	</div>	
+	
+		<!-- SHOW ALL THE COMPANY DETAILS IF THE ADVERTISED PRICE IS SHOWN, INDICATING THIS IS AN ENROLLMENT PAGE -->
+		<apex:outputpanel styleClass="manage-tiles" layout="block" rendered="{!ShowContact}">
+			<!-- div style="font-size: 10px; font-weight: bold;"><apex:outputText value="Legal Name"></apex:outputText></div -->
+			<div class="company-details"><apex:outputText value="{!Rate.plan__r.REP_profile__r.Legal_Name__c}"></apex:outputText></div>
+			
+			<!--div style="font-size: 10px; font-weight: bold;"><apex:outputText value="PUCT License"></apex:outputText></div -->
+			<div class="company-details"><apex:outputText value="PUCT License #{!Rate.plan__r.REP_profile__r.PUCT_License_Number__c}"></apex:outputText></div>
+			
+			<!--div style="font-size: 10px; font-weight: bold;"><apex:outputText value="Contact Information"></apex:outputText></div -->
+			<div class="company-details wrap-long">
+				<apex:outputLink value="http://{!Rate.plan__r.REP_profile__r.Home_Page__c}" target="_blank">{!Rate.plan__r.REP_profile__r.Home_Page__c}</apex:outputLink>
+			</div>
+			<div class="company-details wrap-long">
+				<apex:outputLink value="mailto: {!Rate.plan__r.REP_profile__r.Customer_Service_Email__c}" target="_blank">{!Rate.plan__r.REP_profile__r.Customer_Service_Email__c}</apex:outputLink>
+			</div>
+			<div class="company-details">
+				<apex:outputText value="Phone: {!Rate.plan__r.REP_profile__r.Customer_Service_Phone_Number__c}"></apex:outputText>
+			</div>
+			<div class="company-details">
+				<apex:outputText value="Fax: {!Rate.plan__r.REP_profile__r.Fax_Number__c}"></apex:outputText>
+			</div>
+				
+			<!--div style="font-size: 10px; font-weight: bold;"><apex:outputText value="Mailing Address"></apex:outputText></div -->
+			<div class="company-details">			
+				<apex:outputText value="{!Rate.plan__r.REP_profile__r.Mailing_Street_Address__c}" /><br />
+				<apex:outputText value="{!Rate.plan__r.REP_profile__r.Mailing_City__c}, 
+		   								{!Rate.plan__r.REP_profile__r.Mailing_State__c}
+		    							{!Rate.plan__r.REP_profile__r.Mailing_Zip__c}" />
+		    </div>		
+		</apex:outputpanel>	
+		
+			
+	</apex:outputpanel>
+	
+</apex:component>

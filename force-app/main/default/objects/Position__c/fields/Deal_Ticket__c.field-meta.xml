@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deal_Ticket__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Which deal ticket the closed position is associated with</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Which deal ticket the closed position is associated with</inlineHelpText>
+    <label>Deal Ticket</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>It has to be a deal ticket, not a REP invoice.</errorMessage>
+        <filterItems>
+            <field>Billing_Documents__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Deal Ticket</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Billing_Documents__c</referenceTo>
+    <relationshipLabel>Positions</relationshipLabel>
+    <relationshipName>Positions</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

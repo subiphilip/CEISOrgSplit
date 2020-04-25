@@ -1,0 +1,76 @@
+<apex:page applyBodyTag="false" docType="html-5.0" standardStylesheets="false" showHeader="false" sidebar="false" Controller="ControllerForAnonymousRating">
+    
+    <apex:composition template="Template_TC">
+        <apex:Define name="body">
+            <div class="container"> 
+                <h3>
+                    Tell us about your experience with your Electric Provider<br/>
+                    <small>Then, you'll upload a copy of an electric bill to verify the provider</small>
+                </h3>
+                
+                <apex:detail subject="{!newrating.name}"></apex:detail>  
+                
+                <div>
+                    <apex:form enctype="multipart/form-data">				
+                        <apex:panelgrid columns="2" cellspacing="15px"> 
+                            <apex:outputtext value="Rating" styleClass="question"/> 
+                            <apex:outputpanel id="starholder" style="height:60px;">
+                                <div class="rate" id="stars">
+                                    <apex:outputpanel id="starsb">
+                                        <b style="width: {!(newrating.rating__c/5)*100}%"></b> 
+                                    </apex:outputpanel>
+                                    <apex:commandlink action="{!its5}" title="Great" rerender="starsb">
+                                        Rate 1/5			      		
+                                    </apex:commandlink>
+                                    <apex:commandlink action="{!its4}"  title="Good" rerender="starsb">
+                                        Rate 2/5
+                                    </apex:commandlink> 
+                                    <apex:commandlink action="{!its3}" title="OK" rerender="starsb">
+                                        Rate 3/5
+                                    </apex:commandlink>
+                                    <apex:commandlink action="{!its2}" title="Poor" rerender="starsb">
+                                        Rate 4/5
+                                    </apex:commandlink>
+                                    <apex:commandlink action="{!its1}" title="Very bad" rerender="starsb">
+                                        Rate 5/5
+                                    </apex:commandlink>
+                                </div> 
+                            </apex:outputpanel>
+                            <apex:outputtext value="Review" styleClass="question"/>
+                            <apex:inputfield value="{!newrating.Review__c}" style="width:550px;"></apex:inputfield>	
+                            <apex:outputtext value="Provider" styleClass="question"/>
+                            <apex:inputfield value="{!newrating.REP_without_Order__c}"></apex:inputfield> 
+                            
+                        </apex:panelgrid>
+                        
+                        <apex:outputpanel layout="none" id="panel">
+                            <apex:outputlink styleClass="btn btn-default"  rendered="{!ShowSubmit}" value="{!$Page.myaccount}">Cancel</apex:outputlink>
+                            <apex:commandlink styleClass="btn btn-primary" value="Submit" rendered="{!ShowSubmit}" action="{!saverating}" rerender="uploadArea,panel"/>
+                        </apex:outputpanel>
+                        
+                        <div class="clearfix"/><br/><br/>
+                        
+                        <apex:outputpanel styleClass="well well-large" layout="block" id="uploadArea">
+                            
+                            <apex:outputpanel layout="none" rendered="{!ShowAttachment}">
+                                <h3>Upload your electric bill<br/><small>TrueCost only allows reviews of electric companies from confirmed customers</small></h3>
+                            </apex:outputpanel>
+                            
+                            <apex:pageBlock rendered="{!ShowAttachment}">  
+                                <apex:pagemessages id="error"></apex:pagemessages>
+                                <apex:inputFile style="width:100%" id="fileToUpload" value="{!fileBody}" filename="{!fileName}" />  	         		                                
+                            </apex:pageBlock>
+                            
+                            <apex:outputpanel styleClass="button-container" layout="block" style="margin-top:20px;" rendered="{!ShowAttachment}">
+                                <apex:outputlink styleClass="btn btn-default"  value="{!$Page.myaccount}">Cancel</apex:outputlink>
+                                <apex:commandlink styleClass="btn btn-primary" value="Upload" action="{!UploadFile}"/> 
+                            </apex:outputpanel>
+                            
+                        </apex:outputpanel>
+                    </apex:form>
+                </div>
+            </div>           
+            
+        </apex:Define>
+    </apex:composition>		 
+</apex:page>

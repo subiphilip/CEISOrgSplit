@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_and_Utility_required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( RecordTypeId == $Setup.CnISystemVariables__c.PremiseGasRecType__c ,
+OR(ISBLANK( Account__c ), ISBLANK( TDSP_Lookup__c ))
+)</errorConditionFormula>
+    <errorMessage>Premise22: Account and Utility are required to save</errorMessage>
+</ValidationRule>

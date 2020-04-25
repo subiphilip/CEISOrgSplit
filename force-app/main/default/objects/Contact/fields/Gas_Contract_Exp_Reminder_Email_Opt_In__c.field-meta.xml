@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Contract_Exp_Reminder_Email_Opt_In__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check this box if account wishes to receive gas contract expiration reminders.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check this box if account wishes to receive gas contract expiration reminders.</inlineHelpText>
+    <label>Gas Contract Exp Reminder Email - Opt In</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

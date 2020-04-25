@@ -1,0 +1,36 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "TrueCostSystemVariables__c",
+                "referenceId": "TrueCostSystemVariables__cRef1"
+            },
+            "Analytics_Group_ID__c": "0F930000000Cxe3",
+            "bounceAPI__c": true,
+            "bounce__c": "https://www.bounceenergy.com/api-ng/place-order.php",
+            "CertName__c": "truecostPrd2015",
+            "Chat_is_Available__c": true,
+            "CMEUser__c": "93DABD50347A4DBB88AF2FBAFE1E33A1&",
+            "Default_Plans_to_Show__c": 12,
+            "Facebook_App_ID__c": "196068693790323",
+            "Facebook_Moderator_ID__c": "744599657",
+            "Main_URL__c": "http://www.mytruecost.com",
+            "Name": "a0A3000000Kf9fx",
+            "Private_Beta__c": false,
+            "RegisterURL__c": "https://fullsbx-centerpointenergy.cs43.force.com/RegisterSec",
+            "REST_URL__c": "https://na1.salesforce.com/services/apexrest/",
+            "Sales_Phone_in_Header__c": true,
+            "Show_About_TrueCost_in_private_beta__c": false,
+            "Show_Blog_in_Private_Beta__c": true,
+            "Show_cents_per_kWh__c": true,
+            "Show_Facebook_Comments__c": true,
+            "Show_Index_in_Private_Beta__c": true,
+            "Show_invitation_code_are__c": true,
+            "Show_only_Published_content__c": true,
+            "Show_Small_Business__c": false,
+            "sslurl__c": "https://fullsbx-centerpointenergy.cs43.force.com/",
+            "TriEagleAPI__c": true,
+            "UHITCallback__c": "https://centerpointenergy.cloudhub.io/uhit/HistoricalUsage"
+        }
+    ]
+}

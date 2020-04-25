@@ -1,0 +1,68 @@
+[
+  {
+    "bpId": null,
+    "debtOwed": null,
+    "currentBalance": null,
+    "darStatus": false,
+    "dnpStatus": false,
+    "dnpDate": null,
+    "returnCheckHistory": false,
+    "firstName": null,
+    "lastName": null,
+    "email": null,
+    "ssn": null,
+    "guid": null,
+    "idNumber": null,
+    "idNumberState": null,
+    "phoneNumbers": [
+      {
+        "number": null,
+        "type": null,
+        "sms": null,
+        "primary": null
+      }
+    ],
+    "billing": {
+      "houseNumber": null,
+      "street": null,
+      "aptNumber": null,
+      "city": null,
+      "region": null,
+      "postalCode": null,
+      "zipPlus": null
+    },
+    "contracts": [
+      {
+        "serviceOrderId": null,
+        "contractId": null,
+        "accountId": null,
+        "premiseId": null,
+        "installationId": null,
+        "utilityContractId": null,
+        "forceOut": false,
+        "forceDate": null,
+        "premise": {
+          "houseNumber": null,
+          "street": null,
+          "aptNumber": null,
+          "city": null,
+          "region": null,
+          "postalCode": null,
+          "zipPlus": null,
+          "dunningProc": null,
+          "companyCode": null,
+          "n1": false,
+          "depositReq": false,
+          "premiseType": "R",
+          "depositAmount":null
+        },
+        "hasDebt": false,
+        "darStatus": false,
+        "moveInDate": null,
+        "moveInStatus": null,
+        "moveOutStatus": null,
+        "serviceOrderStatus": null,
+      }
+    ]
+  }
+]

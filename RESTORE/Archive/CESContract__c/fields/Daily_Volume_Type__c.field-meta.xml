@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Daily_Volume_Type__c</fullName>
+    <description>Daily Volume Entry Type only.  Select Variable when the volume for each day of the month will not be the same.  Otherwise, select Stable.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Daily Volume Entry Type only.  Select Variable when the volume for each day of the month will not be the same.  Otherwise, select Stable.</inlineHelpText>
+    <label>Daily Volume Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Volume_Entry_Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Stable</fullName>
+                <default>false</default>
+                <label>Stable</label>
+            </value>
+            <value>
+                <fullName>Variable</fullName>
+                <default>false</default>
+                <label>Variable</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Daily</controllingFieldValue>
+            <valueName>Stable</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Daily</controllingFieldValue>
+            <valueName>Variable</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

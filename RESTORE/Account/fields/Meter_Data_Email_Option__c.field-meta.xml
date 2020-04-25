@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Meter_Data_Email_Option__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND( Meter_Data_Email_Daily__c = TRUE , Meter_Data_Email_Weekly__c = TRUE), &quot;Both&quot;,
+IF( Meter_Data_Email_Daily__c = TRUE, &quot;Daily&quot;,
+ IF(  Meter_Data_Email_Weekly__c = TRUE, &quot;Weekly&quot;,
+ IF( OR(Meter_Data_Email_None__c = TRUE, AND(Meter_Data_Email_Daily__c = FALSE, Meter_Data_Email_Weekly__c = FALSE, Meter_Data_Email_None__c = FALSE))  , &quot;None&quot; ,
+&quot;None&quot;
+))))</formula>
+    <label>Meter Data Email Option</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

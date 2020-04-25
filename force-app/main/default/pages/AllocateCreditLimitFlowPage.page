@@ -1,0 +1,6 @@
+<apex:page standardController="Account" tabStyle="Account" sidebar="false" showHeader="false" >
+    <flow:interview name="AllocateCreditAccount" finishLocation="/{!Account.Id}">
+        <apex:param name="varAccountName" value="{!Account.Name}"/>
+        <apex:param name="varAcctID" value="{!Account.Id}"/>
+    </flow:interview>
+</apex:page>

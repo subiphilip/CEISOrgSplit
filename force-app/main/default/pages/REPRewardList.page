@@ -1,0 +1,37 @@
+<apex:page StandardController="Rate__c" extensions="RewardList">
+    <apex:form >
+    
+        
+            <apex:datatable value="{!Rewards}" var="r" width="100%">
+                <apex:column HeaderValue="Reward Name" >
+                    <apex:outputfield value="{!r.name}"></apex:outputfield>
+                </apex:column>
+                <apex:column HeaderValue="Reward Type" >
+                    {!r.Reward_Type__c}
+                </apex:column>
+                <apex:column HeaderValue="Start" >
+                    <apex:outputfield value="{!r.Reward_Start_Date__c}"></apex:outputfield>
+                </apex:column>
+                <apex:column HeaderValue="End" > 
+                    
+                    <apex:outputfield value="{!r.Reward_End_Date__c}"></apex:outputfield>
+                </apex:column>
+                <apex:column HeaderValue="Value ($)">
+                    {!r.Reward_Value__c}
+                </apex:column>              
+                <apex:column HeaderValue="Click to Add Reward">
+                    <apex:commandlink action="{!AddReward}" value="Add">
+                        <apex:param name="SelectedReward" value="{!r.id}" assignTo="{!SelectedReward}"/>  
+                    </apex:commandlink>
+                </apex:column>
+            </apex:datatable>
+            
+    </apex:form>
+    
+    <apex:outputPanel rendered="{!refreshPage}"> <!-- ugly hack to make the parent page that contains this page refresh -->
+       <script>
+           window.top.location=window.top.location.pathname;
+          //window.top.location='/{!Rate__c.id}';
+       </script>
+    </apex:outputPanel>
+</apex:page>

@@ -1,0 +1,133 @@
+<apex:page showHeader="false" sidebar="false" Controller="SupportLinks" cache="true" expires="43200" applyBodyTag="false" docType="html-5.0" standardStylesheets="false">
+    
+   <html><!--<html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">-->
+      <c:tc2_header title="{!$Label.Page_Title_Fees}|{!$CurrentPage.Parameters.alpha} - {!$Label.Page_Title_Company_Name}"
+         description="" />
+      <style>
+        
+      </style>
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="Common Electric Fees" subHeadline="Understanding your electric bill" />
+    
+             <div id="" class="container"> 
+                <div class="has-margin-3">
+                  <div class="columns content box has-margin-3">
+
+                  <div class="">
+                    <div style="padding:20px;">
+                      <h3><b><c:Content_Viewer content="Fees Intro"/></b></h3>
+                      <hr></hr>
+
+                      <h5><b>Advanced Metering Charge (AMS)</b></h5>
+                      <p>A Transmission and Distribution Utility (TDU) surcharge assessed on your electric bill as a way to recover costs for Advanced Metering Systems, 
+                      sometimes referred to as smart meters. This amount is in addition to a standard metering charge, but it may be bundled in a single line with all other 
+                      TDU charges on your bill. If itemized separately, this surcharge may appear as "AMS," "Advanced Meter," or combined with the “Energy Efficiency Cost 
+                      Recovery Factor” (EEC).</p>
+                      <hr/>
+                      
+                      <h5><b>Base Charge</b></h5>
+                      <p>Also referred as the Minimum Usage Charge, Customer Charge, or Monthly Service Fee, the "Base Charge" is a fee assessed by your Retail Electric
+                      Provider (REP) when your monthly electricity usage falls short of a minimum kWh requirement.  Per-billing-cycle usage requirements are stated in 
+                      Electricity Facts Labels (EFLs) for all electric plans.</p><br></br>
+                      <p><b>Note:</b>  When labeled as the Monthly Service Fee, Customer Charge, or Base Charge, <u>this fee may be charged regardless of monthly usage.</u>  
+                      Also, do NOT confuse this with the Energy Charge on an EFL, which can often be called the "Base Energy Charge."</p>
+                      <hr/>
+                      
+                      <h5><b>Customer Charge</b></h5>
+                      <p>Also referred as the Minimum Usage Charge, Base Charge, or Monthly Service Fee, the "Customer Charge" is a fee assessed by your Retail Electric
+                      Provider (REP) when your monthly electricity usage falls short of a minimum kWh requirement.  Per-billing-cycle usage requirements are stated in 
+                      Electricity Facts Labels (EFLs) for all electric plans.</p><br></br>
+                      <p><b>Note:</b> When labeled as the Monthly Service Fee, Customer Charge, or Base Charge, <u>this fee may be charged regardless of 
+                      monthly usage.</u></p>
+                      <hr/>
+                      
+                      <h5><b>Early Termination Fee</b></h5>
+                      <p>A fee charged to a customer by a Retail Electric Provider (REP) if the contracted rate plan is terminated by the customer prior to its 
+                      ending date.</p>
+                      <hr/>
+                      
+                      <h5><b>Energy Charge</b></h5>
+                      <p>The portion of a monthly electric bill based on the total consumption of power used multiplied by the cost per kilowatt hour (kWh) during 
+                      a billing period.</p><br></br>
+                      <p>(May also be called: Energy Rate or Energy Price)</p>
+                      <hr/>
+                      
+                      <h5><b>Energy Efficiency Cost Recovery Factor</b></h5>
+                      <p>A surcharge assessed to recover costs associated with energy efficiency programs that have been approved by the Public Utility Commission of 
+                      Texas (PUCT). This amount is charged in addition to the standard TDU fee, but it may be bundled into a single line with all other Transmission 
+                      and Distribution Utility (TDU) charges on the bill. If itemized separately, this surcharge may show up as "EEC," "Energy Efficiency," or even 
+                      combined with the Advanced Metering System (AMS) charge.</p>
+                      <hr/>
+                      
+                      <h5><b>Insufficient Funds Fee</b></h5>
+                      <p>A banking term where demand for payment (a check) cannot be honored because there is not money available in the account on which the check 
+                      was drawn.</p>
+                      <hr/>
+                      
+                      <h5><b>Late Payment Penalty</b></h5>
+                      <p>A charge assessed for late payment of an electric bill in accordance with Public Utility Commission of Texas (PUCT) rules.</p>
+                      <hr/>
+                      
+                      <h5><b>Minimum Usage Charge</b></h5>
+                      <p>Also referred as the Monthly Service Fee, Customer Charge, or even Base Charge, the "Minimum Usage Charge" is a fee assessed by your Retail 
+                      Electric Provider (REP) when your monthly electricity usage falls short of a minimum kWh requirement.  Per-billing-cycle usage requirements are 
+                      stated in Electricity Facts Labels for all electric plans.</p><br></br>
+                      <p><b>Note:</b> When labeled as the Monthly Service Fee, Customer Charge, or Base Charge, <u>this fee may be charged regardless of monthly 
+                      usage.</u></p>
+                      <hr/>
+                      
+                      <h5><b>Miscellaneous Gross Receipts Tax (MGRT)</b></h5>
+                      <p>The Miscellaneous Gross Receipts Tax (MGRT) is a tax imposed on each Transmission and Distribution Utility (TDU) located in an incorporated 
+                      city or town having a population greater than 1,000, according to last federal census. This is also imposed on Retail Electric Providers (REPs) 
+                      making sales to customers located in an incorporated city or town with the same population standards.</p>
+                      <p>The tax is computed by applying the prescribed tax rate to the utility company's gross receipts from transmitting and delivering electricity in
+                      an incorporated city or town.  The tax is then applied to monthly electric bills.  See below for the various rates by population:</p>
+                      <p>For business conducted in cities of more than 1,000 but less than 2,500 population, the rate is 0.581 percent.</p>
+                      <p>In cities of 2,500 or more but less than 10,000, the rate is 1.07 percent.</p>
+                      <p>In cities of 10,000 or more, the rate is 1.997 percent <b>(Houston fits in this percentile).</b></p>
+                      <p><b>Please Note: On TrueCost, we assume 1.997% for bill estimations on the plan details pages.</b> For more information on the MGRT, please visit the 
+                      Texas state tax website.</p>
+                      <hr/>
+                      
+                      <h5><b>Pass-Through Charges</b></h5>
+                      <p>Charges billed by the Transmission and Distribution Utility (TDU) that are “passed through” to the bill you receive from your Residential 
+                      Electric Provider. Pass-through charges can be recurring (like monthly standard delivery charges) and non-recurring (for services like connecting,
+                      disconnecting or re-connecting electric service). Pass-through charges may be itemized separately. </p>
+                      <p>(See also: TDU Charges)</p>
+                      <hr/>
+                      
+                      <h5><b>Public Utility Commission Gross Receipts Assessment (PUCA)</b></h5>
+                      <p>A fee assessed to recover the statutory costs for administering the Public Utility Regulatory Act (PUCA).  The PUCA is currently set at .1667% 
+                      of a customer’s total bill for energy service for a given billing cycle (including all TDU/TDSP fees), before sales tax.</p>
+                      <hr/>
+                      
+                      <h5><b>TDU/TDSP Delivery Charges</b></h5>
+                      <p>Charges assessed by a Transmission and Distribution Utility (TDU) for the delivery of electricity to a customer over poles and wires and 
+                      through other TDU facilities. Though these charges are assessed to the Retail Electric Provider (REP) and not the consumer directly, REPs may 
+                      itemize these charges on consumers’ electric bills.</p>
+                      <p>These charges can also be called "Transmission and Distribution Surcharges."  For a complete listing of the current fees for 
+                      Houston/CenterPoint Energy that you might see itemized on your bill, click here.</p>
+                      <hr/>
+                      
+                      <h5><b>TDU/TDSP Discretionary Charges</b></h5>
+                      <p>Charges assessed by a Transmission and Distribution Utility (TDU) for special services rendered such as initial set‐up of service, disconnection of service, 
+                      meter re‐reads and meter tests. Though these charges are assessed to the Retail Electric Provider (REP) and not the consumer directly, REPs may itemize these 
+                      charges on consumers’ electric bills.</p>
+                      <hr/>
+            
+
+                    </div>
+                  </div>
+                      
+                </div>
+               </div>
+
+             </div>
+         </div>    
+         
+        <c:tc2_footer />
+      </body>
+   </html>
+</apex:page>

@@ -1,0 +1,112 @@
+<apex:page docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" id="template_tc" applyBodyTag="false">
+    
+
+    <head>
+        <script type="text/javascript"> if (!window.console) console = {log: function() {}}; </script>
+        <!-- <c:jQueryMinAsComponent /> --> <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"/>
+            <script src="//cdn.optimizely.com/js/6127944940.js"/>
+       <!--
+            <style id="antiClickjack">body{display:none !important;}</style>
+            <script type="text/javascript">
+            if (self === top) {
+                var antiClickjack = document.getElementById("antiClickjack");
+                antiClickjack.parentNode.removeChild(antiClickjack);
+            } else {
+                top.location = self.location;
+            }
+            </script>
+        -->
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!-- <c:BootstrapCSSMin /> --> <link href="//netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <c:BootstrapCustom />
+        
+        <apex:insert name="HeadTags" />        
+        
+    </head>
+    <body>
+        <c:GoogleTagManager />
+        
+        <div class="">
+            <div class="row" id="header_bar">
+                <div class="pull-right hidden-phone" id="welcome-login">
+                    <apex:outputpanel id="loggedin" rendered="{!NOT(ISPICKVAL($User.UserType,'Guest'))}">
+                        <div class="pull-right text-right">
+                            Welcome, <strong>{!$User.FirstName}</strong><br/>
+                            <a href="{!$Page.myaccount}" class="btn btn-primary btn-small">My Account</a>
+                            <a href="{!$Site.Prefix}/secur/logout.jsp" class="btn btn-default btn-small">{!$Label.site.logout}</a>
+                        </div>         
+                    </apex:outputpanel>
+                    
+                    <apex:outputpanel id="notloggedin" rendered="{!ISPICKVAL($User.UserType,'Guest')}">
+                        <div class="pull-right text-right">
+                            Welcome to <strong>TrueCost</strong><br/>
+
+                            <apex:outputPanel layout="inline" rendered="{!$Setup.TrueCostSystemVariables__c.Chat_is_Available__c}">
+                                    <a id="liveagent_button_online_5733000000000Um" href="javascript://Chat" style="display: none;" onclick="liveagent.startChat('5733000000000Um')" class="btn btn-warning btn-small">
+                                        Chat with Us
+                                    </a>
+                                    <div id="liveagent_button_offline_5733000000000Um" style="display: none;" class="btn btn-info btn-small" >
+                                        Live Chat Offline <!-- Offline Chat Content isn't anything--just hidden-->
+                                    </div>
+                            </apex:outputPanel>
+                            <a href="{!$Page.RegisterSec}"  class="btn btn-primary btn-small" >Create Profile</a>
+                            <a href="{!$Page.SiteLogin}" class="btn btn-success btn-small" >Login</a>
+                        </div>         
+                    </apex:outputpanel>              
+                    
+                    
+                </div>
+                
+                <div class="">
+                    <span class="logo" itemscope="itemscope" itemtype="http://schema.org/Organization">
+                        <meta itemprop="name" content="CenterPoint Energy" />
+                        <meta itemprop="email" content="truecost@centerpointenergy.com" />
+                        <meta itemprop="foundingDate" content="1866" />
+                        <a href="http://www.centerpointenergy.com" target="_blank" itemprop="url">
+                            <div id="cnp_logo">
+                                <img src="{!$Resource.CNPlogoTransparent}" title="CenterPoint Energy" alt="CenterPoint Energy logo" itemprop="logo"/>
+                            </div>
+                        </a>
+                    </span>
+                    <span class="wordmark">
+                        <a href="{!$Page.homepage}">
+                            <div id="wordmark">
+                                <img src="{!$Resource.TCWordmarkTransparent}" title="TrueCost Electric Portal" alt="TrueCost Electric Portal" />
+                            </div>
+                        </a>        
+                    </span>
+                    
+                </div>
+                
+            </div>
+        </div>
+        <hr/>    
+            
+        
+        <div class="container">
+            <apex:insert name="breadcrumbs" /> 
+        </div>
+        
+        <div class="phone-body">
+            <apex:insert name="body" />
+        </div>
+        
+        <!-- <c:jQueryUIAsComponent /> --> <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"/>
+        <!-- <c:jQueryCookieAsComponent /> --> <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"/>
+        <!-- <c:BootstrapMinJs /> --> <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"/>
+            
+        <script async="async" src="https://ws.sharethis.com/button/buttons.js" />
+        
+        <!-- <c:Main_Chat_Deployment rendered="{!$Setup.TrueCostSystemVariables__c.Chat_is_Available__c}" /> -->
+        
+        <script type="text/javascript">
+            window.onerror = function(msg, url, line) {
+                dataLayer.push({'event':'error', 'errorFunction':'Unknown', 'errorObject':{'errorType':'Generic Uncaught JS Error',  'errorMessage': msg + '--line: ' +line}});
+                var suppressErrorAlert = true; // If you return true, then error alerts (like in older versions of IE) will be suppressed.
+                return suppressErrorAlert;
+            };
+        </script>
+
+    </body>
+</apex:page>

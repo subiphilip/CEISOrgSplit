@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Error_Length__c</fullName>
+    <externalId>false</externalId>
+    <formula>TEXT(LEN(Field_Error_1__c) + LEN(Field_Error_2__c) + LEN(Field_Error_3__c) + LEN(Field_Error_4__c) + LEN(Field_Error_5__c) + LEN(Field_Error_6__c) + LEN(Field_Error_7__c) + LEN(Field_Error_8__c) + LEN(Field_Error_9__c) + LEN(Field_Error_10__c))</formula>
+    <label>Error Length</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

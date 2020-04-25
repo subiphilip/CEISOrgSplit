@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Usage_Discount</fullName>
+    <active>true</active>
+    <description>You can&#39;t have the usage w/out the discount &amp; vice versa, and you can&#39;t have a usage charge if you have a discount</description>
+    <errorConditionFormula>OR(
+AND(
+NOT(ISBLANK(Usage_Discount_Amount__c)), ISBLANK(Usage_Discount_Minimum__c)), 
+AND(
+NOT(ISBLANK(Usage_Discount_Minimum__c)), ISBLANK(Usage_Discount_Amount__c)
+),
+AND(
+OR(NOT(ISBLANK(Usage_Discount_Amount__c)), NOT(ISBLANK(Usage_Discount_Minimum__c))),
+OR(
+NOT(ISBLANK( Minimum_Usage_Charge__c )),
+NOT(ISBLANK( Minimum_Usage_Charge2__c )),
+NOT(ISBLANK( Minimum_Usage_Charge3__c ))
+)
+)
+)</errorConditionFormula>
+    <errorMessage>Rate17: For rates using usage discounts, a minimum and an amount is required AND minimum usage charges/thresholds cannot be used simultaneously.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>REP_Profile__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>What electric supplier did this deal go to?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What electric supplier did this deal go to?</inlineHelpText>
+    <label>REP Profile</label>
+    <referenceTo>REP_Profile__c</referenceTo>
+    <relationshipLabel>Opportunities</relationshipLabel>
+    <relationshipName>Opportunities</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

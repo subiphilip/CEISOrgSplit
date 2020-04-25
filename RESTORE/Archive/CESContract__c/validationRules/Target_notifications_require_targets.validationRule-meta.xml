@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Target_notifications_require_targets</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(Fixed_Price_Target_Notifications_On__c, isnull(Fixed_Price_Maximum_Target__c), isnull(Price_Target__c))</errorConditionFormula>
+    <errorDisplayField>Price_Target__c</errorDisplayField>
+    <errorMessage>CESC43: Notifications require one a minimum or maximum price</errorMessage>
+</ValidationRule>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>28.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Line 37 - Convertant (Removed 6/30/17) &lt;c:ConvertantCodeManager /&gt;
+Line 244-254 Commented out Electric Price Trends on footer
+Line 155 Commented out TrueCost People on nav bar
+Line 311 Commented out TrueCost People on footer
+Line 322, 329 - Commented out CES notes on footer
+Line 11 - Update previous Optimizely script from 307772693.js to 6127944940.js
+Line 54-61, 172-181, 290-296, 359 Previously commented out LiveAgent.
+Line 59, 178 LiveAgent offline
+Line 144-146 Commented out Price Trends on navigation bar
+Line 147 Commented out News &amp; Insights on navigation bar</description>
+    <label>Template_TC</label>
+</ApexPage>

@@ -1,0 +1,6 @@
+<apex:page showHeader="false" sidebar="false">
+
+
+  <apex:image url="https://na1.salesforce.com/servlet/servlet.ChartServer?rsid=0FL300000018FSj&ruid=00530000004bSMC&did=01Z30000000vKdJ&s=8&fs=12&tfg=12&tfs=-16777063&explode=0&c=gauge&cs=0&title=&eh=no&compo=no&fg=-16777216&bg1=-1&bg2=-3355393&bgdir=2&dl1=Create+Date&dl2=&l=2&sax=yes&Yman=no&nc=0&actUrl=%2F00O30000005RTU2&sd=1&scv=no&sct=yes&spt=yes&cu=USD&ab=X&u=0&vt=0&ab2=Y&u2=0&vt2=0&vl0=Record+Count&spoc=no&topn=no&gm=0.0&gc0=-4041644&gm0=150.0&gc1=-4013484&gm1=350.0&gc2=-11222444&gm2=500.0&refreshts=1307712425000" />
+  
+  </apex:page>

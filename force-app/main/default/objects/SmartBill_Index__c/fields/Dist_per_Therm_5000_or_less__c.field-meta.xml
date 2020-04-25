@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dist_per_Therm_5000_or_less__c</fullName>
+    <description>Variable distribution charge per therm for usage 5000 therms/year or less</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Variable distribution charge per therm for usage 5000 therms/year or less</inlineHelpText>
+    <label>Dist per Therm (5000 or less)</label>
+    <precision>12</precision>
+    <required>false</required>
+    <scale>10</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

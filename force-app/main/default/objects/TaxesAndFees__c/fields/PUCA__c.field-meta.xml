@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PUCA__c</fullName>
+    <description>Public Utility Commission Fee.  Express as a decimal and not a percent.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Public Utility Commission Fee.  Express as a decimal and not a percent.</inlineHelpText>
+    <label>PUCA</label>
+    <precision>12</precision>
+    <required>false</required>
+    <scale>7</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

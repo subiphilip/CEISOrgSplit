@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>lets the customers know when UHIT requests are complete that took longer than normal.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>TrueCost_Customer</letterhead>
+    <name>Usage Data Request Complete</name>
+    <style>freeForm</style>
+    <subject>Your meter data is loaded at myTrueCost.com!</subject>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

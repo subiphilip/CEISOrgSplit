@@ -1,0 +1,6 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[Content Item name: {!FAQ__c.Name}<br>Created by: {!FAQ__c.CreatedBy}<div>Last Modified by: {!FAQ__c.LastModifiedBy}<br><br><b>Category:</b></div><div>{!FAQ__c.Category__c}&nbsp;</div><div><div><b>Draft Question:</b></div><div>{!FAQ__c.Draft_Question__c}&nbsp;</div><div><div><b>Draft Answer:</b></div><div>{!FAQ__c.Draft_Answer__c}&nbsp;</div></div><br>Click here to view/approve:<br>{!FAQ__c.Link}<br><br><br></div>]]></td>
+</tr>
+</table>

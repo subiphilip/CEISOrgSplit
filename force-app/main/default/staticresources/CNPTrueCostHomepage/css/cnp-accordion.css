@@ -1,0 +1,42 @@
+#cnp-accordion{
+      font-size: inherit;
+   }
+   #cnp-accordion h3{
+      padding: 5px;
+      margin-bottom: 2px;
+      cursor: pointer;
+   }
+
+   #cnp-accordion h3:hover, .ui-state-focus{
+      color:#006490 !important;
+      text-decoration: none !important;
+   }
+   
+   #cnp-accordion h3 span{
+      float: left;
+      margin: 4px;
+   }
+   .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{
+	  border: 1px solid #ccc;
+   }
+   .ui-accordion-content{
+      padding: 10px;
+   }
+   .ui-accordion .ui-accordion-header .ui-accordion-header-icon{
+	  position: relative !important;
+	  top: 0 !important;
+	  left: 0 !important;
+   }
+   .ui-widget-content{
+	  background-color: #fff;
+	  background: none;
+   }
+   .ui-icon-triangle-1-e, .ui-icon-triangle-1-s{
+	  background-position: -5px center !important;
+   }
+   .ui-state-default .ui-icon{
+     background-image: url(/_catalogs/masterpage/CNPGallery/images/cnp-plus-32.png) !important;
+   }
+   .ui-state-active .ui-icon{
+	  background-image: url(/_catalogs/masterpage/CNPGallery/images/cnp-minus-32.png) !important;
+   }

@@ -1,0 +1,64 @@
+<apex:page showHeader="false" sidebar="false" controller="SupportLinks" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="true" expires="43200" >
+   <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+      <c:tc2_header title="{!$Label.Page_Title_FAQ} - {!$Label.Page_Title_Company_Name}"
+         description="Get answers to frequently asked questions about electric rates, electric providers, electric choice, switching plans, TrueCost, and CenterPoint Energy" />
+      <style>
+        
+      </style>
+      <body class="has-background-grey-light has-navbar-fixed-top">
+         <div id="wrapper">
+             <c:tc2_navbar />
+             <c:tc2_hero_inner heroClass="has-bg-img-houses" bgImage="hero-1.jpg" headline="About TrueCost" subHeadline="Changing the way you shop for electricity" />
+    
+             <div id="appAbout" class="container"> 
+                <div class="has-margin-3">
+                  <div class="columns content box has-margin-3">
+
+                  <div class="column">
+                    <div style="padding:20px;">
+                      <h3>We take electricity shopping personally.</h3>
+                      <p>TrueCost is electricity shopping made for you. We can use your home or small business' past usage along with the features you'd like to see in a plan -- like green content or rewards points -- and rank them in our system to match your expectations. Plus, our cost projections detail each plan with all fees, taxes and pass-through charges included, so you'll understand the estimated true cost of the plans you're considering before you sign up. </p>
+
+                      <h4>Convenient</h4>
+                      <p>One website with many plans from many electric companies.  No need to search the Internet or call electric companies to check offers.</p>
+
+                      <h4>Personal</h4>
+                      <p>Rates based on your past electricity usage and preferences.</p>
+
+                      <h4>Intelligent</h4>
+                      <p>Working with your smart meter, we can use your actual usage to estimate the cost of plans.</p>
+                      
+                      <h4>Independent</h4>
+                      <p>Credible, reliable, objective.  CenterPoint Energy doesn't generate or sell electricity.</p>
+                      
+                      <h4>Simple</h4>
+                      <p>Easy to shop.  Easy to switch.  Easy to see how you could start saving.</p>
+                    </div>
+                  </div>
+
+                </div>
+               </div>
+
+             </div>
+         </div>
+         
+        <c:tc2_footer />
+         <script>
+            (function ($) {
+                $(function () {
+                'use strict';
+                 
+                 TC.app.appAbout = new Vue({
+                    el: '#appAbout',
+                    data: { },
+                    methods: { },
+                    mounted: function() { },
+                    watch: { }
+                 });
+            
+              })
+            })(jQuery);
+         </script>
+      </body>
+   </html>
+</apex:page>

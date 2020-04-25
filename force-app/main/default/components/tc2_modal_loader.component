@@ -1,0 +1,76 @@
+<apex:component >
+  <!--
+  <my-checkbox inline-template='true'>
+    <div class="checkbox-wrapper" >
+      <div ></div>
+      <div class="title">{{ title }}</div>
+    </div>
+  </my-checkbox>
+
+  <script>
+  Vue.component('my-checkbox', {
+  data() {
+    return { checked: false, title: 'Check me' }
+  },
+  methods: {
+    check() { this.checked = !this.checked; }
+  }
+});
+  </script>
+-->
+
+
+  <script>
+  
+  Vue.component('app-modal-loader', {
+    template:"#template-modal-loader",
+    data: function () { 
+    	return {
+    		queue: [],
+        details: '...'
+    	}
+    },
+    mounted: function() {
+    	var vm = this;
+        TC.app.appSubscribe.$on('addLoaderQueue', function(arg) {
+            vm.showModal();
+            vm.details = arg.status;
+            vm.queue.push(arg)
+        });
+        TC.app.appSubscribe.$on('removeLoaderQueue', function(arg) {
+        	vm.closeModal();
+        });
+    },  
+    props: [],
+    methods:{
+        showModal: function(){
+            TweenMax.to('#app-modal-loader', .24, {opacity:1, display:'block'});
+            TweenMax.fromTo('#app-modal-loader .modal-background', .5, {opacity:0}, {opacity:.8})
+            TweenMax.fromTo('#app-modal-loader .modal-card', .7, {y:-100, opacity:0, scale:1.3}, {y: '50%', opacity:1, scale: 1, ease:Bounce.easeOut});
+        },
+        closeModal: function() {
+            TweenMax.fromTo('#app-modal-loader .modal-card', .24, {opacity:1}, {opacity:0, scale: 1.1, ease:Bounce.easeOut});
+            TweenMax.to('#app-modal-loader .modal-background', .24, {opacity:0})
+            TweenMax.to('#app-modal-loader', .24, {opacity:0, display:'none'});
+        }
+    }
+  });
+  </script>
+
+  <script type="text/x-template" id="template-modal-loader">
+    <div id="app-modal-loader" class="modal">
+          <div class="modal-background"></div>
+          <div class="modal-card" style="width: 340px; height: 200px; margin: 0 auto; overflow:hidden; ">
+              
+              <div id="app-compare-limit-modal-inside" class="modal-card-body has-text-centered animate-gradient-bg">
+                  <div class="modal-card-body-inner">
+                      <span class="icon is-large has-text-info">
+                      <div class="lds-ring"><div></div><div></div><div></div><div></div></div></span>
+                      <h1 class="is-size-4 has-text-weight-semibold"></h1>
+                      <!-- <p>{{details}}</p> -->
+                      
+              </div>
+          </div>
+      </div>
+  </script>
+</apex:component>

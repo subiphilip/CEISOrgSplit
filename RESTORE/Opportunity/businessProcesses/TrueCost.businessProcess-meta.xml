@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BusinessProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrueCost</fullName>
+    <isActive>true</isActive>
+    <values>
+        <fullName>Analysis%2FMeeting</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Closed Lost</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Closed Won</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Decision</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Identify Opportunity</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>In Progress</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Planning</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Qualification%2FRFP</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Quotation</fullName>
+        <default>false</default>
+    </values>
+    <values>
+        <fullName>Stretch</fullName>
+        <default>false</default>
+    </values>
+</BusinessProcess>

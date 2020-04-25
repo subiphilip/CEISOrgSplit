@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>Contract_Value__c</columns>
+    <columns>Gross_Value__c</columns>
+    <columns>Taxes__c</columns>
+    <columns>Net_Value__c</columns>
+    <columns>Volume_MMBtu__c</columns>
+    <columns>Volume_MCF_Calc__c</columns>
+    <columns>Volume_MCF__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+    <language>en_US</language>
+</ListView>

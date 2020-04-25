@@ -1,0 +1,2 @@
+<apex:page controller="ControllerForUHITButtons" action="{!ActionDoer}">
+</apex:page>

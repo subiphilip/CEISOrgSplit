@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Annual_Use_Rollup__c</fullName>
+    <externalId>false</externalId>
+    <label>Annual Use Rollup</label>
+    <summarizedField>Annual_Usage__c.Premise_Usage_Sum__c</summarizedField>
+    <summaryFilterItems>
+        <field>Annual_Usage__c.Year__c</field>
+        <operation>equals</operation>
+        <value>2011,2012,2013</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Annual_Usage__c.Premise__c</summaryForeignKey>
+    <summaryOperation>max</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

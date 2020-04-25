@@ -1,0 +1,7 @@
+<apex:page >
+  <!-- Begin Default Content REMOVE THIS -->
+  <div width="100%">
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/static/modules/gviz/1.0/chart.js"> {"dataSourceUrl":"//docs.google.com/a/mytruecost.com/spreadsheet/tq?key=0AoqLPzxzDUy2dDU2dG5yU1lmR0pQOWlXaUVyTzFiSmc&transpose=0&headers=1&range=A12%3AC133&gid=4&pub=1","options":{"vAxes":[{"useFormatFromData":true,"viewWindowMode":"pretty","viewWindow":{}},{"useFormatFromData":true,"viewWindowMode":"pretty","viewWindow":{}}],"series":[{"type":"bars"}],"booleanRole":"certainty","height":371,"animation":{"duration":0},"legend":"bottom","width":600,"focusTarget":"category","type":"line","hAxis":{"useFormatFromData":true,"viewWindowMode":"pretty","viewWindow":{}}},"state":{},"view":{"columns":[{"calc":"stringify","type":"string","sourceColumn":0},1,2]},"chartType":"ComboChart","chartName":"Chart 1"} </script>
+</div>
+  <!-- End Default Content REMOVE THIS -->
+</apex:page>

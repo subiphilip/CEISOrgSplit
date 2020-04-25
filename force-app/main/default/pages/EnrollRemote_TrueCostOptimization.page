@@ -1,0 +1,534 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false" controller="EnrollRemoteController2" applyHtmlTag="false">
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"/>
+    
+    <html ng-app="checkout" id="ng-app" xmlns:ng="http://angularjs.org">
+        
+        <apex:composition template="TemplateTcNoNav">
+            <apex:define name="HeadTags">
+                <title>Place Order - {!$Label.Page_Title_Company_Name}</title>
+                <!--[if lte IE 8]>
+                    <script src="{!URLFOR($Resource.JSON3Polyfill)}"/>
+                    <script>
+                        document.createElement('datepicker');
+                        document.createElement('datepicker-popup-wrap');       
+                    </script>
+                <![endif]--> <script src="//cdn.optimizely.com/js/6127944940.js"/>
+            </apex:define>
+            
+            <apex:define name="body">  
+                <div class="container" ng-controller="CheckoutCtrl" >
+                    <div class="row" >
+                        
+                        <div class="span9 ng-cloak" ng-if="order.Incentive__c && !order.Reward__c">
+                            <h1>Choose your {!enrollrate.plan__r.rep_profile__r.name} rewards </h1>
+
+                            Choose from one of our great rewards programs and get rewarded for your on-time payments.  With several different options to choose from, you can pick the program that best fits your lifestyle and needs.
+                            <hr/>
+
+                            <div ng-repeat="reward in rewards">
+                                <div class="alert alert-success">
+                                    <h4>{{reward.Name}}</h4>
+                                    <p>{{reward.Reward_Description__c}}</p>
+                                    <a href="" class="btn btn-primary" ng-click="order.Reward__c=reward.Id">Select</a>
+                                </div>
+                               
+
+                            </div>
+                            <div class="alert">
+                                <h4>None</h4>
+                                <p>No thanks, I don't want any rewards.</p>
+                                <a href="" class="btn btn-default" ng-click="order.Incentive__c=false">Continue</a>
+                            </div>
+                            
+                        </div>
+
+                        <div class="span9 ng-cloak" ng-if="data.Progress==='p0' && (!order.Incentive__c || order.Reward__c)">
+                            <h1>Where do you need electricity?</h1>
+                            <c:ngGuestAddress />
+                        </div>
+
+                        <div class="span9 ng-cloak" ng-if="data.Progress==='p1' && (!order.Incentive__c || order.Reward__c)">   
+                            <h1>Please confirm your information</h1>    
+                            <form class="well well-large" ng-submit="SaveOrder1()" name="form1">
+                                <div class="row">
+                                    
+                                    <div class="span4 control-group" ng-class="{error: form1.firstname.$invalid}">          
+                                        <label for="firstName" class="control-label visible-desktop">First Name*</label>
+                                        <input ng-model="order.First_Name__c" name="firstname" id="firstName" placeholder="First Name" type="text" ng-required="true" title="First name is required"  autofocus=""/>
+                                    </div>  
+                                    <div class="span4 control-group" ng-class="{error: form1.lastname.$invalid}"> 
+                                        <label for="lastName" class="control-label visible-desktop">Last Name*</label>
+                                        <input ng-model="order.Last_Name__c" name="lastname" id="lastName" placeholder="Last Name" value="" type="text" ng-required="true" title="Last name is required" />
+                                    </div>
+                                    <div class="span4 control-group" ng-class="{error: form1.phone.$invalid}">  
+                                        <label for="phoneNumber" class="control-label visible-desktop">Phone*</label>
+                                        <input ng-model="order.Customer_Phone_Number__c" name="phone" id="phoneNumber" placeholder="Phone" value="" type="tel" ng-required="true" 
+                                        ng-pattern="/((\(\d{3}\) ?)|(\d{3}-?))?\d{3}-? ?\d{4}$/" 
+                                        />
+                                    </div>
+                                    <div class="span4 control-group">
+                                        <label for="email"  class="control-label visible-desktop" ng-class="{error: form1.email.$invalid}">Email*</label>
+                                        <input ng-model="order.Customer_Email__c" name="email" id="email" placeholder="Email" value="" type="email" ng-required="true" title="Email address is required" />
+                                    </div>
+                                    <div class="span4 control-group" ng-class="{error: form1.month.$invalid || form1.day.$invalid || form1.year.$invalid}" ng-if="!APA.Account__r.PersonBirthdate">
+                                        <label for="dob" class="control-label">Date of Birth* </label>
+                                        <input type="number" min="1" max="12" placeholder="MM" name="month" id="month" ng-maxlength="2" ng-minlength="1"  class="input-mini" ng-model="DOB.DOBM" ng-required="true"/> 
+                                        / 
+                                        <input type="number" min="1" max="31" placeholder="DD" name="day" id="day" ng-maxlength="2" ng-minlength="1"  class="input-mini" ng-model="DOB.DOBD" ng-required="true"/> 
+                                        / 
+                                        <input type="number" min="1900" max="1997" placeholder="YYYY" name="year" id="year" ng-maxlength="4" ng-minlength="4"  class="input-mini" ng-model="DOB.DOBY" ng-required="true"/> 
+                                    </div>  
+                                    <div class="span4 control-group">
+                                        <label for="selectmenu1" class="control-label">Language*</label>
+                                        <select name="selectmenu1" id="language" ng-model="order.Language_Preference__c" >
+                                            <option value="English">English</option>
+                                            <option value="Spanish">Spanish</option> 
+                                        </select>  
+                                    </div>
+                                    
+                                    <div class="span4 control-group" ng-if="rate.Plan__r.Rate_Class_del__c=='Residential' && !APA.Account__r.SSN__c" ng-class="{error: form1.ssn.$invalid}">
+                                        <label for="textinput6" class="control-label visible-desktop" ><!--SSN* icon here--><c:SSNQuestionIcon /></label>
+                                        <input ng-model="order.SSN__c" name="ssn" id="ssn"  placeholder="Social Security #" type="text" 
+                                        ng-required="rate.Plan__r.Rate_Class_del__c=='Residential'" ng-pattern="/^\d\d\d-?\s*\d\d-?\s*\d\d\d\d$/"
+                                         />
+                                    </div>
+                                    
+                                    <p class="span8" ng-if="rate.Plan__r.Rate_Class_del__c!='Residential'">The electric company will need your Business Name (DBA). Please then enter either Personal SSN, EIN (Tax ID number) or DUNS.</p>
+                                    
+                                    <div class="span4 control-group" ng-class="{error: form1.ssnC.$invalid}" ng-if="rate.Plan__r.Rate_Class_del__c!='Residential'">
+                                        <label for="ssn" class="control-label visible-desktop">SSN</label>
+                                        <input name="ssnC" id="ssnComm" value="" type="text" ng-pattern="/^\d\d\d-?\s*\d\d-?\s*\d\d\d\d$/" ng-model="order.SSN__c"/>
+                                    </div>
+                                    <div class="span4 control-group" ng-if="rate.Plan__r.Rate_Class_del__c!='Residential'" ng-class="{error: form1.ein.$invalid}">
+                                        <label for="ein" class="control-label visible-desktop">EIN</label>
+                                        <input name="ein" id="ein" value="" type="text" pattern="[0-9]*" ng-model="order.Tax_Id__c" 
+                                            ng-pattern="/^\d-?\s*\d-?\s*\d-?\s*\d-?\s*\d-?\s*\d-?\s*\d-?\s*\d-?\s*\d$/"/>
+                                    </div>
+                                    <div class="span4 control-group" ng-if="rate.Plan__r.Rate_Class_del__c!='Residential'" ng-class="{error: form1.dba.$invalid}">
+                                        <label for="dba" class="control-label visible-desktop">DBA</label>
+                                        <input name="dba" id="dba" type="text" ng-model="order.DBA_Name__c"/>
+                                    </div>
+                                    <div class="span4 control-group" ng-if="rate.Plan__r.Rate_Class_del__c!='Residential'" ng-class="{error: form1.duns.$invalid}">
+                                        <label for="duns" class="control-label visible-desktop">DUNS</label>
+                                        <input name="duns" id="duns" type="text" ng-model="order.DUNS__c" 
+                                            ng-pattern="/^\d-?\s*\d-?\s*\d-?\s*\d-?\s*\d-?\s*\d-?\s*\d-?\s*\d-?\s*\d$/"/>
+                                    </div>
+                                    
+
+                                    
+                                    <div class="span8" ng-if="!APA.Account__r.SSN__c">
+                                        <label class="checkbox">
+                                            <input type="checkbox" value="" name="checkbox1"  id="checkbox1" required="required" ng-model="consentCheckbox" />
+                                            <p>I agree that CenterPoint may collect, use and share my Social Security number and other personal information with electric companies to enroll me in this plan and other plans I select in the future, and for other purposes. I agree to the terms of the TrueCost<a href="/Privacy" target="_blank">&nbsp;Privacy Policy</a></p>
+                                        </label>
+                                    </div>
+                                </div>  
+                                <div class="row">
+                                    <div class="span8">
+                                        <h4>Service Address (where your electric service will be provided)</h4>
+                                        <p>
+                                            {{order.Service_Address__c}}&nbsp;
+                                            {{order.Service_City__c}},{{order.Service_State__c}}&nbsp;
+                                            {{order.Service_Zip__c}}
+                                        </p>
+                                        <hr/>
+                                        <a href="#myModal1" role="button" class="btn btn-primary btn-block" data-toggle="modal">I have a different Mailing Address </a>
+                                        <a href="#personModal" role="button" class="btn btn-primary btn-block" data-toggle="modal">I want an Alternate Person to be able to discuss my account</a>
+                                        <hr/>
+                                    </div>
+                                </div>
+                                <div id="myModal1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                                    <h3 id="myModalLabel">Mailing Address</h3>
+                                </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="span4">  
+                                                <label for="AlternateStreet" >Street</label>
+                                                <input ng-model="order.Mailing_Street_Address__c" name="AlternateStreet" id="AlternateStreet1" placeholder="Mailing Street" value="" type="text"   />
+                                                <label for="AlternateCity" >City</label>
+                                                <input ng-model="order.Mailing_City__c" name="AlternateCity" id="AlternateCity1" placeholder="Mailing City" value="" type="text"   />
+                                                <label>State</label>
+                                                <select ng-model="order.Mailing_State__c" id="cardstate" name="cardstate">
+                                                    <option value="AL">Alabama</option>
+                                                    <option value="AK">Alaska</option>
+                                                    <option value="AZ">Arizona</option>
+                                                    <option value="AR">Arkansas</option>
+                                                    <option value="CA">California</option>
+                                                    <option value="CO">Colorado</option>
+                                                    <option value="CT">Connecticut</option>
+                                                    <option value="DE">Delaware</option>
+                                                    <option value="DC">District of Columbia</option>
+                                                    <option value="FL">Florida</option>
+                                                    <option value="GA">Georgia</option>
+                                                    <option value="HI">Hawaii</option>
+                                                    <option value="ID">Idaho</option>
+                                                    <option value="IL">Illinois</option>
+                                                    <option value="IN">Indiana</option>
+                                                    <option value="IA">Iowa</option>
+                                                    <option value="KS">Kansas</option>
+                                                    <option value="KY">Kentucky</option>
+                                                    <option value="LA">Louisiana</option>
+                                                    <option value="ME">Maine</option>
+                                                    <option value="MD">Maryland</option>
+                                                    <option value="MA">Massachusetts</option>
+                                                    <option value="MI">Michigan</option>
+                                                    <option value="MN">Minnesota</option>
+                                                    <option value="MS">Mississippi</option>
+                                                    <option value="MO">Missouri</option>
+                                                    <option value="MT">Montana</option>
+                                                    <option value="NE">Nebraska</option>
+                                                    <option value="NV">Nevada</option>
+                                                    <option value="NH">New Hampshire</option>
+                                                    <option value="NJ">New Jersey</option>
+                                                    <option value="NM">New Mexico</option>
+                                                    <option value="NY">New York</option>
+                                                    <option value="NC">North Carolina</option>
+                                                    <option value="ND">North Dakota</option>
+                                                    <option value="OH">Ohio</option>
+                                                    <option value="OK">Oklahoma</option>
+                                                    <option value="OR">Oregon</option>
+                                                    <option value="PA">Pennsylvania</option>
+                                                    <option value="RI">Rhode Island</option>
+                                                    <option value="SC">South Carolina</option>
+                                                    <option value="SD">South Dakota</option>
+                                                    <option value="TN">Tennessee</option>
+                                                    <option value="TX">Texas</option>
+                                                    <option value="UT">Utah</option>
+                                                    <option value="VT">Vermont</option>
+                                                    <option value="VA">Virginia</option>
+                                                    <option value="WA">Washington</option>
+                                                    <option value="WV">West Virginia</option>
+                                                    <option value="WI">Wisconsin</option>
+                                                    <option value="WY">Wyoming</option>
+                                            </select>
+                                                <label for="AlternateZip1" >Zip</label>
+                                                <input ng-model="order.Mailing_Zip_Code__c" name="AlternateZip" id="AlternateZip1" placeholder="Mailing Zip" value="" type="text"   
+                                                ng-minlength="5" ng-maxlength="5" pattern="[0-9]*" title="zip" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                    </div>
+                            </div><!-- end modal -->
+                                <div id="personModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                                        <h3 id="myModalLabel">Alternate Person</h3>
+                                    </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="span4">
+                                                    <label for="AlternateName" >Name</label>
+                                                    <input ng-model="order.Authorized_Representative__c" name="AlternateName" id="AlternateName" placeholder="Alternate Contact Name" value="" type="text" title="Alternate First Name is required" />
+                                                    <label for="AlternateLast4" >Last 4 SSN Digits</label>
+                                                    <input ng-model="order.Last_4_SSN_of_Authorized__c" name="AlternateLast4" id="AlternateLast4" ng-minlength="4" ng-maxlength="4" pattern="[0-9]*"
+                                                    placeholder="Alternate Contact Last 4" value="" type="text"  title="Alternate Last 4 ssn required" />
+                                                    <label for="Alternatephone" >Phone</label>
+                                                    <input ng-model="order.Phone_of_Authorized__c" name="AlternatePhone" id="AlternatePhone" ng-pattern="/((\(\d{3}\) ?)|(\d{3}-?))?\d{3}-? ?\d{4}$/"
+                                                    placeholder="Alternate Contact Phone" value="" type="text"  title="Alternate Phone required" />         
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                        </div>
+                                </div><!-- end modal -->
+                                
+                                <div ng-if="order.Mailing_Street_Address__c.length>0">
+                                    <h4>Mailing Address</h4>
+                                    {{order.Mailing_Street_Address__c}}&nbsp;                               
+                                    {{order.Mailing_City__c}},{{order.Mailing_State__c}}&nbsp;{{order.Mailing_Zip_Code__c}}
+                                    <hr/>
+                                </div>
+                                <div ng-if="order.Authorized_Representative__c.length>0">
+                                    <h4>Authorized Representative</h4>
+                                    <p>Name: {{order.Authorized_Representative__c}}</p>
+                                    <p>Last 4 of Social:{{order.Last_4_SSN_of_Authorized__c}}</p>
+                                    <p>Phone:{{order.Phone_of_Authorized__c}}</p>
+                                    <hr/>
+                                </div>
+                                
+                                <!--credit card-->
+                                <div id="cc" ng-if="rate.Plan__r.Card_Required_For_Payment__c" class="ng-cloak"> 
+                                    <!--div id="deposit" ng-if="false">
+                                        The plan you selected requires a deposit of ${!deposit} to complete. <br/>
+                                        Enter the information below to process the deposit.<br/>
+                                        Cancel to process the order and contact REP about deposit                                            
+                                    </div-->
+                                    
+                                    <h4>Payment Card Information</h4>  
+                                    
+                                    <div class="row">
+                                        <div class="span9">
+                                            <label for="selectcard" class="visible-desktop">Type</label>
+                                            <select name="selectcard" id="selectcard" ng-model="order.Payment_Card_Type__c">
+                                                <option value="Visa" ng-if="rate.Plan__r.REP_Profile__r.Accept_Visa__c" ng-cloak="ng-cloak">Visa</option>
+                                                <option value="AmericanExpress" ng-if="rate.Plan__r.REP_Profile__r.Accept_American_Express__c" ng-cloak="ng-cloak">American Express</option>
+                                                <option value="Discover" ng-if="rate.Plan__r.REP_Profile__r.Accept_Discover__c" ng-cloak="ng-cloak">Discover</option> 
+                                                <option value="Mastercard" ng-if="rate.Plan__r.REP_Profile__r.Accept_MasterCard__c" ng-cloak="ng-cloak">Mastercard</option>
+                                            </select> 
+                                        </div>                  
+                                        <div class="span4 control-group" ng-class="{error: form1.cardnumber.$invalid}">     
+                                            <label for="cardnumber">Card Number (no dashes or spaces)</label>
+                                            <input ng-model="order.Payment_Card_Number__c" name="cardnumber" id="cardnumber1" ng-required="rate.Plan__r.Card_Required_For_Payment__c"
+                                            placeholder="Card Number" value="" pattern="[0-9]*" ng-minlength="15" ng-maxlength="16" type="text" title="Card Number" />
+                                        </div>
+                                        <div class="span4 control-group" ng-class="{error: form1.3digit.$invalid}">
+                                            <label for="3digit" class="visible-desktop">Security Code</label>
+                                            <input ng-model="order.Payment_Card_3_digit_code__c" name="3digit" id="3digit1" ng-required="rate.Plan__r.Card_Required_For_Payment__c"
+                                            placeholder="3 digit security code" value="" pattern="[0-9]*" type="text"  title="3 Digit" ng-minlength="3"/>
+                                        </div>
+                                        <div class="span4 control-group" ng-class="{error: form1.selectmonth.$invalid}">     
+                                            <label for="cardmonth" >Month</label>
+                                            <select name="selectmonth" id="selectmonth" ng-model="order.Payment_Card_Month__c" >
+                                                <option value="01 - January">01 - January</option>
+                                                <option value="02 - February">02 - February</option> 
+                                                <option value="03 - March">03 - March</option>
+                                                <option value="04 - April">04 - April</option>
+                                                <option value="05 - May">05 - May</option>
+                                                <option value="06 - June">06 - June</option> 
+                                                <option value="07 - July">07 - July</option>
+                                                <option value="08 - August">08 - August</option>
+                                                <option value="09 - September">09 - September</option>
+                                                <option value="10 - October">10 - October</option> 
+                                                <option value="11 - November">11 - November</option>
+                                                <option value="12 - December">12 - December</option>
+                                            </select> 
+                                        </div>
+                                        <div class="span4">
+                                            <label for="selectyear" >Year</label>
+                                            <select name="selectyear" id="selectyear" ng-model="order.Payment_Card_Year__c" >
+                                                <option value="2018">2018</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2025">2025</option>
+                                                <option value="2026">2026</option>
+                                                <option value="2027">2027</option>
+                                                <option value="2028">2028</option>
+                                            </select> 
+                                        </div>
+                                        <div class="span10 control-group">     
+                                            <label for="cardname" class="visible-desktop" ng-class="{error: form1.cardname.$invalid}">Cardholder Name</label>
+                                            <input ng-model="order.Name_as_it_appears_on_Payment_Card__c" name="cardname" id="cardname1" ng-required="rate.Plan__r.Card_Required_For_Payment__c"
+                                            placeholder="Cardholder Name" value="" type="text"  title="Cardholder Name" ng-minlength="2" />
+                                        </div>
+                                        <div class="span4 control-group">     
+                                            <label for="cardaddress" class="visible-desktop" ng-class="{error: form1.cardaddress.$invalid}">Billing Address</label>
+                                            <input ng-model="order.Payment_Card_Address_Line_1__c" name="cardaddress" id="cardaddress1" ng-required="rate.Plan__r.Card_Required_For_Payment__c"
+                                            placeholder="Billing Address" value="" type="text"  title="Card Address" ng-minlength="2"/>
+                                        </div>
+                                        <div class="span4 control-group">
+                                            <label for="cardcity" class="visible-desktop" ng-class="{error: form1.cardcity.$invalid}">City</label>
+                                            <input ng-model="order.Payment_Card_Address_City__c" name="cardcity" id="cardcity" ng-required="rate.Plan__r.Card_Required_For_Payment__c"
+                                            placeholder="Billing City" value="" type="text"  title="city" ng-minlength="2"/>
+                                        </div>
+                                        <div class="span4">     
+                                            <label for="cardstate" class="visible-desktop">State</label>
+                                            <select ng-model="order.Payment_Card_Address_State__c" id="cardstate" name="cardstate">
+                                                <option value="AL">Alabama</option>
+                                                <option value="AK">Alaska</option>
+                                                <option value="AZ">Arizona</option>
+                                                <option value="AR">Arkansas</option>
+                                                <option value="CA">California</option>
+                                                <option value="CO">Colorado</option>
+                                                <option value="CT">Connecticut</option>
+                                                <option value="DE">Delaware</option>
+                                                <option value="DC">District of Columbia</option>
+                                                <option value="FL">Florida</option>
+                                                <option value="GA">Georgia</option>
+                                                <option value="HI">Hawaii</option>
+                                                <option value="ID">Idaho</option>
+                                                <option value="IL">Illinois</option>
+                                                <option value="IN">Indiana</option>
+                                                <option value="IA">Iowa</option>
+                                                <option value="KS">Kansas</option>
+                                                <option value="KY">Kentucky</option>
+                                                <option value="LA">Louisiana</option>
+                                                <option value="ME">Maine</option>
+                                                <option value="MD">Maryland</option>
+                                                <option value="MA">Massachusetts</option>
+                                                <option value="MI">Michigan</option>
+                                                <option value="MN">Minnesota</option>
+                                                <option value="MS">Mississippi</option>
+                                                <option value="MO">Missouri</option>
+                                                <option value="MT">Montana</option>
+                                                <option value="NE">Nebraska</option>
+                                                <option value="NV">Nevada</option>
+                                                <option value="NH">New Hampshire</option>
+                                                <option value="NJ">New Jersey</option>
+                                                <option value="NM">New Mexico</option>
+                                                <option value="NY">New York</option>
+                                                <option value="NC">North Carolina</option>
+                                                <option value="ND">North Dakota</option>
+                                                <option value="OH">Ohio</option>
+                                                <option value="OK">Oklahoma</option>
+                                                <option value="OR">Oregon</option>
+                                                <option value="PA">Pennsylvania</option>
+                                                <option value="RI">Rhode Island</option>
+                                                <option value="SC">South Carolina</option>
+                                                <option value="SD">South Dakota</option>
+                                                <option value="TN">Tennessee</option>
+                                                <option value="TX">Texas</option>
+                                                <option value="UT">Utah</option>
+                                                <option value="VT">Vermont</option>
+                                                <option value="VA">Virginia</option>
+                                                <option value="WA">Washington</option>
+                                                <option value="WV">West Virginia</option>
+                                                <option value="WI">Wisconsin</option>
+                                                <option value="WY">Wyoming</option>
+                                            </select>
+                                        </div>
+                                        <div class="span4 control-group" ng-class="{error: form1.cardzip.$invalid}">
+                                            <label for="cardzip" class="visible-desktop">Zip</label>
+                                            <input ng-model="order.Payment_Card_Address_Zip__c" name="cardzip" id="cardzip" 
+                                            placeholder="Zip" value="" minlength="5" maxlength="5" ng-pattern="/^\d{5}$/" type="text" title="zip" ng-required="rate.Plan__r.Card_Required_For_Payment__c"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                                                
+                                <div>   
+                                    <hr/>
+                                    <h4>Enrollment Type</h4>
+                                    <div class="text text-error" ng-if="!OldOrder">
+                                        <c:Content_Viewer content="Early Termination Warning"/>
+                                    </div>
+                                    
+                                <div class="alert alert-error alert-block" ng-if="OldOrder">
+                                
+                                <h5>Avoid early termination fees!</h5>
+                                <p>According to our records, your current plan expires on <b>{{OldOrder.Plan_Expiration__c | date:'shortDate'}}</b>.</p>  
+                                
+                                <p>To avoid early termination penalties, select a switch date <b>less than 14 days</b> before when your current contract expires.</p>
+                            </div>
+                                    <input type="radio" name="switchtype" value="Standard" ng-model="Switch.Type" />
+                                    I'm already receiving service at this address. I'll take the first available switch date, typically 3 business days. (no fee)
+                                    <br/>
+                                    <input type="radio"  name="switchtype" value="SelfSelected" ng-model="Switch.Type"/>
+                                    I am not moving. I need my switch on a specific date (no fee)
+                                    <br/>
+                                    <input type="radio" name="switchtype" value="Move" ng-model="Switch.Type" />
+                                    I am moving or establishing service in my name for the first time at this address (no fee for existing meters)
+                                </div>
+                                
+                                <div ng-show="Switch.Type=='SelfSelected'" >
+                                    <h5>Switch Date (must be between <b>{{MinSwitch|date:'MM/dd/yyyy'}}</b> and <b>{{MaxSwitch|date:'MM/dd/yyyy'}})</b></h5>
+                                    <input type="text" datepicker-popup="MM/dd/yyyy" ng-model="order.InitialDateofService__c" is-open="true" min="MinSwitch" max="MaxSwitch" date-disabled="disabled(date, mode)" show-weeks="false"/>
+                                </div>
+                                <div ng-show="Switch.Type=='Move'" >
+                                    <h5>Move Date (must be between <b>{{MinMove|date:'MM/dd/yyyy'}}</b> and <b>{{MaxMove|date:'MM/dd/yyyy'}})</b></h5>
+                                    <input type="text" datepicker-popup="MM/dd/yyyy" ng-model="order.InitialDateofService__c" is-open="true" min="MinMove" max="MaxMove" date-disabled="disabled(date, mode)" show-weeks="false"/>
+                                </div>  
+                                                            
+                                <div class="form-actions">
+
+                                    <a class="btn btn-default" type="button" href="{!$Page.shopPlans}">Back</a>
+                                    <button class="btn btn-primary" type="submit" ng-disabled="form1.$invalid">Next</button>
+                                    <span class="muted">A move-in or switch can only be made by the electric service applicant or their agent.</span>
+                                </div>
+
+
+                                
+                            </form>
+                        </div>
+<!--end page 1-->                        
+                        <div id="disclosures" class="well well-large span8 ng-cloak" ng-if="data.Progress=='p2'">
+                            <h1>Disclosures</h1>    
+                            <div>
+                                <!--div class="alert alert-error alert-block" ng-if="SwitchHold">
+                                    <c:Content_Viewer content="Switch hold message"></c:Content_Viewer>
+                                </div-->    
+                                
+                                <form ng-submit="SaveOrder2()" name="form2">
+                                    <div>
+                                        <h4>{!$Label.Print_Save_EFL}</h4>
+                                        <apex:outputText value="{!$Label.Disclosure_document_message}">
+                                            <apex:param value="{!enrollrate.plan__r.rep_profile__r.name}"/>
+                                        </apex:outputText>
+                                    </div>
+                                    <c:EFLYRACTOSComponent rate="{!enrollrate}" page="Checkout" /> 
+                                    <hr/>
+                                    <div>
+                                        <h4>Potential Fees</h4>
+                                        <c:FeeDisplay rateid="{!enrollrate.id}"/>                                            
+                                        <hr/>
+                                        <apex:outputText value="{!$Label.Plan_Disclosures_Deposit_Language}">
+                                            <apex:param value="{!enrollrate.plan__r.rep_profile__r.name}"/>
+                                        </apex:outputText>
+                                        <hr/>
+                                    </div>
+                                    
+                                    <div>
+                                        <!--label class="checkbox" id="CritCare">
+                                        <input type="checkbox" value="" name="criticalcare"  id="criticalcare"  />
+                                        {!$Label.Critical_Care}
+                                    </label-->                         
+                                        <label class="checkbox">
+                                            <input type="checkbox" value="disclosure" name="acceptterms"   id="acceptterms" required="required" />
+                                            <apex:outputText value="{!$Label.Accept_Disclosures}">
+                                                <apex:param value="{!enrollrate.plan__r.rep_profile__r.name}"/>
+                                            </apex:outputText>                                            
+                                        </label>
+                                    </div>
+                                    <a class="btn btn-default" type="button" ng-click="data.Progress='p1'">Back</a> 
+                                    <button class="btn btn-primary" type="submit">Finish</button>
+                                </form>       
+                            </div>
+                        </div>
+<!--end page 2-->
+                        <div ng-if="data.Progress=='p3'" class="span8 ng-cloak">
+                            <h1>Your order has been successfully submitted<br/>
+                                <small>Your TrueCost confirmation number is {{data.OrderNumber}}</small>
+                            </h1>
+                            <div class="well well-large">
+                                <h4>Order Details</h4>
+                                <div class="row">
+                                    <div class="span3">Name: {{order.First_Name__c}} {{order.Last_Name__c}}</div>
+                                    <div class="span3">Phone: {{order.Customer_Phone_Number__c}}</div>
+                                    <div class="span3">Email: {{order.Customer_Email__c}}</div>
+                                    <div class="span3" ng-if="order.InitialDateofService__c">Date: {{order.InitialDateofService__c | date:'MM/dd/yyyy' }}</div>
+                                    <div class="span3">Language: {{order.Language_Preference__c}}</div>
+                                </div>
+                                <div>
+                                    <hr/>
+                                    <h4>Service Address</h4>
+                                    {{order.Service_Address__c}} {{order.Service_City__c}}, {{order.Service_State__c}} {{order.Service_Zip__c}} 
+                                    <hr/>
+                                </div>
+                                <div  ng-if="order.Mailing_Street_Address__c.length>0">
+                                    <h4>Mailing Address</h4>
+                                    {{order.Mailing_Street_Address__c}}&nbsp;                               
+                                    {{order.Mailing_City__c}},{{order.Mailing_State__c}}&nbsp;{{order.Mailing_Zip_Code__c}}
+                                    <hr/>
+                                </div>
+                                <div>
+                                    <a class="btn btn-primary" type="button" href="{!$Page.MyAccount}">My Account</a>
+                                    <a class="btn btn-default" type="button" href="{!$Page.Homepage}">Home</a>
+                                </div>
+                            </div>
+                            <div class="span8">
+                                <c:Content_Viewer content="Order Success Message"/>
+                            </div>
+                              
+                        </div>
+<!--end page 3-->                        
+                        <div class="span3 pull-right text-center">
+                            <c:SelectedPlanDisplay ShowContact="true" rate="{!enrollrate}" kWhprice="{!$CurrentPage.Parameters.K}" AnnualPrice="{!$CurrentPage.Parameters.A}" hideAdvertised="{!enrollrate.plan__r.Rate_Class_del__c!='Residential'}"/>
+                        </div>
+                    </div>
+                </div>
+                
+       
+            </apex:define>                   
+        </apex:composition>
+        <c:RemoteTK />
+        <c:EnrollBodyJS2 />
+        
+    </html>
+</apex:page>

@@ -1,0 +1,77 @@
+<apex:page showHeader="false" sidebar="false" Controller="SupportLinks" cache="true" expires="43200" applyBodyTag="false" docType="html-5.0" standardStylesheets="false">
+    
+    
+    <!--SHOW AND HIDE SCRIPT-->
+    <apex:includeScript value="{!$Resource.showhide_js}"/>
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>{!$Label.Page_Title_Glossary} - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>   
+         
+        <apex:define name="body">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h2>
+                            {!$Label.Page_Title_Glossary}<br/>
+                            <small>Understanding the language of electric plans</small>
+                        </h2>
+                        <div class="well well-large">
+                            <c:Content_Viewer content="Glossary Intro"/>
+                        </div>
+                        
+                        <div>
+                            
+                            <ul class="span9 inline">
+                                <apex:repeat value="{!FullAlphabetGlossary}" var="g">
+                                    <li><apex:outputlink value="{!$CurrentPage.Name}?alpha={!g.letter}" disabled="{!NOT(g.present)}">{!g.letter}</apex:outputlink></li>
+                                </apex:repeat>
+                                <li><apex:outputLink value="{!$CurrentPage.Name}" styleClass="alpha">All</apex:outputLink></li>
+                            </ul>
+                            <ul class="span3 inline">
+                                <li><a href="javascript:void(0)" onclick="hideClass('answer');" class="btn pull-right">Collapse All</a></li>
+                                <li><a href="javascript:void(0)" onclick="showClass('answer');" class="btn pull-right">Expand All</a></li>
+                            </ul>  
+                             
+                        </div>
+                        <div class="clearfix"/>
+                        <apex:outputPanel layout="block" id="all" rendered="{!$CurrentPage.parameters.alpha==null}">
+                            <dl>
+                                <apex:repeat var="gloss" value="{!AllGlossary}">
+                                    <a name="{!substitute(gloss.name, ' ', '-')}">
+                                        <dt>
+                                            <apex:outputLink value="javascript:void(0)" onclick="toggleID('{!gloss.id}');">{!gloss.name}</apex:outputLink>
+                                        </dt>
+                                        <dd id="{!gloss.id}" style="display: none;" class="answer">
+                                            <apex:outputfield value="{!gloss.Definition__c}"/>
+                                            
+                                        </dd>
+                                    </a>
+                                    <hr/>
+                                </apex:repeat>
+                            </dl>
+                        </apex:outputPanel>
+                        
+                        <apex:outputPanel layout="block" id="alpha" rendered="{!$CurrentPage.parameters.alpha!=null}">
+                            <dl>
+                                <apex:repeat var="gloss" value="{!GlossaryAlpha}">
+                                    <a name="{!substitute(gloss.name, ' ', '-')}">
+                                        <dt>
+                                            <apex:outputLink value="javascript:void(0)" onclick="toggleID('{!gloss.id}');">{!gloss.name}</apex:outputLink>
+                                        </dt>
+                                        <dd id="{!gloss.id}" style="display: none;" class="answer">
+                                            <apex:outputfield value="{!gloss.Definition__c}"/>
+                                        </dd>
+                                    </a>                         
+                                    <hr/>
+                                </apex:repeat>
+                            </dl>
+                        </apex:outputPanel>    
+                    </div>
+                </div>
+            </div>                                                   
+        </apex:define>       
+        
+    </apex:composition>
+</apex:page>

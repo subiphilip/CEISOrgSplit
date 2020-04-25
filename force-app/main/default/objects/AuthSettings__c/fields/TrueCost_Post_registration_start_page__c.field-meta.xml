@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrueCost_Post_registration_start_page__c</fullName>
+    <defaultValue>&quot;/addaddressafterregistration&quot;</defaultValue>
+    <description>relative link for where the customer goes post-registration (standard is /addaddressafterregistration)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>relative link for where the customer goes post-registration</inlineHelpText>
+    <label>TrueCost Post-registration start page</label>
+    <length>255</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

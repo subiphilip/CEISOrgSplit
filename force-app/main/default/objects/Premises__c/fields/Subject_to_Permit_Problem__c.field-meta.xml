@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subject_to_Permit_Problem__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This premise may have permit issues that need to be verified with the TDSP/Utility.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This premise may have permit issues that need to be verified with the TDSP/Utility.</inlineHelpText>
+    <label>Subject to Permit Problem</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

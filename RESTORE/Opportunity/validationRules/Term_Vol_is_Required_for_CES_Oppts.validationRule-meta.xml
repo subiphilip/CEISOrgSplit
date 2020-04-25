@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Term_Vol_is_Required_for_CES_Oppts</fullName>
+    <active>false</active>
+    <description>Non-demand response business</description>
+    <errorConditionFormula>AND(
+NOT(TEXT( Business_Type__c) = &quot;Demand Response&quot;),
+RecordTypeId = &quot;012300000019K8K&quot;, 
+ ISBLANK(Term_Volume__c)
+)</errorConditionFormula>
+    <errorDisplayField>Term_Volume__c</errorDisplayField>
+    <errorMessage>Oppt13: Term Volume is required for this type of business.</errorMessage>
+</ValidationRule>

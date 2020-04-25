@@ -1,0 +1,13 @@
+<apex:page showHeader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false">
+
+    <apex:composition template="Template_TC">
+        <apex:define name="body"> 
+            <div class="container">
+        		<h2>Add a Service Address<br/><small>Where do you need electricity?  We'll show you plans for that location.</small></h2>
+            	<c:AddServiceAddress />
+            </div>
+        </apex:define>
+    </apex:composition>
+    
+    <c:AddServiceAddressScript />
+</apex:page>

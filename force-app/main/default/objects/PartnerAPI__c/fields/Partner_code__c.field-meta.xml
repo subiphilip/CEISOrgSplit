@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Partner_code__c</fullName>
+    <description>Code or id used to identify that the data is coming from TrueCost</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Code or id used to identify that the data is coming from TrueCost</inlineHelpText>
+    <label>Partner code</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrueCost</fullName>
+    <active>true</active>
+    <businessProcess>TrueCost</businessProcess>
+    <compactLayoutAssignment>TrueCost_Oppt</compactLayoutAssignment>
+    <description>Used only for sales forecasting</description>
+    <label>TrueCost</label>
+</RecordType>

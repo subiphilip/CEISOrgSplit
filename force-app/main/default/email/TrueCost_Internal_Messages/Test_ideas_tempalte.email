@@ -1,0 +1,9 @@
+<messaging:emailTemplate subject="Thanks for submitting your idea" recipientType="User" relatedToType="Idea">
+<messaging:plainTextEmailBody >
+{!Recipient.name},
+
+Thank you for submitting your idea ("{relatedTo.name}")  
+
+
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>

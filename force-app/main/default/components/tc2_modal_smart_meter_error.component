@@ -1,0 +1,49 @@
+<apex:component >
+
+<app-modal-smart-meter-error inline-template='true' xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+	<div id="app-modal-smart-meter-error" class="modal">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+              <div id="app-compare-limit-modal-inside" class="modal-card-body has-text-centered">
+                  <button v-on:click="closeModal" class="delete is-large" aria-label="close"></button>
+                  <div class="modal-card-body-inner">
+                      <span class="icon is-large has-text-info">
+                      <i class="fas fa-tachometer-alt fa-2x"></i></span>
+                      <h1 class="is-size-4 has-text-weight-semibold">Find Your Meter</h1>
+                      <p>We are currently unable to access your historical usage from your smart meter.</p>
+
+                      <button v-on:click="closeModal" class="button is-primary is-rounded fixed-size animate-gradient-bg filled" aria-label="close">Shop Plans</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+</app-modal-smart-meter-error>
+
+  <script>
+  Vue.component('app-modal-smart-meter-error', {
+    data: function () {  },
+    mounted: function() {
+    	var vm = this;
+        TC.app.appSubscribe.$on('smartMeterError', function(arg) {
+            vm.showModal();
+        });
+    },  
+    props: [],
+    methods:{
+        showModal: function(){
+            TweenMax.to('#app-modal-smart-meter-error', .24, {opacity:1, display:'block'});
+            TweenMax.fromTo('#app-modal-smart-meter-error .modal-background', .5, {opacity:0}, {opacity:.8})
+            TweenMax.fromTo('#app-modal-smart-meter-error .modal-card', .7, {y:-100, opacity:0, scale:1.3}, {y: 20, opacity:1, scale: 1, ease:Bounce.easeOut});
+        },
+        closeModal: function() {
+            TweenMax.fromTo('#app-modal-smart-meter-error .modal-card', .24, {opacity:1}, {opacity:0, scale: 1.1, ease:Bounce.easeOut});
+            TweenMax.to('#app-modal-smart-meter-error .modal-background', .24, {opacity:0})
+            TweenMax.to('#app-modal-smart-meter-error', .24, {opacity:0, display:'none'});
+            // TC.fn.getApa();
+            TC.fn.navigateTo('{!$Page.Shop_Plans}')
+            TC.app.appSubscribe.$emit('grantMeterDataPermissionResponse', {'id':'remoteLogin'});
+        }
+    }
+  });
+  </script>
+</apex:component>

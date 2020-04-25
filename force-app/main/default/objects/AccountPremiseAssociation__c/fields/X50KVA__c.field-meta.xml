@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X50KVA__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This premise is is commercial.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This premise is is commercial.</inlineHelpText>
+    <label>&gt;50KVA</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

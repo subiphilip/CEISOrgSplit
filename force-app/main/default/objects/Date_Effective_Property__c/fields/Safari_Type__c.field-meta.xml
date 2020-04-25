@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Safari_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Safari Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>User Field</fullName>
+                <default>false</default>
+                <label>User Field</label>
+            </value>
+            <value>
+                <fullName>Utility Property</fullName>
+                <default>false</default>
+                <label>Utility Property</label>
+            </value>
+            <value>
+                <fullName>Account Property</fullName>
+                <default>false</default>
+                <label>Account Property</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nueces</fullName>
+    <columns>NAME</columns>
+    <columns>Served_by_TrueCost__c</columns>
+    <columns>TDSP_Lookup__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>TDSP_Lookup__c</field>
+        <operation>contains</operation>
+        <value>Nueces</value>
+    </filters>
+    <label>Nueces</label>
+    <language>en_US</language>
+</ListView>

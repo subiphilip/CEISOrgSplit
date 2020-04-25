@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CNP_MNG_Guaranteed_Charge_Therm__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF ( ISPICKVAL( CNP_MNG_Guaranteed_Charge_Discount_Level__c , &#39;Unit&#39; )
+, CNP_MNG_Guaranteed_Charge__c * 0.1
+, CNP_MNG_Guaranteed_Charge__c 
+)</formula>
+    <label>CNP MNG Guaranteed Charge Therm</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

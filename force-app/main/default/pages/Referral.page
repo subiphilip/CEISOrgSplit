@@ -1,0 +1,154 @@
+<apex:page showheader="false" sidebar="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="false" controller="MyAccount">
+    
+    <apex:composition template="Template_TC">
+        
+        <apex:define name="body"> 
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h2>
+                            Start recommending TrueCost today<br/>
+                            <small>Earn a $5 gift card for each friend you refer</small>
+                        </h2>
+                    
+                       <p>Simply enter your name and email address to get started. Your unique referral code will arrive shortly in your inbox. </p>
+                       <p>Available only to current TrueCost users.</p>
+                    
+                        <hr/>
+                        <div class="alert alert-success aler-block" id="form_success" style="display:none">
+                                    <h4>Our TrueCost support team will begin looking at your request. <br></br>
+                                    Thank you for using TrueCost to shop for electricity.</h4>
+                                </div>
+                                
+                                
+                                <form id="contact_form" class="well well-large">
+                                <fieldset>    
+
+                                <label> <p><strong class="text-info">Name </strong></p> </label>
+                                <input name="Contact_Person__c" type="text" placeholder="Name" required="required" class="input-block-level"/>
+                                <input name="Origin__c" type="hidden" value="Web" />
+                                                                                     
+                                <label> <p><strong class="text-info">Phone </strong></p> </label>
+                                <input name="Non_Account_Phone__c" type="tel" placeholder="Phone" required="required" class="input-block-level"/>
+                                
+                                <label> <p><strong class="text-info">Address </strong></p> </label>
+                                <input name="Address__c" type="text" placeholder="Address" required="required" class="input-block-level"/>
+                                
+                                <label> <p><strong class="text-info">Email </strong></p> </label>
+                                <input name="Non_Account_Email__c" type="email" placeholder="emailaddress@domain.com" required="required" class="input-block-level"/>
+                                <br/><br/>
+                                
+                                <!-- <label><h4>Terms and Conditions</h4></label> -->
+                                
+                     <!-- button trigger modal -->
+                    <button type ="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">
+                     Terms and Conditions 
+                    </button>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                 <h4 class="modal-title" id="myModalLabel">myTrueCost.com: “Refer-a-Friend” Program Terms and Conditions</h4>
+                              </div>
+
+                             <div class="modal-body">
+                                    <c:Content_Viewer content="Refer A Friend T&C" headline="false" deck="true"/>                         
+                             </div>
+
+                             <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                      </div>
+                   </div>
+                   <!-- end of button trigger modal --> <br/><br/>
+                   
+                                
+                                <input name="TC_Refer_a_Friend_Program__c" required="required" type="checkbox"> I accept the terms and conditions of the TrueCost Referral Program.</input>
+                                
+                                <br/><br/>
+                                <input type="submit" value="Submit" class="btn btn-warning btn-info" />
+                                </fieldset>
+                                </form>
+                    </div>                  
+                </div>
+                
+                        <div class="span6">  
+                        <img src="{!URLFOR($Resource.styles_landing, 'img/house.jpg')}" class="pull-right"/>
+                        <p><strong class="text-info">Referring is quick and easy</strong></p>
+                        <p><strong class="text-info">1. </strong>Enter your name and email address tied to your TrueCost account.</p>
+                        <p><strong class="text-info">2. </strong>Receive a unique referral code after signing up.</p>
+                        <p><strong class="text-info">3. </strong>Get rewarded when friends sign up using your unique referral code during checkout on their electric order.</p>
+
+                        <!-- <c:Content_Viewer content="Contact Us Information"/> -->
+                    </div>  
+                        
+            </div>
+           
+                    
+        </apex:define>       
+    </apex:composition>
+    <c:RemoteTK />
+    <script>
+        $j=jQuery.noConflict();
+        var client = new remotetk.Client();  
+              
+        //function(objtype, fields, callback, error)
+        $j("#contact_form").submit(function(event){
+            event.preventDefault();
+            console.log($j("#contact_form").serializeObject());
+            
+            client.create(
+              'TrueCost_Case__c', 
+              $j("#contact_form").serializeObject(), 
+              function(result, event){
+                  $j("#contact_form").hide();
+                  $j("#form_success").show();
+                  
+              }, 
+              function(result, event){
+                  if (!event){
+                      console.log(result)
+                      }
+              }
+              );
+            
+        });
+        
+        /*!
+ * jQuery serializeObject - v0.2 - 1/20/2010
+ * http://benalman.com/projects/jquery-misc-plugins/
+ * 
+ * Copyright (c) 2010 "Cowboy" Ben Alman
+ * Dual licensed under the MIT and GPL licenses.
+ * http://benalman.com/about/license/
+ */
+
+// Whereas .serializeArray() serializes a form into an array, .serializeObject()
+// serializes a form into an (arguably more useful) object.
+
+(function($j,undefined){
+  '$j:nomunge'; // Used by YUI compressor.
+  
+  $j.fn.serializeObject = function(){
+    var obj = {};
+    
+    $j.each( this.serializeArray(), function(i,o){
+      var n = o.name,
+        v = o.value;
+        if (v==="on") v=true;
+        
+        obj[n] = obj[n] === undefined ? v
+          : $j.isArray( obj[n] ) ? obj[n].concat( v )
+          : [ obj[n], v ];
+    });
+    
+    return obj;
+  };
+  
+})(jQuery);
+    </script>
+    
+       
+</apex:page>

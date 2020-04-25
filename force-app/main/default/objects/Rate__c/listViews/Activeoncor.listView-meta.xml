@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Activeoncor</fullName>
+    <columns>NAME</columns>
+    <columns>Active__c</columns>
+    <columns>Suspended__c</columns>
+    <columns>Energy_Base_Rate_cents__c</columns>
+    <columns>X1000_kWh_rate__c</columns>
+    <columns>TDSP__c</columns>
+    <columns>Plan__c</columns>
+    <columns>UPDATEDBY_USER</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>CREATEDBY_USER</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Record_Type_Name__c</field>
+        <operation>notEqual</operation>
+        <value>Gas Choice Rate</value>
+    </filters>
+    <filters>
+        <field>TDSP__c</field>
+        <operation>contains</operation>
+        <value>Oncor</value>
+    </filters>
+    <filters>
+        <field>Record_Type_Name__c</field>
+        <operation>contains</operation>
+        <value>residential,commercial</value>
+    </filters>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Active Oncor Rates</label>
+    <language>en_US</language>
+    <sharedTo>
+        <allInternalUsers/>
+    </sharedTo>
+</ListView>

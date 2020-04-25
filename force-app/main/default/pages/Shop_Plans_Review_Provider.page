@@ -1,0 +1,221 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" controller="ControllerforReadReviews">
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="{!rep.name} Reviews provided by myTrueCost.com"
+    description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill."
+  />
+
+  <style>
+    .REPlogo {
+        height: auto;
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
+        margin-bottom: 30px;
+    }
+    .about, .about span, .about p, .about tr td {
+        text-align:left;
+    }
+    .content table td, .content table th {
+        padding:0;
+    }
+  </style>
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+    
+    <div id="wrapper">
+        <c:tc2_navbar />
+        <c:tc2_hero_inner bgImage="hero-1.jpg" headline="Verified Reviews" />
+        
+        <div id="appPlanShopReview" class="container">
+            <div class="has-margin-3">
+                <div class="columns content box has-margin-3">
+                    <div class="column">
+                        
+                    <div class="alert alert-info">
+                        These ratings and reviews are provided by TrueCost customers.  They do not necessarily reflect the opinions of CenterPoint Energy/TrueCost.
+                    </div>
+                    <apex:outputpanel styleclass="row-fluid" layout="block" rendered="{!and(RepPlanCount>0, NOT(isnull($CurrentPage.Parameters.id)))}">
+                        <div class="span2">
+                            <apex:image styleClass="REPlogo" url="/{!rep.Logo_URL__c}" rendered="{!rep.Logo_URL__c!=''}" width="150px" height="75px"/>
+
+                            
+                            <span class="inline logo-stars" style="margin: 0 auto; display: block; width: 130px; margin-bottom: 30px;">
+                                <i v-bind:class="{ 'icon-icon-star-half': {!rep.Star_Rating_Avg__c} >= .5, 'icon-icon-star-full': {!rep.Star_Rating_Avg__c} >= 1, 'icon-icon-star-outline': {!rep.Star_Rating_Avg__c} < .5}" class=" is-size-5 is-size-6-mobile"></i>
+                                <i v-bind:class="{ 'icon-icon-star-half': {!rep.Star_Rating_Avg__c} >= 1.5, 'icon-icon-star-full': {!rep.Star_Rating_Avg__c} >= 2, 'icon-icon-star-outline': {!rep.Star_Rating_Avg__c} < 1.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                <i v-bind:class="{ 'icon-icon-star-half': {!rep.Star_Rating_Avg__c} >= 2.5, 'icon-icon-star-full': {!rep.Star_Rating_Avg__c} >= 3, 'icon-icon-star-outline': {!rep.Star_Rating_Avg__c} < 2.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                <i v-bind:class="{ 'icon-icon-star-half': {!rep.Star_Rating_Avg__c} >= 3.5, 'icon-icon-star-full': {!rep.Star_Rating_Avg__c} >= 4, 'icon-icon-star-outline': {!rep.Star_Rating_Avg__c} < 3.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                <i v-bind:class="{ 'icon-icon-star-half': {!rep.Star_Rating_Avg__c} >= 4.5, 'icon-icon-star-full': {!rep.Star_Rating_Avg__c} >= 5, 'icon-icon-star-outline': {!rep.Star_Rating_Avg__c} < 4.5}" class=" is-size-5 is-size-6-mobile"></i>
+                            </span>    
+
+                        </div>
+
+
+
+                        <!-- <p class="is-size-5 has-text-weight-semibold">{!rep.About_Us__c}</p> -->
+
+                        <apex:outputPanel rendered="{!LEN(rep.About_Us__c)>0}">
+                            <span itemprop="description" class="about">
+                                <apex:outputfield value="{!rep.About_Us__c}"></apex:outputfield>
+                            </span>
+                            
+                        </apex:outputPanel>
+
+
+                        <div class="span5">
+                            <!-- <h4>Compare {!RepPlanCount} {!rep.name} rates! <br/><span>Discover your true cost based on your usage.</span></h4>  -->  
+                            <a href="{!$Page.Shop_Plans}?repid={!rep.id}" class="btn btn-warning"> Continue Shopping</a> 
+                            <!-- Shop {!rep.name} rates now -->
+                            <!-- <apex:outputpanel rendered="{!ISPICKVAL($User.UserType,'Guest')}">
+                                <a href="{!$Page.Register}" class="btn btn-primary"> Register Now</a>
+                            </apex:outputpanel> -->
+                        </div>
+                    </apex:outputpanel>
+                    
+                    <hr/>
+
+                    <apex:outputPanel styleclass="mainleft" layout="block">
+                        <apex:outputpanel rendered="{!ratings.size=0}">
+                            <a href="{!$page.Rating}" class="btn btn-warning">Write One</a> There are currently no reviews available. 
+                        </apex:outputpanel>             
+                        
+                        <apex:outputPanel rendered="{!NOT(isnull($CurrentPage.Parameters.id))}" >
+                            <span itemscope="itemscope" itemtype="http://schema.org/Product">
+                                <meta itemprop="name" content="{!rep.name}"/>
+
+                                <span itemprop="aggregateRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating">
+                                    <meta itemprop="ratingValue" content="{!rep.Star_Rating_Avg__c}"/>
+                                    <meta itemprop="reviewCount" content="{!rep.total_reviews__c}"/>
+                                    <meta content="1" itemprop="worstRating" />
+                                    <meta content="5" itemprop="bestRating" />
+                                </span>
+                                <apex:repeat value="{!ratings}" var="item">
+                                    <span itemscope="itemscope" itemtype="http://schema.org/Review">                      
+                                        <meta content="{!item.REP}" itemprop="itemReviewed"/>
+                                        <div class="row-fluid">                            
+                                            <div class="span8">                         
+                                                <apex:outputpanel layout="none" rendered="{!(isnull($CurrentPage.Parameters.id))}">
+                                                    <h4>Electric Company: <a href="{!$Page.readreviews}?id={!item.repid}"><small>{!item.REP}</small></a></h4>
+                                                </apex:outputpanel>
+                                                <div>
+                                                    <h4>Plan Name: <small>{!item.plan}<apex:outputtext value="Plan not specified" rendered="{!(isnull(item.plan))}"/></small></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <span class="span2">
+                                                <!-- <c:Star_Rating_static starrating="{!item.rating}" aggregate="false" link="false"></c:Star_Rating_static> -->
+
+                                                <span class="inline logo-stars">
+                                                    <i v-bind:class="{ 'icon-icon-star-half': {!item.rating} >= .5, 'icon-icon-star-full': {!item.rating} >= 1, 'icon-icon-star-outline': {!item.rating} < .5}" class=" is-size-5 is-size-6-mobile"></i>
+                                                    <i v-bind:class="{ 'icon-icon-star-half': {!item.rating} >= 1.5, 'icon-icon-star-full': {!item.rating} >= 2, 'icon-icon-star-outline': {!item.rating} < 1.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                                    <i v-bind:class="{ 'icon-icon-star-half': {!item.rating} >= 2.5, 'icon-icon-star-full': {!item.rating} >= 3, 'icon-icon-star-outline': {!item.rating} < 2.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                                    <i v-bind:class="{ 'icon-icon-star-half': {!item.rating} >= 3.5, 'icon-icon-star-full': {!item.rating} >= 4, 'icon-icon-star-outline': {!item.rating} < 3.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                                    <i v-bind:class="{ 'icon-icon-star-half': {!item.rating} >= 4.5, 'icon-icon-star-full': {!item.rating} >= 5, 'icon-icon-star-outline': {!item.rating} < 4.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                                </span>                                
+                                            </span>
+                                            <span class="span6">
+                                                <p>Submitted on {!item.whenmade} by <span itemprop="author">{!item.firstname}</span></p>
+                                            </span>
+                                        </div>
+                                        <div class="row-fluid">
+                                            <apex:outputpanel layout="block" styleClass="span8" rendered="{!(item.review!='')}" >
+                                                Comments:
+                                                <span itemprop="reviewBody">
+                                                    {!item.review}
+                                                </span>
+                                            </apex:outputpanel>   
+                                        </div>
+                                        <div class="row-fluid">
+                                            <br/>
+                                            <apex:outputpanel layout="block" styleClass="span7 offset1" rendered="{!(item.sitecomments!='')}" >
+                                                    <p class="muted">Additional Comments from TrueCost:</p>  
+                                                    <p class="text-info"><apex:outputtext value="{!item.sitecomments}" escape="false"/></p>
+                                            </apex:outputpanel>   
+                                        </div>
+                                    </span>
+                                    <hr/>
+                                </apex:repeat>
+                            </span> 
+                        </apex:outputPanel>
+
+                        <apex:repeat value="{!ratings}" var="item" rendered="{!isnull($CurrentPage.Parameters.id)}">
+                                        <span itemscope="itemscope" itemtype="http://schema.org/Review">                      
+                                            <meta content="{!item.REP}" itemprop="itemReviewed"/>
+                                            <div class="row-fluid">                            
+                                                <div class="span8">                         
+                                                    <apex:outputpanel layout="none" rendered="{!(isnull($CurrentPage.Parameters.id))}">
+                                                        <h4>Electric Company: <a href="{!$Page.readreviews}?id={!item.repid}"><small>{!item.REP}</small></a></h4>
+                                                    </apex:outputpanel>
+                                                    <div>
+                                                        <h4>Plan Name: <small>{!item.plan}<apex:outputtext value="Plan not specified" rendered="{!(isnull(item.plan))}"/></small></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <span class="span2">
+                                                    <c:Star_Rating_static starrating="{!item.rating}" aggregate="false" link="false"></c:Star_Rating_static>                                
+                                                </span>
+                                                <span class="span6">
+                                                    <p>Submitted on {!item.whenmade} by <span itemprop="author">{!item.firstname}</span></p>
+                                                </span>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <apex:outputpanel layout="block" styleClass="span8" rendered="{!(item.review!='')}" >
+                                                    Comments:
+                                                    <span itemprop="reviewBody">
+                                                        {!item.review}
+                                                    </span>
+                                                </apex:outputpanel>   
+                                            </div>
+                                            <div class="row-fluid">
+                                                <br/>
+                                                <apex:outputpanel layout="block" styleClass="span7 offset1" rendered="{!(item.sitecomments!='')}" >
+                                                        <p class="muted">Additional Comments from TrueCost:</p>  
+                                                        <p class="text-info"><apex:outputtext value="{!item.sitecomments}" escape="false"/></p>
+                                                </apex:outputpanel>   
+                                            </div>
+                                        </span>
+                                        <hr/>
+                        </apex:repeat>
+
+                        <apex:outputPanel rendered="{!NOT(isnull($CurrentPage.Parameters.id))}">
+                            <c:BlogView PostID="{!rep.Snapshot_ID__c}" rendered="{!NOT(isnull(rep.Snapshot_ID__c))}"/>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+
+                    
+
+                    </div>
+                </div>
+
+                
+
+            </div>
+
+            <div class="has-text-centered">
+                <p><a href="{!$Page.Shop_Plans}" class="button is-primary is-rounded fixed-size animate-gradient-bg"  >Continue Shopping</a></p>
+            </div>
+
+        </div>
+    </div>        
+    <c:tc2_footer />
+    <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+             
+             TC.app.appPlanShopReview = new Vue({
+                el: '#appPlanShopReview',
+                data: {
+                },
+                methods: { },  
+                mounted: function() { },
+                watch: { },
+             });
+    
+          })
+        })(jQuery);
+    </script>
+  </body>
+  </html>
+</apex:page>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>New_Contract_Request_OLD</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>New Contract Request OLD</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>/setup/ui/recordtypeselect.jsp?ent=01I30000002XFTt&amp;retURL=%2Fa1u%2Fo
+&amp;save_new_url=%2Fa1u%2Fe%3F
+CF00N3000000B7pV1_lkid={!Opportunity.AccountId}
+&amp;CF00N3000000B7pV1={!Opportunity.Account}
+&amp;CF00N3000000B7pVH={!Opportunity.Name}
+&amp;CF00N3000000B7pVH_lkid={!Opportunity.Id}
+&amp;CF00N3000000B7pVR={!Opportunity.LDC2__c}
+&amp;CF00N3000000B7pVK={!Opportunity.Utility_Default_Pricing_Scenario_Name__c}
+&amp;CF00N3000000B7pVL={!Opportunity.Utility_Default_Pricing_Name__c}
+&amp;00N3000000B7pVQ={!Opportunity.Term__c}
+&amp;CF00N3000000B7pV2={!Opportunity.CES_Office_Formula__c}
+&amp;00N3000000B7pVP={!Opportunity.Project_Start_Date__c}{!Opportunity.Start_Date__c}</url>
+</WebLink>

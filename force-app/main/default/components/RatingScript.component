@@ -1,0 +1,137 @@
+<apex:component >
+<script>
+$j=jQuery.noConflict();
+var myModule = angular.module('ratings', ['ngForce'] );
+
+var contents;
+var filename;
+
+function RatingsCtrl($scope, vfr){
+	//person={firstname:"John",lastname:"Doe",age:50,eyecolor:"blue"}
+	$scope.Rating={Rating__c:5}; //really just to get this object going.  We'll overwrite if doing an update.
+	$scope.OrderParam='{!$CurrentPage.Parameters.ordernum}';
+	if ('{!$Profile.Name}'!=='TrueCost Customer'){
+		$scope.Guest=true;
+	}
+
+	if ($scope.OrderParam){ //gets the order that we're talking about
+		vfr.query("SELECT Id, Plan__c, Plan__r.Name, Plan__r.REP_Profile__c, REP_Account__c, Plan__r.REP_Profile__r.Name, Parent_Account__c FROM Order__c WHERE Name='"+$scope.OrderParam+"'").then(
+			function(o){
+				//should be something to error message if the order wasn't found.
+				if (o.records){
+					$scope.o=o.records[0];
+					//there was an order--let's see if there's a rating already created?
+					vfr.query("Select Id, Plan__c, Rating__c, Review__c, REP_Profile__c, Author__c, REP_Account__c, Order__c FROM REP_Rating__c where Order__c = '"+o.records[0].Id+"'").then(
+						function(r){
+							if(r.records.length>0){//there is a rating
+								$scope.Rating = r.records[0];
+							}else { //There is no rating, so we put the order info on the rating. 
+								$scope.Rating.REP_Account__c=o.records[0].REP_Account__c;
+								$scope.Rating.Order__c=o.records[0].Id;
+								$scope.Rating.REP_Profile__c=o.records[0].Plan__r.REP_Profile__c;
+								$scope.Rating.Plan__c=o.records[0].Plan__c;
+								$scope.Rating.Author__c=o.records[0].Parent_Account__c;
+							}
+						},
+						function(e){
+							dataLayer.push({'errorFunction':'ExistingRatingQuery', 'errorObject':e});
+							dataLayer.push({'event':'error'});
+						}
+					);
+				} else {
+					dataLayer.push({'event':'error', 'errorFunction':'No Order Found for Rating', 'errorObject':{'errorCode':'Page Errors', 'errorMessage':'Order Number: '+$scope.OrderParam}});
+				}
+										 
+
+			}, function(error){
+				dataLayer.push({'errorFunction':'Rating:OrderQuery', 'errorObject':error});
+				dataLayer.push({'event':'error'});
+			});
+
+	} else if(!$scope.Guest){ //no order
+		//get the author (ie, account id)
+		vfr.query("select contact.account.id from user where id = '{!$User.Id}'").then(
+			function(result){ 
+				$scope.Rating.Author__c=result.records[0].Contact.Account.Id;
+				
+			}, 
+			function(error){
+				dataLayer.push({'errorFunction':'Rating:AccountLookup', 'errorObject':error});
+				dataLayer.push({'event':'error'});
+			}
+		);
+		vfr.describePicklistValues('REP_Rating__c', 'REP_without_Order__c').then(
+			function(result){ 
+				$scope.REPOptions=result;
+			}, 
+			function(error){
+				dataLayer.push({'errorFunction':'Rating:REPPicklistQuery', 'errorObject':error, 'event':'error'});
+			}
+		);
+	}
+
+	$scope.Post = function(){
+		debugger;
+	//function(objtype, fields, callback, error)
+		if ($scope.Rating.Id){ ///update the existing rating
+			delete $scope.Rating.attributes;
+			vfr.update('REP_Rating__c', $scope.Rating.Id, $scope.Rating).then(
+				function(result){
+					$scope.success=true;
+				}, 
+				function(error){
+					dataLayer.push({'errorFunction':'Rating:updateRating', 'errorObject':error, 'event':'error'});
+				}
+			)  //vfRemote.update = function(objtype, id, fields, callback, error) {
+		} else{//insert a new rating
+			vfr.create('REP_Rating__c', $scope.Rating).then(
+				function(result){
+					$scope.success=true;
+					$scope.Rating.Id=result.id;
+
+					if (contents){//$scope.Rating={Rating__c:5};	            		
+						$scope.Attachment = {ParentId:$scope.Rating.Id,	Name:filename, Body: contents};
+						vfr.create('Attachment', $scope.Attachment).then(
+							function(result2){
+						
+							}, 
+							function(error){
+								dataLayer.push({'errorFunction':'Rating:Attachment', 'errorObject':error, 'event':'error'});
+							}	
+						);
+					}
+				}, 
+				function(error){
+					dataLayer.push({'errorFunction':'Rating:CreateRating', 'errorObject':error, 'event':'error'});
+				}
+			);
+		}
+	}
+
+}
+
+	  function setFile(elem){
+
+		var reader = new FileReader();
+
+		reader.onload = function(event) {
+
+			contents = event.target.result;
+
+			var fullPath = document.getElementById('upload').value;
+
+			filename = fullPath.split(/(\\|\/)/g).pop();
+
+
+
+		};
+		reader.readAsDataURL(elem.files[0]);
+
+	};    	
+
+
+
+	</script>
+	<c:Ngforce />
+
+	</apex:component>

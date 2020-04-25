@@ -1,0 +1,52 @@
+<apex:component >
+    <div class="modal hide fade" id="shopplans_clickthrough">
+        
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <p class="lead"><b>TrueCost:</b> Choose your electric plan in one minute!</p>
+            <p><strong class="text-info">Did you know that the variable rate you are paying currently is most likely significantly higher than 
+            the rate you had under your previous plan?</strong></p>
+            <p>Select a plan in less than one minute to get another great rate locked in!</p>
+           
+            
+            <apex:outputPanel rendered="{!(ISPICKVAL($User.UserType,'Guest'))}">
+                <p>
+                    <a href="{!$Page.SiteLogin}" class="btn btn-success">Login</a> Login to your account.
+                </p>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!NOT((ISPICKVAL($User.UserType,'Guest')))}">
+                <div id="reg_no_premise_modal" style="display:none">
+                    <a href="{!$Page.AddAddressAfterRegistration}" class="btn btn-warning">Set up a service address</a> to get started.
+                </div>
+                <div id="prem_no_data_modal" style="display:none">
+                    <a href="{!$Page.Calculation_Choice}?mode=MeterData" class="btn btn-warning">Import your meter data</a> to get started.
+                </div>
+            </apex:outputPanel>
+            
+        </div>
+        <div class="modal-footer">
+            
+        </div>
+        
+    </div>
+    
+    <script>
+    $j=jQuery.noConflict();
+    
+    $j(".shopping-result-tiles").on("TilesComplete", function (e){
+        //if no APA but hasn't seen before
+        if (typeof StoredAPA==='undefined'){ 
+            if($j.cookie('apex__seen_shop_clickthrough')!='1'){ 
+                $j('#reg_no_premise_modal').show();
+                $j('#shopplans_clickthrough').modal('toggle');
+                $j.cookie('apex__seen_shop_clickthrough', '1');
+            }
+        } //has APA but no meter data permission 
+        else if (!StoredAPA.Meter_Data_Permission__c && $j.cookie('apex__seen_shop_clickthrough')!='1'){ 
+            $j('#prem_no_data_modal').show();
+            $j('#shopplans_clickthrough').modal('toggle');
+            $j.cookie('apex__seen_shop_clickthrough', '1');
+        }
+    });
+    </script>
+</apex:component>

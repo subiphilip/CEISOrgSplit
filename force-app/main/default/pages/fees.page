@@ -1,0 +1,84 @@
+<apex:page showHeader="false" sidebar="false" Controller="SupportLinks" cache="true" expires="43200" applyBodyTag="false" docType="html-5.0" standardStylesheets="false">
+    
+    <!-- -------------------------SHOW AND HIDE SCRIPT --------------------- -->
+    <apex:includeScript value="{!$Resource.showhide_js}"/>
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>{!$Label.Page_Title_Fees}|{!$CurrentPage.Parameters.alpha} - {!$Label.Page_Title_Company_Name}</title>
+            <apex:outputPanel layout="none" rendered="{!not(isnull($CurrentPage.Parameters.alpha))}">
+                <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/fees?alpha={!$CurrentPage.Parameters.alpha}"/>
+            </apex:outputPanel>
+            <apex:outputPanel layout="none" rendered="{!isnull($CurrentPage.Parameters.alpha)}">
+                <link rel="canonical" href="{!$Setup.TrueCostSystemVariables__c.Main_URL__c}/fees"/>
+            </apex:outputPanel>
+            
+        </apex:define>
+        
+        <apex:define name="body"> 
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h2>
+                            Common Electric Fees<br/>
+                            <small>Understanding your electric bill</small>
+                        </h2>
+                        <div class="well well-large">
+                            <c:Content_Viewer content="Fees Intro"/>
+                        </div>
+                        
+                        <div>
+                            
+                            <ul class="span9 inline">
+                                <apex:repeat value="{!FullAlphabetFee}" var="g">
+                                    <li><apex:outputlink value="{!$CurrentPage.Name}?alpha={!g.letter}" disabled="{!NOT(g.present)}">{!g.letter}</apex:outputlink></li>
+                                </apex:repeat>
+                                <li><apex:outputLink value="{!$CurrentPage.Name}" styleClass="alpha">All</apex:outputLink></li>
+                            </ul>
+                            <ul class="span3 inline">
+                                <li><a href="javascript:void(0)" onclick="hideClass('answer');" Class="pull-right btn">Collapse All</a></li>
+                                <li><a href="javascript:void(0)" onclick="showClass('answer');" Class="pull-right btn">Expand All</a></li>
+                            </ul>  
+                            
+                        </div>
+                        <div class="clearfix"/>
+                        <apex:outputPanel layout="block" id="all" rendered="{!$CurrentPage.parameters.alpha==null}">
+                            <dl>
+                                <apex:repeat var="fee" value="{!AllFee}">
+                                    <a name="{!substitute(fee.name, ' ', '-')}">
+                                        <dt>
+                                            <apex:outputLink value="javascript:void(0)" onclick="toggleID('{!fee.id}');">{!fee.name}</apex:outputLink>
+                                        </dt>
+                                        <dd id="{!fee.id}" style="display: none;" class="answer">
+                                            <apex:outputfield value="{!fee.Definition__c}"></apex:outputfield>
+                                            
+                                        </dd>
+                                        
+                                    </a>
+                                    <hr/>
+                                </apex:repeat>
+                            </dl>
+                        </apex:outputPanel>
+                        
+                        <apex:outputPanel layout="block" id="alpha" rendered="{!$CurrentPage.parameters.alpha!=null}">
+                            <dl>    
+                                <apex:repeat var="fee" value="{!FeeAlpha}">
+                                    <dt>
+                                        <apex:outputLink value="javascript:void(0)" onclick="toggleID('{!fee.id}');">{!fee.name}</apex:outputLink>
+                                    </dt>
+                                    <dd id="{!fee.id}" style="display: none;" class="answer">
+                                        <apex:outputfield value="{!fee.Definition__c}"></apex:outputfield>
+                                        
+                                    </dd>
+                                    <hr/>
+                                </apex:repeat>
+                            </dl> 
+                        </apex:outputPanel>    
+                    </div>
+                </div>
+            </div>               
+            
+        </apex:define>       
+        
+    </apex:composition>
+</apex:page>

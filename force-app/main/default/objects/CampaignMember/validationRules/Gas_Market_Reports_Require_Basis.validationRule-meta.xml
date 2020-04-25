@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Market_Reports_Require_Basis</fullName>
+    <active>true</active>
+    <description>margin, load curve, and basis have to be defined for a gas market report.</description>
+    <errorConditionFormula>AND(
+  OR(
+    ISPICKVAL(PageTemplate__c , &#39;Illinois Gas Only&#39;),
+    ISPICKVAL(PageTemplate__c , &#39;Illinois Gas and Electric&#39;)
+  ),
+  OR (
+    ISNULL(Basis__c),
+    ISNULL( Load_Curve__c),
+    ISNULL(  Margin_Dth__c )
+  )
+)</errorConditionFormula>
+    <errorDisplayField>PageTemplate__c</errorDisplayField>
+    <errorMessage>CAMPMEMB1 : To do a gas report, you need a Basis, Load Curve, and Margin ($/Dth)</errorMessage>
+</ValidationRule>

@@ -1,0 +1,666 @@
+<apex:component >
+    <script>
+    $j=jQuery.noConflict();
+    
+    CheckSize();
+    window.onresize=function(){
+        CheckSize();
+        if($j("#score_details_modal").is(":visible")){drawChart();}
+    };
+    setupSliders();
+    var StoredAPA; var pollerTryCounter=0; var PollerMaxTries=12; var PollerVar;
+    function CheckSize(){
+        if (!($j("#cnp_logo").is(":visible"))) {
+            toggleControlsHide();
+        } else{
+            toggleControlsShow();
+        }
+    }
+    //let's declare some variables for math
+    var maxPrice=0; var minPrice=100000; 
+    var rateClass='{!HTMLENCODE($CurrentPage.Parameters.RateClass)}'; 
+    var ShopZip='{!HTMLENCODE($CurrentPage.Parameters.ShopZip)}';
+    var repID='{!HTMLENCODE($CurrentPage.Parameters.repid)}'; 
+    var REPLogocacheString='{!urlfor($Resource.REPLogos)}'; 
+    var LeadId='{!HTMLENCODE($CurrentPage.Parameters.leadid)}';
+    if (LeadId) {
+        $j.cookie("apex__LeadId", LeadId, { expires: 90 });
+    }
+        
+    //console.log(' rateClass is ' + rateClass);    
+    //console.log('LeadId is ' + LeadId);
+    
+    $j("#slider_toggle").click(function(){$j("#company_area").collapse('hide');$j("#contract_area").collapse('hide');});
+    $j("#contract_toggle").click(function(){$j("#slider_area").collapse('hide');$j("#company_area").collapse('hide');});
+    $j("#company_toggle").click(function(){$j("#slider_area").collapse('hide');$j("#contract_area").collapse('hide');});
+    $j(".collapse > .close").click(function(){toggleControlsHide();});
+    
+    function toggleControlsHide(){
+        //hide everything
+        //$j("#slide-box").hide();
+        $j("#slider_area").collapse('hide');
+        $j("#company_area").collapse('hide');
+        $j("#contract_area").collapse('hide');
+        $j("#slider_controls").removeClass('span2');
+        $j("#slider_controls").addClass('span12');
+        $j(".miniStuff").show();
+        $j("#slider_controls").show();
+        
+    }
+    
+    function toggleControlsShow(){
+        //show everything
+        $j(".miniStuff").hide();
+        $j("#slider_area").collapse('show');
+        $j("#company_area").collapse('show');
+        $j("#contract_area").collapse('show');
+        $j("#slider_controls").addClass('span2');
+        $j("#slider_controls").removeClass('span12');
+        $j("#slider_controls").show();
+    }
+    
+    if ('{!$User.Id}'!='00530000004bUq2AAE'){
+        //first, set up all info from the APA                
+        ShopRemote.getAccountInfo('{!$User.Id}', function(result, event){
+            if (event.status && result != null){
+                $j(".Search_Zip").text(result.Premise__r.Electric_Service_Address__c + ", " + result.Premise__r.Electric_Service_Address_Zip__c.substring(0,5));
+                $j(".Result_Rate_Class").text(result.Premise__r.Premise_Type__c);
+                APAtoSliders(result);
+                APAtoCheckboxes(result);
+                StoredAPA=result;
+                NowShop();
+                ShopRemote.HasOrderInProgress(StoredAPA.Account__c, StoredAPA.Premise__c, function(result, event){
+                    //console.log('in the order in progress check for account' + StoredAPA.Account__c+' and premise '+ StoredAPA.Premise__c);
+                    //console.log(result);
+                    if (result){
+                        //console.log('There is an order in progress for this premise');
+                        $j(".detail-button, .enroll-button").click(function (e) {
+                            e.preventDefault();
+                            
+                        $j('#myModal').modal();
+                        });
+                    }
+                });
+            } else{
+                //console.log('no APA');
+                cookieParametersSetup();    
+                NowShop();
+            }
+        }); 
+    } else {
+        cookieParametersSetup();
+        NowShop();
+    }
+    function NowShop(){
+        var leadid = $j.cookie("apex__LeadId");
+        var streetaddy = $j.cookie("apex__StreetAddress");
+        if (leadid || streetaddy){
+            $j(".not-from-homepage").show();
+        } else {
+            $j(".from-homepage").show();
+        }
+        
+        
+        if ($j.cookie("apex__LeadId")) {
+            var leadId = $j.cookie("apex__LeadId");
+            ControllerForMobileMain.getLead(leadId,
+                function(result, event) {
+                    if (!$j.cookie("apex__NewZip")) {
+                        $j.cookie("apex__ShopZip", result.PostalCode, { expires: 90 });
+                        $j($j(".Search_Zip")[1]).text(result.PostalCode)
+                    }
+                    
+                    console.log('lead zip '+ $j.cookie("apex__ShopZip"));
+                    getPlanDataAfterLeadIdCheck(leadid, streetaddy);
+                }
+            );
+        } else {
+            getPlanDataAfterLeadIdCheck(leadid, streetaddy);
+        }
+        
+        
+    }
+    
+    function getPlanDataAfterLeadIdCheck(leadid, streetaddy) {
+    //then get the plan data       //string userid, string rateclass, string zipcode
+        ShopRemote.ShopRemote('{!$User.Id}', $j.cookie("apex__RateClass"), $j.cookie("apex__ShopZip"), function(result, event){  
+            
+            if (event.status && result != null){
+                //console.log('Plan data came back');    
+                for (var i=0; i<result.length; i++) {
+                    createTile(result[i], function(){populateTile(result[i]);});
+                    makeCheckboxes(result[i]);
+                    if (result[i].price>maxPrice) maxPrice=result[i].price;
+                    if (result[i].price<minPrice) minPrice=result[i].price;
+                }
+                $j(".shopping-result-tiles").trigger("TilesComplete");
+                var REPlist=$j("#REPlist").find(".checkbox-holder");
+                REPlist.sort(function (a,b){
+                    if ($j(a).data('rep-name')>$j(b).data('rep-name')) return 1;
+                    if ($j(a).data('rep-name')<$j(b).data('rep-name')) return -1;
+                    return 0;
+                });
+                $j("#REPlist").html(REPlist);
+                $j(".Result_Size").text(result.length);
+                                         
+                //bindings
+                $j(".jq_slider").on("slidestop", function(event, ui){RescoreResort(); SavePrefs();});
+                $j("#sort_by_price_link").click(function(e){sortByPrice();RescoreResort();SavePrefs();});
+                $j("#sort_by_rating_link").click(function(e){
+                    debugger;
+                    sortByRating();
+                    debugger;
+                    RescoreResort();
+                    SavePrefs();});
+                $j("#less_than_6, #from_6_to_11, #more_than_12, #exactly_12, #online_billing_autopay").on('change', function(e){showHideTiles();SavePrefs();});
+                $j(".REPCheckbox").on('change', function(e){showHideTiles(); SaveBlacklist();});
+                $j("#restore_all").click(function(e){restoreAll();showHideTiles();SavePrefs();SaveBlacklist();});
+                $j("#unselect_all").click(function(e){unselectAll();showHideTiles();SavePrefs();SaveBlacklist();});
+                if(StoredAPA) {
+                    AddHowCalculatedText(StoredAPA); 
+                } else $j("#Calc_No_Premise").show();
+                RescoreResort();
+                if (repID!=''){
+                    doOneRepOnly(repID);
+                    $j("#less_than_6").prop("checked", true);
+                    $j("#from_6_to_11").prop("checked", true);
+                    $j("#more_than_12").prop("checked", true);
+                    $j("#exactly_12").prop("checked", true);
+                    $j("#online_billing_autopay").prop("checked", true);
+                    showHideTiles();
+                } else if(StoredAPA && StoredAPA.Blacklist__c!==undefined) {
+                    ReadBlacklist(StoredAPA);
+                    showHideTiles();
+                } else showHideTiles();
+                if (typeof StoredAPA=='undefined'){  //undefined, but cookie says commercial
+                    if( $j.cookie("apex__RateClass")=='Commercial'){
+                        
+                        applyCommercialViewsBlank();
+                    } else {
+                        $j("#non_com_guest_reg_inducement").show();
+                    }
+                } else if( StoredAPA.Premise__r.Premise_Type__c !='Residential' && HowCalculated(StoredAPA)!='Real Data') { //defined, not residential
+                        applyCommercialViewsBlank();
+                } else { //otherwise we have to assume it's resi
+                    $j("#non_com_guest_reg_inducement").show();
+                }                
+                setupTooltips();
+            } else{
+                //console.log('plan result is null');
+            }
+            
+        });
+    }
+    
+    function applyCommercialViewsBlank(){
+        //blankCommPrices();
+        $j("#com_guest_reg_inducement").show();
+        $j("#Calc_No_Premise_Commercial").show();
+        /*$j("#Calc_No_Premise, #Calc_Default_Load, #Calc_Actual_Data, #Calc_Estimated_Data, #Calc_Load_Profile").hide();
+        $j(".yearqm, .kWhqm, .monthqm, .kWhqmAd").tooltip({
+            html:true,
+            title: 'Register to see prices.'
+        });*/
+    }
+    
+    function doOneRepOnly(repid){
+        $j(".REPCheckbox").prop('checked', false);//uncheck all REP checkbox
+        $j('#cb'+repid).prop('checked', true);//check the one that the urlparameter has
+    }
+    
+    //helper functions
+    function setupSliders(){
+        $j(".jq_slider").slider({range:"min", min:0, max:100, step:1});
+        $j("#price_weight_slider").slider({range:"min", min:1, max:100, step:1});
+    }
+    
+    function setupTooltips(){
+        $j(".rewardText").tooltip(); 
+        $j(".yearqm").tooltip({
+            html:true,
+            title: '{!jsencode($Label.Yearly_Cost_Explanation)}'
+        });
+        $j(".kWhqm").tooltip({
+            html:true,
+            title: '{!jsencode($Label.Cents_per_kWh_explanation)}'
+        });
+        $j(".monthqm").tooltip({
+            html:true,
+            title: '{!jsencode($Label.Monthly_Cost_Explanation)}'
+        });
+        $j(".greenqm").tooltip({
+            html:true,
+            title: 'Simply represents how much renewable energy company buys to supply this plan'
+        });
+        
+        /*$j(".kWhqmAd").tooltip({
+            html:true,
+            title: 'Advertised rate is based on the 1000 kWh profile.  <br>The advertised rate is provided to help you compare prices with those you may hear about. <br/> Only TrueCost calculates prices based on your actual usage and includes all fees and charges'
+        });*/
+    }    
+    
+    function cookieParametersSetup(){
+        if(ShopZip=='' && !$j.cookie("apex__ShopZip")) {
+            $j.cookie("apex__ShopZip", "77002", ShopZip, { expires: 90 }); 
+        }else if (ShopZip!=''){
+            //console.log('there is a parameter');
+            $j.cookie("apex__ShopZip", ShopZip, { expires: 90 }); //there's a parameter
+        }
+        if(!$j.cookie("apex__okTerms")) $j.cookie("apex__okTerms", "11111", { expires: 90 });
+        if(!$j.cookie("apex__p")) $j.cookie("apex__p", "50", { expires: 90 });
+        if(!$j.cookie("apex__g")) $j.cookie("apex__g", "50", { expires: 90 });
+        if(!$j.cookie("apex__y")) $j.cookie("apex__y", "50", { expires: 90 });
+        if(!$j.cookie("apex__s")) $j.cookie("apex__s", "50", { expires: 90 });
+        
+        if(rateClass=='' && !$j.cookie("apex__RateClass")) {
+            //console.log('no cookie, no parameter');
+            $j.cookie("apex__RateClass", "Residential", { expires: 90 }); //we got nothing
+        }else if (rateClass!=''){
+            //console.log('there is a parameter');
+            $j.cookie("apex__RateClass", rateClass, { expires: 90 }); //there's a parameter
+        }
+        
+        var streetAddress = $j.cookie("apex__StreetAddress") ? $j.cookie("apex__StreetAddress") + ", " : "";
+        $j(".Search_Zip").text( streetAddress + $j.cookie("apex__ShopZip"));
+        $j(".zipChange").show();
+        $j(".Result_Rate_Class").text($j.cookie("apex__RateClass"));
+        
+        CookieToSliders();
+        CookieToCheckboxes();
+        
+    }
+    
+    
+    function ReadBlacklist(result){
+        var blacklist = result.Account__r.Blacklist__c.replace('[','').replace(']','').split(',');
+        for (var i=0; i<blacklist.length; i++){
+            //console.log(blacklist[i].substring(blacklist[i].indexOf('a0P'), blacklist[i].indexOf('a0P')+18));
+            var REPID=blacklist[i].substring(blacklist[i].indexOf('a0P'), blacklist[i].indexOf('a0P')+18);
+            $j('#cb'+REPID).prop('checked', false);//uncheck its REP checkbox
+        }
+    }
+    
+    function SaveBlacklist(){
+        if(StoredAPA){
+            var blacklist = []
+                $j(".REPCheckbox:not(:checked)").each(function(i){
+                    //console.log('unchecked checkbox ' + this.id);
+                    blacklist.push(this.id.replace("cb", ""));
+                });
+            //console.log(blacklist);
+            ShopRemote.setBlacklist('{!$User.Id}', blacklist, function(result, event){});
+        }
+        
+    }
+    
+    function APAtoSliders(result){
+        $j("#price_weight_slider").slider("value", result.Account__r.Price_weight__c);
+        $j("#green_weight_slider").slider("value", result.Account__r.Green_weight__c);
+        $j("#star_weight_slider").slider("value", result.Account__r.Star_weight__c);
+        $j("#year_weight_slider").slider("value", result.Account__r.Year_weight__c);
+        
+    }
+    
+    function APAtoCheckboxes(result){
+        $j("#less_than_6").prop("checked", result.Account__r.Less_than_6_months__c);
+        $j("#from_6_to_11").prop("checked", result.Account__r.X6_to_11_months__c);
+        $j("#more_than_12").prop("checked", result.Account__r.More_than_12_months__c);
+        $j("#exactly_12").prop("checked", result.Account__r.X12_months__c);
+        $j("#online_billing_autopay").prop("checked", result.Account__r.Online_E_pay__c);
+    }
+    function CookieToSliders(){
+        $j("#price_weight_slider").slider("value", $j.cookie("apex__p"));
+        $j("#green_weight_slider").slider("value", $j.cookie("apex__g"));
+        $j("#star_weight_slider").slider("value", $j.cookie("apex__s"));
+        $j("#year_weight_slider").slider("value", $j.cookie("apex__y"));                
+    }
+    function CookieToCheckboxes(){
+        $j("#less_than_6").prop("checked", $j.cookie("apex__okTerms").charAt(0)==1);
+        $j("#from_6_to_11").prop("checked", $j.cookie("apex__okTerms").charAt(1)==1);
+        $j("#more_than_12").prop("checked", $j.cookie("apex__okTerms").charAt(2)=='1');
+        $j("#exactly_12").prop("checked", $j.cookie("apex__okTerms").charAt(3)=='1');
+        $j("#online_billing_autopay").prop("checked", $j.cookie("apex__okTerms").charAt(4)=='1');
+    }
+    
+    function sortByPrice(){
+        $j("#year_weight_slider").slider("value",0);$j("#star_weight_slider").slider("value",0);$j("#green_weight_slider").slider("value",0);$j("#price_weight_slider").slider("value",100);
+    }
+    function sortByRating(){
+        $j("#year_weight_slider").slider("value",0);$j("#star_weight_slider").slider("value",100);$j("#green_weight_slider").slider("value",0);$j("#price_weight_slider").slider("value",1);
+    }
+    function restoreAll(){
+        $j("#less_than_6, #from_6_to_11, #more_than_12, #exactly_12, #online_billing_autopay, .REPCheckbox").prop('checked', true);
+    }  
+    function unselectAll(){
+        $j(".REPCheckbox").prop('checked', false);
+    }  
+    
+    function makeCheckboxes(tileData){
+        if ($j('#'+tileData.rateplan.Plan__r.REP_Profile__r.Id).length) {  //if it exists
+            $j('#'+tileData.rateplan.Plan__r.REP_Profile__r.Id+' > small > .REP_plan_count').html(parseInt($j('#'+tileData.rateplan.Plan__r.REP_Profile__r.Id+' > small > .REP_plan_count').html(), 0)+1); //increment it
+        } else {
+            $j("#REPlist").prepend('<div class="checkbox-holder" data-rep-name="'+tileData.rateplan.Plan__r.REP_Profile__r.Name+'" id="'+tileData.rateplan.Plan__r.REP_Profile__r.Id+'"><input type="checkbox" checked="true" name="checkbox" class="REPCheckbox" id="cb'+tileData.rateplan.Plan__r.REP_Profile__r.Id+'"/>'+tileData.rateplan.Plan__r.REP_Profile__r.Name+'<small  class="muted"> <span class="REP_plan_count badge badge-inverse pull-right">1</span></small></div>')
+                }
+        if(tileData.rateplan.Plan__r.Contract_Length__c < 6){
+            $j("#less_than_six_count").html(parseInt($j("#less_than_six_count").html(), 0)+1);
+        } else if(tileData.rateplan.Plan__r.Contract_Length__c >12){
+            $j("#more_than_12_count").html(parseInt($j("#more_than_12_count").html(), 0)+1);
+        } else if (tileData.rateplan.Plan__r.Contract_Length__c >=6 && tileData.rateplan.Plan__r.Contract_Length__c <12){
+            $j("#from_6_to_11_count").html(parseInt($j("#from_6_to_11_count").html(), 0)+1);
+        } else if(tileData.rateplan.Plan__r.Contract_Length__c ==12){
+            $j("#exactly_12_count").html(parseInt($j("#exactly_12_count").html(),0)+1);
+        }
+        
+    }
+    
+    
+    
+    function createTile(tileData, callback){
+        $j(".shopping-result-tiles").append('<div class="shopping-result" data-online-bill="'+tileData.rateplan.Plan__r.Online_Payment_Bill_Stements__c+'"data-price="'+tileData.price.toFixed(0)+'" id="'+tileData.rateplan.Id+'" data-total-score="0" data-years="" data-years-score="'+tileData.rateplan.Plan__r.REP_Profile__r.Years_in_Business_Score__c+'" data-rep="'+tileData.rateplan.Plan__r.REP_Profile__r.Name+'" data-rep-id="'+tileData.rateplan.Plan__r.REP_Profile__r.Id+'" data-months="'+tileData.rateplan.Plan__r.Contract_Length__c+'" data-star-ranking="'+tileData.rateplan.Plan__r.REP_Profile__r.Star_ranking__c+'" data-star="'+tileData.rateplan.Plan__r.REP_Profile__r.Star_Rating_Avg__c+'" data-puc="'+tileData.rateplan.Plan__r.REP_Profile__r.PUC_Scorecard_Ranking__c+'" data-1000kWh="'+tileData.rateplan.X1000_kWh_rate__c+'"data-green="'+tileData.rateplan.Plan__r.Renewable_Content__c+'" data-kWh="'+ tileData.pricekWh+'" data-advertised-rate="'+tileData.rateplan.Advertised_Rate__c +'"></div>');
+        callback();
+    }
+    
+    function populateTile(tileData){
+        $j('#'+tileData.rateplan.Id).append('<a href="#score_details_modal" data-toggle="modal" onclick="LoadScoreLightbox('+tileData.rateplan.Id+'); return false;" ><span class="scoring pull-right text-right">Score<br/><span class="score_display">100</span></span></a>');
+        $j('#'+tileData.rateplan.Id).append('<div class="plan-name">'+tileData.rateplan.Plan__r.Name+'</div>');
+        
+        $j('#'+tileData.rateplan.Id).append('<div class="advertised_rate"><strong><h3><span id="advertised_rate">'+tileData.rateplan.Advertised_Rate__c+'</span><span class="smaller dollar">&cent;</span> / kWh </h3><strong></div>');
+        
+        /* $j('#'+tileData.rateplan.Id).append('<div class="kWh_Ad_Price"><strong><h3><span id="kWh_Ad_Price">'+tileData.rateplan.X1000_kWh_rate__c+'</span><span class="smaller dollar">&cent;</span> / kWh </h3><strong></div>'); */
+        
+        $j('#'+tileData.rateplan.Id).append('<img Class="REPlogo" src="'+tileData.rateplan.Plan__r.REP_Profile__r.Logo_URL__c.replace('resource/REPLogos', REPLogocacheString)+'" title="'+tileData.rateplan.Plan__r.REP_Profile__r.Name+'" alt="'+tileData.rateplan.Plan__r.REP_Profile__r.Name+'"/><meta content="1" itemprop="worstRating"/><meta content="5" itemprop="bestRating"/>');    
+
+        $j('#'+tileData.rateplan.Id).append('<div class="tile-row plan-price"><span class="smaller dollar">$</span><span id="Month_Price">'+(tileData.price/12).toFixed(2)+'</span><span class="smaller">/ month</span><a class="monthqm muted" </a></div>');
+        /* $j('#'+tileData.rateplan.Id).append('<div class="tile-row year-price">&#36;<span id="Year_Price">'+tileData.price.toFixed(0)+'</span> / year <a class="muted yearqm" rel="tooltip" data-toggle="tooltip"><img src="{!$Resource.QuestionMark}" Class="question-mark" height="12px" width="12px"/></a></div>'); */
+        /* $j('#'+tileData.rateplan.Id).append('<div Class="tile-row kWh-price"><span id="kWh_Price">'+(tileData.pricekWh*100).toFixed(1)+'</span><span class="smaller dollar">&cent;</span> / kWh <a class="muted kWhqm" rel="tooltip" data-toggle="tooltip"><img src="{!$Resource.QuestionMark}" Class="question-mark" height="12px" width="12px"/></a></div>'); */                                                   
+        $j('#'+tileData.rateplan.Id).append('<div class="tile-row"><span id="Contract_Length">'+tileData.rateplan.Plan__r.Contract_Length__c+'</span> Months</div>'); 
+        $j('#'+tileData.rateplan.Id).append('<div class="tile-row renewable"><span id="Renewable Content">'+tileData.rateplan.Plan__r.Renewable_Content__c+'</span>&#37; Green <a class="muted greenqm" </a></div>'); 
+        
+   //rewards
+        if(!tileData.rewardsText){$j('#'+tileData.rateplan.Id).append('<div class="tile-row muted">No rewards offered</div>');}
+        else {
+            if(tileData.rewardsText.length<=22) $j('#'+tileData.rateplan.Id).append('<a class="rewardText" href="{!$Page.PlanDetails}?id='+tileData.rateplan.Id+'&rep='+tileData.rateplan.Plan__r.REP_Profile__r.Id+'" data-toggle="tooltip" title="'+tileData.rewardsText+'"><div class="tile-row" >'+tileData.rewardsText+'</div></a>');
+            else{$j('#'+tileData.rateplan.Id).append('<a class="rewardText" href="{!$Page.PlanDetails}?id='+tileData.rateplan.Id+'&rep='+tileData.rateplan.Plan__r.REP_Profile__r.Id+'" data-toggle="tooltip" title="'+tileData.rewardsText+'"><div class="tile-row">'+tileData.rewardsText.substring(0,21)+'...</div></a>');}
+        }
+        
+   // star rating on tiles
+        if (tileData.rateplan.Plan__r.REP_Profile__r.Star_Rating_Avg__c){              
+            $j('#'+tileData.rateplan.Id).append('<center><div Class="ratewrapper"><div itemprop ="aggregateRating" itemscope="itemscope" itemtype="http://schema.org/AggregateRating"><meta content="'+tileData.rateplan.Plan__r.REP_Profile__r.Star_Rating_Avg__c+'" itemprop="ratingValue"/><meta content="'+tileData.rateplan.Plan__r.REP_Profile__r.total_reviews__c+'" itemprop="reviewCount"/></div><div class="rate" ><a class="rate-link" href="{!$Page.ReadReviews}?id='+tileData.rateplan.Plan__r.REP_Profile__r.Id+'" title="'+tileData.rateplan.Plan__r.REP_Profile__r.total_reviews__c+' Customer Reviews"><b style="width: '+((tileData.rateplan.Plan__r.REP_Profile__r.Star_Rating_Avg__c/5)*100)+'%"></b></a></div></div></center>');
+        } else {
+            $j('#'+tileData.rateplan.Id).append('<center><div Class="ratewrapper muted">No Reviews</div></center>');
+        }
+   
+   // plan details link
+       $j('#'+tileData.rateplan.Id).append('<div class="tile-row actions"><a href="{!$Page.PlanDetails}?id='+tileData.rateplan.Id+'&rep='+tileData.rateplan.Plan__r.REP_Profile__r.Id+'" class="detail-button text-primary">Plan Details</a></div>'); 
+   
+   // enroll button     
+       $j('#'+tileData.rateplan.Id).append('<div class="tile-row actions"><a class="btn btn-warning enroll-button" href="{!$Setup.TrueCostSystemVariables__c.sslurl__c+$Page.EnrollRemote}?id='+tileData.rateplan.Id+'&K='+(tileData.pricekWh*100).toFixed(1)+'&A='+tileData.price.toFixed(2)+'">Enroll</a></div>'); 
+        
+    }
+    
+    function blankCommPrices(){
+        //console.log('in the blanking function');
+        $j(".plan-price").find("#Month_Price").text('x');
+        $j(".advertised-rate").find("#advertised_rate").text('x');
+        $j(".kWh-ad-price").find("#kWh_Ad_Price").text('x');
+        $j(".year-price").find("#Year_Price").text('x');
+        $j(".kWh-price").find("#kWh_Price").text('x');
+        $j(".scoring").hide();
+        $j(".detail-button, .enroll-button").click(function (e) {
+            e.preventDefault();
+            alert('Commercial pricing is based on your usage.  Please register to see quotes, , and to enroll');
+        });
+        $j(".detail-button, .enroll-button").removeAttr("href");
+    }
+    //for slider value change: rescore, resort
+    function RescoreResort(){
+        $j(".shopping-result").each(function(i){
+            var totalscore=0;
+            //var totalweight=parseInt($j("#year_weight").val())+parseInt($j("#price_weight").val())+parseInt($j("#green_weight").val())+parseInt($j("#star_weight").val());
+            var totalweight=parseInt($j("#year_weight_slider").slider("value")+$j("#star_weight_slider").slider("value")+$j("#green_weight_slider").slider("value")+$j("#price_weight_slider").slider("value"));
+            //console.log('totalweight is ' + totalweight);
+            totalscore = totalscore + (($j("#year_weight_slider").slider("value")/totalweight)*$j(this).data("years-score")); 
+            //console.log('totalscore for ' + i + ' with years is '+totalscore);
+            totalscore = totalscore + (($j("#price_weight_slider").slider("value")/totalweight)*((maxPrice-$j(this).data('price'))/(maxPrice-minPrice)*100  )); 
+            //console.log('totalscore for ' + i + ' with years and price is '+totalscore);
+            totalscore=totalscore+(($j("#green_weight_slider").slider("value")/totalweight)*$j(this).data("green"));
+            //console.log('totalscore for ' + i + ' with years, price, green is '+totalscore);
+            totalscore=totalscore+(($j("#star_weight_slider").slider("value")/totalweight)*SatRanking($j(this).data("star-ranking"), $j(this).data("puc")));
+            //console.log('totalscore for ' + i + ' with all is '+totalscore);
+            $j(this).data('total-score', totalscore);
+            $j(this).find(".score_display").text(totalscore.toFixed(0));
+        });
+        
+        var divList =$j(".shopping-result");
+        divList.sort(function (a,b){
+            var contentA =parseFloat( $j(a).data('total-score'));
+            var contentB =parseFloat( $j(b).data('total-score'));
+            return (contentA > contentB) ? -1 : (contentA < contentB) ? 1 : 0;
+        });
+        $j(".shopping-result-tiles").html(divList);
+        
+    }
+    
+    function SatRanking(stars, puc){
+        if (!puc) puc=3;
+        if (!stars) stars=0;  
+
+        if (!{!$Setup.Calculation_Inputs__c.PUC_Complaint_Scorecard_weighting__c}){
+            return stars;  
+        }                
+        
+        var PUCtranslated=100-(5-puc)*25;
+
+        return {!$Setup.Calculation_Inputs__c.PUC_Complaint_Scorecard_weighting__c}*PUCtranslated + (1-{!$Setup.Calculation_Inputs__c.PUC_Complaint_Scorecard_weighting__c})*stars;
+    }
+    
+    function showHideTiles(){ // this is the "verify all the checkboxes function"
+        //console.log('we are in the showHideFunction');
+        //console.log('less than six not checked is ' + !$j("#less_than_6").is(':checked'));
+        var elementCount=0;
+        $j(".shopping-result").each(function(i){
+            $j(this).show();
+            //check the contract length  
+            //console.log('months is '+  parseInt($j(this).data('months')));
+            if (  parseInt($j(this).data('months')) < 6 && !$j("#less_than_6").is(':checked')  ) $j(this).hide(); 
+            if (  parseInt($j(this).data('months')) === 12 && !$j("#exactly_12").is(':checked')  ) $j(this).hide();
+            if (  parseInt($j(this).data('months')) > 12 && !$j("#more_than_12").is(':checked')  ) $j(this).hide();
+            if (  parseInt($j(this).data('months')) < 12 && parseInt($j(this).data('months')) > 5 && !$j("#from_6_to_11").is(':checked')  ) $j(this).hide();
+            if (  $j(this).data('online-bill') && !$j("#online_billing_autopay").is(':checked')  ) $j(this).hide();
+            if (!$j('#cb'+$j(this).data('rep-id')).is(':checked')){//check its REP checkbox
+                $j(this).hide();        
+            }
+            if ($j(this).is(':visible')) elementCount = elementCount +1;    
+        });
+        if (elementCount==0){
+            //alert('no plans');
+            $j(".shopping-result-tiles").append('<div class="alert alert-block alert-error"><h3>No plans were found that match your criteria.</h3>Try changing your checkboxes or <a href="{!$Page.ContactUs}">contact us </a> if you believe an error has occurred</div>');
+        } else RescoreResort(); 
+    }
+    
+    //SavePrefs(string userid, decimal p, decimal g, decimal s, decimal y, boolean a, boolean b, boolean c, boolean d, boolean e)
+    function SavePrefs(){
+        
+        if(StoredAPA) {
+            ShopRemote.SavePrefs(
+                '{!$User.Id}', 
+                $j("#price_weight_slider").slider("value"),//$j("#price_weight").val(), //decimal p, 
+                $j("#green_weight_slider").slider("value"),//$j("#green_weight").val(), //decimal g, 
+                $j("#star_weight_slider").slider("value"),//$j("#star_weight").val(), //decimal s, 
+                $j("#year_weight_slider").slider("value"),//$j("#year_weight").val(), //decimal y, 
+                $j("#less_than_6").is(':checked'), //boolean a, 
+                $j("#from_6_to_11").is(':checked'), //boolean b, 
+                $j("#exactly_12").is(':checked'), //boolean c, 
+                $j("#more_than_12").is(':checked'), //boolean d, 
+                $j("#online_billing_autopay").is(':checked'), //boolean e,
+                function(result, event){
+                    //nothing to do
+                }
+                
+            );
+        } else{
+            $j.cookie("apex__g", $j("#green_weight_slider").slider("value"), { expires: 90 });
+            $j.cookie("apex__p", $j("#price_weight_slider").slider("value"), { expires: 90 });
+            $j.cookie("apex__s", $j("#star_weight_slider").slider("value"), { expires: 90 });
+            $j.cookie("apex__y", $j("#year_weight_slider").slider("value"), { expires: 90 });
+            var boxes5 = $j("#less_than_6").is(':checked')?'1':'0';
+            boxes5=boxes5 + ($j("#from_6_to_11").is(':checked')?'1':'0');
+            boxes5=boxes5 +($j("#exactly_12").is(':checked')?'1':'0');
+            boxes5=boxes5 +($j("#more_than_12").is(':checked')?'1':'0');
+            boxes5=boxes5 +($j("#online_billing_autopay").is(':checked')?'1':'0');
+            //console.log(boxes5);
+            $j.cookie("apex__okTerms", boxes5, { expires: 90 });                
+        }
+    }
+    
+    function HowCalculated(theAPA){
+        try{
+            //using data            
+            if (theAPA.Meter_Data_Request_Status__c == 'Complete' && theAPA.Meter_Data_Permission__c) return 'Real Data';                       
+            //estimated usage
+            else if (theAPA.Meter_Data_Request_Status__c != 'Complete' && theAPA.Meter_Data_Estimated__c) {
+                return 'Estimated Data';            
+                //console.log('data is estimated');
+            }
+            //size profile
+            else if ( (theAPA.Meter_Data_Request_Status__c != 'Complete' || !theAPA.Meter_Data_Permission__c) && theAPA.Customer_Selected_Profile__c == 'Small') return 'Small';
+            else if ( (theAPA.Meter_Data_Request_Status__c != 'Complete' || !theAPA.Meter_Data_Permission__c)&& theAPA.Customer_Selected_Profile__c == 'Medium') return 'Medium';
+            else if ( (theAPA.Meter_Data_Request_Status__c != 'Complete' || !theAPA.Meter_Data_Permission__c)&& theAPA.Customer_Selected_Profile__c == 'Large') return 'Large';
+            //average for area
+            
+        } catch(err){return 'No Premise';}
+    }
+    
+    function AddHowCalculatedText(StoredAPA){
+        $j("#Calc_No_Premise, #Calc_Default_Load, #Calc_Actual_Data, #Calc_Estimated_Data, #Calc_Load_Profile, .lev-4, .lev-3, .lev-2, .lev-1, .lev-0, #other_meter_data_error, #service_address_error, #meter_number_error, .timeout_message" ).hide();
+        var HowCalc=HowCalculated(StoredAPA);
+        if (!HowCalc || HowCalc=='Default Load') {
+            $j("#Calc_Default_Load").show();
+        }
+        else if (HowCalc=='Real Data') {
+            $j("#Calc_Actual_Data").show();
+        }
+        else if (HowCalc=='Estimated Data') {
+            $j("#Calc_Estimated_Data").show();
+        }
+        else if (HowCalc=='No Premise') {
+            $j("#Calc_No_Premise").show();
+            $j(".lev-0, #complete").show();
+        }
+        else if (HowCalc=='Small' || HowCalc=='Medium' || HowCalc=='Large'){
+            $j("#Calc_Load_Profile").show();
+            $j("#Load_Profile_Size").text(HowCalc)
+            if(HowCalc=='Small'){
+                $j("#Profile_Desc").text('(homes less than 1,500 sqft).');
+            } else if(HowCalc=='Medium'){
+                $j("#Profile_Desc").text('(homes between 1,500 and 3,000 sqft).');
+            } else if(HowCalc=='Large'){
+                $j("#Profile_Desc").text('(homes larger than 3,000 sqft).');
+            }
+        }
+        var DataRequest = getDataStatus(StoredAPA);
+        if (StoredAPA.Meter_Data_Request_Status__c== 'Not requested' || StoredAPA.Meter_Data_Request_Status__c=== undefined) $j(".lev-1, #complete").show();
+        else if (StoredAPA.Meter_Data_Request_Status__c== 'Complete') $j(".lev-4, #complete").show();
+        else if (StoredAPA.Meter_Data_Request_Status__c== 'In Progress') {
+            $j(".lev-2, #complete").show();
+            PollerVar =  setInterval(poller, 5000); 
+        }
+        else if (StoredAPA.Meter_Data_Request_Status__c== 'Error-Invalid Meter/ESID Match') $j(".lev-3, #meter_number_error, #complete").show();
+        else if (StoredAPA.Meter_Data_Request_Status__c== 'Error-Invalid Service Address') $j(".lev-3, #service_address_error, #complete").show();
+        else if (StoredAPA.Meter_Data_Request_Status__c.indexOf('Error')>-1) $j(".lev-3, #other_meter_data_error, #complete").show();
+        //console.log('street address ' +StoredAPA.Premise__r.Electric_Service_Address__c);
+        $j(".Street_Address").html(StoredAPA.Premise__r.Electric_Service_Address__c);
+        //if (DataRequest== 'Complete' service_address_error)
+        //if (DataRequest== 'Complete')
+    }
+    
+    function poller(){
+        //console.log('Trying dataRecheck TryCount '+ pollerTryCounter);
+        if (pollerTryCounter<PollerMaxTries) { // if we haven't used all our tries
+            ShopRemote.recheckMeterDataStatus('{!$User.Id}', function(result, event){ //recheck the meter data.
+                if (result.Meter_Data_Request_Status__c == 'Complete' || result.Meter_Data_Request_Status__c.indexOf('Error')>-1){          //If successful  //If error
+                    StoredAPA.Meter_Data_Request_Status__c = result.Meter_Data_Request_Status__c;
+                    AddHowCalculatedText(StoredAPA);
+                } else {
+                    pollerTryCounter = pollerTryCounter+1;    
+                }
+                
+            });
+        } else {
+            $j(".lev-2, .loading_message").hide();
+            $j(".lev-2, .timeout_message").show();
+            clearInterval(PollerVar);
+        } //if we have used all our tries
+        
+    }
+    
+    function getDataStatus(theAPA){
+        try{
+            if (theAPA.Meter_Data_Permission__c){
+                if (theAPA.Meter_Data_Request_Status__c == 'Complete') return 'Complete';            //complete      
+                if (theAPA.Meter_Data_Request_Status__c == 'In Progress') return 'Pending';         //loading                    
+                if (theAPA.Meter_Data_Request_Status__c.indexOf('Error')) return 'theAPA.Meter_Data_Request_Status__c';     //error
+            }   else {
+                return 'Not requested';
+            }   
+        } catch (err){
+            return 'No Premise';
+        } return 'No Premise';
+    }
+    
+    var ChartGreenScore, ChartStarScore, ChartYearScore, ChartPriceScore;
+    
+    //CHART STUFF HERE:
+    
+    function LoadScoreLightbox(rateID){
+        var totalweight=$j("#year_weight_slider").slider("value")+$j("#green_weight_slider").slider("value")+$j("#price_weight_slider").slider("value")+$j("#star_weight_slider").slider("value");
+        //console.log(rateID);
+        
+        ChartGreenScore= ($j(rateID).data('green')*( $j("#green_weight_slider").slider("value") / totalweight)).toFixed(0);
+        //console.log('Green score: ' + ChartGreenScore );
+        ChartStarScore= (SatRanking($j(rateID).data('star-ranking'), $j(rateID).data('puc')) * ( $j("#star_weight_slider").slider("value") / totalweight)).toFixed(0);
+        //console.log('Star score: ' + ChartStarScore );
+        ChartYearScore= ($j(rateID).data('years-score')*( $j("#year_weight_slider").slider("value") / totalweight)).toFixed(0);
+        //console.log('Year score: ' + ChartYearScore );
+        ChartPriceScore= (((maxPrice-$j(rateID).data('price'))/(maxPrice-minPrice)*100  )*( $j("#price_weight_slider").slider("value") / totalweight)).toFixed(0);
+        //console.log('Price score: ' + ChartPriceScore );
+        $j("#total_score_text").text((parseInt(ChartGreenScore)+parseInt(ChartYearScore)+parseInt(ChartStarScore)+parseInt(ChartPriceScore)).toFixed(0));
+        drawChart();
+    }
+    
+    function drawChart() {
+        
+        // 1. CHART TO DISPLAY TOTAL PLAN SCORE AND BREAKDOWN //
+        var scoreData = google.visualization.arrayToDataTable([
+            ['Criteria', 'Low Price', 'Green-Friendly', 'Customer Satisfaction', 'Years in Business', 'Not Scored'],
+            ['Plan Score', parseInt(ChartPriceScore), parseInt(ChartGreenScore), parseInt(ChartStarScore), parseInt(ChartYearScore), 100-parseInt(ChartPriceScore)-parseInt(ChartGreenScore)-parseInt(ChartStarScore)-parseInt(ChartYearScore)]
+        ]);        
+        
+        var scoreOptions = {
+            title: 'Scorecard',
+            titlePosition: 'out',
+            titleTextStyle: {color: '#666', fontName: 'Arial', fontSize: '12'},
+            colors: ['#f7d199','#f4b966','#f0a233','#ec8b00','#f3f3f3'],
+            //colors: ['#ec8b00','#f0a233','#f4b966','#f7d199','#f3f3f3'], 
+            //colors: ['#d9e6ee','#e6fde7','#fee8a2','#fcd2d1','#f3f3f3'], 
+            legend: {position: 'none', alignment: 'start', textStyle: {color: '#666', fontSize: '12'}},
+            //axisTitlesPosition: 'none',
+            vAxis: {textPosition:'none'},
+            hAxis: {minValue: '0', maxValue: '100', textPosition:'out', gridlines: {color: '#e6e6e6'}, baseline: 0, baselineColor: '#999', textStyle: {color: '#666', fontSize: '10'}},
+            chartArea: {left: 8, top: 28, width:'95%', height:'15'},
+            isStacked: true,
+            series: {4:{visibleInLegend: false}},
+            enableInteractivity: true,  
+            backgroundColor: {stroke: '#ededed', strokeWidth: 0, fill: '#fff'},
+        };
+        
+        var scoreBar = new google.visualization.BarChart(document.getElementById('score_Bar'));
+        scoreBar.draw(scoreData, scoreOptions);   
+    }
+    
+    </script>    
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", {packages:["corechart"]});
+    </script>
+</apex:component>

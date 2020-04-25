@@ -1,0 +1,33 @@
+<apex:page showHeader="false" sidebar="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Link TrueCost and Facebook - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>
+       
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h1>Link your facebook and TrueCost account<br/>
+                            <small>Make logging in easier</small>
+                        </h1>
+                        <a class="btn btn-primary" href="{!$Setup.AuthSettings__c.Facebook_OAuth_Link_Link__c}?site={!urlencode($Setup.AuthSettings__c.TrueCost_Secure_URL__c)}">
+                        	Link my TrueCost account to facebook
+                        </a>
+                    </div>
+                    
+                    <div class="span4">
+                        <h3>How does this work?</h3>
+                        <p>Once you've linked your account, you can click the <b>facebook</b> button on any TrueCost login page.  </p>
+                        <p>If you're signed into facebook already, we sign you in.  If you aren't, you'll be prompted to login to facebook and then you'll be logged into TrueCost.</p>
+                        <p>Fewer passwords to remember, less typing.</p>    
+                    </div>
+                </div>
+            </div>
+            
+        </apex:define>                           
+        
+    </apex:composition>
+</apex:page>

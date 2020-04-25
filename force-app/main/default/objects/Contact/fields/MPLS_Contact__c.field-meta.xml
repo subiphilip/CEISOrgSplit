@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MPLS_Contact__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Primary MPLS Safari contact.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Primary MPLS Safari contact.</inlineHelpText>
+    <label>MPLS Contact</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

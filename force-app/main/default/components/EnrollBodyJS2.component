@@ -1,0 +1,480 @@
+<apex:component controller="EnrollRemoteController2">
+    <apex:includeScript value="{!URLFOR($Resource.MomentJS)}"/>
+    <script>
+    $j=jQuery.noConflict();
+    var myModule = angular.module('checkout', ['ngForce', 'ui.bootstrap'] );
+    
+    
+    
+    function timeZoneShift(d){
+        return moment(d).add('minutes', moment(d).zone()).toDate();
+    }
+    
+    function CheckoutCtrl($scope, GetRate, GetOrder, GetAPA, GetLead, vfr, GetAddressMatches, RemoteRegister){
+        //console.log('in the ctrl');
+        $scope.Switch={}; // Type:'Standard'
+        $scope.showDMButton = true;
+        $scope.matches = [];
+        $scope.rewards = {};
+        
+              
+        $scope.search = {searchAddress:"", searchZip:""};
+        
+        var LeadId = $j.cookie("apex__LeadId");
+        
+        if (!LeadId) {
+            $scope.search.Address = $j.cookie("apex__StreetAddress");
+            $scope.search.Zip = $j.cookie("apex__ShopZip");
+        }
+        if($j.cookie("apex__LeadId")){
+            $scope.showDMButton = false;
+        }
+        
+        $scope.DOB = {};
+        $scope.data = {};
+
+        GetOrder('{!$User.Id}', '{!$CurrentPage.Parameters.id}').then(
+            function(result){
+                $scope.order = result; 
+                $scope.order.Customer_Acceptance_of_Plan_Terms__c = false;
+                $scope.order.Payment_Card_Year__c= new Date().getFullYear().toString();
+                $scope.order.Payment_Card_Month__c='01 - January';
+                $scope.order.Payment_Card_Type__c='Visa';
+                $scope.order.Payment_Card_Address_State__c='TX';
+                $scope.order.Mailing_State__c='TX';
+                
+                $scope.data.OrderNumber = $scope.order.Name; //copy b/c we're about to delete it
+                delete $scope.order['Name'];
+            
+                console.log($scope.order);
+                if ($scope.order.Incentive__c){
+                    $scope.order.Reward__c='';
+                    vfr.query("select id, Reward__r.Name, Reward__c, Reward__r.Reward_Description__c,Reward__r.Reward_Product_ID__c from RateRewardAssociation__c where Choice__c = true and Rate__c = '"+$scope.order.Rate__c+"' and Reward__r.Reward_Start_Date__c<=TODAY and Reward__r.Reward_End_Date__c>=TODAY").then(
+                            function (rewards){
+                                //loop through and add them
+                                console.log(rewards);
+                                for (var i=0; i<rewards.records.length; i++){
+                                    $scope.rewards[rewards.records[i].Reward__r.Name] = rewards.records[i].Reward__r;
+                                }
+                                
+                            },
+                            function(error){
+                                console.log(error);
+                                dataLayer.push({'errorFunction':'rewardsQuery', 'errorObject':error});
+                                dataLayer.push({'event':'error'});
+                            }
+                        );
+                    
+                }
+            },
+            function(error){
+                dataLayer.push({'errorFunction':'GetOrder', 'errorObject':error});
+                dataLayer.push({'event':'error'});
+            }
+        );
+        
+        GetRate('{!$CurrentPage.Parameters.id}').then(
+            function(result){
+                $scope.rate = result; 
+                vfr.query("select id, Name, Reward_Description__c, Reward_Product_ID__c from Rewards__c where Choice__c = true and Applies_to_All_Plans__c = true and REP_Profile__c = '"+$scope.rate.Plan__r.REP_Profile__c+"' and Reward_Start_Date__c<=TODAY and Reward_End_Date__c>=TODAY").then(
+                            function (rewards){
+                                //loop through and add them
+                                console.log(rewards);
+                                for (var i=0; i<rewards.records.length; i++){
+                                    $scope.rewards[rewards.records[i].Name] = rewards.records[i];
+                                }
+                                
+                            },
+                            function(error){
+                                console.log(error);
+                                dataLayer.push({'errorFunction':'rewardsQuery', 'errorObject':error});
+                                dataLayer.push({'event':'error'});
+                            }
+                        );
+
+                $scope.MaxSwitch=moment().startOf('day').add('d', $scope.rate.Plan__r.REP_Profile__r.Maximum_Switch_Days__c-1).toDate();
+                $scope.MinSwitch=moment().startOf('day').add('d', $scope.rate.Plan__r.REP_Profile__r.Soonest_Switch_Date__c+1).toDate();
+                $scope.MaxMove=moment().startOf('day').add('d', $scope.rate.Plan__r.REP_Profile__r.Maximum_Switch_Days__c-1).toDate();
+                $scope.MinMove=moment().startOf('day').add('d', $scope.rate.Plan__r.REP_Profile__r.Soonest_Move_Date__c+1).toDate();
+                //console.log($scope.rate);
+            },
+            function(error){
+                dataLayer.push({'errorFunction':'GetRate', 'errorObject':error});
+                dataLayer.push({'event':'error'});
+            }
+        );
+        
+        GetAPA('{!$User.Id}').then(
+            function(result){
+                if (result!=null){
+                    $scope.data.Progress='p1';
+                    $scope.APA = result; 
+                    //parent account from APA
+                    $scope.order.Parent_Account__c = $scope.APA.Account__c; //set account name (lookup acct)
+                    $scope.order.First_Name__c=$scope.APA.Account__r.FirstName;
+                    $scope.order.Last_Name__c=$scope.APA.Account__r.LastName;                    
+                    $scope.order.Customer_Email__c=$scope.APA.Account__r.PersonEmail;
+                    $scope.order.Customer_Phone_Number__c=$scope.APA.Account__r.Phone;
+                    $scope.order.SSN__c=$scope.APA.Account__r.SSN__c;
+                    
+                    $scope.DOB.DOBM=moment(timeZoneShift($scope.APA.Account__r.PersonBirthdate)).month()+1;
+                    $scope.DOB.DOBD=moment(timeZoneShift($scope.APA.Account__r.PersonBirthdate)).date();
+                    $scope.DOB.DOBY=moment(timeZoneShift($scope.APA.Account__r.PersonBirthdate)).year();
+                    
+                    //service address from APA
+                    $scope.order.Premise__c = $scope.APA.Premise__c;
+                    $scope.order.ESIID_Number__c = $scope.APA.Premise__r.ESID__c;    //set esid
+                    $scope.order.Service_Address__c = $scope.APA.Premise__r.Electric_Service_Address__c;
+                    $scope.order.Service_City__c = $scope.APA.Premise__r.Electric_Service_Address_City__c;
+                    $scope.order.Service_State__c = $scope.APA.Premise__r.Electric_Service_Address_State2__c;
+                    $scope.order.Service_Zip__c = $scope.APA.Premise__r.Electric_Service_Address_Zip__c;
+                    
+                    //check for old order expiration date
+                    vfr.query("SELECT Id, Plan_Expiration__c, REP_Profile__r.Name FROM Order__c WHERE Premise__c='"+$scope.APA.Premise__c+"' and Parent_Account__c ='"+$scope.APA.Account__c+"' and Plan_Expiration__c > NEXT_N_DAYS:13 limit 1").then(
+                        function(result){
+                            try {
+                                console.log(result.records[0]);
+                                $scope.OldOrder=result.records[0];
+                                $scope.OldOrder.Plan_Expiration__c  = timeZoneShift($scope.OldOrder.Plan_Expiration__c);    
+                            } catch(err){}
+                        }
+                    );
+                    dataLayer.push({'virtualUrl':'/goal/enrollRegistered'});
+                    dataLayer.push({'event':'pagechange'});
+                    
+                } else{
+                    $scope.data.Progress='p0';
+                    dataLayer.push({'virtualUrl':'/goal/enrollGuestAddress'});
+                    dataLayer.push({'event':'pagechange'});
+                    
+                    var LeadId = $j.cookie("apex__LeadId");
+                    if (LeadId) {
+                        GetLead(LeadId).then(
+                            function(result) {
+                                $scope.order.First_Name__c=result.FirstName;
+                                $scope.order.Last_Name__c=result.LastName;                    
+                                $scope.order.Customer_Email__c=result.Email;
+                                $scope.order.Customer_Phone_Number__c=result.Phone;
+                                $scope.search.Address = result.Street;
+                                $scope.search.Zip = result.PostalCode;
+                            }
+                        );
+                    }
+                    //_gaq.push(['_trackPageview', '/goal/enrollGuest/' + Math.round($scope.rate.Plan__r.Contract_Length__c) + '/'+$scope.rate.Plan__r.REP_Profile__r.Name+'/'+$scope.rate.Plan__r.Name]);
+                }
+
+                dataLayer.push({'planStarted': $scope.rate});
+                //console.log(dataLayer);
+            }
+        );
+        
+        
+        
+        
+        $scope.SaveOrder2 = function(){
+            console.log('in save order function 2');
+            $scope.order.Order_Status__c='New/Successfully Submitted';
+            $scope.order.OwnerId = $scope.rate.Plan__r.REP_Profile__r.OwnerId;
+
+            vfr.update('Order__c', $scope.order.Id, $scope.order).then(
+                function(result){
+                    console.log(result);
+                    doEcommerce();
+                    dataLayer.push({'virtualUrl':'/goal/enrollmentfinalconfirmation'});
+                    dataLayer.push({'event':'pagechange'});
+                    $scope.data.Progress='p3';
+
+                },
+                function(error){
+                    console.log(error);
+                    dataLayer.push({'errorFunction':'SaveOrder2--update', 'errorObject':error});
+                    dataLayer.push({'event':'error'});
+                }
+            );
+        }
+            
+        $scope.AddressSearch = function(){
+            console.log('in address search');
+            console.log($scope.search.Zip + ':' + $scope.search.Address);
+            GetAddressMatches($scope.search.Address, $scope.search.Zip).then(
+                function(result){
+                    //console.log(result);
+                    $scope.matches=result;
+                },
+                function(error){
+                    dataLayer.push({'errorFunction':'GetAddressMatches', 'errorObject':error});
+                    dataLayer.push({'event':'error'});
+                }
+            );    
+            dataLayer.push({'virtualUrl':'/goal/guestAddressResults'});
+            dataLayer.push({'event':'pagechange'});
+        };
+        
+        $scope.selectAddress = function( ordinal ) {
+            if ( ordinal >= 0 ) {
+                
+                var selectedAddress = $scope.matches[ordinal];
+                
+                $scope.order.Premise__c = selectedAddress.Id;
+                $scope.order.ESIID_Number__c = selectedAddress.ESID__c;    //set esid
+                $scope.order.Service_Address__c = selectedAddress.Electric_Service_Address__c;
+                $scope.order.Service_City__c = selectedAddress.Electric_Service_Address_City__c;
+                $scope.order.Service_State__c = selectedAddress.Electric_Service_Address_State2__c;
+                $scope.order.Service_Zip__c = selectedAddress.Electric_Service_Address_Zip__c;
+                
+                dataLayer.push({'virtualUrl':'/goal/guestAddressSelected'});
+                dataLayer.push({'event':'pagechange'});
+                $scope.data.Progress='p1';
+            }
+        };
+        function stripSpaceDashParen(s){
+            var outputString = s.replaceAll("-","").replaceAll(" ","");
+            return outputString;
+        }
+        
+
+        function doEcommerce(){
+                dataLayer.push({
+                    'transactionId': $scope.data.OrderNumber, 
+                    'transactionAffiliation': 'TrueCost Web',
+                    'transactionTotal': Math.min($scope.rate.Plan__r.Contract_Length__c * 5, 90),
+                    'transactionTax': 0,
+                    'transactionShipping': 0,
+                    'transactionProducts': [{
+                        'sku': $scope.rate.Plan__r.REP_Profile__r.Name+'-'+$scope.rate.Plan__r.Name,
+                        'name': $scope.rate.Plan__r.REP_Profile__r.Name,
+                        'category': $scope.rate.Plan__r.Contract_Length__c + ' month plan',
+                        'price': Math.min($scope.rate.Plan__r.Contract_Length__c * 5, 90), 
+                        'quantity': 1
+                    }]
+                });
+                dataLayer.push({'event':'orderComplete'});
+            }
+
+        
+        $scope.SaveOrder1 = function(){
+            //console.log('in save order function 1');
+            $scope.order.Order_Status__c='Remoting Page 1 Completed';
+            //console.log('date attempted is '+ $scope.DOB.DOBY + '-' + $scope.DOB.DOBM + '-' + $scope.DOB.DOBD);
+            //console.log('date attempted is '+ moment.utc($scope.DOB.DOBY + '-' + $scope.DOB.DOBM + '-' + $scope.DOB.DOBD, 'YYYY-MM-DD').toDate());
+            $scope.order.Customer_Date_of_Birth__c = moment(timeZoneShift(moment($scope.DOB.DOBY + '-' + $scope.DOB.DOBM + '-' + $scope.DOB.DOBD, 'YYYY-M-D'))).format('YYYY-MM-DD');
+            
+            //console.log('DOB full is ' + $scope.order.Customer_Date_of_Birth__c);
+            //Build the DOB back up
+            $scope.order.Plan__c = $scope.rate.Plan__c; //plan from rate
+            $scope.order.Plan_ID__c = $scope.rate.Plan__r.Plan_ID__c; //plan id from rate
+            $scope.order.Contract_Length__c = $scope.rate.Plan__r.Contract_Length__c; //contract length from rate
+            $scope.order.REP_Profile__c = $scope.rate.Plan__r.REP_Profile__c;
+            $scope.order.PMVI_Flag__c = ($scope.Switch.Type==='Move');
+            $scope.order.Browser__c = navigator.userAgent.substring(0, 254);
+            
+            if ($scope.Switch.Type==='Standard') delete $scope.order.InitialDateofService__c; //field may have gotten set but then switch type changed.  Null it back if needed
+            
+            //parent account from APA
+            if (typeof $scope.APA !== "undefined"){
+                $scope.order.Parent_Account__c = $scope.APA.Account__c; //set account name (lookup acct)
+                vfr.update('Order__c', $scope.order.Id, $scope.order).then(
+                    function(result){
+                        //_gaq.push(['_trackPageview', '/goal/PlanDisclosures/']);
+                        dataLayer.push({'virtualUrl':'/goal/PlanDisclosures'});
+                        dataLayer.push({'event':'pagechange'});
+                        $scope.data.Progress='p2';
+                    },
+                    function(error){
+                        dataLayer.push({'errorFunction':'SaveOrder1', 'errorObject':error});
+                        dataLayer.push({'event':'error'});
+                    }
+                );
+            } else {
+                $scope.Register();
+            }
+            
+            
+            
+        }
+            // Disable weekend selection
+            $scope.disabled = function(date, mode) {
+                return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+            };
+        
+        $scope.Register = function() {
+            RemoteRegister($scope.order.First_Name__c, $scope.order.Last_Name__c, $scope.order.Customer_Email__c).then(
+                function(result){
+                    vfr.query("SELECT Id FROM Account WHERE PersonEmail LIKE '"+$scope.order.Customer_Email__c+"'").then(
+                        function(result2){
+                            //console.log(result2);
+                            $scope.order.Parent_Account__c=result2.records[0].Id;
+
+                            $scope.APA = new Object();
+                            $scope.APA.Premise__c=$scope.order.Premise__c;
+                            $scope.APA.Account__c=$scope.order.Parent_Account__c;
+                            $scope.APA.Selected__c=true;
+                            console.log($scope.APA);
+                            vfr.create('AccountPremiseAssociation__c', 
+                                $scope.APA,
+                                function(result, event) {}
+                            );
+                            $scope.data.Progress='p2';
+                            dataLayer.push({'virtualUrl':'/goal/PlanDisclosures'});
+                            dataLayer.push({'event':'pagechange'});
+                        }
+                    );
+                },
+                function(error){
+                    dataLayer.push({'errorFunction':'CheckoutRegistration', 'errorObject':error});
+                    dataLayer.push({'event':'error'});
+                }   
+            );
+        }        
+    }
+    
+    
+    
+    myModule.factory('GetAPA', ['$q', '$rootScope', function($q, $rootScope) {
+        
+        return function(userid) {
+            var deferred = $q.defer();
+            
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.EnrollRemoteController2.getAPA}',
+                userid,
+                function(result, event) {
+                    $rootScope.$apply(function() {
+                        if (event.status) {
+                            deferred.resolve(result);
+                        } else {
+                            deferred.reject(event);
+                        }
+                    })
+                        },
+                { buffer: true, escape: true, timeout: 30000 }
+            );
+            
+            return deferred.promise;
+        }
+            
+            }]);
+            
+    myModule.factory('GetLead', ['$q', '$rootScope', function($q, $rootScope) {
+        
+        return function(leadid) {
+            var deferred = $q.defer();
+            
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.EnrollRemoteController2.getLead}',
+                leadid,
+                function(result, event) {
+                    $rootScope.$apply(function() {
+                        if (event.status) {
+                            deferred.resolve(result);
+                        } else {
+                            deferred.reject(event);
+                        }
+                    })
+                        },
+                { buffer: true, escape: true, timeout: 30000 }
+            );
+            
+            return deferred.promise;
+        }
+            
+            }]);
+    
+    myModule.factory('GetRate', ['$q', '$rootScope', function($q, $rootScope) {
+        
+        return function(rateID) {
+            var deferred = $q.defer();
+            
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.EnrollRemoteController2.getRepRate}',
+                rateID,
+                function(result, event) {
+                    $rootScope.$apply(function() {
+                        if (event.status) {
+                            deferred.resolve(result);
+                        } else {
+                            deferred.reject(event);
+                        }
+                    })
+                        },
+                { buffer: true, escape: true, timeout: 30000 }
+            );
+            
+            return deferred.promise;
+        }
+            
+            }]);
+    
+    myModule.factory('GetOrder', ['$q', '$rootScope', function($q, $rootScope) {
+        
+        return function(userID, rateID) {
+            var deferred = $q.defer();
+            
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.EnrollRemoteController2.startOrderRegistered}',
+                userID, rateID,
+                function(result, event) {
+                    $rootScope.$apply(function() {
+                        if (event.status) {
+                            deferred.resolve(result);
+                        } else {
+                            deferred.reject(event);
+                        }
+                    })
+                        },
+                { buffer: true, escape: true, timeout: 30000 }
+            );
+            return deferred.promise;
+        }
+            }]);
+    
+    myModule.factory('GetAddressMatches', ['$q', '$rootScope', function($q, $rootScope) {
+        return function(address, zip) {
+            var deferred = $q.defer();
+            
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.EnrollRemoteController2.sendPremise}',
+                address, zip,
+                function(result, event) {
+                    $rootScope.$apply(function() {
+                        if (event.status) {
+                            deferred.resolve(result);
+                        } else {
+                            deferred.reject(event);
+                        }
+                    })
+                        },
+                { buffer: true, escape: true, timeout: 30000 }
+            );
+            return deferred.promise;
+        }
+            }]);
+    
+    myModule.factory('RemoteRegister', ['$q', '$rootScope', function($q, $rootScope) {
+        return function(first, last, email) {
+            var deferred = $q.defer();
+            
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.EnrollRemoteController2.Register}',
+                first, last, email, null, null,
+                function(result, event) {
+                    $rootScope.$apply(function() {
+                        if (event.status) {
+                            deferred.resolve(result);
+                        } else {
+                            deferred.reject(event);
+                        }
+                    })
+                        },
+                { buffer: true, escape: true, timeout: 30000 }
+            );
+            return deferred.promise;
+        }
+            }]);
+    
+
+
+    </script>
+    <c:Ngforce />
+    <c:AngularUIBootstrap />
+</apex:component>

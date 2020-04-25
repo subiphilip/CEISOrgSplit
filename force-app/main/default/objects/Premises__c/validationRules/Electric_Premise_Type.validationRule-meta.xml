@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Electric_Premise_Type</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( Record_Type_Name__c = &quot;Electric Premise&quot;, 
+
+ISNULL( Premise_Type__c )
+)</errorConditionFormula>
+    <errorDisplayField>Premise_Type__c</errorDisplayField>
+    <errorMessage>Premise08: Type is required.</errorMessage>
+</ValidationRule>

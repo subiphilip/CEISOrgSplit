@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Emergency_Change__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This change was built and tested in dev and promoted to PRD to fix a user-facing problem.  It should then be tested and promoted from QA to keep the environments in sync and to follow the normal process</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This change was built and tested in dev and promoted to PRD to fix a user-facing problem.  It should then be tested and promoted from QA to keep the environments in sync and to follow the normal process</inlineHelpText>
+    <label>Emergency Change</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

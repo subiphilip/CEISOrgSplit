@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Under_Adder_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( 
+NOT(ISNEW()),
+NOT(
+ISBLANK(Under_Index_Name__c)
+), 
+ISBLANK( Under_Adder__c ) 
+)</errorConditionFormula>
+    <errorDisplayField>Under_Adder__c</errorDisplayField>
+    <errorMessage>CESC30: Adder is required if Under Index is selected</errorMessage>
+</ValidationRule>

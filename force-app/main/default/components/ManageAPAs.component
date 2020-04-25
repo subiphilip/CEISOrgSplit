@@ -1,0 +1,51 @@
+<apex:component controller="ControllerForChangeAPA" allowDML="true">
+    <!--if no addresses -->
+    <apex:outputPanel layout="block" styleClass="maintitle" style="font-size: 14px;" rendered="{!APAstoManage.size=0}">You have no service address associated with your account.</apex:outputPanel>
+    <apex:outputPanel layout="block" styleClass="sub-title" style="font-size: 14px;" rendered="{!APAstoManage.size=0}"></apex:outputPanel>
+
+    <apex:outputpanel styleClass="button-container-bar" layout="block" rendered="{!APAstoManage.size=0}">
+        <apex:outputpanel styleClass="action-button">                
+            <apex:outputlink value="{!$Page.AddAddressAfterRegistration}">Add Address</apex:outputlink>
+        </apex:outputpanel>
+    </apex:outputpanel>    
+
+    <!-- if addresses-->
+    <apex:outputPanel layout="none" rendered="{!APAstoManage.size>0}">
+        <h4>Manage Service Addresses</h4>
+    </apex:outputPanel>
+    <apex:pageBlock rendered="{!APAstoManage.size>0}">
+        <apex:datatable value="{!APAstoManage}" var="APA"  width="100%" id="service-address-table" headerClass="text-left">
+             <apex:column headervalue="Address">                            
+                 <apex:outputText value="{!APA.PremiseAddress}" styleClass="wrap-long"></apex:outputText>
+             </apex:column>
+            
+            <apex:column headervalue="Type">                            
+                <apex:outputText value="{!APA.PremiseType}" styleClass="wrap-long"></apex:outputText>
+            </apex:column>
+            
+             <apex:column headervalue="Added">   
+                <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" styleClass="wrap-long">
+                    <apex:param value="{!APA.createddate}"/>
+                </apex:outputText>
+             </apex:column>
+             
+             <apex:column headervalue="">
+                <apex:outputText value="Default Address" rendered="{!(APA.selected)}"></apex:outputText>
+                <apex:commandlink action="{!Submit}" Value="Set as Default"  rendered="{!NOT(APA.selected)}" styleClass="btn btn-default btn-mini wrap-long">
+                    <apex:param name="SelectedAPA" value="{!APA.APAid}" assignTo="{!SelectedAPA}"/>
+                </apex:commandlink>
+             </apex:column>
+            
+             <apex:column headervalue="">                            
+                <apex:commandlink action="{!DeleteAPA}" Value="Delete" rerender="service-address-table" styleClass="btn btn-danger btn-mini wrap-long">
+                    <apex:param name="SelectedAPA" value="{!APA.APAid}" assignTo="{!SelectedAPA}"/>
+                </apex:commandlink>
+             </apex:column>        
+             
+        </apex:datatable>
+         
+        <br/>
+        <apex:outputLink value="{!$Page.AddAddressAfterRegistration}" styleClass="btn btn-default">Add a new service address</apex:outputLink>
+    </apex:pageBlock>
+    
+</apex:component>

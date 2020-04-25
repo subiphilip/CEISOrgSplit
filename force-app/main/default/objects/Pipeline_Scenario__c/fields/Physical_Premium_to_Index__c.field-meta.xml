@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Physical_Premium_to_Index__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>What physical premium is added to the financial basis for a basis only or citygate deal?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What physical premium is added to the financial basis for a basis only or citygate deal?  If the number never changes, you can use the single field instead of this lookup</inlineHelpText>
+    <label>Physical Premium to Index (Strip)</label>
+    <referenceTo>Index__c</referenceTo>
+    <relationshipLabel>Pricing  Scenarios (Physical Premium to Index (Strip))</relationshipLabel>
+    <relationshipName>Physical_Premium</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>School_Tariff_Tier_1__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>if premise is in a school program, what is the school tariff pga for tier 1 gas?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>if premise is in a school program, what is the school tariff pga for tier 1 gas?</inlineHelpText>
+    <label>School Tariff Tier 1</label>
+    <referenceTo>Index__c</referenceTo>
+    <relationshipLabel>Premises</relationshipLabel>
+    <relationshipName>Premises</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Maximum_Annual_Usage__c</fullName>
+    <defaultValue>99999999999999</defaultValue>
+    <description>What is the maximum kWh that a customer could use last year and be able to see this plan?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>What is the maximum kWh that a customer could use last year and be able to see this plan?  Use this feature to create &quot;bands&quot; of pricing based on usage</inlineHelpText>
+    <label>Maximum Annual Usage</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

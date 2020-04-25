@@ -1,0 +1,39 @@
+<apex:component >
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+     google.load("visualization", "1", {packages:["corechart"]});
+     google.setOnLoadCallback(drawVisualization);
+     var data; var visualization;
+     
+
+      
+    function drawVisualization() {
+
+         var query = new google.visualization.Query(
+//Insert your URL here if it's not the main page
+         'https://docs.google.com/spreadsheet/ccc?key=0AstVZHCorfG7dGhfQnBfUzR5cDExQkF5dXA2ZVRBSXc&output=html');
+//Edit your charts here!!
+         query.setQuery('SELECT A,C WHERE A >= AA ORDER BY A');//12 Month Chart
+  query.send(handleQueryResponse);
+}
+
+function handleQueryResponse(response) {
+  if (response.isError()) {
+    _gaq.push(['_trackEvent', 'Page Errors', 'Chart Query Error', '{!$Site.OriginalUrl}--{!$CurrentPage.url}--u:{!$User.id}--'+response.getMessage() + ' ' + response.getDetailedMessage()]); 
+    //alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+    return;
+  }
+  
+  data = response.getDataTable();
+  visualization = new google.visualization.LineChart(document.getElementById('visualization'));  //rename the div tag if you need multiple charts on the page
+//options
+  visualization.draw(data, {title:'CenterPoint Energy Electric Price Index: TNMP service area one-year fixed rate plans', titlePosition: 'out' , titleTextStyle: {color: '#000000', fontSize:'15'} ,legend: 'none', colors:['#000000', '#BCBDAC', '#838689'], lineWidth:3, chartArea:{width:"80%", height:"80%"},                            vAxis:{gridlineColor:'#006894', textStyle:{color: '#006894'}, baselineColor:'#006894', format:'$###'},                           hAxis:{gridlineColor:'#ffffff', textStyle:{color: '#006894'}, baselineColor:'#ffffff', format:'MMM y'}, interpolateNulls:true});
+              window.onresize = function(event) {
+        visualization.draw(data, {title:'CenterPoint Energy Electric Price Index: TNMP service area one-year fixed rate plans', titlePosition: 'out' , titleTextStyle: {color: '#000000', fontSize:'15'} ,legend: 'none', colors:['#000000', '#BCBDAC', '#838689'], lineWidth:3, chartArea:{width:"80%", height:"80%"},                            
+                                  vAxis:{gridlineColor:'#006894', textStyle:{color: '#006894'}, baselineColor:'#006894', format:'$###'},                           
+                                  hAxis:{gridlineColor:'#ffffff', textStyle:{color: '#006894'}, baselineColor:'#ffffff', format:'MMM y'}, interpolateNulls:true});
+
+        } 
+}
+    </script>
+</apex:component>

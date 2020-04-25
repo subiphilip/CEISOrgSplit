@@ -1,0 +1,15 @@
+<apex:page showheader="false" sidebar="false" title="RegisterRedirect" applyBodyTag="false" standardStylesheets="false" docType="html-5.0" >
+    
+    <apex:outputpanel rendered="{!$Profile.Name='TrueCost Profile'}">
+        <c:GoogleAnalyticsTrackingCodeScript />
+        <script>        
+            _gaq.push(['_link', '{!$Setup.TrueCostSystemVariables__c.RegisterURL__c}']); 
+        </script>
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!$Profile.Name!='TrueCost Profile'}">
+        <script> 
+            //for dealing with people who already have a session so that won't get a VF error.
+            window.location.href = '/shopplans';        
+        </script>
+    </apex:outputpanel> 
+</apex:page>

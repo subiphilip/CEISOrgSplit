@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Meter_Data_Permission__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>The account has provided permission to retrieve data for this premise</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The account has provided permission to retrieve data for this premise</inlineHelpText>
+    <label>Meter Data Permission</label>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

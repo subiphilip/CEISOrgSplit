@@ -1,0 +1,15 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">
+This is a test page.  
+<br/><br/>
+Global Variables
+<br/><br/>
+
+Site Name: {!$Site.Name} <br/>
+Site Domain: {!$Site.Domain} <br/>
+Site Custom Web Address: {!$Site.CustomWebAddress} <br/>
+Site Current Site URL: {!$Site.CurrentSiteUrl} <br/>
+Site Prefix: {!$Site.Prefix} <br/>
+
+<script type="text/javascript" src="https://online.tableausoftware.com/javascripts/api/viz_v1.js"></script><div class="tableauPlaceholder" style="width:1667px; height:858px;"><object class="tableauViz" width="1667" height="858" style="display:none;"><param name="host_url" value="https%3A%2F%2Fonline.tableausoftware.com%2F" /><param name="site_root" value="&#47;t&#47;centerpointenergy" /><param name="name" value="TrueCostOrderDetails&#47;ZipCodeDashboard" /><param name="tabs" value="no" /><param name="toolbar" value="yes" /></object></div>
+
+</apex:page>

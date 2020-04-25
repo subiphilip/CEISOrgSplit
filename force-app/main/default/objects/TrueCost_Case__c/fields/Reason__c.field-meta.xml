@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Given the type of case, what reason is the case?</inlineHelpText>
+    <label>Reason</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Address Not Found</fullName>
+                <default>false</default>
+                <label>Address Not Found</label>
+            </value>
+            <value>
+                <fullName>Comments/Feedback</fullName>
+                <default>false</default>
+                <label>Comments/Feedback</label>
+            </value>
+            <value>
+                <fullName>Commercial Service</fullName>
+                <default>false</default>
+                <label>Commercial Service</label>
+            </value>
+            <value>
+                <fullName>Complex functionality</fullName>
+                <default>false</default>
+                <label>Complex functionality</label>
+            </value>
+            <value>
+                <fullName>ERCOT alert</fullName>
+                <default>false</default>
+                <label>ERCOT alert</label>
+            </value>
+            <value>
+                <fullName>ESID lookup</fullName>
+                <default>false</default>
+                <label>ESID lookup</label>
+            </value>
+            <value>
+                <fullName>Existing problem</fullName>
+                <default>false</default>
+                <label>Existing problem</label>
+            </value>
+            <value>
+                <fullName>Format</fullName>
+                <default>false</default>
+                <label>Format</label>
+            </value>
+            <value>
+                <fullName>Instructions not clear</fullName>
+                <default>false</default>
+                <label>Instructions not clear</label>
+            </value>
+            <value>
+                <fullName>Market question</fullName>
+                <default>false</default>
+                <label>Market question</label>
+            </value>
+            <value>
+                <fullName>New problem</fullName>
+                <default>false</default>
+                <label>New problem</label>
+            </value>
+            <value>
+                <fullName>No Meter</fullName>
+                <default>false</default>
+                <label>No Meter</label>
+            </value>
+            <value>
+                <fullName>Order Failure</fullName>
+                <default>false</default>
+                <label>Order Failure</label>
+            </value>
+            <value>
+                <fullName>Order status</fullName>
+                <default>false</default>
+                <label>Order status</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Questions about an REP</fullName>
+                <default>false</default>
+                <label>Questions about an REP</label>
+            </value>
+            <value>
+                <fullName>Questions about a Plan</fullName>
+                <default>false</default>
+                <label>Questions about a Plan</label>
+            </value>
+            <value>
+                <fullName>Suggestion</fullName>
+                <default>false</default>
+                <label>Suggestion</label>
+            </value>
+            <value>
+                <fullName>Technical - Browser assistance</fullName>
+                <default>false</default>
+                <label>Technical - Browser assistance</label>
+            </value>
+            <value>
+                <fullName>Technical - Complex functionality</fullName>
+                <default>false</default>
+                <label>Technical - Complex functionality</label>
+            </value>
+            <value>
+                <fullName>Technical - Navigation</fullName>
+                <default>false</default>
+                <label>Technical - Navigation</label>
+            </value>
+            <value>
+                <fullName>Technical - Password reset</fullName>
+                <default>false</default>
+                <label>Technical - Password reset</label>
+            </value>
+            <value>
+                <fullName>Testing</fullName>
+                <default>false</default>
+                <label>Testing</label>
+            </value>
+            <value>
+                <fullName>User didn&#39;t attend training</fullName>
+                <default>false</default>
+                <label>User didn&#39;t attend training</label>
+            </value>
+            <value>
+                <fullName>TDSP Fees</fullName>
+                <default>false</default>
+                <label>TDSP Fees</label>
+            </value>
+            <value>
+                <fullName>Account termination</fullName>
+                <default>false</default>
+                <label>Account termination</label>
+            </value>
+            <value>
+                <fullName>Meter number</fullName>
+                <default>false</default>
+                <label>Meter number</label>
+            </value>
+            <value>
+                <fullName>REP order performance</fullName>
+                <default>false</default>
+                <label>REP order performance</label>
+            </value>
+            <value>
+                <fullName>Page errors</fullName>
+                <default>false</default>
+                <label>Page errors</label>
+            </value>
+            <value>
+                <fullName>Survey</fullName>
+                <default>false</default>
+                <label>Survey</label>
+            </value>
+            <value>
+                <fullName>Account Changes</fullName>
+                <default>false</default>
+                <label>Account Changes</label>
+            </value>
+            <value>
+                <fullName>Registration walkthrough (web)</fullName>
+                <default>false</default>
+                <label>Registration walkthrough (web)</label>
+            </value>
+            <value>
+                <fullName>Registration by Agent</fullName>
+                <default>false</default>
+                <label>Registration by Agent</label>
+            </value>
+            <value>
+                <fullName>Order by Agent</fullName>
+                <default>false</default>
+                <label>Order by Agent</label>
+            </value>
+            <value>
+                <fullName>Order walkthrough (web)</fullName>
+                <default>false</default>
+                <label>Order walkthrough (web)</label>
+            </value>
+            <value>
+                <fullName>Switch/Move dates</fullName>
+                <default>false</default>
+                <label>Switch/Move dates</label>
+            </value>
+            <value>
+                <fullName>Deposit</fullName>
+                <default>false</default>
+                <label>Deposit</label>
+            </value>
+            <value>
+                <fullName>Meter Data Error</fullName>
+                <default>false</default>
+                <label>Meter Data Error</label>
+            </value>
+            <value>
+                <fullName>Fees</fullName>
+                <default>false</default>
+                <label>Fees</label>
+            </value>
+            <value>
+                <fullName>Cancelled order</fullName>
+                <default>false</default>
+                <label>Cancelled order</label>
+            </value>
+            <value>
+                <fullName>Gas/Electric phone/chat question</fullName>
+                <default>false</default>
+                <label>Gas/Electric phone/chat question</label>
+            </value>
+            <value>
+                <fullName>AEP.</fullName>
+                <default>false</default>
+                <label>AEP.</label>
+            </value>
+            <value>
+                <fullName>Oncor.</fullName>
+                <default>false</default>
+                <label>Oncor.</label>
+            </value>
+            <value>
+                <fullName>TNMP.</fullName>
+                <default>false</default>
+                <label>TNMP.</label>
+            </value>
+            <value>
+                <fullName>Survey.</fullName>
+                <default>false</default>
+                <label>Survey.</label>
+            </value>
+            <value>
+                <fullName>Entergy.</fullName>
+                <default>false</default>
+                <label>Entergy.</label>
+            </value>
+            <value>
+                <fullName>Out of office</fullName>
+                <default>false</default>
+                <label>Out of office</label>
+            </value>
+            <value>
+                <fullName>REP services</fullName>
+                <default>false</default>
+                <label>REP services</label>
+            </value>
+            <value>
+                <fullName>Voicemail</fullName>
+                <default>false</default>
+                <label>Voicemail</label>
+            </value>
+            <value>
+                <fullName>Commercial</fullName>
+                <default>false</default>
+                <label>Commercial</label>
+            </value>
+            <value>
+                <fullName>Positive feedback</fullName>
+                <default>false</default>
+                <label>Positive feedback</label>
+            </value>
+            <value>
+                <fullName>Negative feedback</fullName>
+                <default>false</default>
+                <label>Negative feedback</label>
+            </value>
+            <value>
+                <fullName>Early termination (switch)</fullName>
+                <default>false</default>
+                <label>Early termination (switch)</label>
+            </value>
+            <value>
+                <fullName>Early termination (move-out)</fullName>
+                <default>false</default>
+                <label>Early termination (move-out)</label>
+            </value>
+            <value>
+                <fullName>Move-out after DNP</fullName>
+                <default>false</default>
+                <label>Move-out after DNP</label>
+            </value>
+            <value>
+                <fullName>Dispute customer</fullName>
+                <default>false</default>
+                <label>Dispute customer</label>
+            </value>
+            <value>
+                <fullName>Dispute commission</fullName>
+                <default>false</default>
+                <label>Dispute commission</label>
+            </value>
+            <value>
+                <fullName>Request re-send</fullName>
+                <default>false</default>
+                <label>Request re-send</label>
+            </value>
+            <value>
+                <fullName>Apply Credit</fullName>
+                <default>false</default>
+                <label>Apply Credit</label>
+            </value>
+            <value>
+                <fullName>Payment Arrangements</fullName>
+                <default>false</default>
+                <label>Payment Arrangements</label>
+            </value>
+            <value>
+                <fullName>Request full report</fullName>
+                <default>false</default>
+                <label>Request full report</label>
+            </value>
+            <value>
+                <fullName>GasChoice</fullName>
+                <default>false</default>
+                <label>GasChoice</label>
+            </value>
+            <value>
+                <fullName>Delegation Agreement</fullName>
+                <default>false</default>
+                <label>Delegation Agreement</label>
+            </value>
+            <value>
+                <fullName>Website question</fullName>
+                <default>false</default>
+                <label>Website question</label>
+            </value>
+            <value>
+                <fullName>Gas Choice - Lost Customer</fullName>
+                <default>false</default>
+                <label>Gas Choice - Lost Customer</label>
+            </value>
+            <value>
+                <fullName>Meter data reply</fullName>
+                <default>false</default>
+                <label>Meter data reply</label>
+            </value>
+            <value>
+                <fullName>API Error</fullName>
+                <default>false</default>
+                <label>API Error</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Address Matching</controllingFieldValue>
+            <valueName>Address Not Found</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Address Matching</controllingFieldValue>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>ESID lookup</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Address Matching</controllingFieldValue>
+            <valueName>Format</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Address Matching</controllingFieldValue>
+            <valueName>No Meter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Address Matching</controllingFieldValue>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Meter number</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <controllingFieldValue>Clawback</controllingFieldValue>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <controllingFieldValue>Inadvertent Switch</controllingFieldValue>
+            <controllingFieldValue>Password Related</controllingFieldValue>
+            <controllingFieldValue>Cancellation</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <valueName>Dispute customer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <valueName>Dispute commission</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <valueName>Request re-send</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <valueName>Apply Credit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <valueName>Payment Arrangements</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <valueName>Request full report</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not Actionable (No Survey)</controllingFieldValue>
+            <valueName>Survey.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Market question</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <valueName>Registration walkthrough (web)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <valueName>Registration by Agent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <valueName>Order by Agent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <valueName>Order walkthrough (web)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Voicemail</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>GasChoice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sales</controllingFieldValue>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <valueName>Delegation Agreement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outside of Service Territory (Entergy)</controllingFieldValue>
+            <valueName>Entergy.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Utility</controllingFieldValue>
+            <valueName>Meter data reply</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outside of Service Territory (AEP)</controllingFieldValue>
+            <valueName>AEP.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API Error</controllingFieldValue>
+            <valueName>API Error</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outside of Service Territory (Oncor)</controllingFieldValue>
+            <valueName>Oncor.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Clawback</controllingFieldValue>
+            <valueName>Early termination (switch)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Clawback</controllingFieldValue>
+            <valueName>Early termination (move-out)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Clawback</controllingFieldValue>
+            <valueName>Move-out after DNP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <valueName>Instructions not clear</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Order Failure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <valueName>Technical - Browser assistance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <valueName>Technical - Complex functionality</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <valueName>Technical - Navigation</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <controllingFieldValue>Password Related</controllingFieldValue>
+            <valueName>Technical - Password reset</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <valueName>Account termination</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <controllingFieldValue>Complaint</controllingFieldValue>
+            <valueName>REP order performance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <controllingFieldValue>Complaint</controllingFieldValue>
+            <valueName>Page errors</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <controllingFieldValue>Complaint</controllingFieldValue>
+            <valueName>Survey</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <valueName>Meter Data Error</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Feature Request</controllingFieldValue>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <valueName>Suggestion</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Order status</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Questions about an REP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Questions about a Plan</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>TDSP Fees</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Switch/Move dates</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Deposit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Fees</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Cancelled order</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Gas/Electric phone/chat question</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>REP services</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Commercial</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Website question</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Testing</controllingFieldValue>
+            <valueName>Testing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <valueName>New problem</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <valueName>Account Changes</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Comments/Feedback</controllingFieldValue>
+            <valueName>Positive feedback</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Comments/Feedback</controllingFieldValue>
+            <valueName>Negative feedback</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Out of Office Reply</controllingFieldValue>
+            <valueName>Out of office</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Outside of Service Territory (TNMP)</controllingFieldValue>
+            <valueName>TNMP.</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

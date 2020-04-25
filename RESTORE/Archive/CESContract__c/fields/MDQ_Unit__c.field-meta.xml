@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MDQ_Unit__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>what unit of measurement is to be displayed on the TC?</inlineHelpText>
+    <label>TC Unit of Measure Display</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>MMBtu</fullName>
+                <default>false</default>
+                <label>MMBtu</label>
+            </value>
+            <value>
+                <fullName>Therm</fullName>
+                <default>false</default>
+                <label>Therm</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Choice_Premise_Program</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(  Record_Type_Name__c = &quot;Gas Choice Premise&quot;, 
+
+ISNULL( TEXT(Program__c) )
+
+)</errorConditionFormula>
+    <errorDisplayField>Program__c</errorDisplayField>
+    <errorMessage>Premise12: Gas Choice premise requires a valid program</errorMessage>
+</ValidationRule>

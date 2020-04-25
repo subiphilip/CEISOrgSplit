@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Year_Input</fullName>
+    <active>false</active>
+    <description>Prevents invalid input of program year</description>
+    <errorConditionFormula>NOT(
+REGEX(Year__c, &quot;[2]{1}[0-9]{3}&quot;)
+)</errorConditionFormula>
+    <errorDisplayField>Year__c</errorDisplayField>
+    <errorMessage>AnnlUsg01: Year must be exactly 4 characters and start with a 2</errorMessage>
+</ValidationRule>

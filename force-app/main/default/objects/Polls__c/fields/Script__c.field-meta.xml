@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Script__c</fullName>
+    <description>Script from SurveyGizmo that loads the poll</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Script from SurveyGizmo that loads the poll</inlineHelpText>
+    <label>Script</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

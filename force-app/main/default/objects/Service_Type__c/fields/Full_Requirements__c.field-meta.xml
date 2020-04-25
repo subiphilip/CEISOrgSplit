@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Full_Requirements__c</fullName>
+    <externalId>false</externalId>
+    <formula>CONTAINS(Name, &#39;Full Req&#39;)</formula>
+    <label>Full Requirements</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

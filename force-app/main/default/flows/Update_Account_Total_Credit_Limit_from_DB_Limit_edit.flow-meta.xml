@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <name>myVariable_waitStartTimeAssignment</name>
+        <label>myVariable_waitStartTimeAssignment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>myVariable_waitStartTimeVariable</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>myDecision</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision</name>
+        <label>myDecision</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision3</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_1</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_A1</targetReference>
+            </connector>
+            <label>primary db limit changed</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision3</name>
+        <label>myDecision3</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_4</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_4</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_4_A1</targetReference>
+            </connector>
+            <label>secondary db limit changed</label>
+        </rules>
+    </decisions>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>BLANKVALUE([Account].HOU_Primary_Credit_Limit__c, 0)  +
+BLANKVALUE([Account].LIVE_Primary_Credit_Limit__c, 0) +
+BLANKVALUE([Account].MPLS_Primary_Credit_Limit__c, 0) +
+BLANKVALUE([Account].STL_Primary_Credit_Limit__c, 0) </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_2_myRule_1_A1_Total_Primary_Credit_Limit_c</name>
+        <dataType>Currency</dataType>
+        <expression>BLANKVALUE({!myVariable_current.HOU_Primary_Credit_Limit__c}, 0)  +
+BLANKVALUE({!myVariable_current.LIVE_Primary_Credit_Limit__c}, 0) +
+BLANKVALUE({!myVariable_current.MPLS_Primary_Credit_Limit__c}, 0) +
+BLANKVALUE({!myVariable_current.STL_Primary_Credit_Limit__c}, 0)</expression>
+        <scale>18</scale>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>BLANKVALUE([Account].HOU_Secondary_Credit_Limit__c, 0)  +
+BLANKVALUE([Account].LIVE_Secondary_Credit_Limit__c, 0) +
+BLANKVALUE([Account].MPLS_Secondary_Credit_Limit__c, 0) +
+BLANKVALUE([Account].STL_Secondary_Credit_Limit__c, 0) </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_5_myRule_4_A1_Total_Secondary_Credit_Limit_c</name>
+        <dataType>Currency</dataType>
+        <expression>BLANKVALUE({!myVariable_current.HOU_Secondary_Credit_Limit__c}, 0)  +
+BLANKVALUE({!myVariable_current.LIVE_Secondary_Credit_Limit__c}, 0) +
+BLANKVALUE({!myVariable_current.MPLS_Secondary_Credit_Limit__c}, 0) +
+BLANKVALUE({!myVariable_current.STL_Secondary_Credit_Limit__c}, 0)</expression>
+        <scale>18</scale>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>AND(
+  NOT(ISNEW()),
+  OR(
+    ISCHANGED([Account].HOU_Primary_Credit_Limit__c ),
+    ISCHANGED([Account].LIVE_Primary_Credit_Limit__c ),
+    ISCHANGED([Account].MPLS_Primary_Credit_Limit__c ),
+    ISCHANGED([Account].STL_Primary_Credit_Limit__c )
+  )
+)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_1</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(
+  NOT(ISNEW()),
+  OR(
+    ISCHANGED({!myVariable_current.HOU_Primary_Credit_Limit__c} ),
+    ISCHANGED({!myVariable_current.LIVE_Primary_Credit_Limit__c} ),
+    ISCHANGED({!myVariable_current.MPLS_Primary_Credit_Limit__c} ),
+    ISCHANGED({!myVariable_current.STL_Primary_Credit_Limit__c} )
+  )
+)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>AND(
+  NOT(ISNEW()),
+  OR(
+    ISCHANGED([Account].HOU_Secondary_Credit_Limit__c ),
+    ISCHANGED([Account].LIVE_Secondary_Credit_Limit__c ),
+    ISCHANGED([Account].MPLS_Secondary_Credit_Limit__c ),
+    ISCHANGED([Account].STL_Secondary_Credit_Limit__c )
+  )
+)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_4</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(
+  NOT(ISNEW()),
+  OR(
+    ISCHANGED({!myVariable_current.HOU_Secondary_Credit_Limit__c} ),
+    ISCHANGED({!myVariable_current.LIVE_Secondary_Credit_Limit__c} ),
+    ISCHANGED({!myVariable_current.MPLS_Secondary_Credit_Limit__c} ),
+    ISCHANGED({!myVariable_current.STL_Secondary_Credit_Limit__c} )
+  )
+)</expression>
+    </formulas>
+    <interviewLabel>Update_Account_Total_Credit_Limit_from_DB_Limit_edit-1_Account</interviewLabel>
+    <label>Update Account Total Credit Limit from DB Limit edit</label>
+    <processMetadataValues>
+        <name>ObjectType</name>
+        <value>
+            <stringValue>Account</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>ObjectVariable</name>
+        <value>
+            <elementReference>myVariable_current</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OldObjectVariable</name>
+        <value>
+            <elementReference>myVariable_old</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>TriggerType</name>
+        <value>
+            <stringValue>onAllChanges</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Workflow</processType>
+    <recordUpdates>
+        <processMetadataValues>
+            <name>evaluationType</name>
+            <value>
+                <stringValue>always</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>isChildRelationship</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>reference</name>
+            <value>
+                <stringValue>[Account]</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_1_A1</name>
+        <label>sum primary credit limit</label>
+        <locationX>100</locationX>
+        <locationY>200</locationY>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>Currency</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Total Primary Credit Limit</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Formula</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>Total_Primary_Credit_Limit__c</field>
+            <value>
+                <elementReference>formula_2_myRule_1_A1_Total_Primary_Credit_Limit_c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <recordUpdates>
+        <processMetadataValues>
+            <name>evaluationType</name>
+            <value>
+                <stringValue>always</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>isChildRelationship</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>reference</name>
+            <value>
+                <stringValue>[Account]</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_4_A1</name>
+        <label>sum secondary credit limit</label>
+        <locationX>400</locationX>
+        <locationY>200</locationY>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>Currency</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Total Secondary Credit Limit</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Formula</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>Total_Secondary_Credit_Limit__c</field>
+            <value>
+                <elementReference>formula_5_myRule_4_A1_Total_Secondary_Credit_Limit_c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <startElementReference>myVariable_waitStartTimeAssignment</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>myVariable_current</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>myVariable_old</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>myVariable_waitStartTimeVariable</name>
+        <dataType>DateTime</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <elementReference>$Flow.CurrentDateTime</elementReference>
+        </value>
+    </variables>
+</Flow>

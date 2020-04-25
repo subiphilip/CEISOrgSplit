@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Standard_CES_Credit_Request</fullName>
+    <active>true</active>
+    <label>Standard CES Credit Request</label>
+    <picklistValues>
+        <picklist>Burn_Level__c</picklist>
+        <values>
+            <fullName>%3E10%2FDay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%3E100%2FDay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%3E25%2FDay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%3E50%2FDay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>%7E10%2FDay</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Credit_Request_Status__c</picklist>
+        <values>
+            <fullName>Additional Information Required</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Credit Decision - Limit Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Credit Decision - Limit Rejected</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Expired</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New%2FPending Submission</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Request Submitted%2FCredit Review</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Credit_Type__c</picklist>
+        <values>
+            <fullName>Accelerated Payment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bad Debt Allowance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Deposit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Discretionary</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Escrow Agreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Guaranty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Insurance Coverage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Letter of Credit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Netout</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>None Required</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Positive Credit Check</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Prepay</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Surety Bond</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Request_Type__c</picklist>
+        <values>
+            <fullName>Credit Limit Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Price Approval</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

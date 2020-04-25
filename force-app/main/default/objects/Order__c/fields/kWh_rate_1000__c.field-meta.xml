@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>kWh_rate_1000__c</fullName>
+    <description>For the rate the customer signed up for, what was the PUC 1000 kWh/month rate?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>For the rate the customer signed up for, what was the PUC 1000 kWh/month rate?</inlineHelpText>
+    <label>kWh rate 1000</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,11 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<p>Dear {!Account.FirstName}, <br><br>We recently received a request&nbsp;to change your email address.&nbsp; If you requested this change, thank you for using our&nbsp;online account center. This confirmation email was sent to your old and new email accounts.<br><br>Old address:<span style="FONT-WEIGHT: bold"> {!Account.Old_email__c}</span><br>New address: <span style="FONT-WEIGHT: bold">{!Account.Email__c}</span><br><br>If you did not request this change of email address, please notify us immediately by replying to this email or calling Customer Support at&nbsp;<span style="font-size: medium; ">(800) 461-3056</span>&nbsp;during business hours Monday through Friday, 8 a.m. to 5 p.m.<br><br>Thank you,<br><br>TrueCost Customer Support</p>
+<p><a href="mailto:TrueCost@CenterPointEnergy.com">TrueCost@CenterPointEnergy.com</a></p>
+<p><span style="font-size: medium; ">(800) 461-3056</span>
+</p>
+<p>&nbsp;</p>
+<p>Log into your account at <a href="http://www.mytruecost.com/myaccount">MyTrueCost.com</a></p>]]></td>
+</tr>
+</table>

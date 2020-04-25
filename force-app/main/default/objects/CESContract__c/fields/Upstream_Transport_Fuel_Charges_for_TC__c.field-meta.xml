@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Upstream_Transport_Fuel_Charges_for_TC__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF ( ISPICKVAL( MDQ_Unit__c , &#39;Therm&#39; )
+   , Upstream_Transport_Fuel_Charges__c * 0.1
+   , Upstream_Transport_Fuel_Charges__c
+)</formula>
+    <label>Upstream Transport Fuel Charges for TC</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

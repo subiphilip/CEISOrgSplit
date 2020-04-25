@@ -1,0 +1,155 @@
+<apex:component controller="ControllerForMobileMain" allowDML="true">
+
+<apex:attribute name="pagename" type="string" required="false" default="homepage" description="What url would you like the customer to start on once the login is complete?"/>
+
+<div xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <div id="appAccountLogin">
+        
+            <section>
+                <div class="container">
+                    <div class="has-margin-3 has-text-centered">
+                        <h2 class="is-size-4 has-text-weight-bold padding-sides">Please fill in the information below</h2>
+                    </div>
+                </div>
+            </section>
+        
+            <section>
+              <form  v-on:submit="validateBeforeSubmit"  method="post">  
+                         
+                <div class="container form singup-bottom-padding">
+                  <div class="box is-form-no-padding">
+                    <div class="inner">
+                      <div class="columns">
+                        <div class="column form-column" style="margin-bottom: 4.5em;">
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p v-if="errors.length">
+                                  <b>Please correct the following error(s):</b>
+                                  <ul>
+                                    <li v-for="error in errors">{{ error }}</li>
+                                  </ul>
+                                </p>
+                              </div>
+                            </div>
+                          </div><div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="email">Email Address</label>
+                                  <input v-validate="'required|email'"  class="input borderless" type="email" name="email" v-model="email" required="required"/>
+                                  <!-- <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span> -->
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="field is-horizontal">
+                            <div class="field-body">
+                              <div class="field">
+                                <p class="control is-expanded">
+                                  <label class="form-label" for="phone">Password</label>
+                                  <input id="password" class="input borderless" type="password" name="password" v-model="password" required="required"/>
+                                </p>
+                                <a href="{!$Page.Account_Forgot_Password}" class="btn btn-default btn-block">Forgot Password?</a>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          
+
+                        </div>
+
+
+                      </div>
+
+                      <div class="is-divider"></div>
+                          <div class="has-text-centered column form-column">
+                              <input class="button is-primary is-rounded fixed-size" type="submit" value="Sign In"/>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div>                    
+                    
+                    <div class="has-text-centered ">
+                      <a class="button is-info is-rounded is-outlined animate-gradient-bg mt-large" href="{!$Page.Account_Register}">CREATE AN ACCOUNT</a>
+                     </div>
+                    
+                    
+                  </div>
+                </div>
+              </form>
+            </section>
+        
+        
+        
+        
+        </div>
+  
+  <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+             
+             TC.app.appAccountLogin = new Vue({
+                el: '#appAccountLogin',
+                data: {
+                    errors: [],
+                    pagename: '{!$CurrentPage.Parameters.starturl}',
+                    email: TC.app.account.email,
+                    password: ''
+                },
+                methods: { 
+                    onSelectSignIn: function() {
+                                                                
+                        ControllerForMobileMain.RemoteLogin(this.email,this.password, '{!$Page.Shop_Plans}', function(result2, event){ 
+                            TC.app.appAccountLogin.error = [];      
+                            if (result2!='login error'){
+                                var decoded = result2.replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '').replace('amp;', '');               
+                                window.location.href=decoded;
+                                // TC.fn.getApa();
+                                
+                            } else{
+                                //dataLayer.push({'event':'error', 'errorFunction':'RemoteLogin', 'errorObject':{'errorCode':'Login Error', 'errorMessage':'Incorrect Username/Password'}});
+                                TC.app.appSubscribe.$emit('removeLoaderQueue', {'id':'createprofile'});
+                                TC.app.appAccountLogin.errors.push("Your email and password were not correct.")
+                            }
+                            
+                        });
+                    },
+                    validateBeforeSubmit: function(e) {
+                      
+                      if (!this.email) {
+                        this.errors.push('Email required.');
+                      } else {
+                        this.errors = [];
+                      }
+                      
+                      if(this.errors.length <= 0){
+                          this.onSelectSignIn();
+                      }
+                      e.preventDefault();
+                    }
+                },  
+                mounted: function() { 
+                },
+                watch: { 
+                    email: {
+                        handler: function() {
+                            TC.app.account.email = this.email;
+                        }
+                    },
+                    password: {
+                        handler: function() {
+                            // TC.app.account.password = this.password;
+                        }
+                    }
+                    
+                },
+             });
+    
+          })
+        })(jQuery);
+    </script>
+</div>
+</apex:component>

@@ -1,0 +1,98 @@
+<apex:page showHeader="false" sidebar="false" cache="true" expires="43200" applyBodyTag="false" applyHtmlTag="false" docType="html-5.0" standardStylesheets="false" controller="Reminders">
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"/>
+    
+<html ng-app="reminders" id="ng-app" xmlns:ng="http://angularjs.org">    
+    
+    <apex:composition template="Template_TC">
+        <apex:define name="HeadTags">
+            <title>Get Reminded - {!$Label.Page_Title_Company_Name}</title>
+            
+        </apex:define>
+        
+        
+        <apex:define name="body">
+            <div class="container" ng-controller="RemindersCtrl">
+                <div class="row">
+                    <div class="span6 offset3">
+                        <h2>
+                            Get Reminded
+                            <br/>
+                            <small>
+                                Only switch to a variable rate on purpose!
+                            </small>
+                        </h2>
+                     </div>
+                    <div class="span6 offset3"> 
+                        <form ng-submit="Post()" ng-show="!success" class="well well-large ng-cloak">
+                            <div class="control-group">
+                                <label class="control-label visible-desktop" for="Expiration">Expiration Date</label>
+                                <div class="controls">
+                                    <input  ng-model="expiration" class="input-block-level" name="Expiration" id="Expiration" placeholder="Expiration Date" value="" type="date" required="required" autofocus="autofocus"/>
+                                </div>                              
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label visible-desktop" for="Email">Email</label>
+                                <div class="controls">
+                                    <input ng-model="email" class="input-block-level" name="Email" id="Email" placeholder="Email" value="" type="email" required="required"/>
+                                </div>
+                            </div>
+                            <button class="btn btn-warning" data-loading-text="Sending">Save Reminder</button>
+                            
+                        </form>
+                        <div class="alert alert-success ng-cloak" ng-show="success">
+                            <h2>Thank you!</h2>
+                            <p class="lead">We'll send you an email when your switch is coming near so you can select your next plan on TrueCost.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </apex:define>    
+        
+    </apex:composition>
+    
+    <script>
+        $j=jQuery.noConflict();
+        var myModule = angular.module('reminders', ['ngForce'] );
+        
+        function RemindersCtrl($scope, RemoteReminders){
+            $scope.success=false;
+            $scope.Post = function(){
+                console.log('in Post');
+                RemoteReminders($scope.email, $scope.expiration).then(
+                    function(result){
+                        $scope.success=true;
+                    }, 
+                    function(error){
+                        //console.log('error');
+                    }
+                );
+            }           
+        }
+        
+        
+        //factory for our remote action
+        myModule.factory('RemoteReminders', ['$q', '$rootScope', function($q, $rootScope) {
+        return function(email, expiration) {
+            var deferred = $q.defer();
+            
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.Reminders.RemindersRemote}',
+                email, expiration, 
+                function(result, event) {
+                    $rootScope.$apply(function() {
+                        if (event.status) {
+                            deferred.resolve(result);
+                        } else {
+                            deferred.reject(event);
+                        }
+                    })
+                        },
+                { buffer: true, escape: true, timeout: 30000 }
+            );
+            return deferred.promise;
+        }
+            }]);
+    </script>
+    <c:Ngforce />
+    </html>
+</apex:page>

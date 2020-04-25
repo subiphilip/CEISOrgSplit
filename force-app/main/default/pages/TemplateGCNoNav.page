@@ -1,0 +1,103 @@
+<apex:page docType="html-5.0" showHeader="false" sidebar="false" standardStylesheets="false" id="template_gc" applyBodyTag="false">
+    
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"/>
+        <script src="https://cdn.optimizely.com/js/307772693.js"></script>
+        <script type="text/javascript"> if (!window.console) console = {log: function() {}}; </script>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="{!URLFOR($Resource.bootstrap, 'css/bootstrap.min.css')}" rel="stylesheet" media="screen"/>
+
+
+        <apex:insert name="HeadTags" />
+        
+    </head>
+
+    <body>
+        <c:GoogleTagManager />
+        <c:GCSTyleComponent />
+        <div class="">
+            <div class="row" id="header_bar">
+                <div class="pull-right hidden-phone" id="welcome-login">
+  
+                </div>
+                <div class="">
+                    <span class="logo" itemscope="itemscope" itemtype="http://schema.org/Organization">
+                        <meta itemprop="name" content="CenterPoint Energy" />
+                        <meta itemprop="email" content="truecost@centerpointenergy.com" />
+                        <meta itemprop="foundingDate" content="1866" />
+                        <a href="http://www.centerpointenergy.com" target="_blank" itemprop="url">
+                            <div id="cnp_logo">
+                                <img src="{!$Resource.CNPlogoTransparent}" title="CenterPoint Energy" alt="CenterPoint Energy logo" itemprop="logo"/>
+                            </div>
+                        </a>
+                    </span>
+                </div>
+                
+            </div>
+            
+            <div class="navbar" id="main-nav">
+                <div class="navbar-inner">
+                    <div class="">
+                        
+                        <a class="brand" id="mobile-brand" href="{!$Page.gaschoicehome2}">
+                            <div id="mobile-logo">
+                                <img src="{!$Resource.CNPlogoTransparent}"  />
+                            </div>
+                        </a>
+                        
+                        <a class="btn btn-navbar pull-right" data-toggle="collapse" data-target=".nav-collapse" id="menu_button">
+                            Menu
+                        </a>
+                        
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+
+                                <li class="visible-phone">
+                                    <a href="mailto:gaschoice@centerpointenergy.com">Email </a>  
+                                </li>
+                                <li class="visible-phone">
+                                    <a id="liveagent_button_online_573300000001Bj5" href="javascript://Chat" style="display: none;" onclick="liveagent.startChat('573300000001Bj5')">
+                                        Chat <!-- Offline Chat Content -->
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                            <!--form class="navbar-form pull-right text-right hidden-phone" action="{!$Page.SearchResults}">
+                                <div class="input-append">
+                                    <input type="text" class="span2" placeholder="Search" name="q"/>
+                                    <button type="submit" class="btn"><i class="icon-search"></i></button>
+                                </div>
+                            </form-->   
+                        </div><!--/.nav-collapse -->
+                        
+                    </div>
+                </div>        
+            </div>
+        </div>
+        
+        <div class="container">
+            <apex:insert name="breadcrumbs" /> 
+        </div>
+        
+        <div class="container phone-body">
+            <apex:insert name="body" />
+        </div>
+        
+        
+        
+        <script src="{!URLFOR($Resource.bootstrap, 'js/bootstrap.min.js')}" />
+            <script type="text/javascript">
+                if (!window._laq) { window._laq = []; }
+        window._laq.push(function(){liveagent.showWhenOnline('573300000001Bj5', document.getElementById('liveagent_button_online_573300000001Bj5'));
+                                    liveagent.showWhenOffline('573300000001Bj5', document.getElementById('liveagent_button_offline_573300000001Bj5'));
+                                   });
+        </script>
+        <script type='text/javascript' src='https://c.la1s1.salesforceliveagent.com/content/g/deployment.js'></script>
+        <script type='text/javascript'>
+            liveagent.init('https://d.la1s1.salesforceliveagent.com/chat', '572300000001BTb', '00D30000000pOSg');
+        </script>
+        <script async="async" src="https://ws.sharethis.com/button/buttons.js" />
+        </body>
+            </apex:page>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Star_ranking__c</fullName>
+    <defaultValue>000.50</defaultValue>
+    <description>How do your customer-given star ratings compare to other REPs on TrueCost?  The higher the percentage, the higher your approval is versus other REPs.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How do your customer-given star ratings compare to other REPs on TrueCost?  The higher the percentage, the higher your approval is versus other REPs.</inlineHelpText>
+    <label>Star Ranking</label>
+    <precision>5</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

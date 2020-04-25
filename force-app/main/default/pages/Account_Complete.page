@@ -1,0 +1,299 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" controller="EnrollRemoteController2">
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="Account Order Complete - {!$Label.Page_Title_Company_Name}"
+      description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+
+
+    <div id="wrapper">
+        <c:tc2_navbar />
+        <!-- <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-1.jpg"
+            headline="Your order has been successfully submitted"
+            subHeadline="Your TrueCost confirmation number is [Confirmation #]"
+        /> -->
+        <div id="appAccountComplete">
+            <section class="hero is-black is-medium" id="hero">
+                <div class="hero-body has-bg-img-building1" style="background-image:url({!URLFOR($Resource.v2_tc_resources_images, 'hero-2.jpg')});">
+                    <div class="container has-text-centered">
+                        <h1 class="title is-size-2-mobile is-spaced">Your order has been successfully submitted</h1>
+                        <h2 class="subtitle is-size-6-mobile " rendered="false">Your TrueCost confirmation number is {{order.Name}}</h2>
+                    </div>
+                </div>
+            </section>
+
+
+            <section>
+            <div class="container form singup-bottom-padding">
+              <p class="is-size-4 has-text-centered has-margin-top">Don’t worry, we'll share an email with you<br/> summarizing this information.</p>
+                <div class="box has-heavy-has-no-shadow" style="margin-top:1em;">
+                    <div class="">
+
+                        <div  class="navbar-center step-outer has-text-weight-semibold">
+                          <ul class="steps is-small">
+                              <!-- <span class="step-marker"><span class="icon"><i class="fa fa-check"></i></span> </span> -->
+                                  <li class="step-item is-completed">
+                                      <span class="step-marker"><span class="icon"><i class="fa fa-check"></i></span> </span>
+                                      <p>Order received by TrueCost</p>
+                                  </li>
+                                  <li class="step-item is-active">
+                                      <span  class="step-marker">2</span>
+                                      <p>Order passed to {{rep.Name}}</p>
+                                  </li>
+                                  <li class="step-item ">
+                                      <span  class="step-marker">3</span>
+                                      <p>Order processed by {{rep.Name}}</p>
+                                  </li>
+                                  <li class="step-item ">
+                                      <span  class="step-marker">4</span>
+                                      <p>Service started by {{rep.Name}}</p>
+                                  </li>
+                          </ul>
+                      </div>
+
+
+
+                    </div>
+                    <div class="is-divider"></div>
+
+
+                    <div class="">
+
+                      <div class="columns">
+                        <div class="column mt-smaller left-logo-box is-one-third inner-box">
+                          <span class="inline logo"><img class="inline logo-image" v-bind:src="plan.logo" v-bind:alt="plan.company"/></span>
+                          <!-- <span class="inline logo-stars">
+                                <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= .5, 'icon-icon-star-full': plan.starScore >= 1, 'icon-icon-star-outline': plan.starScore < .5}" class=" is-size-5 is-size-6-mobile"></i>
+                                <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= 1.5, 'icon-icon-star-full': plan.starScore >= 2, 'icon-icon-star-outline': plan.starScore < 1.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= 2.5, 'icon-icon-star-full': plan.starScore >= 3, 'icon-icon-star-outline': plan.starScore < 2.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= 3.5, 'icon-icon-star-full': plan.starScore >= 4, 'icon-icon-star-outline': plan.starScore < 3.5}" class=" is-size-5 is-size-6-mobile"></i>
+                                <i v-bind:class="{ 'icon-icon-star-half': plan.starScore >= 4.5, 'icon-icon-star-full': plan.starScore >= 5, 'icon-icon-star-outline': plan.starScore < 4.5}" class=" is-size-5 is-size-6-mobile"></i>
+                          </span> -->
+
+                        </div>
+                        <div class="is-divider-vertical"></div>
+                        <div class="column mt-small inner-box">
+                          <p class="his-size-5"><strong><p v-html="plan.title"></p></strong></p>
+                          <p class="is-size-5">{{plan.contract}}</p>
+                          <p class="is-size-7">{{rep.Legal_Name__c}}</p>
+                          <p class="is-size-5">PUCT NO. {{rep.PUCT_License_Number__c}}</p>
+                        </div>
+                        <div class="is-divider-vertical"></div>
+                        <div class="column mt-small inner-box">
+                          <p class="is-size-7">{{rep.Customer_Service_Phone_Number__c}}</p>
+                          <p class="is-size-7">{{rep.Mailing_Street_Address__c}}</p>
+                          <p class="is-size-7">{{rep.Mailing_City__c}}, {{rep.Mailing_State__c}} {{rep.Mailing_Zip__c}}</p>
+                        </div>
+                      </div>
+
+                    </div>
+
+
+
+                    <div class="is-divider"></div>
+                    <div class="columns has-spacing has-text-centered">
+
+                              <div class="column " style="padding: 1em;">
+                                  <p class="is-card-header">ALL-IN COST</p>
+                                  <p class="is-size-3">{{plan.kwhTC}} kWh</p>
+                              </div>
+                              <div class="column " style="padding: 1em;">
+                                  <p class="is-card-header">ADVERTISED PRICE</p>
+                                  <p class="is-size-3">{{plan.kwh1000}} kWh</p>
+                              </div>
+                              <div class="column " style="padding: 1em;">
+                                  <p class="is-card-header">AVERAGE BILL</p>
+                                  <p class="is-size-3">${{plan.costMonthly}}/mo</p>
+                              </div>
+                          </div>
+                    <div class="is-divider"></div>
+
+                    <div class="order-outer">
+                        <div class="order-details">
+                            <p>
+                                <span class="is-card-header">CONFIRMATION NUMBER</span>
+                                <span class="float-right is-size-5 icon-icon-check-green"></span>
+                            </p>
+                            <p>
+                                <p class="is-size-5">{{order.Name}}</p>
+                            </p>
+                        </div>
+                        <div class="order-details">
+                            <p>
+                                <span class="is-card-header">SERVICE ADDRESS</span>
+                                <span class="float-right is-size-5 icon-icon-check-green"></span>
+                            </p>
+                            <p class="is-size-5">{{TC.app.account.premise.street}}</p>
+                            <p class="is-size-5">{{TC.app.account.premise.city}}, {{TC.app.account.premise.state}} {{TC.app.account.premise.zip}}</p>
+                        </div>
+                        <div class="order-details">
+                            <p>
+                                <span class="is-card-header">START DATE</span>
+                                <span class="float-right is-size-5 icon-icon-check-green"></span>
+                            </p>
+                            <p class="is-size-5">{{startDate}}</p>
+                        </div>
+                        <div class="order-details">
+                            <p>
+                                <span class="is-card-header">SMALL BUSINESS INFORMATION</span>
+                                <span class="float-right is-size-5 icon-icon-check-green"></span>
+                            </p>
+                            <p class="is-size-5 is-uppercase">{{TC.app.account.companyName}}</p>
+                            <p class="is-size-5 is-uppercase">{{TC.app.account.companyTaxId}}</p>
+                            <p class="is-size-5 is-uppercase">{{TC.app.account.companyDuns}}</p>
+                        </div>
+                        <div class="order-details">
+                            <p>
+                                <span class="is-card-header">PROFILE INFORMATION</span>
+                                <span class="float-right is-size-5 icon-icon-check-green"></span>
+                            </p>
+                            <p class="is-size-5 is-uppercase">{{TC.app.account.firstName}} {{TC.app.account.lastName}}</p>
+                            <p class="is-size-5 is-uppercase">{{TC.app.account.phone}}</p>
+                            <p class="is-size-5 is-uppercase">{{TC.app.account.email}}</p>
+                        </div>
+                    </div>
+                    <div class="is-divider"></div>
+                    <div v-if="TC.app.account.guest" class="has-text-centered column form-column">
+                        <a class="button is-primary is-rounded fixed-size animate-gradient-bg" v-bind:href="finalizePath">FINALIZE MY TRUECOST ACCOUNT</a><br/>
+                        <a class="" href="{!$Page.Home}">No Thanks I'm Done</a>
+                    </div>
+                    <div v-if="!TC.app.account.guest" class="has-text-centered column form-column">
+                        <a class="button is-primary is-rounded fixed-size animate-gradient-bg" href="{!$Page.Account_Profile}">VIEW PROFILE</a><br/>
+                        <a class="" href="/">No Thanks I'm Done</a>
+                    </div>
+                </div>
+
+                <div class="box  has-heavy-has-no-shadow">
+                    <div class="has-text-centered column form-column ">
+                        <!-- <i class="fas fa-clipboard-list fa-3x"></i> -->
+                        <h3 class="is-size-4 has-text-weight-bold padding-sides" style="margin: .3em;">Let Us Know What You Think!</h3>
+                        <p class="is-size-5 padding-sides">Answer a quick, three-question survey to help us <br/>improve the TrueCost experience</p>
+                    </div>
+                    <div class="has-text-centered column form-column">
+                        <a v-on:click="goToSurvey()" class="is-white has-text-info has-text-weight-semibold animate-arrow">
+                        <span>Get Started</span>
+                        <span class="icon is-small "><i class="fas fa-arrow-right "></i></span>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="columns">
+
+                    <div class="is-half box  has-margin-right has-heavy-has-no-shadow">
+                        <div class="has-text-centered column form-column ">
+                            <span class="icon-flame fa-3x"></span>
+                            <h3 class="is-size-4 has-text-weight-bold padding-sides" style="margin: .3em;">Set Up My Natural Gas Service</h3>
+                            <p class="is-size-5 padding-sides">Did you know we could set up your gas service too? Your information will transfer right over just follow the link below to begin</p>
+                        </div>
+                        <div class="has-text-centered column form-column">
+                            <a class="is-white has-text-info has-text-weight-semibold animate-arrow" v-on:click="goToDigitalMove()">
+                                <span>SET UP MY NATURAL GAS</span>
+                                <span class="icon is-small "><i class="fas fa-arrow-right "></i></span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="is-half box  has-heavy-has-no-shadow card-express-start" v-if="!isExpress">
+                        <div class="has-text-centered column form-column ">
+                            <!-- <img src="assets/gas-icon.png" alt="gas flame" style="width: 40px;" /> -->
+                            <span class="icon-time fa-3x"></span>
+                            <h3 class="is-size-4 has-text-weight-bold padding-sides" style="margin: .3em;">Express Enrollment</h3>
+                            <p class="is-size-5 padding-sides">A free service offered by TrueCost. When your plan is about to expire, we'll show you some great options for your next plan!</p>
+                        </div>
+                        <div class="has-text-centered column form-column">
+                            <a v-on:click="goToEnrollmentExpress()" class="is-white has-text-info has-text-weight-semibold animate-arrow">
+                            <span>SIGN ME UP</span>
+                            <span class="icon is-small "><i class="fas fa-arrow-right "></i></span>
+                        </a>
+                        </div>
+                    </div>
+                    <div class="is-half box  has-heavy-has-no-shadow card-express-stop" v-if="isExpress">
+                        <div class="has-text-centered column form-column ">
+                            <!-- <img src="assets/gas-icon.png" alt="gas flame" style="width: 40px;" /> -->
+                            <span class="icon-time fa-3x"></span>
+                            <h3 class="is-size-4 has-text-weight-bold padding-sides" style="margin: .3em;">Enrolled In Express</h3>
+                            <p class="is-size-5 padding-sides">
+                               Thank you for enrolling. When your plan is about to expire, we'll show you some great options for your next plan!</p>
+                        </div>
+                        <div class="has-text-centered column form-column">
+                          <p class="icon is-large has-text-info ">
+                              <span  class="icon-icon-check-green is-size-4"></span>
+                          </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+            </div>
+    </div>
+    <c:tc2_footer />
+
+    <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+
+             TC.app.appAccountComplete = new Vue({
+                el: '#appAccountComplete',
+                data: {
+                  isExpress: false,
+                  isGuest: TC.app.account.guest,
+                  plan: TC.app.account.plan,
+                  startDate: moment(TC.app.account.serviceDate).format('dddd LL'),
+                  rep: TC.app.account.plan.ratePlan.Plan__r.REP_Profile__r,
+                  order: TC.app.account.order,
+                  finalizePath: '{!$Page.Account_Complete_Finalize}?id='+TC.app.account.plan.id
+                },
+                methods: {
+                  goToDigitalMove: function(){
+                    TC.fn.createLead('to-digital-move');
+                    TC.fn.navigateTo("//move.centerpointenergy.com/move/#/?leadid="+TC.fn.getLeadId());
+                  },
+                  goToSurvey: function(){
+                    TC.fn.createLead('to-servey');
+                    window.open("https://research.centerpointenergy.com/jfe/form/SV_bNq7xoKHpOWtKEB","mywindow","menubar=1,resizable=0,width=720,height=640");
+                  },
+                  goToEnrollmentExpress: function(){
+                    this.isExpress = true;
+                    TC.fn.createLead('express-enroll');
+                  }
+                },
+                mounted: function() {
+                    TC.fn.updateLead();
+                    TC.app.appPlansCompareBar.hideSnackBar();
+
+                    dataLayer.push({
+                      'ecommerce': {
+                        'purchase': {
+                          'actionField': {
+                            'id': TC.app.account.order.Name,
+                            'revenue': Math.min(TC.app.account.plan.ratePlan.Plan__r.Contract_Length__c * 5, 90)
+                          },
+                          'products': [{
+                            'name': TC.app.account.plan.title,
+                            'brand': TC.app.account.plan.company,
+                            'variant': TC.app.account.plan.contract,
+                            'price': Math.min(TC.app.account.plan.ratePlan.Plan__r.Contract_Length__c * 5, 90),
+                            'quantity': '1'
+                           }]
+                        }
+                      },
+                      'transId': TC.app.account.order.Name,
+                      'event': 'transConfirm'
+                    });
+                },
+                watch: { },
+             });
+
+          })
+        })(jQuery);
+    </script>
+    
+    <script language='JavaScript1.1' async='' src='//pixel.mathtag.com/event/js?mt_id=1458593&mt_adid=223710&mt_exem=&mt_excl=&v1=&v2=&v3=&s1=&s2=&s3='></script>
+  </body>
+  </html>
+</apex:page>

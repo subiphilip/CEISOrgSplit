@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unit_of_Measure_Required</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+NOT(ISNEW()),
+NOT(CONTAINS( Record_Type_Name__c, &#39;Agreement&#39; )),
+NOT(CONTAINS( Record_Type_Name__c, &#39;Placeholder&#39; )),
+NOT(CONTAINS( Record_Type_Name__c, &#39;Producer Services&#39; )),
+ISBLANK( TEXT(MDQ_Unit__c) ),
+NOT(CONTAINS( Record_Type_Name__c, &#39;Storage&#39; ))
+)</errorConditionFormula>
+    <errorDisplayField>MDQ_Unit__c</errorDisplayField>
+    <errorMessage>CESC40: Unit of Measure is required</errorMessage>
+</ValidationRule>

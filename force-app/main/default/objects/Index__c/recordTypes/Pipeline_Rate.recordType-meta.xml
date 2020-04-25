@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pipeline_Rate</fullName>
+    <active>true</active>
+    <label>Pipeline Rate</label>
+    <picklistValues>
+        <picklist>Exchange__c</picklist>
+        <values>
+            <fullName>CME</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NYMEX</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Frequency__c</picklist>
+        <values>
+            <fullName>Daily</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Monthly</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Origin_DB__c</picklist>
+        <values>
+            <fullName>CEIP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HOU</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LIVE</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MPLS</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>STL</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Pipeline__c</picklist>
+        <values>
+            <fullName>ANR</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CEGT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CIPL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Guardian</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>KMIT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MGT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MRT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NBPL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NGPL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NNG</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Panhandle</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>TIGT</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trailblazer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trunkline</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Viking</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Publication_2__c</picklist>
+        <values>
+            <fullName>GD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GSPL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NGI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NYMEX</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Publication_Section_2__c</picklist>
+        <values>
+            <fullName>ANR Pipeline Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Appalachia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Canadian Gas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CenterPoint Energy Gas Transmission Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Citygates</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Colorado Interstate Gas Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>East Texas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>East Texas-North Louisiana Area</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>East-Houston-Katy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Florida Gas Transmission Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Louisiana-Onshore South</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Midwest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mississippi-Alabama</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NYMEX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Natural Gas Pipeline Co of America</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Northeast</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Northern Natural Gas Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Northwest Pipeline Corp</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oklahoma</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oneok Gas Transportation LLC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Others</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Panhandle Eastern Pipe Line Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rockies</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rockies%2FNorthwest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>South Louisiana</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>South-Corpus Christi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Southern Star Central Gas Pipeline Inc</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tennessee Gas Pipeline Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Texas Eastern Transmission Corp</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Texas Gas Transmission Corp</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transcontinental Gas Pipe Line Corp</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trunkline Gas Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Upper Midwest</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Publication_Section__c</picklist>
+        <values>
+            <fullName>ANR Pipeline Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Appalachia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Canadian Gas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CenterPoint Energy Gas Transmission Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Citygates</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Colorado Interstate Gas Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>East Texas</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>East Texas-North Louisiana Area</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>East-Houston-Katy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Florida Gas Transmission Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Louisiana-Onshore South</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Midwest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mississippi-Alabama</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NYMEX</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Natural Gas Pipeline Co of America</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Northeast</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Northern Natural Gas Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Northwest Pipeline Corp</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oklahoma</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oneok Gas Transportation LLC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Others</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Panhandle Eastern Pipe Line Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rockies</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rockies%2FNorthwest</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>South Louisiana</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>South-Corpus Christi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Southern Star Central Gas Pipeline Inc</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tennessee Gas Pipeline Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Texas Eastern Transmission Corp</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Texas Gas Transmission Corp</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transcontinental Gas Pipe Line Corp</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trunkline Gas Co</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Upper Midwest</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Publication__c</picklist>
+        <values>
+            <fullName>GD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GSPL</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>IF</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NGI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>NYMEX</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>School_Program__c</picklist>
+        <values>
+            <fullName>KJUMP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Laclede</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>MOPRC</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Service_Level__c</picklist>
+        <values>
+            <fullName>Firm</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Interruptible</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tax_Sub_Type__c</picklist>
+        <values>
+            <fullName>Capable</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Incapable Gas Well</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Incapable Oil Well</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Tax_Type__c</picklist>
+        <values>
+            <fullName>Conservation Tax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Excise Tax</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Severance Tax</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

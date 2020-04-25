@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Notice_Days_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ Auto_renew__c ,
+ ISBLANK( Renewal_Notice_Days__c )
+)</errorConditionFormula>
+    <errorDisplayField>Renewal_Notice_Days__c</errorDisplayField>
+    <errorMessage>CESC25: Termination Notice Days is required if Auto Renewal is selected</errorMessage>
+</ValidationRule>

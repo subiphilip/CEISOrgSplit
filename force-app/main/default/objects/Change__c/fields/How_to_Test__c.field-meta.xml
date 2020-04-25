@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>How_to_Test__c</fullName>
+    <description>How should this be tested?  What pages, actions should the QA team take to validate?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How should this be tested?  What pages, actions should the QA team take to validate?</inlineHelpText>
+    <label>How to Test</label>
+    <length>32768</length>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>8</visibleLines>
+</CustomField>

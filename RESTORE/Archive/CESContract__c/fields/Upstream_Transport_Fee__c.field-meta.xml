@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Upstream_Transport_Fee__c</fullName>
+    <description>PER MMBTU Upstream Transport Fee.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>PER MMBTU Upstream Transport Fee.</inlineHelpText>
+    <label>Upstream Transport Fee (MMBtu)</label>
+    <precision>15</precision>
+    <required>false</required>
+    <scale>5</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

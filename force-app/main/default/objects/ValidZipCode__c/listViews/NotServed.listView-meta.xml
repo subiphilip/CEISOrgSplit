@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NotServed</fullName>
+    <columns>NAME</columns>
+    <columns>Served_by_TrueCost__c</columns>
+    <columns>TDSP_Lookup__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Served_by_TrueCost__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>Not Served</label>
+    <language>en_US</language>
+</ListView>

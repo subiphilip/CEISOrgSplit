@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UDF_Upstream_Transport__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE( TEXT( Upstream_Transport__c ),
+  &#39;Applicable upstream pipeline transportation fees&#39;, &#39;Upstream Pipeline Transport&#39;,
+  &#39;Applicable upstream pipeline transportation fees plus fuel&#39;, &#39;Upstream Pipeline Transport plus Fuel&#39;,
+  &#39;Enter Specific Charges&#39;, &#39;Specific Contract Charges&#39;,
+  null
+)</formula>
+    <label>UDF Upstream Transport</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

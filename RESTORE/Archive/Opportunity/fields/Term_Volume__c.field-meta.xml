@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Term_Volume__c</fullName>
+    <description>The volume (in Dth or kWh) that the customer will use for this contract.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The volume (in Dth or kWh) that the customer will use for this contract.</inlineHelpText>
+    <label>Term Volume</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

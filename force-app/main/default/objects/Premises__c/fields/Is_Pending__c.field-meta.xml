@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Pending__c</fullName>
+    <description>used to determine if informatica should try and delete terminations before processing an active status.  Pending premises would not have been previously terminated.  However, the premise could have been switched to active with this new active status so terminations need to be looked at for active and terminated statuses. just a way to limit the amount of unnecessary deletion calls.</description>
+    <externalId>false</externalId>
+    <formula>IF(Premise_Status_Formula__c == &#39;Pending&#39;,true,false)</formula>
+    <label>Is Pending</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

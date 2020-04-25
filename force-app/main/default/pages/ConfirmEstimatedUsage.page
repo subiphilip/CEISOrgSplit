@@ -1,0 +1,179 @@
+<apex:page showHeader="false" sidebar="false" controller="ControllerForConfirmEstimatedUsage" cache="false" docType="html-5.0" standardStylesheets="false" applyBodyTag="false">
+    
+    <style type="text/css">
+        .Chart-for-Adjust-Usage{
+        height:400px;
+        }
+    </style>
+    
+    <apex:composition template="Template_TC">
+        
+        <apex:define name="HeadTags">
+            <title>Estimated Usage Adjustment - {!$Label.Page_Title_Company_Name}</title>
+        </apex:define>
+        
+        <!--apex:define name="breadcrumbs">
+        <apex:outputpanel styleClass="breadcrumbs" layout="block">
+        <apex:outputlink value="{!$Page.shopplans}">Shop Plans</apex:outputlink>
+        <apex:outputlink value="{!$Page.ConfirmEstimatedUsage}" styleClass="last">Adjust Estimate</apex:outputlink>
+    </apex:outputpanel>            
+    </apex:define-->
+        
+        
+        
+        <apex:define name="body">
+            <div class="container">
+                <div class="row">
+                    <div class="span8">
+                        <h3>Adjust your usage estimate<br/>
+                            <small>Click on the buttons to adjust the entire year's usage, or create your own usage profile on the right.</small>
+                        </h3>
+                        <apex:form >
+                            <div id="chart" >
+                                
+                                <div id="chart_div" ></div>
+                            </div>
+                            <apex:commandlink action="{!RaiseEstimate}" value="Raise Estimate" styleClass="btn btn-default" rerender="valuesTable" oncomplete="redraw({!StuffForChart});"/>	
+                            <apex:commandlink action="{!LowerEstimate}" value="Lower Estimate" styleClass="btn btn-default" rerender="valuesTable" oncomplete="redraw({!StuffForChart});"/>	
+                            <apex:commandlink action="{!ShopWithEstimateUsage}" value="Show Plans" styleClass="btn btn-primary"/>					
+                        </apex:form>
+                    </div>
+                    <div class="span4">
+                        <h4>Edit the Estimate<br/><small>Enter your kWh usage for any month</small></h4>
+                        <apex:form >
+                            <apex:pageblock mode="edit" id="valuesTable">
+                                <apex:pageblocksection columns="1"> 						
+                                    <apex:inputfield value="{!mulistdata[0].usage__c}" label="Jan" rendered="{!  NOT(isnull(mulistdata[0].usage__c)) }" id="jan">
+                                        <apex:actionsupport event="onblur" action="{!updateUsageEstimate}" oncomplete="redraw({!StuffForChart});" rerender="jan"/>
+                                    </apex:inputfield>				   					   		 			
+                                    <apex:inputfield value="{!mulistdata[1].usage__c}" label="Feb" rendered="{!  NOT(isnull(mulistdata[1].usage__c)) }" id="feb">
+                                        <apex:actionsupport event="onblur" action="{!updateUsageEstimate}" oncomplete="redraw({!StuffForChart});" rerender="feb"/>					   	
+                                    </apex:inputfield>						
+                                    <apex:inputfield value="{!mulistdata[2].usage__c}" label="Mar" rendered="{!  NOT(isnull(mulistdata[2].usage__c)) }" id="mar">
+                                        <apex:actionsupport event="onblur" action="{!updateUsageEstimate}" oncomplete="redraw({!StuffForChart});" rerender="mar"/>
+                                    </apex:inputfield>						
+                                    <apex:inputfield value="{!mulistdata[3].usage__c}" label="Apr" rendered="{!  NOT(isnull(mulistdata[3].usage__c)) }" id="apr">
+                                        <apex:actionsupport event="onblur" action="{!updateUsageEstimate}" oncomplete="redraw({!StuffForChart});" rerender="apr"/>
+                                    </apex:inputfield>					
+                                    <apex:inputfield value="{!mulistdata[4].usage__c}" label="May" rendered="{!  NOT(isnull(mulistdata[4].usage__c)) }" id="may">
+                                        <apex:actionsupport event="onblur" action="{!updateUsageEstimate}" oncomplete="redraw({!StuffForChart});" rerender="may"/>
+                                    </apex:inputfield>						
+                                    <apex:inputfield value="{!mulistdata[5].usage__c}" label="Jun" rendered="{!  NOT(isnull(mulistdata[5].usage__c)) }" id="jun">
+                                        <apex:actionsupport event="onblur" action="{!updateUsageEstimate}" oncomplete="redraw({!StuffForChart});" rerender="jun"/>
+                                    </apex:inputfield>						
+                                    <apex:inputfield value="{!mulistdata[6].usage__c}" label="Jul" rendered="{!  NOT(isnull(mulistdata[6].usage__c)) }" id="jul">
+                                        <apex:actionsupport event="onblur" action="{!updateUsageEstimate}" oncomplete="redraw({!StuffForChart});" rerender="jul"/>
+                                    </apex:inputfield>
+                                    <apex:inputfield value="{!mulistdata[7].usage__c}" label="Aug" rendered="{!  NOT(isnull(mulistdata[7].usage__c)) }" id="aug">
+                                        <apex:actionsupport event="onblur" action="{!updateUsageEstimate}" oncomplete="redraw({!StuffForChart});" rerender="aug"/>
+                                    </apex:inputfield>
+                                    <apex:inputfield value="{!mulistdata[8].usage__c}" label="Sep" rendered="{!  NOT(isnull(mulistdata[8].usage__c)) }" id="sep">
+                                        <apex:actionsupport event="onblur" action="{!updateUsageEstimate}" oncomplete="redraw({!StuffForChart});" rerender="sep"/>
+                                    </apex:inputfield>
+                                    <apex:inputfield value="{!mulistdata[9].usage__c}" label="Oct" rendered="{!  NOT(isnull(mulistdata[9].usage__c)) }" id="oct">
+                                        <apex:actionsupport event="onblur" action="{!updateUsageEstimate}" oncomplete="redraw({!StuffForChart});" rerender="oct"/>
+                                    </apex:inputfield>
+                                    <apex:inputfield value="{!mulistdata[10].usage__c}" label="Nov" rendered="{!  NOT(isnull(mulistdata[10].usage__c)) }" id="nov">
+                                        <apex:actionsupport event="onblur" action="{!updateUsageEstimate}" oncomplete="redraw({!StuffForChart});" rerender="nov"/>
+                                    </apex:inputfield>
+                                    <apex:inputfield value="{!mulistdata[11].usage__c}" label="Dec" rendered="{!  NOT(isnull(mulistdata[11].usage__c)) }" id="dec">
+                                        <apex:actionsupport event="onblur" action="{!updateUsageEstimate}" oncomplete="redraw({!StuffForChart});" rerender="dec"/>
+                                    </apex:inputfield>
+                                </apex:pageblocksection>
+                            </apex:pageblock>
+                        </apex:form>
+                    </div>
+                </div>
+            </div>
+            
+        </apex:define>
+    </apex:composition>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    
+    window.onresize = function(event) {
+		chart.draw(data, options);
+    }
+        
+    var data;
+    var options;
+    var chart;
+    
+    function clearData(){
+        data.removeRow(0);
+        data.removeRow(0);
+        data.removeRow(0);
+        data.removeRow(0);
+        data.removeRow(0);
+        data.removeRow(0);
+        data.removeRow(0);
+        data.removeRow(0);
+        
+    }
+    
+    function changeData(x){
+        data.setValue(0, 1, x[0]);
+        data.setValue(1, 1, x[1]);
+        data.setValue(2, 1, x[2]);
+        data.setValue(3, 1, x[3]);
+        data.setValue(4, 1, x[4]);
+        data.setValue(5, 1, x[5]);
+        data.setValue(6, 1, x[6]);
+        data.setValue(7, 1, x[7]);
+        data.setValue(8, 1, x[8]);
+        data.setValue(9, 1, x[9]);
+        data.setValue(10, 1, x[10]);
+        data.setValue(11, 1, x[11]);
+        
+    }
+    
+    function setData(){        
+        data.addRows([
+            ['Jan', {!stuffForChart[0]}], 
+            ['Feb', {!stuffForChart[1]}],
+            ['Mar', {!stuffForChart[2]}],
+            ['Apr', {!stuffForChart[3]}],
+            ['May', {!stuffForChart[4]}],
+            ['Jun', {!stuffForChart[5]}],
+            ['Jul', {!stuffForChart[6]}],
+            ['Aug', {!stuffForChart[7]}],
+            ['Sep', {!stuffForChart[8]}],
+            ['Oct', {!stuffForChart[9]}],
+            ['Nov', {!stuffForChart[10]}],
+            ['Dec', {!stuffForChart[11]}]
+            
+        ]);      
+    }
+    
+    
+    function createChart(){  //does all the initial creation
+        data = new google.visualization.DataTable();
+        data.addColumn('string', 'Month');
+        data.addColumn('number', 'kWh Usage');
+        
+        
+        
+        options = {
+            colors: ['#fe9601'], legend:{position:'none'}, chartArea:{width:"80%", height:"80%"}, vAxis: {minValue: 0, title:'kilowatt-hours (kWh)'}, 
+            animation:{        duration: 1000,         easing: 'out'      }          
+        };
+        
+        chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+    }
+    
+    function drawChart() {
+        createChart();
+        setData();
+        chart.draw(data, options);
+    }
+    
+    function redraw(z){
+        changeData(z);
+        chart.draw(data, options);
+    }
+    
+    </script>
+    
+</apex:page>

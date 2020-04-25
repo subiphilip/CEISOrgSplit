@@ -1,0 +1,10 @@
+[
+    {
+        "sobject": "TrueCostSystemVariables__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "export-demo-TrueCostSystemVariables__cs.json"
+        ]
+    }
+]

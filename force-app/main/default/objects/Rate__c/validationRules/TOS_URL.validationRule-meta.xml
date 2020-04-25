@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TOS_URL</fullName>
+    <active>true</active>
+    <description>Please include http:// or https://</description>
+    <errorConditionFormula>NOT(BEGINS( Link_for_TOS__c , &quot;http&quot;))</errorConditionFormula>
+    <errorDisplayField>Link_for_TOS__c</errorDisplayField>
+    <errorMessage>Rate05: TOS url link must include &quot;http://&quot; or &quot;https://&quot; before the www.</errorMessage>
+</ValidationRule>

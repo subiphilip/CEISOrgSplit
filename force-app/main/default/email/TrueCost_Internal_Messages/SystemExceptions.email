@@ -1,0 +1,6 @@
+{!exceptions__c.error__c} has indicated that an order failed.
+
+Error Type: {!exceptions__c.error_type__c}
+
+
+***FOR INTERNAL USE ONLY***

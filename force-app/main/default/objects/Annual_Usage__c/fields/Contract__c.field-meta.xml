@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contract__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Which contract (option, basis, nymex) is this usage for</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Which contract (option, basis, nymex) is this usage for</inlineHelpText>
+    <label>Contract</label>
+    <referenceTo>Index__c</referenceTo>
+    <relationshipLabel>Annual Usage</relationshipLabel>
+    <relationshipName>Annual_Usage</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

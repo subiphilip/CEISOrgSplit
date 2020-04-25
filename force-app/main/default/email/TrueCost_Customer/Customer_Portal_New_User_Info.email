@@ -1,0 +1,25 @@
+<div>		
+<img src="https://c.na1.content.force.com/servlet/servlet.ImageServer?id=01530000001wTMh&amp;oid=00D30000000pOSg&amp;lastMod=1324502494000" alt="CenterPoint Logo" height="69" width="198" style="float:left;">		
+			<img src="https://c.na1.content.force.com/servlet/servlet.ImageServer?id=01530000001wYTI&amp;oid=00D30000000pOSg&amp;lastMod=1325792309000" alt="TrueCost Logo" height="40" width="249" style="float:left; margin-top:12px; margin-left:20px;">
+		
+		</div>
+	
+<div style="clear:both;">
+<br/><br/>
+<p>Dear {!Contact.FirstName},</p>
+
+<p>Your new TrueCost account has been created and your log-in information is below.</p>
+
+<p>The password is a temporary reset password.  You'll be prompted to create a new password when you log in.<p/>
+
+<p>By accessing TrueCost using this account, you agree to the TrueCost <a href="http://www.mytruecost.com/TermsofUse">Terms of Use</a> and <a href="http://www.mytruecost.com/Privacy">Privacy Policy</a>.</p>
+
+<p>If you have any questions, please email us or call us at (800) 461-3056 Monday through Friday, 8 a.m. to 5 p.m. Central Standard Time. </p>
+
+<p>Thank you,</p>
+<p>TrueCost Customer Support<br/>
+TrueCost@CenterPointEnergy.com</br>
+(800) 461-3056</p>
+
+<p>Log into your account at <a href="http://www.mytruecost.com/myaccount">MyTrueCost.com</a></p>
+</div>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2014_Defaults</fullName>
+    <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+    <columns>NAME</columns>
+    <columns>Confirmation_Code__c</columns>
+    <columns>Plan__c</columns>
+    <columns>Division__c</columns>
+    <columns>Price_Details__c</columns>
+    <columns>Confirmation_Code_Status__c</columns>
+    <columns>Fixed_Rate__c</columns>
+    <columns>Index_Adder__c</columns>
+    <columns>Program__c</columns>
+    <columns>Notes__c</columns>
+    <columns>Default_Code__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Rate__c.Gas_Choice_Rate</value>
+    </filters>
+    <filters>
+        <field>Confirmation_Code_Year__c</field>
+        <operation>equals</operation>
+        <value>2014</value>
+    </filters>
+    <filters>
+        <field>Default_Code__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Division__c</field>
+        <operation>contains</operation>
+        <value>default</value>
+    </filters>
+    <label>2014 Defaults</label>
+    <language>en_US</language>
+    <sharedTo>
+        <group>Administrators_System</group>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Safari_Contract_Opty_Sync_Status__c</fullName>
+    <description>captures the opportunity number sync&#39;ing with its Safari contract&#39;s Opportunity Number UDF</description>
+    <externalId>false</externalId>
+    <label>Safari Contract Opty Sync Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sync in Progress</fullName>
+                <default>false</default>
+                <label>Sync in Progress</label>
+            </value>
+            <value>
+                <fullName>Sync Complete</fullName>
+                <default>false</default>
+                <label>Sync Complete</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

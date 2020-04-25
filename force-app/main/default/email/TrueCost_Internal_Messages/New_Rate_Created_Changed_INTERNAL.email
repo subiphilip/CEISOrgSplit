@@ -1,0 +1,6 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<div style="font-size: 12pt; background-color: rgb(255, 255, 255); "><div>{!Rate__c.LastModifiedBy} modified or created a rate. &nbsp;<b>Please verify that all price fields and attached TDSP fees are accurate according to the EFL, and un-suspend the rate (if needed)</b>:&nbsp;</div><div><br></div><div><a href="https://centerpointenergy.my.salesforce.com/a0Q?div_filter=&amp;fcf=00B30000009DS4X">See ALL suspended rates here</a><br><br>Plan: {!Rate__c.Plan__c}&nbsp;<br>Rate ID: {!Rate__c.Name}&nbsp;<div>TDSP: {!Rate__c.TDSP__c}&nbsp;</div><div>Rate EFL Link:&nbsp;{!Rate__c.Link_for_EFL__c}<br><br>Click on this link to review the rate:&nbsp;<br>{!Rate__c.Link}</div></div></div>]]></td>
+</tr>
+</table>

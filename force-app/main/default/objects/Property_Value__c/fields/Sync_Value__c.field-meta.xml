@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sync_Value__c</fullName>
+    <description>CASE( Value__c , 
+  &#39;Secondary Firm&#39;, &#39;SecFirm&#39;,
+  &#39;Interruptible&#39;, &#39;Inter&#39;,
+  &#39;Firm&#39;, &#39;PriFirm&#39;, 
+  &#39;ANR ML 6&#39;, &#39;ANR&#39;,
+  Value__c
+)</description>
+    <externalId>false</externalId>
+    <formula>IF(Property__r.Divide_by_Therm_Factor__c == true
+  , TEXT(Numeric_Value__c * 0.1)
+  , IF(Property__r.Multiply_by_Therm_Factor__c == true
+      , TEXT(Numeric_Value__c * 10)
+      , CASE( Value__c , 
+          &#39;Secondary Firm&#39;, &#39;SecFirm&#39;,
+          &#39;Interruptible&#39;, &#39;Inter&#39;,
+          &#39;Firm&#39;, &#39;PriFirm&#39;, 
+          &#39;ANR ML 6&#39;, &#39;ANR&#39;,
+          Value__c
+        )
+    )
+)</formula>
+    <label>Sync Value</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

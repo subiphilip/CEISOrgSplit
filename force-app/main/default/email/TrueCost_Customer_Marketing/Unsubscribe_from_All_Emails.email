@@ -1,0 +1,13 @@
+The following user has requested to be removed from ALL Gas/TrueCost marketing email lists.  Please update the user/account accordingly.
+
+Name: {!CampaignMember.FirstName} {!CampaignMember.LastName}
+
+Email: {!CampaignMember.Email}
+
+Request: {!CampaignMember.Campaign}
+
+
+Thanks,
+TrueCost Support
+
+***FOR INTERNAL USE ONLY***

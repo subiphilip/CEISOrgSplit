@@ -1,0 +1,71 @@
+<apex:component layout="none">
+    <apex:attribute name="cost" type="decimal[]" description="Twelve values in month order (January, February, March, etc)">
+    </apex:attribute>
+    <apex:outputpanel rendered="{!isnull(cost)}">
+        No data available
+    </apex:outputpanel>
+    <div id="chart_div" ></div>
+<!-- Here's the Google Chart Script-->
+<!--  class="plan-details-chart"-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      //$j=jQuery.noConflict();
+
+      var currentHeight;
+      var currentWidth;
+       
+      window.onresize= function () {
+       var windowHeight = $(window).height();
+       var windowWidth = $(window).width();
+
+       if (currentHeight == undefined || currentHeight != windowHeight || currentWidth == undefined || currentWidth != windowWidth) {
+
+          drawChart();
+
+        currentHeight = windowHeight;
+        currentWidth = windowWidth;
+        }
+      };
+       
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Month');
+        data.addColumn('number', 'Estimated Cost');
+        
+        data.addRows([
+          ['Jan', {!cost[0]}], 
+          ['Feb', {!cost[1]}],
+          ['Mar', {!cost[2]}],
+          ['Apr', {!cost[3]}],
+          ['May', {!cost[4]}],
+          ['Jun', {!cost[5]}],
+          ['Jul', {!cost[6]}],
+          ['Aug', {!cost[7]}],
+          ['Sep', {!cost[8]}],
+          ['Oct', {!cost[9]}],
+          ['Nov', {!cost[10]}],
+          ['Dec', {!cost[11]}]
+          
+        ]);
+
+        var options = {
+          
+          
+          colors: ['#fe9601'], legend:{position:'none'}, chartArea:{width:"80%", height:"85%"}, vAxis: {minValue: 0, format:'$###'}
+          
+          
+          
+        };
+        
+        var formatter = new google.visualization.NumberFormat({prefix: '$', fractionDigits: 2})
+        
+        ;formatter.format(data,1);
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+</apex:component>

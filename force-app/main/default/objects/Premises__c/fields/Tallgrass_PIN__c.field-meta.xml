@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tallgrass_PIN__c</fullName>
+    <description>Translated SourceGas Utility pin to Tallgrass</description>
+    <externalId>false</externalId>
+    <formula>CASE(Pin__c , 
+&quot;37677&quot;,&quot;44888&quot;,
+&quot;37685&quot;,&quot;44889&quot;,
+&quot;37693&quot;,&quot;44890&quot;,
+&quot;37701&quot;,&quot;44840&quot;,
+&quot;37709&quot;,&quot;44841&quot;,
+&quot;37717&quot;,&quot;44843&quot;,
+&quot;37725&quot;,&quot;44844&quot;,
+&quot;37733&quot;,&quot;44845&quot;,
+&quot;37743&quot;,&quot;44846&quot;,
+&quot;37751&quot;,&quot;44864&quot;,
+&quot;37759&quot;,&quot;44865&quot;,
+&quot;37767&quot;,&quot;44867&quot;,
+&quot;37775&quot;,&quot;44868&quot;,
+&quot;37783&quot;,&quot;44866&quot;,
+&quot;37784&quot;,&quot;44869&quot;,
+&quot;37792&quot;,&quot;44870&quot;,
+&quot;37800&quot;,&quot;44871&quot;,
+&quot;37808&quot;,&quot;44872&quot;,
+&quot;37816&quot;,&quot;44847&quot;,
+&quot;37824&quot;,&quot;44848&quot;,
+&quot;37832&quot;,&quot;44849&quot;,
+&quot;37840&quot;,&quot;44850&quot;,
+&quot;37848&quot;,&quot;44851&quot;,
+&quot;37857&quot;,&quot;44852&quot;,
+&quot;37865&quot;,&quot;44853&quot;,
+&quot;37873&quot;,&quot;44854&quot;,
+&quot;37881&quot;,&quot;44855&quot;,
+&quot;37921&quot;,&quot;44856&quot;,
+&quot;37929&quot;,&quot;44857&quot;,
+&quot;37937&quot;,&quot;44858&quot;,
+&quot;37945&quot;,&quot;44859&quot;,
+&quot;37953&quot;,&quot;44860&quot;,
+&quot;37961&quot;,&quot;44861&quot;,
+&quot;37969&quot;,&quot;44862&quot;,
+&quot;37979&quot;,&quot;44863&quot;,
+&quot;37995&quot;,&quot;44873&quot;,
+&quot;38004&quot;,&quot;44874&quot;,
+&quot;38012&quot;,&quot;44875&quot;,
+&quot;38020&quot;,&quot;45436&quot;,
+&quot;38062&quot;,&quot;44876&quot;,
+&quot;38070&quot;,&quot;44877&quot;,
+&quot;38080&quot;,&quot;44878&quot;,
+&quot;38088&quot;,&quot;44879&quot;,
+&quot;38128&quot;,&quot;44882&quot;,
+&quot;38136&quot;,&quot;44883&quot;,
+&quot;38151&quot;,&quot;44880&quot;,
+&quot;38158&quot;,&quot;44881&quot;,
+&quot;38164&quot;,&quot;44884&quot;,
+&quot;38170&quot;,&quot;44885&quot;,
+&quot;38177&quot;,&quot;44886&quot;,
+&quot;38183&quot;,&quot;44887&quot;,
+&quot;39936&quot;,&quot;44842&quot;,
+&quot;&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Translated SourceGas Utility pin to Tallgrass</inlineHelpText>
+    <label>Tallgrass PIN</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>A case has been open too long</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Cases stay open too long</name>
+    <style>none</style>
+    <subject>A case has been open too long</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

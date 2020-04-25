@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Draft</fullName>
+    <columns>NAME</columns>
+    <columns>Definition__c</columns>
+    <columns>Description__c</columns>
+    <columns>Draft_Content__c</columns>
+    <columns>Priority__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Final_Review__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>Legal_Editing__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>CorpComm_Editing__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>Published__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>Draft</label>
+    <sharedTo>
+        <allInternalUsers/>
+    </sharedTo>
+</ListView>

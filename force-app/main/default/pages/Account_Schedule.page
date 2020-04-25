@@ -1,0 +1,183 @@
+<apex:page doctype="html-5.0" standardStylesheets="false" showChat="false" applyBodyTag="false" showHeader="false" sidebar="false" cache="false">
+  <html xmlns:v-bind="http://vue.org" xmlns:v-on="http://vue.org">
+  <c:tc2_header title="TrueCost Electric Portal"
+      description="Compare Houston electric rates based on your smart meter data.  Save money on your electricity bill." />
+
+
+  <body class="has-background-grey-light has-navbar-fixed-top">
+
+    <div id="wrapper">
+        <c:tc2_navbar />
+        <c:tc2_hero_inner heroClass="has-bg-img-building1" bgImage="hero-3.jpg" headline="Let's schedule it" />
+        <div id="appAccountSchedule">
+        <section>
+            <div class="container">
+                <div class="has-margin-3 has-text-centered padding-sides">
+                    <h2 class="is-size-4 has-text-weight-bold">Select a date to {{serviceType}} your service.</h2>
+                    <p class="is-size-5">The next available date is {{firstAvailable}}</p>
+                </div>
+
+                <div class="is-vertical-center" style="margin-bottom:30px" >
+                    <div id="myCal"></div>
+                </div>
+            </div>
+        </section>
+
+
+
+       <div style="margin: auto; max-width: 400px; margin-bottom: 30px;" v-if="serviceType == 'switch'">
+        <article class="media padding-sides">
+            <figure class="media-left">
+                <div class="checkbox">
+                    <span><input v-model="contractExpiration" name="contractExpiration" id="contractExpiration" type="checkbox" required="required" /></span>
+                </div>
+            </figure>
+            <div class="media-content">
+                <label for="contractExpiration" style="max-width:350px">Texas rules allow you to switch within 14 days before your contract expiration without penalties </label>
+            </div>
+        </article>
+    </div>
+
+
+        <div class="has-text-centered">
+            <p v-if="isSelected"><a class="button is-primary is-rounded fixed-size is-uppercase animate-gradient-bg" v-bind:disabled="isContinueDisabled" v-on:click="onSelectDate()">START ON {{formattedDate}}</a></p>
+            <p class="link-back"><a class="has-text-weight-semibold is-size-8 " href="{!$Page.Account_Moving}">Take Me Back a Step</a></p>
+        </div>
+
+        </div>
+    </div>
+    <c:tc2_footer />
+
+    <script>
+        (function ($) {
+            $(function () {
+            'use strict';
+
+             TC.app.appAccountSchedule = new Vue({
+                el: '#appAccountSchedule',
+                data: {
+                    formattedDate: (TC.app.account.serviceDate !== null) ? moment(TC.app.account.serviceDate).format('l') :  moment().format('l'),
+                    isSelected: true,
+                    firstAvailable: '',
+                    minDate: 'today',
+                    serviceType: 'start',
+                    contractExpiration: false,
+                    isContinueDisabled: false
+                },
+                methods: {
+                    onSelectDate: function() {
+                        if(!this.isContinueDisabled){
+                            TC.fn.navigateTo(TC.routes.accountDetails);
+                        }
+                    }
+                },
+                mounted: function() {
+                    let date = moment();
+                    if(TC.app.account.serviceType == 'moveIn'){
+                        date = moment().add(TC.app.account.plan.ratePlan.Plan__r.REP_Profile__r.Soonest_Move_Date__c,'days')
+                    } else {
+                        this.isContinueDisabled = true;
+                        this.serviceType = 'switch';
+                        date = moment().add(TC.app.account.plan.ratePlan.Plan__r.REP_Profile__r.Soonest_Switch_Date__c,'days')
+                    }
+                    if(moment(date).isoWeekday() == 6) {
+                        date = moment(date).add(2,'days')
+                    }
+                    if(moment(date ).isoWeekday() == 7) {
+                        date = moment(date).add(1,'days')
+                    }
+                    this.minDate = date._d;
+                    TC.app.appMenu.isProgress = true;
+                    TC.app.appMenu.step = 3;
+                    TC.app.appPlansCompareBar.hideSnackBar();
+
+                    dataLayer.push({
+                        'event': 'checkout',
+                        'ecommerce': {
+                        'checkout': {
+                          'actionField': { 'step': 4 },
+                          'products': [{
+                            'name': TC.app.account.plan.title,
+                            'brand': TC.app.account.plan.company,
+                            'variant': TC.app.account.plan.contract,
+                            'price': Math.min(TC.app.account.plan.ratePlan.Plan__r.Contract_Length__c * 5),
+                            'quantity': '1'
+                           }]
+                        }
+                      }
+                    });
+                },
+
+                watch: {
+                  contractExpiration: {
+                    handler: function() {
+                      this.isContinueDisabled = true;
+                      if(this.contractExpiration){
+                          this.isContinueDisabled = false;
+                      }
+                    }
+                  },
+                }
+             });
+
+             setTimeout(function(){
+                 var calConfig = {
+                    altFormat: "F j, Y",
+                    dateFormat: "m-d-Y",
+                    enableTime: false,
+                    inline: true,
+                    minDate: TC.app.appAccountSchedule.minDate,
+                    maxDate: new Date().fp_incr(60),
+                    nextArrow: "<span class='icon-icon-chevron-right is-size-4'></span>",
+                    prevArrow: "<span class='icon-icon-chevron-left is-size-4'></span>",
+                    defaultDate: moment(TC.app.account.serviceDate).format('l'),
+                    "disable": [
+                        function(date) {
+                            return (date.getDay() === 0 || date.getDay() === 6);
+                        }
+                    ],
+                    onChange: function(selectedDates, dateStr, instance) {
+                       TC.app.account.serviceDate = moment(selectedDates[0])
+                       TC.app.appAccountSchedule.formattedDate = moment(selectedDates[0]).format('l');
+                       TC.app.appAccountSchedule.isSelected = true;
+                    },
+                    onReady: function(selectedDates, dateStr, instance) {
+                        let calHeaderWeekDays = $('.flatpickr-weekday');
+                        for(let i = 0; i < calHeaderWeekDays.length; i ++){
+                            $(calHeaderWeekDays[i]).text($(calHeaderWeekDays[i]).text().trim().charAt(0))
+                        }
+                        TC.app.account.serviceDate = TC.app.appAccountSchedule.minDate;
+                        TC.app.appAccountSchedule.formattedDate = moment(TC.app.account.serviceDate).format('LL')
+                        TC.app.appAccountSchedule.isSelected = true;
+                    },
+                    onDayCreate: function(dObj, dStr, fp, dayElem){
+                        if($(dayElem).hasClass('today')){
+                            TC.app.appAccountSchedule.firstAvailable =  moment(TC.app.appAccountSchedule.minDate).format('LL')
+                            if(moment(TC.app.appAccountSchedule.firstAvailable ).isoWeekday() == 6) {
+                                TC.app.appAccountSchedule.firstAvailable = moment(TC.app.appAccountSchedule.firstAvailable).add(2,'days')
+                            }
+                            if(moment(TC.app.appAccountSchedule.firstAvailable ).isoWeekday() == 7) {
+                                TC.app.appAccountSchedule.firstAvailable = moment(TC.app.appAccountSchedule.firstAvailable).add(1,'days')
+                            }
+                            if(moment().valueOf() > moment('2:00pm', 'h:mma').valueOf()){
+                                var iscurrentDate = moment(TC.app.appAccountSchedule.firstAvailable ).isSame(new Date(), "day");
+                                if(iscurrentDate){
+                                    TC.app.appAccountSchedule.firstAvailable = moment(TC.app.appAccountSchedule.firstAvailable).add(1,'days')
+                                }
+                            }
+
+                        };
+                    }
+
+                };
+                flatpickr("#myCal", calConfig);
+
+
+             }, TC.delay)
+
+          })
+        })(jQuery);
+    </script>
+  </body>
+  </html>
+</apex:page>

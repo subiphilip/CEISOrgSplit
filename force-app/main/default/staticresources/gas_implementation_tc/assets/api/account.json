@@ -1,0 +1,142 @@
+{
+  "serviceDetails":{},
+  "bp": {
+    "bpId": null,
+    "debtOwed": null,
+    "currentBalance": null,
+    "darStatus": false,
+    "dnpStatus": false,
+    "dnpDate": null,
+    "returnCheckHistory": false,
+    "firstName": null,
+    "middleName": null,
+    "lastName": null,
+    "email": null,
+    "ssn": null,
+    "guid": null,
+    "idNumber": null,
+    "idNumberState": null,
+    "badDebt": [
+      {
+        // show user bad debt
+        // if all items in adoption are chosen ... continue else route to customer support
+        // if user accepts all adoption options pass payload during moveIn and(or) transfer
+        "reason":null,
+        "bpId":null,
+        "accountId":null,
+        "debtOwed":null, // FE show user amount
+        "currentBalance":null,
+        "fullName": null,
+        "contractId":null,
+        "moveInDate":null, // FE show user date
+        "moveOutDate":null, // FE show user date
+        "premiseId":null,
+        "installationId":null,
+        "division":null,
+        "ssn":null, // maybe
+        "idNumber": null,
+        "idNumberState": null,
+        "adoption":null, // FE allow user to choose one (accept, reject, dispute)
+        "dfkkop":null, // array TBD if required
+        "cellTab":null, // array TBD is required
+        "address":{ // FE show user address
+          "houseNumber": null,
+          "street": null,
+          "aptNumber": null,
+          "city": null,
+          "region": null,
+          "postalCode": null
+        }
+
+      }
+    ],
+    "phoneNumbers": [
+      {
+        "number": null,
+        "type": null,
+        "sms": null,
+        "primary": null
+      }
+    ],
+    "billing": {
+      "houseNumber": null,
+      "street": null,
+      "aptNumber": null,
+      "city": null,
+      "region": null,
+      "postalCode": null,
+      "zipPlus": null
+    },
+    "moveInContract":{
+      "serviceOrderId": null,
+      "contractId": null,
+      "accountId": null,
+      "premiseId": null,
+      "installationId": null,
+      "utilityContractId": null,
+      "forceOut": false,
+      "forceDate": null,
+      "address":{
+        "houseNumber": null,
+        "street": null,
+        "aptNumber": null,
+        "city": null,
+        "region": null,
+        "postalCode": null,
+        "zipPlus": null
+      },
+      "dunningProc": null,
+      "companyCode": null,
+      "n1": false,
+      "depositReq": false,
+      "premiseType": "R",
+      "depositAmount":null,
+      "homeOwner": false,
+      "hasDebt": false,
+      "darStatus": false,
+      "moveInDate": null,
+      "moveInStatus": null,
+      "moveOutStatus": null,
+      "serviceOrderStatus": null
+    },
+    "contracts": [
+      {
+        "permitQa":[
+          { "question": "New Pipe", "answer": 0 },
+          { "question": "Fire Damage", "answer": 0 },
+          { "question": "Leak", "answer": 0 }
+        ],
+        "displayQa":null,
+        "serviceOrderId": null,
+        "contractId": null,
+        "accountId": null,
+        "premiseId": null,
+        "installationId": null,
+        "forceOut": false,
+        "forceDate": null,
+        "address":{
+          "houseNumber": null,
+          "street": null,
+          "aptNumber": null,
+          "city": null,
+          "region": null,
+          "postalCode": null,
+          "zipPlus": null
+        },
+        "dunningProc": null,
+        "companyCode": null,
+        "n1": false,
+        "depositReq": false,
+        "premiseType": "R",
+        "depositAmount":null,
+        "homeOwner": false,
+        "hasDebt": false,
+        "darStatus": false,
+        "moveInDate": null,
+        "moveInStatus": null,
+        "moveOutStatus": null,
+        "serviceOrderStatus": null
+      }
+    ]
+  }
+}

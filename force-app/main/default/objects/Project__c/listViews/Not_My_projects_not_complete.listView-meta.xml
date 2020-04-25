@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Not_My_projects_not_complete</fullName>
+    <columns>NAME</columns>
+    <columns>Overview__c</columns>
+    <columns>Status__c</columns>
+    <columns>Expected_Date_of_Completion__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Completed,Cancelled</value>
+    </filters>
+    <filters>
+        <field>OWNER.ALIAS</field>
+        <operation>notEqual</operation>
+        <value>Shane</value>
+    </filters>
+    <label>Not My projects not complete</label>
+</ListView>
