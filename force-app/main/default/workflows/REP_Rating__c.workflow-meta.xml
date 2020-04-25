@@ -5,7 +5,7 @@
         <description>New REP Rating</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.cnp2</recipient>
+            <recipient>sphilip@cies.com.ces1</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>subi.philip@gmail.com</senderAddress>
@@ -17,7 +17,7 @@
         <description>REP Rating Disputed</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.cnp2</recipient>
+            <recipient>sphilip@cies.com.ces1</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>subi.philip@gmail.com</senderAddress>

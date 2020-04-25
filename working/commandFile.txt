@@ -1,4 +1,6 @@
-sfdx force:source:deploy -p force-app/ -u wave2 -c
+sfdx force:source:deploy -p force-app/ -u wave2 -c 
+
+sfdx force:source:deploy -p force-app/ -u -l --testlevel RunLocalTests -u CES1 -c
 
 sfdx force:org:create -s -f config/project-scratch-def.json -a PersonScratch 
 
@@ -77,7 +79,7 @@ export HUB_USERNAME=<your Dev Hub username>
 
 export CONSUMER_KEY=3MVG9szVa2RxsqBYQegokmxAcUrRQ6fJOYfsbBRt8W5zerA2F_qelXhBkb0SGSDxid3aWg9mQnFqj0YdcCSOX
 export JWT_KEY_FILE=<example: E:\Data\VSCode\certificates\server.key
-export HUB_USERNAME=sphilip@cies.com.cnp2
+export HUB_USERNAME=sphilip@cies.com.ces1
 
 
 Google API Key

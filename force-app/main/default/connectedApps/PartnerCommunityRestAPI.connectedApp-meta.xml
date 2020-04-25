@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
-    <contactEmail>sphilip@cies.com.cnp2</contactEmail>
+    <contactEmail>sphilip@cies.com.ces1</contactEmail>
     <label>PartnerCommunityRestAPI</label>
     <oauthConfig>
         <callbackUrl>https://centerpoint.force.com/REPs/services/oauth2/success</callbackUrl>

@@ -40,7 +40,7 @@
         <description>Update Team on ESCALATED TrueCost Cases</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.cnp2</recipient>
+            <recipient>sphilip@cies.com.ces1</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>subi.philip@gmail.com</senderAddress>
@@ -52,7 +52,7 @@
         <description>Update Team on new TrueCost Cases</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.cnp2</recipient>
+            <recipient>sphilip@cies.com.ces1</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>subi.philip@gmail.com</senderAddress>
@@ -162,7 +162,7 @@
     <fieldUpdates>
         <fullName>Set_Gaston_as_Owner</fullName>
         <field>OwnerId</field>
-        <lookupValue>sphilip@cies.com.cnp2</lookupValue>
+        <lookupValue>sphilip@cies.com.ces1</lookupValue>
         <lookupValueType>User</lookupValueType>
         <name>Set Gaston as Owner</name>
         <notifyAssignee>false</notifyAssignee>
@@ -209,7 +209,7 @@
     <fieldUpdates>
         <fullName>Set_Tracey_as_Owner</fullName>
         <field>OwnerId</field>
-        <lookupValue>sphilip@cies.com.cnp2</lookupValue>
+        <lookupValue>sphilip@cies.com.ces1</lookupValue>
         <lookupValueType>User</lookupValueType>
         <name>Set Tracey as Owner</name>
         <notifyAssignee>false</notifyAssignee>

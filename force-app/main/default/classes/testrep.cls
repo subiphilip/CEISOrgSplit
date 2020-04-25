@@ -49,7 +49,7 @@ public class testrep {
 			String httpURL      	= 'https://login.salesforce.com/services/oauth2/token';
 			String clientID     	= '3MVG99OxTyEMCQ3gu7v8WaS4myRV2HMVBXiurPl4UN5T_S.g_ffg7.eUKt2CUsgChdLfuiBObHQan48kVca3N';
 			String clientSecret 	= '6282016071229520133';
-			String userName         = 'sphilip@cies.com.cnp2';
+			String userName         = 'sphilip@cies.com.ces1';
 			String uhitPW           = 'Autumn12oBDnGWmHnjmRkPrsTr6ZV3ZK6';
             String url = httpURL+'?grant_type=password&client_id='+clientID+'&client_secret='+clientSecret+'&username='+userName+'&password='+uhitPW+'&';
           

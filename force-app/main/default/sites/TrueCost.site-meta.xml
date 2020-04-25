@@ -40,8 +40,8 @@
     <requireInsecurePortalAccess>false</requireInsecurePortalAccess>
     <robotsTxtPage>Robots_txt</robotsTxtPage>
     <serverIsDown>MaintenanceResource</serverIsDown>
-    <siteAdmin>sphilip@cies.com.cnp2</siteAdmin>
-    <siteGuestRecordDefaultOwner>sphilip@cies.com.cnp2</siteGuestRecordDefaultOwner>
+    <siteAdmin>sphilip@cies.com.ces1</siteAdmin>
+    <siteGuestRecordDefaultOwner>sphilip@cies.com.ces1</siteGuestRecordDefaultOwner>
     <siteRedirectMappings>
         <action>Permanent</action>
         <isActive>true</isActive>

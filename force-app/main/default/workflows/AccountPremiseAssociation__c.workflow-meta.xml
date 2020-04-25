@@ -5,7 +5,7 @@
         <description>Send AEP LOA</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.cnp2</recipient>
+            <recipient>sphilip@cies.com.ces1</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>subi.philip@gmail.com</senderAddress>
@@ -26,7 +26,7 @@
         <description>Send Oncor LOA (when pdf attachment is ready, change recipient to contactcenter@oncor.com)</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.cnp2</recipient>
+            <recipient>sphilip@cies.com.ces1</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>subi.philip@gmail.com</senderAddress>
@@ -216,7 +216,7 @@ Premise__r.Electric_Service_Address_Zip__c</formula>
         <endpointUrl>https://use4.dm-us.informaticacloud.com/saas/api/1/salesforceoutboundmessage/oiC4aqhDgaVEvlBf8AbVwV58VrWdcuSt</endpointUrl>
         <fields>Id</fields>
         <includeSessionId>false</includeSessionId>
-        <integrationUser>sphilip@cies.com.cnp2</integrationUser>
+        <integrationUser>sphilip@cies.com.ces1</integrationUser>
         <name>APA ID for TOU profile to informatica</name>
         <protected>false</protected>
         <useDeadLetterQueue>false</useDeadLetterQueue>
@@ -679,7 +679,7 @@ Premise__r.Electric_Service_Address_Zip__c</formula>
     </rules>
     <tasks>
         <fullName>Customer_emailed_about_usage_data_error</fullName>
-        <assignedTo>sphilip@cies.com.cnp2</assignedTo>
+        <assignedTo>sphilip@cies.com.ces1</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -690,7 +690,7 @@ Premise__r.Electric_Service_Address_Zip__c</formula>
     </tasks>
     <tasks>
         <fullName>LOA_submitted_for_customer</fullName>
-        <assignedTo>sphilip@cies.com.cnp2</assignedTo>
+        <assignedTo>sphilip@cies.com.ces1</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
@@ -701,7 +701,7 @@ Premise__r.Electric_Service_Address_Zip__c</formula>
     </tasks>
     <tasks>
         <fullName>Meter_Data_Error_Call</fullName>
-        <assignedTo>sphilip@cies.com.cnp2</assignedTo>
+        <assignedTo>sphilip@cies.com.ces1</assignedTo>
         <assignedToType>user</assignedToType>
         <description>This customer had a meter data error on UHIT.</description>
         <dueDateOffset>0</dueDateOffset>
@@ -713,7 +713,7 @@ Premise__r.Electric_Service_Address_Zip__c</formula>
     </tasks>
     <tasks>
         <fullName>Usage_Data_Completed_Message_Sent_To_Customer</fullName>
-        <assignedTo>sphilip@cies.com.cnp2</assignedTo>
+        <assignedTo>sphilip@cies.com.ces1</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>

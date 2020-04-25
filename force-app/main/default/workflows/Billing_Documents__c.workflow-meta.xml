@@ -5,7 +5,7 @@
         <description>Bill 15 days past due</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.cnp2</recipient>
+            <recipient>sphilip@cies.com.ces1</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>subi.philip@gmail.com</senderAddress>
@@ -17,7 +17,7 @@
         <description>Bill 30 days past due</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.cnp2</recipient>
+            <recipient>sphilip@cies.com.ces1</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>subi.philip@gmail.com</senderAddress>
@@ -29,7 +29,7 @@
         <description>Bill Overdue - To REP Contacts</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.cnp2</recipient>
+            <recipient>sphilip@cies.com.ces1</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>subi.philip@gmail.com</senderAddress>
@@ -41,7 +41,7 @@
         <description>Bill Past Due</description>
         <protected>false</protected>
         <recipients>
-            <recipient>troy.donovan1@centerpointenergy.com.cnp2</recipient>
+            <recipient>sphilip@cies.com.ces1</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>subi.philip@gmail.com</senderAddress>
@@ -53,7 +53,7 @@
         <description>Bill Reminder 20 days</description>
         <protected>false</protected>
         <recipients>
-            <recipient>troy.donovan1@centerpointenergy.com.cnp2</recipient>
+            <recipient>sphilip@cies.com.ces1</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>subi.philip@gmail.com</senderAddress>

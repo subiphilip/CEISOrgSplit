@@ -25,8 +25,8 @@
     <referrerPolicyOriginWhenCrossOrigin>true</referrerPolicyOriginWhenCrossOrigin>
     <requireHttps>true</requireHttps>
     <requireInsecurePortalAccess>false</requireInsecurePortalAccess>
-    <siteAdmin>sphilip@cies.com.cnp2</siteAdmin>
-    <siteGuestRecordDefaultOwner>sphilip@cies.com.cnp2</siteGuestRecordDefaultOwner>
+    <siteAdmin>sphilip@cies.com.ces1</siteAdmin>
+    <siteGuestRecordDefaultOwner>sphilip@cies.com.ces1</siteGuestRecordDefaultOwner>
     <siteTemplate>SiteTemplate</siteTemplate>
     <siteType>Visualforce</siteType>
     <subdomain>java-dream-4647-17198dd3b49</subdomain>
