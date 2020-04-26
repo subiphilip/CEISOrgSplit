@@ -71,8 +71,9 @@ global class ShopRemote extends ControllerForMobileMain {
             if (zipcode==null) zipcode='77002';
             
             id tdspid=TDSPIDfromZipCode(zipcode);
-            system.debug('subi tdspid: '+tdspid+' rateClass: '+rateClass);
+            system.debug('MRE tdspid: '+tdspid+' rateClass: '+rateClass);
             list<rate__c> planlist2 = TrueCostCalc.getActivePlans2(null, tdspid, rateclass);
+            system.debug('planlist2: '+planlist2);
             list<Saved_Plan__c> savedplans = new list<Saved_Plan__c>();
             string loadcurve; //starts null, which is fine for all but commercial.
             if (rateclass=='Commercial') {//commercial, no premise

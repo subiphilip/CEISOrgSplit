@@ -79,7 +79,7 @@ export HUB_USERNAME=<your Dev Hub username>
 
 export CONSUMER_KEY=3MVG9szVa2RxsqBYQegokmxAcUrRQ6fJOYfsbBRt8W5zerA2F_qelXhBkb0SGSDxid3aWg9mQnFqj0YdcCSOX
 export JWT_KEY_FILE=<example: E:\Data\VSCode\certificates\server.key
-export HUB_USERNAME=sphilip@cies.com.ces1
+export HUB_USERNAME=sphilip@cies.com.fullsbx
 
 
 Google API Key
@@ -91,27 +91,27 @@ sfdx force:data:tree:export --query "SELECT Analytics_Group_ID__c,bounceAPI__c,b
 
 sfdx force:data:tree:import --targetusername test-wvkpnfm5z113@example.com --plan data/export-demo-TrueCostSystemVariables__c-plan.json
 
-sfdx force:data:tree:import -u CES1 --plan data/export-demo-TrueCostSystemVariables__c-plan.json
+sfdx force:data:tree:import -u ceisFULLSBX --plan data/export-demo-TrueCostSystemVariables__c-plan.json
 
 
 
 sfdx force:data:tree:export --query "SELECT Facebook_OAuth_Link_Link__c,Facebook_oAuth_link__c,Facebook_OAuth_Login_Link__c,Name,TrueCost_Post_registration_start_page__c,TrueCost_RegisterPage__c,TrueCost_Secure_URL__c FROM AuthSettings__c" --prefix export --outputdir data --plan
 
-sfdx force:data:tree:import -u CES1 --plan data/export-AuthSettings__c-plan.json
+sfdx force:data:tree:import -u ceisFULLSBX --plan data/export-AuthSettings__c-plan.json
 
 
 
 sfdx force:data:tree:export --query "SELECT Active__c,Brand_string__c,Dynamic_Endpoint__c,Endpoint__c,Name,Partner_code__c,Password__c,Saved_Token__c,Username__c FROM PartnerAPI__c" --prefix export --outputdir data --plan
 
-sfdx force:data:tree:import -u CES1 --plan data/export-PartnerAPI__c-plan.json
+sfdx force:data:tree:import -u ceisFULLSBX --plan data/export-PartnerAPI__c-plan.json
 
 
 sfdx force:data:tree:export --query "SELECT Answer__c,Category__c,CorpComm_Editing__c,Draft_Answer__c,Draft_Question__c,Final_Review__c,Legal_Editing__c,Name,Public__c,Question__c,RecordTypeId,Reviewed__c,Stage__c,Top_FAQ__c FROM FAQ__c WHERE RecordTypeId = '012300000018tOFAAY'" --prefix export --outputdir data --plan
 
-sfdx force:data:tree:import -u CES1 --plan data/export-FAQ__c-plan.json
+sfdx force:data:tree:import -u ceisFULLSBX --plan data/export-FAQ__c-plan.json
 
 
 
-sfdx force:data:tree:import -u CES1 --plan data/export-TaxesAndFees__c-plan.json
+sfdx force:data:tree:import -u ceisFULLSBX --plan data/export-TaxesAndFees__c-plan.json
 
 

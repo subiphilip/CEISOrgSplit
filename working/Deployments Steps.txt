@@ -1,29 +1,30 @@
 Deployments Steps
 
-Config Org has the following
-    * Person Accounts 
-    * Contacts to Multiple Accounts
-    * Divisons
-        Add 'TrueCost'
+Required
     * Additional Custom Relationships
-    * Live Agent ? Descoped
-    * Quote Settings Enabled
-    * Account Teams Enabled
-    * Feed Tracking enabled for Tasks
-    * Field History Tracking enabled for Accounts, Opportunities
-    * Login Access Policies->
-    * Partner Communities
-    * Confirm Communities 
-        Are enabled  
-        Partner Roles are set to 3
-        Allow using Standard External Profiles to Self-Register = Enabled
+Config Org has the following
     * Update OWDs
         Lead - 	Public Read/Write/Transfer , 	Public Read/Write/Transfer
         Accouunt - 	Public Read/Write, 	Public Read/Write    
         Opportunity - Private, Private
         Case - Private, Private
     * Register Sites Domain
-    # Setup->Process Automation Settings-> Set the Default Workflow User
+    * Person Accounts 
+    * Contacts to Multiple Accounts
+    * Divisons (Switch to Classic UI)
+        Add 'TrueCost' 
+    * Quote Settings Enabled
+    * Account Teams Enabled
+    * Feed Tracking enabled for Tasks
+    * Field History Tracking enabled for Accounts, Opportunities
+    * Partner Communities
+    * Confirm Communities 
+        Are enabled  
+        Partner Roles are set to 3
+        Allow using Standard External Profiles to Self-Register = Enabled
+    * Setup->Process Automation Settings-> Set the Default Workflow User
+    * Set the Sites.com Subdomain
+    * Update workflow emails to a current Org user. 
 Setup Org Wide Email
     * Add Org Wide Email addressess - Setup->Organization-Wide Addresses
         	repsupport@mytruecost.com
@@ -36,6 +37,7 @@ Setup Org Wide Email
             mes@centerpointenergy.com
             agchoice@centerpointenergy.com
             subi.philip@gmail.com (for Testing/Deployment only.)
+    
 Deploy Metadata
     * Clone Github repo and deploy into org
     * Update WF Emails if necessary
