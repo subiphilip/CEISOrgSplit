@@ -68750,7 +68750,7 @@
       libraries: ["places"],
       apiKey: i.geolocatorKey
      }), X.BotDetectCaptchaModule.forRoot({
-      captchaEndpoint: "https://cnp-digitalmove-botdetectcaptcha-sbx.us-e1.cloudhub.io/botdetect/botdetectcaptcha"
+      captchaEndpoint: "https://cnp-digitalmove-botdetectcaptcha-ceis-qa.us-e1.cloudhub.io/botdetect/botdetectcaptcha"
      }), function() {
       return function() {}
      }()),
@@ -89649,7 +89649,7 @@
        libraries: ["places"],
        apiKey: "AIzaSyBrbzgbXbxUlJAdFnjaA-C0NiG_zPyJc7Q"
       }, []), r["\u0275mpd"](256, Qx.CAPTCHA_SETTINGS, {
-       captchaEndpoint: "https://cnp-digitalmove-botdetectcaptcha-sbx.us-e1.cloudhub.io/botdetect/botdetectcaptcha"
+       captchaEndpoint: "https://cnp-digitalmove-botdetectcaptcha-ceis-qa.us-e1.cloudhub.io/botdetect/botdetectcaptcha"
       }, []), r["\u0275mpd"](256, Yp, Vp, [])])
      });
     (i.production || i.beta) && Object(r.enableProdMode)(), J.platformBrowser().bootstrapModuleFactory(tS)

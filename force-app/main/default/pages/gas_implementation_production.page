@@ -52,7 +52,7 @@
         
     window.CPE = {
       assetPath: "{!URLFOR($Resource.gas_implementation_production_v2, '/assets')}",
-      api: "https://cnpdigitalmove-sbx.us-e2.cloudhub.io//api",
+      api: "https://cnpdigitalmove-ceis-qa.us-e1.cloudhub.io//api",
       hsp_s_plans: [],
       variantDefault: 3,
       content: {
@@ -67,7 +67,7 @@
     window.googleOptimizeExperimentID = 'SVIe3k2aS-mhY-n9wlRblw';
     
     if(window.location.href.indexOf('move.centerpointenergy.com') <= 0){
-        window.CPE.api = "https://cnpdigitalmove-sbx.us-e2.cloudhub.io/api"
+        window.CPE.api = "https://cnpdigitalmove-ceis-qa.us-e1.cloudhub.io/api"
     }
     
   </script>

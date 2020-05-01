@@ -103,6 +103,121 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Safari_PriceType_Name__c</picklist>
+        <values>
+            <fullName>Agency Fixed Price</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Agency Index Price</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Demand Charge</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FOM Baseload Vol Index</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FOM Baseload Vol Index %2B Fuel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FOM Baseload Volume %26 Price %2B Fuel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Price</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Price %2B Fuel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Price Plus %25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Vol %26 Basis w%2F Price Trigger</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Vol %26 Price w%2F Basis Trigger</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Vol Index</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Vol Index %2B Fuel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Vol Index Plus %25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Volume</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Volume %26 Price %2B Fuel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Volume Index w%2FCollar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Volume Plus %25</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fixed Volume Spot</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Gas Futures Purchase</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Higher</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Index %2B Fuel</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Index Plus Percent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Index w%2FCollar</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Index w%2FSplit Basis</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Indexed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lower</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>WACOG Detail</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Volume_Type__c</picklist>
         <values>
             <fullName>Daily-Daily</fullName>
