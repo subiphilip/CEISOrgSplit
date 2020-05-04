@@ -5,7 +5,7 @@
         <description>Notification to Admins : Unsubscribe from All Emails</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.fullsbx</recipient>
+            <recipient>sphilip@cies.com.ces1</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>subi.philip@gmail.com</senderAddress>
@@ -17,7 +17,7 @@
         <description>Notification to Admins : Unsubscribe from TC Emails</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.fullsbx</recipient>
+            <recipient>sphilip@cies.com.ces1</recipient>
             <type>user</type>
         </recipients>
         <senderAddress>subi.philip@gmail.com</senderAddress>
