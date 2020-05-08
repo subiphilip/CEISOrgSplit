@@ -46,8 +46,9 @@ public class  TrueCostUtilities {
     
     public static id lookuptheAdmin(){
         //list<user> alladmins = [select id from user where profile.Name = 'System Administrator' and IsActive= true and userrole.name = 'Business Manager'];         
-        //return alladmins[0].id;
-        return '00530000005wfQm';
+        list<user> alladmins = [select id from user where profile.Name = 'System Administrator' and IsActive= true];         
+        return alladmins[0].id;
+        //return '00530000005wfQm';
     }
     
     @future
@@ -101,7 +102,9 @@ public class  TrueCostUtilities {
         list<monthly_usage__c> usagelist = new list<monthly_usage__c>();
             //temporary hack to apply the CEHE 1000 kWh usage.  TODO--query the premise's TDSP and get the right curve for that TDSP
             list<tdsp__c> cnp=[select id from TDSP__c where name!='None' and name like '%centerpoint%' and recordtypeid='012300000019FSK' LIMIT 1];
-            usagelist=pullAverageUsage(cnp[0].id, '1000 kWh');
+            if (cnp.size()>0){
+                usagelist=pullAverageUsage(cnp[0].id, '1000 kWh');
+            }
         return usagelist;   
     }
     
@@ -526,8 +529,71 @@ public static list<premises__C> exactMatchServiceAddress(string address, string 
     }
     
     public static user GrabAUser(){
-        user u = [select id from user where ContactId != null order by lastname limit 1 ];
-        return u;
+        List<user> u = new List<user>();
+        u = [select id from user where ContactId != null order by lastname limit 1 ];
+        User user1;
+        if (!u.isEmpty()) {
+            return u[0];
+        } else {
+            UserRole portalRole = [Select Id From UserRole Where PortalType = 'None' Limit 1];
+                system.debug('portalRole is ' + portalRole);
+
+                Profile profile1 = [Select Id from Profile where name = 'System Administrator'];
+                User portalAccountOwner1 = new User(
+                UserRoleId = portalRole.Id,
+                ProfileId = profile1.Id,
+                Username = System.now().millisecond() + 'test2@test.com',
+                Alias = 'batman',
+                Email='bruce.wayne@wayneenterprises.com',
+                EmailEncodingKey='UTF-8',
+                Firstname='Bruce',
+                Lastname='Wayne',
+                LanguageLocaleKey='en_US',
+                LocaleSidKey='en_US',
+                TimeZoneSidKey='America/Chicago'
+                );
+                Database.insert(portalAccountOwner1);
+
+                //User u1 = [Select ID From User Where Id =: portalAccountOwner1.Id];
+
+                System.runAs ( portalAccountOwner1 ) {
+                //Create account
+                Account portalAccount1 = new Account(
+                Name = 'TestAccount',
+                OwnerId = portalAccountOwner1.Id
+                );
+                Database.insert(portalAccount1);
+
+                //Create contact
+                Contact contact1 = new Contact(
+                FirstName = 'Test',
+                Lastname = 'McTesty',
+                AccountId = portalAccount1.Id,
+                Email = System.now().millisecond() + 'test@test.com'
+                );
+                Database.insert(contact1);
+
+                //Create user
+                Profile portalProfile = [SELECT Id FROM Profile WHERE Name LIKE '%Portal User%' Limit 1];
+
+                user1 = new User(
+                Username = System.now().millisecond() + 'test12345@test.com',
+                ContactId = contact1.Id,
+                ProfileId = portalProfile.Id,
+                Alias = 'test123',
+                Email = 'test12345@test.com',
+                EmailEncodingKey = 'UTF-8',
+                LastName = 'McTesty',
+                CommunityNickname = 'test12345',
+                TimeZoneSidKey = 'America/Los_Angeles',
+                LocaleSidKey = 'en_US',
+                LanguageLocaleKey = 'en_US'
+                );
+                Database.insert(user1);
+                }
+                
+                return user1;
+        }
     }
     
     public static decimal getPUCA(){
@@ -627,8 +693,12 @@ public static list<premises__C> exactMatchServiceAddress(string address, string 
     public static decimal calculateCommission(decimal contractmonths){
         decimal monthsToUse = math.min(math.max(contractmonths, 3), 18);
         commission__c c = commission__c.getOrgDefaults();
-        decimal comm = c.residential_per_month__c;
-        return comm*monthstoUse;    
+        if (c.residential_per_month__c!=null) {
+            decimal comm = c.residential_per_month__c;
+            return comm*monthstoUse;    
+        } else {
+            return 5*monthstoUse;
+        }
     }
     
     public static order__c CurrentOrder(AccountPremiseAssociation__C theAPA){

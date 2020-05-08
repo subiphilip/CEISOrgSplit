@@ -224,7 +224,10 @@ public  class TriEagleAPI {
 
 	public static date BusinessHoursDate(date d){
 		list<BusinessHours> REPhours = [select id from BusinessHours where name = 'REP SLA']; //Finds the REP business hours  
-		Datetime newdate = BusinessHours.add(REPhours[0].id, d, 1); //if we're out of business hours, roll to the next day
+		Datetime newdate;
+		If (!REPhours.isEmpty()){
+			newdate = BusinessHours.add(REPhours[0].id, d, 1); //if we're out of business hours, roll to the next day
+		} else { newdate = Date.newInstance(2020,5,1);}
 		Date dateTemp = Date.newInstance(newdate.year(),newdate.month(),newdate.day()); //now back from datetime to date
 		return dateTemp;
 	}

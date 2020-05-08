@@ -224,7 +224,7 @@ public with sharing class TriEagleAPI_Test {
         List<CESContract__c> TestLockContracts;
         for (Quote o: TestBaseQuotes) {
             TestLockContracts = TestDataFactory.createContracts(1, o, 'Lock NYMEX', TestAccts[0].Id, null ); 
-        }system.debug('TestLockContracts: '+TestLockContracts[0]);
+        } //system.debug('TestLockContracts: '+TestLockContracts[0]);
         
         List<REP_Profile__c> rep = new List<REP_Profile__c>();
         for(Integer i=0;i<1;i++) {

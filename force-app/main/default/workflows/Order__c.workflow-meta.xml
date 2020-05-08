@@ -21,7 +21,7 @@
     </tasks>
     <tasks>
         <fullName>Order_Failure_Notification</fullName>
-        <assignedTo>sphilip@cies.com.ces1</assignedTo>
+        <assignedTo>troy.donovan1@centerpointenergy.com.fullsbx</assignedTo>
         <assignedToType>user</assignedToType>
         <description>The REP has indicated that this order failed, see order for details.  Please update this task as &quot;Completed&quot; after resolving with REP.</description>
         <dueDateOffset>3</dueDateOffset>

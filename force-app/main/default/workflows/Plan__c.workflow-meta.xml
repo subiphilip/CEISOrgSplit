@@ -2,14 +2,14 @@
 <Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <alerts>
         <fullName>Contract_Length_Changed_for_Existing_Plan</fullName>
-        <ccEmails>subi.philip@gmail.com</ccEmails>
+        <ccEmails>sphilip@mreconsulting.com</ccEmails>
         <description>Contract Length Changed for Existing Plan</description>
         <protected>false</protected>
         <recipients>
             <field>LastModifiedById</field>
             <type>userLookup</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_REPs/Plan_Contract_Length_Changed</template>
     </alerts>
@@ -21,10 +21,10 @@
             <type>owner</type>
         </recipients>
         <recipients>
-            <recipient>sphilip@cies.com.ces1</recipient>
+            <recipient>troy.donovan1@centerpointenergy.com.fullsbx</recipient>
             <type>user</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_REPs/Plan_End_Date_Reminder</template>
     </alerts>
@@ -33,10 +33,10 @@
         <description>REP New Plan Entry/Change</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.ces1</recipient>
+            <recipient>troy.donovan1@centerpointenergy.com.fullsbx</recipient>
             <type>user</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_Internal_Messages/New_Plan_Created_Changed_INTERNAL</template>
     </alerts>

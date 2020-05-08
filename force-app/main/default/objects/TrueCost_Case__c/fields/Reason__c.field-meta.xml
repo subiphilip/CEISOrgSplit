@@ -350,6 +350,33 @@
             </value>
         </valueSetDefinition>
         <valueSettings>
+            <controllingFieldValue>Utility</controllingFieldValue>
+            <valueName>Meter data reply</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>API Error</controllingFieldValue>
+            <valueName>API Error</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <valueName>New problem</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Feature Request</controllingFieldValue>
+            <valueName>Suggestion</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <controllingFieldValue>Question</controllingFieldValue>
+            <valueName>Account termination</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Other</controllingFieldValue>
+            <valueName>Account Changes</valueName>
+        </valueSettings>
+        <valueSettings>
             <controllingFieldValue>Address Matching</controllingFieldValue>
             <valueName>Address Not Found</valueName>
         </valueSettings>
@@ -371,39 +398,6 @@
             <controllingFieldValue>Problem</controllingFieldValue>
             <controllingFieldValue>Question</controllingFieldValue>
             <valueName>Meter number</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
-            <controllingFieldValue>Clawback</controllingFieldValue>
-            <controllingFieldValue>Problem</controllingFieldValue>
-            <controllingFieldValue>Inadvertent Switch</controllingFieldValue>
-            <controllingFieldValue>Password Related</controllingFieldValue>
-            <controllingFieldValue>Cancellation</controllingFieldValue>
-            <valueName>Other</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
-            <valueName>Dispute customer</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
-            <valueName>Dispute commission</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
-            <valueName>Request re-send</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
-            <valueName>Apply Credit</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
-            <valueName>Payment Arrangements</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
-            <valueName>Request full report</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Not Actionable (No Survey)</controllingFieldValue>
@@ -450,20 +444,21 @@
             <valueName>Entergy.</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Utility</controllingFieldValue>
-            <valueName>Meter data reply</valueName>
-        </valueSettings>
-        <valueSettings>
             <controllingFieldValue>Outside of Service Territory (AEP)</controllingFieldValue>
             <valueName>AEP.</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>API Error</controllingFieldValue>
-            <valueName>API Error</valueName>
-        </valueSettings>
-        <valueSettings>
             <controllingFieldValue>Outside of Service Territory (Oncor)</controllingFieldValue>
             <valueName>Oncor.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Clawback</controllingFieldValue>
+            <controllingFieldValue>Inadvertent Switch</controllingFieldValue>
+            <controllingFieldValue>Cancellation</controllingFieldValue>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <controllingFieldValue>Problem</controllingFieldValue>
+            <controllingFieldValue>Password Related</controllingFieldValue>
+            <valueName>Other</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Clawback</controllingFieldValue>
@@ -476,6 +471,30 @@
         <valueSettings>
             <controllingFieldValue>Clawback</controllingFieldValue>
             <valueName>Move-out after DNP</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <valueName>Dispute customer</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <valueName>Dispute commission</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <valueName>Request re-send</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <valueName>Apply Credit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <valueName>Payment Arrangements</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TrueCost Invoice</controllingFieldValue>
+            <valueName>Request full report</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Problem</controllingFieldValue>
@@ -506,12 +525,6 @@
         <valueSettings>
             <controllingFieldValue>Problem</controllingFieldValue>
             <controllingFieldValue>Question</controllingFieldValue>
-            <controllingFieldValue>Other</controllingFieldValue>
-            <valueName>Account termination</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Problem</controllingFieldValue>
-            <controllingFieldValue>Question</controllingFieldValue>
             <controllingFieldValue>Complaint</controllingFieldValue>
             <valueName>REP order performance</valueName>
         </valueSettings>
@@ -529,11 +542,6 @@
         <valueSettings>
             <controllingFieldValue>Problem</controllingFieldValue>
             <valueName>Meter Data Error</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Feature Request</controllingFieldValue>
-            <controllingFieldValue>Other</controllingFieldValue>
-            <valueName>Suggestion</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Question</controllingFieldValue>
@@ -586,14 +594,6 @@
         <valueSettings>
             <controllingFieldValue>Testing</controllingFieldValue>
             <valueName>Testing</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Other</controllingFieldValue>
-            <valueName>New problem</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Other</controllingFieldValue>
-            <valueName>Account Changes</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Comments/Feedback</controllingFieldValue>

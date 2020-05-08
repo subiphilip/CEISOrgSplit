@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CES_Consultant_Cases_TrueCost_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>CES Consultant Cases</label>
+    <queue>CES_Consultant_Cases</queue>
+    <sharedTo>
+        <allInternalUsers/>
+    </sharedTo>
+</ListView>

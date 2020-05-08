@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gas_Choice_Customer_Service_TrueCost_Case</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Gas Choice Customer Service</label>
+    <queue>Gas_Choice_Customer_Service</queue>
+    <sharedTo>
+        <allInternalUsers/>
+    </sharedTo>
+</ListView>

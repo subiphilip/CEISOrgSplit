@@ -69,14 +69,19 @@ public class CESCommonObjectControllerTest {
         CESCommonObjectController.getBillGroupRecordName(bg.Id);
         CESCommonObjectController.logRecentlyViewedBillGroupForReference(bg.Id);
         
-		boolean isMyCESProfileValid;
+        boolean isMyCESProfileValid;
+        
+        Trigger_Killswitch__mdt testTriggerKill = new Trigger_Killswitch__mdt();
+        testTriggerKill.DeveloperName = 'AccountChange';
+        testTriggerKill.MasterLabel = 'AccountChange';
+        //insert testTriggerKill;
 	
 		isMyCESProfileValid = CESCommonObjectController.isMyCESProfileValid(p);
 
         p = [
             SELECT Id, Name
             FROM Profile
-            WHERE Name ='The System Q219'
+            WHERE Name ='System Administrator'
             LIMIT 1
         ];		
 		
@@ -114,22 +119,61 @@ public class CESCommonObjectControllerTest {
 System.debug('CESCommonObjectControllerTest | myTestContact : ' + c);
         
         // This code runs as the system user
-        Profile myCommunityUserProfile2 = [SELECT Id FROM Profile WHERE Name='MyCES ExtFA'];
-        
-        User myTestUser2 = new User(Alias = 'standt', Email='standarduser@testorg.com',
-                            EmailEncodingKey='UTF-8', LastName='Testing', LanguageLocaleKey='en_US',
-                            LocaleSidKey='en_US', ProfileId = myCommunityUserProfile2.Id,
-                            TimeZoneSidKey='America/Los_Angeles',
-                            UserName=uniqueUserName2, ContactId=c.Id);        
-        insert myTestUser2;
-System.debug('CESCommonObjectControllerTest | myTestUser2 : ' + myTestUser2);
-        
-        System.runAs(myTestUser2) {
-            // as user
-            // 
-			System.debug('CESCommonObjectControllerTest | getCommonAccountRecordList as myCES User');            
-            List<Account> testAccountsAsUser = CESCommonObjectController.getCommonAccountRecordList();
-        }
+        Profile myCommunityUserProfile2 = [SELECT Id FROM Profile WHERE Name='System Administrator'];
+
+        UserRole portalRole = [Select Id From UserRole Where PortalType = 'None' Limit 1];
+
+        Profile profile1 = [Select Id from Profile where name = 'System Administrator'];
+        User portalAccountOwner1 = new User(
+        UserRoleId = portalRole.Id,
+        ProfileId = profile1.Id,
+        Username = System.now().millisecond() + 'test2@test.com',
+        Alias = 'batman',
+        Email='bruce.wayne@wayneenterprises.com',
+        EmailEncodingKey='UTF-8',
+        Firstname='Bruce',
+        Lastname='Wayne',
+        LanguageLocaleKey='en_US',
+        LocaleSidKey='en_US',
+        TimeZoneSidKey='America/Chicago'
+        );
+        Database.insert(portalAccountOwner1);
+
+        //User u1 = [Select ID From User Where Id =: portalAccountOwner1.Id];
+
+        //System.runAs ( portalAccountOwner1 ) {
+            //Create account
+            Account portalAccount1 = new Account(
+            Name = 'TestAccount',
+            OwnerId = portalAccountOwner1.Id
+            );
+            Database.insert(portalAccount1);
+
+            //Create contact
+            Contact contact1 = new Contact(
+            FirstName = 'Test',
+            Lastname = 'McTesty',
+            AccountId = portalAccount1.Id,
+            Email = System.now().millisecond() + 'test@test.com'
+            );
+            Database.insert(contact1);
+
+            Profile portalProfile = [SELECT Id FROM Profile WHERE Name LIKE '%Portal User%' Limit 1];
+            User myTestUser2 = new User(Alias = 'standt', Email='standarduser@testorg.com',
+                                EmailEncodingKey='UTF-8', LastName='Testing', LanguageLocaleKey='en_US',
+                                LocaleSidKey='en_US', ProfileId = portalProfile.Id,
+                                TimeZoneSidKey='America/Los_Angeles',
+                                UserName=uniqueUserName2, ContactId=contact1.Id);        
+            insert myTestUser2;
+            System.debug('CESCommonObjectControllerTest | myTestUser2 : ' + myTestUser2);
+
+            System.runAs(myTestUser2) {
+                // as user
+                // 
+                System.debug('CESCommonObjectControllerTest | getCommonAccountRecordList as myCES User');            
+                List<Account> testAccountsAsUser = CESCommonObjectController.getCommonAccountRecordList();
+            }
+        //}
         
     }
     

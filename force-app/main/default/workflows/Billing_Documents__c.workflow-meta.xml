@@ -5,10 +5,10 @@
         <description>Bill 15 days past due</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.ces1</recipient>
+            <recipient>troy.donovan1@centerpointenergy.com.fullsbx</recipient>
             <type>user</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_REPs/Bill_Reminder_15_days_overdue</template>
     </alerts>
@@ -17,10 +17,10 @@
         <description>Bill 30 days past due</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.ces1</recipient>
+            <recipient>troy.donovan1@centerpointenergy.com.fullsbx</recipient>
             <type>user</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_REPs/Bill_Past_Due_30_days</template>
     </alerts>
@@ -29,10 +29,10 @@
         <description>Bill Overdue - To REP Contacts</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.ces1</recipient>
+            <recipient>troy.donovan1@centerpointenergy.com.fullsbx</recipient>
             <type>user</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_REPs/Bill_Reminder_Overdue</template>
     </alerts>
@@ -41,10 +41,10 @@
         <description>Bill Past Due</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.ces1</recipient>
+            <recipient>troy.donovan1@centerpointenergy.com.fullsbx</recipient>
             <type>user</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_Internal_Messages/Bill_Past_Due</template>
     </alerts>
@@ -53,10 +53,10 @@
         <description>Bill Reminder 20 days</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.ces1</recipient>
+            <recipient>troy.donovan1@centerpointenergy.com.fullsbx</recipient>
             <type>user</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_REPs/Bill_Reminder_20_days</template>
     </alerts>

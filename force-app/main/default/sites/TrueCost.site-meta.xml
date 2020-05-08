@@ -15,18 +15,6 @@
     <clickjackProtectionLevel>SameOriginOnly</clickjackProtectionLevel>
     <contentSniffingProtection>true</contentSniffingProtection>
     <cspUpgradeInsecureRequests>true</cspUpgradeInsecureRequests>
-    <customWebAddresses>
-        <domainName>centerpoint.mytruecost.cnptest.com</domainName>
-        <primary>false</primary>
-    </customWebAddresses>
-    <customWebAddresses>
-        <domainName>www.mytrucost.com</domainName>
-        <primary>false</primary>
-    </customWebAddresses>
-    <customWebAddresses>
-        <domainName>www.mytruecost.com</domainName>
-        <primary>true</primary>
-    </customWebAddresses>
     <enableAuraRequests>true</enableAuraRequests>
     <favoriteIcon>CNPBallTr</favoriteIcon>
     <fileNotFoundPage>TrueCost404</fileNotFoundPage>
@@ -40,8 +28,8 @@
     <requireInsecurePortalAccess>false</requireInsecurePortalAccess>
     <robotsTxtPage>Robots_txt</robotsTxtPage>
     <serverIsDown>MaintenanceResource</serverIsDown>
-    <siteAdmin>sphilip@cies.com.ces1</siteAdmin>
-    <siteGuestRecordDefaultOwner>sphilip@cies.com.ces1</siteGuestRecordDefaultOwner>
+    <siteAdmin>troy.donovan1@centerpointenergy.com.fullsbx</siteAdmin>
+    <siteGuestRecordDefaultOwner>troy.donovan1@centerpointenergy.com.fullsbx</siteGuestRecordDefaultOwner>
     <siteRedirectMappings>
         <action>Permanent</action>
         <isActive>true</isActive>

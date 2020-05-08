@@ -157,7 +157,14 @@ public class ChatterUtils {
   }  
   
   public static void chatterTheAdmins(Id recordID, string postText){
-    id[] Admins = new id[]{'00530000008Keur', '00530000008PQie', '00530000005Wn5W'};
+    //id[] Admins = new id[]{'00530000008Keur', '00530000008PQie', '00530000005Wn5W'};
+    List<Id> Admins = new List<Id>();
+
+    for (user adminsRec: [select Id from user where profile.name = 'System Administrator' limit 2]) {
+      Admins.add(adminsRec.Id);
+    }
+    system.debug('Admin: '+Admins);
+
     multiMentionOnRecord(recordId, Admins, postText);
   }
 }

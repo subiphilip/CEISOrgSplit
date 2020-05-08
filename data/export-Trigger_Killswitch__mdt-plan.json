@@ -1,0 +1,10 @@
+[
+    {
+        "sobject": "Trigger_Killswitch__mdt",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "export-Trigger_Killswitch__mdts.json"
+        ]
+    }
+]

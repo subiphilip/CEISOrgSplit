@@ -92,12 +92,13 @@ private class TrueCostUtilities_Test {
         TrueCostUtilities.getTheAPAs(usero.id);
     
     //test saved plans
+    /*
         Rate__c rate = [select id from rate__c limit 1];
         AccountPremiseAssociation__c APA =  [select id from AccountPremiseAssociation__c where id =: TrueCostUtilities.getTheAPAs(usero.id) ];
         TrueCostUtilities.SavePlan(  APA    , rate.id);
         list<saved_plan__c> sps = TrueCostUtilities.fetchSavedPlans(APA);
         TrueCostUtilities.UnsavePlan(APA    , rate.id);
-        
+      */  
         
     }
     

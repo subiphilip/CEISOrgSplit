@@ -5,10 +5,10 @@
         <description>New REP Rating</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.ces1</recipient>
+            <recipient>troy.donovan1@centerpointenergy.com.fullsbx</recipient>
             <type>user</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_Internal_Messages/New_REP_Rating_INTERNAL</template>
     </alerts>
@@ -17,10 +17,10 @@
         <description>REP Rating Disputed</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.ces1</recipient>
+            <recipient>troy.donovan1@centerpointenergy.com.fullsbx</recipient>
             <type>user</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_Internal_Messages/REP_Rating_Disputed</template>
     </alerts>
@@ -31,7 +31,7 @@
         <recipients>
             <type>owner</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_REPs/Notification_to_REPs_for_new_rating</template>
     </alerts>

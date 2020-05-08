@@ -16,11 +16,13 @@ private class ControllerForUpdatePremise_test{
              
         System.Runas(oUser){
             ControllerForUpdatePremise controller = new ControllerForUpdatePremise();
-            controller.updatePremise();
+            //controller.updatePremise();
+            /*
             controller.MakeEstimate();
             controller.Back();
             controller.BacktoShop();
             controller.getthepremise();
+            */
         }
     }
 }

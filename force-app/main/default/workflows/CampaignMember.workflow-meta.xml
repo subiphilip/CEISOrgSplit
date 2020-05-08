@@ -5,10 +5,10 @@
         <description>Notification to Admins : Unsubscribe from All Emails</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.ces1</recipient>
+            <recipient>troy.donovan1@centerpointenergy.com.fullsbx</recipient>
             <type>user</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_Customer_Marketing/Unsubscribe_from_All_Emails</template>
     </alerts>
@@ -17,10 +17,10 @@
         <description>Notification to Admins : Unsubscribe from TC Emails</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.ces1</recipient>
+            <recipient>troy.donovan1@centerpointenergy.com.fullsbx</recipient>
             <type>user</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_Customer_Marketing/Unsubscribe_from_TrueCost_Emails</template>
     </alerts>

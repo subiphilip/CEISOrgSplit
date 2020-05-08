@@ -13,6 +13,13 @@ Config Org has the following
     * Contacts to Multiple Accounts
     * Divisons (Switch to Classic UI)
         Add 'TrueCost' 
+        Add 'C&I Sales' (for test class)
+    * Create Profile:
+        MyCES Consultant  (for test class)
+    * Creat a default Account   
+        Test Account
+    * Update Admin Profile 
+        Add Person Account to Account Record Types
     * Quote Settings Enabled
     * Account Teams Enabled
     * Feed Tracking enabled for Tasks
@@ -36,7 +43,7 @@ Setup Org Wide Email
             cesretailnom@centerpointenergy.com
             mes@centerpointenergy.com
             agchoice@centerpointenergy.com
-            subi.philip@gmail.com (for Testing/Deployment only.)
+            sphilip@mreconsulting.com (for Testing/Deployment only.)
     
 Deploy Metadata
     * Clone Github repo and deploy into org

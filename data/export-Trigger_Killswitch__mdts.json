@@ -1,0 +1,160 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Trigger_Killswitch__mdt",
+                "referenceId": "Trigger_Killswitch__mdtRef1"
+            },
+            "DeveloperName": "LineItemTrigger",
+            "Kill__c": false,
+            "Label": "LineItemTrigger",
+            "Language": "en_US",
+            "MasterLabel": "LineItemTrigger",
+            "QualifiedApiName": "LineItemTrigger"
+        },
+        {
+            "attributes": {
+                "type": "Trigger_Killswitch__mdt",
+                "referenceId": "Trigger_Killswitch__mdtRef2"
+            },
+            "DeveloperName": "LineItemFeeTrigger",
+            "Kill__c": false,
+            "Label": "LineItemFeeTrigger",
+            "Language": "en_US",
+            "MasterLabel": "LineItemFeeTrigger",
+            "QualifiedApiName": "LineItemFeeTrigger"
+        },
+        {
+            "attributes": {
+                "type": "Trigger_Killswitch__mdt",
+                "referenceId": "Trigger_Killswitch__mdtRef3"
+            },
+            "DeveloperName": "TrueCostUserExternalSharingGroupTrigger",
+            "Kill__c": false,
+            "Label": "TrueCostUserExternalSharingGroupTrigger",
+            "Language": "en_US",
+            "MasterLabel": "TrueCostUserExternalSharingGroupTrigger",
+            "QualifiedApiName": "TrueCostUserExternalSharingGroupTrigger"
+        },
+        {
+            "attributes": {
+                "type": "Trigger_Killswitch__mdt",
+                "referenceId": "Trigger_Killswitch__mdtRef4"
+            },
+            "DeveloperName": "PricingFeeTrigger",
+            "Kill__c": false,
+            "Label": "PricingFeeTrigger",
+            "Language": "en_US",
+            "MasterLabel": "PricingFeeTrigger",
+            "QualifiedApiName": "PricingFeeTrigger"
+        },
+        {
+            "attributes": {
+                "type": "Trigger_Killswitch__mdt",
+                "referenceId": "Trigger_Killswitch__mdtRef5"
+            },
+            "DeveloperName": "AccountTrigger",
+            "Kill__c": false,
+            "Label": "AccountTrigger",
+            "Language": "en_US",
+            "MasterLabel": "AccountTrigger",
+            "QualifiedApiName": "AccountTrigger"
+        },
+        {
+            "attributes": {
+                "type": "Trigger_Killswitch__mdt",
+                "referenceId": "Trigger_Killswitch__mdtRef6"
+            },
+            "DeveloperName": "UserTrigger",
+            "Kill__c": false,
+            "Label": "UserTrigger",
+            "Language": "en_US",
+            "MasterLabel": "UserTrigger",
+            "QualifiedApiName": "UserTrigger"
+        },
+        {
+            "attributes": {
+                "type": "Trigger_Killswitch__mdt",
+                "referenceId": "Trigger_Killswitch__mdtRef7"
+            },
+            "DeveloperName": "DealFeeTrigger",
+            "Kill__c": false,
+            "Label": "DealFeeTrigger",
+            "Language": "en_US",
+            "MasterLabel": "DealFeeTrigger",
+            "QualifiedApiName": "DealFeeTrigger"
+        },
+        {
+            "attributes": {
+                "type": "Trigger_Killswitch__mdt",
+                "referenceId": "Trigger_Killswitch__mdtRef8"
+            },
+            "DeveloperName": "PremiseStatusTrigger",
+            "Kill__c": false,
+            "Label": "PremiseStatusTrigger",
+            "Language": "en_US",
+            "MasterLabel": "PremiseStatusTrigger",
+            "QualifiedApiName": "PremiseStatusTrigger"
+        },
+        {
+            "attributes": {
+                "type": "Trigger_Killswitch__mdt",
+                "referenceId": "Trigger_Killswitch__mdtRef9"
+            },
+            "DeveloperName": "CaseAfterInsertTrigger",
+            "Kill__c": false,
+            "Label": "CaseAfterInsertTrigger",
+            "Language": "en_US",
+            "MasterLabel": "CaseAfterInsertTrigger",
+            "QualifiedApiName": "CaseAfterInsertTrigger"
+        },
+        {
+            "attributes": {
+                "type": "Trigger_Killswitch__mdt",
+                "referenceId": "Trigger_Killswitch__mdtRef10"
+            },
+            "DeveloperName": "QuoteTrigger",
+            "Kill__c": false,
+            "Label": "QuoteTrigger",
+            "Language": "en_US",
+            "MasterLabel": "QuoteTrigger",
+            "QualifiedApiName": "QuoteTrigger"
+        },
+        {
+            "attributes": {
+                "type": "Trigger_Killswitch__mdt",
+                "referenceId": "Trigger_Killswitch__mdtRef11"
+            },
+            "DeveloperName": "ContractProvisionsTrigger",
+            "Kill__c": false,
+            "Label": "ContractProvisionsTrigger",
+            "Language": "en_US",
+            "MasterLabel": "ContractProvisionsTrigger",
+            "QualifiedApiName": "ContractProvisionsTrigger"
+        },
+        {
+            "attributes": {
+                "type": "Trigger_Killswitch__mdt",
+                "referenceId": "Trigger_Killswitch__mdtRef12"
+            },
+            "DeveloperName": "CESContractTrigger",
+            "Kill__c": false,
+            "Label": "CESContractTrigger",
+            "Language": "en_US",
+            "MasterLabel": "CESContractTrigger",
+            "QualifiedApiName": "CESContractTrigger"
+        },
+        {
+            "attributes": {
+                "type": "Trigger_Killswitch__mdt",
+                "referenceId": "Trigger_Killswitch__mdtRef13"
+            },
+            "DeveloperName": "ContractPremisesTrigger",
+            "Kill__c": false,
+            "Label": "ContractPremisesTrigger",
+            "Language": "en_US",
+            "MasterLabel": "ContractPremisesTrigger",
+            "QualifiedApiName": "ContractPremisesTrigger"
+        }
+    ]
+}

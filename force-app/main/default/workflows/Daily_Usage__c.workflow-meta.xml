@@ -8,7 +8,7 @@
             <field>Customer_s_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Usage_Data_Emails/Daily_Usage_Summary</template>
     </alerts>
@@ -20,7 +20,7 @@
             <field>Customer_s_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Usage_Data_Emails/Weekly_Usage_Summary</template>
     </alerts>

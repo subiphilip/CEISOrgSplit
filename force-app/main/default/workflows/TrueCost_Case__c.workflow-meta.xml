@@ -8,7 +8,7 @@
             <field>Non_Account_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_Support_Workflow_Emails/CustomCaseClosed</template>
     </alerts>
@@ -19,7 +19,7 @@
         <recipients>
             <type>owner</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Gas_Choice/Incoming_Gas_Choice_File</template>
     </alerts>
@@ -31,7 +31,7 @@
             <field>Non_Account_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_Customer_Marketing/Refer_A_Friend_Program</template>
     </alerts>
@@ -40,10 +40,10 @@
         <description>Update Team on ESCALATED TrueCost Cases</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.ces1</recipient>
+            <recipient>troy.donovan1@centerpointenergy.com.fullsbx</recipient>
             <type>user</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_Internal_Messages/Escalated_TC_CASE_INTERNAL</template>
     </alerts>
@@ -52,10 +52,10 @@
         <description>Update Team on new TrueCost Cases</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sphilip@cies.com.ces1</recipient>
+            <recipient>troy.donovan1@centerpointenergy.com.fullsbx</recipient>
             <type>user</type>
         </recipients>
-        <senderAddress>subi.philip@gmail.com</senderAddress>
+        <senderAddress>sphilip@mreconsulting.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>TrueCost_Internal_Messages/New_TC_CASE_INTERNAL</template>
     </alerts>
@@ -162,7 +162,7 @@
     <fieldUpdates>
         <fullName>Set_Gaston_as_Owner</fullName>
         <field>OwnerId</field>
-        <lookupValue>sphilip@cies.com.ces1</lookupValue>
+        <lookupValue>troy.donovan1@centerpointenergy.com.fullsbx</lookupValue>
         <lookupValueType>User</lookupValueType>
         <name>Set Gaston as Owner</name>
         <notifyAssignee>false</notifyAssignee>
@@ -209,7 +209,7 @@
     <fieldUpdates>
         <fullName>Set_Tracey_as_Owner</fullName>
         <field>OwnerId</field>
-        <lookupValue>sphilip@cies.com.ces1</lookupValue>
+        <lookupValue>troy.donovan1@centerpointenergy.com.fullsbx</lookupValue>
         <lookupValueType>User</lookupValueType>
         <name>Set Tracey as Owner</name>
         <notifyAssignee>false</notifyAssignee>

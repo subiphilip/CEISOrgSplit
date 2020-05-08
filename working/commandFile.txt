@@ -1,10 +1,14 @@
 sfdx force:source:deploy -p force-app/ -u wave2 -c 
 
-sfdx force:source:deploy -p force-app/ -l --testlevel RunLocalTests -u CES1 -c
+sfdx force:source:deploy -p force-app/ -l RunLocalTests -u CES1 -c
 
 sfdx force:org:create -s -f config/project-scratch-def.json -a PersonScratch 
 
 sfdx force:org:create -s -f config/project-scratch-def.json -a CES2 
+
+sfdx force:source:deploy -p force-app/ -l RunLocalTests -u ceisFULLSBX -c
+
+
 
 sfdx force:org:open
 
@@ -79,7 +83,7 @@ export HUB_USERNAME=<your Dev Hub username>
 
 export CONSUMER_KEY=3MVG9szVa2RxsqBYQegokmxAcUrRQ6fJOYfsbBRt8W5zerA2F_qelXhBkb0SGSDxid3aWg9mQnFqj0YdcCSOX
 export JWT_KEY_FILE=<example: E:\Data\VSCode\certificates\server.key
-export HUB_USERNAME=sphilip@cies.com.ces1
+export HUB_USERNAME=troy.donovan1@centerpointenergy.com.fullsbx
 
 
 Google API Key
@@ -113,5 +117,11 @@ sfdx force:data:tree:import -u ceisFULLSBX --plan data/export-FAQ__c-plan.json
 
 
 sfdx force:data:tree:import -u ceisFULLSBX --plan data/export-TaxesAndFees__c-plan.json
+
+
+
+sfdx force:data:tree:export --query "SELECT DeveloperName,Id,Kill__c,Label,Language,MasterLabel,NamespacePrefix,QualifiedApiName FROM Trigger_Killswitch__mdt" --prefix export --outputdir data --plan
+
+sfdx force:data:tree:import -u CES1 --plan data/export-Trigger_Killswitch__mdt-plan.json
 
 

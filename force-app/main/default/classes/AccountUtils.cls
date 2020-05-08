@@ -91,7 +91,7 @@ public class AccountUtils {
         Set<Id> acctIds = New Set<Id>();
         
         //killswitch for tc revision monitoring 
-        Trigger_Killswitch__mdt acctChange = [SELECT Kill__c FROM Trigger_Killswitch__mdt where DeveloperName = 'AccountChange'];
+        Trigger_Killswitch__mdt acctChange = [SELECT Kill__c FROM Trigger_Killswitch__mdt where DeveloperName = 'AccountTrigger'];  //AccountChange
         
         if (!isDelete){
             for (Account a:accts){//get acct list by office of sync complete records for record locking

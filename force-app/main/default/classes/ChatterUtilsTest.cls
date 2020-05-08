@@ -1,5 +1,5 @@
 @isTest
-private class ChatterUtilsTest {
+public class ChatterUtilsTest {
 	
 	@isTest(seeAllData=true) static void testsimpleTextPostToRecord() {	
         // mccann fix by staging test data
