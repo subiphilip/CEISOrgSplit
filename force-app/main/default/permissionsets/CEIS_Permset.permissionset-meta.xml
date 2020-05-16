@@ -9050,6 +9050,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>REP_Rating__c.External_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>REP_Rating__c.Non_Account_Email__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -11946,6 +11951,14 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
+        <tab>Manage_Orders_2_0_Beta</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>Manage_Orders_OLD</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
         <tab>Plan__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
@@ -11959,6 +11972,10 @@
     </tabSettings>
     <tabSettings>
         <tab>REP_Rating__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>Rewards__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
