@@ -35,8 +35,8 @@
     </types>
     -->
     <types>
-        <members>admin</members>
-        <name>Profile</name>
+        <members>Order__c.Failed Order</members>
+        <name>Workflow</name>
     </types>    
     <version>48.0</version>
 </Package>

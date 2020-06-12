@@ -27,12 +27,14 @@ public class CESCommonObjectControllerTest {
         bg.Bill_Group_Batch__c = bgb.id;
         insert bg;
         
+        
         Profile p = [
             SELECT Id, Name
             FROM Profile
             WHERE Name ='MyCES Consultant'
             LIMIT 1
         ];
+        
         
         
 		System.debug('CESCommonObjectControllerTest | getCommonAccountRecordList as admin');        

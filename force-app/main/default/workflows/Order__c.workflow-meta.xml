@@ -1,5 +1,856 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>API_Error_Notification_to_REP</fullName>
+        <ccEmails>laquita.watson@directenergy.com</ccEmails>
+        <description>Direct Energy API Error Notification (to REP)</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>troy.donovan@mytruecost.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>truecost.support@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Admins/API_Error_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>AP_Error_Notification</fullName>
+        <ccEmails>Truecost.support@centerpointenergy.com</ccEmails>
+        <description>API Error Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>troy.donovan@mytruecost.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>truecost.support@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Admins/API_Error_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Copy_Bounce_Commercial_Contact</fullName>
+        <ccEmails>sschilhab@bounceenergy.com</ccEmails>
+        <description>Copy Bounce Commercial Contact</description>
+        <protected>false</protected>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/New_Order_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Customer_needs_to_contact_REP</fullName>
+        <description>Customer needs to contact REP</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>robert.dornbos@centerpointenergy.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Order_Pending_Further_Information</template>
+    </alerts>
+    <alerts>
+        <fullName>New_COMMERCIAL_Order_Notification_FOR_REP</fullName>
+        <ccEmails>troy.donovan@centerpointenergy.com</ccEmails>
+        <description>New COMMERCIAL Order Notification FOR REP</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Alternate_REP_email_1__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Alternate_REP_email_2__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>REP_email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost.support@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/New_COMMERCIAL_Order_Notification_FOR_REP</template>
+    </alerts>
+    <alerts>
+        <fullName>New_Gas_Choice_Order_from_the_web</fullName>
+        <description>New Gas Choice Order from the web</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>gaston.miranda@centerpointenergy.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>robert.dornbos@centerpointenergy.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>gaschoice@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Gas_Choice/New_Gas_Choice_Site_Order</template>
+    </alerts>
+    <alerts>
+        <fullName>New_Order_Notification_to_REPs</fullName>
+        <description>New Order Notification to REPs</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Alternate_REP_email_1__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Alternate_REP_email_2__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>REP_email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>troy.donovan@mytruecost.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/New_Order_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>New_Order_Notification_to_REPs_Critical_Care</fullName>
+        <description>New Order Notification to REPs - Critical Care</description>
+        <protected>false</protected>
+        <recipients>
+            <field>REP_email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>robert.dornbos@centerpointenergy.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>troy.donovan@mytruecost.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/New_Order_Notification_critical_care</template>
+    </alerts>
+    <alerts>
+        <fullName>Notify_customer_that_their_order_was_rejected</fullName>
+        <description>Notify customer that their order was rejected</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Rejection_letter_no_reason</template>
+    </alerts>
+    <alerts>
+        <fullName>Notify_the_REP_about_Deposit_Status</fullName>
+        <description>Notify the REP about Deposit Status</description>
+        <protected>false</protected>
+        <recipients>
+            <field>REP_email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>robert.dornbos@centerpointenergy.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Order_In_Deposit_Status_for_10_days</template>
+    </alerts>
+    <alerts>
+        <fullName>Order_Abandoned_Notification</fullName>
+        <description>Order &quot;Abandoned&quot; Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Order_Abandoned_Reminder</template>
+    </alerts>
+    <alerts>
+        <fullName>Order_Approved_Need_Deposit</fullName>
+        <description>Order Approved Needs Deposit</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Order_Accepted_deposit_needed</template>
+    </alerts>
+    <alerts>
+        <fullName>Order_Approved_No_Deposit</fullName>
+        <description>Order Approved No deposit</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Order_Accepted_no_deposit</template>
+    </alerts>
+    <alerts>
+        <fullName>Order_Escalation_For_Switch_Date</fullName>
+        <description>Order Escalation For Switch Date</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>jessica.anaya@centerpointenergy.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Internal_Messages/Order_Escalation</template>
+    </alerts>
+    <alerts>
+        <fullName>Order_Escalation_For_Switch_Date_2</fullName>
+        <description>Order Escalation For Switch Date (Day of)</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>troy.donovan@mytruecost.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Internal_Messages/Order_Escalation_Day_Of</template>
+    </alerts>
+    <alerts>
+        <fullName>Order_Escalation_For_Switch_Date_REPs</fullName>
+        <description>Order Escalation For Switch Date (Day of) For REPs</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Alternate_REP_email_1__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Alternate_REP_email_2__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>REP_email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Order_Escalation_Day_Of_REPs</template>
+    </alerts>
+    <alerts>
+        <fullName>Order_Exception_Notification</fullName>
+        <description>Order Exception Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>REP_email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>troy.donovan@mytruecost.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Order_Exception_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Order_Switch_Date_Approaching</fullName>
+        <description>Order Switch Date Approaching</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Alternate_REP_email_1__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Alternate_REP_email_2__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>REP_email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>troy.donovan@mytruecost.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>repsupport@mytruecost.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Order_Switch_Date_Approaching</template>
+    </alerts>
+    <alerts>
+        <fullName>Order_approved_with_switch_date</fullName>
+        <description>Order approved with switch date</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Order_Accepted_no_deposit_with_switch_move_date</template>
+    </alerts>
+    <alerts>
+        <fullName>Order_approved_with_switch_date_deposit_needed</fullName>
+        <description>Order approved with switch date deposit needed</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Order_Accepted_deposit_needed_with_date</template>
+    </alerts>
+    <alerts>
+        <fullName>Post_Email_to_Chatter</fullName>
+        <ccEmails>chatter@n-6tx78v0bee9wcje3erinol479.3posgeam.3.apex.salesforce.com</ccEmails>
+        <description>Post Email to Chatter</description>
+        <protected>false</protected>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Internal_Messages/Chatter_post_on_order</template>
+    </alerts>
+    <alerts>
+        <fullName>REP_Order_Pending_Confirmation</fullName>
+        <description>REP Order Pending Confirmation</description>
+        <protected>false</protected>
+        <recipients>
+            <field>REP_email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Order_Confirmation_Reminder</template>
+    </alerts>
+    <alerts>
+        <fullName>REP_Review_Request_to_Customer</fullName>
+        <description>REP Review Request to Customer</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/REP_Review_Request2</template>
+    </alerts>
+    <alerts>
+        <fullName>REP_order_expiration_warning</fullName>
+        <description>REP order expiration warning</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Alternate_REP_email_1__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Alternate_REP_email_2__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>REP_email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>robert.dornbos@centerpointenergy.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>troy.donovan@mytruecost.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/REP_order_expiration_warning</template>
+    </alerts>
+    <alerts>
+        <fullName>REP_order_failure_notification</fullName>
+        <description>REP order failure notification</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>robert.dornbos@centerpointenergy.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>troy.donovan@mytruecost.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Internal_Messages/Order_failure</template>
+    </alerts>
+    <alerts>
+        <fullName>Remind_Customer_of_Deposit_Order</fullName>
+        <description>Remind Customer of Deposit Order</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost.support@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Customer_Reminder_Order_Still_in_Deposit_Status</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Customer_Pending_Information_Email</fullName>
+        <description>Send Customer Pending Information Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>robert.dornbos@centerpointenergy.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Order_Pending_Further_Information</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Order_Survey</fullName>
+        <description>Send Order Survey</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Registered_Purchased_Plan_Survey_Email1</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_REP_the_Customer_s_Approval_email_Summer_Energy</fullName>
+        <ccEmails>Enrollments@mysummerenergy.com</ccEmails>
+        <description>Send REP the Customer&#39;s Approval email - Summer Energy</description>
+        <protected>false</protected>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/REP_CC_of_Customer_Approval_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_cancellation_notice_to_REP</fullName>
+        <description>Send cancellation notice to REP</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Alternate_REP_email_1__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Alternate_REP_email_2__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>REP_email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Order_Cancel_by_CNP_for_REP</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_cancellation_notice_to_customer</fullName>
+        <description>Send cancellation notice to customer</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Order_Cancel_by_CNP</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_the_COMM_customer_a_thank_you_email_for_the_new_order</fullName>
+        <description>Send the COMM customer a thank you email for the new order</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Order_Thank_You_COMM</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_the_CRITICAL_CARE_customer_a_thank_you_email_for_the_new_order</fullName>
+        <description>Send the CRITICAL CARE customer a thank you email for the new order</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Order_Thank_You_Critical_care</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_the_customer_a_thank_you_email_for_the_new_order</fullName>
+        <description>Send the RESI customer a thank you email for the new order</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Order_Thank_You</template>
+    </alerts>
+    <alerts>
+        <fullName>Source_P_G_Order_Approved_Needs_Deposit</fullName>
+        <ccEmails>TXCustomerCare@spgenergy.com</ccEmails>
+        <description>Source P&amp;G - Order Approved Needs Deposit</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Source_P_G_Order_Accepted_deposit_needed</template>
+    </alerts>
+    <alerts>
+        <fullName>Source_P_G_Order_Approved_No_deposit</fullName>
+        <ccEmails>TXCustomerCare@spgenergy.com</ccEmails>
+        <description>Source P&amp;G - Order Approved No deposit</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Source_P_G_Order_Accepted_no_deposit</template>
+    </alerts>
+    <alerts>
+        <fullName>Source_P_G_Order_approved_with_move_date_deposit_needed</fullName>
+        <ccEmails>TXCustomerCare@spgenergy.com</ccEmails>
+        <description>Source P&amp;G - Order approved with move date deposit needed</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Source_P_G_Order_Accepted_deposit_needed_with_move_date</template>
+    </alerts>
+    <alerts>
+        <fullName>Source_P_G_Order_approved_with_movein_date</fullName>
+        <ccEmails>TXCustomerCare@spgenergy.com</ccEmails>
+        <description>Source P&amp;G - Order approved with move-in date</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Source_P_G_Order_Accepted_no_deposit_with_move_date</template>
+    </alerts>
+    <alerts>
+        <fullName>Source_P_G_Order_approved_with_switch_date</fullName>
+        <ccEmails>TXCustomerCare@spgenergy.com</ccEmails>
+        <description>Source P&amp;G - Order approved with switch date</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Source_P_G_Order_Accepted_no_deposit_with_switch_date</template>
+    </alerts>
+    <alerts>
+        <fullName>Source_P_G_Order_approved_with_switch_date_deposit_needed</fullName>
+        <ccEmails>TXCustomerCare@spgenergy.com</ccEmails>
+        <description>Source P&amp;G - Order approved with switch date deposit needed</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_REPs/Source_P_G_Order_Accepted_deposit_needed_with_switch_date</template>
+    </alerts>
+    <alerts>
+        <fullName>Tell_Customer_that_their_order_has_been_completed</fullName>
+        <description>Tell Customer that their order has been completed</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Switch_Confirmation</template>
+    </alerts>
+    <alerts>
+        <fullName>Tell_customer_that_their_plan_expires_in_14_days_existing_customer</fullName>
+        <description>14 day warning for existing customers</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Expiration_warning_14_days_for_existing_customers</template>
+    </alerts>
+    <alerts>
+        <fullName>Tell_team_about_the_order_failure</fullName>
+        <description>Tell team about the order failure</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>troy.donovan@mytruecost.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Admins/Admin_notice_of_Order_Failure</template>
+    </alerts>
+    <alerts>
+        <fullName>X14_day_warning_for_existing_customers</fullName>
+        <description>14 day warning for existing customers</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Expiration_warning_14_days_for_existing_customers</template>
+    </alerts>
+    <alerts>
+        <fullName>X5_day_warning_for_existng_customer</fullName>
+        <description>5 day warning for existng customers</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email_Address__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Expiration_warning_5_days_for_existing_customers</template>
+    </alerts>
+    <alerts>
+        <fullName>X5_day_warning_for_existng_customers</fullName>
+        <description>5 day warning for existng customers</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>truecost@centerpointenergy.com</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>TrueCost_Customer/Expiration_warning_5_days_for_existing_customers</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Alt_REP_email_1</fullName>
+        <field>Alternate_REP_email_1__c</field>
+        <formula>REP_Profile__r.Alternate_Order_Notification_Email_1__c</formula>
+        <name>Residential Alt REP email 1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Alt_REP_email_2</fullName>
+        <field>Alternate_REP_email_2__c</field>
+        <formula>REP_Profile__r.Alternate_Order_Notification_Email_2__c</formula>
+        <name>Residential Alt REP email 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Change_Position_Status_to_None</fullName>
+        <field>Position_Status__c</field>
+        <literalValue>None</literalValue>
+        <name>Change Position Status to None</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Change_Position_Status_to_Pending</fullName>
+        <description>for firing the positions trigger process</description>
+        <field>Position_Status__c</field>
+        <literalValue>Pending</literalValue>
+        <name>Change Position Status to Pending</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Credit_Card_Expiration_Month</fullName>
+        <field>Payment_Card_Month__c</field>
+        <name>Clear Credit Card Expiration Month</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Credit_Card_Expiration_Year</fullName>
+        <field>Payment_Card_Year__c</field>
+        <name>Clear Credit Card Expiration Year</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Credit_Card_Name</fullName>
+        <field>Name_as_it_appears_on_Payment_Card__c</field>
+        <name>Clear Credit Card Name</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Credit_Card_Number</fullName>
+        <field>Payment_Card_Number__c</field>
+        <name>Clear Credit Card Number</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Credit_Card_Security_Code</fullName>
+        <field>Payment_Card_3_digit_code__c</field>
+        <name>Clear Credit Card Security Code</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Credit_Card_Type</fullName>
+        <field>Payment_Card_Type__c</field>
+        <name>Clear Credit Card Type</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_SSN</fullName>
+        <field>SSN__c</field>
+        <name>Clear SSN</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_nullAuthorizedRepresentative</fullName>
+        <field>Authorized_Representative__c</field>
+        <name>Clear null Authorized Representative</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Confirm_Order_and_re_evaluate</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>Confirmed</literalValue>
+        <name>Confirm Order and re-evaluate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Deposit_Instructions</fullName>
+        <field>Deposit_Info__c</field>
+        <formula>REP_Profile__r.Deposit_Instructions__c</formula>
+        <name>Deposit Instructions</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Make_Status_Approved_Pending_DEPOSIT</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>Approved Pending Deposit</literalValue>
+        <name>Make Status Approved Pending DEPOSIT</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Make_order_free</fullName>
+        <field>Free_Order__c</field>
+        <literalValue>1</literalValue>
+        <name>Make order free</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Make_order_status_CONFIRMED</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>Confirmed</literalValue>
+        <name>Make order status CONFIRMED</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Make_order_status_NEW</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>New/Successfully Submitted</literalValue>
+        <name>Make order status NEW</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Mark_Deposit_Orders</fullName>
+        <field>Deposit_Requested__c</field>
+        <literalValue>1</literalValue>
+        <name>Mark Deposit Orders</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Mark_Green_Orders</fullName>
+        <field>Green_Order__c</field>
+        <literalValue>1</literalValue>
+        <name>Mark Green Orders</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Mark_Order_Abandoned</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>Abandoned</literalValue>
+        <name>Mark Order Abandoned</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Mark_Order_Failed</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>Failed</literalValue>
+        <name>Mark Order Failed</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Mark_Pending_API_Response</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>Pending API Response</literalValue>
+        <name>Mark Pending API Response</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
     <fieldUpdates>
         <fullName>Mark_Renewal_Status_Future</fullName>
         <field>Order_Renewal_Status__c</field>
@@ -9,6 +860,2394 @@
         <operation>Literal</operation>
         <protected>false</protected>
     </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Mark_order_as_rejected</fullName>
+        <description>Marks the order as rejected.</description>
+        <field>Order_Status__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Mark order as rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Order_Confirmation_Timestamp</fullName>
+        <field>Order_Confirmed_Date__c</field>
+        <formula>NOW()</formula>
+        <name>Order Confirmation Timestamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reset_Conga_Workflow_Trigger</fullName>
+        <field>Conga_Workflow_Trigger__c</field>
+        <literalValue>0</literalValue>
+        <name>Reset Conga Workflow Trigger</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_REP_COMMERCIAL_notification_addr_2</fullName>
+        <field>Alternate_REP_email_1__c</field>
+        <formula>REP_Profile__r.Commercial_Order_Contact_Email_2__c</formula>
+        <name>Set REP COMMERCIAL notification addr 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_REP_COMMERCIAL_notification_addr_3</fullName>
+        <field>Alternate_REP_email_2__c</field>
+        <formula>REP_Profile__r.Commercial_Order_Notification_Email_3__c</formula>
+        <name>Set REP COMMERCIAL notification addr 3</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_REP_COMMERCIALnotification_address</fullName>
+        <field>REP_email__c</field>
+        <formula>REP_Profile__r.Commercial_Order_Contact__c</formula>
+        <name>Set REP COMMERCIAL notification address</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_REP_notification_address</fullName>
+        <description>Gets the Order Notification Email address from the corresponding REP Profile and saves it to the REP Email field.</description>
+        <field>REP_email__c</field>
+        <formula>REP_Profile__r.Order_Notification_Email__c</formula>
+        <name>Residential Set REP notification address</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Rejection_Reason_Admin_Rejection</fullName>
+        <field>Rejection_Reason__c</field>
+        <literalValue>Admin Rejection</literalValue>
+        <name>Set Rejection Reason: Admin Rejection</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_Status_Timestamp</fullName>
+        <description>sets &quot;Status Timestamp&quot; field to current time</description>
+        <field>Order_Status_TS__c</field>
+        <formula>NOW()</formula>
+        <name>Set Status Timestamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_approve_reject_duration</fullName>
+        <description>Sets the Time to Approve/Reject field</description>
+        <field>Time_to_Approve_Reject__c</field>
+        <formula>NOW()- CreatedDate</formula>
+        <name>Set approve/reject duration</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_confirm_fail_duration</fullName>
+        <description>Sets the Time to Confirm/Fail field</description>
+        <field>Time_to_Confirm_Fail__c</field>
+        <formula>NOW()-CreatedDate</formula>
+        <name>Set confirm/fail duration</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_plan_expiration_date</fullName>
+        <description>Sets the expiration date for this plan</description>
+        <field>Plan_Expiration__c</field>
+        <formula>Now() +  (Contract_Length__c *30.4167)</formula>
+        <name>Set plan expiration date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_plan_expiration_date_self_selected</fullName>
+        <field>Plan_Expiration__c</field>
+        <formula>InitialDateofService__c + (Contract_Length__c *30.4167)</formula>
+        <name>Set plan expiration date (self-selected)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Set_rejection_timestamp</fullName>
+        <field>Order_Rejection_Timestamp__c</field>
+        <formula>NOW()</formula>
+        <name>Set rejection timestamp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Stamp_order_with_TDSP</fullName>
+        <field>TDSP__c</field>
+        <formula>Rate__r.TDSP__r.Name</formula>
+        <name>Stamp order with TDSP</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Stamp_with_CS_email</fullName>
+        <field>Customer_Service_Email_For_Order__c</field>
+        <formula>REP_Profile__r.Customer_Service_Email__c</formula>
+        <name>Stamp with CS email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Stamp_with_CS_phone</fullName>
+        <field>Customer_Service_Phone_Number_For_Order__c</field>
+        <formula>REP_Profile__r.Customer_Service_Phone_Number__c</formula>
+        <name>Stamp with CS phone</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Stamp_with_Customer_AcceptanceofPlanTerm</fullName>
+        <field>Customer_Acceptance_of_Plan_Terms__c</field>
+        <literalValue>1</literalValue>
+        <name>Stamp with Customer Acceptance of Terms</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Stamp_with_EFL</fullName>
+        <field>EFL_URL_For_Order__c</field>
+        <formula>Rate__r.Link_for_EFL__c</formula>
+        <name>Stamp with EFL</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Stamp_with_Energy_Base_Rate</fullName>
+        <field>Fixed_Energy_Rate__c</field>
+        <formula>Rate__r.Energy_Base_Rate_cents__c</formula>
+        <name>Stamp with Energy Base Rate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Stamp_with_TOS</fullName>
+        <field>TOS_URL_For_Order__c</field>
+        <formula>Rate__r.Link_for_TOS__c</formula>
+        <name>Stamp with TOS</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Stamp_with_YRAC</fullName>
+        <field>YRAAC_URL_For_Order__c</field>
+        <formula>Rate__r.Link_for_YRAC__c</formula>
+        <name>Stamp with YRAC</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Stamp_with_kWh_rate</fullName>
+        <field>kWh_rate_1000__c</field>
+        <formula>Rate__r.X1000_kWh_rate__c</formula>
+        <name>Stamp with kWh rate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Start_Conga_Workflow_Email</fullName>
+        <description>starts the email to gas choice users</description>
+        <field>Conga_Workflow_Trigger__c</field>
+        <literalValue>1</literalValue>
+        <name>Start Conga Workflow Email</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Equals_DA_Receipt_Acknowledged</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>DA Receipt Acknowledged</literalValue>
+        <name>Status Equals DA Receipt Acknowledged</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Equals_DA_Received_From_Customer</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>DA Received From Customer</literalValue>
+        <name>Status Equals DA Received From Customer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Equals_DA_Submitted</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>DA Submitted To Utility</literalValue>
+        <name>Status Equals DA Submitted</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Equals_Default</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>Default Submitted</literalValue>
+        <name>Status Equals Default</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Equals_New_Gas_Choice_Order</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>New Gas Choice Order</literalValue>
+        <name>Status Equals New Gas Choice Order</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Equals_Pending_Confirmation</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>Approved Pending Confirmation</literalValue>
+        <name>Status Equals Pending Confirmation</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Equals_Pending_Confirmation_Code</fullName>
+        <description>Status Equals Pending Confirmation Code Change</description>
+        <field>Order_Status__c</field>
+        <literalValue>Pending Confirmation Code Change</literalValue>
+        <name>Status Equals Pending Confirmation Code</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Equals_Pending_DA</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>Pending DA</literalValue>
+        <name>Status Equals Pending DA</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Equals_Rejected</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Status Equals Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Equals_Success</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>Success</literalValue>
+        <name>Status Equals Success</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Order_Status_Gas_Choice_Site</fullName>
+        <field>Order_Status__c</field>
+        <literalValue>Pending DA</literalValue>
+        <name>Update Order Status Gas Choice Site</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Upper_Case_Name_on_CC_Info</fullName>
+        <field>Name_as_it_appears_on_Payment_Card__c</field>
+        <formula>UPPER(Name_as_it_appears_on_Payment_Card__c)</formula>
+        <name>Upper Case Name on CC Info</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>Conga_Execution_for_New_Gas_Choice_Order</fullName>
+        <apiVersion>26.0</apiVersion>
+        <description>sends a message from Conga Composer to the customer who placed it.</description>
+        <endpointUrl>https://workflow.appextremes.com/apps/Conga/PMWorkflow.aspx</endpointUrl>
+        <fields>Conga_Solution_URL__c</fields>
+        <fields>Id</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>shanemclaughlin@centerpointenergy.com</integrationUser>
+        <name>Conga Execution for New Gas Choice Order</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>Order_REP_Account_to_Informatica</fullName>
+        <apiVersion>29.0</apiVersion>
+        <endpointUrl>https://use4.dm-us.informaticacloud.com/saas/api/1/salesforceoutboundmessage/GVgxp66TuD5IinTF1scyHkTSkFoVIBby</endpointUrl>
+        <fields>Formula_for_REP_Profile_Account_ID__c</fields>
+        <fields>Id</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>system@centerpointenergy.com</integrationUser>
+        <name>Order REP Account to Informatica</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>API Error Notification</fullName>
+        <actions>
+            <name>AP_Error_Notification</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Order_REP_Account_to_Informatica</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>contains</operation>
+            <value>API</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Electric Order</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>API Error Notification %28Bounce%2C New Leaf%2C First Choice%2C Direct</fullName>
+        <actions>
+            <name>API_Error_Notification_to_REP</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(
+OR(
+ ISPICKVAL( Order_Status__c , &quot;API Error&quot;) ,
+ISPICKVAL( Order_Status__c , &quot;API Exception&quot;)),
+OR(
+ REP_Profile__r.Name = &quot;Bounce Energy&quot;,
+ REP_Profile__r.Name = &quot;Direct Energy&quot;,
+ REP_Profile__r.Name = &quot;New Leaf Energy&quot;,
+ REP_Profile__r.Name = &quot;First Choice Power&quot;
+)
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Bounce Commercial CC</fullName>
+        <actions>
+            <name>Copy_Bounce_Commercial_Contact</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(  REP_Profile__r.Name = &quot;Bounce Energy&quot;,   Rate__r.RecordTypeId = &quot;012300000017ce9&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cancelled Orders</fullName>
+        <actions>
+            <name>Send_cancellation_notice_to_REP</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Send_cancellation_notice_to_customer</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Cancelled_Order_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Cancelled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>Customer asks CNP to cancel order--this confirms that we completed it.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Champion - Pending deposit orders close after 12 days</fullName>
+        <active>true</active>
+        <formula>AND( No_Workflows_or_Triggers__c = FALSE, ISPICKVAL( Order_Status__c , &quot;Approved Pending Deposit&quot;) ,   REP_Profile__r.Id = &quot;a0P30000007FIBd&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Mark_order_as_rejected</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Set_Rejection_Reason_Admin_Rejection</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>12</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Cirro Order Confirmation STANDARD</fullName>
+        <active>false</active>
+        <formula>AND(OR( REP_Profile__c =&quot;a0P30000008QjIT&quot;, REP_Profile__r.Name = &quot;Cirro Energy&quot;), OR(REPOrderSubStatus__c =&quot;AA&quot;, REPStatus__c =&quot;Approved&quot;),  ISBLANK(InitialDateofService__c ), RecordTypeId &lt;&gt; &quot;012300000018SzH&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Make_order_status_CONFIRMED</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>2</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Cirro Order Confirmation SWITCH DATE</fullName>
+        <active>true</active>
+        <formula>AND(No_Workflows_or_Triggers__c = FALSE, OR( REP_Profile__c =&quot;a0P30000008QjIT&quot;, REP_Profile__r.Name = &quot;Cirro Energy&quot;), OR(REPOrderSubStatus__c =&quot;AA&quot;, REPStatus__c =&quot;Approved&quot;),  NOT(ISBLANK(InitialDateofService__c )))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Make_order_status_CONFIRMED</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Order__c.InitialDateofService__c</offsetFromField>
+            <timeLength>-1</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Clear null null on Authorized Representative</fullName>
+        <actions>
+            <name>Clear_nullAuthorizedRepresentative</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Electric Order</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Authorized_Representative__c</field>
+            <operation>equals</operation>
+            <value>null null</value>
+        </criteriaItems>
+        <description>If no Authorized Representative is listed on the Order, clear &quot;null null&quot;</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Confirm Approved Direct Brand Orders</fullName>
+        <active>true</active>
+        <formula>AND(
+ ISPICKVAL(Order_Status__c, &quot;Approved Pending Confirmation&quot;),
+NOT(ISNULL( InitialDateofService__c )), 
+ RecordType.Name = &quot;Electric Order&quot; ,
+OR(REP_Profile__r.Name = &quot;First Choice Power&quot;,
+ REP_Profile__r.Name = &quot;New Leaf Energy&quot;,
+ REP_Profile__r.Name = &quot;Direct Energy&quot;,
+ REP_Profile__r.Name = &quot;Bounce Energy&quot;)
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Confirm_Order_and_re_evaluate</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Order__c.InitialDateofService__c</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Conga Execution for New Gas Choice Orders</fullName>
+        <actions>
+            <name>Conga_Execution_for_New_Gas_Choice_Order</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Order__c.Conga_Workflow_Trigger__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Deposit Instructions</fullName>
+        <actions>
+            <name>Deposit_Instructions</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>contains</operation>
+            <value>New</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Failed Order</fullName>
+        <actions>
+            <name>Tell_team_about_the_order_failure</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_confirm_fail_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Order_Failure_Notification</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Failed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>What events happen when a REP marks an order status as &quot;failed&quot;</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Free Orders</fullName>
+        <actions>
+            <name>Make_order_free</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>AND(
+ISPICKVAL( Order_Status__c , &quot;Confirmed&quot;) ,  REP_Profile__r.Name = &quot;Cirro Energy&quot;
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Gas Choice Positions</fullName>
+        <actions>
+            <name>Change_Position_Status_to_Pending</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Success</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Position_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Created</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Channel__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>if the record is success, change status to pending.  If it was none (in the workflow) this now creates the positions.
+This does not handle bulk inserts, where you should flip the status manually.  This is only for approval-process based orders.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Gas Choice Site Order</fullName>
+        <actions>
+            <name>New_Gas_Choice_Order_from_the_web</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 and 6</booleanFilter>
+        <criteriaItems>
+            <field>Order__c.Customer_Email__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Account_Number__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.CreatedById</field>
+            <operation>equals</operation>
+            <value>Gas Choice Site Guest User</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Control__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>New Gas Choice Order</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mark Deposit Orders</fullName>
+        <actions>
+            <name>Mark_Deposit_Orders</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Approved Pending Deposit</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Order_Failure_Comments__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Order_Rejection_Comments__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mark Green Orders</fullName>
+        <actions>
+            <name>Mark_Green_Orders</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(
+ISPICKVAL(Order_Status__c,&quot;New/Successfully Submitted&quot;),
+Record_Type_Name__c  &lt;&gt; &quot;Gas Choice Sign Up&quot;,
+Plan__r.Renewable_Content__c &gt; 90
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>New Gaston Gas Choice Temporary Order</fullName>
+        <actions>
+            <name>GM_Call_Temporary_Move_In</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <formula>AND(
+
+ not(Premise__r.SG_Do_Not_Call__c) 
+,
+
+   AND (
+       ISPICKVAL(Order_Status__c, &quot;Gas Choice Temporary&quot;),
+      OR(
+         Right(Name, 1)=&quot;0&quot;, 
+         Right(Name, 1)=&quot;2&quot;, 
+         Right(Name, 1)=&quot;4&quot;
+      )
+   )
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>New Lazaro Gas Choice Temporary Order</fullName>
+        <active>false</active>
+        <formula>AND(
+
+ not(Premise__r.SG_Do_Not_Call__c) 
+,
+
+   AND (
+       ISPICKVAL(Order_Status__c, &quot;Gas Choice Temporary&quot;),
+      OR(         
+         Right(Name, 1)=&quot;7&quot;, 
+         Right(Name, 1)=&quot;9&quot; 
+      )
+   )
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>New Order %28Commercial Electric%29</fullName>
+        <actions>
+            <name>New_COMMERCIAL_Order_Notification_FOR_REP</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Send_the_COMM_customer_a_thank_you_email_for_the_new_order</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_REP_COMMERCIAL_notification_addr_2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_REP_COMMERCIAL_notification_addr_3</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_REP_COMMERCIALnotification_address</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_order_with_TDSP</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_CS_email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_CS_phone</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_EFL</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_Energy_Base_Rate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_TOS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_kWh_rate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>New_Order_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>New_Order_Notification_Sent_To_REP</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7 and 8</booleanFilter>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>contains</operation>
+            <value>New/Successfully Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Control__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Account_Number__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Confirmation_Code__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Critical_Care__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Premise_Order_Type__c</field>
+            <operation>contains</operation>
+            <value>Non-Residential</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>New Order %28Residential Electric%29</fullName>
+        <actions>
+            <name>Send_the_customer_a_thank_you_email_for_the_new_order</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Stamp_order_with_TDSP</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_CS_email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_CS_phone</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_Customer_AcceptanceofPlanTerm</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_EFL</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_Energy_Base_Rate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_TOS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_YRAC</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_kWh_rate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>New_Order_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7 and 8 and 9</booleanFilter>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>contains</operation>
+            <value>New/Successfully Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Control__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Account_Number__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Confirmation_Code__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Critical_Care__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Premise_Order_Type__c</field>
+            <operation>equals</operation>
+            <value>Residential</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Formula_for_REP_Profile_Name__c</field>
+            <operation>notEqual</operation>
+            <value>Energy Rewards</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>New Order - T%26C</fullName>
+        <active>false</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7 AND 8 AND 9</booleanFilter>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>contains</operation>
+            <value>New/Successfully Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Critical_Care__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Premise_Order_Type__c</field>
+            <operation>equals</operation>
+            <value>Residential</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Formula_for_REP_Profile_Name__c</field>
+            <operation>notEqual</operation>
+            <value>Energy Rewards</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Control__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Account_Number__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Confirmation_Code__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>New Order Critical Care %28Customer AND REP%29</fullName>
+        <actions>
+            <name>New_Order_Notification_to_REPs_Critical_Care</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Send_the_CRITICAL_CARE_customer_a_thank_you_email_for_the_new_order</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_REP_notification_address</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_order_with_TDSP</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_CS_email</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_CS_phone</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_EFL</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_Energy_Base_Rate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_TOS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_YRAC</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Stamp_with_kWh_rate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>New_Order_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>New_Order_Notification_Sent_To_REP</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>contains</operation>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Critical_Care__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>REP_order_expiration_warning</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Expiration_Date__c</offsetFromField>
+            <timeLength>-4</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>New Order Status</fullName>
+        <actions>
+            <name>Make_order_status_NEW</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <description>make sure it&#39;s the correct picklist value</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>New Sheree Gas Choice Temporary Order</fullName>
+        <active>false</active>
+        <formula>AND(
+
+ not(Premise__r.SG_Do_Not_Call__c) 
+,
+
+   AND (
+       ISPICKVAL(Order_Status__c, &quot;Gas Choice Temporary&quot;),
+      OR(
+         Right(Name, 1)=&quot;1&quot;, 
+         Right(Name, 1)=&quot;3&quot;, 
+         Right(Name, 1)=&quot;5&quot;
+      )
+   )
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>New Shirley Gas Choice Temporary Order</fullName>
+        <active>false</active>
+        <formula>AND(
+
+ not(Premise__r.SG_Do_Not_Call__c) 
+,
+
+   AND (
+       ISPICKVAL(Order_Status__c, &quot;Gas Choice Temporary&quot;),
+      OR(         
+         Right(Name, 1)=&quot;6&quot;, 
+         Right(Name, 1)=&quot;8&quot; 
+      )
+   )
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>On order Approval %28pending confirmation%29 no switch date</fullName>
+        <actions>
+            <name>Order_Approved_No_Deposit</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Status_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_approve_reject_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Approved_Order_Pending_Confirmation_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <description>Runs when a REP approves an order, regardless of the deposit need</description>
+        <formula>AND(  REP_Profile__r.Name &lt;&gt; &quot;Energy Rewards&quot;, No_Workflows_or_Triggers__c = FALSE, ISPICKVAL(Order_Status__c , &quot;Approved Pending Confirmation&quot;), ISNULL(InitialDateofService__c), Record_Type_Name__c &lt;&gt; &quot;Gas Choice Sign Up&quot;, REP_Profile__r.Name  &lt;&gt;  &quot;Source Power &amp; Gas&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>On order Approval %28pending confirmation%29 with switch date</fullName>
+        <actions>
+            <name>Order_approved_with_switch_date</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Status_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_approve_reject_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Approved_Order_Pending_Confirmation_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <description>Runs when a REP approves an order, regardless of the deposit need</description>
+        <formula>AND( REP_Profile__r.Name &lt;&gt; &quot;Energy Rewards&quot;, No_Workflows_or_Triggers__c = FALSE, ISPICKVAL(Order_Status__c , &quot;Approved Pending Confirmation&quot;), NOT(ISNULL(InitialDateofService__c)), Record_Type_Name__c &lt;&gt; &quot;Gas Choice Sign Up&quot;, REP_Profile__r.Name  &lt;&gt; &quot;Source Power &amp; Gas&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Order_Switch_Date_Approaching</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Order_Switch_date_Approaching_Email_sent_to_REP</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Order__c.InitialDateofService__c</offsetFromField>
+            <timeLength>-2</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>On order Approval %28pending deposit%29 no switch date</fullName>
+        <actions>
+            <name>Order_Approved_Need_Deposit</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Status_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_approve_reject_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Approved_Order_Pending_Deposit_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <description>Runs when a REP approves an order and a deposit is needed</description>
+        <formula>AND( ISPICKVAL(Order_Status__c , &quot;Approved Pending Deposit&quot;), ISNULL(InitialDateofService__c), Record_Type_Name__c &lt;&gt; &quot;Gas Choice Sign Up&quot;, REP_Profile__r.Name  &lt;&gt; &quot;Source Power &amp; Gas&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Notify_the_REP_about_Deposit_Status</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>REP_Notified_of_Pending_Deposit_Status</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Status_TS__c</offsetFromField>
+            <timeLength>10</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>On order Approval %28pending deposit%29 with switch date V2</fullName>
+        <actions>
+            <name>Order_approved_with_switch_date_deposit_needed</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Status_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_approve_reject_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Approved_Order_Pending_Deposit_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <description>Runs when a REP approves an order, regardless of the deposit need</description>
+        <formula>AND( ISPICKVAL(Order_Status__c , &quot;Approved Pending Deposit&quot;), NOT(ISNULL(InitialDateofService__c)), Record_Type_Name__c &lt;&gt; &quot;Gas Choice Sign Up&quot;, REP_Profile__r.Name  &lt;&gt;  &quot;Source Power &amp; Gas&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Notify_the_REP_about_Deposit_Status</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>REP_Notified_of_Pending_Deposit_Status</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Status_TS__c</offsetFromField>
+            <timeLength>10</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Order_Switch_Date_Approaching</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Order_Switch_date_Approaching_Email_sent_to_REP</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Order__c.InitialDateofService__c</offsetFromField>
+            <timeLength>-2</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>On order Pending Deposit %28NO switch date%29 WITH CUSTOMER REMINDER</fullName>
+        <actions>
+            <name>Order_Approved_Need_Deposit</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Status_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_approve_reject_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Approved_Order_Pending_Deposit_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Approved Pending Deposit</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.InitialDateofService__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Formula_for_REP_Profile_Name__c</field>
+            <operation>notEqual</operation>
+            <value>Energy Rewards</value>
+        </criteriaItems>
+        <description>Runs when a REP approves an order and a deposit is needed</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Notify_the_REP_about_Deposit_Status</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>REP_Notified_of_Pending_Deposit_Status</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Status_TS__c</offsetFromField>
+            <timeLength>10</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Remind_Customer_of_Deposit_Order</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Customer_reminded_of_order_deposit_status_after_21_days</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Status_TS__c</offsetFromField>
+            <timeLength>21</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Mark_Order_Abandoned</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Status_TS__c</offsetFromField>
+            <timeLength>31</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>On order Pending Deposit %28with switch date%29 WITH ADMIN REMINDER</fullName>
+        <actions>
+            <name>Order_approved_with_switch_date_deposit_needed</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Status_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_approve_reject_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Approved_Order_Pending_Deposit_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Approved Pending Deposit</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.InitialDateofService__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Formula_for_REP_Profile_Name__c</field>
+            <operation>notEqual</operation>
+            <value>Energy Rewards</value>
+        </criteriaItems>
+        <description>Runs when a REP approves an order, regardless of the deposit need</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Order_Switch_Date_Approaching</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Order_Switch_date_Approaching_Email_sent_to_REP</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Order__c.InitialDateofService__c</offsetFromField>
+            <timeLength>-2</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <offsetFromField>Order__c.InitialDateofService__c</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Order Confirmed-%3EClear Encrypted Data</fullName>
+        <actions>
+            <name>Clear_Credit_Card_Expiration_Month</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Clear_Credit_Card_Expiration_Year</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Clear_Credit_Card_Name</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Clear_Credit_Card_Number</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Clear_Credit_Card_Security_Code</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Clear_Credit_Card_Type</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Clear_SSN</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Electric Order</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Confirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order Escalation</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Electric Order</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Pending Information,Approved Pending Deposit,Pending Switch Hold,New/Successfully Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.InitialDateofService__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Order_Escalation_For_Switch_Date</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Order__c.InitialDateofService__c</offsetFromField>
+            <timeLength>-2</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Order Escalation v2</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Electric Order</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Pending Information,Approved Pending Deposit,Pending Switch Hold,New/Successfully Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.InitialDateofService__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Order_Escalation_For_Switch_Date</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Order__c.InitialDateofService__c</offsetFromField>
+            <timeLength>-2</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Order_Escalation_For_Switch_Date_2</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Order_Escalation_For_Switch_Date_REPs</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Order__c.InitialDateofService__c</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Order Exception</fullName>
+        <actions>
+            <name>Order_Exception_Notification</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(
+NOT(ISBLANK(Exception__c)), 
+Exception__c  &lt;&gt; &quot;SSN was found, but required deposit&quot;, 
+RecordTypeId &lt;&gt; &quot;012300000018SzH&quot;
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order Rejection</fullName>
+        <actions>
+            <name>Notify_customer_that_their_order_was_rejected</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_approve_reject_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_rejection_timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Rejected_Order_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Formula_for_REP_Profile_Name__c</field>
+            <operation>notEqual</operation>
+            <value>Energy Rewards</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order requires more Information from Customer</fullName>
+        <actions>
+            <name>Customer_needs_to_contact_REP</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Order_Requires_More_Information_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Pending Information</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Orders Abandoned in Enrollment</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Electric Order</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Enroll Page - Complete,Plan Disclosures Page - Complete,Enroll Page - Started</value>
+        </criteriaItems>
+        <description>A customer enrolls in a plan but never finishes the process, and we ask them if they meant to submit it.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Order_Abandoned_Notification</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Order_Abandoned_Notification_Sent_To_Customer</name>
+                <type>Task</type>
+            </actions>
+            <timeLength>6</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Pending deposit orders abandoned after 21 days</fullName>
+        <active>false</active>
+        <formula>ISPICKVAL( Order_Status__c , &quot;Approved Pending Deposit&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>REP Customer Email CC - Summer Energy</fullName>
+        <actions>
+            <name>Send_REP_the_Customer_s_Approval_email_Summer_Energy</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(No_Workflows_or_Triggers__c = FALSE, REP_Profile__r.Name = &quot;Summer Energy&quot;,  NOT(ISBLANK(kWh_rate_1000__c)), NOT(ISBLANK( Order_Status_TS__c )) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>REP Fails Order</fullName>
+        <actions>
+            <name>Mark_Order_Failed</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Failure_Reason__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>REP Order Expiration</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <description>Marks orders to status=rejected if REP fails to act in time</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Mark_order_as_rejected</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Expiration_Date__c</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>REP Order Final Confirmation w%2F switch date</fullName>
+        <active>true</active>
+        <description>Order has been pending confirmation for 48 hours after switch date, needs to be confirmed</description>
+        <formula>AND( No_Workflows_or_Triggers__c = FALSE, ISPICKVAL(Order_Status__c ,&quot;Approved pending confirmation&quot;), NOT(ISBLANK( InitialDateofService__c )), RecordTypeId &lt;&gt; &quot;012300000018SzH&quot; )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>REP_Order_Pending_Confirmation</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Order__c.InitialDateofService__c</offsetFromField>
+            <timeLength>2</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>REP Order Final Confirmation w%2Fout switch date</fullName>
+        <active>true</active>
+        <description>Order has been pending confirmation for 48 hours, needs to be confirmed</description>
+        <formula>AND( No_Workflows_or_Triggers__c = FALSE, ISPICKVAL(Order_Status__c ,&quot;Approved pending confirmation&quot;), ISBLANK( InitialDateofService__c ), RecordTypeId &lt;&gt; &quot;012300000018SzH&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>REP_Order_Pending_Confirmation</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Status_TS__c</offsetFromField>
+            <timeLength>2</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>REP Rejects Order</fullName>
+        <actions>
+            <name>Mark_order_as_rejected</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Rejection_Reason__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>REP Requires DEPOSIT</fullName>
+        <actions>
+            <name>Make_Status_Approved_Pending_DEPOSIT</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Deposit__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Confirmed,Rejected,Failed,Cancelled,Abandoned,API Error</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>REP order notification and expiration warning</fullName>
+        <actions>
+            <name>New_Order_Notification_to_REPs</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Alt_REP_email_1</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Alt_REP_email_2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_REP_notification_address</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Order_REP_Account_to_Informatica</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <actions>
+            <name>New_Order_Notification_Sent_To_REP</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>contains</operation>
+            <value>New</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>Notifies the REP when an order is placed and reminds them 4 hours before it expires.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>REP_order_expiration_warning</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Expiration_Date__c</offsetFromField>
+            <timeLength>-4</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Registered Purchased Survey %2845 Days%29</fullName>
+        <active>false</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 and 6</booleanFilter>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Confirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Account_Number__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Control__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Confirmation_Code__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Send_Order_Survey</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Survey_Sent_To_Customer</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Confirmed_Date__c</offsetFromField>
+            <timeLength>45</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Registered Purchased Survey %2860 Days%29</fullName>
+        <active>false</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 and 6</booleanFilter>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Confirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Account_Number__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Control__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Confirmation_Code__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Send_Order_Survey</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Survey_Sent_To_Customer</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Confirmed_Date__c</offsetFromField>
+            <timeLength>60</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Source P%26G - On order Approval %28pending confirmation%29 no switch date</fullName>
+        <actions>
+            <name>Source_P_G_Order_Approved_No_deposit</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Status_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_approve_reject_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Approved_Order_Pending_Confirmation_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <description>Runs when a REP approves an order, regardless of the deposit need</description>
+        <formula>AND( No_Workflows_or_Triggers__c = FALSE, ISCHANGED(Order_Status__c),  ISPICKVAL(Order_Status__c , &quot;Approved Pending Confirmation&quot;),  ISNULL(InitialDateofService__c), Record_Type_Name__c  &lt;&gt;  &quot;Gas Choice Sign Up&quot;,  REP_Profile__r.Name = &quot;Source Power &amp; Gas&quot;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Source P%26G - On order Approval %28pending confirmation%29 with move-in date</fullName>
+        <actions>
+            <name>Source_P_G_Order_approved_with_movein_date</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Status_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_approve_reject_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Approved_Order_Pending_Confirmation_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <description>Runs when a REP approves an order, regardless of the deposit need</description>
+        <formula>AND( No_Workflows_or_Triggers__c = FALSE, ISCHANGED(Order_Status__c),ISPICKVAL(Order_Status__c , &quot;Approved Pending Confirmation&quot;),  NOT(ISNULL(InitialDateofService__c)), Record_Type_Name__c  &lt;&gt;  &quot;Gas Choice Sign Up&quot;,  REP_Profile__r.Name = &quot;Source Power &amp; Gas&quot;, PMVI_Flag__c = TRUE)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Source P%26G - On order Approval %28pending confirmation%29 with switch date</fullName>
+        <actions>
+            <name>Source_P_G_Order_approved_with_switch_date</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Status_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_approve_reject_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Approved_Order_Pending_Confirmation_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <description>Runs when a REP approves an order, regardless of the deposit need</description>
+        <formula>AND( No_Workflows_or_Triggers__c = FALSE, ISCHANGED(Order_Status__c),ISPICKVAL(Order_Status__c , &quot;Approved Pending Confirmation&quot;),  NOT(ISNULL(InitialDateofService__c)), Record_Type_Name__c  &lt;&gt;  &quot;Gas Choice Sign Up&quot;,  REP_Profile__r.Name = &quot;Source Power &amp; Gas&quot;, PMVI_Flag__c = FALSE)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Source P%26G - On order Approval %28pending deposit%29 no switch date</fullName>
+        <actions>
+            <name>Source_P_G_Order_Approved_Needs_Deposit</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Status_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_approve_reject_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Approved_Order_Pending_Deposit_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <description>Runs when a REP approves an order and a deposit is needed</description>
+        <formula>AND( No_Workflows_or_Triggers__c = FALSE, ISPICKVAL(Order_Status__c , &quot;Approved Pending Deposit&quot;),  ISNULL(InitialDateofService__c), Record_Type_Name__c  &lt;&gt;  &quot;Gas Choice Sign Up&quot;,  REP_Profile__r.Name = &quot;Source Power &amp; Gas&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Notify_the_REP_about_Deposit_Status</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Status_TS__c</offsetFromField>
+            <timeLength>10</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Source P%26G - On order Approval %28pending deposit%29 with move-in date</fullName>
+        <actions>
+            <name>Source_P_G_Order_approved_with_move_date_deposit_needed</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Status_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_approve_reject_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Approved_Order_Pending_Deposit_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <description>Runs when a REP approves an order, regardless of the deposit need</description>
+        <formula>AND( No_Workflows_or_Triggers__c = FALSE, ISPICKVAL(Order_Status__c , &quot;Approved Pending Deposit&quot;),  NOT(ISNULL(InitialDateofService__c)), Record_Type_Name__c  &lt;&gt;  &quot;Gas Choice Sign Up&quot;,  REP_Profile__r.Name = &quot;Source Power &amp; Gas&quot;,  PMVI_Flag__c = TRUE )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Notify_the_REP_about_Deposit_Status</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Status_TS__c</offsetFromField>
+            <timeLength>10</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Source P%26G - On order Approval %28pending deposit%29 with switch date</fullName>
+        <actions>
+            <name>Source_P_G_Order_approved_with_switch_date_deposit_needed</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Set_Status_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_approve_reject_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Approved_Order_Pending_Deposit_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <description>Runs when a REP approves an order, regardless of the deposit need</description>
+        <formula>AND( No_Workflows_or_Triggers__c = FALSE, ISPICKVAL(Order_Status__c , &quot;Approved Pending Deposit&quot;),  NOT(ISNULL(InitialDateofService__c)), Record_Type_Name__c  &lt;&gt;  &quot;Gas Choice Sign Up&quot;,  REP_Profile__r.Name = &quot;Source Power &amp; Gas&quot;,  PMVI_Flag__c = FALSE )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Notify_the_REP_about_Deposit_Status</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Status_TS__c</offsetFromField>
+            <timeLength>10</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Switch Confirmation - Customer Email ONLY</fullName>
+        <actions>
+            <name>Tell_Customer_that_their_order_has_been_completed</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Confirmed_Order_Notification_Sent_To_Customer</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 and 7</booleanFilter>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Confirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Account_Number__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Control__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Confirmation_Code__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.No_Workflows_or_Triggers__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Formula_for_REP_Profile_Name__c</field>
+            <operation>notEqual</operation>
+            <value>Energy Rewards</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Switch Confirmation - Move%2FSelf Selected</fullName>
+        <actions>
+            <name>Mark_Renewal_Status_Future</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Order_Confirmation_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_confirm_fail_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_plan_expiration_date_self_selected</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Confirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Enrollment_Type__c</field>
+            <operation>equals</operation>
+            <value>Move-In</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Enrollment_Type__c</field>
+            <operation>equals</operation>
+            <value>Self-Selected Switch</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <offsetFromField>Order__c.InitialDateofService__c</offsetFromField>
+            <timeLength>45</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Switch Confirmation - REP Survey ONLY</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Confirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>REP_Review_Request_to_Customer</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Order__c.Order_Confirmed_Date__c</offsetFromField>
+            <timeLength>60</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Switch Confirmation - Standard</fullName>
+        <actions>
+            <name>Mark_Renewal_Status_Future</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Order_Confirmation_Timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_confirm_fail_duration</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_plan_expiration_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 and 4</booleanFilter>
+        <criteriaItems>
+            <field>Order__c.Order_Status__c</field>
+            <operation>equals</operation>
+            <value>Confirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Enrollment_Type__c</field>
+            <operation>equals</operation>
+            <value>Standard Switch</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Formula_for_REP_Profile_Name__c</field>
+            <operation>notEqual</operation>
+            <value>Energy Rewards</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <offsetFromField>Order__c.Order_Confirmed_Date__c</offsetFromField>
+            <timeLength>45</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>TrueCost Contract Expiration</fullName>
+        <active>false</active>
+        <description>Notify customers with prior orders through TrueCost when their contract is going to expire</description>
+        <formula>AND( 
+No_Workflows_or_Triggers__c = FALSE, 
+ Parent_Account__r.PersonHasOptedOutOfEmail = FALSE,
+Record_Type_Name__c  &lt;&gt; &quot;Gas Choice Sign Up&quot;,
+ ISPICKVAL(Order_Status__c , &quot;Confirmed&quot;)
+)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X14_day_warning_for_existing_customers</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>TrueCost_Contract_Expiration_Notice_14_Day_Warning_Sent_To_Customer</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Order__c.Plan_Expiration__c</offsetFromField>
+            <timeLength>-14</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>X5_day_warning_for_existng_customers</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>TrueCost_Contract_Expiration_Notice_5_Day_Warning_Sent_To_Customer</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Order__c.Plan_Expiration__c</offsetFromField>
+            <timeLength>-5</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Upper Case Name on CC Info</fullName>
+        <actions>
+            <name>Upper_Case_Name_on_CC_Info</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>AND(NOT(ISBLANK(Name_as_it_appears_on_Payment_Card__c)),  RecordTypeId &lt;&gt; &quot;012300000018SzH&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Verification code from SG is bad</fullName>
+        <actions>
+            <name>Mark_order_as_rejected</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Set_rejection_timestamp</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Order__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Gas Choice Sign Up</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Order_Confirmed_Verification_Code__c</field>
+            <operation>lessThan</operation>
+            <value>1000</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Order_Confirmed_Verification_Code__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Control__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order__c.Control__c</field>
+            <operation>notEqual</operation>
+            <value>99999999</value>
+        </criteriaItems>
+        <description>when we don&#39;t get a &quot;big&quot; verification code, we need to throw an error.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Approved_Order_Pending_Confirmation_Notification_Sent_To_Customer</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>The workflow to notify customers of an approved order (pending confirmation) has run.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Approved Order Pending Confirmation Notification Sent To Customer</subject>
+    </tasks>
+    <tasks>
+        <fullName>Approved_Order_Pending_Deposit_Notification_Sent_To_Customer</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>The workflow to notify customers of an approved order (pending deposit) has run.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Approved Order Pending Deposit Notification Sent To Customer</subject>
+    </tasks>
+    <tasks>
+        <fullName>Cancelled_Order_Notification_Sent_To_Customer</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>The workflow to notify customers and REPs of a cancelled order has run.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Cancelled Order Notification Sent To Customer and REP</subject>
+    </tasks>
+    <tasks>
+        <fullName>Confirmed_Order_Notification_Sent_To_Customer</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>The workflow to notify customers of a confirmed/completed order has run.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Confirmed Order Notification Sent To Customer</subject>
+    </tasks>
     <tasks>
         <fullName>Customer_reminded_of_order_deposit_status_after_21_days</fullName>
         <assignedToType>owner</assignedToType>
@@ -20,8 +3259,65 @@
         <subject>Customer reminded of order deposit status after 21 days.</subject>
     </tasks>
     <tasks>
+        <fullName>GC_Order_Rejected</fullName>
+        <assignedTo>gaston.miranda@centerpointenergy.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Order has been rejected.  Please investigate to determine the cause of the error.</description>
+        <dueDateOffset>3</dueDateOffset>
+        <notifyAssignee>true</notifyAssignee>
+        <offsetFromField>Order__c.Order_Status_TS__c</offsetFromField>
+        <priority>High</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>GC Order Rejected</subject>
+    </tasks>
+    <tasks>
+        <fullName>GM_Call_Temporary_Move_In</fullName>
+        <assignedTo>gaston.miranda@centerpointenergy.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>1</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>GM Call Temporary Move-In</subject>
+    </tasks>
+    <tasks>
+        <fullName>New_Order_Notification_Sent_To_Customer</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>The workflow to notify customers of a new order has run.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Order Thank You Notification Sent To Customer</subject>
+    </tasks>
+    <tasks>
+        <fullName>New_Order_Notification_Sent_To_REP</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>The workflow to notify REPs of a new order has run.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>New Order Notification Sent To REP</subject>
+    </tasks>
+    <tasks>
+        <fullName>Order_Abandoned_Notification_Sent_To_Customer</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>The workflow to notify customers that their order is stuck in the enrollment process (not completed) has run.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Order &quot;Abandoned&quot; Notification Sent To Customer</subject>
+    </tasks>
+    <tasks>
         <fullName>Order_Failure_Notification</fullName>
-        <assignedTo>troy.donovan1@centerpointenergy.com.fullsbx</assignedTo>
+        <assignedTo>troy.donovan@mytruecost.com</assignedTo>
         <assignedToType>user</assignedToType>
         <description>The REP has indicated that this order failed, see order for details.  Please update this task as &quot;Completed&quot; after resolving with REP.</description>
         <dueDateOffset>3</dueDateOffset>
@@ -30,5 +3326,116 @@
         <protected>false</protected>
         <status>In Progress</status>
         <subject>Order Failure Notification</subject>
+    </tasks>
+    <tasks>
+        <fullName>Order_Failure_Notification_Sent_To_Customer</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>The workflow to notify customers of a failed order has run.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Order Failure Notification Sent To Customer</subject>
+    </tasks>
+    <tasks>
+        <fullName>Order_Requires_More_Information_Notification_Sent_To_Customer</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>The workflow to notify customers of their order needing more information has run.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>&quot;Order Requires More Information&quot; Notification Sent To Customer</subject>
+    </tasks>
+    <tasks>
+        <fullName>Order_Switch_date_Approaching_Email_sent_to_REP</fullName>
+        <assignedToType>owner</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Order Switch Date Approaching Email sent to REP</subject>
+    </tasks>
+    <tasks>
+        <fullName>REP_Notified_of_Pending_Deposit_Status</fullName>
+        <assignedToType>owner</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>REP Notified of Pending Deposit Status</subject>
+    </tasks>
+    <tasks>
+        <fullName>Rejected_Order_Notification_Sent_To_Customer</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>The workflow to notify customers of a rejected order has run.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Rejected Order Notification Sent To Customer</subject>
+    </tasks>
+    <tasks>
+        <fullName>Send_DA_to_Customer</fullName>
+        <assignedTo>system@centerpointenergy.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>completed by automated workflow.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Low</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Send DA to Customer</subject>
+    </tasks>
+    <tasks>
+        <fullName>Survey_Sent_To_Customer</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>The workflow to send customers a satisfaction survey has run.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Survey Sent To Customer</subject>
+    </tasks>
+    <tasks>
+        <fullName>TrueCost_Contract_Expiration_Notice_14_Day_Warning_Sent_To_Customer</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>The workflow to notify customers of their contract end date has run.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>TrueCost Contract Expiration Notice - 14 Day Warning Sent To Customer</subject>
+    </tasks>
+    <tasks>
+        <fullName>TrueCost_Contract_Expiration_Notice_5_Day_Warning_Sent_To_Customer</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>The workflow to notify customers of their contract end date has run.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>TrueCost Contract Expiration Notice - 5 Day Warning Sent To Customer</subject>
+    </tasks>
+    <tasks>
+        <fullName>Verify_if_this_deposit_order_should_be_confirmed_or_rejected</fullName>
+        <assignedTo>troy.donovan@mytruecost.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Verify if this deposit order with switch date should be confirmed or rejected, using the BPM tool.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>true</notifyAssignee>
+        <offsetFromField>Order__c.InitialDateofService__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>In Progress</status>
+        <subject>Verify if this deposit order should be confirmed or rejected</subject>
     </tasks>
 </Workflow>

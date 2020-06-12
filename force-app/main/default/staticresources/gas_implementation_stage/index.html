@@ -6,8 +6,12 @@
   <base href="/">
   <!--<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>-->
   <script src="https://www.centerpointenergy.com/_layouts/15/init.js"></script>
+
+
+ 
+
   <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn0wEy-rvo_dAAhJTYqIsxnPM9wbIZHXE&callback=initMap"
-          type="text/javascript"></script>-->
+          type="text/javascript"></script> -->
 
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -21,8 +25,15 @@
 
     CPE = {
       assetPath: "/assets",
-      api:"https://cnpdigitalmove-qa.cloudhub.io/api",
-      hsp_s_plans: []
+      api:"https://cnpdigitalmove-ceis-qa.us-e1.cloudhub.io/api",
+      hsp_s_plans: [],
+      content: {
+        hsp_title: "Affordable Repair Plans from HomeServe for CenterPoint Energy Customers",
+        hsp_subtitle: "CenterPoint Energy has selected HomeServe to offer affordable emergency repair plans that can help provide protection against costly and inconvenient repairs to systems through their homes and properties",
+        hsp_headline_bundle: "Would you be interested in protecting your home's gas and water lines?",
+        hsp_headline_multiple_steps: "Would you be interested in this plan?",
+        hsp_subhead_bundle: "Would you be interested in protecting your home's gas lines?"
+      }
     };
 
   </script>
@@ -155,5 +166,5 @@
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />-->
 
 
-<script type="text/javascript" src="runtime.js"></script><script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="main.js"></script></body>
+<script src="runtime.js" defer></script><script src="polyfills-es5.js" nomodule defer></script><script src="polyfills.js" defer></script><script src="main.js" defer></script></body>
 </html>
